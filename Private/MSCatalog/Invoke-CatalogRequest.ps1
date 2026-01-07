@@ -1,84 +1,52 @@
 function Invoke-CatalogRequest {
-    [CmdletBinding()]
     param (
-        [parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true)]
         [string] $Uri,
 
         [Parameter(Mandatory = $false)]
-        [string] $Method = "Get",
-
-        [Parameter(Mandatory = $false)]
-        [string] $EventArgument,
-
-        [Parameter(Mandatory = $false)]
-        [string] $EventTarget,
-
-        [Parameter(Mandatory = $false)]
-        [string] $EventValidation,
-
-        [Parameter(Mandatory = $false)]
-        [string] $ViewState,
-
-        [Parameter(Mandatory = $false)]
-        [string] $ViewStateGenerator
+        [string] $Method = "Get"
     )
 
     try {
-        if ($Method -eq "Post") {
-            $ReqBody = @{
-                "__EVENTARGUMENT" = $EventArgument
-                "__EVENTTARGET" = $EventTarget
-                "__EVENTVALIDATION" = $EventValidation
-                "__VIEWSTATE" = $ViewState
-                "__VIEWSTATEGENERATOR" = $ViewStateGenerator
-            }
+        #Set-TempSecurityProtocol
+
+        $Headers = @{
+            "Cache-Control" = "no-cache"
+            "Pragma"        = "no-cache"
         }
 
-        if ($Uri -match '%26') {
-            $Params = @{
-                Uri = $Uri
-                Method = $Method
-                Body = $ReqBody
-                ContentType = "application/x-www-form-urlencoded"
-                UseBasicParsing = $true
-                ErrorAction = "Stop"
-            }
+        $Params = @{
+            Uri             = $Uri
+            UseBasicParsing = $true
+            ErrorAction     = "Stop"
+            Headers         = $Headers
         }
-        else {
-            $Params = @{
-                Uri = [Uri]::EscapeUriString($Uri)
-                Method = $Method
-                Body = $ReqBody
-                ContentType = "application/x-www-form-urlencoded"
-                UseBasicParsing = $true
-                ErrorAction = "Stop"
-            }
-        }
+
         $Results = Invoke-WebRequest @Params
         $HtmlDoc = [HtmlAgilityPack.HtmlDocument]::new()
         $HtmlDoc.LoadHtml($Results.RawContent.ToString())
         $NoResults = $HtmlDoc.GetElementbyId("ctl00_catalogBody_noResultText")
-        if ($null -eq $NoResults) {
-            $ErrorText = $HtmlDoc.GetElementbyId("errorPageDisplayedError")
-            if ($ErrorText) {
-                throw "The catalog.update.microsoft.com site has encountered an error. Please try again later."
+        $ErrorText = $HtmlDoc.GetElementbyId("errorPageDisplayedError")
+
+        if ($null -eq $NoResults -and $null -eq $ErrorText) {
+            return [MsUpCatResponse]::new($HtmlDoc)
+        }
+        elseif ($ErrorText) {
+            if ($ErrorText.InnerText -match '8DDD0010') {
+                throw "The catalog.microsoft.com site has encountered an error with code 8DDD0010. Please try again later."
             }
             else {
-                #Changed for Issue 127
-                if($null -eq $HtmlDoc.GetElementbyId("ctl00_catalogBody_updateMatches")){ 
-                    return $null 
-                }
-                else {
-                    $HtmlDoc | Out-File -FilePath "$env:TEMP\$((Get-Date).ToString('yyyy-MM-dd-HHmmss')) OSDCloud Microsoft Catalog.html" -Encoding "UTF8"
-                    [MsUpCatResponse]::new($HtmlDoc)
-                }
+                throw "The catalog.microsoft.com site has encountered an error: $($ErrorText.InnerText)"
             }
-        } 
+        }
         else {
-            throw "$($NoResults.InnerText)$($Uri.Split("q=")[-1])"
+            Write-Warning "We did not find any results for $Uri"
         }
     }
     catch {
-        throw $_
+        Write-Warning "$_"
+    }
+    finally {
+        #Set-TempSecurityProtocol -ResetToDefault
     }
 }

@@ -1,168 +1,471 @@
 function Get-MsUpCat {
-    <#
-        .SYNOPSIS
-        Query catalog.update.micrsosoft.com for available updates.
-
-        .DESCRIPTION
-        Given that there is currently no public API available for the catalog.update.micrsosoft.com site, this
-        command makes HTTP requests to the site and parses the returned HTML for the required data.
-
-        .PARAMETER Search
-        Specify a string to search for.
-
-        .PARAMETER SortBy
-        Specify a field to sort the results by. The default sort is by LastUpdated and in descending order.
-
-        .PARAMETER Descending
-        Switch the sort order to descending.
-
-        .PARAMETER Strict
-        Force a Search paramater with multiple words to be treated as a single string.
-
-        .PARAMETER IncludeFileNames
-        Include the filenames for the files as they would be downloaded from catalog.update.micrsosoft.com.
-        This option will cause an extra web request for each update included in the results. It is best to only
-        use this option with a very narrow search term.
-
-        .PARAMETER AllPages
-        By default the Get-MSCatalogUpdate command returns the first page of results from catalog.update.micrsosoft.com, which is
-        limited to 25 updates. If you specify this switch the command will instead return all pages of search results.
-        This can result in a significant increase in the number of HTTP requests to the catalog.update.micrsosoft.com endpoint.
-
-        .EXAMPLE
-        Get-MSCatalogUpdate -Search "Cumulative for Windows Server, version 1903"
-
-        .EXAMPLE
-        Get-MSCatalogUpdate -Search "Cumulative for Windows Server, version 1903" -SortBy "Title" -Descending
-
-        .EXAMPLE
-        Get-MSCatalogUpdate -Search "Cumulative for Windows Server, version 1903" -Strict
-
-        .EXAMPLE
-        Get-MSCatalogUpdate -Search "Cumulative for Windows Server, version 1903" -IncludeFileNames
-
-        .EXAMPLE
-        Get-MSCatalogUpdate -Search "Cumulative for Windows Server, version 1903" -AllPages
-    #>
-    
-    [CmdLetBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'Search')]
+    #[OutputType([MSCatalogUpdate[]])]
+    #[OutputType([MsUpCat[]])]
     param (
-        [Parameter(Mandatory = $true)]
+        #region Parameters
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Filter updates by architecture")]
+        [ValidateSet("All", "x64", "x86", "arm64")]
+        [string] $Architecture = "All",
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Sort in descending order")]
+        [switch] $Descending,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Exclude .NET Framework updates")]
+        [switch] $ExcludeFramework,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Filter updates from this date")]
+        [DateTime] $FromDate,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Format for the results")]
+        [ValidateSet("Default", "CSV", "JSON", "XML")]
+        [string] $Format = "Default",
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Only show .NET Framework updates")]
+        [switch] $GetFramework,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Search through all available pages")]
+        [switch] $AllPages,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Include dynamic updates")]
+        [switch] $IncludeDynamic,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Include file names in the results")]
+        [switch] $IncludeFileNames,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Include preview updates")]
+        [switch] $IncludePreview,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Filter updates from the last N days")]
+        [int] $LastDays,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Filter updates with maximum size")]
+        [double] $MaxSize,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Filter updates with minimum size")]
+        [double] $MinSize,
+        
+        [Parameter(Mandatory = $true, ParameterSetName = 'OS',
+            HelpMessage = "Operating System to search updates for")]
+        [ValidateSet("Windows 11", "Windows 10", "Windows Server")]
+        [string] $OperatingSystem,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Select specific properties to display")]
+        [string[]] $Properties,
+        
+        [Parameter(Mandatory = $true, ParameterSetName = 'Search',
+            Position = 0,
+            HelpMessage = "Search query for Microsoft Update Catalog")]
         [string] $Search,
-
-        [Parameter(Mandatory = $false)]
-        [ValidateSet("Title", "Products", "Classification", "LastUpdated", "Size")]
-        [string] $SortBy,
-
-        [Parameter(Mandatory = $false)]
-        [System.Management.Automation.SwitchParameter] $Descending,
-
-        [Parameter(Mandatory = $false)]
-        [System.Management.Automation.SwitchParameter] $Strict,
-
-        [Parameter(Mandatory = $false)]
-        [System.Management.Automation.SwitchParameter] $IncludeFileNames,
-
-        [Parameter(Mandatory = $false)]
-        [System.Management.Automation.SwitchParameter] $AllPages
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Unit for size filtering (MB or GB)")]
+        [ValidateSet("MB", "GB")]
+        [string] $SizeUnit = "MB",
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Sort results by specified field")]
+        [ValidateSet("Date", "Size", "Title", "Classification", "Product")]
+        [string] $SortBy = "Date",
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Use strict search with exact phrase matching")]
+        [switch] $Strict,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Filter updates until this date")]
+        [DateTime] $ToDate,
+        
+        [Parameter(Mandatory = $false,
+            HelpMessage = "Filter by update type")]
+        [ValidateSet(
+            "Security Updates", 
+            "Updates", 
+            "Critical Updates", 
+            "Feature Packs", 
+            "Service Packs", 
+            "Tools", 
+            "Update Rollups",
+            "Cumulative Updates",
+            "Security Quality Updates",
+            "Driver Updates"
+        )]
+        [string[]] $UpdateType,
+        
+        [Parameter(Mandatory = $false, ParameterSetName = 'OS',
+            HelpMessage = "OS Version/Release (e.g., 22H2, 21H2, 23H2)")]
+        [string] $Version
+        #endregion Parameters
     )
 
-    try {
-        $ProgPref = $ProgressPreference
+    begin {
+        #region Initialization
+        # Ensure MSCatalogUpdate class is available
+        if (-not ('MsUpCat' -as [type])) {
+            $classPath = Join-Path $PSScriptRoot '..\Classes\MsUpCat.Class.ps1'
+            if (Test-Path $classPath) {
+                . $classPath
+            }
+            else {
+                throw "MsUpCat class file not found at: $classPath"
+            }
+        }
+
         $ProgressPreference = "SilentlyContinue"
+        $Updates = @()
+        $MaxResults = 1000
+        #endregion Initialization
 
-        $Uri = "https://www.catalog.update.microsoft.com/Search.aspx?q=$Search"
-        $Res = Invoke-CatalogRequest -Uri $Uri
-
-        if ($PSBoundParameters.ContainsKey("SortBy")) {
-            $SortParams = @{
-                Uri = $Uri
-                SortBy = $SortBy
-                Descending = $Descending
-                EventArgument = $Res.EventArgument
-                EventValidation = $Res.EventValidation
-                ViewState = $Res.ViewState
-                ViewStateGenerator = $Res.ViewStateGenerator
+        #region Query Building
+        # Build search query based on parameters
+        $searchQuery = if ($PSCmdlet.ParameterSetName -eq 'OS') {
+            switch ($OperatingSystem) {
+                "Windows 10" {
+                    if ($Version) {
+                        if ($UpdateType -contains "Cumulative Updates") {
+                            "Cumulative Update for Windows 10 Version $Version"
+                        }
+                        else {
+                            "Windows 10 Version $Version"
+                        }
+                    }
+                    else {
+                        if ($UpdateType -contains "Cumulative Updates") {
+                            "Cumulative Update for Windows 10"
+                        }
+                        else {
+                            "Windows 10"
+                        }
+                    }
+                }
+                "Windows 11" {
+                    if ($Version) {
+                        if ($UpdateType -contains "Cumulative Updates") {
+                            "Cumulative Update for Windows 11 Version $Version"
+                        }
+                        else {
+                            "Windows 11 Version $Version"
+                        }
+                    }
+                    else {
+                        if ($UpdateType -contains "Cumulative Updates") {
+                            "Cumulative Update for Windows 11"
+                        }
+                        else {
+                            "Windows 11"
+                        }
+                    }
+                }
+                "Windows Server" {
+                    if ($Version) {
+                        if ($UpdateType -contains "Cumulative Updates") {
+                            "Cumulative Update for Microsoft Server Operating System, Version $Version"
+                        }
+                        else {
+                            "Microsoft Server Operating System, Version $Version"
+                        }
+                    }
+                    else {
+                        if ($UpdateType -contains "Cumulative Updates") {
+                            "Cumulative Update for Microsoft Server Operating System"
+                        }
+                        else {
+                            "Microsoft Server Operating System"
+                        }
+                    }
+                }
+                default {
+                    if ($Version) {
+                        if ($UpdateType -contains "Cumulative Updates") {
+                            "Cumulative Update for $OperatingSystem $Version"
+                        }
+                        else {
+                            "$OperatingSystem $Version"
+                        }
+                    }
+                    else {
+                        if ($UpdateType -contains "Cumulative Updates") {
+                            "Cumulative Update for $OperatingSystem"
+                        }
+                        else {
+                            "$OperatingSystem"
+                        }
+                    }
+                }
             }
-            $Res = Sort-CatalogResults @SortParams
-        } else {
-            # Default sort is by LastUpdated and in descending order.
-            $SortParams = @{
-                Uri = $Uri
-                SortBy = "LastUpdated"
-                Descending = $true
-                EventArgument = $Res.EventArgument
-                EventValidation = $Res.EventValidation
-                ViewState = $Res.ViewState
-                ViewStateGenerator = $Res.ViewStateGenerator
-            }
-            $Res = Sort-CatalogResults @SortParams
+        }
+        else {
+            $Search
         }
 
-        $Rows = $Res.Rows
+        Write-Verbose "Search query: $searchQuery"
+        #endregion Query Building
+    }
 
-        if ($Strict -and -not $AllPages) {
-            $StrictRows = $Rows.Where({
-                $_.SelectNodes("td")[1].innerText.Trim() -like "*$Search*"
-            })
-            # If $NextPage is $null then there are more pages to collect. It is arse backwards but trust me.
-            while (($StrictRows.Count -lt 25) -and ($Res.NextPage -eq "")) {
-                $NextParams = @{
-                    Uri = $Uri
-                    EventArgument = $Res.EventArgument
-                    EventTarget = 'ctl00$catalogBody$nextPageLinkText'
-                    EventValidation = $Res.EventValidation
-                    ViewState = $Res.ViewState
-                    ViewStateGenerator = $Res.ViewStateGenerator
-                    Method = "Post"
+    process {
+        try {
+            #region Search Preparation
+            # Prepare search query
+            $EncodedSearch = switch ($true) {
+                $Strict { [uri]::EscapeDataString('"' + $searchQuery + '"') }
+                $GetFramework { [uri]::EscapeDataString("*$searchQuery*") }
+                default { [uri]::EscapeDataString($searchQuery) }
+            }
+    
+            # Initialize catalog request
+            $Uri = "https://www.catalog.update.microsoft.com/Search.aspx?q=$EncodedSearch"
+            $Res = Invoke-CatalogRequest -Uri $Uri
+            
+            $Rows = $Res.Rows
+            #endregion Search Preparation
+
+            #region Pagination
+            # Handle pagination
+            if ($AllPages) {
+                $PageCount = 0
+                while ($Res.NextPage -and $PageCount -lt 39) {
+                    # Microsoft Catalog limit is 40 pages
+                    $PageCount++
+                    $PageUri = "$Uri&p=$PageCount"
+                    $Res = Invoke-CatalogRequest -Uri $PageUri
+                    $Rows += $Res.Rows
                 }
-                $Res = Invoke-CatalogRequest @NextParams
-                $StrictRows += $Res.Rows.Where({
-                    $_.SelectNodes("td")[1].innerText.Trim() -like "*$Search*"
+            } 
+            #endregion Pagination
+
+            #region Base Filtering
+            # Apply base filters with improved logic
+            $Rows = $Rows.Where({
+                    $title = $_.SelectNodes("td")[1].InnerText.Trim()
+                    $classification = $_.SelectNodes("td")[3].InnerText.Trim()
+                    $include = $true
+            
+                
+                    # Basic exclusion filters
+                    if (-not $IncludeDynamic -and $title -like "*Dynamic*") { $include = $false }
+                    if (-not $IncludePreview -and $title -like "*Preview*") { $include = $false }
+
+                    # Framework filtering: handle GetFramework and ExcludeFramework parameters
+                    if ($GetFramework) {
+                        # If GetFramework is specified, only keep Framework updates
+                        if (-not ($title -like "*Framework*")) { $include = $false }
+                    }
+                    elseif ($ExcludeFramework) {
+                        # If ExcludeFramework is specified, exclude Framework updates
+                        if ($title -like "*Framework*") { $include = $false }
+                    }
+
+                    # OS and Version specific filtering
+                    if ($PSCmdlet.ParameterSetName -eq 'OS') {
+                        if ($OperatingSystem -eq "Windows Server") {
+                            # For Server, look for "Microsoft server" or similar patterns
+                            if (-not ($title -like "*Microsoft*Server*" -or $title -like "*Server Operating System*")) { $include = $false }
+                        }
+                        else {
+                            # For other OS types, use the standard pattern
+                            if (-not ($title -like "*$OperatingSystem*")) { $include = $false }
+                        }
+                        if ($Version -and -not ($title -like "*$Version*")) { $include = $false }
+                    }
+
+                    # Update type filtering
+                    if ($UpdateType) {
+                        $hasMatchingType = $false
+                        foreach ($type in $UpdateType) {
+                            switch ($type) {
+                                "Security Updates" {
+                                    # In the Classification column
+                                    if ($classification -eq "Security Updates") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Cumulative Updates" {
+                                    # In the title, look for "Cumulative Update"
+                                    if ($title -like "*Cumulative Update*") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Critical Updates" {
+                                    # In the Classification column
+                                    if ($classification -eq "Critical Updates") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Updates" {
+                                    # In the Classification column
+                                    if ($classification -eq "Updates") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Feature Packs" {
+                                    # In the Classification column
+                                    if ($classification -eq "Feature Packs") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Service Packs" {
+                                    # In the Classification column
+                                    if ($classification -eq "Service Packs") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Tools" {
+                                    # In the Classification column
+                                    if ($classification -eq "Tools") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Update Rollups" {
+                                    # In the Classification column
+                                    if ($classification -eq "Update Rollups") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Security Quality Updates" {
+                                    # Combines security and quality
+                                    if (($classification -eq "Security Updates") -and 
+                                        ($title -like "*Quality Update*")) {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                "Driver Updates" {
+                                    # For drivers
+                                    if ($title -like "*Driver*") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                                default {
+                                    if ($title -like "*$type*") {
+                                        $hasMatchingType = $true
+                                    }
+                                }
+                            }
+                            if ($hasMatchingType) { break }
+                        }
+                        if (-not $hasMatchingType) { $include = $false }
+                    }
+                
+                    $include
                 })
-            }
-            $Rows = $StrictRows[0..24]
-        } elseif ($AllPages) {
-            # If $NextPage is $null then there are more pages to collect. It is arse backwards but trust me.
-            while ($Res.NextPage -eq "") {
-                $NextParams = @{
-                    Uri = $Uri
-                    EventArgument = $Res.EventArgument
-                    EventTarget = 'ctl00$catalogBody$nextPageLinkText'
-                    EventValidation = $Res.EventValidation
-                    ViewState = $Res.ViewState
-                    ViewStateGenerator = $Res.ViewStateGenerator
-                    Method = "Post"
-                }
-                $Res = Invoke-CatalogRequest @NextParams
-                $Rows += $Res.Rows
-            }
-            if ($Strict) {
+            #endregion Base Filtering
+
+            #region Architecture Filtering
+            # Apply architecture filter with improved logic
+            if ($Architecture -ne "all") {
                 $Rows = $Rows.Where({
-                    $_.SelectNodes("td")[1].innerText.Trim() -like "*$Search*"
-                })
+                        $title = $_.SelectNodes("td")[1].InnerText.Trim()
+                        switch ($Architecture) {
+                            "x64" { $title -match "x64|64.?bit|64.?based" -and -not ($title -match "x86|32.?bit|arm64") }
+                            "x86" { $title -match "x86|32.?bit|32.?based" -and -not ($title -match "64.?bit|arm64") }
+                            "arm64" { $title -match "arm64|ARM.?based" }
+                        }
+                    })
             }
-        }
-        
-        if ($Rows.Count -gt 0) {
-            foreach ($Row in $Rows) {
-                if ($Row.Id -ne "headerRow") {
-                    [MsUpCat]::new($Row, $IncludeFileNames)
+            #endregion Architecture Filtering
+
+            #region Create Update Objects
+            # Create MSCatalogUpdate objects with improved error handling
+            $Updates = $Rows.Where({ $_.Id -ne "headerRow" }).ForEach({
+                    try {
+                        [MsUpCat]::new($_, $IncludeFileNames)
+                    }
+                    catch {
+                        Write-Warning "Failed to process update: $($_.Exception.Message)"
+                        $null
+                    }
+                }) | Where-Object { $null -ne $_ }
+            #endregion Create Update Objects
+
+            #region Apply Filters
+            # Apply date filters
+            if ($FromDate) { $Updates = $Updates.Where({ $_.LastUpdated -ge $FromDate }) }
+            if ($ToDate) { $Updates = $Updates.Where({ $_.LastUpdated -le $ToDate }) }
+            if ($LastDays) {
+                $CutoffDate = (Get-Date).AddDays(-$LastDays)
+                $Updates = $Updates.Where({ $_.LastUpdated -ge $CutoffDate })
+            }
+
+            # Apply size filters
+            if ($MinSize -or $MaxSize) {
+                $Multiplier = if ($SizeUnit -eq "GB") { 1024 } else { 1 }
+                $Updates = $Updates.Where({
+                        $size = [double]($_.Size -replace ' MB$', '')
+                        $meetsMin = -not $MinSize -or $size -ge ($MinSize * $Multiplier)
+                        $meetsMax = -not $MaxSize -or $size -le ($MaxSize * $Multiplier)
+                        $meetsMin -and $meetsMax
+                    })
+            }
+            #endregion Apply Filters
+
+            #region Sorting and Output
+            # Apply sorting
+            $Updates = switch ($SortBy) {
+                "Date" { $Updates | Sort-Object LastUpdated -Descending:$Descending }
+                "Size" { $Updates | Sort-Object { [double]($_.Size -replace ' MB$', '') } -Descending:$Descending }
+                "Title" { $Updates | Sort-Object Title -Descending:$Descending }
+                "Classification" { $Updates | Sort-Object Classification -Descending:$Descending }
+                "Product" { $Updates | Sort-Object Products -Descending:$Descending }
+                default { $Updates }
+            }
+
+            # Display result summary but Silent if $Update variable or piped is used Fixes#23
+            $IsUpdate = ($MyInvocation.Line -match '^\s*\$update\s*=')
+            $IsPiped = ($PSCmdlet.MyInvocation.PipelineLength -gt 1)
+
+            if (-not $IsUpdate -and -not $IsPiped) {
+                Write-Host "`nSearch completed for: $searchQuery"
+                Write-Host "Found $($Updates.Count) updates"
+            }
+
+            if ($Updates.Count -ge $MaxResults) {
+                Write-Warning "Result limit of $MaxResults reached. Please refine your search criteria."
+            }
+
+            # Format and return results
+            switch ($Format) {
+                "Default" { 
+                    if ($Properties) { $Updates | Select-Object $Properties }
+                    else { $Updates }
+                }
+                "CSV" { 
+                    if ($Properties) { $Updates | Select-Object $Properties | ConvertTo-Csv -NoTypeInformation }
+                    else { $Updates | ConvertTo-Csv -NoTypeInformation }
+                }
+                "JSON" { 
+                    if ($Properties) { $Updates | Select-Object $Properties | ConvertTo-Json }
+                    else { $Updates | ConvertTo-Json }
+                }
+                "XML" { 
+                    if ($Properties) { $Updates | Select-Object $Properties | ConvertTo-Xml -As String }
+                    else { $Updates | ConvertTo-Xml -As String }
                 }
             }
-        } else {
-            Write-Host -ForegroundColor DarkGray "No updates found matching the search term."
+            #endregion Sorting and Output
         }
-        $ProgressPreference = $ProgPref
-    } catch {
-        $ProgressPreference = $ProgPref
-        if ($_.Exception.Message -like "We did not find*") {
-            #Write-Host -ForegroundColor DarkGray $_.Exception.Message
-        } else {
-            throw $_
+        catch {
+            Write-Warning "Error processing search request: $($_.Exception.Message)"
         }
     }
+
+    end {
+        $ProgressPreference = "Continue"
+    }
 }
+
 function Get-MsUpCatUpdate {
     [CmdLetBinding()]
     param (
