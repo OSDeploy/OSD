@@ -1021,7 +1021,7 @@
         }
         #endregion
         #region CheckSHA1
-        if ($Global.OSDCloud.CheckSHA1 -eq $true){
+        if ($Global:OSDCloud.CheckSHA1 -eq $true){
             if (($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileDestination.FullName)){
                 $Global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
                 $Global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $Global:OSDCloud.ImageFileName}).SHA1
