@@ -8,4 +8,4 @@
 | PowerShell Function | Build-OSDCatalogHPSystem |
 | Files | build-system.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Sunday, January 18, 2026 10:05:28 PM UTC |
+| Last Update | Monday, January 19, 2026 5:12:25 AM UTC |
