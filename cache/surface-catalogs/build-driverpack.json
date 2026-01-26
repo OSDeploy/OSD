@@ -1841,5 +1841,24 @@
         "OSBuild":  "22621",
         "OSArchitecture":  "amd64",
         "HashMD5":  ""
+    },
+    {
+        "CatalogVersion":  "26.01.08",
+        "Status":  null,
+        "Component":  "DriverPack",
+        "ReleaseDate":  "01.01.01",
+        "Manufacturer":  "Microsoft",
+        "Model":  "Surface Laptop 7",
+        "Product":  "Surface_Laptop_7th_Edition_With_Intel_For_Business_2108",
+        "Name":  "Microsoft Surface Laptop 7 Business Win11 25H2",
+        "Legacy":  false,
+        "PackageID":  "108014",
+        "FileName":  "SurfaceLaptop7withIntel_Win11_22631_25.122.21761.0.msi",
+        "Url":  "https://download.microsoft.com/download/1543bd80-9cae-498d-8b0f-9841e4d7b2a8/SurfaceLaptop7withIntel_Win11_22631_25.122.21761.0.msi",
+        "OSVersion":  "Windows 11 x64",
+        "OSReleaseId":  "25H2",
+        "OSBuild":  "26200",
+        "OSArchitecture":  "arm64",
+        "HashMD5":  ""
     }
 ]
