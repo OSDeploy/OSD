@@ -1,4 +1,4 @@
-# OSD.Build Catalog
+﻿# OSD.Build Catalog
 
 | | |
 |-|-|
@@ -8,4 +8,4 @@
 | PowerShell Function | Build-OSDCatalogSurfaceDriverPack |
 | Files | build-driverpack.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Friday, January 30, 2026 9:00:47 AM UTC |
+| Last Update | Friday, January 30, 2026 9:14:31 AM UTC |
