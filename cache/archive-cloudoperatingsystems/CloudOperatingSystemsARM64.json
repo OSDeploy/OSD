@@ -16,7 +16,8 @@
     "SHA1": "797d74ceb708f9c34ca96829fb660bf45c80c1c1",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -35,7 +36,8 @@
     "SHA1": "d8e0ac657d4d2076158c03f43203a6182410bf63",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -54,7 +56,8 @@
     "SHA1": "06e7c504c155e065ada6e49c306eaf866df6bbf0",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -73,7 +76,8 @@
     "SHA1": "7f4cf7a1b52493ed977b8cb0b6e3735869cfbf00",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -92,7 +96,8 @@
     "SHA1": "e22362fcb2f3644a485cbd27a6e56956913bc172",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -111,7 +116,8 @@
     "SHA1": "6fc7228d10468cbd40e63a03fa705ea980402cbc",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -130,7 +136,8 @@
     "SHA1": "4df732b8d9fc2b7186cbc94f871e2137ef79b45c",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -149,7 +156,8 @@
     "SHA1": "6a4052584e2a1f79543546ac05f85502d487bae0",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -168,7 +176,8 @@
     "SHA1": "d134f9dec79226567a8a0352137739ca9ddbb41d",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -187,7 +196,8 @@
     "SHA1": "3e4b1cc980cf8ac0420951511b12619528a7ad38",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -206,7 +216,8 @@
     "SHA1": "ff090c68644580c77194f7f779e8bcd8f9a49b37",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -225,7 +236,8 @@
     "SHA1": "cf0e6e96a756a206ee0d84008419fcaf68432a74",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -244,7 +256,8 @@
     "SHA1": "e4b02c73363b8e829493632d0245c896fd1d91c0",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -263,7 +276,8 @@
     "SHA1": "748d2dc6a00ba5e1c0417e72917af73a85ef7af8",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -282,7 +296,8 @@
     "SHA1": "21d0723b6c8e8be77e332aa44c77c9463ab66d6a",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -301,7 +316,8 @@
     "SHA1": "8bf949a95bf5e5f5452484ec6d5ea02e99ee3e16",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -320,7 +336,8 @@
     "SHA1": "d56d895f1cd6cfc2f78cf8b2df85a405db160d7e",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -339,7 +356,8 @@
     "SHA1": "f37a581af6626a41e2c4b0fdcf0258ba715877ee",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -358,7 +376,8 @@
     "SHA1": "fdce6cee7f656c96b61966a3505bda7e45ea6228",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -377,7 +396,8 @@
     "SHA1": "9c2c5ae1985d7f42f28cebe8889a3562fb52b3df",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -396,7 +416,8 @@
     "SHA1": "337137b5e277f33f82d61b994bc8f4090395623f",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -415,7 +436,8 @@
     "SHA1": "c94db8b5c4bb3bd4d4320d315485bfed72bab98e",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -434,7 +456,8 @@
     "SHA1": "bf4756de3ca6690ab085111f791e2404ff8e4fb2",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -453,7 +476,8 @@
     "SHA1": "e1299fc1b558e500ebcf5b2bdd36d1d136a100a4",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -472,7 +496,8 @@
     "SHA1": "6c4a80c1c01393522779d4c6e9e5e840da284ff8",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -491,7 +516,8 @@
     "SHA1": "93542c7f51e65191676c99f3ca42abb6606328eb",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -510,7 +536,8 @@
     "SHA1": "4702f40db9c76cb5a25241ca4fa1e0a920a95ebb",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -529,7 +556,8 @@
     "SHA1": "b732da766a18208252b8276039197afb8fd45444",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -548,7 +576,8 @@
     "SHA1": "cf2b7972e76cdb1c5798a4fc09712dccdf7ae444",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -567,7 +596,8 @@
     "SHA1": "106df9a62e827bb77e4826b62ca74355a3ae83cb",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -586,7 +616,8 @@
     "SHA1": "e266a02111cb98bb59ea590e4608adcfd2d5fdc7",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -605,7 +636,8 @@
     "SHA1": "4a6b201dc75104a1c6e57029c691a90360c5ab6e",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -624,7 +656,8 @@
     "SHA1": "e1c14e3e70fc8d14f683245ed9a33aec51dcb77b",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -643,7 +676,8 @@
     "SHA1": "864c25f4218b93597a68c48b8f45e3322cd5d271",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -662,7 +696,8 @@
     "SHA1": "df59e344b24c53fecb35d3003506240a78eb138d",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -681,7 +716,8 @@
     "SHA1": "9a64ed4d5b239708552fe454acadfb7c46ef2bc2",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -700,7 +736,8 @@
     "SHA1": "c6aa10cf8a2f13ecbfe91b4bc28515b50ed528e2",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -719,7 +756,8 @@
     "SHA1": "181653141d14a49c122e2875a167fdc9d2ead591",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -738,7 +776,8 @@
     "SHA1": "c37cf2e893a87fb8a0b965bb0f081b39e568d1df",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -757,7 +796,8 @@
     "SHA1": "a7620bd62d283d60d7defbe2153ee5c593a37967",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -776,7 +816,8 @@
     "SHA1": "557dbb373e6c7efe2731925091d171ec2e6f9812",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -795,7 +836,8 @@
     "SHA1": "f04be6a2eb6c85cda9bb07afc34486e659ed30d4",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -814,7 +856,8 @@
     "SHA1": "0c374838c7e06edc2e3638579a7068b5183abd92",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -833,7 +876,8 @@
     "SHA1": "b882140424108c4ac65cef66b980905851b0c25b",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -852,7 +896,8 @@
     "SHA1": "900d65c6c06835709c5505a879f72dc7f0db1d0b",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -871,7 +916,8 @@
     "SHA1": "4e69853b05aba29e5354f74483d47a17f0ab0034",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -890,7 +936,8 @@
     "SHA1": "9fb360e29f97251cc5860d83a438b9bdd680788a",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -909,7 +956,8 @@
     "SHA1": "0221074fe5e0f7043fa67cc6b442b8414de65566",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -928,7 +976,8 @@
     "SHA1": "7b87e44d4e11e5891feeaf350ed94eab9fcb78e7",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -947,7 +996,8 @@
     "SHA1": "5431282136c8d762a25950565a3b90383489322d",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -966,7 +1016,8 @@
     "SHA1": "eb9efe7051ee73c8e938f33b318f5e39a311a130",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -985,7 +1036,8 @@
     "SHA1": "a47e5425c51116ebf79c6db12653d387207dd408",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1004,7 +1056,8 @@
     "SHA1": "257d90a937d9cfd9f20586c70f89f20c9525c6b1",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1023,7 +1076,8 @@
     "SHA1": "3ed51d5208a3b9b46625d108d067bc77b0bd0be0",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1042,7 +1096,8 @@
     "SHA1": "d7311430f8b2cdd518206120232a8ee1c0342284",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1061,7 +1116,8 @@
     "SHA1": "21ae001dd0b25dee7d385790af5537f146428c28",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1080,7 +1136,8 @@
     "SHA1": "b462b283fedb39f3292858790c031c6a6694e308",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1099,7 +1156,8 @@
     "SHA1": "964e1169e9d305e32c1881b9882adeda1c5ac776",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1118,7 +1176,8 @@
     "SHA1": "7fa34b844357a3060ef215edcef306272159d832",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1137,7 +1196,8 @@
     "SHA1": "a8ff5e33878deb58e76d8a6ed428f68c9c0309f9",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1156,7 +1216,8 @@
     "SHA1": "edff56f39679cc7b909c03a2a39060105c40eee9",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1175,7 +1236,8 @@
     "SHA1": "ac3eb4f0e5e6c0983e5c929103a46677ad007214",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1194,7 +1256,8 @@
     "SHA1": "62d04daba556499f80627d33dc8450fdfb13a2f1",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1213,7 +1276,8 @@
     "SHA1": "e9356e0924199a6b59a6d16e8ef972a31e142bba",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1232,7 +1296,8 @@
     "SHA1": "5f70ecc968af9262ae06a6828934f28c7a7f19c7",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1251,7 +1316,8 @@
     "SHA1": "93f072e05c111864be0589b6565b813ca5588668",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1270,7 +1336,8 @@
     "SHA1": "29e50a7cb23550f9758385f801f9c26ab4af06d2",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1289,7 +1356,8 @@
     "SHA1": "fca57b1ea4b538acdb522259eda3e31fc154acd0",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1308,7 +1376,8 @@
     "SHA1": "931959560eeed3f89c7c140be951a6ce6a80e865",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1327,7 +1396,8 @@
     "SHA1": "10bcae36b25cfab130549337510e24797db503b7",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1346,7 +1416,8 @@
     "SHA1": "bc8303f8ee7d16fcb4d6edd023cbf6672bf14775",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1365,7 +1436,8 @@
     "SHA1": "d71ff826934151c004dc972ffa850e20b2d08602",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1384,7 +1456,8 @@
     "SHA1": "296d7f8361ba34db797b8ffd29496ecd36dacb27",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1403,7 +1476,8 @@
     "SHA1": "a1a812cdf7dad95414e9e949401356cc4cc6f626",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1422,7 +1496,8 @@
     "SHA1": "69a91d2719948583514acea597fabf834dc64216",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1441,7 +1516,8 @@
     "SHA1": "952a9f09433d4c5a7b7182951f55e6f2d6554225",
     "UpdateID": null,
     "Win10": true,
-    "Win11": false
+    "Win11": false,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1460,7 +1536,8 @@
     "SHA1": "c3ea298b5e4bab8e1a63b00da4ac71ab1822a396",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1479,7 +1556,8 @@
     "SHA1": "c99d9d0302262c857ced2e840fc40b2a1a8c1afa",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1498,7 +1576,8 @@
     "SHA1": "d1c2c9deb831c6c5a3084278495ab3b175f988f3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1517,7 +1596,8 @@
     "SHA1": "e634671517980143858062468e515eac5a0a9bd8",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1536,7 +1616,8 @@
     "SHA1": "5bac030ae2af575b8080086d4bd57d60388c8977",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1555,7 +1636,8 @@
     "SHA1": "fb5863188428b1a4cfeb4b04fb9d08a890aad83d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1574,7 +1656,8 @@
     "SHA1": "23891b9ea1bdabb2b1a9ad1927dcc4e229e503aa",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1593,7 +1676,8 @@
     "SHA1": "ecd8115058b9e98195eb0352184dfe90d032a4cf",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1612,7 +1696,8 @@
     "SHA1": "87b9144a6ec64bda5472a1b8d118de4ee1a17ff1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1631,7 +1716,8 @@
     "SHA1": "fee593a4f407a6c461b4b7e14e6bd1f9c09d01c6",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1650,7 +1736,8 @@
     "SHA1": "18b2a7e58b081e299c09ee3449ef3091c5697812",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1669,7 +1756,8 @@
     "SHA1": "d4acb8b48ca0d40488ee7a12be6695d04c2d58e6",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1688,7 +1776,8 @@
     "SHA1": "9a3f9facfeb0948757779fc916dca0fa7bad232f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1707,7 +1796,8 @@
     "SHA1": "3c7fca720252492ad550256f053dc2ed1271b6df",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1726,7 +1816,8 @@
     "SHA1": "1d3f5c4d02153c28166cbd0ea38de03e5ab70845",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1745,7 +1836,8 @@
     "SHA1": "356ebd300d4d076e53925401fc269956b213c31c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1764,7 +1856,8 @@
     "SHA1": "e95686ecc97c0d557bc9a6d3e1e795afac6be2b9",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1783,7 +1876,8 @@
     "SHA1": "fecc7fb66fb6a4a3ea6996b85c9f9f87708f872e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1802,7 +1896,8 @@
     "SHA1": "491e3456085c287af62308ebc4a4d2d89891bee8",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1821,7 +1916,8 @@
     "SHA1": "03dfacfd7d47f5cd0612cb8c187c268547fb7a63",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1840,7 +1936,8 @@
     "SHA1": "b2bf49e73e6eb8b89d1f1624d79ad4f2c3f55f80",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1859,7 +1956,8 @@
     "SHA1": "8dc1f5903380ae2a539ee459c18e3918dd135216",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1878,7 +1976,8 @@
     "SHA1": "8acc925e4b33e846afce72f607031fee176ead83",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1897,7 +1996,8 @@
     "SHA1": "ed4e617e5bae63d9e858ce64610d66dee074b744",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1916,7 +2016,8 @@
     "SHA1": "9c5abd5b94d45100dc57d67a1aaf3416d9f29a22",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1935,7 +2036,8 @@
     "SHA1": "4d6f66ea658cf84b20a32b7c069c9c46ddfa6f3b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1954,7 +2056,8 @@
     "SHA1": "e486c2351b2ace38a7657f08b17cfdc3a50db2d3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1973,7 +2076,8 @@
     "SHA1": "5ef3d22e022f54cb3e2f781db0ab0a28eea84259",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -1992,7 +2096,8 @@
     "SHA1": "9c28f093b09206fef9d47d9179aed2e10a3def3a",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2011,7 +2116,8 @@
     "SHA1": "58f36adda50a709259b304ff4da4ddb5ccc56c5c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2030,7 +2136,8 @@
     "SHA1": "0a5214a16cf4e0f51220a5269ab5ba1bbcc7d63b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2049,7 +2156,8 @@
     "SHA1": "9df23e49a4a1021ce19bf31b482798a466d6a584",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2068,7 +2176,8 @@
     "SHA1": "f8d0ba58a4a523917a4f92301762bfc6f15f5705",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2087,7 +2196,8 @@
     "SHA1": "248ae3acfc892b138fdbb7cb046fa380a333096d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2106,7 +2216,8 @@
     "SHA1": "ebe8d74c4d8be444343586c8e878014daf450197",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2125,7 +2236,8 @@
     "SHA1": "1ddd71adcb05938301618bf14e68acd1cb67fc9c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2144,7 +2256,8 @@
     "SHA1": "eb2316e66bf0424ab024533f1d34f6d5e101c7b7",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2163,7 +2276,8 @@
     "SHA1": "f8d2f5b408c9ce7e522763eba215042cb4421a13",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2182,7 +2296,8 @@
     "SHA1": "1c511cf9f0e86dccff5cf8fb1013b5335fc9dd05",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2201,7 +2316,8 @@
     "SHA1": "9dd856191761ac3c2727f65587c40fea1344bf52",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2220,7 +2336,8 @@
     "SHA1": "f269f18bca39d40515d6a6414476d42e7da74bd8",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2239,7 +2356,8 @@
     "SHA1": "9ed2ec53a48325b550b3b52aa508363e451d9bd1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2258,7 +2376,8 @@
     "SHA1": "3982d2325a787b91b84a72d700f3b4f0897f9ccf",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2277,7 +2396,8 @@
     "SHA1": "51c7a7494fcc2568307ca837678a97cc87e245ab",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2296,7 +2416,8 @@
     "SHA1": "a502087d3ad80d73599069bc8819b8a23019014b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2315,7 +2436,8 @@
     "SHA1": "e36450d8b2ce1bba1d692ba7ea8748e6b7e3639d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2334,7 +2456,8 @@
     "SHA1": "7b46f039dcdf56dd2ebd82982a0acf48c28ebf0b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2353,7 +2476,8 @@
     "SHA1": "cdc5e8cd4562b582b1eb1a681b558620b62cc4fe",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2372,7 +2496,8 @@
     "SHA1": "91e12357e57cc809c6534dd4aa6eb6c328f22636",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2391,7 +2516,8 @@
     "SHA1": "64f928e06e056b8218589e5b9a0de92222a2db54",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2410,7 +2536,8 @@
     "SHA1": "60f50c5727b47e2b5689880e90e4dc80039d6745",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2429,7 +2556,8 @@
     "SHA1": "f4abe754671e86f7bf070b751b7274f790022b08",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2448,7 +2576,8 @@
     "SHA1": "fe2fb76e8b328192894de799009d2e939cba16e9",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2467,7 +2596,8 @@
     "SHA1": "42bfaa4cdaf844c86f5b960eae18ab20267e534d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2486,7 +2616,8 @@
     "SHA1": "e884ac3af75d8c920056cb577a8eeefc2b564735",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2505,7 +2636,8 @@
     "SHA1": "a96e65a9e73978697038822f67333984a9eeefda",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2524,7 +2656,8 @@
     "SHA1": "74d128a05c6e6473c0ceaacc3f01b80e6e28b0ee",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2543,7 +2676,8 @@
     "SHA1": "52fdfe4020a909a85a8e32e6707cd1c6d0df74c4",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2562,7 +2696,8 @@
     "SHA1": "4954281c36af37e7701bfed7376e6430abaf3844",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2581,7 +2716,8 @@
     "SHA1": "a75b96156d24fe94deaaf787ce3a72cd36976a98",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2600,7 +2736,8 @@
     "SHA1": "fe50931b00ab9f24e217eddaefd3b1c2a2368e61",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2619,7 +2756,8 @@
     "SHA1": "89456f90a07d13e878abb66dbf598bbd5ad1ae72",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2638,7 +2776,8 @@
     "SHA1": "0464b667036143f1858532606fbd922e68f97c2c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2657,7 +2796,8 @@
     "SHA1": "6a923cb2d6a1f48bff95ff059f53e90a076962fc",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2676,7 +2816,8 @@
     "SHA1": "8c672f9c318ae4ca67a04ebb9f8488fc41496062",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2695,7 +2836,8 @@
     "SHA1": "9086107a966f223efc5b1c0e3b06f5d2feea1138",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2714,7 +2856,8 @@
     "SHA1": "c8afaa5d654abc8889bb3b3ab68fe77af35b96de",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2733,7 +2876,8 @@
     "SHA1": "899032558b43e6de91a2c57f5992c2e7af2f5389",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2752,7 +2896,8 @@
     "SHA1": "43e6b8a5c692a402a0ba6153f325321e09ea6d99",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2771,7 +2916,8 @@
     "SHA1": "98a36eb58bb287a2671e260bcc0d0c32e8aacc94",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2790,7 +2936,8 @@
     "SHA1": "4acbfb506411a6f4a61e8182e2d14ee2aa1a42c6",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2809,7 +2956,8 @@
     "SHA1": "2c08ac36ec4df15d75d341fcd3acb96257828f5d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2828,7 +2976,8 @@
     "SHA1": "911075b1a159e19a2520246391b734dc6e645e47",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2847,7 +2996,8 @@
     "SHA1": "cd564b66ff8b6ce5084ce86526068492295823ab",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2866,7 +3016,8 @@
     "SHA1": "aadf423256b30d5c660c617914ba173a143b5f7f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2885,7 +3036,8 @@
     "SHA1": "94c8d0c2e9beef00483e06219ade5b89882e9627",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2904,7 +3056,8 @@
     "SHA1": "f043bea416837a33d0d2be1b444c9579a1567360",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2923,7 +3076,8 @@
     "SHA1": "60b7e57a38484ae10100a9380f5687aac4aa399e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2942,7 +3096,8 @@
     "SHA1": "2655581ec95ebbe0a64143c97b2379abdf4e139c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2961,7 +3116,8 @@
     "SHA1": "e41aeb34c6376e51e159d17f69717b35dc20444a",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2980,7 +3136,8 @@
     "SHA1": "d1ebf848742437fb8034554fe362b54119160aa1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -2999,7 +3156,8 @@
     "SHA1": "d1095559d55749720be77301bb4121e098d50c21",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3018,7 +3176,8 @@
     "SHA1": "260fc4870834a2217300e2c481e1ef64607c007c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3037,7 +3196,8 @@
     "SHA1": "a024b9f0ff4a098d1da88cadbbe9d04de314788e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3056,7 +3216,8 @@
     "SHA1": "ff263285de94a4c6315644ec983bc621092f83bd",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3075,7 +3236,8 @@
     "SHA1": "6dda0f02d7f2884f12ce85672b7dbde9b09ec6a1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3094,7 +3256,8 @@
     "SHA1": "00e32647b02cc8a516e442e6e6681b1839bb5299",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3113,7 +3276,8 @@
     "SHA1": "1dd43df5298d2461f0af7a92d6885ef2398c3f7f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3132,7 +3296,8 @@
     "SHA1": "1b49fd37e1277e442fe21f6ceb9d225df84831e3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3151,7 +3316,8 @@
     "SHA1": "4e20fb012d05898fda5050737e73f21b34b26a15",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3170,7 +3336,8 @@
     "SHA1": "5d429a7fb2cd9d3dad4636a2b09d3c8d587f69dd",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3189,7 +3356,8 @@
     "SHA1": "0434a5e749a0b940b76fc4d4d342effe7d79389d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3208,7 +3376,8 @@
     "SHA1": "9fc5fe54101c98ddeab968ecc4d14d4ef2a809d3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3227,7 +3396,8 @@
     "SHA1": "ed74facd3dae27ba33a6ee15d32ddc4d695f3166",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3246,7 +3416,8 @@
     "SHA1": "65eb7cb0ed17d269cfb029f9891ac1c7a633fd61",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3265,7 +3436,8 @@
     "SHA1": "304e1dc4c7a1e327f46121d2fb28555cb3e4b5f1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3284,7 +3456,8 @@
     "SHA1": "5e037b46f3debdad42b5e412731da23822eb8a77",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3303,7 +3476,8 @@
     "SHA1": "37c670dac75949c08fc00543a7fecc588b963d0d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3322,7 +3496,8 @@
     "SHA1": "78a588c27801cd02e43ec8adb42dd8e527ad12e0",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3341,7 +3516,8 @@
     "SHA1": "a02b2a9c8d28a86aedcd31ce1d23c82b331f3e00",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3360,7 +3536,8 @@
     "SHA1": "6c0e44024b9b6292cf39a19bed7583a0e3146b30",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3379,7 +3556,8 @@
     "SHA1": "1d3292664b0f1dba68ce97c4b20cc9111741600b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3398,7 +3576,8 @@
     "SHA1": "6442ac1b4819bdb196c7927610da3824dcd0c791",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3417,7 +3596,8 @@
     "SHA1": "e16ebd2322533d46f0209f138ad39231068d3fd6",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3436,7 +3616,8 @@
     "SHA1": "5cdd1364ef1fbc3a4bef6e237788cc8d872d4606",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3455,7 +3636,8 @@
     "SHA1": "aca95d3d795919b9e6885312d12f7829019489bb",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3474,7 +3656,8 @@
     "SHA1": "d15c5869a7c1fd6c2655497a09bce1d8b95ca841",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3493,7 +3676,8 @@
     "SHA1": "182904c6b3b04318bbf665f687c3dd1e534d3fb7",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3512,7 +3696,8 @@
     "SHA1": "11b3953c4e51c0082fe1e3e3e9971768916090e9",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3531,7 +3716,8 @@
     "SHA1": "4dd810ba4577c65d8e154eaf0a831a01917ae001",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3550,7 +3736,8 @@
     "SHA1": "280e33b867225166952faad475012257d0d0da36",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3569,7 +3756,8 @@
     "SHA1": "24307f59c68738f9472a8b47ad67db2aa8584c87",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3588,7 +3776,8 @@
     "SHA1": "2a53ebfa1a5a690072e12f7355bb8e88c4727501",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3607,7 +3796,8 @@
     "SHA1": "02e1a2c44845d001aae9b6a8bfd6dfef96df06cb",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3626,7 +3816,8 @@
     "SHA1": "80260e75bd669d6419a7018dce734b1b1a520d12",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3645,7 +3836,8 @@
     "SHA1": "f5fcfa81d8752d724a293a3f07c40b2f73eca2d8",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3664,7 +3856,8 @@
     "SHA1": "66acce009d1c960b13be6f869d5381d260c82588",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3683,7 +3876,8 @@
     "SHA1": "904bbc6887176add905618855ad429bd93783617",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3702,7 +3896,8 @@
     "SHA1": "4029f09be7d2969fe1dbe4835f65f64e823b54c9",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3721,7 +3916,8 @@
     "SHA1": "699f704e18a65e5c1b8c9d8be12380e0fba3f912",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3740,7 +3936,8 @@
     "SHA1": "bd6292ded09eba033fb3e1511e70466247966e00",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3759,7 +3956,8 @@
     "SHA1": "139170cb54c7eaa2884a0f696f2b45f04e6ad64b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3778,7 +3976,8 @@
     "SHA1": "448b6ba6e4bde2463c2bf9a1c560e8e46830a1d5",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3797,7 +3996,8 @@
     "SHA1": "f3c7644c8bed21f3df2e2730c66baeffd003c676",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3816,7 +4016,8 @@
     "SHA1": "cc1b1bc06d9304562b3cdf81758273610e74be37",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3835,7 +4036,8 @@
     "SHA1": "e1dcad7832f3c32d5000cfcee5d9524e477c6285",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3854,7 +4056,8 @@
     "SHA1": "f48470d96983ad808192a2dc88f4b7ef10abf6f6",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3873,7 +4076,8 @@
     "SHA1": "26a516398febab134e97be37d784abc2e332d985",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3892,7 +4096,8 @@
     "SHA1": "57869b81432ca46e65734475d12b54b46359f39c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3911,7 +4116,8 @@
     "SHA1": "94df6baede2c09558400b3c1415805dd66d02872",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3930,7 +4136,8 @@
     "SHA1": "8a28c5a9864e023d3a18ddf4bedc5b8a2419852d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3949,7 +4156,8 @@
     "SHA1": "f45652fe95e82aaebc3a586775f5233078842c90",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3968,7 +4176,8 @@
     "SHA1": "5b2303cd32a90ff3d101709adb64de17cfef728e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -3987,7 +4196,8 @@
     "SHA1": "0c16f87c8312062cf1b7e14ef504bb478b7462a4",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4006,7 +4216,8 @@
     "SHA1": "6d2553238d099aa3782b48bcaf30c37c94081f0d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4025,7 +4236,8 @@
     "SHA1": "f51569b72ec398d826520c84bed0fd6d75f0dd48",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4044,7 +4256,8 @@
     "SHA1": "48cbfc6adf15dd2aa0fda718417c3381e5650aac",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4063,7 +4276,8 @@
     "SHA1": "0a9653168c20f3cd2cfd7cb5682e9b86bbe208e1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4082,7 +4296,8 @@
     "SHA1": "fb6d6be422ef6f25f919728c19dfcb31a62aa367",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4101,7 +4316,8 @@
     "SHA1": "4608d5c6bb6aa32e49aebf5f77e665bd39549d9e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4120,7 +4336,8 @@
     "SHA1": "2ae501573c1a8e05d19a627a33100814db6b4cb0",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4139,7 +4356,8 @@
     "SHA1": "04e081bfdcd17dae8b927ab78a917c0463479a56",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4158,7 +4376,8 @@
     "SHA1": "9b60d7d638802b9e1a8629c5d73a9c5cd4132201",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4177,7 +4396,8 @@
     "SHA1": "83034a1061dce5f25948c194d0e4bdf43ce16c14",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4196,7 +4416,8 @@
     "SHA1": "997909c2a80bc320f6e6db311702e5c540417e65",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4215,7 +4436,8 @@
     "SHA1": "22628c40a2239ce2d475865c0f1c145f30b09d3f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4234,7 +4456,8 @@
     "SHA1": "b0fea67679493247ec34453981a239d867156b73",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4253,7 +4476,8 @@
     "SHA1": "6e91959afd2f6deef880d50147f7dd8b38837333",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4272,7 +4496,8 @@
     "SHA1": "b6ce71283db1aab92dc7b11c19d78cf6162d4b5f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4291,7 +4516,8 @@
     "SHA1": "53f522131bec72da0d16c50caf9917c69d467822",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4310,7 +4536,8 @@
     "SHA1": "eee33dbba20e0438d88bcf6e942a288e9f049771",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4329,7 +4556,8 @@
     "SHA1": "df3f5503644ab08e45d377b65387ff5ce4f6b597",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4348,7 +4576,8 @@
     "SHA1": "6388d353b7daa893dd4b28b99d2de1d2b79662c2",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4367,7 +4596,8 @@
     "SHA1": "08c5329082682cf291f082c7a09d541f03f1d064",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4386,7 +4616,8 @@
     "SHA1": "f36ce55bf8360d246af403926f9ef5698c01ab89",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4405,7 +4636,8 @@
     "SHA1": "8c73c53ddd6d22bf6c17005d2c5902317c355823",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4424,7 +4656,8 @@
     "SHA1": "aa351e3cb1896a685d21c3794ccf6ce7f97cd96e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4443,7 +4676,8 @@
     "SHA1": "e3ccf5927f439c48f1d220e29ce5d960cb036daf",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4462,7 +4696,8 @@
     "SHA1": "8eecebc1d0cc878b1a508056d721912c11c78381",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4481,7 +4716,8 @@
     "SHA1": "84f31a09cec8fdbf5fb6a7f09695574051a5d495",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4500,7 +4736,8 @@
     "SHA1": "ed55545cc7b1e510cd5bce1c76f2a064f9de3056",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4519,7 +4756,8 @@
     "SHA1": "fab0bb2baca3c02ad6e57ae98a82c6e04e634afa",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4538,7 +4776,8 @@
     "SHA1": "736b53076d2f4cac25da597332ec1826cda6a6bc",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4557,7 +4796,8 @@
     "SHA1": "5e0966d254ba068d263327767ebfe9080da6b15c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4576,7 +4816,8 @@
     "SHA1": "e03027dd348b1d7d760667e8e685b4fdd7f0e93e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4595,7 +4836,8 @@
     "SHA1": "daa8e69440875a53ef501ace9f782a5de6066696",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4614,7 +4856,8 @@
     "SHA1": "f2bdb0b494f7a52697a3b155da7794d28b91914a",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4633,7 +4876,8 @@
     "SHA1": "a6e1f72f29adf0ee38ad87c97d50888f60693a2c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4652,7 +4896,8 @@
     "SHA1": "e2a57d9acb3ec9f9e5fa70a1f5307736f1f7f4dd",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4671,7 +4916,8 @@
     "SHA1": "2f4000ef89c51e4d56c8879f5a1d66570289a4f5",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4690,7 +4936,8 @@
     "SHA1": "edd404e8add7f4188426950a3352f6ec5abd5825",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4709,7 +4956,8 @@
     "SHA1": "2c2b3f626802bdc466a26a5ca2e2f2874a40a099",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4728,7 +4976,8 @@
     "SHA1": "a789e0840e373a8cbc0b0b2a59e34c7d8c9c37b1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4747,7 +4996,8 @@
     "SHA1": "a7d916ac06290dd0d1d09ec3bba6ac937837c1bd",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4766,7 +5016,8 @@
     "SHA1": "b26a2181a62c8406e8f93c6dfe8ddc9372d2a819",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4785,7 +5036,8 @@
     "SHA1": "711e0db6eaaeb432ec35937d24f9f668d5680b1f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4804,7 +5056,8 @@
     "SHA1": "efa9eccef870a7cf1077cabe037a4da02f00c252",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4823,7 +5076,8 @@
     "SHA1": "7062f79a31c7b879974d7694859a130ba4bd45ce",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4842,7 +5096,8 @@
     "SHA1": "8d08f9a30bb00fe7fa9f695e1d63ff91917111d4",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4861,7 +5116,8 @@
     "SHA1": "816989a3f03d43e31db7077f5b50e8fc75d7f2ee",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4880,7 +5136,8 @@
     "SHA1": "26068ae20e0475ea76cb6cfb4c2536f947b88981",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4899,7 +5156,8 @@
     "SHA1": "7d443197776026857f76abfdeabc9eb8e5b9e7ff",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4918,7 +5176,8 @@
     "SHA1": "338184522cc783454925bdcc03ef611c29946e0f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4937,7 +5196,8 @@
     "SHA1": "6362ada0b30703076641ebf41a32c1984481ddc6",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4956,7 +5216,8 @@
     "SHA1": "0c84f2532d1e6d74beade5dc4b4d7b20531077ee",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4975,7 +5236,8 @@
     "SHA1": "e324beedac4455dc82c205481b636df23eb351ea",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -4994,7 +5256,8 @@
     "SHA1": "ed42317fbd15d482fec8c052f22b13f76f141d73",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5013,7 +5276,8 @@
     "SHA1": "61c5f4a6d29564bef8e194ed77b21f214c3ba89d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5032,7 +5296,8 @@
     "SHA1": "76bf06dea68b22c911d53fefa7d5990a9408eddf",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5051,7 +5316,8 @@
     "SHA1": "2240442d23887863594b61e79ea481e89a6ee9f8",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5070,7 +5336,8 @@
     "SHA1": "5fb971d3da8803c74cebc17077343cc7f2c0a23b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5089,7 +5356,8 @@
     "SHA1": "a3dc104062e451f0fdc5c5f4e42de6ed8f5ef54e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5108,7 +5376,8 @@
     "SHA1": "03461130747fc56d5d77c3bde656e9392f90d454",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5127,7 +5396,8 @@
     "SHA1": "1d2cf580c4b7bceb05a5586077c90f012714af34",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5146,7 +5416,8 @@
     "SHA1": "d5a16521f564acecf545661d1e33384709442741",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5165,7 +5436,8 @@
     "SHA1": "cf47f0a137be8b4b7450f071b3bfbe11b4d64166",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5184,7 +5456,8 @@
     "SHA1": "ede978457d72cf28c9886220aae4e3941bb0a337",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5203,7 +5476,8 @@
     "SHA1": "79caa9b09d32b0e362d6a3658839cc857982dcae",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5222,7 +5496,8 @@
     "SHA1": "0c72b8921b84388660b3b3207b455b1abc6c3bad",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5241,7 +5516,8 @@
     "SHA1": "c1f790de58117235763701577c0e14954d3a05be",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5260,7 +5536,8 @@
     "SHA1": "6eeacce7bf4aa9d5e429baf6f9fb942308a4f88b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5279,7 +5556,8 @@
     "SHA1": "af15657b5ca2952b1c07172ff5a5ac110265e0cd",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5298,7 +5576,8 @@
     "SHA1": "a2b5c9868f12d1ceb5fb037d34fefb198114acf3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5317,7 +5596,8 @@
     "SHA1": "7b3a59feb923f7f1bf811f4e7b257f2225d1a4f9",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5336,7 +5616,8 @@
     "SHA1": "092b10342fba7e3e5908cb46c64a5ebf510a32d4",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5355,7 +5636,8 @@
     "SHA1": "bcd6b55db697024744ab60d18b1de2013d9f092f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5374,7 +5656,8 @@
     "SHA1": "c9f3cf7db5932fe252ec732eb52bd47d52ee8e32",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5393,7 +5676,8 @@
     "SHA1": "3233e7350bfaa8e88bb4ff2d42532dccf6e9f9d7",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5412,7 +5696,8 @@
     "SHA1": "17ed94a801e60846e11663c679e17bdb4bc76855",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5431,7 +5716,8 @@
     "SHA1": "7c13b4a53c2fce03d95b44e1a83f91118994d33b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5450,7 +5736,8 @@
     "SHA1": "afa936c534c8582f011e55bb7ff24439fb18f2a6",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5469,7 +5756,8 @@
     "SHA1": "277a08c84a43c4c6fe29cfc11ea90929f9f42f6e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5488,7 +5776,8 @@
     "SHA1": "23114e2fb255a8a6414ecef3685f50ab9c9cb287",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5507,7 +5796,8 @@
     "SHA1": "48619e3af0d4f835cb398a5ab3a1d33b5ea04c07",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5526,7 +5816,8 @@
     "SHA1": "9a88b6568b1d383b23e169d1043e40e500244e77",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5545,7 +5836,8 @@
     "SHA1": "9ae459ccc39fc3a1ece40fcbf1bb285c22d1b317",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5564,7 +5856,8 @@
     "SHA1": "2ecba4148f24b7edf32c69480473d88471469c4a",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5583,7 +5876,8 @@
     "SHA1": "a00e3508b587455b39e8f98d138ba1c40cdc4b3c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5602,7 +5896,8 @@
     "SHA1": "b6eaf0a540559191a760168a6fea94ce8d181c6b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5621,7 +5916,8 @@
     "SHA1": "c8c2723153d2411fcd6c452571b6c017a240bee3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5640,7 +5936,8 @@
     "SHA1": "5416d9e80d8de11cfc80eee87369141275743f47",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5659,7 +5956,8 @@
     "SHA1": "f62fe99a42fed18a35002498a9ba8cfee22f8782",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5678,7 +5976,8 @@
     "SHA1": "fd1852320e30f66c59f2e3d0dbe46bcf8989f075",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5697,7 +5996,8 @@
     "SHA1": "dc6fbe0e2c238c0b397c0452e662dc84352cb235",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5716,7 +6016,8 @@
     "SHA1": "144b9e398ee5e06c6afd1f9afabc1238a58fbaab",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5735,7 +6036,8 @@
     "SHA1": "59d818e95efc035a9eae53c4ff924814b08626d0",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5754,7 +6056,8 @@
     "SHA1": "6cb31d498c28da9ee3e73671121335973c3b3583",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5773,7 +6076,8 @@
     "SHA1": "139be75fe890c61aaa130a34d5ef8bc6319c8e33",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5792,7 +6096,8 @@
     "SHA1": "31b37f282fa1fe5b8ea8cb2613069ce624230013",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5811,7 +6116,8 @@
     "SHA1": "546cee771eee6ffb04e7b8cf62cbb72666c771c2",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5830,7 +6136,8 @@
     "SHA1": "f348530db6ad8beef2de6bdddc9c898022206114",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5849,7 +6156,8 @@
     "SHA1": "150272515ea12718bc583c21d590b832cb4faa4f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5868,7 +6176,8 @@
     "SHA1": "9fdb775ef251bc609768dd702cc84289bfe83aea",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5887,7 +6196,8 @@
     "SHA1": "4d61ced932e86bfddcd6355ca4ec67e8d8f65024",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5906,7 +6216,8 @@
     "SHA1": "c5339e3a8433ce108ac31b356634adaf44867fa5",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5925,7 +6236,8 @@
     "SHA1": "ad042859ed9a3e1eed379bd8dfe3ecc9ab629a42",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5944,7 +6256,8 @@
     "SHA1": "cd79755fe0c0fa26279959bc2296739e3c21b722",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5963,7 +6276,8 @@
     "SHA1": "cfcab823726c7d95dfb3a8bef613b5412645e1d2",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -5982,7 +6296,8 @@
     "SHA1": "0ea69a8413adf0c74d159b8163c25828e8f3148d",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6001,7 +6316,8 @@
     "SHA1": "475bfa03fa7655e35bbaf62c463f8089992b26c5",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6020,7 +6336,8 @@
     "SHA1": "cb24b5e148b15ff1af84d0b56b5cfe5eafbc32df",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6039,7 +6356,8 @@
     "SHA1": "c798d5306399a2d502f26cf3fdf2a3509d74cc80",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6058,7 +6376,8 @@
     "SHA1": "c78fd344e845d3b17cb91c40bf4a856459da1b6c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6077,7 +6396,8 @@
     "SHA1": "a67698c3b2988dc7fbd38063875a14b5d2e2c9ee",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6096,7 +6416,8 @@
     "SHA1": "634d9a0f0d797ed08d68b423ef1503673b67f681",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6115,7 +6436,8 @@
     "SHA1": "73fbb3b8a5f1e92746139c6269dfcfe6ff55bab1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6134,7 +6456,8 @@
     "SHA1": "ef44e25be011aff8ff47b31c6c9e88362e47bc3a",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6153,7 +6476,8 @@
     "SHA1": "1d6ff9259b3a276ac4ca9fbf7a742778871173dd",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6172,7 +6496,8 @@
     "SHA1": "2ddef49eb151ef8b56507d1650e9c76e42c7eac5",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6191,7 +6516,8 @@
     "SHA1": "e2e51442cae932ac0471c4b58df34a52aae6c4d9",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6210,7 +6536,8 @@
     "SHA1": "5b5115d8b1a61f121b54dd3517297677fdc4cd58",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6229,7 +6556,8 @@
     "SHA1": "b5ea02475a7c5c7458aaa9fa55e8ff08219d3673",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6248,7 +6576,8 @@
     "SHA1": "2ed62e435d702f41fd22523b04f6eee3a8ec5ea7",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6267,7 +6596,8 @@
     "SHA1": "fd40e5f448401bae16c189827deeb8f3982cf51b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6286,7 +6616,8 @@
     "SHA1": "2942b1baa8943efeca01a1389324049a7aac2ed5",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6305,7 +6636,8 @@
     "SHA1": "3b5ea3cf8454b93b3ce4ca6368333fba7d99f6a1",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6324,7 +6656,8 @@
     "SHA1": "2e6eeec6e8cbc6c2d1046db2ae76cbce398c945a",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6343,7 +6676,8 @@
     "SHA1": "9fa43ad8d4023e6903337fd337fbc60d95da36a8",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6362,7 +6696,8 @@
     "SHA1": "deed518d02cd5facfb5c745120b9e692beb9cf4b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6381,7 +6716,8 @@
     "SHA1": "913c252d7b4d339b15a2d218d0e40a563d0b8f99",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6400,7 +6736,8 @@
     "SHA1": "cb6d5396b92b268d7eec594f1ffdbfd957f8d893",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6419,7 +6756,8 @@
     "SHA1": "d6f2d781055ae1dfcac564e06b2de2a98974e904",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6438,7 +6776,8 @@
     "SHA1": "0b7f28055c397504649cecbf66316fc67abb6764",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6457,7 +6796,8 @@
     "SHA1": "e022ac3d50ccd9ec8cac24453232a86e3bf741ad",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6476,7 +6816,8 @@
     "SHA1": "75faee4daebb639122490d2f8b6992505f09b99c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6495,7 +6836,8 @@
     "SHA1": "9e923a145aa8a0fcb17a9cdf8b5190673e57c28e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6514,7 +6856,8 @@
     "SHA1": "4a8ec82a9bce812c0234b1683ea83cbcbd4994ec",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6533,7 +6876,8 @@
     "SHA1": "344823209114eae2c84e0833e9a3483d30c2efb8",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6552,7 +6896,8 @@
     "SHA1": "d9925119024ab992d2eabe6ea766f4f83957dc95",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6571,7 +6916,8 @@
     "SHA1": "2da80a631c46ae33825356185ec1b86dcda722dc",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6590,7 +6936,8 @@
     "SHA1": "52c29051777caf805be49f8b7fd811d1bf747a8f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6609,7 +6956,8 @@
     "SHA1": "03bb808bdaa05db7138cfe5398e3550fec2db749",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6628,7 +6976,8 @@
     "SHA1": "4ad3dde6bdb31a7e906f26604d6482f9a6bf74d3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6647,7 +6996,8 @@
     "SHA1": "5c3ac2861ca30c6a4ebc1d2ecd3f62f6ef5b5b69",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6666,7 +7016,8 @@
     "SHA1": "41ee3ce84abef1b69f2c3e659316dffd0047b37e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6685,7 +7036,8 @@
     "SHA1": "2569a336d66070a07e202dff496c16202e3b2ca6",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6704,7 +7056,8 @@
     "SHA1": "ea3b8998b3d5960a36a86a4de31069ee558a1b7c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6723,7 +7076,8 @@
     "SHA1": "e3a6205dc9906511e78c73ff50a93c94edb2a6ad",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6742,7 +7096,8 @@
     "SHA1": "9c8fd2a770acd3a2a4023a90b5da17955db5dc60",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6761,7 +7116,8 @@
     "SHA1": "e711df6b334bc13ce5c11e0d224df93772ed28ff",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6780,7 +7136,8 @@
     "SHA1": "4fabc8138158e1670512b2c14c680fd8238ecbef",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6799,7 +7156,8 @@
     "SHA1": "950289c3866d794a82a06e75c91ea02dd7a57a85",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6818,7 +7176,8 @@
     "SHA1": "e5997efc66f04e7711be585d911c35d3afa9ab17",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6837,7 +7196,8 @@
     "SHA1": "0628e1f2ff02c43d91b62eb17d84ae01624ee0a2",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6856,7 +7216,8 @@
     "SHA1": "68b596fd24e692176d6ee18ec3fd5f2a75b4658b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6875,7 +7236,8 @@
     "SHA1": "395c301c085f345c1d5e5288ff84ca8b3602d34a",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6894,7 +7256,8 @@
     "SHA1": "4857a4cafdcacfa33465c4ce815e7a8113c1d8c0",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6913,7 +7276,8 @@
     "SHA1": "f5b5ad9494c5a15533a60de8170aa7e79e4b3d49",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6932,7 +7296,8 @@
     "SHA1": "3b1aa9ff849b45fa6692f7630a5afc923770a2a7",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6951,7 +7316,8 @@
     "SHA1": "bd83f8da6879e0aa2a911ec4c491a06f7223065b",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6970,7 +7336,8 @@
     "SHA1": "32d8ad440484ea115d63e149e2af0cfbccb710d3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -6989,7 +7356,8 @@
     "SHA1": "b8dea81beb74d82779e15fdf867bf12327ef8292",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7008,7 +7376,8 @@
     "SHA1": "5afe286e17e850e6b0b56fcb681c254015653a6f",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7027,7 +7396,8 @@
     "SHA1": "4edec98216c887ed121276d01f12eaa1cccdfa8e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7046,7 +7416,8 @@
     "SHA1": "ef6421d2cc3691856e7bb0d4cc9df32a01bf805c",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7065,7 +7436,8 @@
     "SHA1": "7e1e7d2596a4ffccdd13237d2c0bf072af2a40a4",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7084,7 +7456,8 @@
     "SHA1": "7d0e82e7633b2e688b387c1e67b96e0aa5d7fe0e",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7103,7 +7476,8 @@
     "SHA1": "d1b63c08ab9f36cedb5ac3b28cdf77fff35a97ed",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7122,7 +7496,8 @@
     "SHA1": "a72cfd46982f33b78536505b1c15ec729868b8e3",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7141,7 +7516,8 @@
     "SHA1": "08c265730df5021bb480e7594f66fbdd6b430df7",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7160,7 +7536,8 @@
     "SHA1": "dc07b7584a6056434c36d9d06f198d8df0235383",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7179,7 +7556,8 @@
     "SHA1": "4adc1d5266d2c0fff5f81aba665acb2928ef9332",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7198,7 +7576,8 @@
     "SHA1": "d2bd29d2e839ada7c25dbb8befb17dcabc645adb",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
@@ -7217,1450 +7596,1527 @@
     "SHA1": "d0d5141fb08ee21eec39a43a6993cca0d3b5e3cb",
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": null
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ar-sa Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ar-sa Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ar-sa",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ar-sa.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ar-sa.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/69a01960-21ac-43ea-a64f-2b1b0dc1514d/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ar-sa.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/25844794-129b-4c73-a2da-c111a3969ea8/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ar-sa.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "9c3188747ee824b95a9282b4644c1ea5aa9902bf503b9b359e57ea6a6e604a4c"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ar-sa Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ar-sa Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ar-sa",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ar-sa.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ar-sa.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/bfb359e3-431f-4255-aaba-97ce0ab4eb97/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ar-sa.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/807cdf78-bc41-4644-b0b1-b295bd687aa2/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ar-sa.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "ff7200809fe2188e0a2b055faf4f919e68c6145a9a3b2cd7d0e9960ddfb2eb72"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 bg-bg Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 bg-bg Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "bg-bg",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_bg-bg.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_bg-bg.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a3a70f74-620c-48bf-9039-14a72224a298/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_bg-bg.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/76b30dc2-c0c0-4c41-aba3-98e2c42ce60c/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_bg-bg.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "9c5b2850971090e8ab32eef454c668eb84d468456070a7b7b4b8bf8517b9407f"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 bg-bg Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 bg-bg Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "bg-bg",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_bg-bg.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_bg-bg.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/38f1b4b5-4b94-4a2f-808c-d1e1fe5f73f9/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_bg-bg.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/bd3c42e8-2016-4f89-b320-a868702fabf8/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_bg-bg.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "35b1170ef7dd00b0b550a806d9da02c8cc6bafd593f000c2b81709842db685cc"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 cs-cz Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 cs-cz Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "cs-cz",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_cs-cz.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_cs-cz.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/43eac2b1-c6b5-4f39-b986-5685ea586f06/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_cs-cz.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/4f02e7e8-f509-444e-9d94-ea7a81d8b185/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_cs-cz.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "31f8c0adba77df3905da9be34bdc89d237f3b58ea52281256f03d6915dbba155"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 cs-cz Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 cs-cz Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "cs-cz",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_cs-cz.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_cs-cz.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/c44fea6b-b254-41a1-a43b-455dddf2b180/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_cs-cz.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/24155f1d-2583-4025-8273-36577e9c035f/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_cs-cz.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "f56f15f0e8b48baf1d66d65ea8aa66632b40650b277823cb8b42bc2d34cfe3ef"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 da-dk Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 da-dk Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "da-dk",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_da-dk.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_da-dk.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/0c1988df-2dea-4b3e-b3da-dff5328cbe27/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_da-dk.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/3d9d9d16-abaf-41ca-a6f9-1382c5f1a245/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_da-dk.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "57c71fe9bb47ee6fff6e6edb316aeff998efa5d01963b9b5362ff71ce7f051fb"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 da-dk Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 da-dk Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "da-dk",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_da-dk.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_da-dk.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/81ee416a-aba9-414b-8fe5-7241cf8902a4/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_da-dk.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/8f7fbe57-64d9-4c2c-abdf-0bbf2c67a0e6/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_da-dk.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "6f76b3511362bc8843a4a55c2f6afb292c9ffa3b0c352951c0011b1e92f1508f"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 de-de Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 de-de Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "de-de",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_de-de.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_de-de.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/ae425d6c-1956-4314-9ad1-cc146bc60fc4/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_de-de.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/04306f5d-2036-4e39-ac17-6081b3d0af92/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_de-de.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "f3d9cc5465008d1eec1d75a227a455e60241e29345805d2704e12ae9cdc10411"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 de-de Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 de-de Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "de-de",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_de-de.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_de-de.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/06540c30-04f4-44c5-95dc-6d96b06d2d9b/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_de-de.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/c60366bc-6049-412b-9a19-f6fe59947224/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_de-de.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "c2aa64fe325770347eb6bdccfd6e86ab946e5dcd189f23e0cbcaba390afa69b1"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 el-gr Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 el-gr Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "el-gr",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_el-gr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_el-gr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a7ac73c3-2b04-4001-8dd5-00239d8d64ae/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_el-gr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/672720bf-fbee-482c-aa47-82db24974b52/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_el-gr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "4d705798671ece35d472b02a0067dbbe46e17cca228a3d2bb7e41792861eb55f"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 el-gr Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 el-gr Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "el-gr",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_el-gr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_el-gr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/dcee35d0-4689-470e-bd33-b5e8b6fa49b7/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_el-gr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/78067e01-2b6c-42b3-9344-d97e66a19fbb/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_el-gr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "d9d517249d3e109941fabdc3bb2804c300cbbdb7023c99cd630fb98546063036"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 en-gb Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 en-gb Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "en-gb",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-gb.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-gb.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a9b0ed58-24cb-4163-bcc6-661e6ed80579/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-gb.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/804b6549-92af-42cb-9424-37d1ffa54bfa/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-gb.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "aa6471eab1ef2cac96d528bc663d2bf2bbf6966cf3df56f534791e1bc60bc77a"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 en-gb Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 en-gb Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "en-gb",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-gb.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-gb.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/debb1fbd-1e6b-470c-ae4e-b9341902f9d2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-gb.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/356d1bd2-aa35-4b3c-b577-776789c5145e/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-gb.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "e75a3be530d2c087c1be6d68bba9a9ab8d4729a7122cc0aa5652f3235b70714f"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 en-us Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 en-us Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "en-us",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/16d6894f-1811-4a50-be26-089dfc9fa5cf/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/093670e4-8242-41b5-a748-2f2a12b07a33/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_en-us.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "fa4ce4518ad575848246fcd7ef291e7c0b71a86e5f55b6668cc27d5ed4c38d46"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 en-us Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 en-us Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "en-us",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-us.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-us.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/75ebe212-2d63-4da5-80d2-24b2561cd700/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-us.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/6be8cd01-0c4d-4de3-a33b-fbaf0ec2865c/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_en-us.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "5f8965339a1fdfec96709d836b4ae549e002072d12f28d83eb248ba6dcb447bf"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 es-es Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 es-es Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "es-es",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-es.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-es.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a2349280-e7b3-4cd1-a381-ddbf018dad36/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-es.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/0a19de39-0039-4a3f-a706-158e10512e6e/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-es.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "8e0a507384daeef9cd8694cf3d3b4380346df974a952d1bb7fe77d0f4f1f499f"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 es-es Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 es-es Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "es-es",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-es.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-es.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d7f72768-7214-47cb-80b4-b4b362ea9fa2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-es.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/5f7a7769-7046-42f2-9b6b-b196d74486e3/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-es.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "165cdc9c3ad57566b6d68f589b62bcc50179eeec3c0de9025bc7b9f4e86c5a11"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 es-mx Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 es-mx Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "es-mx",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-mx.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-mx.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2f39969f-3adb-4b1f-b14a-de67e5fd4d94/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-mx.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/00472075-0c2a-43c2-a1e4-48a8c167bd4c/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_es-mx.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "51ea9c3b9034c6688b92f4f8a337f5db4f21b9ebc9991a07f1b1271648a2db73"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 es-mx Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 es-mx Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "es-mx",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-mx.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-mx.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a15c1e8a-9472-45e1-bb37-d023a766b14a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-mx.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f6ff4d84-57d0-4532-a8b0-3174bba1f505/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_es-mx.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "2c3cd2b1285a81d8080de731e34e0545ade875171e4c27fa5f765ec5ae0eac20"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 et-ee Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 et-ee Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "et-ee",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_et-ee.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_et-ee.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/830ccdac-d8ea-4117-923c-e7bd33985930/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_et-ee.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/8361003f-f841-40b1-85b6-09ec3746677b/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_et-ee.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "07acda966000e2430a26c192f929e2a3f1693c8b0040a40531d0bcf2727ee8f6"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 et-ee Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 et-ee Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "et-ee",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_et-ee.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_et-ee.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/655bd75d-6538-464c-b5c6-142f989c3258/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_et-ee.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/39ae00f1-0305-4236-839c-0e2922f7754b/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_et-ee.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "8de3b919c434e705d3d46f89c162d1fbcd94219370b9639be07e3f6e156905b1"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 fi-fi Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 fi-fi Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "fi-fi",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fi-fi.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fi-fi.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d6cef1a8-2ff5-4b86-ab5f-a02ca79d26fa/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fi-fi.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d597be61-4146-42a8-9261-063af2bc982a/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fi-fi.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "c58f8a9f7511d65a00338ff88275abe51b43986c4b4c55531c4d889c6168f0ff"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 fi-fi Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 fi-fi Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "fi-fi",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fi-fi.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fi-fi.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/4cf0747d-e359-4c9b-b194-18161fae2290/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fi-fi.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/b3a86104-59da-4095-a685-7a81fb4356fd/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fi-fi.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "5bf987600dd251b1d9729c0ff0cb96a2e3d3412d2a3a938c1cd0fe847854ac38"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 fr-ca Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 fr-ca Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "fr-ca",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-ca.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-ca.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/1ee230d9-1953-458e-8fae-ef99a3d37437/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-ca.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/5b365e26-64ba-4392-bb10-5dbcf3f69ef9/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-ca.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "fd1325b790e27d0fed2507051cd3984e32992185b88c6275a36946b1ab95aac2"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 fr-ca Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 fr-ca Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "fr-ca",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-ca.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-ca.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/6087c709-6e14-4dcd-a47c-43f0cce9598c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-ca.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/502364f7-572e-4f4e-96a5-8efcb3209ceb/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-ca.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "12ca52bdfb064652d3aa8e0c8f7e19d239fdc9deb2ced467fb8a74e90469d7b5"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 fr-fr Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 fr-fr Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "fr-fr",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-fr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-fr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/151db3f7-3722-4651-b0e8-400d9567707f/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-fr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/4a475f2d-1c01-43c6-b0e0-63f30cca6765/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_fr-fr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "31cc159ad282de2912188554fec6cb9234762cd56e48ef1d8119a64ee3de92eb"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 fr-fr Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 fr-fr Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "fr-fr",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-fr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-fr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a65a717d-45ea-4ad3-a263-5096b7afb83a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-fr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/dfc296a6-ecf4-4c40-8afd-fdb6a5d1bebc/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_fr-fr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "75b7a17f8a3c4e8037fdd93fd5d557230698f55c5be995e06be7cb9cbca3297c"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 he-il Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 he-il Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "he-il",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_he-il.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_he-il.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a9e850aa-cbfc-42e5-96f3-33f67d212541/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_he-il.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/c8be6d27-7b51-4b37-b25b-5fa5f722c106/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_he-il.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "99beea5c8526e08a39ebfea114a7dbd86cefd823600ce390c2e7141de8d7a535"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 he-il Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 he-il Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "he-il",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_he-il.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_he-il.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/cff92bf8-02d3-4230-b710-42e7c464199a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_he-il.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/088816e4-0ac1-4654-9828-aa2883967b41/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_he-il.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "1a4f11cdab168133aeb0cece58b8a9c52ce74c9b7f632bd640322eab9b3576d3"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 hr-hr Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 hr-hr Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "hr-hr",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hr-hr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hr-hr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f89d0589-7187-403d-9995-0a5bf7107a8c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hr-hr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d18ec3ed-ef75-4f93-9b85-ca15783acfc3/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hr-hr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "c4fa59c82aea9bc8d1bbf7e6d1b48cb99e8cca6a33f49ff257cca711a9325767"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 hr-hr Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 hr-hr Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "hr-hr",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hr-hr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hr-hr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/dfe0e827-edc5-4fb7-89d6-4e40dde8ea2d/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hr-hr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/c46662e0-0006-4992-8791-e26899da1a20/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hr-hr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "ffdd8c0de82896539e066f47a7abcada98d29617434b3b39041f713f4c723cff"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 hu-hu Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 hu-hu Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "hu-hu",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hu-hu.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hu-hu.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/1bd53f9f-6346-4830-8394-1f83011a59d0/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hu-hu.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/fe334ed6-3f61-4202-82bf-fc83b2ee0097/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_hu-hu.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "99801a6cf5ecf93ba9ee561c9e5f5b4192d73dfb6097566cfdd660641fe0f729"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 hu-hu Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 hu-hu Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "hu-hu",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hu-hu.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hu-hu.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/b416e8dd-04bb-41fa-853c-730a66c2e8f0/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hu-hu.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/8611f237-8293-4d69-9a68-b9879f0d1d75/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_hu-hu.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "149536b199a8a0764ef12c143fb0825a763a48f547a87f5a3459f74d363eaae7"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 it-it Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 it-it Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "it-it",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_it-it.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_it-it.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2ce26149-b938-48f0-928d-810d37481b90/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_it-it.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/0b4da1f0-d996-4d00-a19f-f2b758d45377/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_it-it.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "2f22bdac7dfebc3df97a69d8263de34bf648944ff42788b6c0e56cace3ab1f6c"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 it-it Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 it-it Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "it-it",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_it-it.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_it-it.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2e518ab8-0b55-4d4b-8180-c8d79a203df2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_it-it.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/cefcd6ab-dcbe-4e3a-b7db-32d322fec2a7/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_it-it.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "076df2e111ba03a94f9bdcfa1dfdd955232c7ff0bcff78907d37542bf65bb8aa"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ja-jp Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ja-jp Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ja-jp",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ja-jp.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ja-jp.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/fc2a3a6c-2fec-40aa-9325-10ba110205fe/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ja-jp.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/3a31809e-c43a-444f-adc1-53ed488a0e7f/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ja-jp.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "f2d84d5bd6cb1bca709ed27711d0c36deb6356d123f9ac9b2f514a7f282295bb"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ja-jp Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ja-jp Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ja-jp",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ja-jp.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ja-jp.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/922b198d-9133-42f4-8790-e065bac44d83/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ja-jp.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/3d341e1b-42e2-4b48-91a0-83a58af486c2/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ja-jp.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "7fb0eccd3de92f938e8218f9ea5c8c3f1dc6e290ff7c014e0e354d990ee97fff"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ko-kr Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ko-kr Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ko-kr",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ko-kr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ko-kr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/17c91c5f-09a6-47e0-b638-2807545c8e50/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ko-kr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/6cd30982-ed41-47ab-bb8d-b627677ced65/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ko-kr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "57f101427ecccbb48417bd10a425a045ff1da54f0e26c8c907d90b79d6e9bc5f"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ko-kr Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ko-kr Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ko-kr",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ko-kr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ko-kr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/9677aa5f-2fe9-46fe-95ed-e675a524ae57/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ko-kr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/624b9e1a-b072-4ffc-bb47-b6cf776bc710/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ko-kr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "0aa54269bb0808ea881b20312a7088d2e80b3ad240166057c729497143bf75ff"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 lt-lt Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 lt-lt Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "lt-lt",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lt-lt.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lt-lt.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/538b17b5-5063-496d-a1c3-203d50f8df2c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lt-lt.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/3b82f187-f587-4381-a819-5265a93d6f86/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lt-lt.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "4f8053c61e73b29ba3b184076438541c8671327c52ef761443c041a88c3ba5ce"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 lt-lt Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 lt-lt Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "lt-lt",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lt-lt.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lt-lt.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/93ba4f34-a41d-4b94-8036-333070b7db76/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lt-lt.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/e6b2417d-ac95-433a-8484-07e35caeb991/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lt-lt.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "c38533b7e3b34e8feeb5de6ea0cb731ae3f2e32424de966f15a8c4daffbe35ba"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 lv-lv Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 lv-lv Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "lv-lv",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lv-lv.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lv-lv.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/5bd46653-2977-46fa-b6cb-762ee9eacd0b/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lv-lv.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/fc087aeb-db7f-4cfc-827e-0ddc1d3b4128/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_lv-lv.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "b4aed4fdf3a8d477e9f8d7bb12ae6060130c4533a8fffb576bfd7388bd8142cb"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 lv-lv Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 lv-lv Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "lv-lv",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lv-lv.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lv-lv.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/31553692-69a7-4ff3-8538-a6857f57972e/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lv-lv.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/7eb504e1-6f7f-45ff-9050-b0ecca5b03d0/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_lv-lv.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "903a9df49389116e763acf4cbed4048a53255a8c1cc45f753fc29c91676a1ba0"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 nb-no Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 nb-no Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "nb-no",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nb-no.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nb-no.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/9693c7e7-5014-47f3-9ea4-1c9ad70009b5/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nb-no.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/ef7ca5c9-5f47-4bc7-aa46-a11f1dd581e6/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nb-no.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "77a7e9d22ee469994bd1c414849ffc430428c5a64b243693e676b0e3269ad216"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 nb-no Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 nb-no Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "nb-no",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nb-no.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nb-no.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d3e5e7c2-59a7-4aa2-ab77-1ac7cbd93ebc/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nb-no.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/784c50b5-533e-4311-8ab2-057e55406b3c/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nb-no.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "085832e1dde18c3fea63402b334f201cc5af79d67527369171bee5a6cc5bbf79"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 nl-nl Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 nl-nl Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "nl-nl",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nl-nl.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nl-nl.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/1d7ebd4b-a1da-4686-b07c-a54f6f2272d3/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nl-nl.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/05899927-0667-4fb5-ba41-5ee1d2e468a4/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_nl-nl.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "81c5a1547e7c19f26a5e004707000619ffac291a8376d38c3da962034483af3b"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 nl-nl Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 nl-nl Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "nl-nl",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nl-nl.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nl-nl.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/bf65a0cd-acb0-4169-a2d9-0cf4de895d11/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nl-nl.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/7b508de2-c6f7-467e-be5a-3e9b1b798db7/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_nl-nl.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "5701f060f4defdd06034f24f0324ab9f03a55af29197b9e34c4990d829296801"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 pl-pl Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 pl-pl Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "pl-pl",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pl-pl.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pl-pl.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/4867d1f9-5baa-4da0-ac7f-7408e57417e2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pl-pl.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f00f79b7-f746-4d2b-b1ff-3daa18897bc2/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pl-pl.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "83fef9ed329decfca8540edc86c44cb714472e24c5ef08c1d076c812c486f14c"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 pl-pl Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 pl-pl Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "pl-pl",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pl-pl.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pl-pl.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/c8d1f17e-7596-490e-894b-908dd5d9facc/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pl-pl.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/cb320893-c987-4988-9d0d-49239605c16c/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pl-pl.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "52646e1d514e32b1431c0bf097f9dabb5e85becdc0e47acd35a4a19a92dbc640"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 pt-br Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 pt-br Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "pt-br",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-br.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-br.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/3e7bc8e4-fe1a-4685-916f-eaae0abdc390/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-br.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/11bacc1c-081f-48bf-ae5f-c01aeeeb0406/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-br.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "4bf246676bf4775108c73fefbdc9ee85e286a71e02e9f32030a5ff38f6dac675"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 pt-br Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 pt-br Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "pt-br",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-br.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-br.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/991701af-03da-46c5-80d8-119149f0896d/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-br.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a72d4e0f-fe8f-48c8-a645-c5bb4d33c736/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-br.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "f43e9c354a2713fe0eae6e820461f55eea149b4bf67ad45e95cd06e8ef759e0c"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 pt-pt Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 pt-pt Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "pt-pt",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-pt.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-pt.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2ff1891a-3f41-4a34-bb57-73e76eca8ae3/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-pt.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/782f1b5d-bf6d-4ff2-9b5f-8e0cdb012fc2/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_pt-pt.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "87d28127ac4fe64cf5b71a5f5b6a21f62e528c18843a96be12ed978870920a80"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 pt-pt Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 pt-pt Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "pt-pt",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-pt.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-pt.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/24cf4c74-3a6c-4c34-bb82-2f9d4608345a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-pt.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a108951d-5fce-41b4-b402-9ff037b8b7c9/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_pt-pt.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "9810b79c80786bdfad1850c056215509f1dd4dc81281b2d343989620536ee7fd"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ro-ro Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ro-ro Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ro-ro",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ro-ro.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ro-ro.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d022461a-090a-43d5-99da-60dca5fa0bdd/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ro-ro.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/70db28a1-8c8a-4040-9883-2b03a0bf7831/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ro-ro.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "18a90e34c8d0f021cc48926dcdea3b712035b627323d88cc50f1ccff50f55f8b"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ro-ro Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ro-ro Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ro-ro",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ro-ro.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ro-ro.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/84949b7d-1c38-464b-b8d9-b67641d2cd09/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ro-ro.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/cbbcda30-caf3-468d-a2d4-48fd608dd121/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ro-ro.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "857e773face2d733916c7f5c6e2b848da84aaa4d437406cccb015f60adcc84e6"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ru-ru Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ru-ru Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ru-ru",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ru-ru.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ru-ru.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/75dc54fa-9d7b-4cb6-b10d-4a7778855a94/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ru-ru.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/e77ab2e0-41df-404d-8d9b-0d0576e254d4/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_ru-ru.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "0d308eb6198e99123a8abf473d25faeb21bcb8f7bb7dd0c9ef000fb23b0b73eb"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 ru-ru Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 ru-ru Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "ru-ru",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ru-ru.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ru-ru.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/589d63eb-5ffe-4362-8fe5-d564c6c032b5/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ru-ru.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a09c0ce7-274e-4fd9-97dd-51c7d438e616/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_ru-ru.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "0b62597e85f386d7cc893ae5d958c1a111d849b61d2749646c1dae49cb595d9d"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 sk-sk Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 sk-sk Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "sk-sk",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sk-sk.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sk-sk.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/3e376114-7072-41d6-97e5-a8bc83a5d1f3/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sk-sk.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a26b1fcc-e154-453a-9b1a-d4ee1b4cd573/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sk-sk.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "6eb942a2caf57b33e073a83db64907638376357030c727ced7948c96c0993046"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 sk-sk Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 sk-sk Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "sk-sk",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sk-sk.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sk-sk.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a2e8442d-dd6c-4f33-bacd-16942126c129/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sk-sk.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a23c4105-a158-426e-b1d4-ab5b237d1e7b/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sk-sk.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "0c853223b67e82a0c7d6a15ba8c472bd0d3498e765353434808ee16281b9858e"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 sl-si Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 sl-si Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "sl-si",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sl-si.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sl-si.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2d92381a-433a-4328-8fa6-198ec66503e6/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sl-si.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a4b05c8b-7491-4643-a0cd-53c82c028d39/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sl-si.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "d8a786980f202f07ef476fbb3efc32bf4ae03745cc7718aad2f54e2230e55ca3"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 sl-si Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 sl-si Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "sl-si",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sl-si.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sl-si.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2c60a2ba-a1dd-42d7-b552-2b998e254d1c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sl-si.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/02626afa-15d0-4aaf-b443-41982b600151/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sl-si.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "91ef27fb42064c8ff0fe25c12b027405eeb199463e94479361619af627587dc4"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 sr-latn-rs Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 sr-latn-rs Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "sr-latn-rs",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sr-latn-rs.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sr-latn-rs.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/8b836c38-68d5-4f96-a324-9be4f5c5fa8a/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sr-latn-rs.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d0cf10c7-1a08-4922-9df1-cbc2e0f1d5ad/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sr-latn-rs.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "37c8d375ee75100356807b3fd348b33f7825d28a08a51ee31a5879472b763471"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 sr-latn-rs Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 sr-latn-rs Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "sr-latn-rs",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sr-latn-rs.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sr-latn-rs.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f7e11319-bf68-492b-8b4e-ae7c4ee93621/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sr-latn-rs.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/6e809044-0c4d-4455-94de-6f49c95b658c/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sr-latn-rs.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "a18a59847942bf11a878aafd70d0b238bcd2e8390a3922e4903447d707762e3e"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 sv-se Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 sv-se Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "sv-se",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sv-se.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sv-se.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/51b0302a-ffa1-4fed-b616-04d3155c1e6c/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sv-se.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/fceafc86-848c-40c3-9a7c-dc3866a92a78/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_sv-se.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "8910fafc3497a6896c81421bde80fd650f4307f5ee2a8a71110ea6923b3b1e57"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 sv-se Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 sv-se Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "sv-se",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sv-se.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sv-se.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/bed1dc9d-6dd1-4757-9fc3-39a84099d9e3/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sv-se.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/ed862d53-5339-4aad-a60d-41d58a802eee/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_sv-se.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "bc45e3388bc3f8653e35e0fe513fbf1d8c05dfb7eab9aaf8ab68194ef2d27f33"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 th-th Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 th-th Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "th-th",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_th-th.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_th-th.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/e142424c-fbfb-4aa0-a95c-d50969d22662/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_th-th.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/ccc9e2b5-aecb-4686-aee7-ac5eea9b7209/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_th-th.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "5a5cf7e7a87d267552bdc0eb0e0acaa13f76e98699dbd1e74b4ae16257eb9fbf"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 th-th Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 th-th Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "th-th",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_th-th.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_th-th.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/79bbcbc1-8639-4278-8df2-a0ebc442c310/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_th-th.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/f7718824-5055-447e-8bd8-08343e95f175/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_th-th.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "31655022279507d1d816aced61d6c88fc58f35346207a83a9d8f4cd1771d8005"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 tr-tr Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 tr-tr Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "tr-tr",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_tr-tr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_tr-tr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/b4c24f13-95dd-4527-92e5-8e0910e34189/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_tr-tr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/22ebc473-7e5e-4ab8-8ee9-3f093ab8c8fb/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_tr-tr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "d5cde93a9cda50a40f7d86afe069d0e57fe57761f429b3ef3bb79871980ea37b"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 tr-tr Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 tr-tr Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "tr-tr",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_tr-tr.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_tr-tr.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/ecf4cf11-832c-472f-bfbd-7b1f3f4dbcd4/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_tr-tr.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/22dcd1b1-d446-4728-b527-dd78508e98bf/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_tr-tr.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "b9e26854d7085a7ff96f339239e46a9e8f056aac8a75053d08ee3a06079d239a"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 uk-ua Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 uk-ua Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "uk-ua",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_uk-ua.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_uk-ua.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/4977bdfb-323d-4488-9934-f92bfac29b38/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_uk-ua.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/8602909f-1d9b-4b92-a9f6-0e6271ac7a09/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_uk-ua.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "0cbbda453932af94a97eed98927570804b6bc69592251a2c9503f8255cd64f35"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 uk-ua Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 uk-ua Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "uk-ua",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_uk-ua.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_uk-ua.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/a346be7f-53c6-4e05-8606-8f3a1cf767d2/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_uk-ua.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d641fd64-f62d-4aca-9470-708b2c17776c/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_uk-ua.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "1be3dc7d1aee4bf7b11e738ef9e5adee352a45e4bc7da3e270c006b26509d1b1"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 zh-cn Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 zh-cn Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "zh-cn",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-cn.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-cn.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/07c122b3-486a-42a3-a823-7fdb052b03ae/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-cn.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/b13dcb46-0b16-4b88-b391-43377cb64490/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-cn.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "e2109a98a7be50b4018b0268f248cb884f2d19a4acce2fc4d8f3c173fbf805d6"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 zh-cn Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 zh-cn Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "zh-cn",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-cn.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-cn.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/efa1d2f8-0582-4ba5-85cb-fa7d8484eb2e/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-cn.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/28616127-21ea-43e8-a034-ea668712ef0a/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-cn.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "8ffc005fc0ca0cfba8e0c61c8a4d127dcae42af4a56215f3527a3290c5e6bf02"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 zh-tw Retail 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 zh-tw Retail 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "zh-tw",
     "Activation": "Retail",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-tw.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-tw.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/d1d3df63-60c2-4fa4-aaa7-9d143c2d05cd/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-tw.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/83afe5f6-b2b2-49a1-ae43-110a003a8b01/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_A64FRE_zh-tw.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "c40d8f777bee46f1d08d4f7ebcbd81020257f7fa80345952417130f1607fcfb9"
   },
   {
     "Status": null,
     "ReleaseDate": "2025-09-15",
-    "Name": "Windows 11 25H2 ARM64 zh-tw Volume 26200.6584",
+    "Name": "Windows 11 25H2 ARM64 zh-tw Volume 26200.7462",
     "Version": "Windows 11",
     "ReleaseID": "25H2",
     "Architecture": "ARM64",
     "Language": "zh-tw",
     "Activation": "Volume",
-    "Build": "26200.6584",
-    "FileName": "26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-tw.esd",
+    "Build": "26200.7462",
+    "FileName": "26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-tw.esd",
     "ImageIndex": null,
     "ImageName": null,
-    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/98c4f1cd-ce41-4daa-9104-6e9a2987d105/26200.6584.250915-1905.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-tw.esd",
+    "Url": "http://dl.delivery.mp.microsoft.com/filestreamingservice/files/ba8865d1-a7f7-43a7-a6ff-190b98aa9dd3/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTBUSINESS_VOL_A64FRE_zh-tw.esd",
     "SHA1": null,
     "UpdateID": null,
     "Win10": false,
-    "Win11": true
+    "Win11": true,
+    "Sha256": "35acf65bc218675e557566fb8c43403281d144698355b27156cc121acc419e86"
   }
 ]
