@@ -1,11 +1,11 @@
-﻿# OSD.Build Catalog
+# OSD.Build Catalog
 
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 25.12.30.1 |
+| Build Version | 26.1.30.1 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogSurfaceSystemSku |
 | Files | build-systemsku.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Thursday, January 8, 2026 5:58:27 AM UTC |
+| Last Update | Friday, January 30, 2026 9:00:41 AM UTC |
