@@ -108,9 +108,9 @@ function Save-WebFile {
 
         if ($UseWebClient -eq $true) {
             [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls1
-            $WebClient = New-Object System.Net.WebClient
-            $WebClient.DownloadFile($SourceUrl, $DestinationFullName)
-            $WebClient.Dispose()
+            $WebClientTemp = New-Object System.Net.WebClient
+            $WebClientTemp.DownloadFile($SourceUrl, $DestinationFullName)
+            $WebClientTemp.Dispose()
         }
         else {
             Write-Verbose "cURL Source: $SourceUrl"
