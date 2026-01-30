@@ -1025,12 +1025,34 @@
             if (($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileDestination.FullName)){
                 $Global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
                 $Global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $Global:OSDCloud.ImageFileName}).SHA1
-                if ($Global:OSDCloud.ImageFileDestinationSHA1 -ne $Global:OSDCloud.ImageFileSHA1){
+                ## PATCHED for SHA256 START
+                # If SHA1 is not available, verify the ESD using SHA256 instead.
+                if (-Not $Global:OSDCloud.ImageFileSHA1) {
+                    $Patched_ImageFileDestinationSHA256 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA256).Hash
+                    $Patched_ImageFileSHA256 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq "$($Global:OSDCloud.ImageFileName)"}).Sha256
+                    if ($Patched_ImageFileDestinationSHA256 -ne $Patched_ImageFileSHA256) {
+                        Write-Warning "SHA256 Mismatch"
+                        Write-Warning "Downloaded ESD SHA256: $($Patched_ImageFileDestinationSHA256)"
+                        Write-Warning "Catalog ESD SHA256: $(($Patched_ImageFileSHA256).ToUpper())"
+                        Write-Warning "Press Ctrl+C to exit"
+                        Start-Sleep -Seconds 86400
+                        Exit
+                    } else {
+                        Write-Host -ForegroundColor Green "SHA256 Match"
+                        Write-Host -ForegroundColor DarkGray " Catalog ESD SHA256:    $(($Patched_ImageFileSHA256).ToUpper())"
+                        Write-Host -ForegroundColor DarkGray " Downloaded ESD SHA256: $($Patched_ImageFileDestinationSHA256)"
+                    }
+                }
+                # if ($Global:OSDCloud.ImageFileDestinationSHA1 -ne $Global:OSDCloud.ImageFileSHA1){
+                ## PATCHED for SHA256 END BELOW
+                # End of SHA256 fallback verification.
+                elseif ($Global:OSDCloud.ImageFileDestinationSHA1 -ne $Global:OSDCloud.ImageFileSHA1){
                     Write-Warning "SHA1 Mismatch"
                     Write-Warning "Downloaded ESD SHA1: $($Global:OSDCloud.ImageFileDestinationSHA1)"
                     Write-Warning "Catalog ESD SHA1: $($Global:OSDCloud.ImageFileSHA1)"
                     Write-Warning "Press Ctrl+C to exit"
                     Start-Sleep -Seconds 86400
+                    Exit ## PATCHED
                 }
                 else {
                     Write-Host -ForegroundColor Green "SHA1 Match"
