@@ -1,198 +1,198 @@
 [
-  {
-    "Model": "Surface 3 (LTE) - ATT",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=49039"
-  },
-  {
-    "Model": "Surface 3 (LTE) - Outside of North America and Y!mobile in Japan",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=49041"
-  },
-  {
-    "Model": "Surface 3 (LTE) - Verizon",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=49920"
-  },
-  {
-    "Model": "Surface 3 (Wi-Fi)",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=49040"
-  },
-  {
-    "Model": "Surface Book",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=49497"
-  },
-  {
-    "Model": "Surface Book 2",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=56261"
-  },
-  {
-    "Model": "Surface Book 3",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=101315"
-  },
-  {
-    "Model": "Surface Dock 2",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=101317"
-  },
-  {
-    "Model": "Surface Go (LTE)",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=57601"
-  },
-  {
-    "Model": "Surface Go (Wi-Fi)",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=57439"
-  },
-  {
-    "Model": "Surface Go 2",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=101304"
-  },
-  {
-    "Model": "Surface Go 3",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=103504"
-  },
-  {
-    "Model": "Surface Go 4",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=105609"
-  },
-  {
-    "Model": "Surface Laptop",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=55489"
-  },
-  {
-    "Model": "Surface Laptop 2",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=57515"
-  },
-  {
-    "Model": "Surface Laptop 3 with AMD processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=100428"
-  },
-  {
-    "Model": "Surface Laptop 3 with Intel processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=100429"
-  },
-  {
-    "Model": "Surface Laptop 4 with AMD processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=102923"
-  },
-  {
-    "Model": "Surface Laptop 4 with Intel processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=102924"
-  },
-  {
-    "Model": "Surface Laptop 5",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=104679"
-  },
-  {
-    "Model": "Surface Laptop 6",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=105946"
-  },
-  {
-    "Model": "Surface Laptop 7th Edition, Intel processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=108014"
-  },
-  {
-    "Model": "Surface Laptop 7th Edition, Snapdragon processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=106120"
-  },
-  {
-    "Model": "Surface Laptop Go",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=102261"
-  },
-  {
-    "Model": "Surface Laptop Go 2",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=104251"
-  },
-  {
-    "Model": "Surface Laptop Go 3",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=105608"
-  },
-  {
-    "Model": "Surface Laptop Studio",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=103505"
-  },
-  {
-    "Model": "Surface Laptop Studio 2",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=105610"
-  },
-  {
-    "Model": "Surface Pro",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=49038"
-  },
-  {
-    "Model": "Surface Pro 10",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=105947"
-  },
-  {
-    "Model": "Surface Pro 10 with 5G",
-    "DriverPage": "https://www.microsoft.com/en-us/download/details.aspx?id=106292"
-  },
-  {
-    "Model": "Surface Pro 11th Edition, Intel processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=108013&amp;msockid=28a850520e226efc1ba245090f0f6f14"
-  },
-  {
-    "Model": "Surface Pro 11th Edition, Snapdragon processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=106119"
-  },
-  {
-    "Model": "Surface Pro 2",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=49042"
-  },
-  {
-    "Model": "Surface Pro 3",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=38826"
-  },
-  {
-    "Model": "Surface Pro 4",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=49498"
-  },
-  {
-    "Model": "Surface Pro 5 (LTE)",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=56278"
-  },
-  {
-    "Model": "Surface Pro 5 (Wi-Fi)",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=55484"
-  },
-  {
-    "Model": "Surface Pro 6",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=57514"
-  },
-  {
-    "Model": "Surface Pro 7",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=100419"
-  },
-  {
-    "Model": "Surface Pro 7+ and Surface Pro 7+ (LTE)",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=102633"
-  },
-  {
-    "Model": "Surface Pro 8",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=103503"
-  },
-  {
-    "Model": "Surface Pro 9 with 5G (SQ3 processor)",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=105941"
-  },
-  {
-    "Model": "Surface Pro 9 with Intel processor",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=104680"
-  },
-  {
-    "Model": "Surface Studio",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=54311"
-  },
-  {
-    "Model": "Surface Studio 2",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=57593"
-  },
-  {
-    "Model": "Surface Studio 2+",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=104681"
-  },
-  {
-    "Model": "Surface Thunderbolt 4 Dock",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=105115"
-  },
-  {
-    "Model": "Windows 10 Pro and Enterprise OS on Surface Hub 2S",
-    "DriverPage": "https://www.microsoft.com/download/details.aspx?id=101974"
-  }
+    {
+        "Model":  "Surface 3 (LTE) - ATT",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=49039"
+    },
+    {
+        "Model":  "Surface 3 (LTE) - Outside of North America and Y!mobile in Japan",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=49041"
+    },
+    {
+        "Model":  "Surface 3 (LTE) - Verizon",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=49920"
+    },
+    {
+        "Model":  "Surface 3 (Wi-Fi)",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=49040"
+    },
+    {
+        "Model":  "Surface Book",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=49497"
+    },
+    {
+        "Model":  "Surface Book 2",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=56261"
+    },
+    {
+        "Model":  "Surface Book 3",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=101315"
+    },
+    {
+        "Model":  "Surface Dock 2",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=101317"
+    },
+    {
+        "Model":  "Surface Go (LTE)",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=57601"
+    },
+    {
+        "Model":  "Surface Go (Wi-Fi)",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=57439"
+    },
+    {
+        "Model":  "Surface Go 2",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=101304"
+    },
+    {
+        "Model":  "Surface Go 3",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=103504"
+    },
+    {
+        "Model":  "Surface Go 4",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=105609"
+    },
+    {
+        "Model":  "Surface Laptop",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=55489"
+    },
+    {
+        "Model":  "Surface Laptop 2",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=57515"
+    },
+    {
+        "Model":  "Surface Laptop 3 with AMD processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=100428"
+    },
+    {
+        "Model":  "Surface Laptop 3 with Intel processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=100429"
+    },
+    {
+        "Model":  "Surface Laptop 4 with AMD processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=102923"
+    },
+    {
+        "Model":  "Surface Laptop 4 with Intel processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=102924"
+    },
+    {
+        "Model":  "Surface Laptop 5",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=104679"
+    },
+    {
+        "Model":  "Surface Laptop 6",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=105946"
+    },
+    {
+        "Model":  "Surface Laptop 7th Edition, Intel processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=108014"
+    },
+    {
+        "Model":  "Surface Laptop 7th Edition, Snapdragon processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=106120"
+    },
+    {
+        "Model":  "Surface Laptop Go",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=102261"
+    },
+    {
+        "Model":  "Surface Laptop Go 2",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=104251"
+    },
+    {
+        "Model":  "Surface Laptop Go 3",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=105608"
+    },
+    {
+        "Model":  "Surface Laptop Studio",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=103505"
+    },
+    {
+        "Model":  "Surface Laptop Studio 2",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=105610"
+    },
+    {
+        "Model":  "Surface Pro",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=49038"
+    },
+    {
+        "Model":  "Surface Pro 10",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=105947"
+    },
+    {
+        "Model":  "Surface Pro 10 with 5G",
+        "DriverPage":  "https://www.microsoft.com/en-us/download/details.aspx?id=106292"
+    },
+    {
+        "Model":  "Surface Pro 11th Edition, Intel processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=108013\u0026amp;msockid=28a850520e226efc1ba245090f0f6f14"
+    },
+    {
+        "Model":  "Surface Pro 11th Edition, Snapdragon processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=106119"
+    },
+    {
+        "Model":  "Surface Pro 2",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=49042"
+    },
+    {
+        "Model":  "Surface Pro 3",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=38826"
+    },
+    {
+        "Model":  "Surface Pro 4",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=49498"
+    },
+    {
+        "Model":  "Surface Pro 5 (LTE)",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=56278"
+    },
+    {
+        "Model":  "Surface Pro 5 (Wi-Fi)",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=55484"
+    },
+    {
+        "Model":  "Surface Pro 6",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=57514"
+    },
+    {
+        "Model":  "Surface Pro 7",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=100419"
+    },
+    {
+        "Model":  "Surface Pro 7+ and Surface Pro 7+ (LTE)",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=102633"
+    },
+    {
+        "Model":  "Surface Pro 8",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=103503"
+    },
+    {
+        "Model":  "Surface Pro 9 with 5G (SQ3 processor)",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=105941"
+    },
+    {
+        "Model":  "Surface Pro 9 with Intel processor",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=104680"
+    },
+    {
+        "Model":  "Surface Studio",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=54311"
+    },
+    {
+        "Model":  "Surface Studio 2",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=57593"
+    },
+    {
+        "Model":  "Surface Studio 2+",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=104681"
+    },
+    {
+        "Model":  "Surface Thunderbolt 4 Dock",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=105115"
+    },
+    {
+        "Model":  "Windows 10 Pro and Enterprise OS on Surface Hub 2S",
+        "DriverPage":  "https://www.microsoft.com/download/details.aspx?id=101974"
+    }
 ]
