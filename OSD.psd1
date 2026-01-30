@@ -12,7 +12,7 @@
 RootModule = 'OSD.psm1'
 
 # Version number of this module.
-ModuleVersion = '26.1.30.4'
+ModuleVersion = '26.1.30.5'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Desktop'
