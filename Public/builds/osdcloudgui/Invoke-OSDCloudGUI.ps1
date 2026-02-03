@@ -939,16 +939,23 @@
         if (($global:OSDCloud.ImageFileDestination) -and ($global:OSDCloud.ImageFileDestination.FullName)) {
             $global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
             $global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $global:OSDCloud.ImageFileName}).SHA1
-            Write-DarkGrayHost "Microsoft Verified ESD SHA1: $($global:OSDCloud.ImageFileSHA1)"
-            Write-DarkGrayHost "Downloaded ESD SHA1: $($global:OSDCloud.ImageFileDestinationSHA1)"
-            if ($global:OSDCloud.ImageFileDestinationSHA1 -ne $global:OSDCloud.ImageFileSHA1) {
-                Write-Warning "[$(Get-Date -format G)] OSDCloud FAILURE"
-                Write-Warning "[$(Get-Date -format G)] WindowsImage SHA1 does not match the verified Microsoft ESD SHA1."
-                Write-Warning 'Press Ctrl+C to cancel OSDCloud'
-                Start-Sleep -Seconds 86400
+            if ($null -eq $Global:OSDCloud.ImageFileSHA1) {
+                Write-Warning "[$(Get-Date -format G)] OSDCloud Warning"
+                Write-Warning "No SHA1 Hash exists for $($Global:OSDCloud.ImageFileName) in the OSDCloud Catalog"
+                Write-Warning "Skipping SHA1 Validation"
             }
             else {
-                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] WindowsImage SHA1 matches the verified Microsoft ESD SHA1. OK."
+                Write-DarkGrayHost "Microsoft Verified ESD SHA1: $($global:OSDCloud.ImageFileSHA1)"
+                Write-DarkGrayHost "Downloaded ESD SHA1: $($global:OSDCloud.ImageFileDestinationSHA1)"
+                if ($global:OSDCloud.ImageFileDestinationSHA1 -ne $global:OSDCloud.ImageFileSHA1) {
+                    Write-Warning "[$(Get-Date -format G)] OSDCloud FAILURE"
+                    Write-Warning "[$(Get-Date -format G)] WindowsImage SHA1 does not match the verified Microsoft ESD SHA1."
+                    Write-Warning 'Press Ctrl+C to cancel OSDCloud'
+                    Start-Sleep -Seconds 86400
+                }
+                else {
+                    Write-Host -ForegroundColor Green "[$(Get-Date -format G)] WindowsImage SHA1 matches the verified Microsoft ESD SHA1. OK."
+                }
             }
         }
     }

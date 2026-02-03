@@ -1021,11 +1021,17 @@
         }
         #endregion
         #region CheckSHA1
-        if ($Global:OSDCloud.CheckSHA1 -eq $true){
-            if (($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileDestination.FullName)){
+        # SHA1 may not exist, it may be null as Windows 25H2 is using SHA256 now
+        if ($Global:OSDCloud.CheckSHA1 -eq $true) {
+            if (($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileDestination.FullName)) {
                 $Global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
                 $Global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $Global:OSDCloud.ImageFileName}).SHA1
-                if ($Global:OSDCloud.ImageFileDestinationSHA1 -ne $Global:OSDCloud.ImageFileSHA1){
+                if ($null -eq $Global:OSDCloud.ImageFileSHA1) {
+                    Write-Warning "[$(Get-Date -format G)] OSDCloud Warning"
+                    Write-Warning "No SHA1 Hash exists for $($Global:OSDCloud.ImageFileName) in the OSDCloud Catalog"
+                    Write-Warning "Skipping SHA1 Validation"
+                }
+                elseif ($Global:OSDCloud.ImageFileDestinationSHA1 -ne $Global:OSDCloud.ImageFileSHA1){
                     Write-Warning "SHA1 Mismatch"
                     Write-Warning "Downloaded ESD SHA1: $($Global:OSDCloud.ImageFileDestinationSHA1)"
                     Write-Warning "Catalog ESD SHA1: $($Global:OSDCloud.ImageFileSHA1)"
