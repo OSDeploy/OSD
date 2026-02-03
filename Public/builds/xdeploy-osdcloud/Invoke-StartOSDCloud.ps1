@@ -55,7 +55,7 @@
     #endregion
 
     #region [Variables] OSDCloud Master Settings
-    Write-DarkGrayHost "Initializing `$Global.OSDCloud"
+    Write-DarkGrayHost "Initializing `$Global:OSDCloud"
     $global:OSDCloud = $null
     $global:OSDCloud = [ordered]@{
         LaunchMethod = $null
@@ -211,53 +211,53 @@
         MyOSDCloud is the last and final customization variable
     #>
     if ($Global:InvokeOSDCloud) {
-        Write-DarkGrayHost 'Applying $Global.InvokeOSDCloud'
+        Write-DarkGrayHost 'Applying $Global:InvokeOSDCloud'
         foreach ($Key in $Global:InvokeOSDCloud.Keys) {
             $global:OSDCloud.$Key = $Global:InvokeOSDCloud.$Key
         }
     }
     else {
-        Write-DarkGrayHost 'Not Used $Global.InvokeOSDCloud'
+        Write-DarkGrayHost 'Not Used $Global:InvokeOSDCloud'
     }
 
     if ($Global:StartOSDCloud) {
-        Write-DarkGrayHost 'Applying $Global.StartOSDCloud'
+        Write-DarkGrayHost 'Applying $Global:StartOSDCloud'
         foreach ($Key in $Global:StartOSDCloud.Keys) {
             $global:OSDCloud.$Key = $Global:StartOSDCloud.$Key
         }
     }
     else {
-        Write-DarkGrayHost 'Not Used $Global.StartOSDCloud'
+        Write-DarkGrayHost 'Not Used $Global:StartOSDCloud'
     }
 
     if ($Global:StartOSDCloudCLI) {
-        Write-DarkGrayHost 'Applying $Global.StartOSDCloudCLI'
+        Write-DarkGrayHost 'Applying $Global:StartOSDCloudCLI'
         foreach ($Key in $Global:StartOSDCloudCLI.Keys) {
             $global:OSDCloud.$Key = $Global:StartOSDCloudCLI.$Key
         }
     }
     else {
-        Write-DarkGrayHost 'Not Used $Global.StartOSDCloudCLI'
+        Write-DarkGrayHost 'Not Used $Global:StartOSDCloudCLI'
     }
 
     if ($Global:InvokeOSDCloud) {
-        Write-DarkGrayHost 'Reapplying $Global.InvokeOSDCloud'
+        Write-DarkGrayHost 'Reapplying $Global:InvokeOSDCloud'
         foreach ($Key in $Global:InvokeOSDCloud.Keys) {
             $global:OSDCloud.$Key = $Global:InvokeOSDCloud.$Key
         }
     }
     else {
-        Write-DarkGrayHost 'Not Used $Global.InvokeOSDCloud'
+        Write-DarkGrayHost 'Not Used $Global:InvokeOSDCloud'
     }
 
     if ($Global:MyOSDCloud) {
-        Write-DarkGrayHost 'Applying $Global.MyOSDCloud'
+        Write-DarkGrayHost 'Applying $Global:MyOSDCloud'
         foreach ($Key in $Global:MyOSDCloud.Keys) {
             $global:OSDCloud.$Key = $Global:MyOSDCloud.$Key
         }
     }
     else {
-        Write-DarkGrayHost 'Not Used $Global.MyOSDCloud'
+        Write-DarkGrayHost 'Not Used $Global:MyOSDCloud'
     }
     #endregion
 
@@ -935,7 +935,7 @@
     #endregion
 
     #region [WindowsImage] Verify SHA1
-    if ($Global.OSDCloud.CheckSHA1 -eq $true) {
+    if ($Global:OSDCloud.CheckSHA1 -eq $true) {
         if (($global:OSDCloud.ImageFileDestination) -and ($global:OSDCloud.ImageFileDestination.FullName)) {
             $global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
             $global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $global:OSDCloud.ImageFileName}).SHA1
