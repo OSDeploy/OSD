@@ -585,8 +585,17 @@ function Get-USBDisk {
     param ()
     #=================================================
     #	Get-OSDDisk
+    #   Hyper-V VM: look for passthrough disks that are likely Offline USB (SSD/NVMe) drives
     #=================================================
-    $GetDisk = Get-OSDDisk -BusType USB
+    $isVM = Test-isVM
+
+    if ($isVM) {
+        $GetDisk = Get-OSDDisk -MediaType SSD
+    }
+    else {
+        $GetDisk = Get-OSDDisk -BusType USB
+    }
+    
     #=================================================
     #	Return
     #=================================================
