@@ -222,8 +222,8 @@
 			"LastKnownGoodWin11": "https://downloads.dell.com/FOLDER12189044M/1/WinPE11.0-Drivers-A05-TPKY4.cab"
 		},
 		"HP": {
-			"Info": "http://ftp.ext.hp.com/pub/caps-softpaq/cmit/softpaq/WinPE10.html",
-			"LastKnownGood": "https://ftp.ext.hp.com/pub/softpaq/sp151001-151500/sp151478.exe"
+			"Info": "http://ftp.ext.hp.com/pub/caps-softpaq/cmit/softpaq/WinPE11.html",
+			"LastKnownGood": "https://ftp.ext.hp.com/pub/softpaq/sp165501-166000/sp165773.exe"
 		}
 	}
 }
