@@ -3,9 +3,9 @@
 | | |
 |-|-|
 | Owner | David Segura |
-| Build Version | 26.1.26.3 |
+| Build Version | 26.1.30.5 |
 | PowerShell Module | OSD.Build |
 | PowerShell Function | Build-OSDCatalogLenovoBios |
 | Files | build-bios.* |
 | Build Workflow | GitHub Actions |
-| Last Update | Monday, January 26, 2026 10:05:03 PM UTC |
+| Last Update | Tuesday, February 24, 2026 4:33:13 AM UTC |
