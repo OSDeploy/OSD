@@ -1,0 +1,9 @@
+{
+  "Invoke-WinPEStartup:InstallModule": ["OSD"],
+  "Invoke-WinPEStartup:InvokeMainCommand": [
+    "Show-OSDCloudDeviceInfo",
+    "Start-OSDCloudCLI"
+  ],
+  "Invoke-WinPEStartup:InvokeMainCommandNoExit": true,
+  "Invoke-WinPEStartup:InvokeMainCommandEA": "Continue"
+}
