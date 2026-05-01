@@ -141,7 +141,28 @@ function Initialize-OSDCloudStartnet {
                 break
             }
         }
-
+        # PACHED START
+        if (Test-WebConnection -Uri "google.com") {
+            Write-Host -ForegroundColor Cyan '[i] Config Post StartNet Scripts'
+            $Global:ScriptStartNet2 = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
+                Write-Host -ForegroundColor DarkGray "$($_.Root)OSDCloud\Config\Scripts\StartNet2\*.ps1"
+                Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\StartNet2\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
+            }
+            if ($Global:ScriptStartNet2) {
+                $Global:ScriptStartNet2 = $Global:ScriptStartNet2 | Sort-Object -Property FullName
+                foreach ($Item in $Global:ScriptStartNet2) {
+                    Write-Host -ForegroundColor Gray "Execute $($Item.FullName)"
+                    & "$($Item.FullName)"
+                }
+                $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
+                Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Tried to execute Post StartNet Scripts" 
+            }
+        }
+        if ($Global:SkipOSDModuleInstall) {
+            Write-Host -ForegroundColor DarkGray "Skip Installing newer OSD PowerShell Module"
+            return
+        }
+        # PATCHED END
         # Check if the OSD Module in the PowerShell Gallery is newer than the installed version
         $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
         Write-Host -ForegroundColor DarkGray "$($TimeSpan.ToString("mm':'ss")) Updating OSD PowerShell Module"
