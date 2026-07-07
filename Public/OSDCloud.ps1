@@ -2,16 +2,16 @@
     <#
     .SYNOPSIS
     This is the master OSDCloud Task Sequence
-    
+
     .DESCRIPTION
     This is the master OSDCloud Task Sequence
-    
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
-    
+
     #region Initialization
     function Write-DarkGrayDate {
         [CmdletBinding()]
@@ -209,7 +209,7 @@
     #endregion
 
     #region Set Initialization Defaults
-    <#  If this is a Virtual Machine and Skip Recovery Partition 
+    <#  If this is a Virtual Machine and Skip Recovery Partition
         OVERRIDE:
         $Global:MyOSDCloud.RecoveryPartition = $true
     #>
@@ -326,7 +326,7 @@
             $OSDCloud | Out-File $env:temp\OSDCloudVars.log
         }
         #endregion
-        
+
         #region Global:OSDCloud.SplashScreen
         if ($Global:OSDCloud.SplashScreen -eq $true){
             Write-SectionHeader "Setup SplashScreen"
@@ -339,7 +339,7 @@
             New-ItemProperty -Path $RegPath -Name "OSActivation" -Value $Global:OSDCloud.OSActivation
         }
         #endregion
-        
+
         #region Global:OSDCloud.SetWiFi
         if ($Global:OSDCloud.SetWiFi -eq $true){
             Write-SectionHeader "Gathering WiFi Information"
@@ -349,7 +349,7 @@
             if (!($PSK)){$PSK = Read-Host -AsSecureString}
         }
         #endregion
-        
+
         #region Global:OSDCloud.MS365Install
         if ($Global:OSDCloud.MS365Install -eq $true){
             Write-SectionHeader "Gathering M365 Information"
@@ -459,6 +459,145 @@
         }
         #endregion
 
+        function ConvertTo-TrimmedString {
+            param(
+                [Parameter(ValueFromPipeline = $true)]
+                $Value
+            )
+
+            process {
+                if ($null -eq $Value) {
+                    return $null
+                }
+                return $Value.ToString().Trim()
+            }
+        }
+        #=================================================
+        # Win32_BIOS
+        $classWin32BIOS = Get-CimInstance -ClassName Win32_BIOS | Select-Object -Property *
+        #=================================================
+        # Win32_ComputerSystem
+        $classWin32ComputerSystem = Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -Property *
+        $ComputerSystemFamily = $classWin32ComputerSystem.SystemFamily | ConvertTo-TrimmedString
+        $ComputerSystemSKU = $classWin32ComputerSystem.SystemSKUNumber | ConvertTo-TrimmedString
+        #=================================================
+        # Win32_ComputerSystemProduct
+        $classWin32ComputerSystemProduct = Get-CimInstance -ClassName Win32_ComputerSystemProduct | Select-Object -Property *
+        $ComputerSystemProduct = $classWin32ComputerSystemProduct.Version | ConvertTo-TrimmedString
+        #=================================================
+        # Win32_Keyboard
+        try {
+            $classWin32Keyboard = Get-CimInstance -ClassName Win32_Keyboard -ErrorAction Stop | Select-Object -Property *
+            $classWin32Keyboard | Out-File (Join-Path -Path $LogsPath -ChildPath 'Win32_Keyboard.txt') -Width 4096 -Force
+            $KeyboardLayout = [System.String]$classWin32Keyboard.Layout
+            $KeyboardName = [System.String]$classWin32Keyboard.Name
+        }
+        catch {
+            $classWin32Keyboard = $null
+            $KeyboardLayout = $null
+            $KeyboardName = $null
+        }
+        #=================================================
+        # Win32_TimeZone
+        $classWin32TimeZone = Get-CimInstance -ClassName Win32_TimeZone | Select-Object -Property *
+        #=================================================
+        #region Analytics
+        $eventName = 'osd_deploy'
+        function Send-OSDCloudDeployEvent {
+            [CmdletBinding()]
+            param(
+                [Parameter(Mandatory)]
+                [string]$EventName,
+                [Parameter(Mandatory)]
+                [string]$ApiKey,
+                [Parameter(Mandatory)]
+                [string]$DistinctId,
+                [Parameter()]
+                [hashtable]$Properties
+            )
+
+            try {
+                $payload = [ordered]@{
+                    api_key    = $ApiKey
+                    event      = $EventName
+                    properties = $Properties + @{
+                        distinct_id = $DistinctId
+                    }
+                    timestamp  = (Get-Date).ToString('o')
+                }
+
+                $body = $payload | ConvertTo-Json -Depth 4 -Compress
+                Invoke-RestMethod -Method Post `
+                    -Uri 'https://us.i.posthog.com/capture/' `
+                    -Body $body `
+                    -ContentType 'application/json' `
+                    -TimeoutSec 2 `
+                    -ErrorAction Stop | Out-Null
+
+                Write-Verbose "[$(Get-Date -format s)] [OSDCloud] Event sent: $EventName"
+            }
+            catch {
+                Write-Verbose "[$(Get-Date -format s)] [OSDCloud] Failed to send event: $($_.Exception.Message)"
+            }
+        }
+        # UUID
+        $deviceUUID = $classWin32ComputerSystemProduct.UUID
+        # Convert the UUID to a hash value to protect user privacyand ensure a consistent identifier across events
+        $deviceUUIDHash = [System.BitConverter]::ToString([System.Security.Cryptography.SHA256]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes($deviceUUID))).Replace("-", "")
+        [string]$distinctId = $deviceUUIDHash
+        if ([string]::IsNullOrWhiteSpace($distinctId)) {
+            $distinctId = [System.Guid]::NewGuid().ToString()
+        }
+
+        $computerInfo = Get-ComputerInfo -ErrorAction Ignore
+        if ($env:SystemDrive -eq 'X:') {
+            $deploymentPhase = 'WinPE'
+            $osName = 'Microsoft WindowsPE'
+        }
+        else {
+            $deploymentPhase = 'Windows'
+            $osName = [string]$computerInfo.OsName
+        }
+        $eventProperties = [ordered]@{
+            deploymentPhase            = [System.String]$deploymentPhase
+            osdManufacturer            = [System.String]$OSDCloud.ComputerManufacturer
+            osdModel                   = [System.String]$OSDCloud.ComputerModel
+            osdProduct                 = [System.String]$OSDCloud.ComputerProduct
+            deviceManufacturer         = [System.String]$OSDCloud.ComputerManufacturer
+            deviceModel                = [System.String]$OSDCloud.ComputerModel
+            deviceSystemFamily         = $ComputerSystemFamily
+            deviceSystemProduct        = $ComputerSystemProduct
+            deviceSystemSKU            = $ComputerSystemSKU
+            deviceSystemType           = $null
+            biosReleaseDate            = [System.String]$classWin32BIOS.ReleaseDate
+            biosSMBIOSBIOSVersion      = [System.String]$classWin32BIOS.SMBIOSBIOSVersion
+            keyboardName               = $KeyboardName
+            keyboardLayout             = $KeyboardLayout
+            winArchitecture            = $null
+            winBuildLabEx              = $null
+            winBuildNumber             = $null
+            winCountryCode             = $null
+            winEditionId               = $null
+            winInstallationType        = $null
+            winLanguage                = $null
+            winName                    = $null
+            winTimeZone                = $classWin32TimeZone.StandardName
+            winVersion                 = $null
+            osdcloudModuleVersion      = $($MyInvocation.MyCommand.Module.Version)
+            osdcloudWorkflowName       = $OSDCloud.Function
+            osdcloudWorkflowTaskName   = $OSDCloud.LaunchMethod
+            osdcloudDriverPackName     = $OSDCloud.DriverPackName
+            osdcloudOSName             = $OSDCloud.OSName
+            osdcloudOSVersion          = $OSDCloud.OSReleaseID
+            osdcloudOSActivationStatus = $OSDCloud.OSActivation
+            osdcloudOSBuild            = $OSDCloud.OSBuild
+            osdcloudOSBuildVersion     = $OSDCloud.OSBuild
+            osdcloudOSLanguageCode     = $OSDCloud.OSLanguage
+        }
+        $postApi = 'phc_2h7nQJCo41Hc5C64B2SkcEBZOvJ6mHr5xAHZyjPl3ZK'
+        Send-OSDCloudDeployEvent -EventName $eventName -ApiKey $postApi -DistinctId $distinctId -Properties $eventProperties
+        #endregion
+
         #region Validate Operating System Source
         Write-SectionHeader "Validate Operating System Source"
 
@@ -488,7 +627,7 @@
             #Write-SectionSuccess
         }
         #endregion
-        
+
         #region Autopilot Profiles
         if ($Global:OSDCloud.SkipAutopilot -ne $true) {
             Write-SectionHeader "Validate Autopilot Configuration"
@@ -546,25 +685,25 @@
             }
         }
         #endregion
-        
+
         #region Global:OSDCloud.ODTFile
         if ($Global:OSDCloud.SkipODT -ne $true) {
             $Global:OSDCloud.ODTFiles = Find-OSDCloudODTFile
-            
+
             if ($Global:OSDCloud.ODTFiles) {
                 Write-SectionHeader "Select Office Deployment Tool Configuration"
-            
+
                 $Global:OSDCloud.ODTFile = Select-OSDCloudODTFile
                 if ($Global:OSDCloud.ODTFile) {
                     Write-DarkGrayHost "Office Config: $($Global:OSDCloud.ODTFile.FullName)"
-                } 
+                }
                 else {
                     Write-Warning "OSDCloud Office Config will not be configured for this deployment"
                 }
             }
         }
         #endregion
-        
+
         #region Global:OSDCloud.IsWinPE
         Write-SectionHeader "Validate WinPE"
 
@@ -603,7 +742,7 @@
             #Write-SectionSuccess
         }
         #endregion
-    
+
         #region Remove-PartitionAccessPath
         <#
         https://docs.microsoft.com/en-us/powershell/module/storage/remove-partitionaccesspath
@@ -629,7 +768,7 @@
             }
         }
         #endregion
-        
+
         #region Clear-Disk
         <#
         https://docs.microsoft.com/en-us/powershell/module/storage/clear-disk
@@ -659,7 +798,7 @@
             }
         }
         #endregion
-        
+
         #region New-OSDisk
         <#
         https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions
@@ -697,7 +836,7 @@
                         New-OSDisk -PartitionStyle GPT -DiskNumber $Global:OSDCloud.OSInstallDiskNumber -Force -ErrorAction Stop
                     }
                     else {New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop}
-                    
+
                     Write-Host "=========================================================================" -ForegroundColor Cyan
                     Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
                     Write-Host "=========================================================================" -ForegroundColor Cyan
@@ -706,7 +845,7 @@
                 }
             }
 
-            #Make sure that there is a PSDrive 
+            #Make sure that there is a PSDrive
             if (-NOT (Get-PSDrive -Name 'C')) {
                 Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
                 Write-Warning "New-OSDisk didn't work. There is no PSDrive FileSystem at C:\"
@@ -720,7 +859,7 @@
             }
         }
         #endregion
-        
+
         #region Add-PartitionAccessPath
         if ($Global:OSDCloud.USBPartitions) {
             Write-SectionHeader 'Restoring USB Drive Letters'
@@ -739,7 +878,7 @@
         }
         #endregion
     #endregion Disk
-    
+
     #region Pre-Image
         #region Global:OSDCloud.ScreenshotCapture
         if ($Global:OSDCloud.ScreenshotCapture) {
@@ -751,54 +890,54 @@
             $Global:OSDCloud.ScreenshotPath = 'C:\OSDCloud\Screenshots'
         }
         #endregion
-        
+
         #region Global:OSDCloud.Transcript
         Write-SectionHeader 'Saving PowerShell Transcript to C:\OSDCloud\Logs'
         Write-Verbose -Message 'https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript'
         if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
             New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
         }
-        
+
         $Global:OSDCloud.Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
         Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
         #endregion
-        
+
         #region Global:OSDCloud.DebugMode
         if ($Global:OSDCloud.DebugMode -eq $true) {
             Write-SectionHeader 'DebugMode: Capture Data to Logs'
             Write-DarkGrayHost "OSD Module: $((Get-Module -Name OSD -ListAvailable | Select-Object -First 1).Version)"
             Write-DarkGrayHost "Manufacurer | Model | Product : $(Get-MyComputerManufacturer) | $(Get-MyComputerModel) | $(Get-MyComputerProduct)"
             Write-DarkGrayHost 'Writing Information to C:\OSDCloud\Logs\OSDCloudDebug.log'
-            
+
             Write-DarkGrayHost ' OSDCloud Variables'
             '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log'
             'OSD Cloud Variables' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             $OSDCloud | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            
+
             Write-DarkGrayHost ' Windows 11 Readiness'
             '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             'Windows 11 Readiness' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             Get-Win11Readiness | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            
+
             Write-DarkGrayHost ' TPM Information'
             '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             'TPM Information' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             Get-CimInstance -Namespace root/CIMV2/Security/MicrosoftTpm -ClassName Win32_Tpm | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            
+
             Write-DarkGrayHost ' My Computer Info'
             '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             'My Computer Info' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
             Get-ComputerInfo | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            
+
             $OSDISKPre | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPre.log'
             $OSDISKPost | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPost.log'
         }
         #endregion
-        
+
         #region Powercfg High Performance
         #https://docs.microsoft.com/en-us/windows/win32/power/power-policy-settings
         Write-SectionHeader 'Powercfg High Performance'
@@ -853,7 +992,7 @@
                 else {
                     Copy-Item -Path $Global:OSDCloud.ImageFileSource.FullName -Destination 'C:\OSDCloud\OS' -Force
                 }
-                
+
                 if (Test-Path "C:\OSDCloud\OS\$($Global:OSDCloud.ImageFileSource.Name)") {
                     $Global:OSDCloud.ImageFileDestination = Get-Item -Path "C:\OSDCloud\OS\$($Global:OSDCloud.ImageFileSource.Name)"
                 }
@@ -871,7 +1010,7 @@
             }
         }
         #endregion
-        
+
         #region Get-OSDCloudOperatingSystems
         if ($Global:OSDCloud.AzOSDCloudImage) {
             #AzOSDCloud
@@ -965,7 +1104,7 @@
                     Get-AzStorageBlobContent @ParamGetAzStorageBlobContent
                 }
             }
-            
+
             $Global:OSDCloud.ImageFileDestination = Get-Item @ParamGetItem | Select-Object -First 1 | Select-Object -First 1
         }
         #endregion
@@ -982,7 +1121,7 @@
                     #	Cache to USB
                     #=================================================
                     $OSDCloudUSB = Get-USBVolume | Where-Object { $_.FileSystem -eq 'NTFS' } | Where-Object { $_.FileSystemLabel -match 'OSDCloud|BHIMAGE|USB-Data' } | Where-Object { $_.SizeGB -ge 8 } | Where-Object { $_.SizeRemainingGB -ge 5} | Select-Object -First 1
-                    
+
                     if ($OSDCloudUSB -and $Global:OSDCloud.OSVersion -and $Global:OSDCloud.OSReleaseID) {
                         $OSDownloadChildPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$($Global:OSDCloud.OSVersion) $($Global:OSDCloud.OSReleaseID)"
                         Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Downloading OSDCloud Offline OS $OSDownloadChildPath"
@@ -1055,7 +1194,7 @@
             Exit
         }
         #endregion
-        
+
         #region ISO Disk Image File
         if ($Global:OSDCloud.ImageFileDestination.Extension -eq '.iso') {
             Write-SectionHeader "OSDCloud Windows ISO Deployment"
@@ -1096,7 +1235,7 @@
             }
         }
         #endregion
-        
+
         #region Validate WindowsImage Index
         Write-SectionHeader "Validate WindowsImage Index"
         if (Test-Path $Global:OSDCloud.ImageFileDestination.FullName) {
@@ -1162,7 +1301,7 @@
             $MatchingWindowsImage = $Global:OSDCloud.WindowsImage | `
                 ForEach-Object { Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -Index $_.ImageIndex } | `
                 Where-Object { $_.EditionId -eq $Global:OSDCloud.OSEditionId }
-            
+
             if ($MatchingWindowsImage) {
                 if ($MatchingWindowsImage.Count -eq 1) {
                     $Global:OSDCloud.OSImageIndex = $MatchingWindowsImage.ImageIndex
@@ -1181,12 +1320,12 @@
 
             if ($SelectedWindowsImage) {
                 $SelectedWindowsImage | Select-Object -Property ImageIndex, ImageName | Format-Table | Out-Host
-        
+
                 do {
                     $SelectReadHost = Read-Host -Prompt "Select an Image to apply by ImageIndex [Number]"
                 }
                 until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $SelectedWindowsImage.ImageIndex))))
-        
+
                 #$Global:OSDCloud.OSImageIndex = $SelectedWindowsImage | Where-Object {$_.ImageIndex -eq $SelectReadHost}
                 $Global:OSDCloud.OSImageIndex = $SelectReadHost
             }
@@ -1362,7 +1501,7 @@
                 Write-DarkGrayHost "Unable to reach internet, will not attempt to download HP Driver Pack via CMSL"
             }
         }
-        
+
         if ($Global:OSDCloud.DriverPackName) {
             if ($Global:OSDCloud.DriverPackName -match 'None') {
                 Write-DarkGrayHost "DriverPack is set to None"
@@ -1375,7 +1514,7 @@
                 }
                 else {
                     if ($Global:OSDCloud.HPCMSLDriverPackLatest -eq $true){
-                        
+
                         Write-DarkGrayHost "Attempting to use HPCMSL Functions to download Latest Driver Pack for Model"
                         $HPDriverPack = Get-HPDriverPackLatest
                         if ($HPDriverPack -ne $false){
@@ -1482,7 +1621,7 @@
                 catch {
                     Get-AzStorageBlobContent -CloudBlob $Global:OSDCloud.AzOSDCloudDriverPack.ICloudBlob -Context $Global:OSDCloud.AzOSDCloudDriverPack.Context -Destination "C:\Drivers\$(Split-Path $Global:OSDCloud.AzOSDCloudDriverPack.Name -Leaf)"
                 }
-                
+
                 $Global:OSDCloud.DriverPackExpand = $true
             }
             elseif ($Global:OSDCloud.DriverPack.Guid) {
@@ -1500,7 +1639,7 @@
                     #=================================================
                     if ($Item.Extension -eq '.cab') {
                         $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-            
+
                         if (-NOT (Test-Path "$DestinationPath")) {
                             New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
                             Write-DarkGrayHost "DriverPack CAB is being expanded to $DestinationPath"
@@ -1513,7 +1652,7 @@
                     #=================================================
                     if ($Item.Extension -eq '.zip') {
                         $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-        
+
                         if (-NOT (Test-Path "$DestinationPath")) {
                             Write-DarkGrayHost "DriverPack ZIP is being expanded to $DestinationPath"
                             Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
@@ -1607,7 +1746,7 @@
                 Write-DarkGrayHost "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers\Firmware"
                 Write-DarkGrayHost "Some systems do not support a driver Firmware Update"
                 Write-DarkGrayHost "You may have to enable this setting in your BIOS or Firmware Settings"
-        
+
                 Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
             }
             else {
@@ -1656,7 +1795,7 @@
             }
         }
         #endregion
-        
+
         #region Add-OfflineServicingWindowsDriver
         Write-SectionHeader "Add Windows Driver with Offline Servicing (Add-OfflineServicingWindowsDriver)"
         Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
@@ -1693,7 +1832,7 @@
         }
         #endregion
     #endregion
-   
+
     #region Gary Blok create SetupComplete.cmd
     if (Test-WebConnection -Uri "google.com") {
         $WebConnection = $True
@@ -1708,12 +1847,12 @@
         }
     }
     if ($Global:OSDCloud.SetWiFi -eq $true){
-        Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize" 
+        Write-Host -ForegroundColor Cyan "Adding WiFi Tasks into JSON Config File for Action during Specialize"
         $PSKText = [System.Net.NetworkCredential]::new("", $PSK).Password
         $HashTable = @{
             'Addons' = @{
                 'SSID' = $SSID
-                'PSK' = $PSKText 
+                'PSK' = $PSKText
             }
         }
         $HashVar = $HashTable | ConvertTo-Json
@@ -1723,13 +1862,13 @@
         catch {}
         $HashVar | Out-File $ConfigFile
     }
-    
+
     Write-SectionHeader "[i] Creating SetupComplete.cmd and SetupComplete.ps1"
     #Creates the SetupComplete.cmd & SetupComplete.ps1 files in C:\Windows\Setup\scripts
     #SetupComplete.cmd calls SetupComplete.ps1, which does all of the actual work
     Set-SetupCompleteCreateStart
-    
-    if ($Null -eq $Global:OSDCloud.SetWiFi){$Global:OSDCloud.SetWiFi = $false} 
+
+    if ($Null -eq $Global:OSDCloud.SetWiFi){$Global:OSDCloud.SetWiFi = $false}
     Write-DarkGrayHost "[i] Enable Wireless from Global Variable `$Global:OSDCloud.SetWiFi is set to $($Global:OSDCloud.SetWiFi)"
     if ($Global:OSDCloud.SetWiFi -eq $true) {
         $SetWiFi = $true
@@ -1764,7 +1903,7 @@
                 Write-DarkGrayHost "No Internet or Future WiFi Configured, disabling Windows Update Driver Updates"
             }
         }
-        
+
         Write-DarkGrayHost "[i] Enable DevMode from Global Variable `$Global:OSDCloud.DevMode is set to $($Global:OSDCloud.DevMode)"
         if ($Global:OSDCloud.DevMode -eq $true) {
             Write-DarkGrayHost "[i] Enable NetFx3 from Global Variable `$Global:OSDCloud.NetFx3 is set to $($Global:OSDCloud.NetFx3)"
@@ -1777,7 +1916,7 @@
                 }
             }
         }
-        if ($Null -eq $Global:OSDCloud.SetTimeZone){$Global:OSDCloud.SetTimeZone = $false}    
+        if ($Null -eq $Global:OSDCloud.SetTimeZone){$Global:OSDCloud.SetTimeZone = $false}
         Write-DarkGrayHost "[i] Enable Set TimeZone from Global Variable `$Global:OSDCloud.SetTimeZone is set to $($Global:OSDCloud.SetTimeZone)"
         if ($Global:OSDCloud.SetTimeZone -eq $true) {
             if ($WebConnection -eq $true) {
@@ -1797,13 +1936,13 @@
     #region Dell Updates Config for Specialize Phase
     if (($Global:OSDCloud.DevMode -eq $true) -and ($WebConnection -eq $true)){
         if (($Global:OSDCloud.DCUInstall -eq $true) -or ($Global:OSDCloud.DCUDrivers -eq $true) -or ($Global:OSDCloud.DCUFirmware -eq $true) -or ($Global:OSDCloud.DCUBIOS -eq $true) -or ($Global:OSDCloud.DCUAutoUpdateEnable -eq $true) -or ($Global:OSDCloud.DellTPMUpdate -eq $true)){
-            
+
             #Set Enable Specialize to be triggered later
             $EnableSpecialize = $true
 
-            Write-Host -ForegroundColor Cyan "Adding Dell Tasks into JSON Config File for Action during Specialize" 
+            Write-Host -ForegroundColor Cyan "Adding Dell Tasks into JSON Config File for Action during Specialize"
             Write-DarkGrayHost "Install Dell Command Update = $($Global:OSDCloud.DCUInstall) | Run DCU Drivers = $($Global:OSDCloud.DCUDrivers) | Run DCU Firmware = $($Global:OSDCloud.DCUFirmware)"
-            Write-DarkGrayHost "Run DCU BIOS = $($Global:OSDCloud.DCUBIOS) | Enable DCU Auto Update = $($Global:OSDCloud.DCUAutoUpdateEnable) | DCU TPM Update = $($Global:OSDCloud.DellTPMUpdate) " 
+            Write-DarkGrayHost "Run DCU BIOS = $($Global:OSDCloud.DCUBIOS) | Enable DCU Auto Update = $($Global:OSDCloud.DCUAutoUpdateEnable) | DCU TPM Update = $($Global:OSDCloud.DellTPMUpdate) "
             $HashTable = @{
                 'Updates' = @{
                     'DCUInstall' = $Global:OSDCloud.DCUInstall
@@ -1826,7 +1965,7 @@
     #=================================================
     #region HP Updates Config for Specialize Phase
     #Set Specialize JSON
-    
+
     if (($Global:OSDCloud.HPIAAll -eq $true) -or ($Global:OSDCloud.HPIADrivers -eq $true) -or ($Global:OSDCloud.HPIAFirmware -eq $true) -or ($Global:OSDCloud.HPIASoftware -eq $true) -or ($Global:OSDCloud.HPTPMUpdate -eq $true) -or ($Global:OSDCloud.HPBIOSUpdate -eq $true)){
         if ($WebConnection) {  #This all requires the device to be online to download updates
             if (Test-HPIASupport){
@@ -1883,7 +2022,7 @@
                         $Global:OSDCloud.HPTPMUpdate = $false
                     }
                     else { #Sure Admin Mode is Off
-                        if ($Global:OSDCloud.HPBIOSUpdate -eq $true){   
+                        if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
                             try { #Test for BIOS Password
                                 Write-Host -ForegroundColor DarkGray "Testing for HP BIOS Password"
                                 $PasswordSet = Get-HPBIOSSetupPasswordIsSet -ErrorAction SilentlyContinue
@@ -1891,7 +2030,7 @@
                             catch {
                                 <#Do this if a terminating exception happens#>
                             }
-                            if ($PasswordSet -eq $true){ 
+                            if ($PasswordSet -eq $true){
                                 Write-Host -ForegroundColor Yellow "Device currently has BIOS Setup Password, Attempting to use Get-HPBIOSWindowsUpdate Later in Process"
                                 $HPBIOSWinUpdate = $true
                             }
@@ -1912,7 +2051,7 @@
                                 # Report the job ID (for diagnostic purposes)
                                 write-host -ForegroundColor DarkGray " BIOS Update Job ID: $($Installing.Id)"
                                 Write-Host -ForegroundColor DarkGray " See Log: C:\OSDCloud\Logs\HPBIOSUpdateJob.log for Details"
-                                
+
                                 # Wait for the job to complete or time out
                                 Wait-Job $Installing -Timeout $timeoutSeconds | Out-Null
                                 #Receive-Job -Job $Installing
@@ -1933,7 +2072,7 @@
                                 if (Test-Path -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log"){
                                     Write-Host -ForegroundColor Cyan " $((Get-content -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log" -ReadCount 1) | Select-Object -last 6 | Select-Object -First 1)"
                                 }
-                                
+
                             }
                         }
                     }
@@ -1951,7 +2090,7 @@
                         #$Global:OSDCloud.HPTPMUpdate = $false
                     }
                 }
-                
+
                 if ($Null -eq $Global:OSDCloud.HPIADrivers){$Global:OSDCloud.HPIADrivers = $false}
                 if ($Null -eq $Global:OSDCloud.HPIAFirmware){$Global:OSDCloud.HPIAFirmware = $false}
                 if ($Null -eq $Global:OSDCloud.HPIASoftware){$Global:OSDCloud.HPIASoftware = $false}
@@ -1963,7 +2102,7 @@
 
                 Write-Host -ForegroundColor DarkGray "Adding HP Tasks into JSON Config File for Action during Specialize and Setup Complete"
                 Write-DarkGrayHost "HPIA Drivers = $($Global:OSDCloud.HPIADrivers) | HPIA Firmware = $($Global:OSDCloud.HPIAFirmware) | HPIA Software = $($Global:OSDCloud.HPIASoftware) | HPIA All = $($Global:OSDCloud.HPIAAll) "
-                Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate) | HP BIOS WU Update = $HPBIOSWinUpdate" 
+                Write-DarkGrayHost "HP TPM Update = $($Global:OSDCloud.HPTPMUpdate) | HP BIOS Update = $($Global:OSDCloud.HPBIOSUpdate) | HP BIOS WU Update = $HPBIOSWinUpdate"
 
                 $HPHashTable = @{
                     'HPUpdates' = @{
@@ -1981,14 +2120,14 @@
                     Write-Host -ForegroundColor Yellow "Running HPIA during Setup Complete will add about 20 Minutes to OOBE (Just a moment...)"
                 }
 
-                
+
                 $HPHashVar = $HPHashTable | ConvertTo-Json
                 $ConfigPath = "c:\osdcloud\configs"
                 $ConfigFile = "$ConfigPath\HP.JSON"
                 try {[void][System.IO.Directory]::CreateDirectory($ConfigPath)}
                 catch {}
                 $HPHashVar | Out-File $ConfigFile
-                
+
                 #Leverage SetupComplete.cmd to run HP Tools
                 Set-SetupCompleteHPAppend
             }
@@ -1996,18 +2135,18 @@
         }
         else { Write-DarkGrayHost "No Interent Found, Skipping HP Device Updates"}
     }
-    
-                    
+
+
     #endregion
     #=================================================
     #Extra Items Config for Specialize Phase
     if (($Global:OSDCloud.PauseSpecialize -eq $true) -and ($Global:OSDCloud.DevMode -eq $true)) {
-        
+
         #Set Enable Specialize to be triggered later
         $EnableSpecialize = $true
 
         if ($WebConnection){
-            Write-Host -ForegroundColor Cyan "Adding Pause Tasks into JSON Config File for Action during Specialize" 
+            Write-Host -ForegroundColor Cyan "Adding Pause Tasks into JSON Config File for Action during Specialize"
             $HashTable = @{
                 'Addons' = @{
                     'Pause' = $Global:OSDCloud.PauseSpecialize
@@ -2021,7 +2160,7 @@
             $HashVar | Out-File $ConfigFile
         }
     }
-    
+
     #Required for some HP & Dell Updates - Will get set to True in the Dell / HP sections if needed
     if ($EnableSpecialize -eq $true){
         if ($Global:OSDCloud.IsWinPE -eq $true) {
@@ -2144,7 +2283,7 @@ exit
         The goal of this section is to export TXT files that contain information about the deployed Operating System
         This information can then be reviewed after deployment in C:\OSDCloud\Logs
         You can use this information to write scripts to remove AppxProvisionedPackage, or perform other tasks
-        
+
         This region has no dependencies with anything else in OSDCloud and can be removed if needed
         David Segura
         #>
@@ -2217,7 +2356,7 @@ exit
             if (-NOT (Test-Path "$PowerShellSavePath\Scripts")) {
                 New-Item -Path "$PowerShellSavePath\Scripts" -ItemType Directory -Force | Out-Null
             }
-            
+
             if (Test-WebConnection -Uri "https://www.powershellgallery.com") {
                 Copy-PSModuleToFolder -Name OSD -Destination "$PowerShellSavePath\Modules"
 
@@ -2274,7 +2413,7 @@ exit
                     Copy-PSModuleToFolder -Name HPCMSL -Destination "$PowerShellSavePath\Modules"
                 }
                 $OSDCloudOfflinePath = Find-OSDCloudOfflinePath
-            
+
                 foreach ($Item in $OSDCloudOfflinePath) {
                     if (Test-Path "$($Item.FullName)\PowerShell\Required") {
                         Write-Host -ForegroundColor Cyan "Applying PowerShell Modules and Scripts in $($Item.FullName)\PowerShell\Required"
@@ -2285,7 +2424,7 @@ exit
         }
         #endregion
     #endregion
- 
+
     #region Gary Blok Debug and Dev Mode
     if ($WebConnection -eq $True){
         if ($Global:OSDCloud.DebugMode -eq $true){
@@ -2320,7 +2459,7 @@ exit
     else {
         Set-SetupCompleteCreateFinish
     }
-    
+
     #endregion
 
     #region ----- Config Shutdown Scripts
