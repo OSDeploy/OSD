@@ -1,27 +1,68 @@
 function Get-OSDCloudOperatingSystems {
     <#
     .SYNOPSIS
-    Returns the Operating Systems used by OSDCloud
+    Gets OSDCloud operating system entries for a specific architecture.
 
     .DESCRIPTION
-    Returns the Operating Systems used by OSDCloud
+    Queries OSDCloud operating system data and returns entries that match the
+    requested operating system architecture.
+
+    .PARAMETER OSArch
+    Specifies the operating system architecture to return.
+
+    Valid values:
+    - x64
+    - arm64
+
+    .EXAMPLE
+    Get-OSDCloudOperatingSystems
+
+    Returns x64 operating system entries.
+
+    .EXAMPLE
+    Get-OSDCloudOperatingSystems -OSArch arm64
+
+    Returns ARM64 operating system entries.
+
+    .INPUTS
+    None. You cannot pipe input to this function.
+
+    .OUTPUTS
+    PSCustomObject
+    One or more operating system entries returned by Get-OSDCoreOperatingSystems.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
 
     .NOTES
     25.2.17 Removed unnecessary Default ParameterSet Name
+    26.6.24 Refined comment-based help text
     #>
-    
+
     [CmdletBinding()]
+    [OutputType([pscustomobject[]])]
     param (
-        [ValidateSet('x64','arm64')]
+        [ValidateSet('x64', 'arm64')]
         [System.String]
         $OSArch = 'x64'
     )
-    $FullResults = Get-Content -Path "$(Get-OSDModulePath)\cache\archive-cloudoperatingsystems\CloudOperatingSystems.json" | ConvertFrom-Json
-    if ($OSArch -eq 'x64'){
-        $Results = $FullResults | Where-Object {$_.Architecture -eq "x64"}
+
+    try {
+        $allOperatingSystems = Get-OSDCoreOperatingSystems -ErrorAction Stop
     }
-    elseif ($OSArch -eq "arm64"){
-        $Results = Get-Content -Path "$(Get-OSDModulePath)\cache\archive-cloudoperatingsystems\CloudOperatingSystemsARM64.json" | ConvertFrom-Json
+    catch {
+        throw "Failed to retrieve operating system data from Get-OSDCoreOperatingSystems. $($_.Exception.Message)"
     }
-    $Results
+
+    if (-not $allOperatingSystems) {
+        Write-Verbose "No operating system data was returned by Get-OSDCoreOperatingSystems."
+        return @()
+    }
+
+    $normalizedArch = $OSArch.ToLowerInvariant()
+    $results = $allOperatingSystems |
+        Where-Object { $_.Architecture -and $_.Architecture.ToLowerInvariant() -eq $normalizedArch } |
+        Sort-Object -Property Name
+
+    return $results
 }

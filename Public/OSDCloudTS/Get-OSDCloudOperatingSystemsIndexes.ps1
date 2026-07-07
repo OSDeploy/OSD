@@ -1,10 +1,28 @@
 function Get-OSDCloudOperatingSystemsIndexes {
     <#
     .SYNOPSIS
-    Returns the Operating Systems used by OSDCloud
+    Returns OSDCloud operating system index entries by architecture.
 
     .DESCRIPTION
-    Returns the Operating Systems used by OSDCloud
+    Reads the cached OSDCloud operating system indexes and returns index
+    entries for the specified architecture.
+
+    .PARAMETER OSArch
+    Specifies the operating system architecture.
+    Valid values are x64 and ARM64.
+
+    .EXAMPLE
+    Get-OSDCloudOperatingSystemsIndexes
+
+    Returns x64 operating system index entries from cache.
+
+    .EXAMPLE
+    Get-OSDCloudOperatingSystemsIndexes -OSArch ARM64
+
+    Returns ARM64 operating system index entries from cache.
+
+    .OUTPUTS
+    PSCustomObject
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
