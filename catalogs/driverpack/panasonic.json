@@ -1,0 +1,246 @@
+{
+"LastDateModified": "2026-02-17T14:32:10Z",  
+"Manufacturer": "Panasonic",
+  "Models": [
+    {
+      "Alias": "FZ55-3",
+      "Product": "FZ55-3H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V3",
+          "URL": "https://na.panasonic.com/computer/cab/55GJ_Mk3_Win10_22H2_V3_CAB.zip",
+          "Size": "1.8GB",
+          "Hash": "22f65daa3d78d929012871a181cda0c1",
+          "ReleaseDate": "2025-02-06"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/55GJ_Mk3_Win11_25H2_V2_CAB.zip",
+          "Size": "3.23GB",
+          "Hash": "8440c7a635222b9f122d6327c692f4ed",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "FZ55-2",
+      "Product": "FZ55-2H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V4",
+          "URL": "https://na.panasonic.com/computer/cab/55DEF_Mk2_Win10_22H2_V4_CAB.zip",
+          "Size": "2.4GB",
+          "Hash": "fa3a38553455aa1fab1eaca372077ebd",
+          "ReleaseDate": "2025-02-06"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/55DEF_Mk2_Win11_25H2_V2_CAB.zip",
+          "Size": "3.25GB",
+          "Hash": "3fd7a64db6cd073978e6e1e68ed8cc76",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "FZ55-1",
+      "Product": "FZ55-1H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V4",
+          "URL": "https://na.panasonic.com/computer/cab/55ABC_Mk1_Win10_22H2_V4_CAB.zip",
+          "Size": "2.3GB",
+          "Hash": "6ccfae54a0c4dbc5b886e713f10d64ca",
+          "ReleaseDate": "2025-02-06"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/55ABC_Mk1_Win11_25H2_V2_CAB.zip",
+          "Size": "2.97GB",
+          "Hash": "5e52a02e1c8c8fc4ce947f278b0ee0f0",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "FZ40-2",
+      "Product": "FZ40-2H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V1",
+          "URL": "https://na.panasonic.com/computer/cab/40EFGH_Mk2_Win10_22H2_V1_CAB.zip",
+          "Size": "3.6GB",
+          "Hash": "5c116626cb7bd404c10877910c9c2655",
+          "ReleaseDate": "2024-07-03"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/40EFGH_Mk2_Win11_25H2_V2_CAB.zip",
+          "Size": "4.09GB",
+          "Hash": "c625bac03472e3a9dfb16b06aeb61b3b",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "FZ40-1",
+      "Product": "FZ40-1H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V4",
+          "URL": "https://na.panasonic.com/computer/cab/Win10_22H2/40ABCD_Mk1_Win10_22H2_V4_CAB.zip",
+          "Size": "2.9GB",
+          "Hash": "043d1f37400a8f1e31cb4e37cb6ae9bc",
+          "ReleaseDate": "2024-02-26"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/40ABCD_Mk1_Win11_25H2_V2_CAB.zip",
+          "Size": "4.25GB",
+          "Hash": "44c48dde3d3b2f7b7a7f8bacc3cc376d",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "CF33-4",
+      "Product": "CF33-4H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V1",
+          "URL": "https://na.panasonic.com/computer/cab/33Y890_Mk4_Win10_22H2_V1_CAB.zip",
+          "Size": "2.4GB",
+          "Hash": "bc167bb427991281dea011861fa9fc3c",
+          "ReleaseDate": "2024-12-09"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/33Y890_Mk4_Win11_25H2_V2_CAB.zip",
+          "Size": "3.10GB",
+          "Hash": "cf3644aee8ee31b8eee5c57f51c888d0",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "CF33-3",
+      "Product": "CF33-3H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/Win10_22H2/33TU45_Mk3_Win10_22H2_V2_CAB.zip",
+          "Size": "1.8GB",
+          "Hash": "563f22347075a734e4be0205a8535cee",
+          "ReleaseDate": "2024-03-02"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/33TU45_Mk3_Win11_25H2_V2_CAB.zip",
+          "Size": "2.65GB",
+          "Hash": "1d8da23bf41c2f440ddf3f9cea017e66",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "CF33-2",
+      "Product": "CF33-2H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V3",
+          "URL": "https://na.panasonic.com/computer/cab/Win10_22H2/33GJKRS_Mk2_Win10_22H2_V3_CAB.zip",
+          "Size": "2.4GB",
+          "Hash": "637061702412afe98a0dc9e4da218153",
+          "ReleaseDate": "2024-03-02"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/33GJKRS_Mk2_Win11_25H2_V2_CAB.zip",
+          "Size": "3.07GB",
+          "Hash": "7cc47af450384f3ec178bc3939479ad3",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "FZG2-3",
+      "Product": "FZG2-3H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/G2NP_Mk3_Win10_22H2_V2_CAB.zip",
+          "Size": "2.6GB",
+          "Hash": "1338c791145476250f4f4903d12c245c",
+          "ReleaseDate": "2024-10-23"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/G2NP_Mk3_Win11_25H2_V2_CAB.zip",
+          "Size": "3.05GB",
+          "Hash": "514973cc7cfe59fb7c14d823e051831b",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    },
+    {
+      "Alias": "FZG2-2",
+      "Product": "FZG2-2H",
+      "DriverPacks": [
+        {
+          "OSVer": "Win10",
+          "OSRelease": "22H2",
+          "Version": "V3",
+          "URL": "https://na.panasonic.com/computer/cab/Win10_22H2/G2EGKM_Mk2_Win10_22H2_V3_CAB.zip",
+          "Size": "2.2GB",
+          "Hash": "f5d1970ab4f883f3b9252290119bbdb0",
+          "ReleaseDate": "2024-03-01"
+        },
+        {
+          "OSVer": "Win11",
+          "OSRelease": "25H2",
+          "Version": "V2",
+          "URL": "https://na.panasonic.com/computer/cab/G2EGKM_Mk2_Win11_25H2_V2_CAB.zip",
+          "Size": "3.06GB",
+          "Hash": "f453546a6126e0c99121f86d978bf24d",
+          "ReleaseDate": "2026-02-17"
+        }
+      ]
+    }
+  ]
+}
