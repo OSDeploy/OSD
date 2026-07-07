@@ -8,7 +8,7 @@ schema: 2.0.0
 # Invoke-HPTPMDownload
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Downloads and extracts the required HP TPM firmware update softpaq using HPCMSL.
 
 ## SYNTAX
 
@@ -17,21 +17,32 @@ Invoke-HPTPMDownload [[-WorkingFolder] <Object>] [-ProgressAction <ActionPrefere
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Calls Get-HPTPMDetermine to identify the required softpaq, then uses the HPCMSL
+Get-Softpaq cmdlet to download it to the specified working folder.
+The downloaded
+EXE is silently extracted to a subfolder.
+Returns the path to the extracted folder.
+Intended for manual download and testing scenarios.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Invoke-HPTPMDownload
+Downloads and extracts the required TPM firmware softpaq to $env:TEMP\TPM.
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+Invoke-HPTPMDownload -WorkingFolder 'C:\Temp\TPMWork'
+Downloads and extracts the required TPM firmware softpaq to C:\Temp\TPMWork.
+```
 
 ## PARAMETERS
 
 ### -WorkingFolder
-{{ Fill WorkingFolder Description }}
+The folder path where the softpaq EXE will be downloaded and extracted.
+Defaults to $env:TEMP\TPM if not specified.
 
 ```yaml
 Type: Object
@@ -39,7 +50,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -65,11 +76,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
+### System.String
+### Returns the path to the extracted firmware folder.
 ## NOTES
+Requires internet access and the HPCMSL PowerShell module.
+Must be run with administrator privileges.
 
 ## RELATED LINKS

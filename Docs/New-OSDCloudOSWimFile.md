@@ -108,7 +108,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: Default
 Aliases:
-Accepted values: Windows 11 24H2 x64, Windows 11 24H2 ARM64, Windows 11 23H2 x64, Windows 11 23H2 ARM64, Windows 11 22H2 x64, Windows 11 21H2 x64, Windows 10 22H2 x64, Windows 10 22H2 ARM64
+Accepted values: Windows 11 25H2 x64, Windows 11 25H2 ARM64, Windows 11 24H2 x64, Windows 11 24H2 ARM64, Windows 11 23H2 x64, Windows 11 23H2 ARM64, Windows 11 22H2 x64, Windows 11 21H2 x64, Windows 10 22H2 x64, Windows 10 22H2 ARM64
 
 Required: False
 Position: Named

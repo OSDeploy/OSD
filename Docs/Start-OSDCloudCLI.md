@@ -16,8 +16,7 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSName <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Legacy
@@ -25,14 +24,14 @@ Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSVersion <String>] [-OSReleaseID <String>]
  [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>]
- [-OSImageIndex <String>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-OSImageIndex <Int32>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -296,44 +295,13 @@ Accept wildcard characters: False
 Images using the specified Image Index
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: CustomImage
 Aliases: ImageIndex
 
 Required: False
 Position: Named
-Default value: AUTO
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

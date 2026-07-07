@@ -1,14 +1,14 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://github.com/OSDeploy/OSD/tree/master/Docs
+online version: https://www.osdeploy.com/
 schema: 2.0.0
 ---
 
 # Start-OSDCloud
 
 ## SYNOPSIS
-Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
@@ -16,26 +16,25 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSName <String>] [-OSEdition <String>] [-OSLanguage <String>]
- [-OSActivation <String>] [-Preview] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-OSActivation <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSVersion <String>] [-OSBuild <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSActivation <String>] [-Preview] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
- [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>] [-OSImageIndex <String>]
- [-Preview] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>] [-OSImageIndex <Int32>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
@@ -48,38 +47,23 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Manufacturer
-Automatically populated from Get-MyComputerManufacturer -Brief
+### -FindImageFile
+{{ Fill FindImageFile Description }}
 
 ```yaml
-Type: String
-Parameter Sets: (All)
+Type: SwitchParameter
+Parameter Sets: CustomImage
 Aliases:
 
 Required: False
 Position: Named
-Default value: (Get-MyComputerManufacturer -Brief)
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Product
-Automatically populated from Get-MyComputerProduct
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: (Get-MyComputerProduct)
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Firmware
-$Global:StartOSDCloud.MSCatalogFirmware = $true
+{{ Fill Firmware Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -88,97 +72,116 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Restart
-Restart the computer after Invoke-OSDCloud to OOBE
+### -ImageFileUrl
+{{ Fill ImageFileUrl Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
+Type: String
+Parameter Sets: CustomImage
 Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Shutdown
-Shutdown the computer after Invoke-OSDCloud
+### -Manufacturer
+{{ Fill Manufacturer Description }}
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Screenshot
-Captures screenshots during OSDCloud WinPE
+### -OSActivation
+{{ Fill OSActivation Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: String
+Parameter Sets: Default, Legacy
+Aliases: License, OSLicense, Activation
+Accepted values: Retail, Volume
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SkipAutopilot
-Skips the Autopilot Task routine
+### -OSBuild
+{{ Fill OSBuild Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: String
+Parameter Sets: Legacy
+Aliases: Build
+Accepted values: 25H2, 24H2, 23H2, 22H2
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SkipODT
-Skips the ODT Task routine
+### -OSEdition
+{{ Fill OSEdition Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: String
+Parameter Sets: Default, Legacy
+Aliases: Edition
+Accepted values: Home, Home N, Home Single Language, Education, Education N, Enterprise, Enterprise N, Pro, Pro N
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ZTI
-Skip prompting to wipe Disks
+### -OSImageIndex
+{{ Fill OSImageIndex Description }}
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: Int32
+Parameter Sets: CustomImage
+Aliases: ImageIndex
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OSLanguage
+{{ Fill OSLanguage Description }}
+
+```yaml
+Type: String
+Parameter Sets: Default, Legacy
+Aliases: Culture, OSCulture
+Accepted values: ar-sa, bg-bg, cs-cz, da-dk, de-de, el-gr, en-gb, en-us, es-es, es-mx, et-ee, fi-fi, fr-ca, fr-fr, he-il, hr-hr, hu-hu, it-it, ja-jp, ko-kr, lt-lt, lv-lv, nb-no, nl-nl, pl-pl, pt-br, pt-pt, ro-ro, ru-ru, sk-sk, sl-si, sr-latn-rs, sv-se, th-th, tr-tr, uk-ua, zh-cn, zh-tw
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -190,6 +193,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: Default
 Aliases:
+Accepted values: Windows 11 25H2 x64, Windows 11 24H2 x64, Windows 11 23H2 x64, Windows 11 22H2 x64, Windows 10 22H2 x64
 
 Required: False
 Position: Named
@@ -199,12 +203,13 @@ Accept wildcard characters: False
 ```
 
 ### -OSVersion
-Operating System Version of the Windows installation
+{{ Fill OSVersion Description }}
 
 ```yaml
 Type: String
 Parameter Sets: Legacy
 Aliases:
+Accepted values: Windows 11, Windows 10
 
 Required: False
 Position: Named
@@ -213,90 +218,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSBuild
-Operating System Build of the Windows installation
-Alias = Build
+### -Product
+{{ Fill Product Description }}
 
 ```yaml
 Type: String
-Parameter Sets: Legacy
-Aliases: Build
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OSEdition
-Operating System Edition of the Windows installation
-Alias = Edition
-
-```yaml
-Type: String
-Parameter Sets: Default, Legacy
-Aliases: Edition
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OSLanguage
-Operating System Language of the Windows installation
-Alias = Culture, OSCulture
-
-```yaml
-Type: String
-Parameter Sets: Default, Legacy
-Aliases: Culture, OSCulture
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OSActivation
-License of the Windows Operating System
-
-```yaml
-Type: String
-Parameter Sets: Default, Legacy
-Aliases: License, OSLicense, Activation
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FindImageFile
-Searches for the specified WIM file
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: CustomImage
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ImageFileUrl
-Downloads a WIM file specified by the URK
-
-```yaml
-Type: String
-Parameter Sets: CustomImage
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -306,23 +233,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OSImageIndex
-Images using the specified Image Index
-
-```yaml
-Type: String
-Parameter Sets: CustomImage
-Aliases: ImageIndex
-
-Required: False
-Position: Named
-Default value: AUTO
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Preview
-{{ Fill Preview Description }}
+### -Restart
+{{ Fill Restart Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -331,7 +243,82 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Screenshot
+{{ Fill Screenshot Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Shutdown
+{{ Fill Shutdown Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SkipAutopilot
+{{ Fill SkipAutopilot Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SkipODT
+{{ Fill SkipODT Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ZTI
+{{ Fill ZTI Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -356,11 +343,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS
-
-[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
-

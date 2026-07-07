@@ -37,7 +37,7 @@ PS C:\> {{ Add example code here }}
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: Windows 11 24H2 x64, Windows 11 23H2 x64, Windows 11 22H2 x64, Windows 11 21H2 x64, Windows 10 22H2 x64, Windows 10 21H2 x64, Windows 10 20H2 x64, Windows 10 1909 x64
+Accepted values: Windows 11 25H2 x64, Windows 11 24H2 x64, Windows 11 23H2 x64, Windows 11 22H2 x64, Windows 11 21H2 x64, Windows 10 22H2 x64, Windows 10 21H2 x64, Windows 10 20H2 x64, Windows 10 1909 x64
 
 Required: True
 Position: 1

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-OSDCloudOperatingSystemsIndexMap
 
 ## SYNOPSIS
-Returns the Operating System Indexes used by OSDCloud
+Returns OSDCloud operating system index map entries by architecture.
 
 ## SYNTAX
 
@@ -18,22 +18,30 @@ Get-OSDCloudOperatingSystemsIndexMap [-OSArch <String>] [-ProgressAction <Action
 ```
 
 ## DESCRIPTION
-Returns the Operating System Indexes used by OSDCloud
+Reads the cached OSDCloud operating system index map and returns entries
+filtered by the specified architecture.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-OSDCloudOperatingSystemsIndexMap
 ```
 
-{{ Add example description here }}
+Returns x64 index map entries from cache.
+
+### EXAMPLE 2
+```
+Get-OSDCloudOperatingSystemsIndexMap -OSArch ARM64
+```
+
+Returns ARM64 index map entries from cache.
 
 ## PARAMETERS
 
 ### -OSArch
-Specifies the OS architecture to filter results.
-Valid values are 'x64' and 'ARM64'.
+Specifies the operating system architecture.
+Valid values are x64 and ARM64.
 
 ```yaml
 Type: String
@@ -69,6 +77,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### PSCustomObject
 ## NOTES
 
 ## RELATED LINKS

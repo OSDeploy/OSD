@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-OSDCloudOperatingSystems
 
 ## SYNOPSIS
-Returns the Operating Systems used by OSDCloud
+Gets OSDCloud operating system entries for a specific architecture.
 
 ## SYNTAX
 
@@ -17,21 +17,33 @@ Get-OSDCloudOperatingSystems [[-OSArch] <String>] [-ProgressAction <ActionPrefer
 ```
 
 ## DESCRIPTION
-Returns the Operating Systems used by OSDCloud
+Queries OSDCloud operating system data and returns entries that match the
+requested operating system architecture.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-OSDCloudOperatingSystems
 ```
 
-{{ Add example description here }}
+Returns x64 operating system entries.
+
+### EXAMPLE 2
+```
+Get-OSDCloudOperatingSystems -OSArch arm64
+```
+
+Returns ARM64 operating system entries.
 
 ## PARAMETERS
 
 ### -OSArch
-{{ Fill OSArch Description }}
+Specifies the operating system architecture to return.
+
+Valid values:
+- x64
+- arm64
 
 ```yaml
 Type: String
@@ -65,9 +77,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None. You cannot pipe input to this function.
 ## OUTPUTS
 
+### PSCustomObject
+### One or more operating system entries returned by Get-OSDCoreOperatingSystems.
 ## NOTES
 25.2.17 Removed unnecessary Default ParameterSet Name
+26.6.24 Refined comment-based help text
 
 ## RELATED LINKS
+
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)
+
