@@ -6,6 +6,49 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [26.7.6.1] - 2026-07-06
+
+### Changed
+
+- **`Invoke-OSDCloud` analytics instrumentation** (`OSD/Public/OSDCloud.ps1`) — Added deployment analytics event handling in the launch validation flow, including hashed device UUID generation for privacy-safe correlation and expanded event property collection for deployment telemetry.
+- **`OSD.psd1`** — Bumped module version to `26.7.6.1` and updated generated-on date to `2026-07-06`.
+
+---
+
+## [26.6.25.1] - 2026-06-25
+
+### Added
+
+- **Operating system catalog retrieval functions** — Added `Get-MCTOperatingSystems` and `Get-MCTOperatingSystemsOSD` to improve catalog data retrieval workflows used by OSDCloud.
+
+### Changed
+
+- **Operating system retrieval refactor** — Renamed and reorganized internal retrieval functions (`Get-CoreOperatingSystems`, `Get-OSDCoreOperatingSystems`) and updated `Get-OSDCloudOperatingSystems` to use the newer flow while removing deprecated function paths.
+- **`OSD.psd1`** — Updated exports for operating system retrieval function changes and bumped module version to `26.6.25.1`; updated generated-on date to `6/25/2026`.
+- **Power and index function documentation** — Enhanced comment-based help for:
+  - `Get-PowerSettingSleepAfter`
+  - `Get-PowerSettingTurnMonitorOffAfter`
+  - `Get-OSDCloudOperatingSystemsIndexMap`
+  - `Get-OSDCloudOperatingSystemsIndexes`
+- **Driver pack and cache content** — Added Panasonic driver pack catalog coverage and refreshed associated operating system catalog/cache artifacts.
+
+### Removed
+
+- **Legacy v2 driver pack docs and scripts** — Removed outdated `Get-OSDCatalogDriverPack` and `Get-OSDCatalogDriverPacks` documentation and v2 public functions.
+- **Archived operating system cache artifacts** — Removed stale `cache/archive-operatingsystems/operatingsystems.json` and `cache/archive-operatingsystems/operatingsystems.xml`.
+
+---
+
+## [26.6.23.1] - 2026-06-23
+
+### Changed
+
+- **Windows 11 25H2 operating system catalogs** — Updated the published 25H2 media catalog to build `26200.8653` for release consumption.
+- **`OSD.json`** — Refreshed Windows 11 25H2 release selections (x64 and ARM64) used by OSDCloud workflows.
+- **`OSD.psd1`** — Bumped module version to `26.6.23.1`; updated generated-on date to `6/23/2026`.
+
+---
+
 ## [26.4.23.1] - 2026-04-23
 
 ### Changed
