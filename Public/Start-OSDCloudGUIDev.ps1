@@ -19,7 +19,7 @@
         [Alias('Brand')]
         [System.String]
         $BrandName = $Global:OSDModuleResource.StartOSDCloudGUIDev.BrandName,
-        
+
         #Color for the OSDCloudGUI Brand
         [Alias('Color')]
         [System.String]
@@ -46,15 +46,15 @@
 
         BrandName                   = [System.String]$BrandName
         BrandColor                  = [System.String]$BrandColor
-        
+
         ComputerManufacturer        = [System.String]$ComputerManufacturer
         ComputerModel               = [System.String](Get-MyComputerModel -Brief)
         ComputerProduct             = [System.String]$ComputerProduct
-        
+
         DriverPack                  = $null
         DriverPacks                 = [array](Get-OSDCloudDriverPacks)
         DriverPackName              = $null
-        
+
         IsOnBattery                 = [System.Boolean](Get-OSDGather -Property IsOnBattery)
 
         OSActivation                = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Activation
@@ -72,15 +72,14 @@
         OSNameARM64Values           = [array]$Global:OSDModuleResource.OSDCloud.Values.NameARM64
         OSReleaseIDValues           = [array]$Global:OSDModuleResource.OSDCloud.Values.ReleaseID
         OSVersionValues             = [array]$Global:OSDModuleResource.OSDCloud.Values.Version
-        
-        captureScreenshots          = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.captureScreenshots
+
         ClearDiskConfirm            = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.ClearDiskConfirm
         restartComputer             = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.restartComputer
         updateDiskDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateDiskDrivers
         updateFirmware              = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware
         updateNetworkDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateNetworkDrivers
         updateSCSIDrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateSCSIDrivers
-        SyncMSUpCatDriverUSB        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.SyncMSUpCatDriverUSB        
+        SyncMSUpCatDriverUSB        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.SyncMSUpCatDriverUSB
         OEMActivation               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.OEMActivation
         WindowsUpdate               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdate
         WindowsUpdateDrivers        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdateDrivers
@@ -100,7 +99,7 @@
     #================================================
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Exporting default configuration to $env:Temp\Start-OSDCloudGUI.json"
     $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-OSDCloudGUI.json" -Force
-    
+
     $Global:OSDCloudGUI.AutomateJsonFile = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
         Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "Start-OSDCloudGUI.json" -File -Force -Recurse -ErrorAction Ignore
     }
@@ -200,7 +199,7 @@
 
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudDEV\MainWindow.ps1"
 
-    
+
     Start-Sleep -Seconds 2
     #================================================
 }

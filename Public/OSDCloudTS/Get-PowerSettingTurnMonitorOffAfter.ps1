@@ -1,29 +1,75 @@
-﻿Function Get-PowerSettingTurnMonitorOffAfter{
-    # Get active plan
-    # Get-CimInstance won't work due to Get-CimInstance -Namespace root\cimv2\power -ClassName Win32_PowerPlan doesn't have the "Activate" trigger as Get-WmiObject does
-    $CurrentPlan = Get-WmiObject -Namespace root\cimv2\power -ClassName Win32_PowerPlan | Where-Object -FilterScript {$_.IsActive}
+﻿Function Get-PowerSettingTurnMonitorOffAfter {
+    <#
+    .SYNOPSIS
+    Gets the active power plan monitor-off timeout in minutes.
 
-    # Get "Lid closed" setting
-    $SleepAfterSetting = Get-CimInstance -Namespace root\cimv2\power -ClassName Win32_Powersetting | Where-Object -FilterScript {$_.ElementName -eq "Turn off display after"}
+    .DESCRIPTION
+    Returns the "Turn off display after" timeout for the active power plan.
+    The function reads both AC (plugged in) and DC (battery) values from
+    power policy data in root\cimv2\power.
 
-    # Get GUIDs
-    $CurrentPlanGUID = [Regex]::Matches($CurrentPlan.InstanceId, "{.*}" ).Value
-    $SleepAfterGUID = [Regex]::Matches($SleepAfterSetting.InstanceID, "{.*}" ).Value
+    .EXAMPLE
+    Get-PowerSettingTurnMonitorOffAfter
 
-    # Get "Plugged in lid" setting (DC)
+    Returns a PSCustomObject with AC and DC monitor-off timeout values
+    in minutes.
 
-    $DC = Get-CimInstance -Namespace root\cimv2\power -ClassName Win32_PowerSettingDataIndex | Where-Object -FilterScript {
-        ($_.InstanceID -eq "Microsoft:PowerSettingDataIndex\$CurrentPlanGUID\DC\$SleepAfterGUID")
-        }
-    # Get "Plugged in lid" setting (AC)
+    .OUTPUTS
+    PSCustomObject
+    #>
+    [CmdletBinding()]
+    [OutputType([pscustomobject])]
+    param ()
 
-	    $AC = Get-CimInstance -Namespace root\cimv2\power -ClassName Win32_PowerSettingDataIndex | Where-Object -FilterScript {
-	    ($_.InstanceID -eq "Microsoft:PowerSettingDataIndex\$CurrentPlanGUID\AC\$SleepAfterGUID")
-        }
-    [int]$ACMinutes = $AC.SettingIndexValue / 60
-    [int]$DCMinutes = $DC.SettingIndexValue / 60
-    $ReturnResults = New-Object System.Object
-    $ReturnResults | Add-Member -MemberType NoteProperty -Name "AC" -Value $ACMinutes -Force
-    $ReturnResults | Add-Member -MemberType NoteProperty -Name "DC" -Value $DCMinutes -Force
-    return $ReturnResults
+    $powerNamespace = 'root\cimv2\power'
+
+    # Use Get-WmiObject first for compatibility with existing WinPE/OSD usage.
+    $currentPlan = Get-WmiObject -Namespace $powerNamespace -Class Win32_PowerPlan -ErrorAction SilentlyContinue |
+        Where-Object { $_.IsActive } |
+        Select-Object -First 1
+
+    if (-not $currentPlan) {
+        $currentPlan = Get-CimInstance -Namespace $powerNamespace -ClassName Win32_PowerPlan -ErrorAction SilentlyContinue |
+            Where-Object { $_.IsActive } |
+            Select-Object -First 1
+    }
+
+    if (-not $currentPlan) {
+        throw 'Unable to determine the active power plan.'
+    }
+
+    $displayOffSetting = Get-CimInstance -Namespace $powerNamespace -ClassName Win32_PowerSetting |
+        Where-Object { $_.ElementName -eq 'Turn off display after' } |
+        Select-Object -First 1
+
+    if (-not $displayOffSetting) {
+        throw 'Unable to locate the "Turn off display after" power setting.'
+    }
+
+    $guidPattern = '\{[0-9a-fA-F\-]{36}\}'
+    $currentPlanGuid = [regex]::Match($currentPlan.InstanceId, $guidPattern).Value
+    $displayOffGuid = [regex]::Match($displayOffSetting.InstanceId, $guidPattern).Value
+
+    if ([string]::IsNullOrWhiteSpace($currentPlanGuid) -or [string]::IsNullOrWhiteSpace($displayOffGuid)) {
+        throw 'Unable to parse power setting GUID values.'
+    }
+
+    $instancePrefix = "Microsoft:PowerSettingDataIndex\$currentPlanGuid"
+
+    $dc = Get-CimInstance -Namespace $powerNamespace -ClassName Win32_PowerSettingDataIndex |
+        Where-Object { $_.InstanceId -eq "$instancePrefix\DC\$displayOffGuid" } |
+        Select-Object -First 1
+
+    $ac = Get-CimInstance -Namespace $powerNamespace -ClassName Win32_PowerSettingDataIndex |
+        Where-Object { $_.InstanceId -eq "$instancePrefix\AC\$displayOffGuid" } |
+        Select-Object -First 1
+
+    if (-not $ac -or -not $dc) {
+        throw 'Unable to retrieve AC and DC values for the display timeout setting.'
+    }
+
+    [pscustomobject]@{
+        AC = [int]($ac.SettingIndexValue / 60)
+        DC = [int]($dc.SettingIndexValue / 60)
+    }
 }

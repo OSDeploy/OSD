@@ -128,7 +128,6 @@ Start-OSDCloud -OSName "Windows 11 24H2 x64" -OSEdition Pro
 | `Get-DellDriverPackCatalog` | Returns the Dell driver pack catalog |
 | `Get-LenovoDriverPackCatalog` | Returns the Lenovo driver pack catalog |
 | `Get-SurfaceDriverPackCatalog` | Returns the Surface driver pack catalog |
-| `Get-OSDCatalogDriverPack` | Returns driver pack catalog entries across all vendors |
 
 ### HP Device Management
 
