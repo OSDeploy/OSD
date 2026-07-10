@@ -328,7 +328,7 @@ function Start-RecastOSDCloudGUI {
     #================================================
     #   Launch GUI
     #================================================
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\OSDCloudGUI\MainWindow.ps1"
+    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\RecastOSDCloudGUI\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================
 }
