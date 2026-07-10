@@ -14,8 +14,6 @@ function Invoke-IPUPreInstallNotifications {
 
 .NOTES
     Author: David Segura - Recast Software
-    Copyright: Recast Software
-    PowerShell Compatibility: 5.1 and 7
     2026-07-10 - Standardized comment-based help metadata and links.
 
 .LINK

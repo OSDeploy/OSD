@@ -1,4 +1,23 @@
 function Install-AzOSDIacTools {
+    <#
+    .SYNOPSIS
+    Install prerequisite IaC tooling for OSDCloud Azure.
+
+    .DESCRIPTION
+    Detects Terraform, Bicep, and Azure CLI, installs missing components, updates the current
+    user's PATH, and verifies the OSD PowerShell modules needed by the Azure IaC workflow.
+
+    .EXAMPLE
+    Install-AzOSDIacTools
+    Installs any missing tooling and validates the OSD modules.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to repo standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         
@@ -116,4 +135,3 @@ function Install-AzOSDIacTools {
 
     }
 }
-

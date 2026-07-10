@@ -1,28 +1,26 @@
 function Connect-OSDCloudAzure {
     <#
     .SYNOPSIS
-    Connect to Azure and prepare OSDCloudAzure session state.
+    Connect to Azure and initialize OSDCloudAzure session state.
 
     .DESCRIPTION
-    Installs the Azure modules used by OSDCloudAzure, signs in to Azure, selects a subscription
-    when more than one is available, and populates the global Azure context and access-token
-    variables used by the Azure deployment workflow.
+    Installs the Azure and Microsoft Graph modules required by OSDCloudAzure, signs in to Azure,
+    optionally prompts for a subscription when multiple subscriptions are available, and populates
+    the global context, token, and header variables used by the Azure deployment workflow.
 
     .PARAMETER UseDeviceAuthentication
     Use device-code authentication instead of the interactive Azure sign-in flow.
 
     .EXAMPLE
     Connect-OSDCloudAzure
-    Signs in to Azure using the default authentication flow.
+    Signs in to Azure using the interactive browser-based authentication flow.
 
     .EXAMPLE
     Connect-OSDCloudAzure -UseDeviceAuthentication
-    Signs in to Azure with device authentication.
+    Signs in to Azure by using device-code authentication.
 
     .NOTES
     Author: David Segura - Recast Software
-    Copyright: Recast Software
-    PowerShell Compatibility: 5.1 and 7
     2026-07-10 - Updated help to repo standard
 
     .LINK

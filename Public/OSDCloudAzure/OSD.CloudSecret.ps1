@@ -1,13 +1,32 @@
-<#
-.SYNOPSIS
-Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
-.DESCRIPTION
-Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
-.LINK
-https://osd.osdeploy.com
-#>
 function Get-CloudSecret
 {
+    <#
+    .SYNOPSIS
+    Read a secret from Azure Key Vault.
+
+    .DESCRIPTION
+    Connects to Azure if needed and returns the named Key Vault secret as plain text.
+
+    .PARAMETER VaultName
+    Name of the Key Vault that contains the secret.
+
+    .PARAMETER Name
+    Name of the secret to read.
+
+    .EXAMPLE
+    Get-CloudSecret -VaultName contoso -Name Script
+    Returns the secret text from the specified vault.
+
+    .OUTPUTS
+    System.String
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to repo standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, Position = 0)]
@@ -54,16 +73,40 @@ function Get-CloudSecret
         Break
     }
 }
-<#
-.SYNOPSIS
-Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
-.DESCRIPTION
-Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
-.LINK
-https://osd.osdeploy.com
-#>
 function Invoke-CloudSecret
 {
+    <#
+    .SYNOPSIS
+    Invoke a secret retrieved from Azure Key Vault.
+
+    .DESCRIPTION
+    Loads the named secret with Get-CloudSecret and either invokes it directly, writes it to a
+    temporary file, or runs it elevated depending on the selected invoke mode.
+
+    .PARAMETER VaultName
+    Name of the Key Vault that contains the secret.
+
+    .PARAMETER Name
+    Name of the secret to read.
+
+    .PARAMETER Invoke
+    Choose how to run the secret content: Command, File, or FileRunas.
+
+    .EXAMPLE
+    Invoke-CloudSecret -VaultName contoso -Name Script
+    Invokes the retrieved secret in the current session.
+
+    .EXAMPLE
+    Invoke-CloudSecret -VaultName contoso -Name Script -Invoke FileRunas
+    Writes the secret to a temporary file and runs it elevated.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to repo standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, Position = 0)]
@@ -105,17 +148,49 @@ function Invoke-CloudSecret
         }
     }
 }
-<#
-.SYNOPSIS
-Converts a value to an Azure Key Vault Secret
-.DESCRIPTION
-Converts a value to an Azure Key Vault Secret
-.NOTES
-.LINK
-https://osd.osdeploy.com
-#>
 function Set-CloudSecret
 {
+    <#
+    .SYNOPSIS
+    Convert content to an Azure Key Vault secret.
+
+    .DESCRIPTION
+    Reads content from a URL, the clipboard, a file, or a raw string and stores it in Azure Key
+    Vault as a secret.
+
+    .PARAMETER VaultName
+    Name of the Key Vault that receives the secret.
+
+    .PARAMETER Name
+    Name of the secret to set.
+
+    .PARAMETER Uri
+    URI content to set as the Azure Key Vault secret.
+
+    .PARAMETER Clipboard
+    Clipboard text to set as the Azure Key Vault secret.
+
+    .PARAMETER File
+    File content to set as the Azure Key Vault secret.
+
+    .PARAMETER String
+    String content to set as the Azure Key Vault secret.
+
+    .EXAMPLE
+    Set-CloudSecret -VaultName contoso -Name Script -File .\script.ps1
+    Uploads file contents to Key Vault.
+
+    .EXAMPLE
+    Set-CloudSecret -VaultName contoso -Name Script -Clipboard
+    Stores clipboard contents in Key Vault.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to repo standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding(DefaultParameterSetName='FromUriContent')]
     param
     (

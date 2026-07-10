@@ -1,4 +1,32 @@
 function Get-AzOSDTechId {
+    <#
+    .SYNOPSIS
+    Find Azure AD users for an OSD tech identifier prefix.
+
+    .DESCRIPTION
+    Connects to Azure with device authentication, selects a subscription when multiple subscriptions
+    are available, and returns Azure AD users whose name starts with the supplied value.
+
+    .PARAMETER AzureAdUserName
+    Prefix to search for in Azure AD user names.
+
+    .EXAMPLE
+    Get-AzOSDTechId -AzureAdUserName alex
+    Finds Azure AD users whose names start with alex.
+
+    .OUTPUTS
+    System.Management.Automation.PSObject
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to repo standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .LINK
+    https://github.com/OSDeploy/OSD/blob/master/Docs/Get-AzOSDTechId.md
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true, Position=0)]

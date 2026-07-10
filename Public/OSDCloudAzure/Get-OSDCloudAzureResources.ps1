@@ -1,4 +1,24 @@
 function Get-OSDCloudAzureResources {
+    <#
+    .SYNOPSIS
+    Discover OSDCloud Azure Storage resources.
+
+    .DESCRIPTION
+    Uses the current Azure context to enumerate storage accounts tagged OSDCloud, caches the
+    matching containers and blob collections in global variables, and writes discovered resource
+    snapshots to the WinPE log folder when available.
+
+    .EXAMPLE
+    Get-OSDCloudAzureResources
+    Scans Azure storage for tagged OSDCloud resources.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to repo standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -18,7 +38,7 @@ function Get-OSDCloudAzureResources {
             #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $OSDCloudLogs\AzStorageAccounts.json"
             $Global:AzStorageAccounts | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageAccounts.json" -Encoding ascii -Width 2000 -Force
         }
-    
+
         #Write-Host -ForegroundColor DarkGray    'OSDCloud Storage Accounts: $Global:AzOSDCloudStorageAccounts'
         $Global:AzOSDCloudStorageAccounts = Get-AzStorageAccount | Where-Object {$_.Tags.ContainsKey('OSDCloud')}
         #$Global:AzOSDCloudStorageAccounts = Get-AzResource -ResourceType 'Microsoft.Storage/storageAccounts'
@@ -27,7 +47,7 @@ function Get-OSDCloudAzureResources {
             #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $OSDCloudLogs\AzOSDCloudStorageAccounts.json"
             $Global:AzOSDCloudStorageAccounts | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudStorageAccounts.json" -Encoding ascii -Width 2000 -Force
         }
-    
+
         $Global:AzStorageContext = @{}
         $Global:AzOSDCloudBlobAutopilotFile = @()
         $Global:AzOSDCloudBlobBootImage = @()
@@ -35,7 +55,7 @@ function Get-OSDCloudAzureResources {
         $Global:AzOSDCloudBlobDriverPack = @()
         $Global:AzOSDCloudBlobPackage = @()
         $Global:AzOSDCloudBlobScript = @()
-    
+
         if ($Global:AzOSDCloudStorageAccounts) {
             #Write-Host -ForegroundColor DarkGray    'Storage Contexts:          $Global:AzStorageContext'
             #Write-Host -ForegroundColor DarkGray    'Blob Windows Images:       $Global:AzOSDCloudBlobImage'
@@ -47,13 +67,13 @@ function Get-OSDCloudAzureResources {
                 $Global:AzStorageContext."$($Item.StorageAccountName)" = $Global:AzCurrentStorageContext
                 #Get-AzStorageBlobByTag -TagFilterSqlExpression ""osdcloudimage""=""win10ltsc"" -Context $StorageContext
                 #Get-AzStorageBlobByTag -Context $Global:AzCurrentStorageContext
-        
+
                 $AzOSDCloudStorageContainers = Get-AzStorageContainer -Context $Global:AzCurrentStorageContext
                 if ($OSDCloudLogs) {
                     #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $OSDCloudLogs\AzOSDCloudStorageContainers.json"
                     $Global:AzOSDCloudStorageContainers | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzOSDCloudStorageContainers.json" -Encoding ascii -Width 2000 -Force
                 }
-            
+
                 if ($AzOSDCloudStorageContainers) {
                     foreach ($Container in $AzOSDCloudStorageContainers) {
                         if ($Container.Name -like "provision*") {
