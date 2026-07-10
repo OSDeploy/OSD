@@ -172,7 +172,20 @@
         'Update-MyDellBios', 'Update-MyWindowsImage', 'Update-OSDCloudUSB',
         'Use-WinPEContent', 'Wait-WebConnection', 'Write-CMTraceLog',
         'Get-OSDModulePath',
-        'Get-OSDModuleVersion', 'Get-OSDCachePath'
+        'Get-OSDModuleVersion', 'Get-OSDCachePath',
+        # OSD Core Functions
+        'Initialize-OSDCoreDevice',
+        'Invoke-RecastOSDCloud',
+        'Get-OSDCoreCache',
+        'Get-OSDCoreDeploymentDisk',
+        'Get-OSDCoreDriverPacks',
+        'Get-OSDCoreDriverPackCatalogDell',
+        'Get-OSDCoreDriverPackCatalogHP',
+        'Get-OSDCoreDriverPackCatalogLenovo',
+        'Get-OSDCoreDriverPackCatalogPanasonic',
+        'Get-OSDCoreDriverPackCatalogSurface',
+        'Get-OSDCoreOperatingSystems',
+        'Start-RecastOSDCloudGUI'
     )
     CmdletsToExport      = @()
     VariablesToExport    = @()
