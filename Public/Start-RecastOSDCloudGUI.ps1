@@ -74,6 +74,7 @@ function Start-RecastOSDCloudGUI {
         $v2
     )
     #=================================================
+    # Emit function/version context and surface legacy parameter usage.
     $ModuleVersion = $($MyInvocation.MyCommand.Module.Version)
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] $ModuleVersion"
 
@@ -81,6 +82,7 @@ function Start-RecastOSDCloudGUI {
         Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] v2 parameter is deprecated and non-functional and will be removed in a future release. Please remove the v2 parameter from your command."
     }
     #=================================================
+    # Ensure hardware context is available for later OS/driver decisions.
     #region Initialize-OSDCoreDevice
     if (-not ($global:OSDCoreDevice)) {
         Initialize-OSDCoreDevice
@@ -135,27 +137,31 @@ function Start-RecastOSDCloudGUI {
     #>
     #endregion
     #=================================================
-    # OSDCoreOperatingSystems
-    # Fail if no Operating Systems found for the current architecture
+    # Validate that the OS catalog was preloaded for this architecture.
+    # The GUI cannot continue without at least one deployable operating system.
     if (-not $global:OSDCoreOperatingSystems) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to load Operating Systems"
     }
     #=================================================
-    # OSDCoreDriverPacks
+    # Resolve driver pack metadata for the detected device, with optional
+    # manufacturer/product overrides supplied by the caller.
     if ($ComputerManufacturer) {
         $global:OSDCoreDevice.OSDManufacturer = $ComputerManufacturer
         $global:OSDCoreDriverPacks = Get-OSDCoreDriverPacks -OSDManufacturer $ComputerManufacturer
     }
 
     if ($ComputerProduct) {
+        # Use explicit product override for driver pack match.
         $global:OSDCoreDevice.OSDProduct = $ComputerProduct
         $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $ComputerProduct } | Select-Object -First 1
     }
     else {
+        # Default to the detected device product when no override is provided.
         $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $global:OSDCoreDevice.OSDProduct } | Select-Object -First 1
     }
 
     if ($global:OSDCoreDriverPackObject) {
+        # Log resolved driver pack details to make selection behavior explicit.
         $DriverPackName = $global:OSDCoreDriverPackObject.Name
         $DriverPackUrl = $global:OSDCoreDriverPackObject.Url
 
@@ -171,32 +177,30 @@ function Start-RecastOSDCloudGUI {
         Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
     }
     #=================================================
-    # Dependencies
-    # Make sure curl.exe is present and throw if not
+    # Dependency guard: OSDCloud relies on curl.exe for downloads.
     if (-not (Get-Command -Name 'curl.exe' -ErrorAction SilentlyContinue)) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCloud requires 'curl.exe' which is not available on this system. Please ensure curl.exe is available in the system PATH."
     }
     #=================================================
-    # Get-OSDCoreDeploymentDisk
+    # Detect candidate deployment disk(s).
     $DeploymentDiskObject = Get-OSDCoreDeploymentDisk
 
-    # Make sure Get-OSDCoreDeploymentDisk returns a single object
+    # Stop immediately if no eligible local deployment disk is found.
     if (-not $DeploymentDiskObject) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCloud requires at least one Local Disk, but no compatible Local Disk was found."
     }
-    # Warn if multiple disks found and inform which disk will be used
-    # Include the Friendly Name of the disk for clarity
-    # Include the size in GB for clarity
+    # If multiple disks are discovered, keep behavior deterministic by using
+    # the first disk and logging all candidates for troubleshooting visibility.
     if (@($DeploymentDiskObject).Count -gt 1) {
         Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Multiple Local Disks were found. OSDCloud will default to DiskNumber: $($DeploymentDiskObject[0].DiskNumber)"
         $DeploymentDiskObject | ForEach-Object {
             Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DiskNumber: $($_.DiskNumber), FriendlyName: $($_.FriendlyName), Size(GB): $([math]::Round($_.Size / 1GB, 2))"
         }
     }
-    # Limit to the first disk found
+    # Limit to the selected disk object expected by downstream workflow code.
     $DeploymentDiskObject = $DeploymentDiskObject | Select-Object -First 1
     #=================================================
-    # Main
+    # Build deployment state consumed by the broader OSDCloud workflow.
     $global:OSDCloudDeploy = $null
     $global:OSDCloudDeploy = [ordered]@{
         DeploymentDiskObject  = $DeploymentDiskObject
@@ -234,8 +238,7 @@ function Start-RecastOSDCloudGUI {
         # WorkflowTaskObject        = $WorkflowTaskObject
     }
     #================================================
-    #   Pass Variables to OSDCloudGUI
-    #================================================
+    # Build GUI configuration defaults from module resources and current device context.
     $Global:OSDCloudGUI = $null
     $Global:OSDCloudGUI = [ordered]@{
         Function              = [System.String]'Start-RecastOSDCloudGUI'
@@ -299,8 +302,8 @@ function Start-RecastOSDCloudGUI {
         TimeStart             = [datetime](Get-Date)
     }
     #================================================
-    #   OSDCloud Automate
-    #================================================
+    # Export baseline GUI settings, then look for external automation JSON
+    # on non-C drives to override interactive defaults when present.
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Exporting default configuration to $env:Temp\Start-RecastOSDCloudGUI.json"
     $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-RecastOSDCloudGUI.json" -Force
 
@@ -314,6 +317,7 @@ function Start-RecastOSDCloudGUI {
         }
     }
     if ($Global:OSDCloudGUI.AutomateConfiguration) {
+        # Apply each discovered automation setting onto the active GUI config.
         foreach ($Key in $Global:OSDCloudGUI.AutomateConfiguration.Keys) {
             $Global:OSDCloudGUI.$Key = $Global:OSDCloudGUI.AutomateConfiguration.$Key
         }
@@ -326,8 +330,7 @@ function Start-RecastOSDCloudGUI {
     Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
     $Global:OSDCloudGUI | Out-Host
     #================================================
-    #   Launch GUI
-    #================================================
+    # Launch the WPF GUI entry point with the prepared global state.
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\RecastOSDCloudGUI\MainWindow.ps1"
     Start-Sleep -Seconds 2
     #================================================
