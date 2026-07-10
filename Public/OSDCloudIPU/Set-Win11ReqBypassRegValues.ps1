@@ -1,4 +1,33 @@
 Function Set-Win11ReqBypassRegValues {
+    <#
+    .SYNOPSIS
+        Sets Windows 11 setup requirement bypass registry values.
+
+    .DESCRIPTION
+        Detects whether the current environment is WinPE, OOBE, specialize, audit mode, or a running Windows installation and writes the LabConfig and MoSetup values needed to bypass Windows 11 hardware requirement checks during setup.
+
+    .INPUTS
+        None.
+
+    .OUTPUTS
+        None.
+
+    .EXAMPLE
+        Set-Win11ReqBypassRegValues
+        Writes the appropriate bypass registry keys for the current phase.
+
+    .NOTES
+        Author: David Segura - Recast Software
+        Copyright: Recast Software
+        PowerShell Compatibility: 5.1 and 7
+        2026-07-10 - Standardized comment-based help metadata and links.
+
+    .LINK
+        https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .LINK
+        https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11
+    #>
     if ($env:SystemDrive -eq 'X:') {
     $WindowsPhase = 'WinPE'
     }

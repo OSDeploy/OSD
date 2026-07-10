@@ -1,23 +1,31 @@
 function Invoke-IPUPreInstallNotifications {
 <#
 .SYNOPSIS
-    --.
+    Shows the pre-install notification toast during an in-place upgrade.
+
 .DESCRIPTION
-    Triggers Notifications when Upgrade Starts
+    Starts the upgrade notification workflow, records start and finish markers, waits for Windows Setup progress to be available, and keeps the user informed with toast updates until the upgrade completes or the timeout is reached.
+
 .INPUTS
     None.
+
 .OUTPUTS
     None.
+
 .NOTES
-    Created by @gwblok
+    Author: David Segura - Recast Software
+    Copyright: Recast Software
+    PowerShell Compatibility: 5.1 and 7
+    2026-07-10 - Standardized comment-based help metadata and links.
+
+.LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
 .LINK
     https://garytown.com
+
 .LINK
     https://www.recastsoftware.com
-.COMPONENT
-    --
-.FUNCTIONALITY
-    --
 #>
 
 ## Set script requirements

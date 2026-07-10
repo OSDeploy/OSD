@@ -1,7 +1,44 @@
 function New-OSDCloudOSWimFile {
     <#
-    Log Files for IPU: https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files
-    Setup Command Line: https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11
+    .SYNOPSIS
+        Builds Windows setup media content for an OSDCloud feature update.
+
+    .DESCRIPTION
+        Resolves the target operating system image, determines the correct image index for the requested edition, downloads or locates the matching ESD, expands the setup content, and optionally creates an ISO file.
+
+    .PARAMETER OSName
+        Specifies the Windows release and architecture to build media for.
+
+    .PARAMETER OSEdition
+        Specifies the Windows edition to package into the setup media.
+
+    .PARAMETER OSLanguage
+        Specifies the language and culture of the Windows image.
+
+    .PARAMETER OSActivation
+        Specifies whether the image should target Retail or Volume activation.
+
+    .PARAMETER CreateISO
+        Creates an ISO file from the generated setup content after the image is prepared.
+
+    .EXAMPLE
+        New-OSDCloudOSWimFile -OSName 'Windows 11 25H2 x64' -OSEdition Pro -OSLanguage en-us -OSActivation Retail -CreateISO
+        Prepares the Windows 11 25H2 x64 Pro retail media and builds an ISO file.
+
+    .NOTES
+        Author: David Segura - Recast Software
+        Copyright: Recast Software
+        PowerShell Compatibility: 5.1 and 7
+        2026-07-10 - Standardized comment-based help metadata and links.
+
+    .LINK
+        https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .LINK
+        https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files
+
+    .LINK
+        https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11
     #>
     
     [CmdletBinding(DefaultParameterSetName = 'Default')]

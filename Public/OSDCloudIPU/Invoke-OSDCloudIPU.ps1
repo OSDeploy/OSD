@@ -1,7 +1,56 @@
 function Invoke-OSDCloudIPU {
     <#
-    Log Files for IPU: https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files
-    Setup Command Line: https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11
+    .SYNOPSIS
+        Starts an OSDCloud in-place upgrade workflow.
+
+    .DESCRIPTION
+        Validates elevation, inspects the current device and operating system, resolves the target feature update image, prepares any required driver pack content, and launches Windows Setup with the requested upgrade options.
+
+    .PARAMETER OSName
+        Specifies the target feature update image to download and install.
+
+    .PARAMETER Silent
+        Runs Windows Setup with the quiet UI mode.
+
+    .PARAMETER SkipDriverPack
+        Prevents driver pack download and integration even when a recommended driver pack is available.
+
+    .PARAMETER NoReboot
+        Prevents Windows Setup from rebooting after the down-level phase completes.
+
+    .PARAMETER DownloadOnly
+        Stops after downloading and preparing upgrade content without launching Setup.
+
+    .PARAMETER DiagnosticPrompt
+        Enables the Windows Setup diagnostic command prompt.
+
+    .PARAMETER SkipFinalize
+        Starts setup operations on the down-level OS without immediately initiating the offline phase.
+
+    .PARAMETER Finalize
+        Completes previously started setup operations and immediately reboots to start the offline phase.
+
+    .PARAMETER DynamicUpdate
+        Enables Windows Setup Dynamic Update so setup can search for and install updates during the upgrade.
+
+    .EXAMPLE
+        Invoke-OSDCloudIPU -OSName 'Windows 11 24H2 x64' -Silent -DynamicUpdate
+        Downloads the 24H2 x64 image and starts the upgrade with a quiet setup experience and Dynamic Update enabled.
+
+    .NOTES
+        Author: David Segura - Recast Software
+        Copyright: Recast Software
+        PowerShell Compatibility: 5.1 and 7
+        2026-07-10 - Standardized comment-based help metadata and links.
+
+    .LINK
+        https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .LINK
+        https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files
+
+    .LINK
+        https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11
     #>
     
     [CmdletBinding(DefaultParameterSetName = 'Default')]

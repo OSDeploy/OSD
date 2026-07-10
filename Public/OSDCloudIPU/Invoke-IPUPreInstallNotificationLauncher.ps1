@@ -2,25 +2,31 @@ Function Invoke-IPUPreInstallNotificationLauncher {
 
 <#
 .SYNOPSIS
-    --.
+    Launches the pre-install notification script in the logged-on user context.
+
 .DESCRIPTION
-Create a Process as Logged-On-User from PowerShell
-Then Launch the PreInstall Notificaiton Script as the logged on user.
+    Creates a process as the active user and starts the pre-install notification workflow so the toast UI runs in the same interactive session as the upgrade target.
 
 .INPUTS
     None.
+
 .OUTPUTS
     None.
+
 .NOTES
-    Created by @gwblok
+    Author: David Segura - Recast Software
+    Copyright: Recast Software
+    PowerShell Compatibility: 5.1 and 7
+    2026-07-10 - Standardized comment-based help metadata and links.
+
+.LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
 .LINK
     https://garytown.com
+
 .LINK
     https://www.recastsoftware.com
-.COMPONENT
-    --
-.FUNCTIONALITY
-    --
 #>
 
 ## Set script requirements
