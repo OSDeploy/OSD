@@ -129,7 +129,7 @@ function Save-OSDCloudDriverPack {
                 Save-WebFile -SourceUrl $DriverPack.Url -DestinationDirectory $DownloadPath -DestinationName $DriverPack.FileName
 
                 if (! (Test-Path $OutFile)) {
-                    Write-Warning "[$(Get-Date -format G)] Driver Pack failed to download"
+                    Write-Warning "[$(Get-Date -format s)] Driver Pack failed to download"
                 }
                 else {
                     $GetItemOutFile = Get-Item $OutFile

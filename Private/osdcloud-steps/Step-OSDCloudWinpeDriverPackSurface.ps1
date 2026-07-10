@@ -5,7 +5,7 @@ function Step-OSDCloudWinpeDriverPackSurface {
     )
     #=================================================
     # Start the step
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Start"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Debug -Message $Message; Write-Verbose -Message $Message
     #=================================================
     $ExpandPath = 'C:\Windows\Temp\osdcloud\drivers-driverpack'
@@ -26,7 +26,7 @@ function Step-OSDCloudWinpeDriverPackSurface {
     $SetupCompleteCmd = "$ScriptsPath\SetupComplete.cmd"
     $SetupSpecializeCmd = "C:\Windows\Temp\osdcloud\SetupSpecialize.cmd"
     #=================================================
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Adding Microsoft Surface DriverPack to $SetupCompleteCmd"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Adding Microsoft Surface DriverPack to $SetupCompleteCmd"
 
 $Content = @"
 :: ========================================================
@@ -42,7 +42,7 @@ rd /s /q C:\Windows\Temp\osdcloud\drivers-driverpack-download
     $Content | Out-File -FilePath $SetupCompleteCmd -Append -Encoding ascii -Width 2000 -Force
     #=================================================
     # End the function
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] End"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     Write-Verbose -Message $Message; Write-Debug -Message $Message
     #=================================================
 }

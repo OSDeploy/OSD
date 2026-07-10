@@ -3,7 +3,7 @@ function Step-OSDCloudWinpeDriverRecast {
     param ()
     #=================================================
     # Start the step
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Start"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Debug -Message $Message; Write-Verbose -Message $Message
     #=================================================
     $ExpandPath = 'C:\Windows\Temp\osdcloud\drivers-recast'
@@ -32,7 +32,7 @@ function Step-OSDCloudWinpeDriverRecast {
     }
     #=================================================
     # Export Drivers to Disk
-    Write-Verbose "[$(Get-Date -format G)] Exporting drivers to: $ExpandPath"
+    Write-Verbose "[$(Get-Date -format s)] Exporting drivers to: $ExpandPath"
     foreach ($Device in $PnputilDevices) {
         # Check that the Device has a DriverName
         if ($Device.Drivername) {
@@ -44,7 +44,7 @@ function Step-OSDCloudWinpeDriverRecast {
             }
             
             # Export the driver using pnputil
-            Write-Verbose "[$(Get-Date -format G)] Exporting $($Device.DriverName) to: $destinationPath"
+            Write-Verbose "[$(Get-Date -format s)] Exporting $($Device.DriverName) to: $destinationPath"
             $null = & pnputil.exe /export-driver $Device.DriverName $destinationPath
         }
     }
@@ -54,7 +54,7 @@ function Step-OSDCloudWinpeDriverRecast {
     }
     #=================================================
     # End the function
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] End"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     Write-Verbose -Message $Message; Write-Debug -Message $Message
     #=================================================
 }

@@ -5,7 +5,7 @@ function Step-OSDCloudWinpeDriverPackHp {
     )
     #=================================================
     # Start the step
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Start"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Debug -Message $Message; Write-Verbose -Message $Message
     #=================================================
     $ExpandPath = 'C:\Windows\Temp\osdcloud\drivers-driverpack'
@@ -26,25 +26,25 @@ function Step-OSDCloudWinpeDriverPackHp {
     $SetupCompleteCmd = "$ScriptsPath\SetupComplete.cmd"
     $SetupSpecializeCmd = "C:\Windows\Temp\osdcloud\SetupSpecialize.cmd"
     #=================================================
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] FileDescription: $($FileInfo.VersionInfo.FileDescription)"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] InternalName: $($FileInfo.VersionInfo.InternalName)"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] ProductVersion: $($FileInfo.VersionInfo.ProductVersion)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] FileDescription: $($FileInfo.VersionInfo.FileDescription)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] InternalName: $($FileInfo.VersionInfo.InternalName)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] ProductVersion: $($FileInfo.VersionInfo.ProductVersion)"
 
     if (Test-Path -Path $env:windir\System32\7za.exe) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Expand HP DriverPack to $ExpandPath"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Expand HP DriverPack to $ExpandPath"
         # Start-Process -FilePath $FileInfo.FullName -ArgumentList "/s /e /f `"$ExpandPath`"" -Wait
         & 7za x "$($FileInfo.FullName)" -o"$ExpandPath"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Apply drivers in $ExpandPath"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Apply drivers in $ExpandPath"
         Add-WindowsDriver -Path "C:\" -Driver $ExpandPath -Recurse -ForceUnsigned -LogPath "$LogPath\drivers-driverpack.log" -ErrorAction SilentlyContinue | Out-Null
         
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing driverpack download and expanded drivers"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Removing driverpack download and expanded drivers"
         Remove-Item -Path $ExpandPath -Recurse -Force -ErrorAction SilentlyContinue
         Remove-Item -Path "C:\Drivers" -Recurse -Force -ErrorAction SilentlyContinue
         Remove-Item -Path "C:\Windows\Temp\osdcloud\drivers-driverpack-download" -Recurse -Force -ErrorAction SilentlyContinue
     }
     #=================================================
     # End the function
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] End"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     Write-Verbose -Message $Message; Write-Debug -Message $Message
     #=================================================
 }

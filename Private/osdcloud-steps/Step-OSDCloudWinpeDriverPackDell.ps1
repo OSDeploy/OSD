@@ -5,7 +5,7 @@ function Step-OSDCloudWinpeDriverPackDell {
     )
     #=================================================
     # Start the step
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Start"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Debug -Message $Message; Write-Verbose -Message $Message
     #=================================================
     $ExpandPath = 'C:\Windows\Temp\osdcloud\drivers-driverpack'
@@ -26,22 +26,22 @@ function Step-OSDCloudWinpeDriverPackDell {
     $SetupCompleteCmd = "$ScriptsPath\SetupComplete.cmd"
     $SetupSpecializeCmd = "C:\Windows\Temp\osdcloud\SetupSpecialize.cmd"
     #=================================================
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] FileDescription: $($FileInfo.VersionInfo.FileDescription)"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] ProductVersion: $($FileInfo.VersionInfo.ProductVersion)"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Expand Dell DriverPack to $ExpandPath"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] FileDescription: $($FileInfo.VersionInfo.FileDescription)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] ProductVersion: $($FileInfo.VersionInfo.ProductVersion)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Expand Dell DriverPack to $ExpandPath"
 
     $null = New-Item -Path $ExpandPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
     Start-Process -FilePath $FileInfo.FullName -ArgumentList "/s /e=`"$ExpandPath`"" -Wait
 
     Add-WindowsDriver -Path "C:\" -Driver $ExpandPath -Recurse -ForceUnsigned -LogPath "$LogPath\drivers-driverpack.log" -ErrorAction SilentlyContinue | Out-Null
         
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing driverpack download and expanded drivers"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Removing driverpack download and expanded drivers"
     Remove-Item -Path $ExpandPath -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Drivers" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "C:\Windows\Temp\osdcloud\drivers-driverpack-download" -Recurse -Force -ErrorAction SilentlyContinue
     #=================================================
     # End the function
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] End"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     Write-Verbose -Message $Message; Write-Debug -Message $Message
     #=================================================
 }

@@ -21,10 +21,10 @@
             $Message
         )
         if ($Message) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $Message"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $Message"
         }
         else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] " -NoNewline
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] " -NoNewline
         }
     }
     function Write-DarkGrayHost {
@@ -732,7 +732,7 @@
         }
 
         if ($Global:OSDCloud.SectionPassed -eq $false) {
-            Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+            Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
             Write-Warning "Unable to locate a Fixed Disk. You may need to add additional HDC Drivers to WinPE"
             Write-Warning "Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
@@ -847,7 +847,7 @@
 
             #Make sure that there is a PSDrive
             if (-NOT (Get-PSDrive -Name 'C')) {
-                Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
                 Write-Warning "New-OSDisk didn't work. There is no PSDrive FileSystem at C:\"
                 Write-Warning "Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
@@ -1002,7 +1002,7 @@
                 $Global:OSDCloud.ImageFileUrl = $null
             }
             else {
-                Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
                 Write-Warning "Could not copy the Windows Image to C:\OSDCloud\OS"
                 Write-Warning "Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
@@ -1031,7 +1031,7 @@
                 $Global:OSDCloud.ImageFileUrl = $Global:OSDCloud.GetFeatureUpdate.FileUri
             }
             else {
-                Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
                 Write-Warning "Unable to locate a Windows Feature Update"
                 Write-Warning "OSDCloud cannot continue"
                 Write-Warning "Press Ctrl+C to exit"
@@ -1124,7 +1124,7 @@
 
                     if ($OSDCloudUSB -and $Global:OSDCloud.OSVersion -and $Global:OSDCloud.OSReleaseID) {
                         $OSDownloadChildPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$($Global:OSDCloud.OSVersion) $($Global:OSDCloud.OSReleaseID)"
-                        Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Downloading OSDCloud Offline OS $OSDownloadChildPath"
+                        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Downloading OSDCloud Offline OS $OSDownloadChildPath"
 
                         $OSDCloudUsbOS = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory "$OSDownloadChildPath" -DestinationName $Global:OSDCloud.ImageFileName
 
@@ -1147,7 +1147,7 @@
                 }
             }
             else {
-                Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
                 Write-Warning "Could not verify an Internet connection for the Windows ImageFile"
                 Write-Warning "Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
@@ -1166,7 +1166,7 @@
                 $Global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
                 $Global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $Global:OSDCloud.ImageFileName}).SHA1
                 if ($null -eq $Global:OSDCloud.ImageFileSHA1) {
-                    Write-Warning "[$(Get-Date -format G)] OSDCloud Warning"
+                    Write-Warning "[$(Get-Date -format s)] OSDCloud Warning"
                     Write-Warning "No SHA1 Hash exists for $($Global:OSDCloud.ImageFileName) in the OSDCloud Catalog"
                     Write-Warning "Skipping SHA1 Validation"
                 }
@@ -1187,7 +1187,7 @@
         #endregion
         #region Global:OSDCloud.ImageFileDestination
         if (-not ($Global:OSDCloud.ImageFileDestination)) {
-            Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+            Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
             Write-Warning "The Windows Image Source did not download properly to the Destination"
             Write-Warning "Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
@@ -1217,7 +1217,7 @@
                     Write-DarkGrayHost "Windows ISO is attached to Drive Letter $($Global:OSDCloud.IsoGetVolume.DriveLetter)"
                 }
                 else {
-                    Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+                    Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
                     Write-Warning "The Windows ISO did not mount properly"
                     Write-Warning "Press Ctrl+C to exit"
                     Start-Sleep -Seconds 86400
@@ -1227,7 +1227,7 @@
             $Global:OSDCloud.ImageFileDestination = Get-ChildItem -Path "$($Global:OSDCloud.IsoGetVolume.DriveLetter):\*" -Include *.wim,*.esd -Recurse | Sort-Object Length -Descending | Select-Object -First 1
 
             if (-not ($Global:OSDCloud.ImageFileDestination)) {
-                Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
                 Write-Warning "Unable to find a WIM or ESD file on the Mounted Windows ISO"
                 Write-Warning "Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
@@ -1244,7 +1244,7 @@
 
             # Image is corrupt
             if ($null -eq $Global:OSDCloud.WindowsImageCount) {
-                Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
                 Write-Warning "Could not read the Windows Image properly"
                 Start-Sleep -Seconds 86400
                 Stop-Computer -Force
@@ -1259,7 +1259,7 @@
             #=================================================
             #	FAILED
             #=================================================
-            Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+            Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
             Write-Warning "Could not find a proper Windows Image for deployment"
             Write-Warning "Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
@@ -1294,7 +1294,7 @@
         if ($Global:OSDCloud.OSEdition -eq 'Enterprise N') {
             $Global:OSDCloud.OSEditionId = 'EnterpriseN'
         }
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSEditionId is set to $($Global:OSDCloud.OSEditionId)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSEditionId is set to $($Global:OSDCloud.OSEditionId)"
 
         # Match the OSEditionId to the OSImageIndex
         if ($Global:OSDCloud.OSEditionId) {
@@ -1308,11 +1308,11 @@
                 }
             }
         }
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSImageIndex is set to $($Global:OSDCloud.OSImageIndex)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSImageIndex is set to $($Global:OSDCloud.OSImageIndex)"
 
         # Does the WindowsImage contain the ImageIndex?
         if ($Global:OSDCloud.WindowsImage | Where-Object {$_.ImageIndex -eq $Global:OSDCloud.OSImageIndex}) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] WindowsImage contains the required ImageIndex"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] WindowsImage contains the required ImageIndex"
         }
         else {
             Write-SectionHeader "Select the Windows Image to expand"
@@ -1338,7 +1338,7 @@
             #=================================================
             #	FAILED
             #=================================================
-            Write-Warning "[$(Get-Date -format G)] OSDCloud Failed"
+            Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
             Write-Warning "Could not find a proper Windows Image for deployment"
             Write-Warning "Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
@@ -1393,8 +1393,8 @@
                 Expand-WindowsImage @ExpandWindowsImage
             }
             catch {
-                Write-Warning "[$(Get-Date -format G)] Expand-WindowsImage failed."
-                Write-Warning "[$(Get-Date -format G)] $_"
+                Write-Warning "[$(Get-Date -format s)] Expand-WindowsImage failed."
+                Write-Warning "[$(Get-Date -format s)] $_"
                 Write-Warning 'Press Ctrl+C to cancel OSDCloud'
                 Start-Sleep -Seconds 86400
                 exit
@@ -1415,7 +1415,7 @@
             Write-SectionHeader 'BCDBoot with Log X:\Windows\Temp\bcdboot.log'
             #https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdboot-command-line-options-techref-di?view=windows-11
             #Updated configuration that should clear existing UEFI Boot entires and fix the Dell issue
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] C:\Windows\System32\bcdboot.exe C:\Windows /c /v"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] C:\Windows\System32\bcdboot.exe C:\Windows /c /v"
             $BCDBootOutput = & C:\Windows\System32\bcdboot.exe C:\Windows /c /v
             $BCDBootOutput | Out-File -FilePath "X:\Windows\Temp\bcdboot.log" -Force
         }
@@ -1717,7 +1717,7 @@
                         }
                         if (Test-Path $DriverPackPath){
                             $OSDCloudUSBDestination = "$($OSDCloudUSB.DriveLetter):\OSDCloud\DriverPacks\$($Global:OSDCloud.Manufacturer)"
-                            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Copying Driver Pack $DriverPackPath to OSDCloudUSB at $OSDCloudUSBDestination"
+                            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Copying Driver Pack $DriverPackPath to OSDCloudUSB at $OSDCloudUSBDestination"
                             If (!(Test-Path $OSDCloudUSBDestination)) {
                                 $null = New-Item -Path $OSDCloudUSBDestination -ItemType Directory -Force
                             }
@@ -2364,42 +2364,42 @@ exit
                     Save-Module -Name OSD -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
                 }
                 catch {
-                    Write-Warning "[$(Get-Date -format G)] Unable to Save-Module OSD to $PowerShellSavePath\Modules"
+                    Write-Warning "[$(Get-Date -format s)] Unable to Save-Module OSD to $PowerShellSavePath\Modules"
                 }
 
                 try {
                     Save-Module -Name PackageManagement -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
                 }
                 catch {
-                    Write-Warning "[$(Get-Date -format G)] Unable to Save-Module PackageManagement to $PowerShellSavePath\Modules"
+                    Write-Warning "[$(Get-Date -format s)] Unable to Save-Module PackageManagement to $PowerShellSavePath\Modules"
                 }
 
                 try {
                     Save-Module -Name PowerShellGet -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
                 }
                 catch {
-                    Write-Warning "[$(Get-Date -format G)] Unable to Save-Module PowerShellGet to $PowerShellSavePath\Modules"
+                    Write-Warning "[$(Get-Date -format s)] Unable to Save-Module PowerShellGet to $PowerShellSavePath\Modules"
                 }
 
                 try {
                     Save-Module -Name WindowsAutopilotIntune -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
                 }
                 catch {
-                    Write-Warning "[$(Get-Date -format G)] Unable to Save-Module WindowsAutopilotIntune to $PowerShellSavePath\Modules"
+                    Write-Warning "[$(Get-Date -format s)] Unable to Save-Module WindowsAutopilotIntune to $PowerShellSavePath\Modules"
                 }
 
                 try {
                     Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellSavePath\Scripts" -ErrorAction Stop
                 }
                 catch {
-                    Write-Warning "[$(Get-Date -format G)] Unable to Save-Script Get-WindowsAutopilotInfo to $PowerShellSavePath\Scripts"
+                    Write-Warning "[$(Get-Date -format s)] Unable to Save-Script Get-WindowsAutopilotInfo to $PowerShellSavePath\Scripts"
                 }
                 if ($HPFeaturesEnabled) {
                     try {
                         Save-Module -Name HPCMSL -AcceptLicense -Path "$PowerShellSavePath\Modules" -Force -ErrorAction Stop
                     }
                     catch {
-                        Write-Warning "[$(Get-Date -format G)] Unable to Save-Module HPCMSL to $PowerShellSavePath\Modules"
+                        Write-Warning "[$(Get-Date -format s)] Unable to Save-Module HPCMSL to $PowerShellSavePath\Modules"
                     }
                 }
             }

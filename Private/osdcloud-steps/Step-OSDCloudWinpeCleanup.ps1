@@ -5,10 +5,10 @@ function Step-OSDCloudWinpeCleanup {
     )
     #=================================================
     # Start the step
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Start"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Debug -Message $Message; Write-Verbose -Message $Message
     #=================================================
-    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)]"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     # Are we in WinPE
     if ($env:SystemDrive -ne 'X:') {
         return
@@ -22,10 +22,10 @@ function Step-OSDCloudWinpeCleanup {
     foreach ($Item in $FolderCleanup) {
         try {
             Remove-Item -Path $Item -Recurse -Force -ErrorAction Stop
-            # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing $Item"
+            # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Removing $Item"
         }
         catch {
-            Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to remove $Item"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to remove $Item"
         }
     }
 
@@ -58,15 +58,15 @@ function Step-OSDCloudWinpeCleanup {
         # Cleanup folder
         try {
             Remove-Item -Path $Item -Recurse -Force -ErrorAction Stop
-            # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Removing $Item"
+            # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Removing $Item"
         }
         catch {
-            # Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to remove $Item"
+            # Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to remove $Item"
         }
     }
     #=================================================
     # End the function
-    $Message = "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] End"
+    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     Write-Verbose -Message $Message; Write-Debug -Message $Message
     #=================================================
 }

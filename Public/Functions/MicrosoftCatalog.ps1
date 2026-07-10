@@ -767,19 +767,19 @@ function Save-MsUpCatDriver {
                                 }
                             }
                             else {
-                                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $($Item.Name) $FindHardwareID"
+                                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No Results: $($Item.Name) $FindHardwareID"
                                 #Write-Host -ForegroundColor DarkGray "HardwareID: $FindHardwareID"
                                 #Write-Host -ForegroundColor DarkGray "SearchString: $SearchString"
                                 #Write-Host -ForegroundColor DarkGray "Save-MsUpCatDriver: Could not find a Windows Update GUID"
                             }
                         }
                         catch{
-                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to get Driver for Hardware component"
+                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to get Driver for Hardware component"
                         }   
                     }
                     else {
                         Write-Verbose "DeviceID: $($Item.DeviceID)"
-                        #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
+                        #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                     }
                 }
             }
@@ -896,11 +896,11 @@ function Save-MsUpCatDriver {
                         }
                     }
                     else {
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                     }
                 }
                 else {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                 }
             }
         }
@@ -920,17 +920,17 @@ function Save-MsUpCatDriver {
                         $Destination = $MSUpCatDriversOSDCloudUSBPath #OSDCloud Flash Drive cache folder
 
                         Write-Host -ForegroundColor Cyan "Syncing MS Update Catalog Drivers to OSDCloud USB Cache"
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Transfering $([Math]::Round($MsUpCatDriverCacheSizeGB,2)) GB of MS Update Drivers to $Destination"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Transfering $([Math]::Round($MsUpCatDriverCacheSizeGB,2)) GB of MS Update Drivers to $Destination"
                         Invoke-Exe robocopy $Source $Destination *.* /s /ndl /nfl /njh /njs
                     }
                     else {
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Not enough Free Space on OSDCloudUSB to sync drivers"
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Requires $([Math]::Round(($MsUpCatDriverCacheSizeGB + 5),2)) GB, but only $($OSDCloudUSB.SizeRemainingGB) GB available"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Not enough Free Space on OSDCloudUSB to sync drivers"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Requires $([Math]::Round(($MsUpCatDriverCacheSizeGB + 5),2)) GB, but only $($OSDCloudUSB.SizeRemainingGB) GB available"
                     }
                 }
             }
             else {
-                # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] OSDCloudUSB not detected to sync drivers back to, skipping sync"
+                # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCloudUSB not detected to sync drivers back to, skipping sync"
             }
         }
     }

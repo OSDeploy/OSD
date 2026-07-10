@@ -131,7 +131,7 @@ function New-OSDCloudOSWimFile {
     Write-Host -ForegroundColor Green $OSArch
 
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Starting Feature Update lookup and Download"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Starting Feature Update lookup and Download"
 
     #============================================================================
     #region Detect & Download ESD File
@@ -163,7 +163,7 @@ function New-OSDCloudOSWimFile {
     Write-Host -ForegroundColor Cyan "Url: " -NoNewline
     Write-Host -ForegroundColor Green $ESD.Url   
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Getting Content for Upgrade Media"   
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Getting Content for Upgrade Media"   
 
     <##>
     #Build Media Paths
@@ -256,7 +256,7 @@ function New-OSDCloudOSWimFile {
     }
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Starting Extract of ESD file to create Setup Content"
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Starting Extract of ESD file to create Setup Content"
         $ApplyPath = $MediaLocation
         Write-Host -ForegroundColor Gray "Expanding $ImagePath Index 1 to $ApplyPath"
         $Expand = Expand-WindowsImage -ImagePath $ImagePath -Index 1 -ApplyPath $ApplyPath
@@ -313,7 +313,7 @@ function New-OSDCloudOSWimFile {
             throw "oscdimg.exe not found, unable to create ISO File"
         }
         else {
-            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Creating ISO File"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Creating ISO File"
             $BootData='2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$ApplyPath\boot\etfsboot.com","$ApplyPath\efi\Microsoft\boot\efisys.bin"
 
             $ISOFile = "`"$ScratchLocation\$($ESD.Version) $($ESD.ReleaseId) $($ESD.Architecture).iso`""

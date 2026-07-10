@@ -20,7 +20,7 @@ function Invoke-OSDInfo {
     $Win32Battery = (Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue | Select-Object -Property *)
 
     if ($Win32Battery.BatteryStatus -eq 1) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Battery: Device has $($Win32Battery.EstimatedChargeRemaining)% battery remaining"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Battery: Device has $($Win32Battery.EstimatedChargeRemaining)% battery remaining"
     }
     #================================================
     #   TPM
@@ -30,34 +30,34 @@ function Invoke-OSDInfo {
             $Win32Tpm = Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_Tpm
 
             if ($null -eq $Win32Tpm) {
-                Write-Host -ForegroundColor Red "[$(Get-Date -format G)] TPM: Not Supported"
-                Write-Host -ForegroundColor Red "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Write-Host -ForegroundColor Red "[$(Get-Date -format s)] TPM: Not Supported"
+                Write-Host -ForegroundColor Red "[$(Get-Date -format s)] Autopilot: Not Supported"
             }
             elseif ($Win32Tpm.SpecVersion) {
                 if ($null -eq $Win32Tpm.SpecVersion) {
-                    Write-Host -ForegroundColor Red "[$(Get-Date -format G)] Unable to detect the TPM SpecVersion"
-                    Write-Host -ForegroundColor Red "[$(Get-Date -format G)] Autopilot: Not Supported"
+                    Write-Host -ForegroundColor Red "[$(Get-Date -format s)] Unable to detect the TPM SpecVersion"
+                    Write-Host -ForegroundColor Red "[$(Get-Date -format s)] Autopilot: Not Supported"
                 }
 
                 $majorVersion = $Win32Tpm.SpecVersion.Split(",")[0] -as [int]
                 if ($majorVersion -lt 2) {
-                    Write-Host -ForegroundColor Red "[$(Get-Date -format G)] TPM version is less than 2.0"
-                    Write-Host -ForegroundColor Red "[$(Get-Date -format G)] Autopilot: Not Supported"
+                    Write-Host -ForegroundColor Red "[$(Get-Date -format s)] TPM version is less than 2.0"
+                    Write-Host -ForegroundColor Red "[$(Get-Date -format s)] Autopilot: Not Supported"
                 }
                 else {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
-                    Write-Host -ForegroundColor Green "[$(Get-Date -format G)] TPM 2.0: Supported"
-                    Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Autopilot: Supported"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
+                    Write-Host -ForegroundColor Green "[$(Get-Date -format s)] TPM 2.0: Supported"
+                    Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Autopilot: Supported"
                 }
             }
             else {
-                Write-Host -ForegroundColor Red "[$(Get-Date -format G)] TPM: Not Supported"
-                Write-Host -ForegroundColor Red "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Write-Host -ForegroundColor Red "[$(Get-Date -format s)] TPM: Not Supported"
+                Write-Host -ForegroundColor Red "[$(Get-Date -format s)] Autopilot: Not Supported"
             }
         }
         catch {
