@@ -1,4 +1,39 @@
-﻿function Get-OSDCloudVMSettings {
+﻿function Get-OSDCloudVMDefaults {
+    <#
+    .SYNOPSIS
+    Gets the OSDCloudVM Module defaults from $Global:OSDModuleResource.NewOSDCloudVM
+
+    .DESCRIPTION
+    Gets the OSDCloudVM Module defaults from $Global:OSDModuleResource.NewOSDCloudVM
+
+    .EXAMPLE
+    Get-OSDCloudVMDefaults
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
+
+    [CmdletBinding()]
+    param ()
+
+    # OSDCloudVM Module Defaults
+    $Results = [ordered]@{
+        CheckpointVM    = [System.Boolean]$Global:OSDModuleResource.NewOSDCloudVM.CheckpointVM
+        Generation      = [System.Int16]$Global:OSDModuleResource.NewOSDCloudVM.Generation
+        MemoryStartupGB = [System.Int64]$Global:OSDModuleResource.NewOSDCloudVM.MemoryStartupGB
+        NamePrefix      = [System.String]$Global:OSDModuleResource.NewOSDCloudVM.NamePrefix
+        ProcessorCount  = [System.Int64]$Global:OSDModuleResource.NewOSDCloudVM.ProcessorCount
+        StartVM         = [System.Boolean]$Global:OSDModuleResource.NewOSDCloudVM.StartVM
+        SwitchName      = [System.String]$Global:OSDModuleResource.NewOSDCloudVM.SwitchName
+        VHDSizeGB       = [System.Int64]$Global:OSDModuleResource.NewOSDCloudVM.VHDSizeGB
+    }
+    $Results
+}
+function Get-OSDCloudVMSettings {
     <#
     .SYNOPSIS
     Gets information returned by Get-OSDCloudVMSettings.

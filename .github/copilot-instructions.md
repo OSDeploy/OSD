@@ -4,7 +4,7 @@ Purpose: standardize comment-based help across OSD PowerShell functions so help 
 
 ## Required Help Sections
 
-Use comment-based help directly above each function definition and include sections in this order:
+Use comment-based help inside each function block as the first statement after the opening `{` and include sections in this order:
 
 1. `.SYNOPSIS`
 2. `.DESCRIPTION`
@@ -18,6 +18,11 @@ Optional sections when relevant:
 - `.OUTPUTS`
 - `.INPUTS`
 - Additional `.EXAMPLE` blocks
+
+## Placement Rule
+
+- Comment-based help must be inside the function block, not outside the function definition.
+- Place the help block immediately after `function Verb-Noun {` and before `[CmdletBinding()]` or `param(...)`.
 
 ## Required NOTES Content
 
@@ -100,7 +105,7 @@ function Verb-Noun {
 
 Before submitting changes, verify all items are true:
 
-1. Help block exists directly above the function.
+1. Help block exists inside the function block and is the first statement after the opening `{`.
 2. Required sections are present and in the defined order.
 3. Every exposed parameter has a matching `.PARAMETER` entry.
 4. The first `.LINK` is exactly `https://github.com/OSDeploy/OSD/tree/master/Docs`.
