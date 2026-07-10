@@ -1,40 +1,43 @@
-function New-OSDCloudUSB {
+﻿function New-OSDCloudUSB {
     <#
     .SYNOPSIS
-    Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory
-    Clear, Initialize, Partition (WinPE and OSDCloudUSB), and Format a USB Disk
-    Requires Admin Rights
+    Creates resources by using New-OSDCloudUSB.
 
     .DESCRIPTION
-    Creates an OSDCloud USB Drive and copies the contents of the OSDCloud Workspace Media directory
-    Clear, Initialize, Partition (WinPE and OSDCloud), and Format a USB Disk
-    Requires Admin Rights
+    Provides the implementation for New-OSDCloudUSB.
+
+    .PARAMETER WorkspacePath
+    Specifies the value for WorkspacePath.
+
+    .PARAMETER fromIsoFile
+    Specifies the value for fromIsoFile.
+
+    .PARAMETER fromIsoUrl
+    Specifies the value for fromIsoUrl.
 
     .EXAMPLE
-    New-OSDCloudUSB -WorkspacePath C:\OSDCloud
+    New-OSDCloudUSB -WorkspacePath <WorkspacePath> -fromIsoFile <fromIsoFile>
+    Runs New-OSDCloudUSB with common parameters.
 
-    .EXAMPLE
-    New-OSDCloudUSB -fromIsoFile D:\osdcloud.iso
-
-    .EXAMPLE
-    New-OSDCloudUSB -fromIsoUrl https://contoso.blob.core.windows.net/public/osdcloud.iso
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://www.osdcloud.com/setup/osdcloud-usb
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding(DefaultParameterSetName='Workspace')]
     param (
         #Path to the OSDCloud Workspace containing the Media directory
         #This parameter is not necessary if Get-OSDCloudWorkspace can get a return
         [Parameter(ParameterSetName='Workspace',ValueFromPipelineByPropertyName)]
         [System.String]$WorkspacePath,
-        
+
         #Path to an OSDCloud ISO
         #This file will be mounted and the contents will be copied to the OSDCloud USB
         [Parameter(ParameterSetName='fromIsoFile',Mandatory)]
         [System.IO.FileInfo]$fromIsoFile,
-        
+
         #Path to an OSDCloud ISO saved on the internet
         #This file will be downloaded and mounted and the contents will be copied to the OSDCloud USB
         [Parameter(ParameterSetName='fromIsoUrl',Mandatory)]
@@ -63,22 +66,22 @@ function New-OSDCloudUSB {
             Set-OSDCloudWorkspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
         }
         $WorkspacePath = Get-OSDCloudWorkspace -ErrorAction Stop
-    
+
         if (-NOT ($WorkspacePath)) {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud Workspace"
             Break
         }
-    
+
         if (-NOT (Test-Path $WorkspacePath)) {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud Workspace at $WorkspacePath"
             Break
         }
-    
+
         if (-NOT (Test-Path "$WorkspacePath\Media\sources\boot.wim")) {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud WinPE at $WorkspacePath\Media\sources\boot.wim"
             Break
         }
-        
+
         $WinpeSourcePath = "$WorkspacePath\Media"
     }
     #=================================================
@@ -126,7 +129,7 @@ function New-OSDCloudUSB {
 
         $fromIsoFileGetItem = Save-WebFile -SourceUrl $fromIsoUrl -DestinationDirectory (Join-Path $HOME 'Downloads')
         $fromIsoFileFullName = $fromIsoFileGetItem.FullName
-    
+
         if ($fromIsoFileGetItem -and $fromIsoFileGetItem.Extension -eq '.iso') {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloudISO downloaded to $fromIsoFileFullName"
         }
@@ -227,11 +230,29 @@ function New-OSDCloudUSB {
     #=================================================
 }
 function New-OSDCloudUSBSetupCompleteTemplate {
+    <#
+    .SYNOPSIS
+    Creates resources by using New-OSDCloudUSBSetupCompleteTemplate.
+
+    .DESCRIPTION
+    Provides the implementation for New-OSDCloudUSBSetupCompleteTemplate.
+
+    .EXAMPLE
+    New-OSDCloudUSBSetupCompleteTemplate
+    Runs New-OSDCloudUSBSetupCompleteTemplate with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     $OSDCloudUSB = Get-Volume.usb | Where-Object {($_.FileSystemLabel -match 'OSDCloud') -or ($_.FileSystemLabel -match 'BHIMAGE')} | Select-Object -First 1
     $SetupCompletePath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\Config\Scripts\SetupComplete"
     $ScriptsPath = $SetupCompletePath
 
-    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath -ItemType Directory -Force} 
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath -ItemType Directory -Force}
 
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
 
@@ -240,11 +261,11 @@ function New-OSDCloudUSBSetupCompleteTemplate {
 
     $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
-            
+
     #Create Batch File to Call PowerShell File
     if (Test-Path -Path $PSFilePath){
         copy-item $PSFilePath -Destination "$ScriptsPath\SetupComplete.ps1.bak"
-    }        
+    }
     New-Item -Path $BatFilePath -ItemType File -Force
     $CustomActionContent = New-Object system.text.stringbuilder
     [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File C:\OSDCloud\Scripts\SetupComplete\SetupComplete.ps1')
@@ -264,15 +285,40 @@ function New-OSDCloudUSBSetupCompleteTemplate {
 function Update-OSDCloudUSB {
     <#
     .SYNOPSIS
-    Updates an OSDCloud USB by downloading OS and Driver Packs from the internet
+    Updates resources by using Update-OSDCloudUSB.
 
     .DESCRIPTION
-    Updates an OSDCloud USB by downloading OS and Driver Packs from the internet
+    Provides the implementation for Update-OSDCloudUSB.
+
+    .PARAMETER DriverPack
+    Specifies the value for DriverPack.
+
+    .PARAMETER PSUpdate
+    Indicates whether to enable PSUpdate.
+
+    .PARAMETER OS
+    Indicates whether to enable OS.
+
+    .PARAMETER OSLanguage
+    Specifies the value for OSLanguage.
+
+    .PARAMETER OSActivation
+    Specifies the value for OSActivation.
+
+    .PARAMETER OSName
+    Specifies the value for OSName.
+
+    .EXAMPLE
+    Update-OSDCloudUSB -DriverPack <DriverPack> -PSUpdate
+    Runs Update-OSDCloudUSB with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding()]
     param (
         #Optional. Select one or more of the following Driver Packs to download
@@ -400,7 +446,7 @@ function Update-OSDCloudUSB {
     if ($RobocopyWorkspace) {
         if ($PSUpdate -or $DriverPack -or $OS -or $OSName -or $OSActivation -or $OSLanguage) {
             $PowerShellPath = "$WorkspacePath\PowerShell"
-        
+
             if (! (Test-Path "$PowerShellPath")) {
                 Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Creating OSDCloud Workspace PowerShell at $WorkspacePath\PowerShell"
                 $null = New-Item -Path "$PowerShellPath" -ItemType Directory -Force -ErrorAction Ignore
@@ -436,7 +482,7 @@ function Update-OSDCloudUSB {
                 Write-Warning "[$(Get-Date -format s)] There were some issues updating the OSD PowerShell Module at $PowerShellPath\Offline\Modules"
                 Write-Warning "[$(Get-Date -format s)] Make sure you have an Internet connection and can access powershellgallery.com"
             }
-        
+
             try {
                 Save-Module WindowsAutoPilotIntune -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
             }
@@ -444,7 +490,7 @@ function Update-OSDCloudUSB {
                 Write-Warning "[$(Get-Date -format s)] There were some issues updating the WindowsAutoPilotIntune PowerShell Module at $PowerShellPath\Offline\Modules"
                 Write-Warning "[$(Get-Date -format s)] Make sure you have an Internet connection and can access powershellgallery.com"
             }
-        
+
             try {
                 Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellPath\Offline\Scripts" -ErrorAction Stop
             }
@@ -493,19 +539,19 @@ function Update-OSDCloudUSB {
                     robocopy "$WorkspacePath\Config" "$($volume.DriveLetter):\OSDCloud\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
-    
+
                 if (Test-Path "$WorkspacePath\DriverPacks") {
                     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] ROBOCOPY $WorkspacePath\DriverPacks $($volume.DriveLetter):\OSDCloud\DriverPacks"
                     robocopy "$WorkspacePath\DriverPacks" "$($volume.DriveLetter):\OSDCloud\DriverPacks" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
-    
+
                 if (Test-Path "$WorkspacePath\OS") {
                     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] ROBOCOPY $WorkspacePath\OS $($volume.DriveLetter):\OSDCloud\OS"
                     robocopy "$WorkspacePath\OS" "$($volume.DriveLetter):\OSDCloud\OS" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     Write-Host -ForegroundColor DarkGray "========================================================================="
                 }
-    
+
                 if (Test-Path "$WorkspacePath\PowerShell") {
                     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] ROBOCOPY $WorkspacePath\PowerShell $($volume.DriveLetter):\OSDCloud\PowerShell"
                     robocopy "$WorkspacePath\PowerShell" "$($volume.DriveLetter):\OSDCloud\PowerShell" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
@@ -525,12 +571,12 @@ function Update-OSDCloudUSB {
                 Write-Host -ForegroundColor DarkGray "========================================================================="
                 Break
             }
-        
+
             if (($OSDCloudVolumes | Measure-Object).Count -gt 1) {
                 Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Select a single OSDCloud USB volume in PowerShell GridView and press OK"
                 $OSDCloudVolumes = $OSDCloudVolumes | Out-GridView -Title 'Select an OSDCloud USB volume and press OK' -OutputMode Single
             }
-        
+
             if (! ($OSDCloudVolumes)) {
                 Write-Warning "[$(Get-Date -format s)] You must select one OSDCloud USB volume"
                 Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -544,14 +590,14 @@ function Update-OSDCloudUSB {
     if (($OSDCloudVolumes | Measure-Object).Count -eq 1) {
         if ($OS -or $OSName -or $OSActivation -or $OSLanguage) {
             $OSDownloadPath = "$($OSDCloudVolumes.DriveLetter):\OSDCloud\OS"
-    
+
             $OSDCloudSavedOS = $null
             if (Test-Path $OSDownloadPath) {
                 $OSDCloudSavedOS = Get-ChildItem -Path $OSDownloadPath *.esd -Recurse -File | Select-Object -ExpandProperty Name
             }
             #$OperatingSystems = Get-WSUSXML -Catalog FeatureUpdate -UpdateArch 'x64' -Silent
             $OperatingSystems = Get-OSDCloudOperatingSystems
-        
+
             if ($OSName) {
                 #$OperatingSystems = $OperatingSystems | Where-Object {$_.Catalog -cmatch $OSName}
                 $OperatingSystems = $OperatingSystems | Where-Object {$_.Name -cmatch $OSName}
@@ -568,10 +614,10 @@ function Update-OSDCloudUSB {
                 #$OperatingSystems = $OperatingSystems | Where-Object {$_.Title -match $OSLanguage}
                 $OperatingSystems = $OperatingSystems | Where-Object {$_.Language -match $OSLanguage}
             }
-        
+
             if ($OperatingSystems) {
                 $OperatingSystems = $OperatingSystems | Sort-Object Title
-    
+
                 foreach ($Item in $OperatingSystems) {
                     #$Item.Catalog = $Item.Catalog -replace 'FeatureUpdate ',''
                     if ($OSDCloudSavedOS) {
@@ -580,7 +626,7 @@ function Update-OSDCloudUSB {
                         }
                     }
                 }
-    
+
                 #$OperatingSystems = $OperatingSystems | Select-Object -Property OSDVersion,OSDStatus,@{Name='OperatingSystem';Expression={($_.Catalog)}},Title,CreationDate,FileUri,FileName
                 $OperatingSystems = $OperatingSystems | Select-Object -Property Version,ReleaseID,Status,Name,ReleaseDate,Url,FileName
 
@@ -588,7 +634,7 @@ function Update-OSDCloudUSB {
                 #$OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='OSDStatus';Descending=$true}, OperatingSystem -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
                 $OperatingSystems = $OperatingSystems | Sort-Object -Property @{Expression='Status';Descending=$true}, Name -Descending | Out-GridView -Title 'Select one or more Operating Systems to download and press OK' -PassThru
 
-                
+
                 foreach ($OperatingSystem in $OperatingSystems) {
                     if ($OperatingSystem.Status -eq 'Downloaded') {
                         Get-ChildItem -Path $OSDownloadPath -Recurse -Include $OperatingSystem.FileName | Select-Object -ExpandProperty FullName
@@ -602,7 +648,7 @@ function Update-OSDCloudUSB {
                         #$SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.FileUri -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
                         $SaveWebFile = Save-WebFile -SourceUrl $OperatingSystem.Url -DestinationDirectory "$OSDownloadChildPath" -DestinationName $OperatingSystem.FileName
 
-                        
+
                         if (Test-Path $SaveWebFile.FullName) {
                             Get-Item $SaveWebFile.FullName
                         }
@@ -630,21 +676,21 @@ function Update-OSDCloudUSB {
         if ($DriverPack) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPacks will require up to 2GB each"
             $DriverPackDownloadPath = "$($OSDCloudVolumes.DriveLetter):\OSDCloud\DriverPacks"
-    
+
             $OSDCloudSavedDriverPacks = $null
             if (Test-Path $DriverPackDownloadPath) {
                 $OSDCloudSavedDriverPacks = Get-ChildItem -Path $DriverPackDownloadPath *.* -Recurse -File | Select-Object -ExpandProperty Name
             }
-    
+
             if ($DriverPack -contains '*') {
                 $DriverPack = 'ThisPC','Dell','HP','Lenovo','Microsoft'
             }
-    
+
             if ($DriverPack -contains 'ThisPC') {
                 $Manufacturer = Get-MyComputerManufacturer -Brief
                 Save-MyDriverPack -DownloadPath "$DriverPackDownloadPath\$Manufacturer"
             }
-        
+
             if ($DriverPack -contains 'Dell') {
                 Get-DellDriverPackCatalog -DownloadPath "$DriverPackDownloadPath\Dell"
             }
@@ -704,7 +750,7 @@ function Update-OSDCloudUSB {
                         Write-Warning "[$(Get-Date -format s)] There were some issues updating the OSD PowerShell Module at $PowerShellPath\Offline\Modules"
                         Write-Warning "[$(Get-Date -format s)] Make sure you have an Internet connection and can access powershellgallery.com"
                     }
-        
+
                     try {
                         Save-Module WindowsAutoPilotIntune -Path "$PowerShellPath\Offline\Modules" -ErrorAction Stop
                     }
@@ -712,7 +758,7 @@ function Update-OSDCloudUSB {
                         Write-Warning "[$(Get-Date -format s)] There were some issues updating the WindowsAutoPilotIntune PowerShell Module at $PowerShellPath\Offline\Modules"
                         Write-Warning "[$(Get-Date -format s)] Make sure you have an Internet connection and can access powershellgallery.com"
                     }
-        
+
                     try {
                         Save-Script -Name Get-WindowsAutopilotInfo -Path "$PowerShellPath\Offline\Scripts" -ErrorAction Stop
                     }

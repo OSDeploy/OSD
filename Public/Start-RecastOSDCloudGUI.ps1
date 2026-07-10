@@ -38,7 +38,12 @@ function Start-RecastOSDCloudGUI {
     Starts OSDCloud GUI with custom branding.
 
     .NOTES
-    The -v2 parameter is deprecated and will be removed in a future release.
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
+    2026-07-09 - The -v2 parameter is deprecated and will be removed in a future release.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param (

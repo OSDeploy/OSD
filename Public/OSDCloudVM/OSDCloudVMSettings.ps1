@@ -1,18 +1,22 @@
-function Get-OSDCloudVMSettings {
+﻿function Get-OSDCloudVMSettings {
     <#
     .SYNOPSIS
-    Gets the current OSDCloudVM Settings from the OSD Module, OSDCloud Template, and OSDCloud Workspace
+    Gets information returned by Get-OSDCloudVMSettings.
 
     .DESCRIPTION
-    Gets the current OSDCloudVM Settings from the OSD Module, OSDCloud Template, and OSDCloud Workspace
+    Provides the implementation for Get-OSDCloudVMSettings.
 
     .EXAMPLE
     Get-OSDCloudVMSettings
+    Runs Get-OSDCloudVMSettings with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding()]
     param ()
 
@@ -55,18 +59,22 @@ function Get-OSDCloudVMSettings {
 function Reset-OSDCloudVMSettings {
     <#
     .SYNOPSIS
-    Resets OSDCloudVM to its default settings stored in the OSDCloud Template and current Workspace
+    Resets configuration by using Reset-OSDCloudVMSettings.
 
     .DESCRIPTION
-    Resets OSDCloudVM to its default settings stored in the OSDCloud Template and current Workspace
+    Provides the implementation for Reset-OSDCloudVMSettings.
 
     .EXAMPLE
     Reset-OSDCloudVMSettings
+    Runs Reset-OSDCloudVMSettings with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding()]
     param ()
 
@@ -87,18 +95,46 @@ function Reset-OSDCloudVMSettings {
 function Set-OSDCloudVMSettings {
     <#
     .SYNOPSIS
-    Sets OSDCloudVM settings stored in the OSDCloud Template
+    Sets configuration values by using Set-OSDCloudVMSettings.
 
     .DESCRIPTION
-    Sets OSDCloudVM settings stored in the OSDCloud Template
+    Provides the implementation for Set-OSDCloudVMSettings.
+
+    .PARAMETER CheckpointVM
+    Specifies the value for CheckpointVM.
+
+    .PARAMETER Generation
+    Specifies the value for Generation.
+
+    .PARAMETER MemoryStartupGB
+    Specifies the value for MemoryStartupGB.
+
+    .PARAMETER NamePrefix
+    Specifies the value for NamePrefix.
+
+    .PARAMETER ProcessorCount
+    Specifies the value for ProcessorCount.
+
+    .PARAMETER StartVM
+    Specifies the value for StartVM.
+
+    .PARAMETER SwitchName
+    Specifies the value for SwitchName.
+
+    .PARAMETER VHDSizeGB
+    Specifies the value for VHDSizeGB.
 
     .EXAMPLE
-    Set-OSDCloudVMSettings -ProcessorCount 2 -MemoryStartupGB 8
+    Set-OSDCloudVMSettings -CheckpointVM <CheckpointVM> -Generation <Generation>
+    Runs Set-OSDCloudVMSettings with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding()]
     param (
         [System.Boolean]

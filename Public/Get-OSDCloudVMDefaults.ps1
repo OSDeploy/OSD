@@ -9,6 +9,10 @@
     .EXAMPLE
     Get-OSDCloudVMDefaults
 
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>

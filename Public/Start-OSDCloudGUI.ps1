@@ -6,11 +6,32 @@
     .DESCRIPTION
     OSDCloud imaging using the command line
 
+    .PARAMETER BrandName
+    Sets the GUI brand text shown in the header/title.
+
+    .PARAMETER BrandColor
+    Sets the GUI brand color.
+
+    .PARAMETER ComputerManufacturer
+    Overrides detected manufacturer for driver pack filtering.
+
+    .PARAMETER ComputerProduct
+    Overrides detected product/system identifier for driver pack filtering.
+
+    .PARAMETER v2
+    Legacy compatibility switch for manufacturer-based driver pack filtering.
+
     .EXAMPLE
     Start-OSDCloudGUI
+    Starts OSDCloud GUI with detected device values.
 
     .NOTES
-    25.1.17 Added a temporary parameter v2 to filter DriverPacks by Manufacturer
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
+    2026-07-09 - The v2 parameter remains deprecated and retained temporarily for compatibility.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
 
     [CmdletBinding()]

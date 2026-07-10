@@ -1,21 +1,25 @@
-function New-OSDCloudISO {
+﻿function New-OSDCloudISO {
     <#
     .SYNOPSIS
-    Creates an .iso file in the OSDCloud Workspace.  ADK is required
+    Creates resources by using New-OSDCloudISO.
 
     .DESCRIPTION
-    Creates an .iso file in the OSDCloud Workspace.  ADK is required
+    Provides the implementation for New-OSDCloudISO.
+
+    .PARAMETER WorkspacePath
+    Specifies the value for WorkspacePath.
 
     .EXAMPLE
-    New-OSDCloudISO
+    New-OSDCloudISO -WorkspacePath <WorkspacePath>
+    Runs New-OSDCloudISO with common parameters.
 
-    .EXAMPLE
-    New-OSDCloudISO -WorkspacePath C:\OSDCloud
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://www.osdcloud.com/setup/osdcloud-iso
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding()]
     param (
         #Path to the OSDCloud Workspace containing the Media directory

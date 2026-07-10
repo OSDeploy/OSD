@@ -1,24 +1,79 @@
 ﻿function Edit-OSDCloudWinPE {
     <#
     .SYNOPSIS
-    Edits WinPE in an OSDCloud Workspace for customization
+    Edits content by using Edit-OSDCloudWinPE.
 
     .DESCRIPTION
-    Edits WinPE in an OSDCloud Workspace for customization
+    Provides the implementation for Edit-OSDCloudWinPE.
+
+    .PARAMETER CloudDriver
+    Specifies the value for CloudDriver.
+
+    .PARAMETER StartOSDCloudGUI
+    Indicates whether to enable StartOSDCloudGUI.
+
+    .PARAMETER DriverHWID
+    Specifies the value for DriverHWID.
+
+    .PARAMETER DriverPath
+    Specifies the value for DriverPath.
+
+    .PARAMETER PSModuleCopy
+    Specifies the value for PSModuleCopy.
+
+    .PARAMETER PSModuleInstall
+    Specifies the value for PSModuleInstall.
+
+    .PARAMETER Startnet
+    Specifies the value for Startnet.
+
+    .PARAMETER StartOSDCloud
+    Specifies the value for StartOSDCloud.
+
+    .PARAMETER StartOSDPad
+    Specifies the value for StartOSDPad.
+
+    .PARAMETER StartPSCommand
+    Specifies the value for StartPSCommand.
+
+    .PARAMETER StartURL
+    Specifies the value for StartURL.
+
+    .PARAMETER UpdateUSB
+    Indicates whether to enable UpdateUSB.
+
+    .PARAMETER Wallpaper
+    Specifies the value for Wallpaper.
+
+    .PARAMETER UseDefaultWallpaper
+    Indicates whether to enable UseDefaultWallpaper.
+
+    .PARAMETER Brand
+    Specifies the value for Brand.
+
+    .PARAMETER WorkspacePath
+    Specifies the value for WorkspacePath.
+
+    .PARAMETER WirelessConnect
+    Indicates whether to enable WirelessConnect.
+
+    .PARAMETER WifiProfile
+    Specifies the value for WifiProfile.
+
+    .PARAMETER Add7Zip
+    Indicates whether to enable Add7Zip.
 
     .EXAMPLE
-    Edit-OSDCloudWinPE -StartOSDCloudGUI
+    Edit-OSDCloudWinPE -CloudDriver <CloudDriver> -StartOSDCloudGUI
+    Runs Edit-OSDCloudWinPE with common parameters.
 
-    .EXAMPLE
-    Edit-OSDCloudWinPE -StartOSDCloud '-OSBuild 22H2 -OSEdition Pro -OSLanguage en-us -OSActivation Retail'
-
-    .EXAMPLE
-    Edit-OSDCloudWinPE –StartURL 'https://sandbox.osdcloud.com'
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://www.osdcloud.com/setup/osdcloud-winpe
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-    
     [CmdletBinding(PositionalBinding = $false)]
     param (
         [ValidateSet('*','Dell','HP','IntelNet','LenovoDock','Surface','Nutanix','USB','VMware','WiFi')]

@@ -6,8 +6,25 @@
     .DESCRIPTION
     OSDCloud imaging using the command line
 
+    .PARAMETER BrandName
+    Sets the GUI brand text shown in the header/title.
+
+    .PARAMETER BrandColor
+    Sets the GUI brand color.
+
+    .PARAMETER ComputerManufacturer
+    Overrides detected manufacturer for driver pack selection.
+
+    .PARAMETER ComputerProduct
+    Overrides detected product/system identifier for driver pack selection.
+
     .EXAMPLE
     Start-OSDCloudGUIDev
+    Starts the OSDCloud development GUI workflow.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs

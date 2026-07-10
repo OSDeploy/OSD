@@ -1,18 +1,46 @@
-function New-OSDCloudVM {
+﻿function New-OSDCloudVM {
     <#
     .SYNOPSIS
-    Creates a Hyper-V VM for use with OSDCloud
+    Creates resources by using New-OSDCloudVM.
 
     .DESCRIPTION
-    Creates a Hyper-V VM for use with OSDCloud
+    Provides the implementation for New-OSDCloudVM.
+
+    .PARAMETER CheckpointVM
+    Specifies the value for CheckpointVM.
+
+    .PARAMETER Generation
+    Specifies the value for Generation.
+
+    .PARAMETER MemoryStartupGB
+    Specifies the value for MemoryStartupGB.
+
+    .PARAMETER NamePrefix
+    Specifies the value for NamePrefix.
+
+    .PARAMETER ProcessorCount
+    Specifies the value for ProcessorCount.
+
+    .PARAMETER StartVM
+    Specifies the value for StartVM.
+
+    .PARAMETER SwitchName
+    Specifies the value for SwitchName.
+
+    .PARAMETER VHDSizeGB
+    Specifies the value for VHDSizeGB.
 
     .EXAMPLE
-    New-OSDCloudVM
+    New-OSDCloudVM -CheckpointVM <CheckpointVM> -Generation <Generation>
+    Runs New-OSDCloudVM with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding()]
     param (
         [System.Boolean]

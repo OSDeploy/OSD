@@ -7,15 +7,17 @@ The Get-OSDMetrics script retrieves metrics for the OSD PowerShell module and OS
 It displays the latest version of the OSD PowerShell module, the date it was published, and the number of times it has been installed or saved.
 It also displays metrics for OSDCloud CLI, OSDCloud GUI, and OSDCloud Azure deployment methods, including the number of devices deployed, the current usage rate, and the number of devices deployed per day, week, month, and year.
 
-.PARAMETER None
-This script does not accept any parameters.
-
 .EXAMPLE
 PS C:\> Get-OSDMetrics
 This example retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
 
 .NOTES
-This script requires the OSD PowerShell module and the OSDCloudCLI, OSDCloudGUI, and OSDCloudAzure modules to be installed.
+Author: David Segura - Recast Software
+2026-07-09 - Standardized comment-based help metadata and links.
+2026-07-09 - Requires OSD, OSDCloudCLI, OSDCloudGUI, and OSDCloudAzure modules.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-OSDMetrics {
     [CmdletBinding()]
@@ -23,7 +25,7 @@ function Get-OSDMetrics {
     $CurrentDateTime = (Get-Date).ToUniversalTime()
     Write-Host "Current DateTime is " -NoNewline; Write-Host -ForegroundColor Green "$CurrentDateTime UTC"
     Write-Host
-    
+
     $OSDModule = Find-Module OSD
     $OSDModuleVersion = $OSDModule.Version
     $OSDCloudCLIDatePublished = $OSDModule.PublishedDate
@@ -52,7 +54,7 @@ function Get-OSDMetrics {
     Write-Host "Current usage rate is " -NoNewline; Write-Host -ForegroundColor Green "$DevicesPerHour " -NoNewline; Write-Host "devices per hour"
     Write-Host -ForegroundColor DarkGray "$DevicesPerDay per day / $DevicesPerWeek per week / $DevicesPerMonth per month / $DevicesPerYear per year"
     Write-Host
-    
+
     $OSDCloud = Find-Module OSDCloudGUI
     $OSDCloudDatePublished = $OSDCloud.PublishedDate
     $OSDCloudDownloadCount = ($OSDCloud.AdditionalMetadata).versionDownloadCount
@@ -69,7 +71,7 @@ function Get-OSDMetrics {
     Write-Host "Current usage rate is " -NoNewline; Write-Host -ForegroundColor Green "$DevicesPerHour " -NoNewline; Write-Host "devices per hour"
     Write-Host -ForegroundColor DarkGray "$DevicesPerDay per day / $DevicesPerWeek per week / $DevicesPerMonth per month / $DevicesPerYear per year"
     Write-Host
-    
+
     # OSDCloudAzure
     $OSDCloud = Find-Module OSDCloudAzure
     $OSDCloudDatePublished = $OSDCloud.PublishedDate

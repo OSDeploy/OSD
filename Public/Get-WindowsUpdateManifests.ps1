@@ -5,6 +5,16 @@ Returns an Array of Microsoft Updates from the Microsoft Update Catalog
 .DESCRIPTION
 Returns an Array of Microsoft Updates from the Microsoft Update Catalog
 
+.EXAMPLE
+Get-WindowsUpdateManifests
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-09 - Standardized comment-based help metadata and links.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
 .LINK
 https://osd.osdeploy.com/
 #>

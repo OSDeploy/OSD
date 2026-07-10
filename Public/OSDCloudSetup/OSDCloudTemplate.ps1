@@ -1,18 +1,22 @@
-function Get-OSDCloudTemplate {
+﻿function Get-OSDCloudTemplate {
     <#
     .SYNOPSIS
-    Returns the path to the current OSDCloud Template.  This is typically $env:ProgramData\OSDCloud\Templates\Default
+    Gets information returned by Get-OSDCloudTemplate.
 
     .DESCRIPTION
-    Returns the path to the current OSDCloud Template.  This is typically $env:ProgramData\OSDCloud\Templates\Default
+    Provides the implementation for Get-OSDCloudTemplate.
+
+    .EXAMPLE
+    Get-OSDCloudTemplate
+    Runs Get-OSDCloudTemplate with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplate.md
-
-    .LINK
-    https://www.osdcloud.com/setup/osdcloud-template/named-templates
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-    
     [CmdletBinding()]
     param ()
     
@@ -55,18 +59,22 @@ function Get-OSDCloudTemplate {
 function Get-OSDCloudTemplateNames {
     <#
     .SYNOPSIS
-    Returns the names of the OSDCloud Templates
+    Gets information returned by Get-OSDCloudTemplateNames.
 
     .DESCRIPTION
-    Returns the names of the OSDCloud Templates
+    Provides the implementation for Get-OSDCloudTemplateNames.
+
+    .EXAMPLE
+    Get-OSDCloudTemplateNames
+    Runs Get-OSDCloudTemplateNames with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudTemplateNames.md
-
-    .LINK
-    https://www.osdcloud.com/setup/osdcloud-template/named-templates
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-    
     [CmdletBinding()]
     param ()
 
@@ -97,24 +105,43 @@ function Get-OSDCloudTemplateNames {
 function New-OSDCloudTemplate {
     <#
     .SYNOPSIS
-    Creates an OSDCloud Template in $env:ProgramData\OSDCloud
+    Creates resources by using New-OSDCloudTemplate.
 
     .DESCRIPTION
-    Creates an OSDCloud Template in $env:ProgramData\OSDCloud
+    Provides the implementation for New-OSDCloudTemplate.
+
+    .PARAMETER Name
+    Specifies the value for Name.
+
+    .PARAMETER Language
+    Specifies the value for Language.
+
+    .PARAMETER CumulativeUpdate
+    Specifies the value for CumulativeUpdate.
+
+    .PARAMETER SetAllIntl
+    Specifies the value for SetAllIntl.
+
+    .PARAMETER SetInputLocale
+    Specifies the value for SetInputLocale.
+
+    .PARAMETER WinRE
+    Indicates whether to enable WinRE.
+
+    .PARAMETER Add7Zip
+    Indicates whether to enable Add7Zip.
 
     .EXAMPLE
-    New-OSDCloudTemplate
+    New-OSDCloudTemplate -Name <Name> -Language <Language>
+    Runs New-OSDCloudTemplate with common parameters.
 
-    .EXAMPLE
-    New-OSDCloudTemplate -WinRE
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs/New-OSDCloudTemplate.md
-    
-    .LINK
-    https://www.osdcloud.com/setup/osdcloud-template
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding()]
     param (
         [System.String]
@@ -1064,18 +1091,25 @@ Windows Registry Editor Version 5.00
 function Set-OSDCloudTemplate {
     <#
     .SYNOPSIS
-    Sets the current OSDCloud Template to a valid OSDCloud Template returned by Get-OSDCloudTemplateNames
+    Sets configuration values by using Set-OSDCloudTemplate.
 
     .DESCRIPTION
-    Sets the current OSDCloud Template to a valid OSDCloud Template returned by Get-OSDCloudTemplateNames
+    Provides the implementation for Set-OSDCloudTemplate.
+
+    .PARAMETER Name
+    Specifies the value for Name.
+
+    .EXAMPLE
+    Set-OSDCloudTemplate -Name <Name>
+    Runs Set-OSDCloudTemplate with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudTemplate.md
-
-    .LINK
-    https://www.osdcloud.com/setup/osdcloud-template/named-templates
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-
     [CmdletBinding()]
     param (
         [Parameter(Position=0)]

@@ -6,6 +6,69 @@
     .DESCRIPTION
     Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
 
+    .PARAMETER ComputerManufacturer
+    Overrides the detected manufacturer used for driver pack matching.
+
+    .PARAMETER ComputerProduct
+    Overrides the detected product/system identifier used for driver pack matching.
+
+    .PARAMETER Firmware
+    Enables firmware catalog processing for the deployment workflow.
+
+    .PARAMETER Restart
+    Restarts the computer after deployment completes.
+
+    .PARAMETER Shutdown
+    Shuts down the computer after deployment completes.
+
+    .PARAMETER Screenshot
+    Captures screenshots during the workflow in WinPE.
+
+    .PARAMETER SkipAutopilot
+    Skips Autopilot tasks in the deployment process.
+
+    .PARAMETER ZTI
+    Enables zero-touch mode and suppresses disk wipe prompts.
+
+    .PARAMETER OSName
+    Default parameter set OS selection, for example 'Windows 11 25H2 x64'.
+
+    .PARAMETER OSVersion
+    Legacy parameter set operating system family.
+
+    .PARAMETER OSReleaseID
+    Legacy parameter set operating system release identifier.
+
+    .PARAMETER OSEdition
+    Target Windows edition.
+
+    .PARAMETER OSLanguage
+    Target Windows language/culture.
+
+    .PARAMETER OSActivation
+    Target activation channel: Retail or Volume.
+
+    .PARAMETER FindImageFile
+    CustomImage parameter set switch to locate a local WIM/ESD file.
+
+    .PARAMETER ImageFileUrl
+    CustomImage parameter set URL to download a WIM/ESD image.
+
+    .PARAMETER OSImageIndex
+    CustomImage parameter set image index.
+
+    .EXAMPLE
+    Start-OSDCloudCLI
+    Starts OSDCloud CLI interactively.
+
+    .EXAMPLE
+    Start-OSDCloudCLI -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us
+    Starts OSDCloud CLI with explicit OS selections.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>

@@ -1,18 +1,22 @@
-function Get-OSDCloudWorkspace {
+﻿function Get-OSDCloudWorkspace {
     <#
     .SYNOPSIS
-    Returns the path to the OSDCloud Workspace by reading the configuration file $env:ProgramData\OSDCloud\workspace.json
-    
-    .DESCRIPTION
-    Returns the path to the OSDCloud Workspace by reading the configuration file $env:ProgramData\OSDCloud\workspace.json
-    
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs/Get-OSDCloudWorkspace.md
-    
-    .LINK
-    https://www.osdcloud.com/setup/osdcloud-workspace
-    #>
+    Gets information returned by Get-OSDCloudWorkspace.
 
+    .DESCRIPTION
+    Provides the implementation for Get-OSDCloudWorkspace.
+
+    .EXAMPLE
+    Get-OSDCloudWorkspace
+    Runs Get-OSDCloudWorkspace with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
 
@@ -37,18 +41,37 @@ function Get-OSDCloudWorkspace {
 function New-OSDCloudWorkspace {
     <#
     .SYNOPSIS
-    Creates or updates an OSDCloud Workspace
+    Creates resources by using New-OSDCloudWorkspace.
 
     .DESCRIPTION
-    Creates or updates an OSDCloud Workspace
+    Provides the implementation for New-OSDCloudWorkspace.
+
+    .PARAMETER WorkspacePath
+    Specifies the value for WorkspacePath.
+
+    .PARAMETER fromIsoFile
+    Specifies the value for fromIsoFile.
+
+    .PARAMETER fromIsoUrl
+    Specifies the value for fromIsoUrl.
+
+    .PARAMETER fromUsbDrive
+    Indicates whether to enable fromUsbDrive.
+
+    .PARAMETER Public
+    Indicates whether to enable Public.
+
+    .EXAMPLE
+    New-OSDCloudWorkspace -WorkspacePath <WorkspacePath> -fromIsoFile <fromIsoFile>
+    Runs New-OSDCloudWorkspace with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md
-    
-    .LINK
-    https://www.osdcloud.com/setup/osdcloud-workspace
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
-    
     [CmdletBinding(DefaultParameterSetName='fromTemplate')]
     param (
         [Parameter(ParameterSetName='fromTemplate',Position=0,ValueFromPipelineByPropertyName)]
@@ -390,19 +413,24 @@ function New-OSDCloudWorkspace {
 function Set-OSDCloudWorkspace {
     <#
     .SYNOPSIS
-    Changes the path to the OSDCloud Workspace
+    Sets configuration values by using Set-OSDCloudWorkspace.
 
     .DESCRIPTION
-    Changes the path to the OSDCloud Workspace from an OSDCloud Template
+    Provides the implementation for Set-OSDCloudWorkspace.
 
     .PARAMETER WorkspacePath
-    Directory for the OSDCloud Workspace to set.  Default is $env:SystemDrive\OSDCloud
+    Specifies the value for WorkspacePath.
+
+    .EXAMPLE
+    Set-OSDCloudWorkspace -WorkspacePath <WorkspacePath>
+    Runs Set-OSDCloudWorkspace with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs/Set-OSDCloudWorkspace.md
-    
-    .LINK
-    https://www.osdcloud.com/setup/osdcloud-workspace
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param (
@@ -432,6 +460,24 @@ function Set-OSDCloudWorkspace {
 }
 
 function New-OSDCloudWorkSpaceSetupCompleteTemplate {
+    <#
+    .SYNOPSIS
+    Creates resources by using New-OSDCloudWorkSpaceSetupCompleteTemplate.
+
+    .DESCRIPTION
+    Provides the implementation for New-OSDCloudWorkSpaceSetupCompleteTemplate.
+
+    .EXAMPLE
+    New-OSDCloudWorkSpaceSetupCompleteTemplate
+    Runs New-OSDCloudWorkSpaceSetupCompleteTemplate with common parameters.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Updated comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
 
     $OSDCloudWS = Get-OSDCloudWorkspace
     $SetupCompletePath = "$OSDCloudWS\Config\Scripts\SetupComplete"
