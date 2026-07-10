@@ -1,15 +1,14 @@
 function Get-OSDCoreCache {
     <#
     .SYNOPSIS
-        Returns OSDCloud cache paths or cached content found on local file system drives.
+        Returns cached OSDCloud content found on local file system drives.
 
     .DESCRIPTION
         Enumerates mounted file system drives and discovers OSDCloud cache content.
-        Returns objects with Type, FullName, SizeMB,
+        Returns objects with Type, Name, FullName, SizeMB,
         DriveRoot, VolumeLabel, and VolumeUniqueId properties.
 
-        If Type is omitted, returns discovered '<DriveLetter>:\OSDCloud' cache root
-        folders as Type 'Cache'.
+        If Type is omitted, returns all supported cache content types.
 
         Type values:
         - ESD: All .esd files under '<DriveLetter>:\OSDCloud\OS' recursively.
@@ -28,14 +27,26 @@ function Get-OSDCoreCache {
         Supports one or more values. Use '*' to return all supported
         cache content types.
 
+    .PARAMETER Include
+        Optional list of drive letters to include when searching for OSDCloud cache
+        content. Accepts values such as 'C', 'D:', or 'E:\'.
+
+        When omitted, all mounted file system drive letters are considered.
+
+    .PARAMETER Exclude
+        Optional list of drive letters to exclude when searching for OSDCloud cache
+        content. Accepts values such as 'C', 'D:', or 'E:\'.
+
+        Excluded drives are skipped even when they are also present in Include.
+
     .OUTPUTS
-        System.Object[]. Objects with Type, FullName, SizeMB,
+        System.Object[]. Objects with Type, Name, FullName, SizeMB,
         DriveRoot, VolumeLabel, and VolumeUniqueId.
 
     .EXAMPLE
         Get-OSDCoreCache
 
-        Returns paths such as 'C:\OSDCloud' and 'D:\OSDCloud' when present.
+        Returns all supported cache content types.
 
     .EXAMPLE
         Get-OSDCoreCache -Type ESD
@@ -51,13 +62,26 @@ function Get-OSDCoreCache {
         Get-OSDCoreCache -Type *
 
         Returns all supported cache content types.
+
+    .EXAMPLE
+        Get-OSDCoreCache -Include C,D -Exclude D
+
+        Searches only drive C for supported cache content types.
     #>
     [CmdletBinding()]
     [OutputType([System.Object[]])]
     param (
         [Parameter()]
         [ValidateSet('ESD', 'ISO', 'DriverPacks', 'Drivers', 'Profiles', 'WIM', '*')]
-        [string[]]$Type
+        [string[]]$Type,
+
+        [Parameter()]
+        [ValidatePattern('^[a-zA-Z](:\\)?$|^[a-zA-Z]$')]
+        [string[]]$Include,
+
+        [Parameter()]
+        [ValidatePattern('^[a-zA-Z](:\\)?$|^[a-zA-Z]$')]
+        [string[]]$Exclude
     )
 
     $Error.Clear()
@@ -125,17 +149,51 @@ function Get-OSDCoreCache {
         )
 
         [PSCustomObject]@{
-            Type           = $ResultType
+            Name           = Split-Path -Path $ResultFullName -Leaf
             FullName       = $ResultFullName
             SizeMB         = Get-FileOnlySizeMB -Path $ResultFullName
+            Type           = $ResultType
             DriveRoot      = [string]$VolumeMetadata.DriveRoot
             VolumeLabel    = [string]$VolumeMetadata.VolumeLabel
             VolumeUniqueId = [string]$VolumeMetadata.VolumeUniqueId
         }
     }
 
+    function ConvertTo-DriveLetterList {
+        param(
+            [Parameter()]
+            [string[]]$DriveLetters
+        )
+
+        $normalized = foreach ($driveLetter in $DriveLetters) {
+            if ([string]::IsNullOrWhiteSpace($driveLetter)) {
+                continue
+            }
+
+            $value = $driveLetter.Trim().TrimEnd('\\')
+            if ($value.Length -lt 1) {
+                continue
+            }
+
+            $letter = $value.Substring(0, 1).ToUpperInvariant()
+            if ($letter -match '^[A-Z]$') {
+                $letter
+            }
+        }
+
+        @($normalized | Sort-Object -Unique)
+    }
+
+    $includedDriveLetters = ConvertTo-DriveLetterList -DriveLetters $Include
+    $excludedDriveLetters = ConvertTo-DriveLetterList -DriveLetters $Exclude
+
     $cachePaths = Get-PSDrive -PSProvider FileSystem |
         Where-Object { $_.Root -match '^[A-Z]:\\$' } |
+        Where-Object {
+            $driveLetter = ([string]$_.Root).Substring(0, 1).ToUpperInvariant()
+            (($includedDriveLetters.Count -eq 0) -or ($driveLetter -in $includedDriveLetters)) -and
+            ($driveLetter -notin $excludedDriveLetters)
+        } |
         ForEach-Object {
             $driveRoot = [string]$_.Root
             $osdCloudPath = Join-Path -Path $driveRoot -ChildPath 'OSDCloud'
@@ -151,18 +209,11 @@ function Get-OSDCoreCache {
 
     $cachePaths = @($cachePaths | Sort-Object -Property CachePath -Unique)
 
-    if (-not $PSBoundParameters.ContainsKey('Type')) {
-        $result = foreach ($cacheEntry in $cachePaths) {
-            New-CacheResultObject -ResultType 'Cache' -ResultFullName ([string]$cacheEntry.CachePath) -VolumeMetadata $cacheEntry.VolumeMetadata
-        }
-
-        $result = @($result | Sort-Object -Property FullName, Type -Unique | Sort-Object -Property FullName)
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Found $($result.Count) path(s)"
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
-        return $result
+    $selectedTypes = if ($PSBoundParameters.ContainsKey('Type')) {
+        @($Type | Sort-Object -Unique)
+    } else {
+        @('ESD', 'ISO', 'DriverPacks', 'Drivers', 'Profiles', 'WIM')
     }
-
-    $selectedTypes = @($Type | Sort-Object -Unique)
     if ($selectedTypes -contains '*') {
         $selectedTypes = @('ESD', 'ISO', 'DriverPacks', 'Drivers', 'Profiles', 'WIM')
     }

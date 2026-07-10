@@ -578,6 +578,9 @@ function Initialize-OSDCoreDevice {
     }
     $global:OSDCoreDevice | ConvertTo-Json -Depth 10 | Out-File "$LogsPath\OSDCoreDevice.json" -Force -Encoding utf8
     #=================================================
+    # OSDCoreCache
+    $global:OSDCoreCache = Get-OSDCoreCache
+    #=================================================
     # OSDCoreOperatingSystems
     $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -match "$ProcessorArchitecture" }
     #=================================================
