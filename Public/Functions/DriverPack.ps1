@@ -1,4 +1,22 @@
 function Enable-SpecializeDriverPack {
+    <#
+    .SYNOPSIS
+    Configures driver pack expansion during Windows Specialize phase
+
+    .DESCRIPTION
+    Sets up an unattend XML file to automatically expand driver packs during the Windows Specialize pass. Requires admin rights and Windows 10 or later.
+
+    .EXAMPLE
+    Enable-SpecializeDriverPack
+    Configures the system to expand driver packs during Specialize phase
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
 $UnattendXml = @'
@@ -40,6 +58,31 @@ $UnattendXml = @'
     #=================================================
 }
 function Expand-StagedDriverPack {
+    <#
+    .SYNOPSIS
+    Expands staged driver pack archives during Windows Setup
+
+    .DESCRIPTION
+    Extracts and processes staged driver pack files (CAB, EXE, MSI, ZIP) from the C:\Drivers directory. Supports multiple vendor formats including Dell, HP, Lenovo, and generic packages.
+
+    .PARAMETER Apply
+    Applies drivers during PnP unattend phase
+
+    .EXAMPLE
+    Expand-StagedDriverPack
+    Expands all driver packs in C:\Drivers
+
+    .EXAMPLE
+    Expand-StagedDriverPack -Apply
+    Expands driver packs and applies them during setup
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]$Apply
@@ -203,6 +246,24 @@ function Expand-StagedDriverPack {
     }
 }
 function Expand-ZTIDriverPack {
+    <#
+    .SYNOPSIS
+    Expands driver packs during Lite Touch or Zero Touch deployment
+
+    .DESCRIPTION
+    Processes and extracts driver pack files from C:\Drivers directory during MDT/ConfigMgr task sequence execution. Supports CAB, EXE, MSI, and ZIP formats from multiple vendors.
+
+    .EXAMPLE
+    Expand-ZTIDriverPack
+    Expands all driver packs in C:\Drivers during task sequence
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -361,6 +422,34 @@ function Expand-ZTIDriverPack {
     }
 }
 function Get-MyDriverPack {
+    <#
+    .SYNOPSIS
+    Retrieves the driver pack for the current computer from OSDCloud
+
+    .DESCRIPTION
+    Queries OSDCloud for a matching driver pack based on computer manufacturer and product model.
+
+    .PARAMETER Manufacturer
+    Computer manufacturer. Default is auto-detected from current system
+
+    .PARAMETER Product
+    Computer product model. Default is auto-detected from current system
+
+    .EXAMPLE
+    Get-MyDriverPack
+    Returns the driver pack for the current computer
+
+    .EXAMPLE
+    Get-MyDriverPack -Manufacturer 'Lenovo' -Product 'ThinkPad X1'
+    Returns the driver pack for the specified model
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
@@ -387,6 +476,43 @@ function Get-MyDriverPack {
     #=================================================
 }
 function Save-MyDriverPack {
+    <#
+    .SYNOPSIS
+    Downloads and optionally expands the driver pack for the current computer
+
+    .DESCRIPTION
+    Downloads the matching driver pack from OSDCloud for the current or specified computer. Can optionally extract and expand the driver pack after download.
+
+    .PARAMETER DownloadPath
+    Directory where the driver pack will be saved. Default is C:\Drivers
+
+    .PARAMETER Expand
+    Automatically expands the driver pack archive after download
+
+    .PARAMETER Manufacturer
+    Computer manufacturer. Default is auto-detected
+
+    .PARAMETER Product
+    Computer product model. Default is auto-detected
+
+    .PARAMETER Guid
+    GUID of a specific driver pack to download
+
+    .EXAMPLE
+    Save-MyDriverPack
+    Downloads the driver pack for the current computer to C:\Drivers
+
+    .EXAMPLE
+    Save-MyDriverPack -DownloadPath 'D:\DriverPacks' -Expand
+    Downloads and expands the driver pack to D:\DriverPacks
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -531,6 +657,34 @@ function Save-MyDriverPack {
     }
 }
 function Save-ZTIDriverPack {
+    <#
+    .SYNOPSIS
+    Downloads the driver pack for a computer during MDT/ConfigMgr task sequence
+
+    .DESCRIPTION
+    Downloads and stages the matching driver pack from OSDCloud during Lite Touch or Zero Touch deployment. Requires an active task sequence environment.
+
+    .PARAMETER Manufacturer
+    Computer manufacturer. Default is auto-detected
+
+    .PARAMETER Product
+    Computer product model. Default is auto-detected
+
+    .EXAMPLE
+    Save-ZTIDriverPack
+    Downloads the driver pack for the current computer during task sequence
+
+    .EXAMPLE
+    Save-ZTIDriverPack -Manufacturer 'Dell' -Product 'Latitude 5420'
+    Downloads the driver pack for a specific Dell model
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),

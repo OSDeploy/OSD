@@ -98,11 +98,18 @@ function Copy-WinREWIM {
 function Get-ReAgentXml {
     <#
     .SYNOPSIS
-    Returns information from the Reagent XML file
+    Returns information from the Windows Recovery Agent XML file
 
     .DESCRIPTION
-    Returns information from the Reagent XML file
-    This function must be run in Windows
+    Reads and parses the Reagent.xml file to extract Windows Recovery Environment configuration and status information. This function must be run in Windows.
+
+    .EXAMPLE
+    Get-ReAgentXml
+    Returns ReAgent.xml configuration details
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -188,11 +195,18 @@ function Get-ReAgentXml {
 function Get-WinREPartition {
     <#
     .SYNOPSIS
-    Returns the Partition containing Windows Recovery Environment WIM
+    Retrieves the Windows Recovery Environment partition information
 
     .DESCRIPTION
-    Returns the Partition containing Windows Recovery Environment WIM
-    This function must be run in Windows
+    Returns the partition information for the Windows Recovery Environment (WinRE) WIM file. This function must be run in Windows.
+
+    .EXAMPLE
+    Get-WinREPartition
+    Returns the WinRE partition information
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs

@@ -1,4 +1,22 @@
 function Get-DisplayAllScreens {
+    <#
+    .SYNOPSIS
+    Returns all display screens on the system
+
+    .DESCRIPTION
+    Enumerates all display screens connected to the system using Windows Forms assembly and sorts them by device name.
+
+    .EXAMPLE
+    Get-DisplayAllScreens
+    Returns all connected displays sorted by device name
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
   
@@ -6,6 +24,24 @@ function Get-DisplayAllScreens {
     Return ([System.Windows.Forms.Screen]::AllScreens | Select-Object * | Sort-Object DeviceName)
 }
 function Get-DisplayPrimaryBitmapSize {
+    <#
+    .SYNOPSIS
+    Returns the primary display bitmap size accounting for DPI scaling
+
+    .DESCRIPTION
+    Calculates the primary display monitor size in pixels, adjusted for the current DPI scaling percentage.
+
+    .EXAMPLE
+    Get-DisplayPrimaryBitmapSize
+    Returns the scaled primary display dimensions
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
   
@@ -20,6 +56,24 @@ function Get-DisplayPrimaryBitmapSize {
     Return $GetDisplayPrimaryMonitorSize
 }
 function Get-DisplayPrimaryMonitorSize {
+    <#
+    .SYNOPSIS
+    Returns the primary display monitor size in pixels
+
+    .DESCRIPTION
+    Returns the width and height of the primary monitor display in pixels using Windows Forms assembly.
+
+    .EXAMPLE
+    Get-DisplayPrimaryMonitorSize
+    Returns primary monitor width and height
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
   
@@ -27,6 +81,24 @@ function Get-DisplayPrimaryMonitorSize {
     Return ([System.Windows.Forms.SystemInformation]::PrimaryMonitorSize | Select-Object Width, Height)
 }
 function Get-DisplayPrimaryScaling {
+    <#
+    .SYNOPSIS
+    Returns the DPI scaling percentage of the primary display
+
+    .DESCRIPTION
+    Calculates the current DPI scaling percentage of the primary monitor by comparing logical and physical screen heights.
+
+    .EXAMPLE
+    Get-DisplayPrimaryScaling
+    Returns the DPI scaling percentage (e.g., 100, 125, 150)
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
   
@@ -61,6 +133,24 @@ return (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
     Return [DPI]::scaling() * 100
 }
 function Get-DisplayVirtualScreen {
+    <#
+    .SYNOPSIS
+    Returns the virtual screen dimensions covering all displays
+
+    .DESCRIPTION
+    Returns the overall virtual screen information that encompasses all connected displays, including width, height, and position coordinates.
+
+    .EXAMPLE
+    Get-DisplayVirtualScreen
+    Returns the combined dimensions of all displays
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
   

@@ -216,6 +216,30 @@ function Edit-MyWinPE {
     end {}
 }
 function Enable-PEWimPSGallery {
+    <#
+    .SYNOPSIS
+    Enables PowerShell Gallery functionality in a WinPE WIM file
+
+    .DESCRIPTION
+    Mounts a WinPE WIM file and configures it to support PowerShell Gallery functionality by modifying registry settings and environment variables.
+
+    .PARAMETER ImagePath
+    Full path to the WinPE WIM file to modify. This parameter is mandatory and accepts pipeline input.
+
+    .PARAMETER Index
+    Index of the WIM to mount. Default is 1
+
+    .EXAMPLE
+    Enable-PEWimPSGallery -ImagePath 'C:\WinPE\winpe.wim'
+    Enables PowerShell Gallery in the specified WIM file
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName)]
@@ -254,6 +278,31 @@ function Enable-PEWimPSGallery {
     end {}
 }
 function Enable-PEWindowsImagePSGallery {
+    <#
+    .SYNOPSIS
+    Enables PowerShell Gallery in a mounted Windows image
+
+    .DESCRIPTION
+    Configures a mounted Windows image to support PowerShell Gallery by adding necessary registry entries and environment variables to the system profile.
+
+    .PARAMETER Path
+    Path to the mounted Windows image root directory. If not specified, will use the currently mounted image.
+
+    .EXAMPLE
+    Enable-PEWindowsImagePSGallery
+    Enables PowerShell Gallery in the currently mounted image
+
+    .EXAMPLE
+    Enable-PEWindowsImagePSGallery -Path 'C:\Mount'
+    Enables PowerShell Gallery in the image mounted at C:\Mount
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]

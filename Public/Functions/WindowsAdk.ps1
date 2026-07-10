@@ -154,13 +154,21 @@ function Edit-AdkWinPEWIM {
 function Get-WindowsAdkInstallPath {
     <#
     .SYNOPSIS
-    Retrieves the installation path of the Windows Assessment and Deployment Kit (Windows ADK) from the registry.
+    Retrieves the installation path of the Windows Assessment and Deployment Kit (ADK)
 
     .DESCRIPTION
-    Retrieves the installation path of the Windows Assessment and Deployment Kit (Windows ADK) from the registry.
+    Retrieves the installation path of the Windows Assessment and Deployment Kit (ADK) from the registry.
+
+    .EXAMPLE
+    Get-WindowsAdkInstallPath
+    Returns the ADK installation directory path
 
     .NOTES
-    Author: David Segura
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -188,13 +196,21 @@ function Get-WindowsAdkInstallPath {
 function Get-WindowsAdkInstallVersion {
     <#
     .SYNOPSIS
-    Retrieves the installed version of the Windows Assessment and Deployment Kit (Windows ADK) from the registry.
+    Retrieves the installed version of the Windows Assessment and Deployment Kit (ADK)
 
     .DESCRIPTION
-    Retrieves the installed version of the Windows Assessment and Deployment Kit (Windows ADK) from the registry.
+    Retrieves the installed version of the Windows Assessment and Deployment Kit (ADK) from the registry.
+
+    .EXAMPLE
+    Get-WindowsAdkInstallVersion
+    Returns the ADK version string
 
     .NOTES
-    Author: David Segura
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -366,10 +382,18 @@ function Get-WindowsKitsInstallPath {
     Retrieves the installation path of the Windows Kit directory.
 
     .DESCRIPTION
-    Retrieves the installation path of the Windows Kit directory.
+    Retrieves the installation path of the Windows Kits (which includes ADK and other Windows development tools) from the registry.
+
+    .EXAMPLE
+    Get-WindowsKitsInstallPath
+    Returns the Windows Kits installation directory path
 
     .NOTES
-    Author: David Segura
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -417,18 +441,27 @@ function Get-WindowsKitsInstallPath {
 }
 <#
 .SYNOPSIS
-Creates an ADK CopyPE Working Directory
+Creates an ADK CopyPE working directory
 
 .DESCRIPTION
-Creates an ADK CopyPE Working Directory
+Creates a working directory structure for ADK CopyPE media with bootable WinPE environment.
+
+.PARAMETER MediaPath
+Path where the CopyPE working directory will be created. This parameter is mandatory.
+
+.EXAMPLE
+New-AdkCopyPE -MediaPath 'C:\CopyPEMedia'
+Creates a CopyPE working directory at C:\CopyPEMedia
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-10 - Updated help to follow OSD standard
+2021-05-27 - Resolved issue with paths
+2021-03-15 - Renamed to make it easier to understand what it does
+2021-03-10 - Initial Release
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
-
-.NOTES
-21.5.27.2   Resolved issue with paths
-21.3.15.2   Renamed to make it easier to understand what it does
-21.3.10     Initial Release
 #>
 function New-AdkCopyPE {
     [CmdletBinding()]
@@ -488,28 +521,37 @@ function New-AdkCopyPE {
 }
 <#
 .SYNOPSIS
-Creates an .iso file from a bootable media directory.  ADK is required
+Creates an ISO file from a bootable media directory using ADK tools
 
 .DESCRIPTION
-Creates a .iso file from a bootable media directory.  ADK is required
+Creates an ISO file from a bootable media directory. Requires the Windows Assessment and Deployment Kit (ADK) to be installed.
 
 .PARAMETER MediaPath
-Directory containing the bootable media
+Path to the directory containing the bootable media
 
 .PARAMETER isoFileName
-File Name of the ISO
+Filename of the output ISO file
 
 .PARAMETER isoLabel
-Label of the ISO.  Limited to 16 characters
+Label of the ISO (limited to 16 characters)
+
+.PARAMETER WindowsAdkRoot
+Path to Windows ADK root directory. Optional if ADK is in default location.
 
 .PARAMETER OpenExplorer
-Opens Windows Explorer to the parent directory of the ISO File
+Switch to open Windows Explorer to the parent directory of the ISO file after creation
+
+.EXAMPLE
+New-AdkISO -MediaPath 'C:\BootMedia' -isoFileName 'WinPE.iso' -isoLabel 'WinPE'
+Creates an ISO file from the bootable media
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-10 - Updated help to follow OSD standard
+2021-03-16 - Initial Release
 
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
-
-.NOTES
-21.3.16     Initial Release
 #>
 function New-AdkISO {
     [CmdletBinding()]
@@ -668,16 +710,35 @@ function New-AdkISO {
 }
 function New-WindowsAdkISO {
     <#
-        .SYNOPSIS
-        Creates an .iso file from a bootable media directory.  ADK is required
+    .SYNOPSIS
+    Creates an ISO file from a bootable media directory using ADK
 
-        .DESCRIPTION
-        Creates a .iso file from a bootable media directory.  ADK is required
+    .DESCRIPTION
+    Creates an ISO file from a bootable media directory using Windows Assessment and Deployment Kit (ADK) tools.
 
-        .NOTES
-        David Segura
-        25.02.26     Initial Release replacing New-AdkISO
-        25.03.01     Updated to use Get-WindowsAdkPaths
+    .PARAMETER MediaPath
+    Path to the directory containing the bootable media
+
+    .PARAMETER isoFileName
+    Filename for the output ISO file
+
+    .PARAMETER isoLabel
+    Label for the ISO volume (limited to 16 characters)
+
+    .PARAMETER WindowsAdkRoot
+    Path to the Windows ADK root directory (optional if installed in default location)
+
+    .EXAMPLE
+    New-WindowsAdkISO -MediaPath 'C:\\Media' -isoFileName 'boot.iso' -isoLabel 'BootMedia'\n    Creates an ISO file from the bootable media
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
+    2025-03-01 - Updated to use Get-WindowsAdkPaths
+    2025-02-26 - Initial Release replacing New-AdkISO
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param (

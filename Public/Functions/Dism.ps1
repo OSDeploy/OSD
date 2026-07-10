@@ -97,6 +97,37 @@ function Add-WindowsPackageSSU {
     #=================================================
 }
 function Copy-PSModuleToWindowsImage {
+    <#
+    .SYNOPSIS
+    Copies PowerShell modules to a mounted Windows image
+
+    .DESCRIPTION
+    Copies specified PowerShell modules from the running operating system to a mounted Windows image for offline servicing.
+
+    .PARAMETER Name
+    Name of the PowerShell module(s) to copy. Wildcard patterns are supported. This parameter is mandatory.
+
+    .PARAMETER ExecutionPolicy
+    Sets the PowerShell Execution Policy in the Windows image. Valid values are Restricted, AllSigned, RemoteSigned, Unrestricted, Bypass, and Undefined.
+
+    .PARAMETER Path
+    Path to the mounted Windows image. If not specified, will use the currently mounted image.
+
+    .EXAMPLE
+    Copy-PSModuleToWindowsImage -Name 'OSD' -Path 'C:\Mount'
+    Copies the OSD module to the mounted image at C:\\Mount
+
+    .EXAMPLE
+    Copy-PSModuleToWindowsImage -Name 'OSD','ActiveDirectory' -ExecutionPolicy Bypass -Path 'C:\Mount'
+    Copies multiple modules and sets execution policy
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]

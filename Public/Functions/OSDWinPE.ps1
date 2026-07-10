@@ -188,6 +188,31 @@ if ($env:SystemDrive -eq 'X:') {
         }
     }
     function Add-OfflineServicingWindowsDriver {
+        <#
+        .SYNOPSIS
+        Configures drivers for offline servicing in Windows Setup
+
+        .DESCRIPTION
+        Creates and applies an unattend XML file to configure driver paths for offline servicing during Windows Setup. This allows drivers to be installed on both x86 and x64 architectures.
+
+        .PARAMETER Path
+        Path to the drivers directory. Default is C:\Drivers
+
+        .EXAMPLE
+        Add-OfflineServicingWindowsDriver
+        Configures C:\Drivers for offline servicing
+
+        .EXAMPLE
+        Add-OfflineServicingWindowsDriver -Path 'E:\CustomDrivers'
+        Configures E:\CustomDrivers for offline servicing
+
+        .NOTES
+        Author: David Segura - Recast Software
+        2026-07-10 - Added comment-based help
+
+        .LINK
+        https://github.com/OSDeploy/OSD/tree/master/Docs
+        #>
         [CmdletBinding()]
         param (
             [string]$Path = 'C:\Drivers'
@@ -228,6 +253,31 @@ $UnattendXml = @"
         #=================================================
     }
     function Use-WinPEContent {
+        <#
+        .SYNOPSIS
+        Processes and integrates content into WinPE environment
+
+        .DESCRIPTION
+        Finds and processes WinPE content including drivers, files, modules, registry settings, and scripts from connected drives or USB media. This function searches for content in standardized directories and applies it to the WinPE system.
+
+        .PARAMETER Content
+        Type of content to process. Valid values are Drivers, Files, Modules, Registry, Scripts, or * for all. Default is all content types.
+
+        .EXAMPLE
+        Use-WinPEContent
+        Processes all available content types in WinPE
+
+        .EXAMPLE
+        Use-WinPEContent -Content 'Drivers','Modules'
+        Processes only drivers and modules
+
+        .NOTES
+        Author: David Segura - Recast Software
+        2026-07-10 - Added comment-based help
+
+        .LINK
+        https://github.com/OSDeploy/OSD/tree/master/Docs
+        #>
         [CmdletBinding()]
         param (
             [ValidateSet('*','Drivers','Files','Modules','Registry','Scripts')]

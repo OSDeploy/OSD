@@ -259,6 +259,24 @@ function Get-ScreenPNG {
     end {}
 }
 function Set-ClipboardScreenshot {
+    <#
+    .SYNOPSIS
+    Captures a screenshot and copies it to the clipboard
+
+    .DESCRIPTION
+    Takes a screenshot of the current display(s) and copies the image to the clipboard using Windows Forms bitmap functionality.
+
+    .EXAMPLE
+    Set-ClipboardScreenshot
+    Captures the current screen and copies to clipboard
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
 
@@ -291,6 +309,37 @@ function Set-ClipboardScreenshot {
     Return Get-Clipboard -Format Image
 }
 function Start-ScreenPNGProcess {
+    <#
+    .SYNOPSIS
+    Starts a background process to capture screenshots
+
+    .DESCRIPTION
+    Launches a hidden PowerShell process that periodically captures screenshots and saves them to the specified directory.
+
+    .PARAMETER Directory
+    Directory where screenshots will be saved. This parameter is mandatory.
+
+    .PARAMETER Count
+    Total number of screenshots to capture. Default is 9999
+
+    .PARAMETER Delay
+    Delay in seconds between screenshots. Default is 2 seconds
+
+    .EXAMPLE
+    Start-ScreenPNGProcess -Directory 'C:\Screenshots'
+    Starts capturing screenshots with default delay and count
+
+    .EXAMPLE
+    Start-ScreenPNGProcess -Directory 'C:\Screenshots' -Count 5 -Delay 3
+    Starts capturing 5 screenshots with 3-second intervals
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -308,6 +357,24 @@ function Start-ScreenPNGProcess {
     $Global:ScreenPNGProcess = ([System.Diagnostics.Process]::Start($StartInfo)).Id
 }
 function Stop-ScreenPNGProcess {
+    <#
+    .SYNOPSIS
+    Stops the background screenshot capture process
+
+    .DESCRIPTION
+    Terminates the background PowerShell process that is capturing screenshots and clears related global variables.
+
+    .EXAMPLE
+    Stop-ScreenPNGProcess
+    Stops the background screenshot process
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
 

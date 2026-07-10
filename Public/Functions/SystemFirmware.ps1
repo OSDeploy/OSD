@@ -1,10 +1,46 @@
 function Get-SystemFirmwareDevice {
+    <#
+    .SYNOPSIS
+    Returns the system firmware device
+
+    .DESCRIPTION
+    Retrieves the system firmware device from WMI using Win32_PnpEntity with the System Firmware class GUID.
+
+    .EXAMPLE
+    Get-SystemFirmwareDevice
+    Returns the system firmware device information
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdLetBinding()]
     param ()
 
     Get-CimInstance -ClassName Win32_PnpEntity | Where-Object ClassGuid -eq '{f2e7dd72-6468-4e36-b6f1-6488f42c1b52}' | Where-Object Caption -match 'System'
 }
 function Get-SystemFirmwareResource {
+    <#
+    .SYNOPSIS
+    Returns the GUID of the system firmware resource
+
+    .DESCRIPTION
+    Retrieves the system firmware device and converts its PNP Device ID to a GUID for use with Microsoft Update Catalog queries.
+
+    .EXAMPLE
+    Get-SystemFirmwareResource
+    Returns the firmware resource GUID
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdLetBinding()]
     param ()
 
@@ -15,7 +51,25 @@ function Get-SystemFirmwareResource {
     }
 }
 function Get-SystemFirmwareUpdate {
-    #=================================================
+    <#
+    .SYNOPSIS
+    Retrieves the latest system firmware update from Microsoft Update Catalog
+
+    .DESCRIPTION
+    Searches Microsoft Update Catalog for the latest system firmware update available for the current computer's firmware device. Requires PowerShell 5.1 and MSCatalog module.
+
+    .EXAMPLE
+    Get-SystemFirmwareUpdate
+    Returns the latest available firmware update
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
+    [CmdLetBinding()]
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
     #   https://github.com/ryan-jan/MSCatalog
@@ -51,6 +105,31 @@ function Get-SystemFirmwareUpdate {
     #=================================================
 }
 function Install-SystemFirmwareUpdate {
+    <#
+    .SYNOPSIS
+    Downloads and installs the system firmware update
+
+    .DESCRIPTION
+    Downloads the latest system firmware update from Microsoft Update Catalog and installs it on the running system. Requires admin rights and PowerShell 5.1.
+
+    .PARAMETER DestinationDirectory
+    Directory where the firmware update will be downloaded. Default is C:\Drivers\SystemFirmwareUpdate
+
+    .EXAMPLE
+    Install-SystemFirmwareUpdate
+    Downloads and installs the latest firmware update
+
+    .EXAMPLE
+    Install-SystemFirmwareUpdate -DestinationDirectory 'D:\Updates'
+    Downloads firmware update to D:\Updates and installs it
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdLetBinding()]
     param (
         [String] $DestinationDirectory = "C:\Drivers\SystemFirmwareUpdate"
