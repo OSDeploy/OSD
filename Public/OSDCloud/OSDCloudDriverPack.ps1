@@ -6,6 +6,14 @@ function Get-OSDCloudDriverPack {
     .DESCRIPTION
     Gets the OSDCloud DriverPack for the current or specified computer model
 
+    .EXAMPLE
+    Get-OSDCloudDriverPack
+    Returns the most recent matching OSDCloud driver pack for the current device model.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
@@ -62,6 +70,14 @@ function Get-OSDCloudDriverPacks {
     .DESCRIPTION
     Returns the DriverPacks used by OSDCloud
 
+    .EXAMPLE
+    Get-OSDCloudDriverPacks
+    Returns all OSDCloud driver packs from the module catalog.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
@@ -72,11 +88,19 @@ function Get-OSDCloudDriverPacks {
 }
 function Save-OSDCloudDriverPack {
     <#
-    .SYNOPSIS`
+    .SYNOPSIS
     Gets the OSDCloud DriverPack for the current or specified computer model
 
     .DESCRIPTION
     Gets the OSDCloud DriverPack for the current or specified computer model
+
+    .EXAMPLE
+    Save-OSDCloudDriverPack -Guid '00000000-0000-0000-0000-000000000000' -DownloadPath 'C:\Drivers'
+    Downloads the specified OSDCloud driver pack to C:\Drivers.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs

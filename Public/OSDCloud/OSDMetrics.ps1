@@ -1,25 +1,25 @@
-﻿<#
-.SYNOPSIS
-Retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
+﻿function Get-OSDMetrics {
+    <#
+    .SYNOPSIS
+    Retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
 
-.DESCRIPTION
-The Get-OSDMetrics script retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
-It displays the latest version of the OSD PowerShell module, the date it was published, and the number of times it has been installed or saved.
-It also displays metrics for OSDCloud CLI, OSDCloud GUI, and OSDCloud Azure deployment methods, including the number of devices deployed, the current usage rate, and the number of devices deployed per day, week, month, and year.
+    .DESCRIPTION
+    The Get-OSDMetrics script retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
+    It displays the latest version of the OSD PowerShell module, the date it was published, and the number of times it has been installed or saved.
+    It also displays metrics for OSDCloud CLI, OSDCloud GUI, and OSDCloud Azure deployment methods, including the number of devices deployed, the current usage rate, and the number of devices deployed per day, week, month, and year.
 
-.EXAMPLE
-PS C:\> Get-OSDMetrics
-This example retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
+    .EXAMPLE
+    PS C:\> Get-OSDMetrics
+    This example retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
 
-.NOTES
-Author: David Segura - Recast Software
-2026-07-09 - Standardized comment-based help metadata and links.
-2026-07-09 - Requires OSD, OSDCloudCLI, OSDCloudGUI, and OSDCloudAzure modules.
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
+    2026-07-09 - Requires OSD, OSDCloudCLI, OSDCloudGUI, and OSDCloudAzure modules.
 
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
-#>
-function Get-OSDMetrics {
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
     $CurrentDateTime = (Get-Date).ToUniversalTime()

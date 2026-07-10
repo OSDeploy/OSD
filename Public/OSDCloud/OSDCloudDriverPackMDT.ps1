@@ -6,6 +6,14 @@ function Invoke-OSDCloudDriverPackMDT {
     .DESCRIPTION
     Downloads a matching DriverPack to %OSDisk%\Drivers
 
+    .EXAMPLE
+    Invoke-OSDCloudDriverPackMDT
+    Downloads and stages a matching driver pack during an MDT task sequence.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>

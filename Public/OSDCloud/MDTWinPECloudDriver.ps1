@@ -6,6 +6,14 @@ function Import-MDTWinPECloudDriver {
     .DESCRIPTION
     Imports OSDCloud CloudDrivers into an MDT Deployment Share
 
+    .EXAMPLE
+    Import-MDTWinPECloudDriver
+    Imports OSDCloud WinPE cloud drivers into the configured MDT deployment share.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>

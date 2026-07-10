@@ -1,4 +1,23 @@
 function Get-OSDCloudREAzureResources {
+    <#
+    .SYNOPSIS
+    OSDCloudRE: Discovers Azure storage resources used for OSDCloudRE boot images.
+
+    .DESCRIPTION
+    OSDCloudRE: Queries Azure storage accounts tagged for OSDCloud, discovers BootImage containers,
+    and stores matching ISO blob metadata in global variables for downstream OSDCloudRE workflows.
+
+    .EXAMPLE
+    Get-OSDCloudREAzureResources
+    Connects to Azure and populates OSDCloudRE Azure storage and boot image variables.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added in-function comment-based help block.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+    #>
     [CmdletBinding()]
     param ()
     Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -95,6 +114,10 @@ function Get-OSDCloudREPartition {
     .EXAMPLE
     Get-OSDCloudREPartition
 
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
@@ -118,6 +141,10 @@ function Get-OSDCloudREPSDrive {
     .EXAMPLE
     Get-OSDCloudREPSDrive
 
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
@@ -139,6 +166,10 @@ function Get-OSDCloudREVolume {
 
     .EXAMPLE
     Get-OSDCloudREVolume
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -162,6 +193,10 @@ function Hide-OSDCloudREDrive {
 
     .EXAMPLE
     Hide-OSDCloudREDrive
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -196,6 +231,14 @@ function Invoke-OSDCloudRE {
 
     .DESCRIPTION
     This is the master OSDCloudRE Task Sequence
+
+    .EXAMPLE
+    Invoke-OSDCloudRE
+    Runs the full OSDCloudRE provisioning sequence using current global configuration.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -501,6 +544,10 @@ function New-OSDCloudREVolume {
     .EXAMPLE
     New-OSDCloudREVolume
 
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
@@ -623,6 +670,10 @@ function Set-OSDCloudREBootmgr {
     Set-OSDCloudREBootmgr -BootToOSDCloudRE
     Boots to OSDCloudRE on the next reboot
 
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
@@ -723,6 +774,10 @@ function Show-OSDCloudREDrive {
     .EXAMPLE
     Show-OSDCloudREDrive
 
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES to align with OSD help standards.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
@@ -760,6 +815,10 @@ function Start-OSDCloudREAzure {
 
     .EXAMPLE
     Start-OSDCloudREAzure
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
