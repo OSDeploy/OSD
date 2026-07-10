@@ -39,8 +39,6 @@ function Invoke-OSDCloudIPU {
 
     .NOTES
         Author: David Segura - Recast Software
-        Copyright: Recast Software
-        PowerShell Compatibility: 5.1 and 7
         2026-07-10 - Standardized comment-based help metadata and links.
 
     .LINK
@@ -52,16 +50,16 @@ function Invoke-OSDCloudIPU {
     .LINK
         https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11
     #>
-    
+
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
             'Windows 11 24H2 x64',
-            'Windows 11 24H2 ARM64', 
+            'Windows 11 24H2 ARM64',
             'Windows 11 23H2 x64',
-            'Windows 11 23H2 ARM64',    
+            'Windows 11 23H2 ARM64',
             'Windows 11 22H2 x64',
             'Windows 11 21H2 x64',
             'Windows 10 22H2 x64',
@@ -135,7 +133,7 @@ function Invoke-OSDCloudIPU {
     }
 
     #endregion Functions
-    
+
     #============================================================================
     #region Device Info
     #============================================================================
@@ -200,14 +198,14 @@ function Invoke-OSDCloudIPU {
             }
             elseif ($Build -lt 19045){
                 write-host -ForegroundColor Green "But.. You can upgrade it to Windows 10 22H2"
-            } 
+            }
         }
     }
 
     #$OSVersion = "Windows $($OSName.split(" ")[1])"
     #$OSReleaseID = $OSName.split(" ")[2]
     #$Product = (Get-MyComputerProduct)
-    
+
     $DriverPack = Get-OSDCloudDriverPack # -Product $Product -OSVersion $OSVersion -OSReleaseID $OSReleaseID
     if ($DriverPack){
         Write-host -ForegroundColor Gray "Recommended Driverpack for upgrade: $($DriverPack.Name)"
@@ -234,10 +232,10 @@ function Invoke-OSDCloudIPU {
     if ($OSActivation -match "OEM"){
         $OSActivation = "Retail"
     }
-    $OSArch = $env:PROCESSOR_ARCHITECTURE   
+    $OSArch = $env:PROCESSOR_ARCHITECTURE
     if ($OSArch -eq "AMD64"){$OSArch = 'x64'}
     #endregion Current Activation
-    
+
     if ($OSArch -eq "ARM64"){
         #=================================================
         #	OSEditionId and OSActivation ARM64
@@ -348,13 +346,13 @@ function Invoke-OSDCloudIPU {
     Write-Host -ForegroundColor Cyan "Activation: " -NoNewline
     Write-Host -ForegroundColor Green $ESD.Activation
     Write-Host -ForegroundColor Cyan "Build: " -NoNewline
-    Write-Host -ForegroundColor Green $ESD.Build    
+    Write-Host -ForegroundColor Green $ESD.Build
     Write-Host -ForegroundColor Cyan "FileName: " -NoNewline
-    Write-Host -ForegroundColor Green $ESD.FileName   
+    Write-Host -ForegroundColor Green $ESD.FileName
     Write-Host -ForegroundColor Cyan "Url: " -NoNewline
-    Write-Host -ForegroundColor Green $ESD.Url   
+    Write-Host -ForegroundColor Green $ESD.Url
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Getting Content for Upgrade Media"   
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Getting Content for Upgrade Media"
 
     #Build Media Paths
     $SubFolderName = "$($ESD.Version) $($ESD.ReleaseId)"
@@ -372,7 +370,7 @@ function Invoke-OSDCloudIPU {
             Copy-Item -Path $USBImagePath -Destination $ImagePath
         }
     }
-    
+
     #Test for Media
     if (Test-path -path $ImagePath){
         Write-Host -ForegroundColor Gray "Found previously downloaded media, getting SHA1 Hash"
@@ -384,18 +382,18 @@ function Invoke-OSDCloudIPU {
         else {
             Write-Host -ForegroundColor Gray "SHA1 Match Failed on $ImagePath, removing content"
         }
-        
+
     }
     if ($ImageDownloadRequired -eq $true){
         #Save-WebFile -SourceUrl $ESD.Url -DestinationDirectory $ScratchLocation -DestinationName $ESD.FileName
         Write-Host -ForegroundColor Gray "Starting Download to $ImagePath, this takes awhile"
-            
+
         <# This was taking way too long for some files
         #Get ESD Size
         $req = [System.Net.HttpWebRequest]::Create("$($ESD.Url)")
         $res = $req.GetResponse()
         (Invoke-WebRequest $ESD.Url -Method Head).Headers.'Content-Length'
-        $ESDSizeMB = $([Math]::Round($res.ContentLength /1000000)) 
+        $ESDSizeMB = $([Math]::Round($res.ContentLength /1000000))
         Write-Host "Total Size: $ESDSizeMB MB"
         #>
 
@@ -404,7 +402,7 @@ function Invoke-OSDCloudIPU {
         If ($ExistingBitsJob) {
             Remove-BitsTransfer -BitsJob $ExistingBitsJob
         }
-    
+
         if ((Get-Service -name BITS).Status -ne "Running"){
             Write-Host -ForegroundColor Yellow "BITS Service is not Running, which is required to download ESD File, attempting to Start"
             $StartBITS = Start-Service -Name BITS -PassThru
@@ -453,7 +451,7 @@ function Invoke-OSDCloudIPU {
         ##Export-WindowsImage -SourceImagePath $ImagePath -SourceIndex 5 -DestinationImagePath "$ApplyPath\Sources\install.wim" -CompressionType max -CheckIntegrity
         $null = $Expand
     }
-    
+
     #endregion Extract of ESD file to create Setup Content
 
     if (!(Test-Path -Path "$MediaLocation\Setup.exe")){
@@ -468,7 +466,7 @@ function Invoke-OSDCloudIPU {
 
     if (($DriverPack) -and (!($SkipDriverPack))){
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Getting Driver Pack for IPU Integration"           
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Getting Driver Pack for IPU Integration"
         $DriverPackDownloadRequired = $true
         if (!(Test-Path -Path "C:\Drivers")){New-Item -Path "C:\Drivers" -ItemType Directory -Force | Out-Null}
         $DriverPackPath = "C:\Drivers\$($DriverPack.FileName)"
@@ -483,7 +481,7 @@ function Invoke-OSDCloudIPU {
                 Write-Host -ForegroundColor Gray "MD5 Match Failed on $DriverPackPath, removing content"
             }
         }
-        
+
         IF ($DriverPackDownloadRequired -eq $true){
             Write-Host -ForegroundColor Gray "Starting Download to $DriverPackPath, this takes awhile"
             <#
@@ -491,7 +489,7 @@ function Invoke-OSDCloudIPU {
             $req = [System.Net.HttpWebRequest]::Create("$($DriverPack.Url)")
             $res = $req.GetResponse()
             (Invoke-WebRequest $ESD.Url -Method Head).Headers.'Content-Length'
-            $SizeMB = $([Math]::Round($res.ContentLength /1000000)) 
+            $SizeMB = $([Math]::Round($res.ContentLength /1000000))
             Write-Host "Total Size: $SizeMB MB"
             #>
 
@@ -500,7 +498,7 @@ function Invoke-OSDCloudIPU {
             If ($ExistingBitsJob) {
                 Remove-BitsTransfer -BitsJob $ExistingBitsJob
             }
-    
+
             #Start Download using BITS
             $BitsJob = Start-BitsTransfer -Source $DriverPack.Url -Destination $DriverPackPath -DisplayName "$($DriverPack.FileName)" -Description "Driver Pack Download" -RetryInterval 60
             If ($BitsJob.JobState -eq "Error"){
@@ -510,7 +508,7 @@ function Invoke-OSDCloudIPU {
         #Expand Driver Pack
         if (Test-path -path $DriverPackPath){
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Expanding DriverPack for Upgrade Media"   
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Expanding DriverPack for Upgrade Media"
             Expand-StagedDriverPack
             $DriverPackFile = Get-ChildItem -Path $DriverPackPath -Filter $DriverPack.FileName
 
@@ -542,8 +540,8 @@ function Invoke-OSDCloudIPU {
         }
     }
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Triggering Windows Upgrade Setup"   
-    
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Triggering Windows Upgrade Setup"
+
     if ($DownloadOnly){
         Write-Host -ForegroundColor Yellow "Download Complete, exiting script before install based on 'DownloadOnly' switch"
     }
@@ -562,7 +560,7 @@ function Invoke-OSDCloudIPU {
         else {
             $DriverArg = ""
         }
-        
+
         #Run Silently - This will suppress any Windows Setup user experience including the rollback user experience.
         if ($Silent){
             $SilentArg = "/quiet"
@@ -570,7 +568,7 @@ function Invoke-OSDCloudIPU {
         else{
             $SilentArg = ""
         }
-        
+
         #Dynamic Updates - Specifies whether Windows Setup will perform Dynamic Update operations (search, download, and install updates).
         if ($DynamicUpdate){
             $DynamicUpdateArg = "/DynamicUpdate Enable"
@@ -578,7 +576,7 @@ function Invoke-OSDCloudIPU {
         else{
             $DynamicUpdateArg = "/DynamicUpdate Disable"
         }
-        
+
         #Diagnostic Prompt - Specifies that the Command Prompt is available during Windows Setup.
         if ($DiagnosticPrompt){
             $DiagnosticPromptArg = "/diagnosticprompt enable"
@@ -611,11 +609,11 @@ function Invoke-OSDCloudIPU {
         else{
             $NoRebootArg  = ""
         }
-        
+
         $ParamStartProcess = @{
             FilePath = "$MediaLocation\Setup.exe"
             ArgumentList = "/Auto Upgrade $DynamicUpdateArg /EULA accept $DriverArg /Priority High $SilentArg $DiagnosticPromptArg $NoRebootArg $SkipFinalizeArg $FinalizeArg"
-        } 
+        }
 
         Write-Host -ForegroundColor Cyan "Setup Path: " -NoNewline
         Write-Host -ForegroundColor Green $ParamStartProcess.FilePath
