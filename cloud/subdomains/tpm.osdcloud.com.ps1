@@ -1,7 +1,7 @@
 <#PSScriptInfo
 .VERSION 24.2.24.1
 .GUID 0bf5a9ca-9bc5-4c8a-8e58-b5759c99b33d
-.AUTHOR David Segura @SeguraOSD
+.AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
 .COPYRIGHT (c) 2024 David Segura osdcloud.com. All rights reserved.
 .TAGS OSDeploy OSDCloud TPM PowerShell
