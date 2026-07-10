@@ -1,4 +1,35 @@
 function Get-AzOSDCloud {
+    <#
+    .SYNOPSIS
+    Initialize the local OSDCloud Azure tooling workspace.
+
+    .DESCRIPTION
+    Creates the local OSDCloud folder structure under C:\OSDCloud, copies the repository's bicep
+    and terraform templates into place, and optionally opens the workspace in Visual Studio Code.
+
+    .PARAMETER edit
+    Open the C:\OSDCloud workspace in Visual Studio Code after the files are copied.
+
+    .EXAMPLE
+    Get-AzOSDCloud
+    Creates the local OSDCloud folder structure and copies the Azure IaC templates.
+
+    .EXAMPLE
+    Get-AzOSDCloud -edit
+    Creates the local workspace and opens it in Visual Studio Code.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    Copyright: Recast Software
+    PowerShell Compatibility: 5.1 and 7
+    2026-07-10 - Updated help to repo standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .LINK
+    https://github.com/OSDeploy/OSD/blob/master/Docs/Get-AzOSDCloud.md
+    #>
     [CmdletBinding()]
     param (
         [switch]$edit

@@ -1,19 +1,34 @@
 function Start-OSDCloudAzure {
     <#
     .SYNOPSIS
-    Installs the OSDCloudAzure Module and starts OS Deployment from Azure Storage
+    Start an OSDCloud deployment from Azure Storage.
 
     .DESCRIPTION
-    Installs the OSDCloudAzure Module and starts OS Deployment from Azure Storage
+    Installs the OSDCloudAzure module, runs from WinPE, connects to Azure, discovers available
+    OSDCloud resources, and starts the deployment workflow when an image is available.
+
+    .PARAMETER Force
+    Reset OSDCloudAzure state before continuing.
 
     .EXAMPLE
     Start-OSDCloudAzure
+    Starts an Azure-backed OSDCloud deployment using the current selection.
 
     .EXAMPLE
     Start-OSDCloudAzure -Force
+    Resets the current Azure image selection and restarts the deployment flow.
+
+    .NOTES
+    Author: David Segura - Recast Software
+    Copyright: Recast Software
+    PowerShell Compatibility: 5.1 and 7
+    2026-07-10 - Updated help to repo standard
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .LINK
+    https://github.com/OSDeploy/OSD/blob/master/Docs/Start-OSDCloudAzure.md
     #>
 
     [CmdletBinding()]
