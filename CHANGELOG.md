@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [26.7.10.1] - 2026-07-10
+
+### Added
+
+- **OSD Core function surface expansion** — Added new core functions for deployment and catalog workflows, including `Get-OSDCoreOperatingSystems`, `Initialize-OSDCoreDevice`, `Invoke-OSDCoreDownloadFile`, `Get-OSDCoreCache`, `Get-OSDCoreDeploymentDisk`, and driver pack catalog helpers (`Get-OSDCoreDriverPackCatalogDell`, `Get-OSDCoreDriverPackCatalogHP`, `Get-OSDCoreDriverPackCatalogLenovo`, `Get-OSDCoreDriverPackCatalogPanasonic`, `Get-OSDCoreDriverPackCatalogSurface`, `Get-OSDCoreDriverPacks`).
+- **New OSDCloud workflow functions** — Added `Get-OSDCloudDefaultOS`, `Invoke-RecastOSDCloud`, and `Start-RecastOSDCloudGUI` to support default OS resolution and updated deployment UX workflows.
+- **New OSDCloud step functions** — Added `Step-OSDCloudDriverPackAdd`, `Step-OSDCloudDriverPackSave`, `Step-OSDCloudExportOSInformation`, `Step-OSDCloudSaveModule`, and `Step-OSDCloudStageOfficeConfig`.
+- **OOBE workflow enhancements** — Added OOBE-related capabilities and update management support with new/relocated environment OOBE entry points.
+- **Driver pack source artifacts** — Added core driver pack catalog files for Dell, HP, Lenovo, Surface, Panasonic, and generic mappings under `core/driverpacks`.
+- **Repository authoring guidance** — Added `.github/copilot-instructions.md` with standardized comment-based help authoring requirements.
+
+### Changed
+
+- **Comment-based help standardization** — Updated and standardized help metadata and content across a broad set of public scripts, including Azure, OSDCloud setup, VM, TS, IPU, and module utility functions.
+- **Author metadata normalization** — Updated author references in help documentation to align with Recast Software attribution standards.
+- **Logging timestamp format** — Changed log date formatting from `G` to `s` for consistent sortable timestamps.
+- **Cloud and launch script refresh** — Updated `cloud/functions.ps1` and multiple cloud subdomain scripts to align with new function exports and workflow changes.
+- **`OSD.psd1`** — Bumped module version to `26.7.10.1` and updated manifest exports for the new and reorganized function surface.
+
+### Removed
+
+- **Deprecated private operating system retrieval functions** — Removed `Private/operatingsystem/Get-CoreOperatingSystems.ps1` and legacy private `Get-OSDCoreOperatingSystems` implementation after migration to the public core function layout.
+
+---
+
 ## [26.7.6.1] - 2026-07-06
 
 ### Changed
