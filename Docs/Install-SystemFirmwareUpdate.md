@@ -8,7 +8,7 @@ schema: 2.0.0
 # Install-SystemFirmwareUpdate
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Downloads and installs the latest system firmware update from Microsoft Update Catalog.
 
 ## SYNTAX
 
@@ -18,21 +18,39 @@ Install-SystemFirmwareUpdate [[-DestinationDirectory] <String>] [-ProgressAction
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Finds the latest firmware update for the current system firmware HardwareID, downloads and extracts the package to a destination directory, and installs matching INF drivers.
+
+This function requires elevation and PowerShell 5.1. In WinPE (`X:` system drive), it stages drivers by using `Add-WindowsDriver`. In a full Windows OS, it installs drivers with `pnputil`.
+
+Supports `-WhatIf` and `-Confirm`.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Install-SystemFirmwareUpdate
 ```
 
-{{ Add example description here }}
+Downloads, extracts, and installs the latest available firmware update using the default destination directory.
+
+### Example 2
+```powershell
+PS C:\> Install-SystemFirmwareUpdate -DestinationDirectory 'D:\Updates\Firmware'
+```
+
+Downloads and installs the latest available firmware update using a custom destination directory.
+
+### Example 3
+```powershell
+PS C:\> Install-SystemFirmwareUpdate -WhatIf
+```
+
+Shows what the function would do without downloading or installing any drivers.
 
 ## PARAMETERS
 
 ### -DestinationDirectory
-{{ Fill DestinationDirectory Description }}
+Directory used to save and extract the firmware update package before installation.
 
 ```yaml
 Type: String
@@ -41,13 +59,13 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
+Default value: C:\Drivers\SystemFirmwareUpdate
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -ProgressAction
-{{ Fill ProgressAction Description }}
+Specifies how progress is displayed.
 
 ```yaml
 Type: ActionPreference
@@ -70,7 +88,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### None
 ## NOTES
+Author: David Segura - Recast Software
+
+Requires administrative privileges and internet access to Microsoft Update Catalog.
 
 ## RELATED LINKS
+[https://github.com/OSDeploy/OSD/tree/master/Docs](https://github.com/OSDeploy/OSD/tree/master/Docs)

@@ -1,9 +1,39 @@
 function Invoke-CatalogRequest {
+    <#
+    .SYNOPSIS
+    Sends a request to the Microsoft Update Catalog and parses the HTML response.
+
+    .DESCRIPTION
+    Performs an HTTP request to catalog.microsoft.com, loads the returned HTML into
+    HtmlAgilityPack, and returns a MsUpCatResponse object when results are found.
+    If the catalog returns a known error page or no results, the function emits a
+    warning or throws an error as appropriate.
+
+    .PARAMETER Uri
+    The request URI for the catalog query.
+
+    .PARAMETER Method
+    The HTTP method used for the request. Defaults to Get.
+
+    .EXAMPLE
+    Invoke-CatalogRequest -Uri 'https://www.catalog.update.microsoft.com/Search.aspx?q=KB5030211'
+    Queries the Microsoft Update Catalog and returns a parsed MsUpCatResponse object.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Added comment-based help and improved request handling.
+    #>
+    [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string] $Uri,
 
         [Parameter(Mandatory = $false)]
+        [ValidateSet('Get', 'Post', 'Put', 'Delete', 'Head', 'Patch', 'Options')]
         [string] $Method = "Get"
     )
 
@@ -17,14 +47,19 @@ function Invoke-CatalogRequest {
 
         $Params = @{
             Uri             = $Uri
-            UseBasicParsing = $true
+            Method          = $Method
             ErrorAction     = "Stop"
             Headers         = $Headers
         }
 
+        # UseBasicParsing is only valid in Windows PowerShell 5.1.
+        if ($PSVersionTable.PSVersion.Major -lt 6) {
+            $Params.UseBasicParsing = $true
+        }
+
         $Results = Invoke-WebRequest @Params
         $HtmlDoc = [HtmlAgilityPack.HtmlDocument]::new()
-        $HtmlDoc.LoadHtml($Results.RawContent.ToString())
+        $HtmlDoc.LoadHtml($Results.Content)
         $NoResults = $HtmlDoc.GetElementbyId("ctl00_catalogBody_noResultText")
         $ErrorText = $HtmlDoc.GetElementbyId("errorPageDisplayedError")
 
@@ -41,6 +76,7 @@ function Invoke-CatalogRequest {
         }
         else {
             Write-Warning "We did not find any results for $Uri"
+            return $null
         }
     }
     catch {
