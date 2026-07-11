@@ -46,6 +46,8 @@ The first `.LINK` entry must always be:
 
 `https://github.com/OSDeploy/OSD/tree/master/Docs`
 
+In canonical ordering, `.LINK` must appear before `.NOTES`.
+
 Additional `.LINK` entries are allowed after the required first entry.
 
 Example:
@@ -76,12 +78,12 @@ function Verb-Noun {
     Verb-Noun -Name Value
     Explain what this example does and expected outcome.
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-09 - Initial help block created
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param(
@@ -129,4 +131,5 @@ Fail:
 - Missing changelog or invalid date format.
 - Compatibility line missing or different wording.
 - First link is not the required OSD Docs URL.
+- `.LINK` appears after `.NOTES`.
 - Parameter exists in `param()` but missing from `.PARAMETER` section.
