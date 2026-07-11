@@ -141,20 +141,19 @@ function Save-SystemFirmwareUpdate {
 
     try {
         if (-not (Test-MicrosoftUpdateCatalog)) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Could not reach https://www.catalog.update.microsoft.com/"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to reach https://www.catalog.update.microsoft.com/"
             return
         }
 
         $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
 
         if (-not $SystemFirmwareUpdate -or [string]::IsNullOrWhiteSpace($SystemFirmwareUpdate.Guid)) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Could not find a UEFI Firmware update for this HardwareID"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to find a UEFI Firmware update for this HardwareID"
             return
         }
 
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Selected update: $($SystemFirmwareUpdate.Title)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Version: $($SystemFirmwareUpdate.Version) | Size: $($SystemFirmwareUpdate.Size) | Last Updated: $($SystemFirmwareUpdate.LastUpdated)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] UpdateID: $($SystemFirmwareUpdate.Guid)"
+        # Display selected update information
+        $SystemFirmwareUpdate
 
         $ExtractDirectory = Join-Path -Path $DestinationDirectory -ChildPath ($SystemFirmwareUpdate.Guid.Trim('{','}'))
 
@@ -166,12 +165,12 @@ function Save-SystemFirmwareUpdate {
             $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $ExtractDirectory -ErrorAction Stop
         }
         catch {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to download update package: $($_.Exception.Message)"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to download $($_.Exception.Message)"
             return
         }
 
         if (-not $SystemFirmwareUpdateFile -or -not (Test-Path $SystemFirmwareUpdateFile.FullName)) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Download did not produce a valid update package"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Download did not produce a valid update package"
             return
         }
 
@@ -179,12 +178,12 @@ function Save-SystemFirmwareUpdate {
             & expand.exe "$($SystemFirmwareUpdateFile.FullName)" -F:* "$ExtractDirectory" | Out-Null
 
             if ($LASTEXITCODE -ne 0) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] expand.exe failed with exit code $LASTEXITCODE"
+                Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] expand.exe failed with exit code $LASTEXITCODE"
                 return
             }
         }
         catch {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to extract update package: $($_.Exception.Message)"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to extract update package: $($_.Exception.Message)"
             return
         }
 
@@ -192,15 +191,15 @@ function Save-SystemFirmwareUpdate {
             Remove-Item $SystemFirmwareUpdateFile.FullName -ErrorAction Stop
         }
         catch {
-            Write-Verbose "[$($MyInvocation.MyCommand.Name)] Failed to remove temporary package: $($_.Exception.Message)"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to remove temporary package: $($_.Exception.Message)"
         }
 
         $InfFiles = @(Get-ChildItem -Path $ExtractDirectory -Recurse -Filter '*.inf' -ErrorAction SilentlyContinue)
         if ($InfFiles) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Saved and extracted firmware update to $ExtractDirectory (INF files: $($InfFiles.Count))"
+            # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Saved and extracted firmware update to $ExtractDirectory (INF files: $($InfFiles.Count))"
         }
         else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Saved and extracted firmware update to $ExtractDirectory"
+            # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Saved and extracted firmware update to $ExtractDirectory"
         }
 
         [PSCustomObject]@{
@@ -211,7 +210,7 @@ function Save-SystemFirmwareUpdate {
         }
     }
     catch {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unexpected error: $($_.Exception.Message)"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unexpected error: $($_.Exception.Message)"
     }
     #=================================================
 }
@@ -226,6 +225,12 @@ function Install-SystemFirmwareUpdate {
     .PARAMETER DestinationDirectory
     Directory where the firmware update will be downloaded. Default is C:\Drivers\SystemFirmwareUpdate
 
+    .PARAMETER Force
+    Required switch to perform the firmware update. Without this switch, the function only warns and exits.
+
+    .PARAMETER Restart
+    Restarts the computer automatically when a reboot is required after installation.
+
     .EXAMPLE
     Install-SystemFirmwareUpdate
     Downloads and installs the latest firmware update
@@ -234,6 +239,10 @@ function Install-SystemFirmwareUpdate {
     Install-SystemFirmwareUpdate -DestinationDirectory 'D:\Updates'
     Downloads firmware update to D:\Updates and installs it
 
+    .EXAMPLE
+    Install-SystemFirmwareUpdate -Force -Restart
+    Downloads and installs the latest firmware update and restarts if required.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
 
@@ -241,17 +250,24 @@ function Install-SystemFirmwareUpdate {
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
     2026-07-11 - Refactored to use Save-SystemFirmwareUpdate and improved install error handling
+    2026-07-11 - Added BitLocker warning, Force gate, and optional restart handling
     #>
     [CmdLetBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
     param (
         [ValidateNotNullOrEmpty()]
-        [String] $DestinationDirectory = "C:\Drivers\SystemFirmwareUpdate"
+        [String] $DestinationDirectory = "C:\Drivers\SystemFirmwareUpdate",
+
+        [Parameter()]
+        [switch] $Force,
+
+        [Parameter()]
+        [switch] $Restart
     )
 
     $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
     if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
         return
     }
 
@@ -260,6 +276,21 @@ function Install-SystemFirmwareUpdate {
         if ($env:SystemDrive -eq 'X:') {
             Write-Host -ForegroundColor DarkGray "Make sure that Bitlocker encrypted drives are unlocked and suspended first"
         }
+        return
+    }
+
+    try {
+        $BitLockerVolumes = Get-BitLockerVolume -MountPoint $env:SystemDrive -ErrorAction Stop
+        if ($BitLockerVolumes -and ($BitLockerVolumes.ProtectionStatus -contains 'On' -or $BitLockerVolumes.ProtectionStatus -contains 1)) {
+            Write-Warning "[$($MyInvocation.MyCommand.Name)] BitLocker protection is enabled on $env:SystemDrive. Suspend BitLocker before applying firmware updates."
+        }
+    }
+    catch {
+        Write-Verbose "[$($MyInvocation.MyCommand.Name)] Unable to query BitLocker status: $($_.Exception.Message)"
+    }
+
+    if (-not $Force) {
+        Write-Warning "[$($MyInvocation.MyCommand.Name)] Use -Force to perform the firmware update. No changes were made."
         return
     }
 
@@ -339,6 +370,17 @@ function Install-SystemFirmwareUpdate {
 
     if ($RebootRequired) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] A reboot is required to complete firmware update installation"
+
+        if ($Restart) {
+            if ($PSCmdlet.ShouldProcess('LocalComputer', 'Restart-Computer -Force')) {
+                try {
+                    Restart-Computer -Force
+                }
+                catch {
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to restart computer: $($_.Exception.Message)"
+                }
+            }
+        }
     }
     #=================================================
 }
