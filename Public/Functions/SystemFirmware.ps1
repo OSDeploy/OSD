@@ -29,7 +29,7 @@ function Get-SystemFirmwareDevice {
         Get-CimInstance -ClassName Win32_PnpEntity -Filter $Filter -ErrorAction Stop
     }
     catch {
-        Write-Verbose "Get-SystemFirmwareDevice: Failed to query Win32_PnpEntity. $_"
+        Write-Verbose "Failed to query Win32_PnpEntity. $_"
         $null
     }
 }
@@ -39,7 +39,8 @@ function Get-SystemFirmwareResource {
     Returns the GUID of the system firmware resource
 
     .DESCRIPTION
-    Retrieves the system firmware device and converts its PNP Device ID to a GUID for use with Microsoft Update Catalog queries.
+    Retrieves the system firmware device and extracts GUID values directly from
+    its PNP Device ID for use with Microsoft Update Catalog queries.
 
     .EXAMPLE
     Get-SystemFirmwareResource
@@ -51,71 +52,38 @@ function Get-SystemFirmwareResource {
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
+    2026-07-11 - Removed dependency on Convert-PNPDeviceIDtoGuid and added local GUID extraction
     #>
-    [CmdLetBinding()]
+    [OutputType([string])]
+    [CmdletBinding()]
     param ()
 
     $UefiFirmwareDevice = Get-SystemFirmwareDevice
 
-    if ($UefiFirmwareDevice) {
-        Convert-PNPDeviceIDtoGuid -PNPDeviceID $UefiFirmwareDevice.PNPDeviceID
-    }
-}
-function Get-SystemFirmwareUpdate {
-    <#
-    .SYNOPSIS
-    Retrieves the latest system firmware update from Microsoft Update Catalog
-
-    .DESCRIPTION
-    Searches Microsoft Update Catalog for the latest system firmware update available for the current computer's firmware device. Requires PowerShell 5.1 and MSCatalog module.
-
-    .EXAMPLE
-    Get-SystemFirmwareUpdate
-    Returns the latest available firmware update
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
-
-    .NOTES
-    Author: David Segura - Recast Software
-    2026-07-10 - Added comment-based help
-    #>
-    [CmdLetBinding()]
-    param()
-    #	MSCatalog PowerShell Module
-    #   Ryan-Jan
-    #   https://github.com/ryan-jan/MSCatalog
-    #   This excellent work is a good way to gather information from MS
-    #   Catalog
-    #=================================================
-    if ($PSVersionTable.PSVersion.Major -ne 5) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] PowerShell 5.1 is required to run this function"
+    if (-not $UefiFirmwareDevice) {
+        Write-Verbose 'Get-SystemFirmwareResource: No system firmware device found.'
         return
     }
-    if (!(Get-Module -ListAvailable -Name MSCatalog)) {
-        Install-Module MSCatalog -Force -SkipPublisherCheck -ErrorAction Ignore
-    }
-    #=================================================
-    #	Make sure the Module was installed
-    #=================================================
-    if (Get-Module -ListAvailable -Name MSCatalog) {
-        if (Test-MicrosoftUpdateCatalog) {
-            Try {
-                Get-MSCatalogUpdate -Search (Get-SystemFirmwareResource) -SortBy LastUpdated -Descending | Select-Object LastUpdated,Title,Version,Size,Guid -First 1
-            }
-            Catch {
-                #Do nothing
-            }
+
+    $GuidRegex = [System.Text.RegularExpressions.Regex]::new(
+        '(?i)\{?[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\}?',
+        [System.Text.RegularExpressions.RegexOptions]::Compiled
+    )
+
+    foreach ($Device in @($UefiFirmwareDevice)) {
+        $Matches = $GuidRegex.Matches($Device.PNPDeviceID)
+
+        if ($Matches.Count -eq 0) {
+            Write-Verbose "Get-SystemFirmwareResource: No GUID found in PNPDeviceID '$($Device.PNPDeviceID)'."
+            continue
         }
-        else {
-            Write-Host -ForegroundColor DarkGray "Get-SystemFirmwareUpdate: Could not reach https://www.catalog.update.microsoft.com/"
+
+        foreach ($Match in $Matches) {
+            $Match.Value
         }
     }
-    else {
-        Write-Host -ForegroundColor DarkGray "Get-SystemFirmwareUpdate: Could not install required PowerShell Module MSCatalog"
-    }
-    #=================================================
 }
+
 function Install-SystemFirmwareUpdate {
     <#
     .SYNOPSIS
