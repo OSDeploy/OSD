@@ -1,17 +1,25 @@
-<#
-.SYNOPSIS
-Saves a Drive as Full Flash Update Windows Image (FFU)
-
-.DESCRIPTION
-Saves a Drive as Full Flash Update Windows Image (FFU)
-
-.LINK
-https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-windows-using-full-flash-update--ffu
-
-.NOTES
-21.1.27    Initial Release
-#>
 function Backup-DiskToFFU {
+    <#
+    .SYNOPSIS
+    Captures a physical disk to a Full Flash Update (FFU) image.
+
+    .DESCRIPTION
+    Interactively selects a source disk and destination data disk, then uses DISM /Capture-FFU to create an FFU backup from WinPE.
+
+    .EXAMPLE
+    Backup-DiskToFFU
+    Prompts for source and destination disks, then captures the selected source disk to an FFU file.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .LINK
+    https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-windows-using-full-flash-update--ffu
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Moved help block inside function and expanded sections
+    #>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -79,7 +87,7 @@ function Backup-DiskToFFU {
     Write-Host -ForegroundColor Cyan        'Cmd Syntax:'
     Write-Host -ForegroundColor White       "DISM.exe /Capture-FFU /ImageFile=`"$ImageFile`" /CaptureDrive=\\.\PhysicalDrive$DiskNumber /Name:`"$Name`" /Description:`"$Description`" /Compress:$Compress"
     Write-Host -ForegroundColor DarkGray    '======================================================================================================'
-    
+
     do {$ConfirmFFU = Read-Host "Type FFU to create the Backup, or X to Exit"}
     until (($ConfirmFFU -eq 'FFU') -or ($ConfirmFFU -eq 'X'))
 
@@ -178,7 +186,7 @@ function Clear-LocalDisk {
     FriendlyName,Model, PartitionStyle,`
     @{Name='Partitions';Expression={$_.NumberOfPartitions}} | `
     Format-Table | Out-Host
-    
+
     if ($IsForcePresent -eq $false) {
         Break
     }
@@ -206,7 +214,7 @@ function Clear-LocalDisk {
                 Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName)"
                 $Item | Initialize-Disk -PartitionStyle $PartitionStyle
             }
-            
+
             $ClearDisk += Get-OSDDisk -Number $Item.Number
         }
     }
@@ -304,7 +312,7 @@ function Clear-USBDisk {
     $GetDisk | Select-Object -Property Number, BusType, MediaType,`
     FriendlyName, PartitionStyle, NumberOfPartitions,`
     @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
-    
+
     if ($IsForcePresent -eq $false) {
         Break
     }
@@ -327,12 +335,12 @@ function Clear-USBDisk {
         {
             Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
             Clear-Disk -Number $Item.Number -RemoveData -RemoveOEM -ErrorAction Stop
-            
+
             if ($Initialize -eq $true) {
                 Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName)"
                 $Item | Initialize-Disk -PartitionStyle $PartitionStyle
             }
-            
+
             $ClearDisk += Get-OSDDisk -Number $Item.Number
         }
     }
@@ -369,7 +377,7 @@ function Get-DataDisk {
     $LocalResults = foreach ($Item in $GetPartition) {
         $GetVolumeProperties = $GetVolume | Where-Object {$_.DriveLetter -eq $Item.DriveLetter}
         $ObjectProperties = @{
-            
+
             DiskNumber          = $Item.DiskNumber
             DriveLetter         = $GetVolumeProperties.DriveLetter
             FileSystem          = $GetVolumeProperties.FileSystem
@@ -455,7 +463,7 @@ function Get-OSDDisk {
         [string[]]$BusType,
         [ValidateSet('1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual')]
         [string[]]$BusTypeNot,
-        
+
         [ValidateSet('SSD','HDD','SCM','Unspecified')]
         [string[]]$MediaType,
         [ValidateSet('SSD','HDD','SCM','Unspecified')]
@@ -656,7 +664,7 @@ function Invoke-SelectDataDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Disk to save the FFU on by DriveLetter, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DriveLetter) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -717,7 +725,7 @@ function Invoke-SelectFFUDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Fixed Disk to Backup by DiskNumber, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DiskNumber) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -775,7 +783,7 @@ function Invoke-SelectLocalDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Fixed Disk by DiskNumber, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DiskNumber) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -843,7 +851,7 @@ function Invoke-SelectLocalVolume {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Fixed Volume by DriveLetter, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DriveLetter) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -901,7 +909,7 @@ function Invoke-SelectOSDDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Disk by DiskNumber, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $GetDisk.DiskNumber) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -970,7 +978,7 @@ function Invoke-SelectOSDVolume {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Volume by DriveLetter, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DriveLetter) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -989,7 +997,7 @@ function Invoke-SelectUSBDisk {
     param (
         [Parameter(ValueFromPipeline = $true)]
         [Object]$Input,
-        
+
         [Alias('Min','MinGB','MinSize')]
         [int]$MinimumSizeGB = 8,
 
@@ -1035,7 +1043,7 @@ function Invoke-SelectUSBDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a USB Disk by DiskNumber, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DiskNumber) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -1061,7 +1069,7 @@ function Invoke-SelectUSBVolume {
 
         [System.Management.Automation.SwitchParameter]
         $Skip,
-        
+
         [System.Management.Automation.SwitchParameter]
         $SelectOne
     )
@@ -1106,7 +1114,7 @@ function Invoke-SelectUSBVolume {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a USB Volume by DriveLetter, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DriveLetter) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -1211,7 +1219,7 @@ function New-BootableUSBDrive {
     if ($GetUSBDisk.SizeGB -le 2000) {
         Write-Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
         $DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop
-        
+
         Write-Verbose '$BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel'
         $BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel -ErrorAction Stop
     }
@@ -1430,7 +1438,7 @@ function New-OSDisk {
         FriendlyName, Model, PartitionStyle,`
         @{Name='Partitions';Expression={$_.NumberOfPartitions}} | `
         Format-Table | Out-Host
-        
+
         Break
     }
     #=================================================

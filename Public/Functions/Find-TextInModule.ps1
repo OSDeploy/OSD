@@ -1,4 +1,31 @@
 function Find-TextInModule {
+    <#
+    .SYNOPSIS
+    Searches module files for matching text.
+
+    .DESCRIPTION
+    Resolves the latest installed version of a module, searches its files for matching text, shows results in Out-GridView, and opens selected files in Visual Studio Code when available.
+
+    .PARAMETER Text
+    Text pattern to search for in module files.
+
+    .PARAMETER Module
+    Module name to search. The latest installed version is selected.
+
+    .PARAMETER Include
+    File include pattern(s) used by Get-ChildItem during the recursive search.
+
+    .EXAMPLE
+    Find-TextInModule -Text Save-WebFile -Module OSD -Include *.ps1
+    Searches PowerShell files in the latest installed OSD module for Save-WebFile.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]

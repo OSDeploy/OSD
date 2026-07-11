@@ -1,29 +1,38 @@
-<#
-.SYNOPSIS
-Adds the SSU from a Cumulative Update .cab or .msu to a Windows Image
-
-.DESCRIPTION
-The Add-WindowsPackageSSU cmdlet installs a specified .cab or .msu package in the image
-
-.PARAMETER Path
-Specifies the full path to the root directory of the offline Windows image that you will service.
-
-.PARAMETER PackagePath
-Specifies the location of the package to add to the image
-
-.PARAMETER Online
-Specifies that the action is to be taken on the operating system that is currently running on the local computer.
-
-.PARAMETER LogPath
-Specifies the full path and file name to log to. If not set, the default is %WINDIR%\Logs\Dism\dism.log.
-In Windows PE, the default directory is the RAMDISK scratch space which can be as low as 32 MB. The log file will automatically be archived. The archived log file will be saved with .bak appended to the file name and a new log file will be generated. Each time the log file is archived the .bak file will be overwritten. 
-When using a network share that is not joined to a domain, use the net use command together with domain credentials to set access permissions before you set the log path for the DISM log.
-
-.LINK
-
-.NOTES
-#>
 function Add-WindowsPackageSSU {
+    <#
+    .SYNOPSIS
+    Adds a Servicing Stack Update package to Windows.
+
+    .DESCRIPTION
+    Extracts SSU cabinet files from a .cab or .msu package and applies them to an online or offline Windows image using Add-WindowsPackage.
+
+    .PARAMETER PackagePath
+    Full path to the source .cab or .msu package file.
+
+    .PARAMETER Path
+    Full path to the root directory of the offline mounted Windows image.
+
+    .PARAMETER Online
+    Applies the SSU to the currently running operating system.
+
+    .PARAMETER LogPath
+    Full path to the DISM log file used during package application.
+
+    .EXAMPLE
+    Add-WindowsPackageSSU -PackagePath C:\Updates\windows10.0-kbxxxx.msu -Path C:\Mount
+    Extracts SSU content from the MSU and applies it to the mounted image at C:\Mount.
+
+    .EXAMPLE
+    Add-WindowsPackageSSU -PackagePath C:\Updates\ssu.cab -Online
+    Applies SSU cab content to the running operating system.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Moved help block inside function and expanded sections
+    #>
     [CmdletBinding(DefaultParameterSetName = 'Offline')]
     param (
         [Parameter(Mandatory = $true)]
@@ -121,12 +130,12 @@ function Copy-PSModuleToWindowsImage {
     Copy-PSModuleToWindowsImage -Name 'OSD','ActiveDirectory' -ExecutionPolicy Bypass -Path 'C:\Mount'
     Copies multiple modules and sets execution policy
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param (

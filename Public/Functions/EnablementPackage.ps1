@@ -1,4 +1,28 @@
 function Get-EnablementPackage {
+    <#
+    .SYNOPSIS
+    Returns the latest matching Windows enablement package metadata.
+
+    .DESCRIPTION
+    Retrieves enablement package metadata from the WSUSXML catalog and filters the result by build and architecture.
+
+    .PARAMETER OSBuild
+    Target Windows release build used to filter the enablement package.
+
+    .PARAMETER OSArch
+    Target operating system architecture used to filter the enablement package.
+
+    .EXAMPLE
+    Get-EnablementPackage -OSBuild 22H2 -OSArch x64
+    Returns the newest x64 enablement package metadata for 22H2.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [ValidateSet('22H2','21H2','21H1','20H2','1909')]
@@ -29,6 +53,33 @@ function Get-EnablementPackage {
     #=================================================
 }
 function Save-EnablementPackage {
+    <#
+    .SYNOPSIS
+    Downloads a matching Windows enablement package.
+
+    .DESCRIPTION
+    Resolves an enablement package for the requested build and architecture, verifies connectivity, and downloads the package to the specified directory.
+
+    .PARAMETER DownloadPath
+    Destination directory where the enablement package file is saved.
+
+    .PARAMETER OSBuild
+    Target Windows release build used to select the enablement package.
+
+    .PARAMETER OSArch
+    Target operating system architecture used to select the enablement package.
+
+    .EXAMPLE
+    Save-EnablementPackage -DownloadPath C:\Temp -OSBuild 22H2 -OSArch x64
+    Downloads the latest matching x64 enablement package for 22H2 to C:\Temp.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]

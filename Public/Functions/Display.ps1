@@ -10,12 +10,12 @@ function Get-DisplayAllScreens {
     Get-DisplayAllScreens
     Returns all connected displays sorted by device name
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -35,12 +35,12 @@ function Get-DisplayPrimaryBitmapSize {
     Get-DisplayPrimaryBitmapSize
     Returns the scaled primary display dimensions
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -67,12 +67,12 @@ function Get-DisplayPrimaryMonitorSize {
     Get-DisplayPrimaryMonitorSize
     Returns primary monitor width and height
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -92,12 +92,12 @@ function Get-DisplayPrimaryScaling {
     Get-DisplayPrimaryScaling
     Returns the DPI scaling percentage (e.g., 100, 125, 150)
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -144,12 +144,12 @@ function Get-DisplayVirtualScreen {
     Get-DisplayVirtualScreen
     Returns the combined dimensions of all displays
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -157,21 +157,31 @@ function Get-DisplayVirtualScreen {
     Add-Type -Assembly System.Windows.Forms
     Return ([System.Windows.Forms.SystemInformation]::VirtualScreen | Select-Object Width, Height, X, Y, Left, Top, Right, Bottom, Size)
 }
-<#
-.SYNOPSIS
-Sets the Primary Display Screen Resolution
-
-.DESCRIPTION
-Sets the Primary Display Screen Resolution
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
-
-.NOTES
-21.2.1 Initial Release
-
-#>
 function Set-DisRes {
+    <#
+    .SYNOPSIS
+    Sets the primary display screen resolution.
+
+    .DESCRIPTION
+    Changes the primary display resolution to the specified width and height, or to a preset alias such as 720p, 1080p, 4k, or Restore.
+
+    .PARAMETER Width
+    Target horizontal resolution, a preset alias, or Restore to return to the previous value captured in the current session.
+
+    .PARAMETER Height
+    Target vertical resolution. If omitted when Width is numeric or a preset alias, Height may be auto-selected from common aspect ratios.
+
+    .EXAMPLE
+    Set-DisRes -Width 1920 -Height 1080
+    Sets the primary display resolution to 1920x1080.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Moved help block inside function and expanded sections
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0)]

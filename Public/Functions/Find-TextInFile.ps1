@@ -1,4 +1,31 @@
 function Find-TextInFile {
+	<#
+	.SYNOPSIS
+	Searches files for matching text and displays selectable results.
+
+	.DESCRIPTION
+	Recursively searches files under a path using Select-String, displays matching lines in Out-GridView, and opens selected files in Visual Studio Code when available.
+
+	.PARAMETER Path
+	Root path to search recursively.
+
+	.PARAMETER Text
+	Text pattern to search for.
+
+	.PARAMETER Include
+	File include pattern(s) used by Get-ChildItem during the recursive search.
+
+	.EXAMPLE
+	Find-TextInFile -Path C:\Logs -Text Error -Include *.log
+	Searches all .log files in C:\Logs for Error and shows the matches.
+
+	.LINK
+	https://github.com/OSDeploy/OSD/tree/master/Docs
+
+	.NOTES
+	Author: David Segura - Recast Software
+	2026-07-11 - Added comment-based help
+	#>
     [CmdletBinding()]
     param (
 		[Parameter(Mandatory = $true)]

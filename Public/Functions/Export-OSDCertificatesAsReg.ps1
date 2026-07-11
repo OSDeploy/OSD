@@ -1,4 +1,22 @@
 function Export-OSDCertificatesAsReg {
+    <#
+    .SYNOPSIS
+    Exports selected LocalMachine certificates as .reg files.
+
+    .DESCRIPTION
+    Prompts for installed certificates and exports matching certificate registry keys from system certificate hives into .reg files under the temporary Certs folder.
+
+    .EXAMPLE
+    Export-OSDCertificatesAsReg
+    Opens a selection grid and exports registry-backed certificate entries for selected certificates to $env:Temp\Certs.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Added comment-based help
+    #>
     [CmdletBinding()]
     param ()
 

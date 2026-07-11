@@ -10,12 +10,12 @@ function Enable-SpecializeDriverPack {
     Enable-SpecializeDriverPack
     Configures the system to expand driver packs during Specialize phase
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -76,12 +76,12 @@ function Expand-StagedDriverPack {
     Expand-StagedDriverPack -Apply
     Expands driver packs and applies them during setup
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param (
@@ -257,12 +257,12 @@ function Expand-ZTIDriverPack {
     Expand-ZTIDriverPack
     Expands all driver packs in C:\Drivers during task sequence
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param ()
@@ -443,12 +443,12 @@ function Get-MyDriverPack {
     Get-MyDriverPack -Manufacturer 'Lenovo' -Product 'ThinkPad X1'
     Returns the driver pack for the specified model
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param (
@@ -506,12 +506,12 @@ function Save-MyDriverPack {
     Save-MyDriverPack -DownloadPath 'D:\DriverPacks' -Expand
     Downloads and expands the driver pack to D:\DriverPacks
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param (
@@ -678,12 +678,12 @@ function Save-ZTIDriverPack {
     Save-ZTIDriverPack -Manufacturer 'Dell' -Product 'Latitude 5420'
     Downloads the driver pack for a specific Dell model
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
     param (
