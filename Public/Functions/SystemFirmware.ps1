@@ -4,23 +4,34 @@ function Get-SystemFirmwareDevice {
     Returns the system firmware device
 
     .DESCRIPTION
-    Retrieves the system firmware device from WMI using Win32_PnpEntity with the System Firmware class GUID.
+    Retrieves the system firmware device by querying Win32_PnpEntity for the System Firmware class GUID.
 
     .EXAMPLE
     Get-SystemFirmwareDevice
     Returns the system firmware device information
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    2026-07-11 - Improved CIM filtering and error handling
     #>
-    [CmdLetBinding()]
+    [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
+    [CmdletBinding()]
     param ()
 
-    Get-CimInstance -ClassName Win32_PnpEntity | Where-Object ClassGuid -eq '{f2e7dd72-6468-4e36-b6f1-6488f42c1b52}' | Where-Object Caption -match 'System'
+    $SystemFirmwareClassGuid = '{f2e7dd72-6468-4e36-b6f1-6488f42c1b52}'
+    $Filter = "ClassGuid = '$SystemFirmwareClassGuid' AND Caption LIKE '%System%'"
+
+    try {
+        Get-CimInstance -ClassName Win32_PnpEntity -Filter $Filter -ErrorAction Stop
+    }
+    catch {
+        Write-Verbose "Get-SystemFirmwareDevice: Failed to query Win32_PnpEntity. $_"
+        $null
+    }
 }
 function Get-SystemFirmwareResource {
     <#
@@ -34,12 +45,12 @@ function Get-SystemFirmwareResource {
     Get-SystemFirmwareResource
     Returns the firmware resource GUID
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdLetBinding()]
     param ()
@@ -62,14 +73,15 @@ function Get-SystemFirmwareUpdate {
     Get-SystemFirmwareUpdate
     Returns the latest available firmware update
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdLetBinding()]
+    param()
     #	MSCatalog PowerShell Module
     #   Ryan-Jan
     #   https://github.com/ryan-jan/MSCatalog
@@ -123,12 +135,12 @@ function Install-SystemFirmwareUpdate {
     Install-SystemFirmwareUpdate -DestinationDirectory 'D:\Updates'
     Downloads firmware update to D:\Updates and installs it
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added comment-based help
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdLetBinding()]
     param (
@@ -138,7 +150,7 @@ function Install-SystemFirmwareUpdate {
     #	Blocks
     #=================================================
     Block-StandardUser
-    
+
     if ($PSVersionTable.PSVersion.Major -ne 5) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] PowerShell 5.1 is required to run this function"
         return
@@ -158,7 +170,7 @@ function Install-SystemFirmwareUpdate {
         if (Test-MicrosoftUpdateCatalog) {
             if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
                 $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
-            
+
                 if ($SystemFirmwareUpdate.Guid) {
                     Write-Host -ForegroundColor DarkGray "$($SystemFirmwareUpdate.Title) version $($SystemFirmwareUpdate.Version)"
                     Write-Host -ForegroundColor DarkGray "Version $($SystemFirmwareUpdate.Version) Size: $($SystemFirmwareUpdate.Size)"
@@ -166,7 +178,7 @@ function Install-SystemFirmwareUpdate {
                     Write-Host -ForegroundColor DarkGray "UpdateID: $($SystemFirmwareUpdate.Guid)"
                     Write-Host -ForegroundColor DarkGray ""
                 }
-            
+
                 if ($SystemFirmwareUpdate) {
                     $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
                     if ($SystemFirmwareUpdateFile) {
@@ -224,7 +236,7 @@ function Save-SystemFirmwareUpdate {
     if (Test-MicrosoftUpdateCatalog) {
         if (Get-Module -ListAvailable -Name MSCatalog -ErrorAction Ignore) {
             $SystemFirmwareUpdate = Get-SystemFirmwareUpdate
-        
+
             if ($SystemFirmwareUpdate.Guid) {
                 Write-Host -ForegroundColor DarkGray "$($SystemFirmwareUpdate.Title) version $($SystemFirmwareUpdate.Version)"
                 Write-Host -ForegroundColor DarkGray "Version $($SystemFirmwareUpdate.Version) Size: $($SystemFirmwareUpdate.Size)"
@@ -232,7 +244,7 @@ function Save-SystemFirmwareUpdate {
                 Write-Host -ForegroundColor DarkGray "UpdateID: $($SystemFirmwareUpdate.Guid)"
                 Write-Host -ForegroundColor DarkGray ""
             }
-        
+
             if ($SystemFirmwareUpdate) {
                 $SystemFirmwareUpdateFile = Save-UpdateCatalog -Guid $SystemFirmwareUpdate.Guid -DestinationDirectory $DestinationDirectory
                 if ($SystemFirmwareUpdateFile) {
