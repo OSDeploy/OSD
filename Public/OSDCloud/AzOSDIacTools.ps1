@@ -19,12 +19,15 @@ function Install-AzOSDIacTools {
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
     [CmdletBinding()]
-    param (
-        
-    )
-    
+    param ()
+
     begin {
-        Block-StandardUser
+        $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+        if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+            return
+        }
         Write-Host "============================================================" -ForegroundColor Gray
         Write-Host "Searching for #Iac Tools on your system $env:COMPUTERNAME" -ForegroundColor Green
         Write-Host "============================================================" -ForegroundColor Gray
@@ -63,13 +66,13 @@ function Install-AzOSDIacTools {
             Write-Host ""
             $Needinstallazcli = $true
         }
-    
+
     }
-    
+
     process {
-       
+
         if ($Needinstallbicep -eq $true ) {
-            
+
             Write-Host "Installing bicep on your system $env:COMPUTERNAME" -ForegroundColor Green
             $installPath = "$env:USERPROFILE\.bicep"
             $installDir = New-Item -ItemType Directory -Path $installPath -Force
@@ -90,7 +93,7 @@ function Install-AzOSDIacTools {
             Write-Host "Installing Azure CLI on your system $env:COMPUTERNAME" -ForegroundColor Green
             Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi
             Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'
-            rm .\AzureCLI.msi 
+            rm .\AzureCLI.msi
             # Add Terraform to your PATH
             $currentPath = (Get-Item -path "HKCU:\Environment" ).GetValue('Path', '', 'DoNotExpandEnvironmentNames')
             if (-not $currentPath.Contains("C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin")) { setx PATH ($currentPath + "; 'C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin'") }
@@ -121,7 +124,7 @@ function Install-AzOSDIacTools {
         }
 
     }
-    
+
     end {
         Write-Host "============================================================" -ForegroundColor Gray
         Write-Host "Searching PowerShellModule  for #Iac on your system $env:COMPUTERNAME" -ForegroundColor Green

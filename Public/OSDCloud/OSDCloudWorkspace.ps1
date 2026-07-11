@@ -81,19 +81,19 @@ function New-OSDCloudWorkspace {
         [System.String]
         #Directory for the OSDCloud Workspace to create or update.  Default is $env:SystemDrive\OSDCloud
         $WorkspacePath = "$env:SystemDrive\OSDCloud",
-        
+
         [Parameter(ParameterSetName='fromIsoFile',Mandatory)]
         [System.IO.FileInfo]
         #Path to an OSDCloud ISO
         #This file will be mounted and the contents will be copied to the OSDCloud Workspace
         $fromIsoFile,
-        
+
         [Parameter(ParameterSetName='fromIsoUrl',Mandatory)]
         [System.String]
         #Path to an OSDCloud ISO saved on the internet
         #This file will be downloaded and mounted and the contents will be copied to the OSDCloud Workspace
         $fromIsoUrl,
-        
+
         [Parameter(ParameterSetName='fromUsbDrive',Mandatory)]
         [System.Management.Automation.SwitchParameter]
         #Searches for an OSDCloud USB
@@ -108,7 +108,12 @@ function New-OSDCloudWorkspace {
     #region Block
     Block-NoCurl
     Block-PowerShellVersionLt5
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-WinPE
     #endregion
@@ -124,12 +129,12 @@ function New-OSDCloudWorkspace {
         #	OSDCloudTemplate
         #=================================================
         $OSDCloudTemplate = Get-OSDCloudTemplate -ErrorAction Stop
-    
+
         if (-NOT ($OSDCloudTemplate)) {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud Template at $OSDCloudTemplate"
             Break
         }
-    
+
         if (-NOT (Test-Path $OSDCloudTemplate)) {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud Template at $OSDCloudTemplate"
             Break
@@ -193,7 +198,7 @@ function New-OSDCloudWorkspace {
 
         $fromIsoFileGetItem = Save-WebFile -SourceUrl $fromIsoUrl -DestinationDirectory (Join-Path $HOME 'Downloads')
         $fromIsoFileFullName = $fromIsoFileGetItem.FullName
-    
+
         if ($fromIsoFileGetItem -and $fromIsoFileGetItem.Extension -eq '.iso') {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloudISO downloaded to $fromIsoFileFullName"
         }
@@ -282,7 +287,7 @@ function New-OSDCloudWorkspace {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying from OSDCloud Template at $OSDCloudTemplate"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Source: $OSDCloudTemplate"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Destination: $WorkspacePath"
-    
+
         $null = robocopy "$OSDCloudTemplate" "$WorkspacePath" *.* /e /b /ndl /np /r:0 /w:0 /xj /xf workspace.json /LOG+:$WorkspaceLogs\Robocopy.log
         #=================================================
         #	Mirror Media
@@ -301,7 +306,7 @@ function New-OSDCloudWorkspace {
         #   WinPE Volume
         #=================================================
         $WinpeVolumes = $UsbVolumes | Where-Object {($_.FileSystemLabel -eq 'USBBOOT') -or ($_.FileSystemLabel -eq 'OSDBOOT') -or ($_.FileSystemLabel -eq 'USB BOOT') -or ($_.FileSystemLabel -eq 'WinPE')}
-    
+
         if ($WinpeVolumes) {
             foreach ($WinpeVolume in $WinpeVolumes) {
                 if (Test-Path -Path "$($WinPEVolume.DriveLetter):\") {
@@ -314,9 +319,9 @@ function New-OSDCloudWorkspace {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud USB WinPE volume"
             Break
         }
-    
+
         $OSDCloudVolumes = Get-USBVolume | Where-Object {($_.FileSystemLabel -eq 'OSDCloud') -or ($_.FileSystemLabel -eq 'OSDCloudUSB')}
-    
+
         if ($OSDCloudVolumes) {
             foreach ($OSDCloudVolume in $OSDCloudVolumes) {
                 if (! $Public) {
@@ -325,17 +330,17 @@ function New-OSDCloudWorkspace {
                         robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\Config" "$WorkspacePath\Config" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                     }
                 }
-    
+
                 if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks") {
                     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks to OSDCloud Workspace $WorkspacePath\DriverPacks"
                     robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\DriverPacks" "$WorkspacePath\DriverPacks" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                 }
-    
+
                 if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\OS") {
                     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\OS to OSDCloud Workspace $WorkspacePath\OS"
                     robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\OS" "$WorkspacePath\OS" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
                 }
-    
+
                 if (Test-Path "$($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell") {
                     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell to OSDCloud Workspace $WorkspacePath\PowerShell"
                     robocopy "$($OSDCloudVolume.DriveLetter):\OSDCloud\PowerShell" "$WorkspacePath\PowerShell" *.* /e /mt /ndl /njh /njs /r:0 /w:0 /xd "$RECYCLE.BIN" "System Volume Information"
@@ -355,12 +360,12 @@ function New-OSDCloudWorkspace {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud Media"
             Break
         }
-    
+
         if (-NOT (Test-Path $WinpeSourcePath)) {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud Media at $WinpeSourcePath"
             Break
         }
-    
+
         if (-NOT (Test-Path "$WinpeSourcePath\sources\boot.wim")) {
             Write-Warning "[$(Get-Date -format s)] Unable to find an OSDCloud WinPE at $WinpeSourcePath\sources\boot.wim"
             Break
@@ -394,11 +399,11 @@ function New-OSDCloudWorkspace {
         $null = Dismount-DiskImage -ImagePath $MountDiskImage.ImagePath
     }
     #endregion
-    
+
     #region Set WorkspacePath
     Set-OSDCloudWorkspace -WorkspacePath $WorkspacePath -ErrorAction Stop | Out-Null
     #endregion
-    
+
     #region Complete
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Yellow "Find your current OSDCloud Workspace:   " -NoNewline
@@ -437,9 +442,14 @@ function Set-OSDCloudWorkspace {
         [Parameter(Position=0)]
         [System.String]$WorkspacePath = "$env:SystemDrive\OSDCloud"
     )
-    
+
     #region Block
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-PowerShellVersionLt5
     Block-WinPE
     #endregion
@@ -483,7 +493,7 @@ function New-OSDCloudWorkSpaceSetupCompleteTemplate {
     $SetupCompletePath = "$OSDCloudWS\Config\Scripts\SetupComplete"
     $ScriptsPath = $SetupCompletePath
 
-    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath -ItemType Directory} 
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath -ItemType Directory}
 
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
 
@@ -492,11 +502,11 @@ function New-OSDCloudWorkSpaceSetupCompleteTemplate {
 
     $BatFilePath = "$($RunScript.Path)\$($RunScript.batFile)"
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
-            
+
     #Create Batch File to Call PowerShell File
     if (Test-Path -Path $PSFilePath){
         copy-item $PSFilePath -Destination "$ScriptsPath\SetupComplete.ps1.bak"
-    }        
+    }
     New-Item -Path $BatFilePath -ItemType File -Force
     $CustomActionContent = New-Object system.text.stringbuilder
     [void]$CustomActionContent.Append('%windir%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy ByPass -File C:\OSDCloud\Scripts\SetupComplete\SetupComplete.ps1')

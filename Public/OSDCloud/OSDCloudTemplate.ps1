@@ -19,14 +19,19 @@
     #>
     [CmdletBinding()]
     param ()
-    
+
     #region Block
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #endregion
-    
+
     #region template.json
     if (Test-Path "$env:ProgramData\OSDCloud\template.json") {
         $TemplateSettings = Get-Content -Path "$env:ProgramData\OSDCloud\template.json" | ConvertFrom-Json
@@ -80,7 +85,12 @@ function Get-OSDCloudTemplateNames {
 
     #region Block
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #endregion
@@ -163,7 +173,7 @@ function New-OSDCloudTemplate {
 
         [ValidateScript({
             if (-Not ($_ | Test-Path)) {
-                throw "CumulativeUpdate must be a valid path to a file." 
+                throw "CumulativeUpdate must be a valid path to a file."
             }
             if (-Not ($_ | Test-Path -PathType Leaf)) {
                 throw "CumulativeUpdate parameter must be a file, not a folder."
@@ -188,7 +198,7 @@ function New-OSDCloudTemplate {
         [System.Management.Automation.SwitchParameter]
         #Uses Windows 10 WinRE.wim instead of the ADK Boot.wim
         $WinRE,
-        
+
         [System.Management.Automation.SwitchParameter]
         #Adds 7Zip to Boot Image
         $Add7Zip
@@ -323,7 +333,12 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] $($MyInvocation.MyCommand.Name)"
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-NoCurl
@@ -416,12 +431,12 @@ Windows Registry Editor Version 5.00
     $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-New-OSDCloudTemplate.log"
     Start-Transcript -Path (Join-Path $TemplateLogs $Transcript) -ErrorAction Ignore
     #endregion
-    
+
     #region Mirror ADK Media
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Mirroring ADK Media using Robocopy"
     Write-Host -ForegroundColor Yellow 'Mirroring will remove any previous WinPE and will force a full rebuild'
-    
+
     $PathWinPEMedia = $WindowsAdkPaths.PathWinPEMedia
     Write-Host -ForegroundColor DarkGray "Source: $PathWinPEMedia"
 
@@ -475,14 +490,14 @@ Windows Registry Editor Version 5.00
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Replacing Boot Media font wgl4_boot.ttf"
         Write-Host -ForegroundColor Yellow "Replacing this file resolves an issue where WinPE does not boot to the proper display resolution"
-    
+
         $SourceUrl = 'https://github.com/OSDeploy/Archive-OSDCloud/raw/main/Media/boot/fonts/wgl4_boot.ttf'
         if (Test-WebConnection -Uri $SourceUrl) {
             Write-Host -ForegroundColor DarkGray "Source: $SourceUrl"
             Write-Host -ForegroundColor DarkGray "Destination: $DestinationMedia\boot\fonts\wgl4_boot.ttf"
             Save-WebFile -SourceUrl $SourceUrl -DestinationDirectory "$DestinationMedia\boot\fonts" -Overwrite | Out-Null
         }
-    
+
         $SourceUrl = 'https://github.com/OSDeploy/Archive-OSDCloud/raw/main/Media/efi/microsoft/boot/fonts/wgl4_boot.ttf'
         if (Test-WebConnection -Uri $SourceUrl) {
             Write-Host -ForegroundColor DarkGray "Source: $SourceUrl"
@@ -501,14 +516,14 @@ Windows Registry Editor Version 5.00
     $MountPath = $MountMyWindowsImage.Path
     Write-Host -ForegroundColor DarkGray "MountPath: $MountPath"
     #endregion
-    
+
     #region WinPE Information
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] WinPE Information"
     $WinPECurrentInfo = Get-RegCurrentVersion -Path $MountPath
     $WinPECurrentInfo
     #endregion
-    
+
     #region WinRE
     #=================================================
     if ($PSBoundParameters.ContainsKey('WinRE')) {
@@ -604,7 +619,7 @@ Windows Registry Editor Version 5.00
         'StorageWMI'
         'WDS-Tools'
     )
-    
+
     if ($OSArch -eq 'ARM64') {
         # Require specific order of install of packages or it fails.
         #$OCPackages =@('Dot3Svc','EnhancedStorage','MDAC','NetFx','PowerShell','Scripting','SecureBootCmdlets','WMI','StorageWMI','PmemCmdlets','DismCmdlets','SecureStartup','x64-Support','PlatformId')
@@ -619,7 +634,7 @@ Windows Registry Editor Version 5.00
         $OCPackages += 'MDAC'
     }
     #>
-    
+
     #endregion
 
     #region Install Default en-us Language
@@ -634,7 +649,7 @@ Windows Registry Editor Version 5.00
             Write-Host -ForegroundColor DarkGray "$SourceFile"
             $PackageName = "Add-WindowsPackage-WinPE-$Package"
             $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
-            
+
             Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
             Catch {Write-Host -ForegroundColor Red $CurrentLog}
         }
@@ -662,7 +677,7 @@ Windows Registry Editor Version 5.00
             Write-Host -ForegroundColor DarkGray "$SourceFile"
             $PackageName = "Add-WindowsPackage-WinPE-$Package`_$Lang"
             $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
-            
+
             Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
             Catch {Write-Host -ForegroundColor Red $CurrentLog}
         }
@@ -693,7 +708,7 @@ Windows Registry Editor Version 5.00
             Write-Host -ForegroundColor DarkGray "$SourceFile"
             $PackageName = "Add-WindowsPackage-WinPE-lp_$Lang"
             $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
-    
+
             Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
             Catch {Write-Host -ForegroundColor Red $CurrentLog}
         }
@@ -707,7 +722,7 @@ Windows Registry Editor Version 5.00
                 Write-Host -ForegroundColor DarkGray "$SourceFile"
                 $PackageName = "Add-WindowsPackage-WinPE-$Package`_$Lang"
                 $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$PackageName.log"
-                
+
                 Try {Add-WindowsPackage -Path $MountPath -PackagePath $SourceFile -LogPath "$CurrentLog" | Out-Null}
                 Catch {Write-Host -ForegroundColor Red $CurrentLog}
             }
@@ -719,7 +734,7 @@ Windows Registry Editor Version 5.00
             $CurrentLog = "$TemplateLogs\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Gen-LangINI.log"
             DISM /image:"$MountPath" /Gen-LangINI /distribution:"$MountPath" /LogPath:"$CurrentLog"
         }
-        
+
         Write-Host -ForegroundColor DarkGray "========================================================================="
         Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Save Windows Image"
         Write-Host -ForegroundColor Yellow "Dism Function: Save-WindowsImage"
@@ -822,8 +837,8 @@ Windows Registry Editor Version 5.00
     #=================================================
     if ($PSBoundParameters.ContainsKey('Add7Zip')) {
         Add-7Zip2BootImage
-    }    
-    
+    }
+
 
     #=================================================
     #   Adding Microsoft DartConfig from MDT
@@ -992,14 +1007,14 @@ Windows Registry Editor Version 5.00
     Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Windows Packages installed in WinPE"
     Get-WindowsPackage -Path $MountPath | Sort-Object -Property PackageName | Format-Table -AutoSize
     #endregion
-    
+
     #region Dismount Windows Image and Save
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Dismounting and Saving Windows Image"
     Write-Host -ForegroundColor Yellow "OSD Function: Dismount-MyWindowsImage"
     $MountMyWindowsImage | Dismount-MyWindowsImage -Save
     #endregion
-    
+
     #region Export WIM to reduce the size
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Exporting Boot.wim"
@@ -1029,7 +1044,7 @@ Windows Registry Editor Version 5.00
         Rename-Item -Path $DestinationImage -NewName 'boot.wim' -Force -ErrorAction Stop | Out-Null
     }
     #endregion
-    
+
     #region Create Config Directories
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Create Config Directories"
@@ -1043,7 +1058,7 @@ Windows Registry Editor Version 5.00
         'Config\Scripts\Startup',
         'Config\Scripts\StartNet'
     )
-    
+
     if ($Name -match 'public') {
         Write-Host -ForegroundColor DarkGray 'Skipping Config Directories for Public Template'
     }
@@ -1117,9 +1132,14 @@ function Set-OSDCloudTemplate {
         #Name of the OSDCloud Template
         $Name = 'default'
     )
-    
+
     #region Block
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-PowerShellVersionLt5
     Block-WinPE
     #endregion
@@ -1154,7 +1174,7 @@ function Set-OSDCloudTemplate {
         $TemplateSettings = [PSCustomObject]@{
             TemplatePath = $OSDCloudTemplate
         }
-    
+
         $TemplateSettings | ConvertTo-Json | Out-File "$env:ProgramData\OSDCloud\template.json" -Encoding ascii -Width 2000 -Force
     }
     $OSDCloudTemplate

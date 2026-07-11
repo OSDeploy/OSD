@@ -207,7 +207,12 @@ function Hide-OSDCloudREDrive {
     param ()
     Write-Verbose $MyInvocation.MyCommand
 
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     $OSDCloudREPartition = Get-OSDCloudREPartition
 
     if ($OSDCloudREPartition) {
@@ -560,7 +565,12 @@ function New-OSDCloudREVolume {
     )
     Write-Verbose $MyInvocation.MyCommand
 
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
 
     $WindowsPartition = Get-Partition | Where-Object {$env:SystemDrive -match $_.DriveLetter}
     $WindowsDiskNumber = $WindowsPartition.DiskNumber
@@ -703,7 +713,12 @@ function Set-OSDCloudREBootmgr {
     )
     Write-Verbose $MyInvocation.MyCommand
 
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
 
     if ($SetRamdisk -or $SetOSloader) {
         $OSDCloudREPartition = Get-OSDCloudREPartition
@@ -787,7 +802,12 @@ function Show-OSDCloudREDrive {
     param ()
     Write-Verbose $MyInvocation.MyCommand
 
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     $OSDCloudREPartition = Get-OSDCloudREPartition
 
     if ($OSDCloudREPartition) {

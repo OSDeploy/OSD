@@ -16,7 +16,12 @@ function Start-OOBEDeploy {
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=================================================
@@ -86,7 +91,7 @@ function Start-OOBEDeploy {
         Write-Host -ForegroundColor DarkGray "Importing Configuration $JsonPath"
         $ImportOOBEDeploy = @()
         $ImportOOBEDeploy = Get-Content -Raw -Path $JsonPath | ConvertFrom-Json
-    
+
         $ImportOOBEDeploy.PSObject.Properties | ForEach-Object {
             if ($_.Value -match 'IsPresent=True') {
                 $_.Value = $true
@@ -134,15 +139,15 @@ function Start-OOBEDeploy {
 
     if ($env:SystemDrive -eq 'X:') {
         Write-Host -ForegroundColor DarkGray "Exporting Configuration $ProgramDataOSDeploy\OSDeploy.OOBEDeploy.json"
-        @($Global:OOBEDeploy.Keys) | ForEach-Object { 
-            if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) } 
+        @($Global:OOBEDeploy.Keys) | ForEach-Object {
+            if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) }
         }
         $Global:OOBEDeploy | ConvertTo-Json | Out-File "$ProgramDataOSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Width 2000 -Force
     }
     else {
         Write-Host -ForegroundColor DarkGray "Exporting Configuration $env:Temp\OSDeploy.OOBEDeploy.json"
-        @($Global:OOBEDeploy.Keys) | ForEach-Object { 
-            if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) } 
+        @($Global:OOBEDeploy.Keys) | ForEach-Object {
+            if (-not $Global:OOBEDeploy[$_]) { $Global:OOBEDeploy.Remove($_) }
         }
         $Global:OOBEDeploy | ConvertTo-Json | Out-File "$env:Temp\OSDeploy.OOBEDeploy.json" -Encoding ascii -Width 2000 -Force
         #=================================================

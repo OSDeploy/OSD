@@ -236,7 +236,12 @@
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-PowerShellVersionLt5
     Block-NoCurl
     #=================================================
@@ -464,25 +469,25 @@
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select a ReleaseID for $OSVersion x64"
-            
+
             $i = $null
             $Global:StartOSDCloudCLI.OSReleaseIDMenu = foreach ($Item in $Global:StartOSDCloudCLI.OSReleaseIDValues) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloudCLI.OSReleaseIDMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloudCLI.OSReleaseIDMenu.Selection))))
-            
+
             $Global:StartOSDCloudCLI.OSReleaseID = $Global:StartOSDCloudCLI.OSReleaseIDMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSReleaseID = $Global:StartOSDCloudCLI.OSReleaseID
@@ -504,21 +509,21 @@
             $i = $null
             $Global:StartOSDCloudCLI.OSEditionMenu = foreach ($Item in $Global:StartOSDCloudCLI.OSEditionValues) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloudCLI.OSEditionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloudCLI.OSEditionMenu.Selection))))
-            
+
             $Global:StartOSDCloudCLI.OSEdition = $Global:StartOSDCloudCLI.OSEditionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         #=================================================
@@ -569,25 +574,25 @@
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select an Operating System License Activation"
-            
+
             $i = $null
             $Global:StartOSDCloudCLI.OSActivationMenu = foreach ($Item in $Global:StartOSDCloudCLI.OSActivationValues) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection           = $i
                     Name                = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloudCLI.OSActivationMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloudCLI.OSActivationMenu.Selection))))
-            
+
             $Global:StartOSDCloudCLI.OSActivationMenu = $Global:StartOSDCloudCLI.OSActivationMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
 
             if ($Global:StartOSDCloudCLI.OSActivationMenu -match 'Retail') {
@@ -619,21 +624,21 @@
             $i = $null
             $Global:StartOSDCloudCLI.OSLanguageMenu = foreach ($Item in $Global:StartOSDCloudCLI.OSLanguageValues) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloudCLI.OSLanguageMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloudCLI.OSLanguageMenu.Selection))))
-            
+
             $Global:StartOSDCloudCLI.OSLanguage = $Global:StartOSDCloudCLI.OSLanguageMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSLanguage = $Global:StartOSDCloudCLI.OSLanguage

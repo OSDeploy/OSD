@@ -22,7 +22,12 @@ function Start-DEVWimRobotCLI {
     #   Block
     #=================================================
     Show-WimRobotTime; Write-Host 'Verify Admin Rights'
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Show-WimRobotTime; Write-Host 'Verify Windows 10 or Higher'
     Block-WindowsVersionNe10
     #=================================================
@@ -86,7 +91,7 @@ function Start-DEVWimRobotCLI {
 
 
 
-    
+
 
 
 
@@ -174,7 +179,7 @@ function Start-DEVWimRobotCLI {
         }
 
         if ($Update -eq 'Check') {Continue}
-                
+
 <#      if ($BitsTransfer.IsPresent) {
             $UpdateFile = Save-OSDDownload -SourceUrl $item.OriginUri -BitsTransfer -Verbose
         } else {

@@ -191,7 +191,12 @@
     #	Block
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-NoCurl
@@ -325,7 +330,7 @@
     else {
         $InitializeOSDCloudStartnetCommand = "Initialize-OSDCloudStartnet"
     }
-    
+
 $StartnetCMD = @"
 @ECHO OFF
 wpeinit
@@ -348,7 +353,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C `"$StartPSCommand`"" -Force
     }
     #endregion
-    
+
     #region Startup Parameter: StartURL
     if ($StartURL) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Startnet.cmd: Launch URL on WinPE Startup"
@@ -373,13 +378,13 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
 
         Write-Host '@ECHO OFF'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
-        
-        Write-Host 'ECHO Start-OSDCloud'        
+
+        Write-Host 'ECHO Start-OSDCloud'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO Start-OSDCloud' -Force
-        
+
         Write-Host "start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value "start /wait PowerShell -NoL -C Start-OSDCloud $StartOSDCloud"
-        
+
         Write-Host '@ECHO ON'
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO ON' -Force
     }
@@ -407,7 +412,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     if ($StartOSDPad) {
         Write-Warning "The StartOSDPad parameter is adding OSDPad to Startnet.cmd"
         Write-Warning "This must be set every time you run Edit-OSDCloudWinPE or it will revert back to defaults"
-        
+
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Startnet.cmd: start /wait PowerShell -NoL -C OSDPad $StartOSDPad"
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value '@ECHO OFF' -Force
         Add-Content -Path "$MountPath\Windows\System32\Startnet.cmd" -Value 'ECHO OSDPad' -Force
@@ -455,9 +460,9 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     if ($PSBoundParameters.ContainsKey('Add7Zip')) {
         Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Adding 7zip (7za.exe) to WinPE"
         Add-7Zip2BootImage
-    }   
+    }
     #endregion
-    
+
     #region CMTrace
     #Copy CMTrace from WorkSpace to WinPE - Gary Blok 25.1.22
     if (Test-Path "$WorkspacePath\cmtrace.exe") {
@@ -509,14 +514,14 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
                 Copy-Item -Path "$env:SystemRoot\System32\vcruntime140_1.dll" -Destination "$MountPath\Windows\System32\vcruntime140_1.dll" -Force | Out-Null
             }
         }
-        
+
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
         if ($Module -eq 'HPCMSL'){
             Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force -AcceptLicense
         }
         else {
             Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
-        } 
+        }
     }
     #endregion
 
@@ -540,7 +545,7 @@ PowerShell -Nol -C Initialize-OSDCloudStartnetUpdate
     #region UpdateUSB
     if ($UpdateUSB) {
         $WinpeVolumes = (Get-USBVolume | Where-Object {$_.FileSystemLabel -eq 'WinPE'}).DriveLetter
-    
+
         if ($WinpeVolumes) {
             foreach ($WinpeVolume in $WinpeVolumes) {
                 Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $WorkspacePath\Media to $($WinpeVolume):\"

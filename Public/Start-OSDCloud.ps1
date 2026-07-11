@@ -93,7 +93,7 @@
 .NOTES
     Author: David Segura - Recast Software
     2026-07-09 - Standardized comment-based help metadata and links.
-    - Requires the OSD module helper functions used by the workflow (Get-FeatureUpdate, Invoke-OSDCloud, 
+    - Requires the OSD module helper functions used by the workflow (Get-FeatureUpdate, Invoke-OSDCloud,
       Find-OSDCloudFile, Get-MyComputerManufacturer, Get-MyComputerProduct, Start-ScreenPNGProcess, etc.).
     - This function changes global state: $Global:StartOSDCloud and may interact with $Global:StartOSDCloudGUI.
     - Intended to be run in WinPE or full Windows with administrative privileges.
@@ -296,7 +296,12 @@ function Start-OSDCloud {
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-PowerShellVersionLt5
     Block-NoCurl
     #=================================================
@@ -500,25 +505,25 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select a Build for $OSVersion x64"
             $Global:StartOSDCloud.OSBuildNames = @('25H2','24H2','23H2','22H2')
-            
+
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSBuildMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSBuildMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSBuild = $Global:StartOSDCloud.OSBuildMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSBuild = $Global:StartOSDCloud.OSBuild
@@ -541,21 +546,21 @@ function Start-OSDCloud {
             $i = $null
             $Global:StartOSDCloud.OSEditionMenu = foreach ($Item in $Global:StartOSDCloud.OSEditionNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSEditionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSEditionMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSEdition = $Global:StartOSDCloud.OSEditionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         #=================================================
@@ -606,25 +611,25 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select an Operating System License"
             $Global:StartOSDCloud.OSActivationNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
-            
+
             $i = $null
             $Global:StartOSDCloud.OSActivationMenu = foreach ($Item in $Global:StartOSDCloud.OSActivationNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection           = $i
                     Name                = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSActivationMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSActivationMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSActivationMenu = $Global:StartOSDCloud.OSActivationMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
 
             if ($Global:StartOSDCloud.OSActivationMenu -match 'Retail') {
@@ -653,25 +658,25 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select an Operating System Language"
             $Global:StartOSDCloud.OSLanguageNames = @('ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr','en-gb','en-us','es-es','es-mx','et-ee','fi-fi','fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','zh-cn','zh-tw')
-            
+
             $i = $null
             $Global:StartOSDCloud.OSLanguageMenu = foreach ($Item in $Global:StartOSDCloud.OSLanguageNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSLanguageMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSLanguageMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSLanguage = $Global:StartOSDCloud.OSLanguageMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSLanguage = $Global:StartOSDCloud.OSLanguage
