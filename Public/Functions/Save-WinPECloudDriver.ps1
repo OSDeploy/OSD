@@ -2,11 +2,11 @@ function Save-WinPECloudDriver {
     <#
     .SYNOPSIS
     Download and expand WinPE Drivers
-    
+
     .DESCRIPTION
     Download and expand WinPE Drivers
     This function must be run in Windows
-    
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
     #>
@@ -32,7 +32,12 @@ function Save-WinPECloudDriver {
     #	Block
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=================================================
@@ -44,7 +49,7 @@ function Save-WinPECloudDriver {
 
     $DellCloudDriverText                = 'Dell WinPE Driver Pack'
     $DellCloudDriverPack                = Get-DellWinPEDriverPack
-    
+
     $HpCloudDriverText                  = 'HP WinPE Driver Pack'
     $HpCloudDriverPack                  = Get-HpWinPEDriverPack
 
@@ -141,7 +146,7 @@ function Save-WinPECloudDriver {
                                         'MSHW0184' #Light Sensor
                                         )
                                         #'VEN_8086&DEV_A0D0 VEN_8086&DEV_43D0 VEN_8086&DEV_A0D1 VEN_8086&DEV_43D1' #Touch
-    
+
     $UsbDongleHwidsText                 = 'USB Dongle Driver Pack [Microsoft Catalog]'
     $UsbDongleHwids                     = @(
                                         'VID_045E&PID_0927 VID_045E&PID_0927 VID_045E&PID_09A0 Surface Ethernet'
@@ -151,7 +156,7 @@ function Save-WinPECloudDriver {
                                         'VID_13B1&PID_0041'
                                         'VID_17EF&PID_720C Lenovo USB-C Ethernet'
                                         )
-    
+
     $VmwareCloudDriverText              = 'VMware WinPE Driver Pack [Microsoft Catalog]'
     $VmwareCloudDriverHwids             = @(
                                         'VEN_15AD&DEV_0740' #VMware Virtual Machine Communication Interface
@@ -162,7 +167,12 @@ function Save-WinPECloudDriver {
     #	Block
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-NoCurl
@@ -206,7 +216,7 @@ function Save-WinPECloudDriver {
             if (Test-Path $DriverPackDownload.FullName) {
                     $DriverPackItem = Get-Item -Path $DriverPackDownload.FullName
                     $DriverPackExpand = Join-Path $Path (Join-Path $DriverPack $DriverPackItem.BaseName)
-            
+
                     if (-NOT (Test-Path $DriverPackExpand)) {
                         New-Item -Path $DriverPackExpand -ItemType Directory -Force | Out-Null
                     }
@@ -242,8 +252,8 @@ function Save-WinPECloudDriver {
                     Start-Process -FilePath $DriverPackItem -ArgumentList "/s /e /f `"$DriverPackExpand`"" -Wait
                 }
             }
-            else {  
-                Write-Warning "Unable to connect to $HpCloudDriverPack"  
+            else {
+                Write-Warning "Unable to connect to $HpCloudDriverPack"
             }
         }
         #=================================================
