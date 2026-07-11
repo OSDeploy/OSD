@@ -1,33 +1,43 @@
-<#
-.LINK
-    https://www.osdeploy.com
-.SYNOPSIS
-    Creates a Bootable FAT32 USB (32GB or smaller) and copies a Mounted ISO.
-.DESCRIPTION
-    Creates a Bootable FAT32 USB (32GB or smaller) and copies a Mounted ISO.
-.PARAMETER ISOFile
-    Full path to the ISO file to Mount
-.PARAMETER MakeBootable
-    Uses Bootsect to make the USB Bootable
-.PARAMETER USBDriveLabel
-    USB Drive Label (no spaces)
-.EXAMPLE
-    Copy-IsoToUsb -ISOFile "C:\Temp\SW_DVD5_Win_Pro_Ent_Edu_N_10_1709_64BIT_English_MLF_X21-50143.ISO" -MakeBootable -USBDriveLabel WIN10X64
-    You will be prompted to select a USB Drive in GridView
-.NOTES
-    NAME:	Copy-IsoToUsb.ps1
-    AUTHOR:	David Segura, david@segura.org
-    BLOG:	http://www.osdeploy.com
-    VERSION:	18.9.4
-            
-    Original credit to Mike Robbins
-    http://mikefrobbins.com/2018/01/18/use-powershell-to-create-a-bootable-usb-drive-from-a-windows-10-or-windows-server-2016-iso/
-    
-    Additional credit to Sergey Tkachenko
-    https://winaero.com/blog/powershell-windows-10-bootable-usb/
-#>
-
 function Copy-IsoToUsb {
+    <#
+    .SYNOPSIS
+    Creates a bootable USB drive from a Windows ISO.
+
+    .DESCRIPTION
+    Formats a selected USB disk, mounts the ISO, and copies installation files
+    to the USB volume. Supports FAT32 or NTFS, optional bootsect execution, and
+    optional splitting of large install.wim files.
+
+    .PARAMETER ISOFile
+    Full path to the ISO file to mount and copy.
+
+    .PARAMETER MakeBootable
+    Runs bootsect.exe against the USB drive after formatting.
+
+    .PARAMETER NTFS
+    Formats the USB drive as NTFS instead of FAT32.
+
+    .PARAMETER SplitWim
+    Forces splitting install.wim into .swm files during copy.
+
+    .PARAMETER USBLabel
+    File system label assigned to the USB drive.
+
+    .EXAMPLE
+    Copy-IsoToUsb -ISOFile 'C:\Temp\Win11.iso' -MakeBootable -USBLabel WIN11
+    Creates a bootable USB and copies the ISO contents.
+
+    .EXAMPLE
+    Copy-IsoToUsb -ISOFile 'C:\Temp\Win11.iso' -NTFS -USBLabel WIN11NTFS
+    Creates an NTFS-formatted USB and copies the ISO contents.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Updated comment-based help
+    #>
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory)]

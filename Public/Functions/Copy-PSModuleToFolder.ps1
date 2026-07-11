@@ -1,4 +1,36 @@
 function Copy-PSModuleToFolder {
+    <#
+    .SYNOPSIS
+    Copies PowerShell modules to a destination module path.
+
+    .DESCRIPTION
+    Finds the latest installed version of each requested module and copies it to
+    the destination using the standard module\version folder layout.
+
+    .PARAMETER Name
+    One or more module names to copy.
+
+    .PARAMETER Destination
+    Destination root folder for copied modules.
+
+    .PARAMETER RemoveOldVersions
+    Removes existing module content from the destination before copying.
+
+    .EXAMPLE
+    Copy-PSModuleToFolder -Name OSD -Destination 'C:\Modules'
+    Copies the latest installed OSD module to C:\Modules\OSD\<version>.
+
+    .EXAMPLE
+    Copy-PSModuleToFolder -Name OSD,PackageManagement -Destination 'C:\Modules' -RemoveOldVersions
+    Removes existing destination module content and copies fresh module versions.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]

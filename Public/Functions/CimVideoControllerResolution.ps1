@@ -1,17 +1,31 @@
-<#
-.SYNOPSIS
-Returns the CIM_VideoControllerResolution Properties for the Primary Screen
-
-.DESCRIPTION
-Returns the CIM_VideoControllerResolution Properties for the Primary Screen
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
-
-.NOTES
-21.2.1  Initial Release
-#>
 function Get-CimVideoControllerResolution {
+    <#
+    .SYNOPSIS
+    Returns CIM video controller resolution entries for the system display adapter.
+
+    .DESCRIPTION
+    Queries CIM_VideoControllerResolution, filters out low resolutions, and returns
+    either progressive or interlaced modes based on the selected switch.
+
+    .PARAMETER Interlaced
+    Returns interlaced resolutions when specified. By default, progressive
+    resolutions are returned.
+
+    .EXAMPLE
+    Get-CimVideoControllerResolution
+    Returns progressive resolutions with a horizontal resolution of 800 or higher.
+
+    .EXAMPLE
+    Get-CimVideoControllerResolution -Interlaced
+    Returns interlaced resolutions with a horizontal resolution of 800 or higher.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Updated comment-based help
+    #>
     [CmdletBinding()]
     param (
 

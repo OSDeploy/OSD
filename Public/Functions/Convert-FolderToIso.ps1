@@ -1,4 +1,44 @@
 function Convert-FolderToIso {
+    <#
+    .SYNOPSIS
+    Creates an ISO file from a source folder.
+
+    .DESCRIPTION
+    Uses Windows ADK oscdimg to create a standard or bootable ISO from a folder.
+    The function validates required boot files when present and supports optional
+    no-prompt UEFI boot media generation.
+
+    .PARAMETER folderFullName
+    Source folder path to convert into an ISO.
+
+    .PARAMETER isoFullName
+    Destination ISO file path. If omitted, an ISO is created beside the source
+    folder using the folder name.
+
+    .PARAMETER isoLabel
+    ISO volume label. Must be 1 to 16 characters.
+
+    .PARAMETER noPrompt
+    Uses efisys_noprompt.bin when available for UEFI boot media.
+
+    .PARAMETER WindowsAdkRoot
+    Optional Windows ADK root path used to resolve oscdimg.exe.
+
+    .EXAMPLE
+    Convert-FolderToIso -folderFullName 'C:\OSD\Media'
+    Creates C:\OSD\Media.iso from the specified folder.
+
+    .EXAMPLE
+    Convert-FolderToIso -folderFullName 'C:\OSD\Media' -isoFullName 'C:\ISO\Custom.iso' -isoLabel 'CustomISO' -noPrompt
+    Creates a bootable ISO at the specified destination with a custom label.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Added comment-based help
+    #>
     [CmdletBinding(PositionalBinding = $false)]
     param (
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
