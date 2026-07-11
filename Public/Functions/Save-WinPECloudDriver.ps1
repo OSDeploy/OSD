@@ -35,7 +35,7 @@ function Save-WinPECloudDriver {
     $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
     if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
         return
     }
     Block-WindowsVersionNe10
@@ -170,7 +170,7 @@ function Save-WinPECloudDriver {
     $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
     if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
         return
     }
     Block-WindowsVersionNe10

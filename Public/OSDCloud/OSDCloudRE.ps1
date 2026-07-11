@@ -210,7 +210,7 @@ function Hide-OSDCloudREDrive {
     $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
     if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
         return
     }
     $OSDCloudREPartition = Get-OSDCloudREPartition
@@ -568,7 +568,7 @@ function New-OSDCloudREVolume {
     $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
     if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
         return
     }
 
@@ -716,7 +716,7 @@ function Set-OSDCloudREBootmgr {
     $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
     if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
         return
     }
 
@@ -805,7 +805,7 @@ function Show-OSDCloudREDrive {
     $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
     if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
         return
     }
     $OSDCloudREPartition = Get-OSDCloudREPartition
