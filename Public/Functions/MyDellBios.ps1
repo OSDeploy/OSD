@@ -62,7 +62,7 @@ function Save-MyDellBios {
     )
     #Make sure Computer is a Dell
     if ((Get-MyComputerManufacturer -Brief) -eq 'Dell') {
-        
+
         #See if we can get the Dell BIOS
         $GetMyDellBios = Get-MyDellBios
 
@@ -139,7 +139,12 @@ function Update-MyDellBios {
     #=================================================
     #   Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     #=================================================
     #   Require Dell Computer
     #=================================================
@@ -168,7 +173,7 @@ function Update-MyDellBios {
         $SaveMyDellBios = Save-MyDellBios -DownloadPath $DownloadPath
         if (-NOT ($SaveMyDellBios)) {Return $null}
         if (-NOT (Test-Path $SaveMyDellBios.FullName)) {Return $null}
-    
+
         if (($env:SystemDrive -eq 'X:') -and ($env:PROCESSOR_ARCHITECTURE -match '64')) {
             $SaveMyDellBiosFlash64W = Save-MyDellBiosFlash64W -DownloadPath $DownloadPath
             if (-NOT ($SaveMyDellBiosFlash64W)) {Return $null}
@@ -198,7 +203,7 @@ function Update-MyDellBios {
         #   Arguments
         #=================================================
         $BiosLog = Join-Path $env:TEMP 'Update-MyDellBios.log'
-    
+
         $Arguments = "/l=`"$BiosLog`""
         if ($Reboot) {
             $Arguments = $Arguments + " /r /s"
@@ -251,7 +256,7 @@ function Save-MyDellBiosFlash64W {
 function Test-MyDellBiosWebConnection {
     [CmdletBinding()]
     param ()
-    
+
     $GetMyDellBios = Get-MyDellBios
     if ($GetMyDellBios) {
         Test-WebConnection -Uri $GetMyDellBios.Url

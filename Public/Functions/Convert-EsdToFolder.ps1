@@ -34,7 +34,12 @@ function Convert-EsdToFolder {
     #=================================================
     #	Blocks
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-WindowsReleaseIdLt1703
     #=================================================
@@ -50,7 +55,7 @@ function Convert-EsdToFolder {
         if (! ($folderFullName)) {
             $folderFullName = Join-Path $esdGetItem.Directory $esdGetItem.BaseName
         }
-        
+
         if (Test-Path $folderFullName) {
             Write-Warning "Delete exiting folder at $folderFullName"
             Break
@@ -92,4 +97,3 @@ function Convert-EsdToFolder {
         #=================================================
     }
 }
-

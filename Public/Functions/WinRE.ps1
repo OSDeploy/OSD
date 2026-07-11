@@ -27,7 +27,12 @@ function Copy-WinREWIM {
     #	Block
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=================================================
@@ -35,7 +40,7 @@ function Copy-WinREWIM {
     #=================================================
     $GetPartitionWinRE = Get-WinREPartition -ErrorAction Stop
     #$GetPartitionWinRE | Select-Object -Property * | Format-List
-    
+
     if ($GetPartitionWinRE) {
         #=================================================
         #	Get WinrePartitionDriveLetter
@@ -120,7 +125,12 @@ function Get-ReAgentXml {
     #	Block
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=================================================
@@ -134,7 +144,7 @@ function Get-ReAgentXml {
 
         $XmlDocument.SelectNodes('WindowsRE') | ForEach-Object {
 
-            
+
             $WinreLocationGuid = $_.WinreLocation.guid
             $WinreLocationId = $_.WinreLocation.id
             $WinreLocationOffset = $_.WinreLocation.offset

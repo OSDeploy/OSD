@@ -55,7 +55,12 @@ function Convert-EsdToIso {
     #=================================================
     #	Blocks
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-WindowsReleaseIdLt1703
     #=================================================
@@ -75,7 +80,7 @@ function Convert-EsdToIso {
             #$isoFullName = $(Join-Path $env:TEMP $([string]$(Get-Random) + '.iso'))
             $isoFullName = Join-Path $esdGetItem.Directory ($esdGetItem.BaseName + '.iso')
         }
-        
+
         if (Test-Path $isoFullName) {
             Write-Warning "Delete exiting ISO at $isoFullName"
             Break
@@ -136,4 +141,3 @@ function Convert-EsdToIso {
         #=================================================
     }
 }
-

@@ -33,7 +33,12 @@ function Convert-EsdToWim {
     #=================================================
     #	Blocks
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     Block-WindowsReleaseIdLt1703
     #=================================================
@@ -49,7 +54,7 @@ function Convert-EsdToWim {
         if (! ($wimFullName)) {
             $wimFullName = Join-Path $esdGetItem.Directory ($esdGetItem.BaseName + '.wim')
         }
-        
+
         if (Test-Path $wimFullName) {
             Write-Warning "Delete exiting WIM at $wimFullName"
             Break
@@ -89,4 +94,3 @@ function Convert-EsdToWim {
         #=================================================
     }
 }
-

@@ -58,7 +58,12 @@ function Edit-MyWinPE {
         #	Block
         #=================================================
         Block-WinPE
-        Block-StandardUser
+        $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+        if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+            return
+        }
         Block-WindowsVersionNe10
         Block-PowerShellVersionLt5
         #=================================================
@@ -117,7 +122,7 @@ function Edit-MyWinPE {
 
             if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
                 Write-Warning "$($MyInvocation.MyCommand) can only service WinPE with MajorVersion 10"
-                
+
                 $MountMyWindowsImage | Dismount-MyWindowsImage -Discard
                 Continue
             }

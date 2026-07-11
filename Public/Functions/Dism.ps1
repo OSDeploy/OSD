@@ -49,7 +49,12 @@ function Add-WindowsPackageSSU {
     #=================================================
     #   Blocks
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-WindowsVersionNe10
     #=================================================
     #   Test PackagePath
@@ -403,7 +408,7 @@ function Edit-MyWindowsImage {
                         Write-Verbose "$($_.Name): Removing Appx Package $($_.PackageFullName)" -Verbose
                         Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
                         Catch {Write-Warning "$($_.Name): Removing Appx Package $($_.PackageFullName) did not complete successfully"}
-                    } 
+                    }
                 }
             }
             #=================================================
@@ -415,7 +420,7 @@ function Edit-MyWindowsImage {
                         Write-Verbose "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName)" -Verbose
                         Try {Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName | Out-Null}
                         Catch {Write-Warning "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName) did not complete successfully"}
-                    } 
+                    }
                 }
             }
             #=================================================
@@ -463,10 +468,10 @@ function Edit-MyWindowsImage {
                 #=================================================
                 Write-Verbose "Verifying WinPE 10"
                 $GetRegCurrentVersion = Get-RegCurrentVersion -Path $MountMyWindowsImage.Path
-    
+
                 if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
                     Write-Warning "$($MyInvocation.MyCommand) can only service WinPE with MajorVersion 10"
-                    
+
                     $MountMyWindowsImage | Dismount-MyWindowsImage -Discard
                     Continue
                 }
@@ -487,7 +492,7 @@ function Edit-MyWindowsImage {
                             $DismLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Edit-MyWindowsImage.log"
                             Write-Verbose "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName)" -Verbose
                             Remove-AppxProvisionedPackage -Path $_.Path -PackageName $_.PackageName -LogPath $DismLog | Out-Null
-                        } 
+                        }
                     }
                 }
                 #=================================================
@@ -1191,7 +1196,12 @@ function Remove-AppxOnline {
         #=================================================
         #   Blocks
         #=================================================
-        Block-StandardUser
+        $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+        if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+            return
+        }
         Block-WindowsVersionNe10
         #=================================================
     }
@@ -1225,7 +1235,7 @@ function Remove-AppxOnline {
             if (Get-Command Get-AppxPackage) {
                 if ((Get-Command Get-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                     Get-AppxPackage -AllUsers | Select-Object * | Where-Object {$_.NonRemovable -ne $true} | Where-Object {$_.Name -Match $Item} | ForEach-Object {
-                        
+
                         Write-Host -ForegroundColor DarkCyan $_.Name
                         if ((Get-Command Remove-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                             Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
@@ -1242,7 +1252,7 @@ function Remove-AppxOnline {
                     }
                 } else {
                     Get-AppxPackage | Select-Object * | Where-Object {$_.NonRemovable -ne $true} | Where-Object {$_.Name -Match $Item} | ForEach-Object {
-                        
+
                         Write-Host -ForegroundColor DarkCyan $_.Name
                         if ((Get-Command Remove-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                             Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
@@ -1496,7 +1506,7 @@ function Test-WindowsPackageCAB {
         [System.String]
         $Path
     )
-    
+
     try {
         $WinPackage = $null
         if ($Path) {
@@ -1509,7 +1519,7 @@ function Test-WindowsPackageCAB {
     catch {
         Write-Verbose -Message $_.Exception.Message
     }
-    
+
     Write-Verbose -Message $PackagePath
     Write-Verbose -Message $Path
 
@@ -1581,7 +1591,12 @@ function Update-MyWindowsImage {
         #=================================================
         #   Block
         #=================================================
-        Block-StandardUser
+        $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+        if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+            return
+        }
         Block-WindowsVersionNe10
         #=================================================
         #   Get-WindowsImage Mounted
@@ -1674,7 +1689,7 @@ function Update-MyWindowsImage {
                 }
 
                 if ($Update -eq 'Check') {Continue}
-                
+
 <#                 if ($BitsTransfer.IsPresent) {
                     $UpdateFile = Save-OSDDownload -SourceUrl $item.OriginUri -BitsTransfer -Verbose
                 } else {

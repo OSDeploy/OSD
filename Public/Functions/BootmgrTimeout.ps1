@@ -21,7 +21,7 @@ function Set-BootmgrTimeout {
     Author: David Segura - Recast Software
     2026-07-11 - Updated comment-based help
     #>
-    
+
     [CmdletBinding()]
     [OutputType([System.Void])]
     param (
@@ -29,8 +29,11 @@ function Set-BootmgrTimeout {
         [uint32]
         $Timeout
     )
-    Write-Verbose $MyInvocation.MyCommand
-
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     $null = bcdedit /set '{bootmgr}' timeout $Timeout
 }

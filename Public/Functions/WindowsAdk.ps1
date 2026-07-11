@@ -23,7 +23,12 @@ function Edit-AdkWinPEWIM {
     #	Blocks
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required to run this function"
+        return
+    }
     Block-NoCurl
     #=================================================
     #	Set VerbosePreference
@@ -272,7 +277,7 @@ function Get-WindowsAdkPaths {
         $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
         $RegistryValue = 'KitsRoot10'
         $KitsRoot10 = $null
- 
+
         if (Test-Path -Path $InstalledRoots64) {
             $RegistryKey = Get-Item -Path $InstalledRoots64
             if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
@@ -402,7 +407,7 @@ function Get-WindowsKitsInstallPath {
     $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
     # 64-bit Registry
     $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
-    
+
     $RegistryValue = 'KitsRoot10'
     $KitsRoot10 = $null
 
