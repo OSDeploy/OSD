@@ -860,15 +860,15 @@ $formMainWindowControlStartButton.add_Click({
     }
     #>
     #=================================================
-    #   Invoke-StartOSDCloud.ps1
+    #   Invoke-RecastOSDCloud.ps1
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Invoke-StartOSDCloud Configuration"
+    Write-Host -ForegroundColor Green "Invoke-RecastOSDCloud Configuration"
     $Global:InvokeOSDCloud | Out-Host
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Invoke-StartOSDCloud ... Starting in 5 seconds..."
+    Write-Host -ForegroundColor Green "Invoke-RecastOSDCloud ... Starting in 5 seconds..."
     Start-Sleep -Seconds 5
-    Invoke-StartOSDCloud
+    Invoke-RecastOSDCloud
     #=================================================
 })
 #================================================
