@@ -160,21 +160,12 @@ function Start-RecastOSDCloudGUI {
         $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $global:OSDCoreDevice.OSDProduct } | Select-Object -First 1
     }
 
-    if ($global:OSDCoreDriverPackObject) {
-        # Log resolved driver pack details to make selection behavior explicit.
-        $DriverPackName = $global:OSDCoreDriverPackObject.Name
-        $DriverPackUrl = $global:OSDCoreDriverPackObject.Url
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDManufacturer: $($global:OSDCoreDevice.OSDManufacturer)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
 
-        Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] OSDManufacturer: $($global:OSDCoreDevice.OSDManufacturer)"
-        Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
-        Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
-        Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] DriverPack Name: $DriverPackName"
-        Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] DriverPack Url: $DriverPackUrl"
-    }
-    else {
-        Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] OSDManufacturer: $($global:OSDCoreDevice.OSDManufacturer)"
-        Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
-        Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
+    if ($global:OSDCoreDriverPackObject) {
+        $global:OSDCoreDriverPackObject
     }
     #=================================================
     # Dependency guard: OSDCloud relies on curl.exe for downloads.
@@ -243,25 +234,19 @@ function Start-RecastOSDCloudGUI {
     $Global:OSDCloudGUI = [ordered]@{
         Function              = [System.String]'Start-RecastOSDCloudGUI'
         LaunchMethod          = [System.String]'OSDCloudGUI'
-
         AutomateConfiguration = $null
         AutomateJsonFile      = $null
-
         BrandName             = [System.String]$BrandName
         BrandColor            = [System.String]$BrandColor
-
         ComputerManufacturer  = [System.String]$OSDManufacturer
         ComputerModel         = [System.String]$OSDModel
         ComputerProduct       = [System.String]$OSDProduct
-
         # DriverPack                  = $null
         # DriverPacks                 = $null
         # DriverPackName        = $DriverPackName
         # DriverPackObject      = $DriverPackObject
         # DriverPackValues      = [array]$DriverPackValues
-
         IsOnBattery           = [System.Boolean]$global:OSDCoreDevice.IsOnBattery
-
         OSActivation          = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Activation
         OSEdition             = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Edition
         OSLanguage            = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Language
@@ -269,7 +254,6 @@ function Start-RecastOSDCloudGUI {
         OSName                = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Name
         OSReleaseID           = [System.String]$Global:OSDModuleResource.OSDCloud.Default.ReleaseID
         OSVersion             = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Version
-
         OSActivationValues    = [array]$Global:OSDModuleResource.OSDCloud.Values.Activation
         OSEditionValues       = [array]$Global:OSDModuleResource.OSDCloud.Values.Edition
         OSLanguageValues      = [array]$Global:OSDModuleResource.OSDCloud.Values.Language
