@@ -29,19 +29,6 @@ Side effects:
 function Initialize-OSDCoreDevice {
     [CmdletBinding()]
     param ()
-    function ConvertTo-TrimmedString {
-        param(
-            [Parameter(ValueFromPipeline = $true)]
-            $Value
-        )
-
-        process {
-            if ($null -eq $Value) {
-                return $null
-            }
-            return $Value.ToString().Trim()
-        }
-    }
     #=================================================
     $Error.Clear()
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
