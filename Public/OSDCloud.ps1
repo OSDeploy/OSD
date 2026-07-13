@@ -9,12 +9,12 @@
     .EXAMPLE
     Invoke-OSDCloud
 
-    .NOTES
-    Author: David Segura - Recast Software
-    2026-07-09 - Standardized comment-based help metadata and links.
-
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-12 - Updated comment-based help section order to OSD standard.
     #>
     [CmdletBinding()]
     param ()
@@ -57,7 +57,7 @@
         )
         Write-DarkGrayLine
         Write-DarkGrayDate
-        Write-Host -ForegroundColor Cyan $Message
+        Write-Host -ForegroundColor DarkCyan $Message
     }
     function Write-SectionSuccess {
         [CmdletBinding()]
