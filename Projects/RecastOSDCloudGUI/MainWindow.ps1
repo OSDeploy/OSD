@@ -498,7 +498,7 @@ foreach ($Item in $OSDCloudOSIso) {
         #ISO is already mounted
     }
     else {
-        Write-Host "Mounting OSDCloud OS ISO $($Item.FullName)" -ForegroundColor Cyan
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Mounting OSDCloud OS ISO $($Item.FullName)"
         $Results = Mount-DiskImage -ImagePath $Item.FullName
         $Results | Select-Object -Property Attached,DevicePath,ImagePath,Number,Size | Format-List
     }
@@ -721,14 +721,9 @@ $formMainWindowControlStartButton.add_Click({
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
         $tempOSNameCombo = $formMainWindowControlOSNameCombobox.SelectedValue
         $OSName = $tempOSNameCombo -replace 'x64', 'amd64'
-        # Write-Host "OSName: $OSName"
-        # Write-Host "OSActivation: $OSActivation"
-        # Write-Host "OSEdition: $OSEdition"
-        # Write-Host "OSLanguage: $OSLanguage"
-        # Write-Host "OSImageIndex: $OSImageIndex"
         $global:OSDCoreOperatingSystemObject = $global:OSDCoreOperatingSystems | Where-Object { $_.Name -match $OSName } | Where-Object { $_.Activation -eq $OSActivation } | Where-Object { $_.Language -eq $OSLanguage }
         if (-not $global:OSDCoreOperatingSystemObject) {
-            throw "Unable to find a matching operating system object for OSName '$OSName', Activation '$OSActivation', and Language '$OSLanguage'."
+            throw "[$(Get-Date -format s)] Unable to find a matching operating system object for OSName '$OSName', Activation '$OSActivation', and Language '$OSLanguage'."
         }
         $OSBuild = $global:OSDCoreOperatingSystemObject.Build
         $OSReleaseID = $global:OSDCoreOperatingSystemObject.ReleaseID
@@ -762,7 +757,18 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     if ($formMainWindowControlDriverPackCombobox.Text) {
         $selectedDriverPackName = $formMainWindowControlDriverPackCombobox.Text
-        $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks.DriverPackValues | Where-Object {$_.Name -eq $selectedDriverPackName}
+        $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object {$_.Name -eq $selectedDriverPackName}
+    }
+    #================================================
+    #   Output OSDCore Objects
+    #================================================
+    if ($global:OSDCoreOperatingSystemObject) {
+        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCloud Operating System Object:"
+        $global:OSDCoreOperatingSystemObject | Out-Host
+    }
+    if ($global:OSDCoreDriverPackObject) {
+        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCloud DriverPack Object:"
+        $global:OSDCoreDriverPackObject | Out-Host
     }
     #================================================
     #   Global Variables
@@ -863,10 +869,10 @@ $formMainWindowControlStartButton.add_Click({
     #   Invoke-RecastOSDCloud.ps1
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Invoke-RecastOSDCloud Configuration"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] Invoke-RecastOSDCloud Configuration"
     $Global:InvokeOSDCloud | Out-Host
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Invoke-RecastOSDCloud ... Starting in 5 seconds..."
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] Invoke-RecastOSDCloud ... Starting in 5 seconds..."
     Start-Sleep -Seconds 5
     Invoke-RecastOSDCloud
     #=================================================
