@@ -100,8 +100,30 @@ function Initialize-OSDCoreDevice {
     try {
         $classWin32Keyboard = Get-CimInstance -ClassName Win32_Keyboard -ErrorAction Stop | Select-Object -Property *
         $classWin32Keyboard | Out-File (Join-Path -Path $LogsPath -ChildPath 'Win32_Keyboard.txt') -Width 4096 -Force
-        $KeyboardLayout = [System.String]$classWin32Keyboard.Layout
-        $KeyboardName = [System.String]$classWin32Keyboard.Name
+
+        # A device can expose multiple keyboard endpoints. Prefer entries with
+        # a populated layout and stable ordering, then use the first candidate.
+        $keyboardCandidates = @($classWin32Keyboard) | Where-Object {
+            -not [string]::IsNullOrWhiteSpace($_.Layout) -or -not [string]::IsNullOrWhiteSpace($_.Name)
+        } | Sort-Object -Property @(
+            @{ Expression = { [string]::IsNullOrWhiteSpace($_.Layout) } ; Descending = $false },
+            @{ Expression = { [string]$_.Name } ; Descending = $false },
+            @{ Expression = { [string]$_.DeviceID } ; Descending = $false }
+        )
+
+        $primaryKeyboard = $keyboardCandidates | Select-Object -First 1
+        if ($primaryKeyboard) {
+            $KeyboardLayout = [System.String]$primaryKeyboard.Layout
+            $KeyboardName = [System.String]$primaryKeyboard.Name
+
+            if ($keyboardCandidates.Count -gt 1) {
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Multiple keyboards detected ($($keyboardCandidates.Count)). Using '$KeyboardName' with layout '$KeyboardLayout'."
+            }
+        }
+        else {
+            $KeyboardLayout = $null
+            $KeyboardName = $null
+        }
     }
     catch {
         $classWin32Keyboard = $null
