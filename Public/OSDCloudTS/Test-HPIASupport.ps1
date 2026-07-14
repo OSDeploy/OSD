@@ -1,18 +1,85 @@
 function Test-HPIASupport {
-    $CabPath = "$env:TEMP\platformList.cab"
-    $XMLPath = "$env:TEMP\platformList.xml"
+    <#
+    .SYNOPSIS
+    Tests whether the current HP platform is supported by HPIA.
+
+    .DESCRIPTION
+    Downloads the HP platform catalog, reads the platform IDs from the XML, and
+    compares the local baseboard product ID to determine whether HPIA support is
+    available on this device.
+
+    .EXAMPLE
+    Test-HPIASupport
+    Returns True when the current device platform is listed in the HPIA platform catalog.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Initial help block created
+    #>
+    $CabPath = Join-Path -Path $env:TEMP -ChildPath "platformList.cab"
+    $XMLPath = Join-Path -Path $env:TEMP -ChildPath "platformList.xml"
     $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
-    Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing
-    $Expand = expand $CabPath $XMLPath
-    [xml]$XML = Get-Content $XMLPath
-    $Platforms = $XML.ImagePal.Platform.SystemID
-    $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
-    if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
-    else {$HPIASupport = $false}
-    return $HPIASupport
+
+    try {
+        Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing -ErrorAction Stop
+        $null = & expand.exe $CabPath $XMLPath
+        [xml]$XML = Get-Content -Path $XMLPath -Raw -ErrorAction Stop
+        $Platforms = $XML.ImagePal.Platform.SystemID
+        $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
+        return ($MachinePlatform -in $Platforms)
+    }
+    catch {
+        return $false
+    }
+    finally {
+        Remove-Item -Path $CabPath -Force -ErrorAction SilentlyContinue
+        Remove-Item -Path $XMLPath -Force -ErrorAction SilentlyContinue
+    }
 }
 
 function Get-HPOSSupport {
+    <#
+    .SYNOPSIS
+    Gets supported Windows releases for an HP platform from the HPIA catalog.
+
+    .DESCRIPTION
+    Downloads and parses the HP platform catalog and returns operating system
+    support data for a specified platform or the local device platform. Optional
+    switches can return only the latest supported OS values.
+
+    .PARAMETER Platform
+    HP platform ID to query. If not provided, the local baseboard product ID is used.
+
+    .PARAMETER Latest
+    Returns a combined string containing the latest supported OS description and release ID.
+
+    .PARAMETER MaxOS
+    Returns the latest supported OS family as Win10 or Win11.
+
+    .PARAMETER MaxOSVer
+    Returns the latest supported OS release ID value.
+
+    .PARAMETER MaxOSNum
+    Returns the latest supported OS major version number as 10.0 or 11.0.
+
+    .EXAMPLE
+    Get-HPOSSupport
+    Returns all supported OS entries for the local platform.
+
+    .EXAMPLE
+    Get-HPOSSupport -Platform 83B2 -MaxOSVer
+    Returns the maximum supported release ID for platform 83B2.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Initial help block created
+    #>
     [CmdletBinding()]
     param(
     [Parameter(Position=0,mandatory=$false)]
@@ -32,7 +99,7 @@ function Get-HPOSSupport {
     [xml]$XML = Get-Content $XMLPath
     $XMLPlatforms = $XML.ImagePal.Platform
     $OSList = ($XMLPlatforms | Where-Object {$_.SystemID -match $MachinePlatform}).OS | Select-Object -Property OSReleaseIdDisplay, OSBuildId, OSDescription
-    
+
     if ($Latest){
         [String]$MaxOSSupported = ($OSList.OSDescription | Where-Object {$_ -notmatch "LTSB"}| Select-Object -Unique| Measure-Object -Maximum).Maximum
         [String]$MaxOSVerion = (($OSList | Where-Object {$_.OSDescription -eq "$MaxOSSupported"}).OSReleaseIdDisplay | Measure-Object -Maximum).Maximum
@@ -63,6 +130,42 @@ function Get-HPOSSupport {
 }
 
 function Get-HPSoftpaqListLatest {
+    <#
+    .SYNOPSIS
+    Gets the latest HPIA SoftPaq list for an HP platform.
+
+    .DESCRIPTION
+    Resolves the latest supported OS information for a platform, downloads the
+    corresponding HPIA reference CAB, and returns the SoftPaq update list from
+    the extracted XML metadata.
+
+    .PARAMETER Platform
+    HP platform ID to query. If not provided, the local baseboard product ID is used.
+
+    .PARAMETER SystemInfo
+    Returns system information from the HPIA XML instead of the SoftPaq list.
+
+    .PARAMETER MaxOSVer
+    Reserved switch parameter in this function signature.
+
+    .PARAMETER MaxOSNum
+    Reserved switch parameter in this function signature.
+
+    .EXAMPLE
+    Get-HPSoftpaqListLatest
+    Returns the latest SoftPaq list for the local platform.
+
+    .EXAMPLE
+    Get-HPSoftpaqListLatest -Platform 83B2 -SystemInfo
+    Returns system information metadata for platform 83B2.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Initial help block created
+    #>
     [CmdletBinding()]
     param(
     [Parameter(Position=0,mandatory=$false)]
@@ -98,6 +201,39 @@ function Get-HPSoftpaqListLatest {
 }
 
 function Get-HPSoftPaqItems {
+    <#
+    .SYNOPSIS
+    Gets HPIA SoftPaq items for a specific HP platform and OS release.
+
+    .DESCRIPTION
+    Validates that the requested operating system and release are supported by
+    the target platform, downloads the matching HPIA CAB metadata file, and
+    returns the SoftPaq update entries from the extracted XML.
+
+    .PARAMETER Platform
+    HP platform ID to query. If not provided, the local baseboard product ID is used.
+
+    .PARAMETER osver
+    Operating system release ID value to query, such as 23H2.
+
+    .PARAMETER os
+    Operating system major version number to query. Valid values are 10.0 and 11.0.
+
+    .EXAMPLE
+    Get-HPSoftPaqItems -osver 23H2 -os 11.0
+    Returns SoftPaq items for Windows 11 23H2 on the local platform.
+
+    .EXAMPLE
+    Get-HPSoftPaqItems -Platform 83B2 -osver 22H2 -os 10.0
+    Returns SoftPaq items for Windows 10 22H2 on platform 83B2.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Initial help block created
+    #>
     [CmdletBinding()]
     param(
     [Parameter(Position=0,mandatory=$false)]
@@ -109,14 +245,14 @@ function Get-HPSoftPaqItems {
     [string] $os
     )
 
-    
-    
+
+
     if ($env:PROCESSOR_ARCHITECTURE -eq "AMD64"){$Arch = '64'}
     $CabPath = "$env:TEMP\HPIA.cab"
     $XMLPath = "$env:TEMP\HPIA.xml"
     if ($Platform){$MachinePlatform = $platform}
     else {$MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product}
-    
+
     #Test Passed Parameters
     $OSList = Get-HPOSSupport -Platform $MachinePlatform
     if ($OS -eq "11.0"){
@@ -151,6 +287,39 @@ function Get-HPSoftPaqItems {
 }
 
 function Get-HPDriverPackLatest {
+    <#
+    .SYNOPSIS
+    Gets the latest available HP driver pack for a platform.
+
+    .DESCRIPTION
+    Checks supported OS releases for the target platform, searches from newest
+    to oldest release for Windows 11 and then Windows 10, and returns the first
+    matching Driver Pack entry found in the HPIA SoftPaq catalog.
+
+    .PARAMETER Platform
+    HP platform ID to query. If not provided, the local baseboard product ID is used.
+
+    .PARAMETER URL
+    Returns only the full download URL for the discovered driver pack.
+
+    .PARAMETER download
+    Downloads the discovered driver pack to C:\Drivers using Save-WebFile.
+
+    .EXAMPLE
+    Get-HPDriverPackLatest
+    Returns the latest driver pack metadata for the local platform.
+
+    .EXAMPLE
+    Get-HPDriverPackLatest -Platform 83B2 -URL
+    Returns only the driver pack URL for platform 83B2.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Initial help block created
+    #>
     [CmdletBinding()]
     param(
     [Parameter(Position=0,mandatory=$false)]
@@ -172,7 +341,7 @@ function Get-HPDriverPackLatest {
                 Write-Verbose "Checking for Driver Pack for $OS $($SupportedWinXXBuilds[$loop_index])"
                 $DriverPack = Get-HPSoftPaqItems -osver $($SupportedWinXXBuilds[$loop_index]) -os $OS -Platform $MachinePlatform | Where-Object {$_.Category -match "Driver Pack"}
                 #$DriverPack = Get-SoftpaqList -Category Driverpack -OsVer $($SupportedWinXXBuilds[$loop_index]) -Os "Win11" -ErrorAction SilentlyContinue
-            
+
                 if (!($DriverPack)){$Loop_Index++;}
                 if ($DriverPack){
                     Write-Verbose "Windows 11 $($SupportedWinXXBuilds[$loop_index]) Driver Pack Found"
@@ -224,6 +393,40 @@ function Get-HPDriverPackLatest {
 }
 
 function Invoke-HPIAOfflineSync {
+    <#
+    .SYNOPSIS
+    Creates and synchronizes an offline HPIA repository for the local HP platform.
+
+    .DESCRIPTION
+    Builds a local repository using HPCMSL commands, applies platform and OS
+    filters, and downloads selected update content for offline use. Logs are
+    written to C:\OSDCloud\Logs\HPIAOfflineSync.log.
+
+    .PARAMETER Category
+    Update category filter for repository content. Valid values are All, BIOS,
+    Driver, Software, Firmware, and UWPPack.
+
+    .PARAMETER OS
+    Operating system filter passed to Add-RepositoryFilter, such as win11.
+
+    .PARAMETER Release
+    Operating system release filter passed to Add-RepositoryFilter, such as 23H2.
+
+    .EXAMPLE
+    Invoke-HPIAOfflineSync
+    Creates an offline repository for the local platform using default Driver, win11, and 23H2 filters.
+
+    .EXAMPLE
+    Invoke-HPIAOfflineSync -Category BIOS -OS win10 -Release 22H2
+    Creates an offline repository filtered to Windows 10 22H2 BIOS content.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Initial help block created
+    #>
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory=$false)]
@@ -234,7 +437,7 @@ function Invoke-HPIAOfflineSync {
         [Parameter(Mandatory=$false)]
         $Release = "23H2"
     )
-    
+
     #Create HPIA Repo & Sync for this Platform (EXE / Online)
     $LogFolder = "C:\OSDCloud\Logs"
     $HPIARepoFolder = "C:\OSDCloud\HPIA\Repo"
