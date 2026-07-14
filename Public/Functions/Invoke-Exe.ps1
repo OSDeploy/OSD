@@ -1,10 +1,10 @@
 function Invoke-Exe {
     <#
     .SYNOPSIS
-    Run External Command.
+    Runs an external command.
 
     .DESCRIPTION
-    This function calls an external command outside of the powershell script and logs the output.
+    Calls an external command outside of the PowerShell script and logs the output.
 
     .PARAMETER Executable
     Executable that needs to be run.
@@ -14,11 +14,15 @@ function Invoke-Exe {
 
     .EXAMPLE
     Invoke-Exe dir c:\
-    
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Improved readability and completed help metadata without changing behavior
     #>
-    
+
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -27,10 +31,13 @@ function Invoke-Exe {
         [Parameter(ValueFromRemainingArguments = $true, ValueFromPipelineByPropertyName = $true)]
         $Arguments = $null
     )
+
     Write-Host -ForegroundColor DarkGray "Invoke-Exe '$Executable' Arguments '$Arguments'"
-    $Out = &$Executable $Arguments 2>&1 | Out-String
-    if ($Out.Trim()) {
-        $Out.Trim().Split("`n") | ForEach-Object {
+    $commandOutput = &$Executable $Arguments 2>&1 | Out-String
+    $trimmedOutput = $commandOutput.Trim()
+
+    if ($trimmedOutput) {
+        $trimmedOutput.Split("`n") | ForEach-Object {
             Write-Host -ForegroundColor DarkGray "$_"
         }
     }

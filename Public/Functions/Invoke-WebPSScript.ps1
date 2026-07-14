@@ -1,10 +1,22 @@
 <#
 .SYNOPSIS
-Allows you to execute a PowerShell Script as a URL Link
+Executes a PowerShell script from a URL.
+
 .DESCRIPTION
-Allows you to execute a PowerShell Script as a URL Link
+Downloads and executes a PowerShell script from a URL.
+
+.PARAMETER Uri
+The URL of the PowerShell script to execute. Redirects are not allowed.
+
+.EXAMPLE
+Invoke-WebPSScript -Uri 'https://example.com/script.ps1'
+
 .LINK
 https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Improved help and readability without changing behavior
 #>
 function Invoke-WebPSScript
 {
@@ -18,17 +30,18 @@ function Invoke-WebPSScript
         $Uri
     )
 
-    $Uri = $Uri -replace '%20',' '
+    $Uri = $Uri -replace '%20', ' '
     Write-Verbose $Uri -Verbose
-    
-    if (-NOT (Test-WebConnection $Uri))
+
+    if (-not (Test-WebConnection $Uri))
     {
-        Return
+        return
     }
+
     #[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls1
-    $WebClient = New-Object System.Net.WebClient
-    $WebPSCommand = $WebClient.DownloadString("$Uri")
-    Invoke-Expression -Command $WebPSCommand
-    $WebClient.Dispose()
+    $webClient = New-Object System.Net.WebClient
+    $webPSCommand = $webClient.DownloadString("$Uri")
+    Invoke-Expression -Command $webPSCommand
+    $webClient.Dispose()
 }

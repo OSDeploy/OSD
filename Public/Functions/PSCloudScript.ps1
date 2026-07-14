@@ -1,10 +1,19 @@
 <#
 .SYNOPSIS
-Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
+Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file.
+
 .DESCRIPTION
-Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file
+Development function to get the contents of a PSCloudScript. Optionally allows for execution by command or file.
+
+.EXAMPLE
+Get-PSCloudScript -Uri 'https://example.com/script.ps1'
+
 .LINK
 https://osd.osdeploy.com
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Improved readability and help metadata without changing behavior
 #>
 function Get-PSCloudScript
 {
@@ -43,19 +52,19 @@ function Get-PSCloudScript
         # String to use as a PSCloudScript
         [System.String]
         $String,
-        
+
         [Parameter(Mandatory, ParameterSetName='FromGitHubRepo')]
         [ValidateNotNull()]
         [System.String]
         # GitHub Organization
         $RepoOwner,
-        
+
         [Parameter(Mandatory, ParameterSetName='FromGitHubRepo')]
         [ValidateNotNull()]
         [System.String]
         # GitHub Repo
         $RepoName,
-        
+
         [Parameter(Mandatory=$false, ParameterSetName='FromGitHubRepo')]
         [System.String]
         # GitHub Path
@@ -66,43 +75,44 @@ function Get-PSCloudScript
         [System.String]
         $Invoke
     )
+
     Write-Warning 'PSCloudScript functions are currently under development'
     Write-Warning 'Functionality is subject to change until this warning is removed'
 
-    $Result = $null
+    $result = $null
     #=================================================
     #	FromUriContent
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'FromUriContent')
     {
-        
+
         if ($Uri -match 'github')
         {
-            [System.Array]$ResolvedUrl = Get-GithubRawUrl -Uri $Uri
+            [System.Array]$resolvedUrl = Get-GithubRawUrl -Uri $Uri
         }
         elseif (([System.Uri]$Uri).AbsoluteUri)
         {
-            [System.String]$ResolvedUrl = ([System.Uri]$Uri).AbsoluteUri
+            [System.String]$resolvedUrl = ([System.Uri]$Uri).AbsoluteUri
         }
         else
         {
-            [System.String]$ResolvedUrl = $Uri
+            [System.String]$resolvedUrl = $Uri
         }
 
-        foreach ($Item in $ResolvedUrl)
+        foreach ($item in $resolvedUrl)
         {
             try
             {
-                $WebRequest = Invoke-WebRequest $Item -UseBasicParsing -Method Head -ErrorAction SilentlyContinue
-                if ($WebRequest.StatusCode -eq 200)
+                $webRequest = Invoke-WebRequest $item -UseBasicParsing -Method Head -ErrorAction SilentlyContinue
+                if ($webRequest.StatusCode -eq 200)
                 {
-                    if ($ResolvedUrl -is [System.Array])
+                    if ($resolvedUrl -is [System.Array])
                     {
-                        [Array]$Result += (Invoke-RestMethod -Uri $Item)
+                        [Array]$result += (Invoke-RestMethod -Uri $item)
                     }
                     else
                     {
-                        $Result = (Invoke-RestMethod -Uri $Item)
+                        $result = (Invoke-RestMethod -Uri $item)
                     }
                 }
             }
@@ -116,17 +126,17 @@ function Get-PSCloudScript
     #	FromAzKeyVaultSecret
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'FromAzKeyVaultSecret') {
-        
-        $Module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
-        if (-not $Module) {
+
+        $module = Import-Module Az.Accounts -PassThru -ErrorAction Ignore
+        if (-not $module) {
             Install-Module Az.Accounts -Force
         }
-        
-        $Module = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
-        if (-not $Module) {
+
+        $module = Import-Module Az.KeyVault -PassThru -ErrorAction Ignore
+        if (-not $module) {
             Install-Module Az.KeyVault -Force
         }
-    
+
         if (!(Get-AzContext -ErrorAction Ignore)) {
             Connect-AzAccount -DeviceCode
         }
@@ -136,9 +146,9 @@ function Get-PSCloudScript
                 $Name = Get-AzKeyVaultSecret -VaultName "$VaultName" | Select-Object -ExpandProperty Name
             }
             if ($Name) {
-                foreach ($Item in $Name) {
-                    Write-Verbose "Get-AzKeyVaultSecret -VaultName $VaultName -Name $Item"
-                    [array]$Result += Get-AzKeyVaultSecret -VaultName "$VaultName" -Name "$Item" -AsPlainText
+                foreach ($item in $Name) {
+                    Write-Verbose "Get-AzKeyVaultSecret -VaultName $VaultName -Name $item"
+                    [array]$result += Get-AzKeyVaultSecret -VaultName "$VaultName" -Name "$item" -AsPlainText
                 }
             }
         }
@@ -155,7 +165,7 @@ function Get-PSCloudScript
         {
             try
             {
-                $Result = Get-Clipboard -Format Text -Raw
+                $result = Get-Clipboard -Format Text -Raw
             }
             catch
             {
@@ -172,7 +182,7 @@ function Get-PSCloudScript
         {
             try
             {
-                $Result = Get-Content $File -Raw
+                $result = Get-Content $File -Raw
             }
             catch
             {
@@ -185,7 +195,7 @@ function Get-PSCloudScript
     #=================================================
     if ($PSCmdlet.ParameterSetName -eq 'FromString')
     {
-        $Result = $String
+        $result = $String
     }
     #=================================================
     #	FromGitHubRepo
@@ -195,8 +205,8 @@ function Get-PSCloudScript
         $Uri = "https://api.github.com/repos/$RepoOwner/$RepoName/contents/$GithubPath"
         Write-Verbose $Uri
 
-        $GitHubApiRateLimit = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.github.com/rate_limit' -Method Get
-        Write-Warning "You have used $($GitHubApiRateLimit.rate.used) of your $($GitHubApiRateLimit.rate.limit) GitHub API Requests"
+        $gitHubApiRateLimit = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.github.com/rate_limit' -Method Get
+        Write-Warning "You have used $($gitHubApiRateLimit.rate.used) of your $($gitHubApiRateLimit.rate.limit) GitHub API Requests"
 
         $Params = @{
             Method = 'GET'
@@ -204,24 +214,24 @@ function Get-PSCloudScript
             UseBasicParsing = $true
         }
 
-        $GitHubApiContent = @()
+        $gitHubApiContent = @()
         try {
-            $GitHubApiContent = Invoke-RestMethod @Params -ErrorAction Stop
+            $gitHubApiContent = Invoke-RestMethod @Params -ErrorAction Stop
         }
         catch {
             Write-Error $_
             Break
         }
 
-        if ($GitHubApiContent.count -eq 1)
+        if ($gitHubApiContent.count -eq 1)
         {
-            $Result = [Text.Encoding]::Utf8.GetString([Convert]::FromBase64String($GitHubApiContent.content))
+            $result = [Text.Encoding]::Utf8.GetString([Convert]::FromBase64String($gitHubApiContent.content))
         }
         else
         {
-            foreach ($Item in $GitHubApiContent)
+            foreach ($item in $gitHubApiContent)
             {
-                [array]$Result += Invoke-RestMethod $Item.download_url
+                [array]$result += Invoke-RestMethod $item.download_url
             }
         }
 
@@ -230,29 +240,29 @@ function Get-PSCloudScript
     #=================================================
     #	Invoke
     #=================================================
-    if ($Result)
+    if ($result)
     {
-        foreach ($Item in $Result)
+        foreach ($item in $result)
         {
             if ($Invoke -eq 'Command')
             {
-                Invoke-Expression -Command $Item
+                Invoke-Expression -Command $item
             }
             elseif ($Invoke -eq 'File')
             {
-                $Item | Out-File -FilePath "$env:TEMP\PSCloudScript.ps1"
+                $item | Out-File -FilePath "$env:TEMP\PSCloudScript.ps1"
                 & "$env:TEMP\PSCloudScript.ps1"
                 Remove-Item -Path "$env:TEMP\PSCloudScript.ps1" -Force -ErrorAction Ignore | Out-Null
             }
             elseif ($Invoke -eq 'FileRunas')
             {
-                $Item | Out-File -FilePath "$env:TEMP\PSCloudScript.ps1"
+                $item | Out-File -FilePath "$env:TEMP\PSCloudScript.ps1"
                 Start-Process powershell.exe -Verb Runas "& $env:TEMP\PSCloudScript.ps1" -Wait
                 Remove-Item -Path "$env:TEMP\PSCloudScript.ps1" -Force -ErrorAction Ignore | Out-Null
             }
             else
             {
-                $Item
+                $item
             }
         }
     }
