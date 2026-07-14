@@ -11,6 +11,25 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 .NOTES
 #>
 function Get-OSD {
+<#
+.SYNOPSIS
+Gets OSD information.
+
+.DESCRIPTION
+Returns OSD data for the current system or OSD session context.
+
+.EXAMPLE
+Get-OSD
+Demonstrates a common way to run Get-OSD.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=================================================

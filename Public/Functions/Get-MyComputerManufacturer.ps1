@@ -1,4 +1,26 @@
 function Get-MyComputerManufacturer {
+<#
+.SYNOPSIS
+Gets MyComputerManufacturer information.
+
+.DESCRIPTION
+Returns MyComputerManufacturer data for the current system or OSD session context.
+
+.PARAMETER Brief
+Specifies the Brief to use when running Get-MyComputerManufacturer.
+
+.EXAMPLE
+Get-MyComputerManufacturer -B <value>
+Demonstrates a common way to run Get-MyComputerManufacturer.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]$Brief

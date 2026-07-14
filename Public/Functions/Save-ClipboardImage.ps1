@@ -1,4 +1,26 @@
 function Save-ClipboardImage {
+<#
+.SYNOPSIS
+Saves ClipboardImage content.
+
+.DESCRIPTION
+Writes ClipboardImage output to disk or another target defined by parameters.
+
+.PARAMETER SaveAs
+Specifies the SaveAs to use when running Save-ClipboardImage.
+
+.EXAMPLE
+Save-ClipboardImage -S <value>
+Demonstrates a common way to run Save-ClipboardImage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param(
         #Path and Name of the file to save

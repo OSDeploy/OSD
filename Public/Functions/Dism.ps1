@@ -244,6 +244,34 @@ Microsoft.Dism.Commands.BaseDismObject
 21.2.9      Renamed from Dismount-WindowsImageOSD
 #>
 function Dismount-MyWindowsImage {
+<#
+.SYNOPSIS
+Dismounts MyWindowsImage and finalizes changes.
+
+.DESCRIPTION
+Commits or discards changes to MyWindowsImage and then unmounts the image.
+
+.PARAMETER Path
+Specifies the Path to use when running Dismount-MyWindowsImage.
+
+.PARAMETER Discard
+Specifies the Discard to use when running Dismount-MyWindowsImage.
+
+.PARAMETER Save
+Specifies the Save to use when running Dismount-MyWindowsImage.
+
+.EXAMPLE
+Dismount-MyWindowsImage -Path <value>
+Demonstrates a common way to run Dismount-MyWindowsImage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'DismountDiscard')]
     param (
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -317,6 +345,49 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 19.11.22 David Segura @SeguraOSD
 #>
 function Edit-MyWindowsImage {
+<#
+.SYNOPSIS
+Edits MyWindowsImage content.
+
+.DESCRIPTION
+Applies modifications to MyWindowsImage in the current servicing workflow.
+
+.PARAMETER Path
+Specifies the Path to use when running Edit-MyWindowsImage.
+
+.PARAMETER CleanupImage
+Specifies the CleanupImage to use when running Edit-MyWindowsImage.
+
+.PARAMETER Online
+Specifies the Online to use when running Edit-MyWindowsImage.
+
+.PARAMETER GridRemoveAppx
+Specifies the GridRemoveAppx to use when running Edit-MyWindowsImage.
+
+.PARAMETER GridRemoveAppxPP
+Specifies the GridRemoveAppxPP to use when running Edit-MyWindowsImage.
+
+.PARAMETER RemoveAppx
+Specifies the RemoveAppx to use when running Edit-MyWindowsImage.
+
+.PARAMETER RemoveAppxPP
+Specifies the RemoveAppxPP to use when running Edit-MyWindowsImage.
+
+.PARAMETER DismountSave
+Specifies the DismountSave to use when running Edit-MyWindowsImage.
+
+.EXAMPLE
+Edit-MyWindowsImage -Path <value>
+Demonstrates a common way to run Edit-MyWindowsImage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding(DefaultParameterSetName = 'Offline')]
     param (
         #Specifies the full path to the root directory of the offline Windows image that you will service.
@@ -537,6 +608,49 @@ function Edit-MyWindowsImage {
     end {}
 }
 function Get-MyWindowsCapability {
+<#
+.SYNOPSIS
+Gets MyWindowsCapability information.
+
+.DESCRIPTION
+Returns MyWindowsCapability data for the current system or OSD session context.
+
+.PARAMETER Path
+Specifies the Path to use when running Get-MyWindowsCapability.
+
+.PARAMETER State
+Specifies the State to use when running Get-MyWindowsCapability.
+
+.PARAMETER Category
+Specifies the Category to use when running Get-MyWindowsCapability.
+
+.PARAMETER Culture
+Specifies the Culture to use when running Get-MyWindowsCapability.
+
+.PARAMETER Like
+Specifies the Like to use when running Get-MyWindowsCapability.
+
+.PARAMETER Match
+Specifies the Match to use when running Get-MyWindowsCapability.
+
+.PARAMETER Detail
+Specifies the Detail to use when running Get-MyWindowsCapability.
+
+.PARAMETER DisableWSUS
+Specifies the DisableWSUS to use when running Get-MyWindowsCapability.
+
+.EXAMPLE
+Get-MyWindowsCapability -Path <value>
+Demonstrates a common way to run Get-MyWindowsCapability.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding(DefaultParameterSetName = 'Online')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = "Offline", ValueFromPipeline = $false, ValueFromPipelineByPropertyName = $true)]
@@ -779,6 +893,49 @@ function Get-MyWindowsCapability {
     }
 }
 function Get-MyWindowsPackage {
+<#
+.SYNOPSIS
+Gets MyWindowsPackage information.
+
+.DESCRIPTION
+Returns MyWindowsPackage data for the current system or OSD session context.
+
+.PARAMETER Path
+Specifies the Path to use when running Get-MyWindowsPackage.
+
+.PARAMETER PackageState
+Specifies the PackageState to use when running Get-MyWindowsPackage.
+
+.PARAMETER ReleaseType
+Specifies the ReleaseType to use when running Get-MyWindowsPackage.
+
+.PARAMETER Category
+Specifies the Category to use when running Get-MyWindowsPackage.
+
+.PARAMETER Culture
+Specifies the Culture to use when running Get-MyWindowsPackage.
+
+.PARAMETER Like
+Specifies the Like to use when running Get-MyWindowsPackage.
+
+.PARAMETER Match
+Specifies the Match to use when running Get-MyWindowsPackage.
+
+.PARAMETER Detail
+Specifies the Detail to use when running Get-MyWindowsPackage.
+
+.EXAMPLE
+Get-MyWindowsPackage -Path <value>
+Demonstrates a common way to run Get-MyWindowsPackage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding(DefaultParameterSetName = 'Online')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = "Offline", ValueFromPipeline = $false, ValueFromPipelineByPropertyName = $true)]
@@ -1039,6 +1196,37 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 .NOTES
 #>
 function Mount-MyWindowsImage {
+<#
+.SYNOPSIS
+Mounts MyWindowsImage for servicing.
+
+.DESCRIPTION
+Mounts MyWindowsImage and prepares it for offline servicing tasks.
+
+.PARAMETER ImagePath
+Specifies the ImagePath to use when running Mount-MyWindowsImage.
+
+.PARAMETER Index
+Specifies the Index to use when running Mount-MyWindowsImage.
+
+.PARAMETER ReadOnly
+Specifies the ReadOnly to use when running Mount-MyWindowsImage.
+
+.PARAMETER Explorer
+Specifies the Explorer to use when running Mount-MyWindowsImage.
+
+.EXAMPLE
+Mount-MyWindowsImage -ImagePath <value>
+Demonstrates a common way to run Mount-MyWindowsImage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(
@@ -1180,6 +1368,34 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 19.12.20 David Segura @SeguraOSD
 #>
 function Remove-AppxOnline {
+<#
+.SYNOPSIS
+Removes AppxOnline items.
+
+.DESCRIPTION
+Deletes matching AppxOnline items from the current context.
+
+.PARAMETER GridRemoveAppx
+Specifies the GridRemoveAppx to use when running Remove-AppxOnline.
+
+.PARAMETER GridRemoveAppxPP
+Specifies the GridRemoveAppxPP to use when running Remove-AppxOnline.
+
+.PARAMETER Name
+Specifies the Name to use when running Remove-AppxOnline.
+
+.EXAMPLE
+Remove-AppxOnline -GridRemoveAppx <value>
+Demonstrates a common way to run Remove-AppxOnline.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         #Appx Packages selected in GridView will be removed from the Windows Image
@@ -1313,6 +1529,34 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 .NOTES
 #>
 function Test-WindowsImage {
+<#
+.SYNOPSIS
+Tests WindowsImage conditions.
+
+.DESCRIPTION
+Evaluates WindowsImage state and returns a validation result for scripting decisions.
+
+.PARAMETER ImagePath
+Specifies the ImagePath to use when running Test-WindowsImage.
+
+.PARAMETER Index
+Specifies the Index to use when running Test-WindowsImage.
+
+.PARAMETER Extension
+Specifies the Extension to use when running Test-WindowsImage.
+
+.EXAMPLE
+Test-WindowsImage -ImagePath <value>
+Demonstrates a common way to run Test-WindowsImage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(
@@ -1425,6 +1669,31 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 .NOTES
 #>
 function Test-WindowsImageMounted {
+<#
+.SYNOPSIS
+Tests WindowsImageMounted conditions.
+
+.DESCRIPTION
+Evaluates WindowsImageMounted state and returns a validation result for scripting decisions.
+
+.PARAMETER ImagePath
+Specifies the ImagePath to use when running Test-WindowsImageMounted.
+
+.PARAMETER Index
+Specifies the Index to use when running Test-WindowsImageMounted.
+
+.EXAMPLE
+Test-WindowsImageMounted -ImagePath <value>
+Demonstrates a common way to run Test-WindowsImageMounted.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(
@@ -1460,6 +1729,28 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 .NOTES
 #>
 function Test-WindowsImageMountPath {
+<#
+.SYNOPSIS
+Tests WindowsImageMountPath conditions.
+
+.DESCRIPTION
+Evaluates WindowsImageMountPath state and returns a validation result for scripting decisions.
+
+.PARAMETER Path
+Specifies the Path to use when running Test-WindowsImageMountPath.
+
+.EXAMPLE
+Test-WindowsImageMountPath -P <value>
+Demonstrates a common way to run Test-WindowsImageMountPath.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(
@@ -1496,6 +1787,31 @@ https://www.osdcloud.com
     Credit to Lasse Meggele @lassemeggele for correcting some issues. Thanks!
 #>
 function Test-WindowsPackageCAB {
+<#
+.SYNOPSIS
+Tests WindowsPackageCAB conditions.
+
+.DESCRIPTION
+Evaluates WindowsPackageCAB state and returns a validation result for scripting decisions.
+
+.PARAMETER PackagePath
+Specifies the PackagePath to use when running Test-WindowsPackageCAB.
+
+.PARAMETER Path
+Specifies the Path to use when running Test-WindowsPackageCAB.
+
+.EXAMPLE
+Test-WindowsPackageCAB -PackagePath <value>
+Demonstrates a common way to run Test-WindowsPackageCAB.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -1574,6 +1890,37 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 .NOTES
 #>
 function Update-MyWindowsImage {
+<#
+.SYNOPSIS
+Updates MyWindowsImage content.
+
+.DESCRIPTION
+Installs updates into MyWindowsImage according to the supplied parameters.
+
+.PARAMETER Path
+Specifies the Path to use when running Update-MyWindowsImage.
+
+.PARAMETER Update
+Specifies the Update to use when running Update-MyWindowsImage.
+
+.PARAMETER BitsTransfer
+Specifies the BitsTransfer to use when running Update-MyWindowsImage.
+
+.PARAMETER Force
+Specifies the Force to use when running Update-MyWindowsImage.
+
+.EXAMPLE
+Update-MyWindowsImage -Path <value>
+Demonstrates a common way to run Update-MyWindowsImage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName)]

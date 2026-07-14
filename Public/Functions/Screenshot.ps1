@@ -1,4 +1,44 @@
 function Get-ScreenPNG {
+<#
+.SYNOPSIS
+Gets ScreenPNG information.
+
+.DESCRIPTION
+Returns ScreenPNG data for the current system or OSD session context.
+
+.PARAMETER Env
+Specifies the Env to use when running Get-ScreenPNG.
+
+.PARAMETER Directory
+Specifies the Directory to use when running Get-ScreenPNG.
+
+.PARAMETER Prefix
+Specifies the Prefix to use when running Get-ScreenPNG.
+
+.PARAMETER Delay
+Specifies the Delay to use when running Get-ScreenPNG.
+
+.PARAMETER Count
+Specifies the Count to use when running Get-ScreenPNG.
+
+.PARAMETER Clipboard
+Specifies the Clipboard to use when running Get-ScreenPNG.
+
+.PARAMETER Primary
+Specifies the Primary to use when running Get-ScreenPNG.
+
+.EXAMPLE
+Get-ScreenPNG -Env <value>
+Demonstrates a common way to run Get-ScreenPNG.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         #Directory where the Screenshots will be saved

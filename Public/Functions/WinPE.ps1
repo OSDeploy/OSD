@@ -427,6 +427,34 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 21.2.1  Initial Release
 #>
 function Set-WimExecutionPolicy {
+<#
+.SYNOPSIS
+Sets WimExecutionPolicy configuration.
+
+.DESCRIPTION
+Configures WimExecutionPolicy settings using the provided parameters and current OSD context.
+
+.PARAMETER ExecutionPolicy
+Specifies the ExecutionPolicy to use when running Set-WimExecutionPolicy.
+
+.PARAMETER ImagePath
+Specifies the ImagePath to use when running Set-WimExecutionPolicy.
+
+.PARAMETER Index
+Specifies the Index to use when running Set-WimExecutionPolicy.
+
+.EXAMPLE
+Set-WimExecutionPolicy -ExecutionPolicy <value>
+Demonstrates a common way to run Set-WimExecutionPolicy.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -486,6 +514,31 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 21.2.1  Initial Release
 #>
 function Set-WindowsImageExecutionPolicy {
+<#
+.SYNOPSIS
+Sets WindowsImageExecutionPolicy configuration.
+
+.DESCRIPTION
+Configures WindowsImageExecutionPolicy settings using the provided parameters and current OSD context.
+
+.PARAMETER ExecutionPolicy
+Specifies the ExecutionPolicy to use when running Set-WindowsImageExecutionPolicy.
+
+.PARAMETER Path
+Specifies the Path to use when running Set-WindowsImageExecutionPolicy.
+
+.EXAMPLE
+Set-WindowsImageExecutionPolicy -ExecutionPolicy <value>
+Demonstrates a common way to run Set-WindowsImageExecutionPolicy.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0,Mandatory = $true,ValueFromPipelineByPropertyName = $true)]

@@ -17,6 +17,28 @@
 	VERSION:	18.9.4
 #>
 function Show-RegistryXML {
+<#
+.SYNOPSIS
+Displays RegistryXML information.
+
+.DESCRIPTION
+Presents RegistryXML details for inspection or troubleshooting.
+
+.PARAMETER SourceDirectory
+Specifies the SourceDirectory to use when running Show-RegistryXML.
+
+.EXAMPLE
+Show-RegistryXML -S <value>
+Demonstrates a common way to run Show-RegistryXML.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     Param (
 		[Parameter(Mandatory)]

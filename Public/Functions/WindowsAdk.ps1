@@ -12,6 +12,25 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 21.3.15.2   Initial Release
 #>
 function Edit-AdkWinPEWIM {
+<#
+.SYNOPSIS
+Edits AdkWinPEWIM content.
+
+.DESCRIPTION
+Applies modifications to AdkWinPEWIM in the current servicing workflow.
+
+.EXAMPLE
+Edit-AdkWinPEWIM
+Demonstrates a common way to run Edit-AdkWinPEWIM.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
 
@@ -469,6 +488,31 @@ Author: David Segura - Recast Software
 https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function New-AdkCopyPE {
+<#
+.SYNOPSIS
+Creates AdkCopyPE resources.
+
+.DESCRIPTION
+Builds new AdkCopyPE resources based on the provided parameters.
+
+.PARAMETER Path
+Specifies the Path to use when running New-AdkCopyPE.
+
+.PARAMETER WinPEArch
+Specifies the WinPEArch to use when running New-AdkCopyPE.
+
+.EXAMPLE
+New-AdkCopyPE -Path <value>
+Demonstrates a common way to run New-AdkCopyPE.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -559,6 +603,46 @@ Author: David Segura - Recast Software
 https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function New-AdkISO {
+<#
+.SYNOPSIS
+Creates AdkISO resources.
+
+.DESCRIPTION
+Builds new AdkISO resources based on the provided parameters.
+
+.PARAMETER WindowsAdkRoot
+Specifies the WindowsAdkRoot to use when running New-AdkISO.
+
+.PARAMETER MediaPath
+Specifies the MediaPath to use when running New-AdkISO.
+
+.PARAMETER isoFileName
+Specifies the isoFileName to use when running New-AdkISO.
+
+.PARAMETER isoLabel
+Specifies the isoLabel to use when running New-AdkISO.
+
+.PARAMETER NoPrompt
+Specifies the NoPrompt to use when running New-AdkISO.
+
+.PARAMETER Mount
+Specifies the Mount to use when running New-AdkISO.
+
+.PARAMETER OpenExplorer
+Specifies the OpenExplorer to use when running New-AdkISO.
+
+.EXAMPLE
+New-AdkISO -WindowsAdkRoot <value>
+Demonstrates a common way to run New-AdkISO.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Alias('AdkRoot')]

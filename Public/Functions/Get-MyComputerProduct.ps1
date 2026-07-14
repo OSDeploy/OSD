@@ -1,4 +1,23 @@
 function Get-MyComputerProduct {
+<#
+.SYNOPSIS
+Gets MyComputerProduct information.
+
+.DESCRIPTION
+Returns MyComputerProduct data for the current system or OSD session context.
+
+.EXAMPLE
+Get-MyComputerProduct
+Demonstrates a common way to run Get-MyComputerProduct.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
 

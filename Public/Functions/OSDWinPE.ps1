@@ -13,6 +13,61 @@ if ($env:SystemDrive -eq 'X:') {
     19.10.1     David Segura @SeguraOSD
     #>
     function Get-OSDWinPE {
+    <#
+    .SYNOPSIS
+    Gets OSDWinPE information.
+
+    .DESCRIPTION
+    Returns OSDWinPE data for the current system or OSD session context.
+
+    .PARAMETER GetModules
+    Specifies the GetModules to use when running Get-OSDWinPE.
+
+    .PARAMETER GetScript
+    Specifies the GetScript to use when running Get-OSDWinPE.
+
+    .PARAMETER GetScripts
+    Specifies the GetScripts to use when running Get-OSDWinPE.
+
+    .PARAMETER InitializeNetwork
+    Specifies the InitializeNetwork to use when running Get-OSDWinPE.
+
+    .PARAMETER InitializeNetworkNoWait
+    Specifies the InitializeNetworkNoWait to use when running Get-OSDWinPE.
+
+    .PARAMETER WaitForNetwork
+    Specifies the WaitForNetwork to use when running Get-OSDWinPE.
+
+    .PARAMETER WaitForRemovableStorage
+    Specifies the WaitForRemovableStorage to use when running Get-OSDWinPE.
+
+    .PARAMETER DisableFirewall
+    Specifies the DisableFirewall to use when running Get-OSDWinPE.
+
+    .PARAMETER UpdateBootInfo
+    Specifies the UpdateBootInfo to use when running Get-OSDWinPE.
+
+    .PARAMETER RemoteRecovery
+    Specifies the RemoteRecovery to use when running Get-OSDWinPE.
+
+    .PARAMETER Reboot
+    Specifies the Reboot to use when running Get-OSDWinPE.
+
+    .PARAMETER Shutdown
+    Specifies the Shutdown to use when running Get-OSDWinPE.
+
+    .EXAMPLE
+    Get-OSDWinPE -GetModules <value>
+    Demonstrates a common way to run Get-OSDWinPE.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/Docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Initial help block created
+    2026-07-13 - Refined generated help text
+    #>
         [CmdletBinding()]
         param (
             #Find and Copy PowerShell Modules to WinPE

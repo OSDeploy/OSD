@@ -7,6 +7,25 @@ Downloads a file from the internet and returns a Get-Item Object
 https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Save-WebFile {
+<#
+.SYNOPSIS
+Saves WebFile content.
+
+.DESCRIPTION
+Writes WebFile output to disk or another target defined by parameters.
+
+.EXAMPLE
+Save-WebFile
+Demonstrates a common way to run Save-WebFile.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     [OutputType([System.IO.FileInfo])]
     param

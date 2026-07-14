@@ -9,6 +9,34 @@ Returns the Session.xml Updates that have been applied to an Operating System
 https://github.com/OSDeploy/OSD/tree/master/Docs
 #>
 function Get-SessionsXml {
+<#
+.SYNOPSIS
+Gets SessionsXml information.
+
+.DESCRIPTION
+Returns SessionsXml data for the current system or OSD session context.
+
+.PARAMETER Path
+Specifies the Path to use when running Get-SessionsXml.
+
+.PARAMETER env
+Specifies the env to use when running Get-SessionsXml.
+
+.PARAMETER KBNumber
+Specifies the KBNumber to use when running Get-SessionsXml.
+
+.EXAMPLE
+Get-SessionsXml -Path <value>
+Demonstrates a common way to run Get-SessionsXml.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]

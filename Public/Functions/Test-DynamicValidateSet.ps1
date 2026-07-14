@@ -1,4 +1,23 @@
 function Test-DynamicValidateSet {
+<#
+.SYNOPSIS
+Tests DynamicValidateSet conditions.
+
+.DESCRIPTION
+Evaluates DynamicValidateSet state and returns a validation result for scripting decisions.
+
+.EXAMPLE
+Test-DynamicValidateSet
+Demonstrates a common way to run Test-DynamicValidateSet.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
   [CmdletBinding()]
   param(
       #No parameters are hard coded!

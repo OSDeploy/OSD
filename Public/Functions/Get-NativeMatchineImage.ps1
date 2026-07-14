@@ -1,4 +1,23 @@
 Function Get-NativeMatchineImage {
+<#
+.SYNOPSIS
+Gets NativeMatchineImage information.
+
+.DESCRIPTION
+Returns NativeMatchineImage data for the current system or OSD session context.
+
+.EXAMPLE
+Get-NativeMatchineImage
+Demonstrates a common way to run Get-NativeMatchineImage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     #Code from https://github.com/rweijnen/Posh-Snippets/blob/master/PoshWow64ApiSet
 $source = @"
 using System;

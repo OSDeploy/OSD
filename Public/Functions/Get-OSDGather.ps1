@@ -23,6 +23,31 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 19.10.4.0   David Segura @SeguraOSD
 #>
 function Get-OSDGather {
+<#
+.SYNOPSIS
+Gets OSDGather information.
+
+.DESCRIPTION
+Returns OSDGather data for the current system or OSD session context.
+
+.PARAMETER Property
+Specifies the Property to use when running Get-OSDGather.
+
+.PARAMETER Full
+Specifies the Full to use when running Get-OSDGather.
+
+.EXAMPLE
+Get-OSDGather -Property <value>
+Demonstrates a common way to run Get-OSDGather.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         #Returns the Name Value

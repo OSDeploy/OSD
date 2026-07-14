@@ -1,4 +1,32 @@
 function Get-OSDWinEvent {
+<#
+.SYNOPSIS
+Gets OSDWinEvent information.
+
+.DESCRIPTION
+Returns OSDWinEvent data for the current system or OSD session context.
+
+.PARAMETER Area
+Specifies the Area to use when running Get-OSDWinEvent.
+
+.PARAMETER DayCount
+Specifies the DayCount to use when running Get-OSDWinEvent.
+
+.PARAMETER LogName
+Specifies the LogName to use when running Get-OSDWinEvent.
+
+.EXAMPLE
+Get-OSDWinEvent -Area <value>
+Demonstrates a common way to run Get-OSDWinEvent.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [ValidateSet('Autopilot','BlueScreen','Time')]

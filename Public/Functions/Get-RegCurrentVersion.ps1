@@ -13,6 +13,31 @@ https://github.com/OSDeploy/OSD/tree/master/Docs
 19.11.9     David Segura @SeguraOSD Initial Release
 #>
 function Get-RegCurrentVersion {
+<#
+.SYNOPSIS
+Gets RegCurrentVersion information.
+
+.DESCRIPTION
+Returns RegCurrentVersion data for the current system or OSD session context.
+
+.PARAMETER Path
+Specifies the Path to use when running Get-RegCurrentVersion.
+
+.PARAMETER Property
+Specifies the Property to use when running Get-RegCurrentVersion.
+
+.EXAMPLE
+Get-RegCurrentVersion -Path <value>
+Demonstrates a common way to run Get-RegCurrentVersion.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         #Specifies the full path to the root directory of the offline Windows image that you will service.

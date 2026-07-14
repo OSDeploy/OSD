@@ -15,6 +15,46 @@ Displays the results in GridView with -PassThru
 Hide the Current Update Date information
 #>
 function Get-WSUSXML {
+<#
+.SYNOPSIS
+Gets WSUSXML information.
+
+.DESCRIPTION
+Returns WSUSXML data for the current system or OSD session context.
+
+.PARAMETER Catalog
+Specifies the Catalog to use when running Get-WSUSXML.
+
+.PARAMETER UpdateArch
+Specifies the UpdateArch to use when running Get-WSUSXML.
+
+.PARAMETER UpdateBuild
+Specifies the UpdateBuild to use when running Get-WSUSXML.
+
+.PARAMETER UpdateGroup
+Specifies the UpdateGroup to use when running Get-WSUSXML.
+
+.PARAMETER UpdateOS
+Specifies the UpdateOS to use when running Get-WSUSXML.
+
+.PARAMETER GridView
+Specifies the GridView to use when running Get-WSUSXML.
+
+.PARAMETER Silent
+Specifies the Silent to use when running Get-WSUSXML.
+
+.EXAMPLE
+Get-WSUSXML -Catalog <value>
+Demonstrates a common way to run Get-WSUSXML.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/Docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     PARAM (
         #Filter by Catalog Property
