@@ -87,7 +87,7 @@ Function osdcloud-InstallDCU {
                 $TargetLink = "http://downloads.dell.com/$($DellItem.path)"
                 $TargetFileName = ($DellItem.path).Split("/") | Select-Object -Last 1
 
-                Write-Host " New Update available: Installed = $CurrentVersion DCU = $DCUVersion" -ForegroundColor Yellow 
+                Write-Host " New Update available: Installed = $CurrentVersion DCU = $DCUVersion" -ForegroundColor Yellow
                 Write-Output "  Title: $($DellItem.Name.Display.'#cdata-section')"
                 Write-Host "  ----------------------------" -ForegroundColor Cyan
                 Write-Output "   Severity: $($DellItem.Criticality.Display.'#cdata-section')"
@@ -134,7 +134,7 @@ Function osdcloud-InstallDCU {
         Write-Host "No Match in XML for $SystemSKUNumber"
         }
 
- } 
+ }
 
 
 #Function to Run DCU to install drivers, BIOS and firmware updates.
@@ -177,7 +177,7 @@ function osdcloud-RunDCU {
         $ProcessPath = 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'
     }
     else {
-        throw "No DCU Installed"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No DCU Installed"
     }
 
     if ($UpdateType -eq "CleanImage"){
@@ -188,7 +188,7 @@ function osdcloud-RunDCU {
     }
     try {[void][System.IO.Directory]::CreateDirectory($LogFolder)}
     catch {throw}
-   
+
     $DCU = Start-Process -FilePath $ProcessPath -ArgumentList $ProcessArgs -Wait -PassThru -NoNewWindow
     $DCUReturn = $DCUReturnTablet | Where-Object {$_.ReturnCode -eq $DCU.ExitCode}
 
@@ -207,7 +207,7 @@ function osdcloud-DCUAutoUpdate {
         $ProcessPath = 'C:\Program Files\Dell\CommandUpdate\dcu-cli.exe'
     }
     else {
-        throw "No DCU Installed"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No DCU Installed"
     }
     $ProcessArgs = "/configure -scheduleAuto -scheduleAction=DownloadInstallAndNotify -scheduledReboot=60"
     $DCU = Start-Process -FilePath $ProcessPath -ArgumentList $ProcessArgs -Wait -PassThru -NoNewWindow

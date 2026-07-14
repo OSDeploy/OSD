@@ -86,7 +86,7 @@ function osdcloud-HPTPMDetermine{
 function osdcloud-HPTPMDowngrade{
     [String]$TPMVer = (Get-CimInstance  -Namespace "root\cimv2\security\MicrosoftTPM" -ClassName win32_tpm).ManufacturerVersion
     if ($TPMVer -eq "7.85.4555.0"){$SPNumber = "SP94937"}
-    if ($TPMVer -eq "7.63.3353.0"){$SPNumber = "SP87753"}  #Need to confirm test machine to determine 
+    if ($TPMVer -eq "7.63.3353.0"){$SPNumber = "SP87753"}  #Need to confirm test machine to determine
     if ($SPNumber){
         if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
         if (!(Test-Path -Path $WorkingFolder)){New-Item -Path $WorkingFolder -ItemType Directory -Force |Out-Null}
@@ -130,7 +130,7 @@ function osdcloud-HPTPMDownload {
     param ($WorkingFolder)
     osdcloud-InstallModuleHPCMSL
     Import-Module -Name HPCMSL -Force
-    $TPMUpdate = osdcloud-HPTPMDetermine    
+    $TPMUpdate = osdcloud-HPTPMDetermine
     if ($TPMUpdate -ne $false)
         {
         if ((!($WorkingFolder))-or ($null -eq $WorkingFolder)){$WorkingFolder = "$env:TEMP\TPM"}
@@ -139,13 +139,13 @@ function osdcloud-HPTPMDownload {
         $extractPath = "$WorkingFolder\$TPMUpdate"
         Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
         Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
-        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
+        if (!(Test-Path -Path $UpdatePath)){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to Download TPM Update"}
         Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
-        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Extract TPM Update"}
+        if (!(Test-Path -Path $UpdatePath)){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to Extract TPM Update"}
         else {
             Return $extractPath
             }
-        }    
+        }
 }
 function osdcloud-HPTPMEXEDownload {
     osdcloud-InstallModuleHPCMSL
@@ -159,8 +159,8 @@ function osdcloud-HPTPMEXEDownload {
         $UpdatePath = "$DownloadFolder\$TPMUpdate.exe"
         Write-Host "Starting download of TPM Update $TPMUpdate"
         Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
-        if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
-    }    
+        if (!(Test-Path -Path $UpdatePath)){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Download TPM Update"}
+    }
 }
 function osdcloud-HPTPMEXEInstall {
     [CmdletBinding()]
@@ -180,19 +180,19 @@ function osdcloud-HPTPMEXEInstall {
     $TPMUpdate = (Get-ChildItem -Path $DownloadFolder -Filter *.exe).FullName
     if (Test-Path $TPMUpdate){
         Start-Process -FilePath $TPMUpdate -ArgumentList "/s /e /f $DownloadFolder" -Wait
-        if (!(Test-Path -Path "$DownloadFolder\TPMConfig64.exe")){Throw "Failed to Extract TPM Update"}
+        if (!(Test-Path -Path "$DownloadFolder\TPMConfig64.exe")){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to Extract TPM Update"}
         $Process = "$DownloadFolder\TPMConfig64.exe"
         #Create Argument List
         if ($filename -and $spec){$TPMArg = "-s -f$filename -a$spec -l$($env:temp)\TPMConfig.log"}
         elseif ($filename -and !($spec)) { $TPMArg = "-s -f$filename -l$($env:temp)\TPMConfig.log"}
         elseif (!($filename) -and $spec) { $TPMArg = "-s -a$spec -l$($env:temp)\TPMConfig.log"}
         elseif (!($filename) -and !($spec)) { $TPMArg = "-s -l$($env:temp)\TPMConfig.log"}
-        
+
         Write-Output "Running Command: Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait"
         $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
         write-output "TPMUpdate Exit Code: $($TPMUpdate.exitcode)"
     }
-    else {Throw "Failed to Locate Update Path"}
+    else {throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Locate Update Path"}
 }
 #does not work in pe
 function osdcloud-HPBIOSEXEDownload {
@@ -204,7 +204,7 @@ function osdcloud-HPBIOSEXEDownload {
             $UpdatePath = "$DownloadFolder\$BIOSUpdate.exe"
             Write-Host "Starting download of System Firmware Update $BIOSUpdate"
             Get-Softpaq -Number $SoftpaqNumber -SaveAs $UpdatePath -Overwrite yes
-            if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download System Firmware Update"}
+            if (!(Test-Path -Path $UpdatePath)){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Download System Firmware Update"}
 }
 function osdcloud-HPTPMUpdate {
     [CmdletBinding()]
@@ -227,14 +227,14 @@ function osdcloud-HPTPMUpdate {
             Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 2 | Out-Null}
         osdcloud-HPBIOSSetSetting -SettingName 'Virtualization Technology (VTx)' -Value 'Disable'
         $extractPath = osdcloud-HPTPMDownload -WorkingFolder $WorkingFolder
-        if (!(Test-Path -Path $extractPath)){Throw "Failed to Locate Update Path"}
+        if (!(Test-Path -Path $extractPath)){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Locate Update Path"}
         $Process = "$extractPath\TPMConfig64.exe"
         #Create Argument List
         if ($filename -and $spec){$TPMArg = "-s -f$filename -a$spec -l$($env:temp)\TPMConfig_$($logsuffix).log"}
         elseif ($filename -and !($spec)) { $TPMArg = "-s -f$filename -l$($env:temp)\TPMConfig_$($logsuffix).log"}
         elseif (!($filename) -and $spec) { $TPMArg = "-s -a$spec -l$($env:temp)\TPMConfig_$($logsuffix).log"}
         elseif (!($filename) -and !($spec)) { $TPMArg = "-s -l$($env:temp)\TPMConfig_$($logsuffix).log"}
-        
+
         Write-Output "Running Command: Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait"
         $TPMUpdate = Start-Process -FilePath $Process -ArgumentList $TPMArg -PassThru -Wait
         write-output "TPMUpdate Exit Code: $($TPMUpdate.exitcode)"
@@ -255,7 +255,7 @@ Function osdcloud-HPIAOfflineSync {
         [Parameter(Mandatory=$false)]
         $Release = "21H2"
         )
-    
+
     #Create HPIA Repo & Sync for this Platform (EXE / Online)
     $LogFolder = "C:\OSDCloud\Logs"
     $HPIARepoFolder = "C:\OSDCloud\HPIA\Repo"
@@ -279,16 +279,16 @@ Function osdcloud-HPIAExecute {
 <#
     Update HP Drivers via HPIA - Gary Blok - @gwblok
     Several Code Snips taken from: https://smsagent.blog/2021/03/30/deploying-hp-bios-updates-a-real-world-example/
-    
-    
+
+
     HPIA User Guide: https://ftp.ext.hp.com/pub/caps-softpaq/cmit/whitepapers/HPIAUserGuide.pdf
-    
+
     Notes about Severity:
     Routine – For new hardware support and feature enhancements.
     Recommended – For minor bug fixes. HP recommends this SoftPaq be installed.
     Critical – For major bug fixes, specific problem resolutions, to enable new OS or Service Pack. Essentially the SoftPaq is required to receive support from HP.
-    
-    
+
+
     #>
     [CmdletBinding()]
         Param (
@@ -318,10 +318,10 @@ Function osdcloud-HPIAExecute {
         $HPIAWebUrl = "https://ftp.hp.com/pub/caps-softpaq/cmit/HPIA.html" # Static web page of the HP Image Assistant
         $script:FolderPath = "HP_Updates" # the subfolder to put logs into in the storage container
         $ProgressPreference = 'SilentlyContinue' # to speed up web requests
-        
+
         #Record currently running Processes:
         #Get-Process | Select-Object -Property Name, Description | Out-File C:\osdcloud\Logs\HPIA-RunningProcesses.txt
-        
+
         ################################
         ## Create Directory Structure ##
         ################################
@@ -329,13 +329,13 @@ Function osdcloud-HPIAExecute {
         $ReportsFolder = "$ReportsFolder\$DateTime"
         $HPIALogFile = "$LogFolder\Run-HPIA.log"
         $script:TempWorkFolder = "C:\Windows\Temp\HPIA"
-        try 
+        try
         {
             [void][System.IO.Directory]::CreateDirectory($LogFolder)
             [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
             [void][System.IO.Directory]::CreateDirectory($ReportsFolder)
         }
-        catch 
+        catch
         {
             throw
         }
@@ -385,7 +385,7 @@ Function osdcloud-HPIAExecute {
         {
             $HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop -UseBasicParsing
         }
-        catch 
+        catch
         {
             CMTraceLog –Message "Failed to download the HPIA web page. $($_.Exception.Message)" –Component "Download" -Type 3
             throw
@@ -402,7 +402,7 @@ Function osdcloud-HPIAExecute {
         CMTraceLog –Message "Downloading HPIA" –Component "DownloadHPIA"
         Write-Host "Downloading HPIA" -ForegroundColor Green
         if (!(Test-Path -Path "$TempWorkFolder\$HPIAFileName")){
-            try 
+            try
             {
                 $ExistingBitsJob = Get-BitsTransfer –Name "$HPIAFileName" –AllUsers –ErrorAction SilentlyContinue
                 If ($ExistingBitsJob)
@@ -410,7 +410,7 @@ Function osdcloud-HPIAExecute {
                     CMTraceLog –Message "An existing BITS tranfer was found. Cleaning it up." –Component "Download" –Type 2
                     Remove-BitsTransfer –BitsJob $ExistingBitsJob
                 }
-                $BitsJob = Start-BitsTransfer –Source $HPIADownloadURL –Destination $TempWorkFolder\$HPIAFileName –Asynchronous –DisplayName "$HPIAFileName" –Description "HPIA download" –RetryInterval 60 –ErrorAction Stop 
+                $BitsJob = Start-BitsTransfer –Source $HPIADownloadURL –Destination $TempWorkFolder\$HPIAFileName –Asynchronous –DisplayName "$HPIAFileName" –Description "HPIA download" –RetryInterval 60 –ErrorAction Stop
                 do {
                     Start-Sleep –Seconds 5
                     $Progress = [Math]::Round((100 * ($BitsJob.BytesTransferred / $BitsJob.BytesTotal)),2)
@@ -425,7 +425,7 @@ Function osdcloud-HPIAExecute {
                 CMTraceLog –Message "BITS transfer is complete" –Component "Download"
                 Write-Host "BITS transfer is complete" -ForegroundColor Green
             }
-            catch 
+            catch
             {
                 CMTraceLog –Message "Failed to start a BITS transfer for the HPIA: $($_.Exception.Message)" –Component "Download" –Type 3
                 Write-Host "Failed to start a BITS transfer for the HPIA: $($_.Exception.Message)" -ForegroundColor Red
@@ -445,7 +445,7 @@ Function osdcloud-HPIAExecute {
         ##################
         CMTraceLog –Message "Extracting HPIA" –Component "Extract"
         Write-Host "Extracting HPIA" -ForegroundColor Green
-        try 
+        try
         {
             $Process = Start-Process –FilePath $TempWorkFolder\$HPIAFileName –WorkingDirectory $TempWorkFolder –ArgumentList "/s /f .\HPIA\ /e" –NoNewWindow –PassThru –Wait –ErrorAction Stop
             Start-Sleep –Seconds 5
@@ -453,14 +453,14 @@ Function osdcloud-HPIAExecute {
             {
                 CMTraceLog –Message "Extraction complete" –Component "Extract"
             }
-            Else  
+            Else
             {
                 CMTraceLog –Message "HPImageAssistant not found!" –Component "Extract" –Type 3
                 Write-Host "HPImageAssistant not found!" -ForegroundColor Red
                 throw
             }
         }
-        catch 
+        catch
         {
             CMTraceLog –Message "Failed to extract the HPIA: $($_.Exception.Message)" –Component "Extract" –Type 3
             Write-Host "Failed to extract the HPIA: $($_.Exception.Message)" -ForegroundColor Red
@@ -472,18 +472,18 @@ Function osdcloud-HPIAExecute {
         #CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
         #Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
         #osdcloud-addserviceui -ErrorAction SilentlyContinue
-        try 
+        try
         {
             if ($OfflineMode -eq $false){
                 if (Test-Path -path $env:temp\ServiceUI.exe)
                     {
                         CMTraceLog –Message "Running HPIA With Args: $env:temp\ServiceUI.exe -process:WinLogon.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
-                        Write-Host "Running HPIA With Args: $env:temp\ServiceUI.exe -process:WinLogon.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green                   
+                        Write-Host "Running HPIA With Args: $env:temp\ServiceUI.exe -process:WinLogon.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
                     $Process = Start-Process –FilePath $env:temp\ServiceUI.exe –ArgumentList "-process:WinLogon.exe $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –ErrorAction Stop
                 }
-                else {                
+                else {
                     CMTraceLog –Message "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
-                    Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green                   
+                    Write-Host "Running HPIA With Args: /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
                     $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –ErrorAction Stop
                 }
                 #CMTraceLog –Message "/Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
@@ -492,15 +492,15 @@ Function osdcloud-HPIAExecute {
                 }
             if ($OfflineMode -eq $true){
                 CMTraceLog –Message "/Offlinemode:$Offlinefolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –Component "Update"
-                Write-Host "Running HPIA With Args: /Offlinemode:$Offlinefolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green 
+                Write-Host "Running HPIA With Args: /Offlinemode:$Offlinefolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action  /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" -ForegroundColor Green
                 $Process = Start-Process –FilePath $TempWorkFolder\HPIA\HPImageAssistant.exe –WorkingDirectory $TempWorkFolder –ArgumentList "/Offlinemode:$Offlinefolder /Operation:$Operation /Category:$Category /Selection:$Selection /Action:$Action /Noninteractive /Debug /ReportFolder:$ReportsFolder /LogFolder:$ReportsFolder" –NoNewWindow –PassThru –ErrorAction Stop
                 }
-            
+
             #Bring Progress Bar to Front
             start-sleep -Seconds 10
             write-host "Attempting to bring HPIA Progress bar to top"
             (New-Object -ComObject WScript.Shell).AppActivate((get-process HPImageAssistant.dll).Description)
-            
+
             #Wait for Process to Finish
             $Process = Get-Process -name "HPImageAssistant" -ErrorAction SilentlyContinue
             if ($Process -ne $null){
@@ -515,29 +515,29 @@ Function osdcloud-HPIAExecute {
                 CMTraceLog –Message "Analysis complete" –Component "Update"
                 Write-Host "Analysis complete" -ForegroundColor Green
             }
-            elseif ($ExitCode -eq 256) 
+            elseif ($ExitCode -eq 256)
             {
                 CMTraceLog –Message "Exit $($ExitCode) - The analysis returned no recommendation." –Component "Update" –Type 2
                 Write-Host "Exit $($ExitCode) - The analysis returned no recommendation." -ForegroundColor Green
                 Exit 0
             }
-                elseif ($ExitCode -eq 257) 
+                elseif ($ExitCode -eq 257)
             {
                 CMTraceLog –Message "Exit $($ExitCode) - There were no recommendations selected for the analysis." –Component "Update" –Type 2
                 Write-Host "Exit $($ExitCode) - There were no recommendations selected for the analysis." -ForegroundColor Green
                 Exit 0
             }
-            elseif ($ExitCode -eq 3010) 
+            elseif ($ExitCode -eq 3010)
             {
                 CMTraceLog –Message "Exit $($ExitCode) - HPIA Complete, requires Restart" –Component "Update" –Type 2
                 Write-Host "Exit $($ExitCode) - HPIA Complete, requires Restart" -ForegroundColor Yellow
             }
-            elseif ($ExitCode -eq 3020) 
+            elseif ($ExitCode -eq 3020)
             {
                 CMTraceLog –Message "Exit $($ExitCode) - Install failed — One or more SoftPaq installations failed." –Component "Update" –Type 2
                 Write-Host "Exit $($ExitCode) - Install failed — One or more SoftPaq installations failed." -ForegroundColor Yellow
             }
-            elseif ($ExitCode -eq 4096) 
+            elseif ($ExitCode -eq 4096)
             {
                 CMTraceLog –Message "Exit $($ExitCode) - This platform is not supported!" –Component "Update" –Type 2
                 Write-Host "Exit $($ExitCode) - This platform is not supported!" -ForegroundColor Yellow
@@ -550,7 +550,7 @@ Function osdcloud-HPIAExecute {
                 throw
             }
         }
-        catch 
+        catch
         {
             CMTraceLog –Message "Failed to start the HPImageAssistant.exe: $($_.Exception.Message)" –Component "Update" –Type 3
             Write-Host "Failed to start the HPImageAssistant.exe: $($_.Exception.Message)" -ForegroundColor Red
@@ -559,20 +559,20 @@ Function osdcloud-HPIAExecute {
         ##############################################
         ## Gathering Addtional Information ##
         ##############################################
-    
+
         CMTraceLog –Message "Reading xml report" –Component "Report"
-        try 
+        try
         {
             $XMLFile = Get-ChildItem –Path $ReportsFolder –Recurse –Include *.xml –ErrorAction Stop
             If ($XMLFile)
             {
                 CMTraceLog –Message "Report located at $($XMLFile.FullName)" –Component "Report"
-                try 
+                try
                 {
                     [xml]$XML = Get-Content –Path $XMLFile.FullName –ErrorAction Stop
                     if ($Category -eq "BIOS" -or $Category -eq "All"){
                         CMTraceLog –Message "Checking BIOS Recommendations" –Component "Report"
-                        Write-Host "Checking BIOS Recommendations" -ForegroundColor Green 
+                        Write-Host "Checking BIOS Recommendations" -ForegroundColor Green
                         $null = $Recommendation
                         $Recommendation = $xml.HPIA.Recommendations.BIOS.Recommendation
                         If ($Recommendation)
@@ -583,7 +583,7 @@ Function osdcloud-HPIAExecute {
                             $DownloadURL = "https://" + $Recommendation.Solution.Softpaq.Url
                             $SoftpaqFileName = $DownloadURL.Split('/')[-1]
                             CMTraceLog –Message "Component: $ItemName" –Component "Report"
-                            Write-Host "Component: $ItemName" -ForegroundColor Gray                           
+                            Write-Host "Component: $ItemName" -ForegroundColor Gray
                             CMTraceLog –Message " Current version is $CurrentBIOSVersion" –Component "Report"
                             Write-Host " Current version is $CurrentBIOSVersion" -ForegroundColor Gray
                             CMTraceLog –Message " Recommended version is $ReferenceBIOSVersion" –Component "Report"
@@ -591,7 +591,7 @@ Function osdcloud-HPIAExecute {
                             CMTraceLog –Message " Softpaq download URL is $DownloadURL" –Component "Report"
                             Write-Host " Softpaq download URL is $DownloadURL" -ForegroundColor Gray
                         }
-                        Else  
+                        Else
                         {
                             CMTraceLog –Message "No BIOS recommendation in the XML report" –Component "Report" –Type 2
                             Write-Host "No BIOS recommendation in XML" -ForegroundColor Gray
@@ -599,7 +599,7 @@ Function osdcloud-HPIAExecute {
                     }
                     if ($Category -eq "drivers" -or $Category -eq "All"){
                         CMTraceLog –Message "Checking Driver Recommendations" –Component "Report"
-                        Write-Host "Checking Driver Recommendations" -ForegroundColor Green                
+                        Write-Host "Checking Driver Recommendations" -ForegroundColor Green
                         $null = $Recommendation
                         $Recommendation = $xml.HPIA.Recommendations.drivers.Recommendation
                         If ($Recommendation){
@@ -610,7 +610,7 @@ Function osdcloud-HPIAExecute {
                                 $DownloadURL = "https://" + $item.Solution.Softpaq.Url
                                 $SoftpaqFileName = $DownloadURL.Split('/')[-1]
                                 CMTraceLog –Message "Component: $ItemName" –Component "Report"
-                                Write-Host "Component: $ItemName" -ForegroundColor Gray                           
+                                Write-Host "Component: $ItemName" -ForegroundColor Gray
                                 CMTraceLog –Message " Current version is $CurrentBIOSVersion" –Component "Report"
                                 Write-Host " Current version is $CurrentBIOSVersion" -ForegroundColor Gray
                                 CMTraceLog –Message " Recommended version is $ReferenceBIOSVersion" –Component "Report"
@@ -619,7 +619,7 @@ Function osdcloud-HPIAExecute {
                                 Write-Host " Softpaq download URL is $DownloadURL" -ForegroundColor Gray
                                 }
                             }
-                        Else  
+                        Else
                             {
                             CMTraceLog –Message "No Driver recommendation in the XML report" –Component "Report" –Type 2
                             Write-Host "No Driver recommendation in XML" -ForegroundColor Gray
@@ -627,7 +627,7 @@ Function osdcloud-HPIAExecute {
                         }
                         if ($Category -eq "Software" -or $Category -eq "All"){
                         CMTraceLog –Message "Checking Software Recommendations" –Component "Report"
-                        Write-Host "Checking Software Recommendations" -ForegroundColor Green 
+                        Write-Host "Checking Software Recommendations" -ForegroundColor Green
                         $null = $Recommendation
                         $Recommendation = $xml.HPIA.Recommendations.software.Recommendation
                         If ($Recommendation){
@@ -638,7 +638,7 @@ Function osdcloud-HPIAExecute {
                                 $DownloadURL = "https://" + $item.Solution.Softpaq.Url
                                 $SoftpaqFileName = $DownloadURL.Split('/')[-1]
                                 CMTraceLog –Message "Component: $ItemName" –Component "Report"
-                                Write-Host "Component: $ItemName" -ForegroundColor Gray                           
+                                Write-Host "Component: $ItemName" -ForegroundColor Gray
                                 CMTraceLog –Message "Current version is $CurrentBIOSVersion" –Component "Report"
                                 Write-Host " Current version is $CurrentBIOSVersion" -ForegroundColor Gray
                                 CMTraceLog –Message "Recommended version is $ReferenceBIOSVersion" –Component "Report"
@@ -647,36 +647,36 @@ Function osdcloud-HPIAExecute {
                                 Write-Host " Softpaq download URL is $DownloadURL" -ForegroundColor Gray
                             }
                         }
-                        Else  
+                        Else
                             {
                             CMTraceLog –Message "No Software recommendation in the XML report" –Component "Report" –Type 2
                             Write-Host "No Software recommendation in XML" -ForegroundColor Gray
                             }
                     }
                 }
-                catch 
+                catch
                 {
                     CMTraceLog –Message "Failed to parse the XML file: $($_.Exception.Message)" –Component "Report" –Type 3
                 }
             }
-            Else  
+            Else
             {
                 CMTraceLog –Message "Failed to find an XML report." –Component "Report" –Type 3
                 }
         }
-        catch 
+        catch
         {
             CMTraceLog –Message "Failed to find an XML report: $($_.Exception.Message)" –Component "Report" –Type 3
         }
         ## Overview History of HPIA
-        try 
+        try
         {
             $JSONFile = Get-ChildItem –Path $ReportsFolder –Recurse –Include *.JSON –ErrorAction Stop
             If ($JSONFile)
             {
                 Write-Host "Reporting Full HPIA Results" -ForegroundColor Green
                 CMTraceLog –Message "JSON located at $($JSONFile.FullName)" –Component "Report"
-                try 
+                try
                 {
                 $JSON = Get-Content –Path $JSONFile.FullName  –ErrorAction Stop | ConvertFrom-Json
                 CMTraceLog –Message "HPIAOpertaion: $($JSON.HPIA.HPIAOperation)" –Component "Report"
@@ -727,22 +727,22 @@ function osdcloud-HPIADownload {
     $script:TempWorkFolder = "c:\windows\temp\HPIA"
     [void][System.IO.Directory]::CreateDirectory($TempWorkFolder)
     $HTML = Invoke-WebRequest –Uri $HPIAWebUrl –ErrorAction Stop -UseBasicParsing
-            
+
     $HPIASoftPaqNumber = ($HTML.Links | Where {$_.href -match "hp-hpia-"}).outerText
     $HPIADownloadURL = ($HTML.Links | Where {$_.href -match "hp-hpia-"}).href
     $HPIAFileName = $HPIADownloadURL.Split('/')[-1]
     Write-Host " Download URL is $HPIADownloadURL" -ForegroundColor DarkGray
-    
+
     Write-Host " Downloading HPIA" -ForegroundColor Green
     if (!(Test-Path -Path "$TempWorkFolder\$HPIAFileName")){
-        try 
+        try
         {
             $ExistingBitsJob = Get-BitsTransfer –Name "$HPIAFileName" –AllUsers –ErrorAction SilentlyContinue
             If ($ExistingBitsJob)
             {
                 Remove-BitsTransfer –BitsJob $ExistingBitsJob
             }
-            $BitsJob = Start-BitsTransfer –Source $HPIADownloadURL –Destination $TempWorkFolder\$HPIAFileName –Asynchronous –DisplayName "$HPIAFileName" –Description "HPIA download" –RetryInterval 60 –ErrorAction Stop 
+            $BitsJob = Start-BitsTransfer –Source $HPIADownloadURL –Destination $TempWorkFolder\$HPIAFileName –Asynchronous –DisplayName "$HPIAFileName" –Description "HPIA download" –RetryInterval 60 –ErrorAction Stop
             do {
                 Start-Sleep –Seconds 5
                 $Progress = [Math]::Round((100 * ($BitsJob.BytesTransferred / $BitsJob.BytesTotal)),2)
@@ -750,7 +750,7 @@ function osdcloud-HPIADownload {
             Complete-BitsTransfer –BitsJob $BitsJob
             Write-Host " BITS transfer is complete" -ForegroundColor DarkGray
         }
-        catch 
+        catch
         {
         }
         if (!(Test-Path -Path $TempWorkFolder\$HPIAFileName)){
@@ -765,7 +765,7 @@ function osdcloud-HPIADownload {
         {
         Write-Host " $HPIAFileName already downloaded, skipping step" -ForegroundColor DarkGray
         }
-    }    
+    }
 
 function osdcloud-HPBIOSUpdate {
     #Stage Firmware Update for Next Reboot
@@ -837,7 +837,7 @@ else
 function osdcloud-HPSetupCompleteAppend {
 
     $ScriptsPath = "C:\Windows\Setup\scripts"
-    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
+    if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath}
 
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"
@@ -858,19 +858,19 @@ function osdcloud-HPSetupCompleteAppend {
         if (($Global:OSDCloud.HPIAFirmware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
             Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Firmware" -ForegroundColor Magenta'
             Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Firmware"
-        } 
+        }
         if (($Global:OSDCloud.HPIASoftware -eq $true) -and ($Global:OSDCloud.HPIAAll  -ne $true)){
             Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
             Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category Software"
-        } 
+        }
         if ($Global:OSDCloud.HPIAAll -eq $true){
             Add-Content -Path $PSFilePath 'Write-Host "Running HPIA for Software" -ForegroundColor Magenta'
             Add-Content -Path $PSFilePath "osdcloud-HPIAExecute -Category All"
-        }            
+        }
         if ($Global:OSDCloud.HPTPMUpdate -eq $true){
             #Add-Content -Path $PSFilePath 'Write-Host "Updating TPM Firmware" -ForegroundColor Magenta'
             #Add-Content -Path $PSFilePath "osdcloud-TPMEXEInstall"
-        } 
+        }
         if ($Global:OSDCloud.HPBIOSUpdate -eq $true){
             Add-Content -Path $PSFilePath 'Write-Host "Running HP System Firmware" -ForegroundColor Magenta'
             Add-Content -Path $PSFilePath "osdcloud-HPBIOSUpdate"
