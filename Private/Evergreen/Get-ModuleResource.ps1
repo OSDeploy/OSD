@@ -8,7 +8,7 @@ Function Get-ModuleResource {
     param (
         [Parameter(Mandatory = $False, Position = 0)]
         [ValidateNotNull()]
-        [ValidateScript( { If (Test-Path -Path $_ -PathType 'Leaf') { $True } Else { Throw "Cannot find file $_" } })]
+        [ValidateScript( { If (Test-Path -Path $_ -PathType 'Leaf') { $True } Else { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Cannot find file $_" } })]
         [System.String] $Path = (Join-Path -Path $MyInvocation.MyCommand.Module.ModuleBase -ChildPath "OSD.json")
     )
 
