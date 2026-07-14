@@ -106,7 +106,7 @@ function Get-OSDCoreDeploymentDisk {
     #=================================================
     # Test Get-PhysicalDisk and throw if not available
     if (-not (Get-Command -Name 'Get-PhysicalDisk' -ErrorAction SilentlyContinue)) {
-        Throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Get-OSDCoreDeploymentDisk requires 'Get-PhysicalDisk' which is not available on this system"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Get-OSDCoreDeploymentDisk requires 'Get-PhysicalDisk' which is not available on this system"
     }
     #=================================================
     # Get Variables
@@ -144,7 +144,7 @@ function Get-OSDCoreDeploymentDisk {
         )
         $diskObjects = $searcher.Get()
     } catch {
-        Throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to enumerate disks using MSFT_Disk via .NET: $($_.Exception.Message)"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to enumerate disks using MSFT_Disk via .NET: $($_.Exception.Message)"
     }
 
     $GetDisk = foreach ($diskObject in $diskObjects) {
@@ -219,7 +219,7 @@ function Get-OSDCoreDeploymentDisk {
     #=================================================
     # if no disks found, throw
     if ($GetDisk.Count -eq 0) {
-        Throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No disks were found that could be used for OSDCloud."
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No disks were found that could be used for OSDCloud."
     }
     # if more than 1, then need to warn
     if ($GetDisk.Count -gt 1) {
