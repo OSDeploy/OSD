@@ -50,7 +50,7 @@ function LoadForm {
         Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase, system.windows.forms
     } 
     Catch {
-        Throw "Failed to load Windows Presentation Framework assemblies."
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to load Windows Presentation Framework assemblies."
     }
 
     #Create the XAML reader using a new XML node reader
