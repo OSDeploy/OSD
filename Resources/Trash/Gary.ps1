@@ -1,8 +1,8 @@
 function osdcloud-EjectCD {
     [CmdletBinding()]
-    param ()   
+    param ()
     (New-Object -ComObject 'Shell.Application').Namespace(17).Items() | Where-Object { $_.Type -eq 'CD Drive' } | ForEach-Object { $_.InvokeVerb('Eject') }
-    }   
+    }
 function osdcloud-InstallModuleHPCMSL {
     [CmdletBinding()]
     param ()
@@ -54,15 +54,15 @@ function osdcloud-DownloadHPTPM {
             $extractPath = "$WorkingFolder\$TPMUpdate"
             Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
             Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
-            if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Download TPM Update"}
+            if (!(Test-Path -Path $UpdatePath)){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Download TPM Update"}
             Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
-            if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Extract TPM Update"}
+            if (!(Test-Path -Path $UpdatePath)){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Extract TPM Update"}
             else {
                 Return $UpdatePath
                 }
             }
         }
-    else {throw "Unable to load HPCMSL"}
+    else {throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to load HPCMSL"}
 
 }
 function osdcloud-StartHPTPMUpdate {
@@ -94,7 +94,7 @@ function osdcloud-UpdateHPTPM {
     [CmdletBinding()]
     param ($WorkingFolder)
     $UpdatePath = osdcloud-DownloadHPTPM -WorkingFolder $WorkingFolder
-    if (!(Test-Path -Path $UpdatePath)){Throw "Failed to Locate Update Path"}
+    if (!(Test-Path -Path $UpdatePath)){throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to Locate Update Path"}
     osdcloud-StartHPTPMUpdate -path $extractPath
 
 }
