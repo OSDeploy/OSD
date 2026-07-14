@@ -258,49 +258,18 @@ function Show-PowershellWindow() {
     $null = $showWindowAsync::ShowWindowAsync((Get-Process -Id $pid).MainWindowHandle, 10)
 }
 #================================================
-#   Manufacturer Enhacements
+#   Device Specific Enhancements
 #================================================
-if (($global:OSDCoreDevice.OSDManufacturer -eq 'Microsoft') -and ($global:OSDCoreDevice.OSDProduct -match 'Hyper-V')) {
-    $HyperV = $true
-}
-else {
-    $HyperV = $false
-}
-
-try {
-    $WebConnection = [bool](Test-WebConnection -Uri "google.com")
-}
-catch {
-    $WebConnection = $false
-}
-
-function Test-HPIASupport {
-    $CabPath = Join-Path -Path $env:TEMP -ChildPath "platformList.cab"
-    $XMLPath = Join-Path -Path $env:TEMP -ChildPath "platformList.xml"
-    $PlatformListCabURL = "https://hpia.hpcloud.hp.com/ref/platformList.cab"
-
+$HPEnterprise = $false
+if ($global:OSDCoreDevice.OSDManufacturer -eq 'HP') {
     try {
-        Invoke-WebRequest -Uri $PlatformListCabURL -OutFile $CabPath -UseBasicParsing -ErrorAction Stop
-        $null = & expand.exe $CabPath $XMLPath
-        [xml]$XML = Get-Content -Path $XMLPath -Raw -ErrorAction Stop
-        $Platforms = $XML.ImagePal.Platform.SystemID
-        return ($global:OSDCoreDevice.BaseBoardProduct -in $Platforms)
+        $HPEnterprise = [bool](Test-HPIASupport)
     }
     catch {
-        return $false
-    }
-    finally {
-        Remove-Item -Path $CabPath -Force -ErrorAction SilentlyContinue
-        Remove-Item -Path $XMLPath -Force -ErrorAction SilentlyContinue
+        Write-Verbose "Test-HPIASupport failed: $($_.Exception.Message)"
+        $HPEnterprise = $false
     }
 }
-
-if ($global:OSDCoreDevice.OSDManufacturer -eq 'HP') {
-    if ($WebConnection -eq $true) {
-        $HPEnterprise = Test-HPIASupport
-    }
-}
-
 if ($HPEnterprise) {
     Install-ModuleHPCMSL
     $TPM = Get-HPTPMDetermine
@@ -310,10 +279,8 @@ if ($HPEnterprise) {
     catch {
         $BIOS = 'Skip'
     }
-
     $formMainWindowControlManufacturerFunction.Header = "HP Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
-
     $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
     $formMainWindowControlOption_Name_1.IsChecked = $Global:OSDCloudGUI.HPIADrivers
     $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
@@ -340,7 +307,7 @@ if ($HPEnterprise) {
         $LatestVer = (Get-HPBIOSUpdates -Latest).ver
         $CurrentVer = Get-HPBIOSVersion
         $formMainWindowControlOption_Name_6.Visibility = 'Visible'
-        $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
+        $formMainWindowControlOption_Name_6.Header = "HP Update System Firmware from $CurrentVer to $LatestVer"
         $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate
     }
     elseif ($BIOS -eq "Skip"){
@@ -362,7 +329,7 @@ if ($HPEnterprise) {
     $formMainWindowControlOption_Name_2.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
     $formMainWindowControlOption_Name_3.add_Checked({$formMainWindowControlOption_Name_4.IsChecked = $false})
 }
-elseif ($HyperV) {
+elseif ($global:OSDCoreDevice.OSDProduct -match 'Hyper-V') {
     $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
     $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
@@ -852,7 +819,7 @@ $formMainWindowControlStartButton.add_Click({
         $Global:InvokeOSDCloud.DCUAutoUpdateEnable = $formMainWindowControlOption_Name_5.IsChecked
         $Global:InvokeOSDCloud.DellTPMUpdate = $formMainWindowControlOption_Name_6.IsChecked
     }
-    if ($HyperV){
+    if ($global:OSDCoreDevice.OSDProduct -match 'Hyper-V'){
         $Global:InvokeOSDCloud.HyperVSetName = $formMainWindowControlOption_Name_1.IsChecked
         $Global:InvokeOSDCloud.HyperVEjectISO = $formMainWindowControlOption_Name_2.IsChecked
     }
