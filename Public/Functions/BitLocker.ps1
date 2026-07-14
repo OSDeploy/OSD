@@ -27,19 +27,14 @@ function Backup-MyBitLockerKeys {
         [string[]]$Path
     )
     begin {
-        #=================================================
-        #   Require Admin Rights
-        #=================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
         #=================================================
-        if (-NOT (Get-Command Get-BitLockerVolume -ErrorAction Ignore)) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Get-BitLockerVolume which is not present on this system"
-            Break
+        if (-not (Get-Command -Name Get-BitLockerVolume -ErrorAction Ignore)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires Get-BitLockerVolume, which is not present on this system"
         }
         #=================================================
     }
@@ -86,37 +81,35 @@ function Get-MyBitLockerKeyProtectors {
         #=================================================
         #   Require Admin Rights
         #=================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
         #=================================================
-        if (-NOT (Get-Command Get-BitLockerVolume -ErrorAction Ignore)) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Get-BitLockerVolume which is not present on this system"
-            Break
+        if (-not (Get-Command -Name Get-BitLockerVolume -ErrorAction Ignore)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires Get-BitLockerVolume, which is not present on this system"
         }
         #=================================================
         #   Get-BitLockerVolume
         #=================================================
-        #$BitLockerVolumes = Get-BitLockerVolume | Sort-Object -Property MountPoint | Where-Object {$_.VolumeStatus -eq 'FullyEncrypted'} | Where-Object {$_.LockStatus -eq 'Unlocked'} | Select-Object *
-        $BitLockerVolumes = Get-BitLockerVolume | Sort-Object -Property MountPoint | Where-Object {$_.EncryptionMethod -ne ''} | Select-Object *
+        #$BitLockerVolumes = Get-BitLockerVolume | Sort-Object -Property MountPoint | Where-Object {$_.VolumeStatus -eq 'FullyEncrypted'} | Where-Object {$_.LockStatus -eq 'Unlocked'}
+        $BitLockerVolumes = Get-BitLockerVolume | Sort-Object -Property MountPoint | Where-Object { $_.EncryptionMethod -ne '' }
         #=================================================
     }
     process {
         $Results = foreach ($BitLockerVolume in $BitLockerVolumes) {
 
-            $ExternalKeyMatches = ($BitLockerVolume.KeyProtector | Where-Object {$_.KeyProtectorType -eq 'ExternalKey'}).Count
-            if ($ExternalKeyMatches -eq 0) {Write-Warning "Mountpoint $($BitLockerVolume.Mountpoint) does not contain an ExternalKey"}
-            if ($ExternalKeyMatches -gt 1) {Write-Warning "Mountpoint $($BitLockerVolume.Mountpoint) contains $ExternalKeyMatches ExternalKeys.  Ideally, this should be 1"}
-    
-            $RecoveryPasswordMatches = ($BitLockerVolume.KeyProtector | Where-Object {$_.KeyProtectorType -eq 'RecoveryPassword'}).Count
-            if ($RecoveryPasswordMatches -eq 0) {Write-Warning "Mountpoint $($BitLockerVolume.Mountpoint) does not contain an RecoveryPassword"}
-            if ($RecoveryPasswordMatches -gt 1) {Write-Warning "Mountpoint $($BitLockerVolume.Mountpoint) contains $RecoveryPasswordMatches RecoveryPassword.  Ideally, this should be 1"}
-    
+            $ExternalKeyMatches = @($BitLockerVolume.KeyProtector | Where-Object { $_.KeyProtectorType -eq 'ExternalKey' }).Count
+            if ($ExternalKeyMatches -eq 0) { Write-Warning "Mountpoint $($BitLockerVolume.Mountpoint) does not contain an ExternalKey" }
+            if ($ExternalKeyMatches -gt 1) { Write-Warning "Mountpoint $($BitLockerVolume.Mountpoint) contains $ExternalKeyMatches ExternalKeys.  Ideally, this should be 1" }
+
+            $RecoveryPasswordMatches = @($BitLockerVolume.KeyProtector | Where-Object { $_.KeyProtectorType -eq 'RecoveryPassword' }).Count
+            if ($RecoveryPasswordMatches -eq 0) { Write-Warning "Mountpoint $($BitLockerVolume.Mountpoint) does not contain an RecoveryPassword" }
+            if ($RecoveryPasswordMatches -gt 1) { Write-Warning "Mountpoint $($BitLockerVolume.Mountpoint) contains $RecoveryPasswordMatches RecoveryPassword.  Ideally, this should be 1" }
+
             foreach ($item in $BitLockerVolume.KeyProtector) {
-    
+
                 if ($ShowRecoveryPassword) {
                     [PSCustomObject] @{
                             ComputerName            = $BitLockerVolume.ComputerName
@@ -134,7 +127,8 @@ function Get-MyBitLockerKeyProtectors {
                             AutoUnlockProtector     = $item.AutoUnlockProtector
                             KeyFileName             = $item.KeyFileName
                     }
-                } else {
+                }
+                else {
                     [PSCustomObject] @{
                             ComputerName            = $BitLockerVolume.ComputerName
                             MountPoint              = $BitLockerVolume.MountPoint
@@ -154,7 +148,7 @@ function Get-MyBitLockerKeyProtectors {
                 }
             }
         }
-    
+
         Return $Results
     }
     end {}
@@ -191,29 +185,29 @@ function Save-MyBitLockerExternalKey {
         #=================================================
         #   Require Admin Rights
         #=================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
         #=================================================
-        if (-NOT (Get-Command Get-BitLockerVolume -ErrorAction Ignore)) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Get-BitLockerVolume which is not present on this system"
-            Break
+        if (-not (Get-Command -Name Get-BitLockerVolume -ErrorAction Ignore)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires Get-BitLockerVolume, which is not present on this system"
         }
         #=================================================
         #   Test-Path
         #=================================================
         foreach ($Item in $Path) {
-            if (-NOT (Test-Path $Item)) {
+            if (-NOT (Test-Path -LiteralPath $Item)) {
                 New-Item $Item -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
         }
         #=================================================
         #   Get-BitLockerKeyProtectors
         #=================================================
-        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors | Sort-Object -Property MountPoint | Where-Object {$_.LockStatus -eq 'Unlocked'} | Where-Object {$_.KeyProtectorType -eq 'ExternalKey'}
+        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors |
+            Sort-Object -Property MountPoint |
+            Where-Object { $_.LockStatus -eq 'Unlocked' -and $_.KeyProtectorType -eq 'ExternalKey' }
         #=================================================
     }
     process {
@@ -257,29 +251,29 @@ function Save-MyBitLockerKeyPackage {
         #=================================================
         #   Require Admin Rights
         #=================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
         #=================================================
-        if (-NOT (Get-Command Get-BitLockerVolume -ErrorAction Ignore)) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Get-BitLockerVolume which is not present on this system"
-            Break
+        if (-not (Get-Command -Name Get-BitLockerVolume -ErrorAction Ignore)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires Get-BitLockerVolume, which is not present on this system"
         }
         #=================================================
         #   Test-Path
         #=================================================
         foreach ($Item in $Path) {
-            if (-NOT (Test-Path $Item)) {
+            if (-NOT (Test-Path -LiteralPath $Item)) {
                 New-Item $Item -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
         }
         #=================================================
         #   Get-BitLockerKeyProtectors
         #=================================================
-        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors -ShowRecoveryPassword | Sort-Object -Property MountPoint | Where-Object {$_.LockStatus -eq 'Unlocked'} | Where-Object {$_.KeyProtectorType -ne 'Tpm'}
+        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors -ShowRecoveryPassword |
+            Sort-Object -Property MountPoint |
+            Where-Object { $_.LockStatus -eq 'Unlocked' -and $_.KeyProtectorType -ne 'Tpm' }
         #=================================================
     }
     process {
@@ -323,29 +317,29 @@ function Save-MyBitLockerRecoveryPassword {
         #=================================================
         #   Require Admin Rights
         #=================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
         #=================================================
-        if (-NOT (Get-Command Get-BitLockerVolume -ErrorAction Ignore)) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Get-BitLockerVolume which is not present on this system"
-            Break
+        if (-not (Get-Command -Name Get-BitLockerVolume -ErrorAction Ignore)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires Get-BitLockerVolume, which is not present on this system"
         }
         #=================================================
         #   Test-Path
         #=================================================
         foreach ($Item in $Path) {
-            if (-NOT (Test-Path $Item)) {
+            if (-NOT (Test-Path -LiteralPath $Item)) {
                 New-Item $Item -ItemType Directory -Force -ErrorAction Stop | Out-Null
             }
         }
         #=================================================
         #   Get-BitLockerKeyProtectors
         #=================================================
-        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors -ShowRecoveryPassword | Sort-Object -Property MountPoint | Where-Object {$_.LockStatus -eq 'Unlocked'} | Where-Object {$_.KeyProtectorType -eq 'RecoveryPassword'}
+        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors -ShowRecoveryPassword |
+            Sort-Object -Property MountPoint |
+            Where-Object { $_.LockStatus -eq 'Unlocked' -and $_.KeyProtectorType -eq 'RecoveryPassword' }
         #=================================================
     }
     process {
@@ -355,7 +349,7 @@ function Save-MyBitLockerRecoveryPassword {
                 $MountPoint = $BitLockerKeyProtector.MountPoint -replace ":"
                 $KeyProtectorId = $BitLockerKeyProtector.KeyProtectorId -replace "{" -replace "}"
                 $RecoveryPassword = $BitLockerKeyProtector.RecoveryPassword
-        
+
 $TextContent = @"
 BitLocker Drive Encryption recovery key 
 
@@ -374,7 +368,7 @@ Recovery Key:
 If the above identifier doesn't match the one displayed by your PC, then this isn't the right key to unlock your drive.
 Try another recovery key, or refer to https://go.microsoft.com/fwlink/?LinkID=260589 for additional assistance.
 "@
-        
+
                 New-Item -Path "$Item\$ComputerName MountPoint $MountPoint $KeyProtectorId.TXT" -Force
                 $TextContent | Set-Content "$Item\$ComputerName MountPoint $MountPoint $KeyProtectorId.TXT" -Force
             }
@@ -424,22 +418,20 @@ function Unlock-MyBitLockerExternalKey {
         #=================================================
         #   Require Admin Rights
         #=================================================
-        if ((Get-OSDGather -Property IsAdmin) -eq $false) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Admin Rights ELEVATED"
-            Break
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
         #=================================================
-        if (-NOT (Get-Command Get-BitLockerVolume -ErrorAction Ignore)) {
-            Write-Warning "$($MyInvocation.MyCommand) requires Get-BitLockerVolume which is not present on this system"
-            Break
+        if (-not (Get-Command -Name Get-BitLockerVolume -ErrorAction Ignore)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires Get-BitLockerVolume, which is not present on this system"
         }
         #=================================================
         #   Test-Path
         #=================================================
         foreach ($Item in $Path) {
-            if (-NOT (Test-Path $Item)) {
+            if (-NOT (Test-Path -LiteralPath $Item)) {
                 Write-Warning "Unable to validate Path at $Item"
                 Break
             }
@@ -447,9 +439,11 @@ function Unlock-MyBitLockerExternalKey {
         #=================================================
         #   Get-MyBitLockerKeyProtectors
         #=================================================
-        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors | Sort-Object -Property MountPoint | Where-Object {$_.LockStatus -eq 'Locked'} | Where-Object {$_.KeyProtectorType -eq 'ExternalKey'} | Select-Object *
+        $BitLockerKeyProtectors = Get-MyBitLockerKeyProtectors |
+            Sort-Object -Property MountPoint |
+            Where-Object { $_.LockStatus -eq 'Locked' -and $_.KeyProtectorType -eq 'ExternalKey' }
         $BitLockerKeyProtectors
-        if ($null -eq $BitLockerKeyProtectors) {
+        if (-NOT $BitLockerKeyProtectors) {
             Write-Warning "No BitLocker Volumes with a LockStatus of Locked could be found"
             Break
         }
@@ -461,9 +455,11 @@ function Unlock-MyBitLockerExternalKey {
             $ExternalKeyName = (($BitLockerKeyProtector).KeyProtectorId -replace "{" -replace "}") + ".BEK"
 
             if ($Recurse) {
-                $RecoveryKeyPath = (Get-ChildItem -Path $Path -Force -Recurse | Where-Object {$_.Name -eq $ExternalKeyName} | Select-Object -First 1).FullName
+                $RecoveryKeyPath = Get-ChildItem -Path $Path -Force -Recurse -File -Filter $ExternalKeyName -ErrorAction Ignore |
+                    Select-Object -ExpandProperty FullName -First 1
             } else {
-                $RecoveryKeyPath = (Get-ChildItem -Path $Path -Force | Where-Object {$_.Name -eq $ExternalKeyName} | Select-Object -First 1).FullName
+                $RecoveryKeyPath = Get-ChildItem -Path $Path -Force -File -Filter $ExternalKeyName -ErrorAction Ignore |
+                    Select-Object -ExpandProperty FullName -First 1
             }
 
             if ($RecoveryKeyPath) {
@@ -477,8 +473,3 @@ function Unlock-MyBitLockerExternalKey {
     }
     end {}
 }
-
-
-
-
-
