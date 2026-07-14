@@ -249,9 +249,9 @@ function Invoke-HPTPMDownload {
         $extractPath = "$WorkingFolder\$TPMUpdate"
         Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
         Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
-        if (!(Test-Path -Path $UpdatePath)) { Throw "Failed to Download TPM Update" }
+        if (!(Test-Path -Path $UpdatePath)) { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Download TPM Update" }
         Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
-        if (!(Test-Path -Path $extractPath)) { Throw "Failed to Extract TPM Update" }
+        if (!(Test-Path -Path $extractPath)) { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Extract TPM Update" }
         else {
             Return $extractPath
         }
@@ -295,9 +295,9 @@ function Invoke-HPTPMDowngrade {
         $extractPath = "$WorkingFolder\$TPMUpdate"
         Write-Host "Starting downlaod & Install of TPM Update $TPMUpdate"
         Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
-        if (!(Test-Path -Path $UpdatePath)) { Throw "Failed to Download TPM Update" }
+        if (!(Test-Path -Path $UpdatePath)) { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Download TPM Update" }
         Start-Process -FilePath $UpdatePath -ArgumentList "/s /e /f $extractPath" -Wait
-        if (!(Test-Path -Path $extractPath)) { Throw "Failed to Extract TPM Update" }
+        if (!(Test-Path -Path $extractPath)) { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Extract TPM Update" }
         else {
             Write-Host "TPM Downloaded to $extractPath"
         }
@@ -356,7 +356,7 @@ function Invoke-HPTPMEXEDownload {
             Import-Module -Name HPCMSL -Force
             Get-Softpaq -Number $TPMUpdate -SaveAs $UpdatePath -Overwrite yes
         }
-        if (!(Test-Path -Path $UpdatePath)) { Throw "Failed to Download TPM Update" }
+        if (!(Test-Path -Path $UpdatePath)) { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Download TPM Update" }
     }
 }
 function Invoke-HPTPMEXEInstall {
@@ -420,7 +420,7 @@ function Invoke-HPTPMEXEInstall {
         $TPMUpdate = (Get-ChildItem -Path $DownloadFolder -Filter *.exe).FullName
         if (Test-Path $TPMUpdate) {
             Start-Process -FilePath $TPMUpdate -ArgumentList "/s /e /f $DownloadFolder" -Wait
-            if (!(Test-Path -Path "$DownloadFolder\TPMConfig64.exe")) { Throw "Failed to Extract TPM Update" }
+            if (!(Test-Path -Path "$DownloadFolder\TPMConfig64.exe")) { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Extract TPM Update" }
             $Process = "$DownloadFolder\TPMConfig64.exe"
             #Create Argument List
             if ($filename -and $spec) { $TPMArg = "-s -f$filename -a$spec -l$($LogFolder)\TPMConfig.log" }
@@ -468,6 +468,6 @@ function Invoke-HPTPMEXEInstall {
                 write-output "$($TPMUpdate.exitcode): $ErrorDescription"
             }
         }
-        else { Throw "Failed to Locate Update Path" }
+        else { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to Locate Update Path" }
     }
 }

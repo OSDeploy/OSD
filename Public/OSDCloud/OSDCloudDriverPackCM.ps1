@@ -36,13 +36,13 @@ function Invoke-OSDCloudDriverPackCM {
         function Confirm-TSProgressUISetup(){
         if ($Script:TaskSequenceProgressUi -eq $null){
             try{$Script:TaskSequenceProgressUi = New-Object -ComObject Microsoft.SMS.TSProgressUI}
-            catch{throw "Unable to connect to the Task Sequence Progress UI! Please verify you are in a running Task Sequence Environment. Please note: TSProgressUI cannot be loaded during a prestart command.`n`nErrorDetails:`n$_"}
+            catch{throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to connect to the Task Sequence Progress UI! Please verify you are in a running Task Sequence Environment. Please note: TSProgressUI cannot be loaded during a prestart command.`n`nErrorDetails:`n$_"}
             }
         }
         function Confirm-TSEnvironmentSetup(){
             if ($Script:TaskSequenceEnvironment -eq $null){
                 try{$Script:TaskSequenceEnvironment = New-Object -ComObject Microsoft.SMS.TSEnvironment}
-                catch{throw "Unable to connect to the Task Sequence Environment! Please verify you are in a running Task Sequence Environment.`n`nErrorDetails:`n$_"}
+                catch{throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to connect to the Task Sequence Environment! Please verify you are in a running Task Sequence Environment.`n`nErrorDetails:`n$_"}
                 }
             }
         function Show-TSActionProgress(){
@@ -122,7 +122,7 @@ function Invoke-OSDCloudDriverPackCM {
         $GetMyDriverPack = Get-MyDriverPack -Product $Product
     }
 
-    if ($GetMyDriverPack) {     
+    if ($GetMyDriverPack) {
         $GetMyDriverPackBaseName = ($GetMyDriverPack.FileName).Split('.')[0]
         Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Matching DriverPack identified"
         Write-Host -ForegroundColor DarkGray "-Name $($GetMyDriverPack.Name)"
@@ -189,7 +189,7 @@ function Invoke-OSDCloudDriverPackCM {
 
             if ($PPKGMethod -eq $true){
                 $OSDCloudDriverPackPPKG = Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase "Provisioning\Invoke-OSDCloudDriverPack.ppkg"
-        
+
                 if (Test-Path $OSDCloudDriverPackPPKG) {
                     Show-TSActionProgress -Message "Applying first boot Specialize Provisioning Package" -Step 4 -MaxStep 5 -ErrorAction SilentlyContinue
                     Write-Host

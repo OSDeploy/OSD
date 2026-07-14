@@ -35,7 +35,7 @@
     }
 
     if (-not $currentPlan) {
-        throw 'Unable to determine the active power plan.'
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to determine the active power plan."
     }
 
     $displayOffSetting = Get-CimInstance -Namespace $powerNamespace -ClassName Win32_PowerSetting |
@@ -43,7 +43,7 @@
         Select-Object -First 1
 
     if (-not $displayOffSetting) {
-        throw 'Unable to locate the "Turn off display after" power setting.'
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to locate the 'Turn off display after' power setting."
     }
 
     $guidPattern = '\{[0-9a-fA-F\-]{36}\}'
@@ -51,7 +51,7 @@
     $displayOffGuid = [regex]::Match($displayOffSetting.InstanceId, $guidPattern).Value
 
     if ([string]::IsNullOrWhiteSpace($currentPlanGuid) -or [string]::IsNullOrWhiteSpace($displayOffGuid)) {
-        throw 'Unable to parse power setting GUID values.'
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to parse power setting GUID values."
     }
 
     $instancePrefix = "Microsoft:PowerSettingDataIndex\$currentPlanGuid"
@@ -65,7 +65,7 @@
         Select-Object -First 1
 
     if (-not $ac -or -not $dc) {
-        throw 'Unable to retrieve AC and DC values for the display timeout setting.'
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to retrieve AC and DC values for the display timeout setting."
     }
 
     [pscustomobject]@{

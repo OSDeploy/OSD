@@ -173,13 +173,13 @@ function New-OSDCloudTemplate {
 
         [ValidateScript({
             if (-Not ($_ | Test-Path)) {
-                throw "CumulativeUpdate must be a valid path to a file."
+                throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] CumulativeUpdate must be a valid path to a file."
             }
             if (-Not ($_ | Test-Path -PathType Leaf)) {
-                throw "CumulativeUpdate parameter must be a file, not a folder."
+                throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] CumulativeUpdate parameter must be a file, not a folder."
             }
             if ($_ -notmatch "(\.cab|\.msu)") {
-                throw "CumulativeUpdate must be a .cab or .msu file."
+                throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] CumulativeUpdate must be a .cab or .msu file."
             }
             return $true
         })]

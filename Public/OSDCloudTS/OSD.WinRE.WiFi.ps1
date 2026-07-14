@@ -26,7 +26,7 @@ if ($env:SystemDrive -eq 'X:') {
             $authmode = "WPA2PSK"
             $encmode = "AES"
         }
-        
+
         # Checks if your card is able to do WPA3
         if (($network.Authentication -eq "WPA3-Personal") -and (netsh wlan show driver | Select-String -Pattern "WPA3-Personal")) {
             $authmode = "WPA3SAE"
@@ -47,7 +47,7 @@ if ($env:SystemDrive -eq 'X:') {
         # connect to network
         $result = Netsh WLAN connect name="$SSID"
         if ($result -ne "Connection request was completed successfully.") {
-            throw "Connection to WIFI wasn't successful. Error was $result"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Connection to WIFI wasn't successful. Error was $result"
         }
     }
     function Connect-WinREWiFiByXMLProfile {
@@ -58,18 +58,18 @@ if ($env:SystemDrive -eq 'X:') {
                 if (Test-Path -Path $_) {
                     $true
                 } else {
-                    throw "$_ doesn't exists"
+                    throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] $_ doesn't exists"
                 }
                 if ($_ -notmatch "\.xml$") {
-                    throw "$_ isn't xml file"
+                    throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] $_ isn't xml file"
                 }
                 if (!(([xml](Get-Content $_ -Raw)).WLANProfile.Name) -or (([xml](Get-Content $_ -Raw)).WLANProfile.MSM.security.sharedKey.protected) -ne "false") {
-                    throw "$_ isn't valid Wi-Fi XML profile (is the password correctly in plaintext?). Use command like this, to create it: netsh wlan export profile name=`"MyWifiSSID`" key=clear folder=C:\Wifi"
+                    throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] $_ isn't valid Wi-Fi XML profile (is the password correctly in plaintext?). Use command like this, to create it: netsh wlan export profile name=`"MyWifiSSID`" key=clear folder=C:\Wifi"
                 }
             })]
             [string] $wifiProfile
         )
-        
+
         $SSID = ([xml](Get-Content $wifiProfile)).WLANProfile.Name
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Connecting to $SSID"
 
@@ -82,7 +82,7 @@ if ($env:SystemDrive -eq 'X:') {
         # connect to network
         $result = Netsh WLAN connect name="$SSID"
         if ($result -ne "Connection request was completed successfully.") {
-            throw "Connection to WIFI wasn't successful. Error was $result"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Connection to WIFI wasn't successful. Error was $result"
         }
     }
     function Get-WinREWiFi {
@@ -115,10 +115,10 @@ if ($env:SystemDrive -eq 'X:') {
             [Parameter(Mandatory = $true, HelpMessage = "Please add Wireless network name")]
             [System.String]
             $WLanName,
-            
+
             [System.String]
             $Passwd,
-            
+
             [Parameter(Mandatory = $false, HelpMessage = "This switch will generate a WPA profile instead of WPA2")]
             [System.Management.Automation.SwitchParameter]
             $WPA = $false,
@@ -199,7 +199,7 @@ $XMLProfile = @"
         $result = Netsh WLAN add profile filename=$WlanConfig
         Remove-Item $WlanConfig -ErrorAction SilentlyContinue
         if ($result -notmatch "is added on interface") {
-            throw "There was en error when setting up WIFI $WLanName connection profile. Error was $result"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] There was an error when setting up WIFI $WLanName connection profile. Error was $result"
         }
     }
     function Start-WinREWiFi {
@@ -207,7 +207,7 @@ $XMLProfile = @"
         param (
             [System.String]
             $wifiProfile,
-            
+
             [System.Management.Automation.SwitchParameter]
             $WirelessConnect
         )
@@ -215,7 +215,7 @@ $XMLProfile = @"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
         #=================================================
         #	Transcript
-        #=================================================        
+        #=================================================
         $TranscriptPath = "$env:Temp"
         if (!(Test-Path -path $TranscriptPath)){
             New-Item -Path $TranscriptPath -ItemType Directory -Force | Out-Null
@@ -281,7 +281,7 @@ $XMLProfile = @"
         if ($StartWinREWiFi) {
             # Do we have a Wireless Interface? We have to search for different names as this will vary depending on the WinPE Language
             $SmbClientNetworkInterface = Get-SmbClientNetworkInterface | Where-Object { ($_.'FriendlyName' -match 'WiFi|Wi-Fi|Wireless|WLAN') } | Sort-Object -Property InterfaceIndex | Select-Object -First 1
-            
+
             # Pair a Wireless Network Adapter based on the InterfaceIndex
             $WirelessNetworkAdapter = Get-CimInstance -ClassName Win32_NetworkAdapter | Where-Object { $_.InterfaceIndex -eq $SmbClientNetworkInterface.InterfaceIndex }
 
@@ -365,7 +365,7 @@ $XMLProfile = @"
                 $StartWinREWiFi = 0
                 # make checks on start of evert cycle because in case of failure, profile will be deleted
                 if ($wifiProfile -and (Test-Path $wifiProfile)) { ++$StartWinREWiFi }
-        
+
                 if ($StartWinREWiFi) {
                     # use saved wi-fi profile to make the unattended connection
                     try {
@@ -391,15 +391,15 @@ $XMLProfile = @"
                         if ($SSIDList) {
                             #show list of available SSID
                             $SSIDList | Sort-Object Index | Select-Object Signal, Index, SSID, Authentication, Encryption, NetworkType | Format-Table
-                
+
                             $SSIDListIndex = $SSIDList.index
                             $SSIDIndex = ""
                             while ($SSIDIndex -notin $SSIDListIndex) {
                                 $SSIDIndex = Read-Host "Select the Index of Wi-Fi Network to connect or CTRL+C to quit"
                             }
-                
+
                             $SSID = $SSIDList | Where-Object { $_.index -eq $SSIDIndex } | Select-Object -exp SSID
-                
+
                             # connect to selected Wi-Fi
                             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Establishing a connection to SSID $SSID"
                             try {
@@ -421,7 +421,7 @@ $XMLProfile = @"
                 }
                 Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Waiting for a connection $text"
                 Start-Sleep -Seconds 15
-            
+
                 $i = 30
                 #TODO Resolve issue with WirelessNetworkAdapter
                 while (((Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration | Where-Object { $_.Index -eq $($WirelessNetworkAdapter.DeviceID) }).IPEnabled -eq $false) -and $i -gt 0) {

@@ -1000,7 +1000,7 @@ function Invoke-OSDCloudIPU {
     $ESD = Get-FeatureUpdate -OSName $OSName -OSActivation $OSActivation -OSLanguage $OSLanguage -OSArchitecture $OSArch
     if (!($ESD)){
         Write-Host -ForegroundColor Red "Unable to Determine proper ESD Upgrade File"
-        throw "Unable to Determine proper ESD Upgrade File"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to Determine proper ESD Upgrade File"
     }
     Write-Host -ForegroundColor Cyan "Name: " -NoNewline
     Write-Host -ForegroundColor Green $ESD.Name
@@ -1094,11 +1094,11 @@ function Invoke-OSDCloudIPU {
     if ((!(Test-Path -Path $ImagePath)) -or (!(Test-Path -Path $MediaLocation))){
         if (!(Test-Path -Path $ImagePath)){
             Write-Host -ForegroundColor Red "Missing $ImagePath, double check download process"
-            throw "Failed to find $ImagePath, double check download process"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to find $ImagePath, double check download process"
         }
         if (!(Test-Path -Path $MediaLocation)){
             Write-Host -ForegroundColor Red "Missing $MediaLocation, double check folder exist"
-            throw "Faield to find $MediaLocation, double check folder exist"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Faield to find $MediaLocation, double check folder exist"
         }
     }
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
@@ -1194,7 +1194,7 @@ function Invoke-OSDCloudIPU {
                     if ($DriverContinueInput -eq 'Y' -or $DriverContinueInput -eq 'y') {
                         Write-Host -ForegroundColor Red "Continuing without Driver Pack integration"
                     } elseif ($DriverContinueInput -eq 'N' -or $DriverContinueInput -eq 'n') {
-                        throw "Driver Pack Failed to Expand to $DriverPackExpandPath"
+                        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Driver Pack Failed to Expand to $DriverPackExpandPath"
                     } else {
                         Write-Output "Invalid input. Please enter Y or N."
                     }
@@ -1429,7 +1429,7 @@ function New-OSDCloudOSWimFile {
     if ($OSImageIndex -eq $null){
         Write-Host -ForegroundColor Red "Unable to determine OSImageIndex for Index $OSEdition"
         Write-Host -ForegroundColor Yellow "Available Indexes are $($OSDCloudOperatingSystem.IndexNames.replace($(($OSDCloudOperatingSystem).Version),'') -join ', ')"
-        throw "Unable to determine OSImageIndex for $OSName $OSEdition $OSActivation $OSLanguage"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to determine OSImageIndex for $OSName $OSEdition $OSActivation $OSLanguage"
     }
 
     #$OSBuild = $OSDCloudOperatingSystem.Build
@@ -1474,7 +1474,7 @@ function New-OSDCloudOSWimFile {
     $ESD = Get-FeatureUpdate -OSName $OSName -OSActivation $OSActivation -OSLanguage $OSLanguage -OSArchitecture $OSArch
     if (!($ESD)){
         Write-Host -ForegroundColor Red "Unable to Determine proper ESD Upgrade File"
-        throw "Unable to Determine proper ESD Upgrade File"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to Determine proper ESD Upgrade File"
     }
     Write-Host -ForegroundColor Cyan "Name: " -NoNewline
     Write-Host -ForegroundColor Green $ESD.Name
@@ -1573,11 +1573,11 @@ function New-OSDCloudOSWimFile {
     if ((!(Test-Path -Path $ImagePath)) -or (!(Test-Path -Path $MediaLocation))){
         if (!(Test-Path -Path $ImagePath)){
             Write-Host -ForegroundColor Red "Missing $ImagePath, double check download process"
-            throw "Failed to find $ImagePath, double check download process"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to find $ImagePath, double check download process"
         }
         if (!(Test-Path -Path $MediaLocation)){
             Write-Host -ForegroundColor Red "Missing $MediaLocation, double check folder exist"
-            throw "Failed to find $MediaLocation, double check folder exist"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to find $MediaLocation, double check folder exist"
         }
     }
     if ((Test-Path -Path $ImagePath) -and (Test-Path -Path $MediaLocation)){
@@ -1636,7 +1636,7 @@ function New-OSDCloudOSWimFile {
         $PathToOscdimg = (Get-WindowsAdkPaths).oscdimgexe
         if (!(Test-Path -Path $PathToOscdimg)){
             Write-Host -ForegroundColor Red "oscdimg.exe not found, unable to create ISO File"
-            throw "oscdimg.exe not found, unable to create ISO File"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] oscdimg.exe not found, unable to create ISO File"
         }
         else {
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Creating ISO File"
@@ -1649,7 +1649,7 @@ function New-OSDCloudOSWimFile {
             $Proc = Start-Process -FilePath $PathToOscdimg -ArgumentList @("-bootdata:$BootData",'-u2','-udfver102',"$ISOMedia","$ISOFile") -PassThru -Wait -NoNewWindow
             if($Proc.ExitCode -ne 0)
             {
-                Throw "Failed to generate ISO with exitcode: $($Proc.ExitCode)"
+                throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Failed to generate ISO with exitcode: $($Proc.ExitCode)"
             }
             if (Test-Path -Path $ISOFilePath){
                 Write-Host -ForegroundColor Green "ISO File Created: $ISOFile"

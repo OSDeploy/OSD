@@ -51,11 +51,11 @@ function Get-OSDCloudOperatingSystems {
         $allOperatingSystems = Get-OSDCoreOperatingSystems -ErrorAction Stop
     }
     catch {
-        throw "Failed to retrieve operating system data from Get-OSDCoreOperatingSystems. $($_.Exception.Message)"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to retrieve operating system data from Get-OSDCoreOperatingSystems. $($_.Exception.Message)"
     }
 
     if (-not $allOperatingSystems) {
-        Write-Verbose "No operating system data was returned by Get-OSDCoreOperatingSystems."
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No operating system data was returned by Get-OSDCoreOperatingSystems."
         return @()
     }
 
