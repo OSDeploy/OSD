@@ -185,7 +185,9 @@
         'Get-OSDCoreDriverPackCatalogPanasonic',
         'Get-OSDCoreDriverPackCatalogSurface',
         'Get-OSDCoreOperatingSystems',
-        'Start-RecastOSDCloudGUI'
+        'Start-RecastOSDCloud',
+        'Start-RecastOSDCloudGUI',
+        'Convert-KeyboardLayoutToLanguageCode'
     )
     CmdletsToExport      = @()
     VariablesToExport    = @()
