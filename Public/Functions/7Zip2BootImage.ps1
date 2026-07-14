@@ -30,24 +30,28 @@ function Add-7Zip2BootImage {
     .NOTES
     Author: David Segura - Recast Software
     2026-07-11 - Updated comment-based help
+    2026-07-13 - Refactored internals for readability without changing output behavior
     #>
     param(
-        [Parameter(Position=0,mandatory=$false)]    
+        [Parameter(Position=0,mandatory=$false)]
         [string]$MountPath,
         [switch]$Use7zr, #Uses 7zr.exe instead of 7z.exe
         [switch]$TempTest
     )
-    if ($TempTest){
-        $MountPath = "$env:temp\7zip"
+    $Temp7ZipPath = Join-Path -Path $env:TEMP -ChildPath '7zip'
+    $Temp7zrPath = Join-Path -Path $env:TEMP -ChildPath '7zr.exe'
+
+    if ($TempTest) {
+        $MountPath = $Temp7ZipPath
     }
     else {
-        if (!($MountPath)){
-            $MountPath = (Get-WindowsImage -Mounted).path
-            if ($MountPath.count -gt 1){
+        if (-not $MountPath) {
+            $MountPath = (Get-WindowsImage -Mounted).Path
+            if ($MountPath.Count -gt 1) {
                 Write-Warning "Multiple Images Mounted, please specify the path"
                 return
-            }  
-            if (!(Test-Path -Path $MountPath\Windows\System32)){
+            }
+            if (-not (Test-Path -Path (Join-Path -Path $MountPath -ChildPath 'Windows\System32'))) {
                 Write-Host -ForegroundColor Yellow "Unable to find Windows\System32 in $MountPath"
                 return
             }
@@ -56,33 +60,40 @@ function Add-7Zip2BootImage {
     Write-Host -ForegroundColor DarkGray "Using Current Mount Path: $MountPath"
     #Scrape the latest version of 7zip from the github page
     $Latest = Invoke-WebRequest -Uri https://github.com/ip7z/7zip/releases/latest -UseBasicParsing
-    $NextLink = ($Latest.Links | Where-Object {$_.href -match "releases/tag"}).href
-    $Version = $NextLink.Split("/")[-1]
-    $VersionClean = ($Version).Replace(".","")
-    $FileName = "7z$VersionClean-extra.7z" #Full 7zip command line options, 3 files
-    if ($Use7zr){$FileName = "lzma$VersionClean.7z"} #Reduced 7zip command line options, 1 file
-    # Example: https://github.com/ip7z/7zip/releases/download/24.07/7z2407-extra.7z
-    $Download7zrURL = "https://github.com/ip7z/7zip/releases/download/$Version/7zr.exe" #Needed to extract the 7z file - isn't 64bit
-    $DownloadURL ="https://github.com/ip7z/7zip/releases/download/$Version/$fileName" #This is 64bit
-
-    if ($Null -eq $NextLink -or $null -eq $Version){
+    $NextLink = ($Latest.Links | Where-Object { $_.href -match 'releases/tag' } | Select-Object -First 1).href
+    if ($null -eq $NextLink) {
         Write-Warning "Could not find the latest version of 7zip"
         return
-    } 
+    }
+
+    $Version = $NextLink.Split('/')[-1]
+    $VersionClean = ($Version).Replace(".","")
+    $FileName = "7z$VersionClean-extra.7z" #Full 7zip command line options, 3 files
+    if ($Use7zr) { $FileName = "lzma$VersionClean.7z" } #Reduced 7zip command line options, 1 file
+    # Example: https://github.com/ip7z/7zip/releases/download/24.07/7z2407-extra.7z
+    $Download7zrURL = "https://github.com/ip7z/7zip/releases/download/$Version/7zr.exe" #Needed to extract the 7z file - isn't 64bit
+    $DownloadURL = "https://github.com/ip7z/7zip/releases/download/$Version/$FileName" #This is 64bit
+
+    $DownloadedArchivePath = Join-Path -Path $env:TEMP -ChildPath $FileName
+
+    if ($Null -eq $NextLink -or $null -eq $Version) {
+        Write-Warning "Could not find the latest version of 7zip"
+        return
+    }
 
     Write-Host -ForegroundColor DarkGray "Downloading $Download7zrURL"
-    Invoke-WebRequest -Uri $Download7zrURL -OutFile "$env:TEMP\7zr.exe" -UseBasicParsing
+    Invoke-WebRequest -Uri $Download7zrURL -OutFile $Temp7zrPath -UseBasicParsing
     Write-Host -ForegroundColor DarkGray "Downloading $DownloadURL"
-    Invoke-WebRequest -Uri $DownloadURL -OutFile "$env:TEMP\$FileName" -UseBasicParsing
-    if ((Test-Path -Path $env:TEMP\$FileName) -and (Test-Path -Path $env:TEMP\7zr.exe)){
+    Invoke-WebRequest -Uri $DownloadURL -OutFile $DownloadedArchivePath -UseBasicParsing
+    if ((Test-Path -Path $DownloadedArchivePath) -and (Test-Path -Path $Temp7zrPath)) {
         Write-Host -ForegroundColor DarkGray "Extracting $env:TEMP\$FileName to $env:temp\7zip"
-        $null = & "$env:temp\7zr.exe" x "$env:TEMP\$FileName" -o"$env:temp\7zip" -y
-        if (!($TempTest)){   
-            if ($Use7zr){
-                Copy-Item -Path "$env:temp\7zip\bin\x64\7zr.exe" -Destination "$MountPath\Windows\System32" -Recurse -Force -Verbose
+        $null = & $Temp7zrPath x $DownloadedArchivePath -o"$Temp7ZipPath" -y
+        if (-not $TempTest) {
+            if ($Use7zr) {
+                Copy-Item -Path (Join-Path -Path $Temp7ZipPath -ChildPath 'bin\x64\7zr.exe') -Destination (Join-Path -Path $MountPath -ChildPath 'Windows\System32') -Recurse -Force -Verbose
             }
-            else{
-                Copy-Item -Path "$env:temp\7zip\x64\*" -Destination "$MountPath\Windows\System32" -Recurse -Force -Verbose
+            else {
+                Copy-Item -Path (Join-Path -Path $Temp7ZipPath -ChildPath 'x64\*') -Destination (Join-Path -Path $MountPath -ChildPath 'Windows\System32') -Recurse -Force -Verbose
             }
         }
     }
@@ -90,6 +101,3 @@ function Add-7Zip2BootImage {
         Write-Warning "Could not find $env:TEMP\$FileName"
     }
 }
-
-
-

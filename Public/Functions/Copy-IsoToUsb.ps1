@@ -55,7 +55,7 @@ function Copy-IsoToUsb {
         #=================================================
         $Elevated = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
         if ( -not $Elevated ) {
-            Throw "This Function requires Elevation"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]This Function requires Elevation"
         }
     }
     
@@ -73,7 +73,7 @@ function Copy-IsoToUsb {
         Write-Verbose "Validating a USB Drive was Selected ..."
         #=================================================
         if($null -eq $Results) {
-            Throw "No USB Driver was Found or Selected"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]No USB Driver was Found or Selected"
         }
 
         #=================================================
