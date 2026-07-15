@@ -46,6 +46,9 @@ function Initialize-OSDCoreDevice {
         New-Item -Path $LogsPath -ItemType Directory -Force | Out-Null
     }
     #=================================================
+    # Real Architecture
+    $ProcessorArchitecture = $env:PROCESSOR_ARCHITECTURE
+    #=================================================
     # ipconfig
     ipconfig | Out-File (Join-Path -Path $LogsPath -ChildPath 'Network_IPConfig.txt') -Width 4096 -Force
     #=================================================
@@ -246,7 +249,6 @@ function Initialize-OSDCoreDevice {
     #=================================================
     # Secure Boot Information
     # https://github.com/richardhicks/uefi/blob/main/Get-UEFICertificate.ps1
-
     try {
         $SecureBootStatus = Confirm-SecureBootUEFI
     }
@@ -511,6 +513,32 @@ function Initialize-OSDCoreDevice {
         $OSDProduct = 'Unknown'
     }
     #=================================================
+    # Disk Information
+    # Include only USB disks that are online and available.
+    $GetDisk = Get-Disk |
+        Where-Object {
+            $_.BusType -eq 'USB' -and
+            $_.IsOffline -eq $false -and
+            $_.OperationalStatus -eq 'Online'
+        } |
+        Sort-Object DiskNumber |
+        Select-Object -Property *
+
+    $usbDiskNumbers = [System.Collections.Generic.HashSet[int]]::new()
+    foreach ($disk in $GetDisk) {
+        [void]$usbDiskNumbers.Add([int]$disk.DiskNumber)
+    }
+
+    # Partition Information
+    $GetPartition = Get-Partition |
+        Sort-Object DiskNumber, PartitionNumber |
+        Select-Object -Property *, @{
+            Name       = 'IsUSB'
+            Expression = { $usbDiskNumbers.Contains([int]$_.DiskNumber) }
+        }
+
+    $USBPartitions = $GetPartition | Where-Object { $_.IsUSB -eq $true }
+    #=================================================
     #   OSDCloudEnv
     #=================================================
     # Use OSDCloudEnv to override these properties:
@@ -518,7 +546,6 @@ function Initialize-OSDCoreDevice {
     # OSDModel
     # OSDProduct
     # OSArchitecture
-    $ProcessorArchitecture = $env:PROCESSOR_ARCHITECTURE
     if ($global:OSDCloudEnv) {
         if ($global:OSDCloudEnv.OSDManufacturer) {
             $OSDManufacturer = $global:OSDCloudEnv.OSDManufacturer
@@ -583,6 +610,7 @@ function Initialize-OSDCoreDevice {
         TpmManufacturerIdTxt      = $DeviceTpmManufacturerIdTxt
         TpmManufacturerVersion    = $DeviceTpmManufacturerVersion
         TpmSpecVersion            = $DeviceTpmSpecVersion
+        USBPartitions             = $USBPartitions
         UUID                      = $classWin32ComputerSystemProduct.UUID
     }
     $global:OSDCoreDevice | ConvertTo-Json -Depth 10 | Out-File "$LogsPath\OSDCoreDevice.json" -Force -Encoding utf8
