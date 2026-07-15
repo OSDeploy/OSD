@@ -2040,26 +2040,18 @@ function Invoke-RecastOSDCloud {
         Set-BitlockerRegValuesXTS256
         Set-SetupCompleteBitlocker
     }
-
     # HERE
     #endregion
 
-    #region Post Image
-        #region AutopilotConfigurationFile.json
-        if ($Global:OSDCloud.AutopilotJsonObject) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Applying AutopilotConfigurationFile.json"
-            Write-DarkGrayHost 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json'
-            $Global:OSDCloud.AutopilotJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ascii -Width 2000 -Force
-        }
-        #endregion
-
-        #region SetupDisplayedEula
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Set SetupDisplayedEula Registry for TPM"
-        Invoke-Exe reg load HKLM\TempSOFTWARE "C:\Windows\System32\Config\SOFTWARE"
-        Invoke-Exe reg add HKLM\TempSOFTWARE\Microsoft\Windows\CurrentVersion\Setup\OOBE /v SetupDisplayedEula /t REG_DWORD /d 0x00000001 /f
-        Invoke-Exe reg unload HKLM\TempSOFTWARE
-        #endregion
+    #region AutopilotConfigurationFile.json
+    if ($Global:OSDCloud.AutopilotJsonObject) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Applying AutopilotConfigurationFile.json"
+        Write-DarkGrayHost 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json'
+        $Global:OSDCloud.AutopilotJsonObject | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json' -Encoding ascii -Width 2000 -Force
+    }
     #endregion
+    Step-OSDCloudUpdateSetupDisplayedEula
+    Step-OSDCloudUpdatePowerShellModules
 
     #region ----- OSDeploy.OOBEDeploy.json
     if ($Global:OSDCloud.OOBEDeployJsonObject) {
