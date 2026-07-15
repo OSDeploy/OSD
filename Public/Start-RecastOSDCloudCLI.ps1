@@ -1,21 +1,13 @@
-function Start-RecastOSDCloudGUI {
+function Start-RecastOSDCloudCLI {
     <#
     .SYNOPSIS
-    Starts the Recast OSDCloud graphical deployment workflow.
+    Starts the Recast OSDCloud command-line deployment workflow.
 
     .DESCRIPTION
     Initializes device and deployment context, discovers matching operating systems,
     resolves driver pack metadata for the current device (or supplied overrides),
-    validates required dependencies, and then prepares global state consumed by
-    the Recast OSDCloud GUI workflow.
-
-    .PARAMETER BrandName
-    Sets the branding text shown in the OSDCloud GUI title/header.
-    Defaults to the module resource value.
-
-    .PARAMETER BrandColor
-    Sets the branding color shown in the OSDCloud GUI.
-    Provide a hex color value, for example '#0096D6'.
+    validates required dependencies, and prepares global state consumed by
+    the Recast OSDCloud CLI workflow.
 
     .PARAMETER OSArchitecture
     Operating system architecture used when selecting catalog entries.
@@ -47,21 +39,13 @@ function Start-RecastOSDCloudGUI {
     Overrides the detected computer product/system ID for driver pack matching.
     If omitted, the detected device product value is used.
 
-    .PARAMETER v2
-    Legacy compatibility switch. This parameter is non-functional and retained
-    temporarily to avoid breaking existing scripts.
+    .EXAMPLE
+    Start-RecastOSDCloudCLI
+    Starts OSDCloud CLI using detected device values and default deployment selection.
 
     .EXAMPLE
-    Start-RecastOSDCloudGUI
-    Starts OSDCloud GUI using detected device values and default branding.
-
-    .EXAMPLE
-    Start-RecastOSDCloudGUI -BrandName 'Contoso' -BrandColor '#005A9C'
-    Starts OSDCloud GUI with custom branding.
-
-    .EXAMPLE
-    Start-RecastOSDCloudGUI -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2
-    Starts OSDCloud GUI with an ARM64 Windows 11 Pro 24H2 deployment selection.
+    Start-RecastOSDCloudCLI -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2
+    Starts OSDCloud CLI for an ARM64 Windows 11 Pro 24H2 deployment selection.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/Docs
@@ -69,23 +53,10 @@ function Start-RecastOSDCloudGUI {
     .NOTES
     Author: David Segura - Recast Software
     2026-07-09 - Standardized comment-based help metadata and links.
-    2026-07-09 - The -v2 parameter is deprecated and will be removed in a future release.
-    2026-07-14 - Added complete parameter help coverage and updated examples.
+    2026-07-14 - Updated help content for CLI-specific behavior and parameter documentation.
     #>
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $false, HelpMessage = 'Custom brand text for the OSDCloud GUI.')]
-        [Alias('Brand')]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $BrandName = $Global:OSDModuleResource.StartOSDCloudGUI.BrandName,
-
-        [Parameter(Mandatory = $false, HelpMessage = 'Brand color in hex format (for example #0096D6).')]
-        [Alias('Color')]
-        [ValidatePattern('^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$')]
-        [string]
-        $BrandColor = $Global:OSDModuleResource.StartOSDCloudGUI.BrandColor,
-
         [Parameter(Mandatory = $false, HelpMessage = 'Operating system architecture for deployment selection.')]
         [ValidateNotNullOrEmpty()]
         [ValidateSet('amd64','arm64')]
@@ -136,17 +107,8 @@ function Start-RecastOSDCloudGUI {
         [Parameter(Mandatory = $false, HelpMessage = 'Optional product/system ID override used for driver pack selection.')]
         [ValidateNotNullOrEmpty()]
         [string]
-        $OSDProduct,
-
-        [Parameter(Mandatory = $false, HelpMessage = 'Legacy compatibility switch. This parameter is deprecated and non-functional.')]
-        [System.Management.Automation.SwitchParameter]
-        $v2
+        $OSDProduct
     )
-    #=================================================
-    # Parameter Changes
-    if ($v2) {
-        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] v2 parameter is deprecated and non-functional and will be removed in a future release. Please remove the v2 parameter from your command."
-    }
     #=================================================
     # Emit function/version context and surface legacy parameter usage.
     $ModuleVersion = $($MyInvocation.MyCommand.Module.Version)
@@ -285,7 +247,7 @@ function Start-RecastOSDCloudGUI {
         Function              = $($MyInvocation.MyCommand.Name)
         # ImageFileName         = $ImageFileName
         # ImageFileUrl          = $ImageFileUrl
-        LaunchMethod          = 'RecastOSDCloudGUI'
+        LaunchMethod          = 'RecastOSDCloud'
         Module                = $($MyInvocation.MyCommand.Module.Name)
         OperatingSystem       = $OperatingSystem
         # OperatingSystemObject = $OperatingSystemObject
@@ -307,93 +269,8 @@ function Start-RecastOSDCloudGUI {
         # WorkflowTaskObject        = $WorkflowTaskObject
     }
     #================================================
-    # Build GUI configuration defaults from module resources and current device context.
-    $Global:OSDCloudGUI = $null
-    $Global:OSDCloudGUI = [ordered]@{
-        Function              = [System.String]'Start-RecastOSDCloudGUI'
-        LaunchMethod          = [System.String]'OSDCloudGUI'
-        AutomateConfiguration = $null
-        AutomateJsonFile      = $null
-        BrandName             = [System.String]$BrandName
-        BrandColor            = [System.String]$BrandColor
-        ComputerManufacturer  = [System.String]$OSDManufacturer
-        ComputerModel         = [System.String]$OSDModel
-        ComputerProduct       = [System.String]$OSDProduct
-        # DriverPack                  = $null
-        # DriverPacks                 = $null
-        # DriverPackName        = $DriverPackName
-        # DriverPackObject      = $DriverPackObject
-        # DriverPackValues      = [array]$DriverPackValues
-        IsOnBattery           = [System.Boolean]$global:OSDCoreDevice.IsOnBattery
-        OSActivation          = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Activation
-        OSEdition             = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Edition
-        OSLanguage            = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Language
-        OSImageIndex          = [System.Int32]$Global:OSDModuleResource.OSDCloud.Default.ImageIndex
-        OSName                = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Name
-        OSReleaseID           = [System.String]$Global:OSDModuleResource.OSDCloud.Default.ReleaseID
-        OSVersion             = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Version
-        OSActivationValues    = [array]$Global:OSDModuleResource.OSDCloud.Values.Activation
-        OSEditionValues       = [array]$Global:OSDModuleResource.OSDCloud.Values.Edition
-        OSLanguageValues      = [array]$Global:OSDModuleResource.OSDCloud.Values.Language
-        OSNameValues          = [array]$Global:OSDModuleResource.OSDCloud.Values.Name
-        OSNameARM64Values     = [array]$Global:OSDModuleResource.OSDCloud.Values.NameARM64
-        OSReleaseIDValues     = [array]$Global:OSDModuleResource.OSDCloud.Values.ReleaseID
-        OSVersionValues       = [array]$Global:OSDModuleResource.OSDCloud.Values.Version
-
-        ClearDiskConfirm      = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.ClearDiskConfirm
-        restartComputer       = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.restartComputer
-
-        updateDiskDrivers     = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateDiskDrivers
-        updateFirmware        = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware
-        updateNetworkDrivers  = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateNetworkDrivers
-        updateSCSIDrivers     = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.updateSCSIDrivers
-        SyncMSUpCatDriverUSB  = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.SyncMSUpCatDriverUSB
-
-        OEMActivation         = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.OEMActivation
-        WindowsUpdate         = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdate
-        WindowsUpdateDrivers  = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsUpdateDrivers
-        WindowsDefenderUpdate = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.WindowsDefenderUpdate
-
-        HPIAALL               = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAALL
-        HPIADrivers           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIADrivers
-        HPIAFirmware          = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIAFirmware
-        HPIASoftware          = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPIASoftware
-        HPTPMUpdate           = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPTPMUpdate
-        HPBIOSUpdate          = [System.Boolean]$Global:OSDModuleResource.StartOSDCloudGUI.HPBIOSUpdate
-
-        TimeStart             = [datetime](Get-Date)
-    }
-    #================================================
-    # Export baseline GUI settings, then look for external automation JSON
-    # on non-C drives to override interactive defaults when present.
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Exporting default configuration to $env:Temp\Start-RecastOSDCloudGUI.json"
-    $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-RecastOSDCloudGUI.json" -Force
-
-    $Global:OSDCloudGUI.AutomateJsonFile = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
-        Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "Start-RecastOSDCloudGUI.json" -File -Force -Recurse -ErrorAction Ignore
-    }
-    if ($Global:OSDCloudGUI.AutomateJsonFile) {
-        foreach ($Item in $Global:OSDCloudGUI.AutomateJsonFile) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($Item.FullName)"
-            $Global:OSDCloudGUI.AutomateConfiguration = Get-Content -Path "$($Item.FullName)" -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
-        }
-    }
-    if ($Global:OSDCloudGUI.AutomateConfiguration) {
-        # Apply each discovered automation setting onto the active GUI config.
-        foreach ($Key in $Global:OSDCloudGUI.AutomateConfiguration.Keys) {
-            $Global:OSDCloudGUI.$Key = $Global:OSDCloudGUI.AutomateConfiguration.$Key
-        }
-    }
-    #================================================
-    $Global:OSDCloudGuiBranding = @{
-        Title = $Global:OSDCloudGUI.BrandName
-        Color = $Global:OSDCloudGUI.BrandColor
-    }
-    Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
-    $Global:OSDCloudGUI | Out-Host
-    #================================================
-    # Launch the WPF GUI entry point with the prepared global state.
-    & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\RecastOSDCloudGUI\MainWindow.ps1"
-    Start-Sleep -Seconds 2
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] Starting Invoke-RecastOSDCloud in 5 seconds ..."
+    Start-Sleep -Seconds 5
+    Invoke-RecastOSDCloud
     #================================================
 }
