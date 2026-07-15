@@ -56,7 +56,7 @@ function Invoke-RecastOSDCloud {
     }
     #=================================================
     #region ----- OSDCloud Master Settings
-    Write-DarkGrayHost "[i] Initializing `$Global:OSDCloud"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Initializing `$Global:OSDCloud"
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
         LaunchMethod = $null
@@ -335,9 +335,9 @@ function Invoke-RecastOSDCloud {
         #region Global:OSDCloud.SetWiFi
         if ($Global:OSDCloud.SetWiFi -eq $true){
             Write-SectionHeader "Gathering WiFi Information"
-            Write-Host -ForegroundColor Yellow "Please Supply the SSID & Press Enter - CASE SENSITIVE"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Please Supply the SSID & Press Enter - CASE SENSITIVE"
             if (!($SSID)){$SSID = Read-Host}
-            Write-Host -ForegroundColor Yellow "Please Supply the Password & Press Enter - CASE SENSITIVE"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Please Supply the Password & Press Enter - CASE SENSITIVE"
             if (!($PSK)){$PSK = Read-Host -AsSecureString}
         }
         #endregion
@@ -345,7 +345,7 @@ function Invoke-RecastOSDCloud {
         #region Global:OSDCloud.MS365Install
         if ($Global:OSDCloud.MS365Install -eq $true){
             Write-SectionHeader "Gathering M365 Information"
-            Write-Host -ForegroundColor Magenta "Please Supply the CompanyName & Press Enter - CASE SENSITIVE"
+            Write-Host -ForegroundColor Magenta "[$(Get-Date -format s)] Please Supply the CompanyName & Press Enter - CASE SENSITIVE"
             if (!($M365CompanyName)){$M365CompanyName = Read-Host}
             if ($M365CompanyName -eq ""){$M365CompanyName = "Organization"}
         }
@@ -367,7 +367,7 @@ function Invoke-RecastOSDCloud {
     if ($Global:OSDCloud.ScriptStartup) {
         $Global:OSDCloud.ScriptStartup = $Global:OSDCloud.ScriptStartup | Sort-Object -Property FullName
         foreach ($Item in $Global:OSDCloud.ScriptStartup) {
-            Write-Host -ForegroundColor Gray "Execute $($Item.FullName)"
+            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Execute $($Item.FullName)"
             & "$($Item.FullName)"
         }
     }
@@ -382,7 +382,7 @@ function Invoke-RecastOSDCloud {
     if ($Global:OSDCloud.ShutdownScript) {
         $Global:OSDCloud.ShutdownScript = $Global:OSDCloud.ShutdownScript | Sort-Object -Property FullName
         foreach ($Item in $Global:OSDCloud.ShutdownScript) {
-            Write-Host -ForegroundColor Gray "Staging $($Item.FullName)"
+            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Staging $($Item.FullName)"
         }
     }
     #endregion
@@ -396,7 +396,7 @@ function Invoke-RecastOSDCloud {
     if ($Global:OSDCloud.AutomateAutopilot) {
         $Global:OSDCloud.AutomateAutopilot = $Global:OSDCloud.AutomateAutopilot | Sort-Object -Property FullName | Select-Object -First 1
         foreach ($Item in $Global:OSDCloud.AutomateAutopilot) {
-            Write-Host -ForegroundColor Gray "Staging $($Item.FullName)"
+            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Staging $($Item.FullName)"
         }
     }
     #endregion
@@ -410,7 +410,7 @@ function Invoke-RecastOSDCloud {
     if ($Global:OSDCloud.AutomateProvisioning) {
         $Global:OSDCloud.AutomateProvisioning = $Global:OSDCloud.AutomateProvisioning | Sort-Object -Property FullName
         foreach ($Item in $Global:OSDCloud.AutomateProvisioning) {
-            Write-Host -ForegroundColor Gray "Staging $($Item.FullName)"
+            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Staging $($Item.FullName)"
         }
     }
     #endregion
@@ -424,7 +424,7 @@ function Invoke-RecastOSDCloud {
     if ($Global:OSDCloud.AutomateStartupScript) {
         $Global:OSDCloud.AutomateStartupScript = $Global:OSDCloud.AutomateStartupScript | Sort-Object -Property FullName
         foreach ($Item in $Global:OSDCloud.AutomateStartupScript) {
-            Write-Host -ForegroundColor Gray "Execute $($Item.FullName)"
+            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Execute $($Item.FullName)"
             & "$($Item.FullName)"
         }
     }
@@ -439,7 +439,7 @@ function Invoke-RecastOSDCloud {
     if ($Global:OSDCloud.AutomateShutdownScript) {
         $Global:OSDCloud.AutomateShutdownScript = $Global:OSDCloud.AutomateShutdownScript | Sort-Object -Property FullName
         foreach ($Item in $Global:OSDCloud.AutomateShutdownScript) {
-            Write-Host -ForegroundColor Gray "Staging $($Item.FullName)"
+            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Staging $($Item.FullName)"
         }
     }
     #endregion
@@ -579,31 +579,21 @@ function Invoke-RecastOSDCloud {
 
         #region Validate Operating System Source
         Write-SectionHeader "Validate Operating System Source"
-
-        $Global:OSDCloud.SectionPassed = $false
-        if ($Global:OSDCloud.AzOSDCloudImage) {
-            $Global:OSDCloud.SectionPassed = $true
-        }
-        if ($Global:OSDCloud.ImageFileItem) {
-            $Global:OSDCloud.SectionPassed = $true
-        }
-        if ($Global:OSDCloud.ImageFileDestination) {
-            $Global:OSDCloud.SectionPassed = $true
-        }
-        if ($Global:OSDCloud.ImageFileUrl) {
-            $Global:OSDCloud.SectionPassed = $true
-        }
+        $Global:OSDCloud.SectionPassed = [bool](
+            $global:OSDCoreOperatingSystemObject -or
+            $Global:OSDCloud.AzOSDCloudImage -or
+            $Global:OSDCloud.ImageFileItem -or
+            $Global:OSDCloud.ImageFileDestination -or
+            $Global:OSDCloud.ImageFileUrl
+        )
         if ($Global:OSDCloud.SectionPassed -eq $false) {
-            Write-Warning "OSDCloud Failed"
-            Write-Warning "An Operating System Source was not specified by any required Variables"
-            Write-Warning "Invoke-OSDCloud should not be run directly unless you know what you are doing"
-            Write-Warning "Try using Start-OSDCloud, Start-OSDCloudGUI, or Start-OSDCloudAzure"
-            Write-Warning "Press Ctrl+C to exit"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] An Operating System Source was not specified by any required Variables"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Invoke-OSDCloud should not be run directly unless you know what you are doing"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Try using Start-OSDCloud, Start-OSDCloudGUI, or Start-OSDCloudAzure"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
             Exit
-        }
-        else {
-            #Write-SectionSuccess
         }
         #endregion
 
@@ -620,29 +610,25 @@ function Invoke-RecastOSDCloud {
                     $Global:OSDCloud.AutopilotJsonObject = (Invoke-WebRequest -Uri $Global:OSDCloud.AutopilotJsonUrl).Content | ConvertFrom-Json
                 }
             }
-            elseif ($Global:OSDCloud.AutopilotJsonItem) {
-                $Global:OSDCloud.AutopilotJsonChildItem = Find-OSDCloudFile -Name $Global:OSDCloud.AutopilotJsonItem.Name -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
-                $Global:OSDCloud.AutopilotJsonChildItem += Find-OSDCloudFile -Name $Global:OSDCloud.AutopilotJsonItem.Name -Path '\OSDCloud\Config\AutopilotJSON\' | Sort-Object FullName
-                $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"} | Select-Object -First 1
-                if ($Global:OSDCloud.AutopilotJsonItem) {
-                    $Global:OSDCloud.AutopilotJsonObject = Get-Content $Global:OSDCloud.AutopilotJsonItem.FullName | ConvertFrom-Json
-                }
-            }
-            elseif ($Global:OSDCloud.AutopilotJsonName) {
-                $Global:OSDCloud.AutopilotJsonChildItem = Find-OSDCloudFile -Name $Global:OSDCloud.AutopilotJsonName -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
-                $Global:OSDCloud.AutopilotJsonChildItem += Find-OSDCloudFile -Name $Global:OSDCloud.AutopilotJsonName -Path '\OSDCloud\Config\AutopilotJSON\' | Sort-Object FullName
-                $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"} | Select-Object -First 1
-                if ($Global:OSDCloud.AutopilotJsonItem) {
-                    $Global:OSDCloud.AutopilotJsonObject = Get-Content $Global:OSDCloud.AutopilotJsonItem.FullName | ConvertFrom-Json
-                }
-            }
             else {
-                $Global:OSDCloud.AutopilotJsonChildItem = Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Autopilot\Profiles\' | Sort-Object FullName
-                $Global:OSDCloud.AutopilotJsonChildItem += Find-OSDCloudFile -Name "*.json" -Path '\OSDCloud\Config\AutopilotJSON\' | Sort-Object FullName
-                $Global:OSDCloud.AutopilotJsonChildItem = $Global:OSDCloud.AutopilotJsonChildItem | Where-Object {$_.FullName -notlike "C*"}
+                $autopilotSearchName = '*.json'
+                if ($Global:OSDCloud.AutopilotJsonItem) {
+                    $autopilotSearchName = $Global:OSDCloud.AutopilotJsonItem.Name
+                }
+                elseif ($Global:OSDCloud.AutopilotJsonName) {
+                    $autopilotSearchName = $Global:OSDCloud.AutopilotJsonName
+                }
+
+                $Global:OSDCloud.AutopilotJsonChildItem = @(
+                    Find-OSDCloudFile -Name $autopilotSearchName -Path '\OSDCloud\Autopilot\Profiles\'
+                    Find-OSDCloudFile -Name $autopilotSearchName -Path '\OSDCloud\Config\AutopilotJSON\'
+                ) | Sort-Object FullName | Where-Object {$_.FullName -notlike 'C*'}
 
                 if ($Global:OSDCloud.AutopilotJsonChildItem) {
-                    if ($Global:OSDCloud.ZTI -eq $true) {
+                    if ($Global:OSDCloud.AutopilotJsonItem -or $Global:OSDCloud.AutopilotJsonName) {
+                        $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Select-Object -First 1
+                    }
+                    elseif ($Global:OSDCloud.ZTI -eq $true) {
                         $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Select-Object -First 1
                     }
                     else {
@@ -657,49 +643,50 @@ function Invoke-RecastOSDCloud {
 
             if ($Global:OSDCloud.AutopilotJsonObject) {
                 Write-DarkGrayHost "OSDCloud will apply the following Autopilot Configuration as AutopilotConfigurationFile.json"
-                $($Global:OSDCloud.AutopilotJsonObject) | Out-Host | Format-List
+                $Global:OSDCloud.AutopilotJsonObject | Format-List | Out-Host
             }
             else {
-                Write-Warning "AutopilotConfigurationFile.json will not be configured for this deployment"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] AutopilotConfigurationFile.json will not be configured for this deployment"
             }
         }
         #endregion
 
-        #region Global:OSDCloud.ODTFile
+        #region OSDCloudODTFile
         if ($Global:OSDCloud.SkipODT -ne $true) {
             $Global:OSDCloud.ODTFiles = Find-OSDCloudODTFile
 
-            if ($Global:OSDCloud.ODTFiles) {
+            if (-not $Global:OSDCloud.ODTFiles) {
+                Write-DarkGrayHost 'No Office Deployment Tool configurations were found'
+            }
+            else {
                 Write-SectionHeader "Select Office Deployment Tool Configuration"
-
                 $Global:OSDCloud.ODTFile = Select-OSDCloudODTFile
+
                 if ($Global:OSDCloud.ODTFile) {
                     Write-DarkGrayHost "Office Config: $($Global:OSDCloud.ODTFile.FullName)"
                 }
                 else {
-                    Write-Warning "OSDCloud Office Config will not be configured for this deployment"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Office Config will not be configured for this deployment"
                 }
             }
         }
         #endregion
 
-        #region Global:OSDCloud.IsWinPE
+        #region Validate WinPE
         Write-SectionHeader "Validate WinPE"
-
-        if ($Global:OSDCloud.IsWinPE -eq $false) {
-            Write-Warning "OSDCloud can only be run from WinPE"
-            Write-Warning "OSDCloud is running in Test mode"
+        if ($env:SystemDrive -ne 'X:') {
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud can only be run from WinPE"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud is running in Test mode"
             Start-Sleep -Seconds 5
         }
         #endregion
-
     #endregion
 
     #region Disk
         #region Validate Fixed Disk
         Write-SectionHeader 'Validate Fixed Disks'
         $Global:OSDCloud.SectionPassed = $false
-        if ($Global:OSDCloud.IsWinPE -eq $false) {
+        if ($env:SystemDrive -ne 'X:') {
             $Global:OSDCloud.GetDiskFixed = Get-LocalDisk | Sort-Object Number
         }
         else {
@@ -715,9 +702,9 @@ function Invoke-RecastOSDCloud {
         }
 
         if ($Global:OSDCloud.SectionPassed -eq $false) {
-            Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Warning "Unable to locate a Fixed Disk. You may need to add additional HDC Drivers to WinPE"
-            Write-Warning "Press Ctrl+C to exit"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Unable to locate a Fixed Disk. You may need to add additional HDC Drivers to WinPE"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
             Exit
         }
@@ -726,37 +713,10 @@ function Invoke-RecastOSDCloud {
         }
         #endregion
 
-        #region Remove-PartitionAccessPath
-        <#
-        https://docs.microsoft.com/en-us/powershell/module/storage/remove-partitionaccesspath
-        Partition Access Paths are being removed from USB Drive Letters
-        This prevents issues when Drive Letters are reassigned
-        #>
-        $Global:OSDCloud.USBPartitions = Get-USBPartition
-        if ($Global:OSDCloud.USBPartitions) {
-            Write-SectionHeader "Removing USB drive letters"
-
-            if ($Global:OSDCloud.IsWinPE -eq $true) {
-                foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
-
-                    $RemovePartitionAccessPath = @{
-                        AccessPath = "$($USBPartition.DriveLetter):"
-                        DiskNumber = $USBPartition.DiskNumber
-                        PartitionNumber = $USBPartition.PartitionNumber
-                    }
-
-                    Remove-PartitionAccessPath @RemovePartitionAccessPath -ErrorAction Stop
-                    Start-Sleep -Seconds 3
-                }
-            }
-        }
-        #endregion
+        Step-OSDCloudRemoveUSBDriveLetter
 
         #region Clear-Disk
-        <#
-        https://docs.microsoft.com/en-us/powershell/module/storage/clear-disk
-        Fixed Disks must be cleared before new partitions can be created
-        #>
+        # Fixed Disks must be cleared before new partitions can be created
         Write-SectionHeader "Clear-Disk"
 
         if ($Global:OSDCloud.SkipClearDisk -eq $true) {
@@ -783,11 +743,7 @@ function Invoke-RecastOSDCloud {
         #endregion
 
         #region New-OSDisk
-        <#
-        https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/configure-uefigpt-based-hard-drive-partitions
-        New Partitions will be created using Microsoft Standard Layout
-        #>
-
+        # New Partitions will be created using Microsoft Standard Layout
         Write-SectionHeader "New-OSDisk"
         if ($Global:OSDCloud.SkipNewOSDisk -eq $true) {
             Write-DarkGrayHost '$OSDCloud.SkipNewOSDisk = $true'
@@ -830,9 +786,9 @@ function Invoke-RecastOSDCloud {
 
             #Make sure that there is a PSDrive
             if (-NOT (Get-PSDrive -Name 'C')) {
-                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-                Write-Warning "New-OSDisk didn't work. There is no PSDrive FileSystem at C:\"
-                Write-Warning "Press Ctrl+C to exit"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] New-OSDisk didn't work. There is no PSDrive FileSystem at C:\"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
                 Exit
             }
@@ -842,24 +798,7 @@ function Invoke-RecastOSDCloud {
             }
         }
         #endregion
-
-        #region Add-PartitionAccessPath
-        if ($Global:OSDCloud.USBPartitions) {
-            Write-SectionHeader 'Restoring USB Drive Letters'
-
-            if ($Global:OSDCloud.IsWinPE -eq $true) {
-                foreach ($USBPartition in $Global:OSDCloud.USBPartitions) {
-
-                    $ParamAddPartitionAccessPath = @{
-                        AssignDriveLetter = $true
-                        DiskNumber = $USBPartition.DiskNumber
-                        PartitionNumber = $USBPartition.PartitionNumber
-                    }
-                    Add-PartitionAccessPath @ParamAddPartitionAccessPath; Start-Sleep -Seconds 5
-                }
-            }
-        }
-        #endregion
+        Step-OSDCloudRestoreUSBDriveLetter
     #endregion Disk
 
     #region Pre-Image
@@ -909,30 +848,9 @@ function Invoke-RecastOSDCloud {
             $OSDISKPost | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPost.log'
         }
         #endregion
-
-        #region Powercfg High Performance
-        #https://docs.microsoft.com/en-us/windows/win32/power/power-policy-settings
-        Write-SectionHeader 'Powercfg High Performance'
-
-        if ($Global:OSDCloud.IsOnBattery -eq $true) {
-            $Win32Battery = (Get-CimInstance -ClassName Win32_Battery -ErrorAction SilentlyContinue | Select-Object -Property *)
-            if ($Win32Battery.BatteryStatus -eq 1) {
-                Write-DarkGrayHost "Device has $($Win32Battery.EstimatedChargeRemaining)% battery remaining"
-            }
-            Write-DarkGrayHost 'High Performance will not be enabled while on battery'
-        }
-        elseif ($Global:OSDCloud.IsWinPE -eq $false) {
-            Write-DarkGrayHost 'Device is not running in WinPE. Performance will not be adjusted'
-        }
-        elseif ($Global:OSDCloud.Debug -eq $true) {
-            Write-DarkGrayHost 'Device is running in debug mode. Performance will not be adjusted'
-        }
-        else {
-            Write-DarkGrayHost 'Enable powercfg High Performance'
-            Invoke-Exe powercfg.exe -SetActive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-        }
-        #endregion
     #endregion
+
+    Step-OSDCloudEnableHighPerformance
 
     #region Deploy Windows Image
         #region Copy-Item Offline WindowsImage
@@ -974,9 +892,9 @@ function Invoke-RecastOSDCloud {
                 $Global:OSDCloud.ImageFileUrl = $null
             }
             else {
-                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-                Write-Warning "Could not copy the Windows Image to C:\OSDCloud\OS"
-                Write-Warning "Press Ctrl+C to exit"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Could not copy the Windows Image to C:\OSDCloud\OS"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
                 Exit
             }
@@ -989,10 +907,10 @@ function Invoke-RecastOSDCloud {
         }
         elseif (!($Global:OSDCloud.ImageFileDestination) -and (!($Global:OSDCloud.ImageFileUrl))) {
             Write-SectionHeader "Get-OSDCloudOperatingSystems"
-            Write-Warning "Invoke-OSDCloud was not set properly with an OS to Download"
-            Write-Warning "You should be using Start-OSDCloud or Start-OSDCloudGUI"
-            Write-Warning "Invoke-OSDCloud should not be run directly unless you know what you are doing"
-            Write-Warning "Windows 10 Enterprise is being downloaded and installed out of convenience only"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Invoke-OSDCloud was not set properly with an OS to Download"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] You should be using Start-OSDCloud or Start-OSDCloudGUI"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Invoke-OSDCloud should not be run directly unless you know what you are doing"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Windows 10 Enterprise is being downloaded and installed out of convenience only"
 
             if (!($Global:OSDCloud.GetFeatureUpdate)) {
                 $Global:OSDCloud.GetFeatureUpdate = Get-FeatureUpdate
@@ -1003,10 +921,10 @@ function Invoke-RecastOSDCloud {
                 $Global:OSDCloud.ImageFileUrl = $Global:OSDCloud.GetFeatureUpdate.FileUri
             }
             else {
-                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-                Write-Warning "Unable to locate a Windows Feature Update"
-                Write-Warning "OSDCloud cannot continue"
-                Write-Warning "Press Ctrl+C to exit"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Unable to locate a Windows Feature Update"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud cannot continue"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
                 Exit
             }
@@ -1119,9 +1037,9 @@ function Invoke-RecastOSDCloud {
                 }
             }
             else {
-                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-                Write-Warning "Could not verify an Internet connection for the Windows ImageFile"
-                Write-Warning "Press Ctrl+C to exit"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Could not verify an Internet connection for the Windows ImageFile"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
                 Exit
             }
@@ -1138,15 +1056,15 @@ function Invoke-RecastOSDCloud {
                 $Global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
                 $Global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $Global:OSDCloud.ImageFileName}).SHA1
                 if ($null -eq $Global:OSDCloud.ImageFileSHA1) {
-                    Write-Warning "[$(Get-Date -format s)] OSDCloud Warning"
-                    Write-Warning "No SHA1 Hash exists for $($Global:OSDCloud.ImageFileName) in the OSDCloud Catalog"
-                    Write-Warning "Skipping SHA1 Validation"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Warning"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] No SHA1 Hash exists for $($Global:OSDCloud.ImageFileName) in the OSDCloud Catalog"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Skipping SHA1 Validation"
                 }
                 elseif ($Global:OSDCloud.ImageFileDestinationSHA1 -ne $Global:OSDCloud.ImageFileSHA1){
-                    Write-Warning "SHA1 Mismatch"
-                    Write-Warning "Downloaded ESD SHA1: $($Global:OSDCloud.ImageFileDestinationSHA1)"
-                    Write-Warning "Catalog ESD SHA1: $($Global:OSDCloud.ImageFileSHA1)"
-                    Write-Warning "Press Ctrl+C to exit"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] SHA1 Mismatch"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Downloaded ESD SHA1: $($Global:OSDCloud.ImageFileDestinationSHA1)"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Catalog ESD SHA1: $($Global:OSDCloud.ImageFileSHA1)"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
                     Start-Sleep -Seconds 86400
                 }
                 else {
@@ -1159,9 +1077,9 @@ function Invoke-RecastOSDCloud {
         #endregion
         #region Global:OSDCloud.ImageFileDestination
         if (-not ($Global:OSDCloud.ImageFileDestination)) {
-            Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Warning "The Windows Image Source did not download properly to the Destination"
-            Write-Warning "Press Ctrl+C to exit"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] The Windows Image Source did not download properly to the Destination"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
             Exit
         }
@@ -1189,9 +1107,9 @@ function Invoke-RecastOSDCloud {
                     Write-DarkGrayHost "Windows ISO is attached to Drive Letter $($Global:OSDCloud.IsoGetVolume.DriveLetter)"
                 }
                 else {
-                    Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-                    Write-Warning "The Windows ISO did not mount properly"
-                    Write-Warning "Press Ctrl+C to exit"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] The Windows ISO did not mount properly"
+                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
                     Start-Sleep -Seconds 86400
                     Exit
                 }
@@ -1199,9 +1117,9 @@ function Invoke-RecastOSDCloud {
             $Global:OSDCloud.ImageFileDestination = Get-ChildItem -Path "$($Global:OSDCloud.IsoGetVolume.DriveLetter):\*" -Include *.wim,*.esd -Recurse | Sort-Object Length -Descending | Select-Object -First 1
 
             if (-not ($Global:OSDCloud.ImageFileDestination)) {
-                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-                Write-Warning "Unable to find a WIM or ESD file on the Mounted Windows ISO"
-                Write-Warning "Press Ctrl+C to exit"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Unable to find a WIM or ESD file on the Mounted Windows ISO"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
                 Start-Sleep -Seconds 86400
                 Exit
             }
@@ -1216,8 +1134,8 @@ function Invoke-RecastOSDCloud {
 
             # Image is corrupt
             if ($null -eq $Global:OSDCloud.WindowsImageCount) {
-                Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-                Write-Warning "Could not read the Windows Image properly"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Could not read the Windows Image properly"
                 Start-Sleep -Seconds 86400
                 Stop-Computer -Force
                 Exit
@@ -1231,9 +1149,9 @@ function Invoke-RecastOSDCloud {
             #=================================================
             #	FAILED
             #=================================================
-            Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Warning "Could not find a proper Windows Image for deployment"
-            Write-Warning "Press Ctrl+C to exit"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Could not find a proper Windows Image for deployment"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
             Exit
         }
@@ -1310,9 +1228,9 @@ function Invoke-RecastOSDCloud {
             #=================================================
             #	FAILED
             #=================================================
-            Write-Warning "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Warning "Could not find a proper Windows Image for deployment"
-            Write-Warning "Press Ctrl+C to exit"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Could not find a proper Windows Image for deployment"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
             Start-Sleep -Seconds 86400
             Exit
         }
@@ -1365,9 +1283,9 @@ function Invoke-RecastOSDCloud {
                 Expand-WindowsImage @ExpandWindowsImage
             }
             catch {
-                Write-Warning "[$(Get-Date -format s)] Expand-WindowsImage failed."
-                Write-Warning "[$(Get-Date -format s)] $_"
-                Write-Warning 'Press Ctrl+C to cancel OSDCloud'
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Expand-WindowsImage failed."
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] $_"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to cancel OSDCloud"
                 Start-Sleep -Seconds 86400
                 exit
             }
@@ -1724,7 +1642,7 @@ function Invoke-RecastOSDCloud {
                 Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
             }
             else {
-                Write-Warning "Unable to download or find firware for his Device"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Unable to download or find firmware for this Device"
             }
         }
         #endregion
@@ -2423,8 +2341,8 @@ exit
     Write-DarkGrayHost "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
 
     if ($Global:OSDCloud.Restart) {
-        Write-Warning "WinPE is restarting in 30 seconds"
-        Write-Warning "Press CTRL + C to cancel"
+        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] WinPE is restarting in 30 seconds"
+        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press CTRL + C to cancel"
         Start-Sleep -Seconds 30
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             Restart-Computer
@@ -2432,8 +2350,8 @@ exit
     }
 
     if ($Global:OSDCloud.Shutdown) {
-        Write-Warning "WinPE will shutdown in 30 seconds"
-        Write-Warning "Press CTRL + C to cancel"
+        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] WinPE will shutdown in 30 seconds"
+        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press CTRL + C to cancel"
         Start-Sleep -Seconds 30
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             Stop-Computer
