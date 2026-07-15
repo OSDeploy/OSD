@@ -55,8 +55,7 @@ function Invoke-RecastOSDCloud {
         Initialize-OSDCoreDevice
     }
     #=================================================
-    #region ----- OSDCloud Master Settings
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Initializing `$Global:OSDCloud"
+    #region OSDCloud Master Settings
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
         LaunchMethod = $null
@@ -210,7 +209,7 @@ function Invoke-RecastOSDCloud {
     }
     #endregion
 
-    #region ----- Merge Variables
+    #region Merge Variables
     <#  Overwrite the OSDCloud Master Settings by using custom variables
         MyOSDCloud is the last and final customization variable
     #>
@@ -1352,6 +1351,10 @@ function Invoke-RecastOSDCloud {
     #endregion
 
     #region Drivers
+    Step-OSDCloudExportWindowsDriverOemWinPE
+    Step-OSDCloudAddWindowsDriverOemWinOS
+    Step-OSDCloudAddWindowsDriverOemWinRE
+
         #region Get-OSDCloudDriverPack
         Write-SectionHeader 'OSDCloud DriverPack'
         #Check the Global Variables for a Driver Pack name
