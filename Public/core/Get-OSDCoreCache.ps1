@@ -8,7 +8,7 @@ function Get-OSDCoreCache {
         Returns objects with Type, Name, FullName, SizeMB,
         DriveRoot, VolumeLabel, and VolumeUniqueId properties.
 
-        If Type is omitted, returns all supported cache content types.
+        If Type is omitted, retur ns all supported cache content types.
 
         Type values:
         - ESD: All .esd files under '<DriveLetter>:\OSDCloud\OS' recursively.
