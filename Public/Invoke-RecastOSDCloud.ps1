@@ -291,466 +291,55 @@ function Invoke-RecastOSDCloud {
         $Global:OSDCloud.ClearDiskConfirm = $false
     }
     #endregion
-
-    #region Initialize OSDCloud Logs
-    Write-SectionHeader 'Initialize OSDCloud Logs'
-    $ParamNewItem = @{
-        Path = $Global:OSDCloud.Logs
-        ItemType = 'Directory'
-        Force = $true
-        ErrorAction = 'Stop'
-    }
-
-    if ($Global:OSDCloud.IsWinPE) {
-        if (-not (Test-Path $Global:OSDCloud.Logs)) {
-            $null = New-Item @ParamNewItem
-        }
+    Step-OSDCloudPreinstallLogs
+    #region Global:OSDCloud.DebugMode
+    if ($Global:OSDCloud.DebugMode -eq $true){
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DebugMode Write OSDCloud Vars"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Writing OSDCloud Variables to $($env:temp)\OSDCloudVars.log"
+        $OSDCloud | Out-File $env:temp\OSDCloudVars.log
     }
     #endregion
-
-    #region Gary Blok Initialize
-        #region Global:OSDCloud.DebugMode
-        if ($Global:OSDCloud.DebugMode -eq $true){
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DebugMode Write OSDCloud Vars"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Writing OSDCloud Variables to $($env:temp)\OSDCloudVars.log"
-            $OSDCloud | Out-File $env:temp\OSDCloudVars.log
-        }
-        #endregion
-
-        #region Global:OSDCloud.SplashScreen
-        if ($Global:OSDCloud.SplashScreen -eq $true){
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Setup SplashScreen"
-            $RegPath = "HKLM:\SOFTWARE\OSDCloud"
-            if (!(Test-Path -Path $RegPath)){New-Item -Path $RegPath -Force}
-            New-ItemProperty -Path $RegPath -Name "OSVersion" -Value $Global:OSDCloud.OSVersion
-            New-ItemProperty -Path $RegPath -Name "OSReleaseID" -Value $Global:OSDCloud.OSReleaseID
-            New-ItemProperty -Path $RegPath -Name "OSEdition" -Value $Global:OSDCloud.OSEdition
-            New-ItemProperty -Path $RegPath -Name "OSLicense" -Value $Global:OSDCloud.OSActivation
-            New-ItemProperty -Path $RegPath -Name "OSActivation" -Value $Global:OSDCloud.OSActivation
-        }
-        #endregion
-
-        #region Global:OSDCloud.SetWiFi
-        if ($Global:OSDCloud.SetWiFi -eq $true){
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Gathering WiFi Information"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Please Supply the SSID & Press Enter - CASE SENSITIVE"
-            if (!($SSID)){$SSID = Read-Host}
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Please Supply the Password & Press Enter - CASE SENSITIVE"
-            if (!($PSK)){$PSK = Read-Host -AsSecureString}
-        }
-        #endregion
-
-        #region Global:OSDCloud.MS365Install
-        if ($Global:OSDCloud.MS365Install -eq $true){
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Gathering M365 Information"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Please Supply the CompanyName & Press Enter - CASE SENSITIVE"
-            if (!($M365CompanyName)){$M365CompanyName = Read-Host}
-            if ($M365CompanyName -eq ""){$M365CompanyName = "Organization"}
-        }
-        #endregion
-
-    #endregion
-
-    #region ----- ..\OSDCloud\Config\Scripts\Startup\*.ps1
-    <#
-    These scripts will be in the OSDCloud Workspace in Config\Scripts\Startup
-    When Edit-OSDCloudWinPE is executed then these files should be copied to the mounted WinPE
-    In WinPE, the scripts will exist in X:\OSDCloud\Config\Scripts\Startup\*
-    #>
-    # Write-SectionHeader '[i] Config Startup Scripts'
-    $Global:OSDCloud.ScriptStartup = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($_.Root)OSDCloud\Config\Scripts\Startup\*.ps1"
-        Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\Startup\" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
-    }
-    if ($Global:OSDCloud.ScriptStartup) {
-        $Global:OSDCloud.ScriptStartup = $Global:OSDCloud.ScriptStartup | Sort-Object -Property FullName
-        foreach ($Item in $Global:OSDCloud.ScriptStartup) {
-            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Execute $($Item.FullName)"
-            & "$($Item.FullName)"
-        }
+    #region Global:OSDCloud.SplashScreen
+    if ($Global:OSDCloud.SplashScreen -eq $true){
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Setup SplashScreen"
+        $RegPath = "HKLM:\SOFTWARE\OSDCloud"
+        if (!(Test-Path -Path $RegPath)){New-Item -Path $RegPath -Force}
+        New-ItemProperty -Path $RegPath -Name "OSVersion" -Value $Global:OSDCloud.OSVersion
+        New-ItemProperty -Path $RegPath -Name "OSReleaseID" -Value $Global:OSDCloud.OSReleaseID
+        New-ItemProperty -Path $RegPath -Name "OSEdition" -Value $Global:OSDCloud.OSEdition
+        New-ItemProperty -Path $RegPath -Name "OSLicense" -Value $Global:OSDCloud.OSActivation
+        New-ItemProperty -Path $RegPath -Name "OSActivation" -Value $Global:OSDCloud.OSActivation
     }
     #endregion
-
-    #region ----- ..\OSDCloud\Config\Scripts\Shutdown\*.ps1
-    # Write-SectionHeader '[i] Config Shutdown Scripts'
-    $Global:OSDCloud.ShutdownScript = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($_.Root)OSDCloud\Config\Scripts\Shutdown\*.ps1"
-        Get-ChildItem "$($_.Root)OSDCloud\Config\Scripts\Shutdown\" -Include '*.ps1' -File -Recurse -Force -ErrorAction Ignore
-    }
-    if ($Global:OSDCloud.ShutdownScript) {
-        $Global:OSDCloud.ShutdownScript = $Global:OSDCloud.ShutdownScript | Sort-Object -Property FullName
-        foreach ($Item in $Global:OSDCloud.ShutdownScript) {
-            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Staging $($Item.FullName)"
-        }
+    #region Global:OSDCloud.SetWiFi
+    if ($Global:OSDCloud.SetWiFi -eq $true){
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Gathering WiFi Information"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Please Supply the SSID & Press Enter - CASE SENSITIVE"
+        if (!($SSID)){$SSID = Read-Host}
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Please Supply the Password & Press Enter - CASE SENSITIVE"
+        if (!($PSK)){$PSK = Read-Host -AsSecureString}
     }
     #endregion
-
-    #region ----- ..\OSDCloud\Automate\AutopilotConfigurationFile.json
-    # Write-SectionHeader '[i] Automate AutopilotConfigurationFile.json'
-    $Global:OSDCloud.AutomateAutopilot = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($_.Root)OSDCloud\Automate\AutopilotConfigurationFile.json"
-        Get-ChildItem "$($_.Root)OSDCloud\Automate" -Include "AutopilotConfigurationFile.json" -File -Recurse -Force -ErrorAction Ignore
-    }
-    if ($Global:OSDCloud.AutomateAutopilot) {
-        $Global:OSDCloud.AutomateAutopilot = $Global:OSDCloud.AutomateAutopilot | Sort-Object -Property FullName | Select-Object -First 1
-        foreach ($Item in $Global:OSDCloud.AutomateAutopilot) {
-            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Staging $($Item.FullName)"
-        }
+    #region Global:OSDCloud.MS365Install
+    if ($Global:OSDCloud.MS365Install -eq $true){
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Gathering M365 Information"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Please Supply the CompanyName & Press Enter - CASE SENSITIVE"
+        if (!($M365CompanyName)){$M365CompanyName = Read-Host}
+        if ($M365CompanyName -eq ""){$M365CompanyName = "Organization"}
     }
     #endregion
-
-    #region ----- ..\OSDCloud\Automate\Provisioning\*.ppkg
-    # Write-SectionHeader '[i] Automate Provisioning Package'
-    $Global:OSDCloud.AutomateProvisioning = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($_.Root)OSDCloud\Automate\Provisioning\*.ppkg"
-        Get-ChildItem "$($_.Root)OSDCloud\Automate\Provisioning" -Include "*.ppkg" -File -Recurse -Force -ErrorAction Ignore
-    }
-    if ($Global:OSDCloud.AutomateProvisioning) {
-        $Global:OSDCloud.AutomateProvisioning = $Global:OSDCloud.AutomateProvisioning | Sort-Object -Property FullName
-        foreach ($Item in $Global:OSDCloud.AutomateProvisioning) {
-            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Staging $($Item.FullName)"
-        }
-    }
-    #endregion
-
-    #region ----- ..\OSDCloud\Automate\Startup\*.ps1
-    # Write-SectionHeader '[i] Automate Startup Scripts'
-    $Global:OSDCloud.AutomateStartupScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($_.Root)OSDCloud\Automate\Startup\*.ps1"
-        Get-ChildItem "$($_.Root)OSDCloud\Automate\Startup" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
-    }
-    if ($Global:OSDCloud.AutomateStartupScript) {
-        $Global:OSDCloud.AutomateStartupScript = $Global:OSDCloud.AutomateStartupScript | Sort-Object -Property FullName
-        foreach ($Item in $Global:OSDCloud.AutomateStartupScript) {
-            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Execute $($Item.FullName)"
-            & "$($Item.FullName)"
-        }
-    }
-    #endregion
-
-    #region ----- ..\OSDCloud\Automate\Shutdown\*.ps1
-    # Write-SectionHeader '[i] Automate Shutdown Scripts'
-    $Global:OSDCloud.AutomateShutdownScript = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($_.Root)OSDCloud\Automate\Shutdown\*.ps1"
-        Get-ChildItem "$($_.Root)OSDCloud\Automate\Shutdown" -Include "*.ps1" -File -Recurse -Force -ErrorAction Ignore
-    }
-    if ($Global:OSDCloud.AutomateShutdownScript) {
-        $Global:OSDCloud.AutomateShutdownScript = $Global:OSDCloud.AutomateShutdownScript | Sort-Object -Property FullName
-        foreach ($Item in $Global:OSDCloud.AutomateShutdownScript) {
-            Write-Host -ForegroundColor Gray "[$(Get-Date -format s)] Staging $($Item.FullName)"
-        }
-    }
-    #endregion
-
-    #region Launch Validation
-        #region Install-Module LaunchMethod
-        if ($Global:OSDCloud.LaunchMethod) {
-            $null = Install-Module -Name $Global:OSDCloud.LaunchMethod -Force -ErrorAction Ignore -WarningAction Ignore
-        }
-        #endregion
-
-        #region Analytics
-        #=================================================
-        # Win32_BIOS
-        $classWin32BIOS = Get-CimInstance -ClassName Win32_BIOS | Select-Object -Property *
-        #=================================================
-        # Win32_ComputerSystem
-        $classWin32ComputerSystem = Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -Property *
-        $ComputerSystemFamily = $classWin32ComputerSystem.SystemFamily | ConvertTo-TrimmedString
-        $ComputerSystemSKU = $classWin32ComputerSystem.SystemSKUNumber | ConvertTo-TrimmedString
-        #=================================================
-        # Win32_ComputerSystemProduct
-        $classWin32ComputerSystemProduct = Get-CimInstance -ClassName Win32_ComputerSystemProduct | Select-Object -Property *
-        $ComputerSystemProduct = $classWin32ComputerSystemProduct.Version | ConvertTo-TrimmedString
-        #=================================================
-        # Win32_Keyboard
-        try {
-            $classWin32Keyboard = Get-CimInstance -ClassName Win32_Keyboard -ErrorAction Stop | Select-Object -Property *
-            $classWin32Keyboard | Out-File (Join-Path -Path $LogsPath -ChildPath 'Win32_Keyboard.txt') -Width 4096 -Force
-            $KeyboardLayout = [System.String]$classWin32Keyboard.Layout
-            $KeyboardName = [System.String]$classWin32Keyboard.Name
-        }
-        catch {
-            $classWin32Keyboard = $null
-            $KeyboardLayout = $null
-            $KeyboardName = $null
-        }
-        #=================================================
-        # Win32_TimeZone
-        $classWin32TimeZone = Get-CimInstance -ClassName Win32_TimeZone | Select-Object -Property *
-        #=================================================
-        $eventName = 'osd_deploy'
-        function Send-OSDCloudDeployEvent {
-            [CmdletBinding()]
-            param(
-                [Parameter(Mandatory)]
-                [string]$EventName,
-                [Parameter(Mandatory)]
-                [string]$ApiKey,
-                [Parameter(Mandatory)]
-                [string]$DistinctId,
-                [Parameter()]
-                [hashtable]$Properties
-            )
-
-            try {
-                $payload = [ordered]@{
-                    api_key    = $ApiKey
-                    event      = $EventName
-                    properties = $Properties + @{
-                        distinct_id = $DistinctId
-                    }
-                    timestamp  = (Get-Date).ToString('o')
-                }
-
-                $body = $payload | ConvertTo-Json -Depth 4 -Compress
-                Invoke-RestMethod -Method Post `
-                    -Uri 'https://us.i.posthog.com/capture/' `
-                    -Body $body `
-                    -ContentType 'application/json' `
-                    -TimeoutSec 2 `
-                    -ErrorAction Stop | Out-Null
-
-                Write-Verbose "[$(Get-Date -format s)] [OSDCloud] Event sent: $EventName"
-            }
-            catch {
-                Write-Verbose "[$(Get-Date -format s)] [OSDCloud] Failed to send event: $($_.Exception.Message)"
-            }
-        }
-        # UUID
-        $deviceUUID = $classWin32ComputerSystemProduct.UUID
-        # Convert the UUID to a hash value to protect user privacyand ensure a consistent identifier across events
-        $deviceUUIDHash = [System.BitConverter]::ToString([System.Security.Cryptography.SHA256]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes($deviceUUID))).Replace("-", "")
-        [string]$distinctId = $deviceUUIDHash
-        if ([string]::IsNullOrWhiteSpace($distinctId)) {
-            $distinctId = [System.Guid]::NewGuid().ToString()
-        }
-
-        $computerInfo = Get-ComputerInfo -ErrorAction Ignore
-        if ($env:SystemDrive -eq 'X:') {
-            $deploymentPhase = 'WinPE'
-            $osName = 'Microsoft WindowsPE'
-        }
-        else {
-            $deploymentPhase = 'Windows'
-            $osName = [string]$computerInfo.OsName
-        }
-        $global:OSDCoreEvent = [ordered]@{
-            deploymentPhase            = $deploymentPhase
-            osdManufacturer            = $global:OSDCoreDevice.OSDManufacturer
-            osdModel                   = $global:OSDCoreDevice.OSDModel
-            osdProduct                 = $global:OSDCoreDevice.OSDProduct
-            deviceManufacturer         = $global:OSDCoreDevice.OSDManufacturer
-            deviceModel                = $global:OSDCoreDevice.ComputerModel
-            deviceSystemFamily         = $global:OSDCoreDevice.ComputerSystemFamily
-            deviceSystemProduct        = $global:OSDCoreDevice.ComputerSystemProduct
-            deviceSystemSKU            = $global:OSDCoreDevice.ComputerSystemSKU
-            deviceSystemType           = $global:OSDCoreDevice.ComputerSystemType
-            biosReleaseDate            = $global:OSDCoreDevice.BiosReleaseDate
-            biosSMBIOSBIOSVersion      = $global:OSDCoreDevice.BiosVersion
-            keyboardName               = $global:OSDCoreDevice.KeyboardName
-            keyboardLayout             = $global:OSDCoreDevice.KeyboardLayout
-            winArchitecture            = [string]$env:PROCESSOR_ARCHITECTURE
-            winBuildLabEx              = [string]$computerInfo.WindowsBuildLabEx
-            winBuildNumber             = [string]$computerInfo.OsBuildNumber
-            winCountryCode             = [string]$computerInfo.OsCountryCode
-            winEditionId               = [string]$computerInfo.WindowsEditionId
-            winInstallationType        = [string]$computerInfo.WindowsInstallationType
-            winLanguage                = [string]$computerInfo.OsLanguage
-            winName                    = [string]$osName
-            winTimeZone                = [string]$computerInfo.TimeZone
-            winVersion                 = [string]$computerInfo.OsVersion
-            osdcloudModuleVersion      = $($MyInvocation.MyCommand.Module.Version)
-            osdcloudWorkflowName       = $OSDCloud.Function
-            osdcloudWorkflowTaskName   = $OSDCloud.LaunchMethod
-            osdcloudDriverPackName     = $OSDCloud.DriverPackName
-            osdcloudOSName             = $OSDCloud.OSName
-            osdcloudOSVersion          = $OSDCloud.OSReleaseID
-            osdcloudOSActivationStatus = $OSDCloud.OSActivation
-            osdcloudOSBuild            = $OSDCloud.OSBuild
-            osdcloudOSBuildVersion     = $OSDCloud.OSBuild
-            osdcloudOSLanguageCode     = $OSDCloud.OSLanguage
-        }
-        $postApi = 'phc_2h7nQJCo41Hc5C64B2SkcEBZOvJ6mHr5xAHZyjPl3ZK'
-        Send-OSDCloudDeployEvent -EventName $eventName -ApiKey $postApi -DistinctId $distinctId -Properties $global:OSDCoreEvent
-        #endregion
-
-        Step-OSDCloudVerifyOperatingSystem
-        Step-OSDCloudVerifyAutopilotJson
-
-        #region OSDCloudODTFile
-        if ($Global:OSDCloud.SkipODT -ne $true) {
-            $Global:OSDCloud.ODTFiles = Find-OSDCloudODTFile
-
-            if ($Global:OSDCloud.ODTFiles) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Select Office Deployment Tool Configuration"
-                $Global:OSDCloud.ODTFile = Select-OSDCloudODTFile
-
-                if ($Global:OSDCloud.ODTFile) {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Office Config: $($Global:OSDCloud.ODTFile.FullName)"
-                }
-                else {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud Office Config will not be configured for this deployment"
-                }
-            }
-        }
-        #endregion
-    #endregion
-
-    #region Disk
-        #region Validate Fixed Disk
-        Write-SectionHeader 'Validate Fixed Disks'
-        $Global:OSDCloud.SectionPassed = $false
-        if ($env:SystemDrive -ne 'X:') {
-            $Global:OSDCloud.GetDiskFixed = Get-LocalDisk | Sort-Object Number
-        }
-        else {
-            $Global:OSDCloud.GetDiskFixed = Get-LocalDisk | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
-        }
-
-
-        if ($Global:OSDCloud.GetDiskFixed) {
-            $Global:OSDCloud.SectionPassed = $true
-        }
-        else {
-            $Global:OSDCloud.SectionPassed = $false
-        }
-
-        if ($Global:OSDCloud.SectionPassed -eq $false) {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Unable to locate a Fixed Disk. You may need to add additional HDC Drivers to WinPE"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-            Start-Sleep -Seconds 86400
-            Exit
-        }
-        else {
-            #Write-SectionSuccess
-        }
-        #endregion
-
-        Step-OSDCloudRemoveUSBDriveLetter
-
-        #region Clear-Disk
-        # Fixed Disks must be cleared before new partitions can be created
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Clear-Disk"
-        if ($Global:OSDCloud.SkipClearDisk -eq $false) {
-            if (($Global:OSDCloud.GetDiskFixed | Measure-Object).Count -ge 2) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] More than 1 Fixed Disk is present, Clear-Disk Confirm is required"
-                $Global:OSDCloud.ClearDiskConfirm = $true
-            }
-            if ($Global:OSDCloud.ClearDiskConfirm -eq $true) {
-                Clear-LocalDisk -Force -NoResults -ErrorAction Stop
-            }
-            else {
-                Clear-LocalDisk -Force -NoResults -Confirm:$false -ErrorAction Stop
-            }
-        }
-        #endregion
-
-        #region New-OSDisk
-        # New Partitions will be created using Microsoft Standard Layout
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] New-OSDisk"
-        if ($Global:OSDCloud.SkipNewOSDisk -eq $false) {
-            if ($Global:OSDCloud.DebugMode -eq $true){
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Capturing Disk Information Pre Modifications"
-                $OSDISKPre = (Get-OSDGather -Full).DiskPartition
-            }
-           # Uses DiskPart instead of PS to create partitions, I think I'm going to depricate this soon.
-            if ($Global:OSDCloud.DiskPart -eq $true) {
-                Start-OSDDiskPart
-                Write-Host "=========================================================================" -ForegroundColor Cyan
-                Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
-                Write-Host "=========================================================================" -ForegroundColor Cyan
-                $LocalVolumes = Get-Volume | Where-Object {$_.DriveType -eq "Fixed"}
-                Write-Output $LocalVolumes
-            }
-            else {
-                if ($Global:OSDCloud.SkipRecoveryPartition -eq $true) {
-                    New-OSDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
-                    Write-Host "=========================================================================" -ForegroundColor Cyan
-                    Write-Host "| SYSTEM | MSR |                    WINDOWS                             |" -ForegroundColor Cyan
-                    Write-Host "=========================================================================" -ForegroundColor Cyan
-                }
-                else {
-                    if ($Null -ne $Global:OSDCloud.OSInstallDiskNumber){
-                        New-OSDisk -PartitionStyle GPT -DiskNumber $Global:OSDCloud.OSInstallDiskNumber -Force -ErrorAction Stop
-                    }
-                    else {New-OSDisk -PartitionStyle GPT -Force -ErrorAction Stop}
-
-                    Write-Host "=========================================================================" -ForegroundColor Cyan
-                    Write-Host "| SYSTEM | MSR |                    WINDOWS                  | RECOVERY |" -ForegroundColor Cyan
-                    Write-Host "=========================================================================" -ForegroundColor Cyan
-                    #Wait a few seconds to make sure the Disk is set
-                    Start-Sleep -Seconds 5
-                }
-            }
-
-            #Make sure that there is a PSDrive
-            if (-NOT (Get-PSDrive -Name 'C')) {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] New-OSDisk didn't work. There is no PSDrive FileSystem at C:\"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-                Start-Sleep -Seconds 86400
-                Exit
-            }
-            if ($Global:OSDCloud.DebugMode -eq $true){
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Capturing Disk Information Post Modifications"
-                $OSDISKPost = (Get-OSDGather -Full).DiskPartition
-            }
-        }
-        #endregion
-    #endregion Disk
+    Step-OSDCloudPreinstallHooks
+    Step-OSDCloudVerifyOperatingSystem
+    Step-OSDCloudVerifyAutopilotJson
+    Step-OSDCloudVerifyODTFile
+    Step-OSDCloudVerifyDisk
+    Step-OSDCloudTelemetryPSGallery
+    Step-OSDCloudTelemetryPH
+    Step-OSDCloudRemoveUSBDriveLetter
+    Step-OSDCloudClearDisk
+    Step-OSDCloudNewDisk
     Step-OSDCloudRestoreUSBDriveLetter
-
-    #region Pre-Image
-        #region Global:OSDCloud.Transcript
-        Write-SectionHeader 'Saving PowerShell Transcript to C:\OSDCloud\Logs'
-        Write-Verbose -Message 'https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript'
-        if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
-            New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
-        }
-
-        $Global:OSDCloud.Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
-        Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
-        #endregion
-
-        #region Global:OSDCloud.DebugMode
-        if ($Global:OSDCloud.DebugMode -eq $true) {
-            Write-SectionHeader 'DebugMode: Capture Data to Logs'
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSD Module: $((Get-Module -Name OSD -ListAvailable | Select-Object -First 1).Version)"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Manufacurer | Model | Product : $(Get-MyComputerManufacturer) | $(Get-MyComputerModel) | $(Get-MyComputerProduct)"
-            Write-DarkGrayHost 'Writing Information to C:\OSDCloud\Logs\OSDCloudDebug.log'
-
-            Write-DarkGrayHost ' OSDCloud Variables'
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log'
-            'OSD Cloud Variables' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            $OSDCloud | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-
-            Write-DarkGrayHost ' Windows 11 Readiness'
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            'Windows 11 Readiness' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            Get-Win11Readiness | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-
-            Write-DarkGrayHost ' TPM Information'
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            'TPM Information' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            Get-CimInstance -Namespace root/CIMV2/Security/MicrosoftTpm -ClassName Win32_Tpm | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-
-            Write-DarkGrayHost ' My Computer Info'
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            'My Computer Info' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            Get-ComputerInfo | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-
-            $OSDISKPre | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPre.log'
-            $OSDISKPost | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPost.log'
-        }
-        #endregion
-    #endregion
-
+    Step-OSDCloudMigrateLogs
     Step-OSDCloudEnableHighPerformance
 
     #region Deploy Windows Image
