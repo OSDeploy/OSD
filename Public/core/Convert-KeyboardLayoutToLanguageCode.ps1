@@ -62,6 +62,23 @@ function Convert-KeyboardLayoutToLanguageCode {
 	)
 
 	process {
+		$allowedLanguageCodes = @(
+			'ar-sa', 'bg-bg', 'cs-cz', 'da-dk', 'de-de', 'el-gr',
+			'en-gb', 'en-us', 'es-es', 'es-mx', 'et-ee', 'fi-fi',
+			'fr-ca', 'fr-fr', 'he-il', 'hr-hr', 'hu-hu', 'it-it',
+			'ja-jp', 'ko-kr', 'lt-lt', 'lv-lv', 'nb-no', 'nl-nl',
+			'pl-pl', 'pt-br', 'pt-pt', 'ro-ro', 'ru-ru', 'sk-sk',
+			'sl-si', 'sr-latn-rs', 'sv-se', 'th-th', 'tr-tr',
+			'uk-ua', 'zh-cn', 'zh-tw'
+		)
+
+		$resolvedFallbackLanguageCode = if ($allowedLanguageCodes -contains $FallbackLanguageCode.ToLowerInvariant()) {
+			$FallbackLanguageCode
+		}
+		else {
+			'en-US'
+		}
+
 		$layoutToResolve = $KeyboardLayout
 
 		if ([string]::IsNullOrWhiteSpace($layoutToResolve)) {
@@ -70,22 +87,22 @@ function Convert-KeyboardLayoutToLanguageCode {
 				Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Detected keyboard layout: $layoutToResolve"
 			}
 			catch {
-				Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Unable to detect keyboard layout from Win32_Keyboard. Returning fallback language code: $FallbackLanguageCode"
+				Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Unable to detect keyboard layout from Win32_Keyboard. Returning fallback language code: $resolvedFallbackLanguageCode"
 				if ($LowerCase) {
-					return $FallbackLanguageCode.ToLowerInvariant()
+					return $resolvedFallbackLanguageCode.ToLowerInvariant()
 				}
-				return $FallbackLanguageCode
+				return $resolvedFallbackLanguageCode
 			}
 		}
 
 		$normalizedLayout = ($layoutToResolve -replace '^0x', '').Trim()
 
 		if ([string]::IsNullOrWhiteSpace($normalizedLayout) -or $normalizedLayout.Length -lt 4 -or $normalizedLayout -notmatch '^[0-9a-fA-F]+$') {
-			Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Keyboard layout '$layoutToResolve' is not a valid hex layout. Returning fallback language code: $FallbackLanguageCode"
+			Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Keyboard layout '$layoutToResolve' is not a valid hex layout. Returning fallback language code: $resolvedFallbackLanguageCode"
 			if ($LowerCase) {
-				return $FallbackLanguageCode.ToLowerInvariant()
+				return $resolvedFallbackLanguageCode.ToLowerInvariant()
 			}
-			return $FallbackLanguageCode
+			return $resolvedFallbackLanguageCode
 		}
 
 		$languageIdHex = $normalizedLayout.Substring($normalizedLayout.Length - 4)
@@ -98,6 +115,14 @@ function Convert-KeyboardLayoutToLanguageCode {
 				throw "No culture name resolved for LCID $languageIdHex"
 			}
 
+			if ($allowedLanguageCodes -notcontains $cultureName.ToLowerInvariant()) {
+				Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Resolved language code '$cultureName' is not in the supported set. Returning fallback language code: $resolvedFallbackLanguageCode"
+				if ($LowerCase) {
+					return $resolvedFallbackLanguageCode.ToLowerInvariant()
+				}
+				return $resolvedFallbackLanguageCode
+			}
+
 			if ($LowerCase) {
 				return $cultureName.ToLowerInvariant()
 			}
@@ -105,11 +130,11 @@ function Convert-KeyboardLayoutToLanguageCode {
 			return $cultureName
 		}
 		catch {
-			Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Unable to convert keyboard layout '$layoutToResolve' (LCID: $languageIdHex). Returning fallback language code: $FallbackLanguageCode"
+			Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Unable to convert keyboard layout '$layoutToResolve' (LCID: $languageIdHex). Returning fallback language code: $resolvedFallbackLanguageCode"
 			if ($LowerCase) {
-				return $FallbackLanguageCode.ToLowerInvariant()
+				return $resolvedFallbackLanguageCode.ToLowerInvariant()
 			}
-			return $FallbackLanguageCode
+			return $resolvedFallbackLanguageCode
 		}
 	}
 }
