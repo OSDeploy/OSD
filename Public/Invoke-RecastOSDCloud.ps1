@@ -575,79 +575,8 @@ function Invoke-RecastOSDCloud {
         Send-OSDCloudDeployEvent -EventName $eventName -ApiKey $postApi -DistinctId $distinctId -Properties $global:OSDCoreEvent
         #endregion
 
-        #region Validate Operating System Source
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Validate Operating System Source"
-        $Global:OSDCloud.SectionPassed = [bool](
-            $global:OSDCoreOperatingSystemObject -or
-            $Global:OSDCloud.AzOSDCloudImage -or
-            $Global:OSDCloud.ImageFileItem -or
-            $Global:OSDCloud.ImageFileDestination -or
-            $Global:OSDCloud.ImageFileUrl
-        )
-        if ($Global:OSDCloud.SectionPassed -eq $false) {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] An Operating System Source was not specified by any required Variables"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Invoke-OSDCloud should not be run directly unless you know what you are doing"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Try using Start-OSDCloud, Start-OSDCloudGUI, or Start-OSDCloudAzure"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-            Start-Sleep -Seconds 86400
-            Exit
-        }
-        #endregion
-
-        #region Autopilot Profiles
-        if ($Global:OSDCloud.SkipAutopilot -ne $true) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Validate Autopilot Configuration"
-
-            if ($Global:OSDCloud.AutopilotJsonObject) {
-                Write-DarkGrayHost 'Importing AutopilotJsonObject'
-            }
-            elseif ($Global:OSDCloud.AutopilotJsonUrl) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Importing Autopilot Configuration $($Global:OSDCloud.AutopilotJsonUrl)"
-                if (Test-WebConnection -Uri $Global:OSDCloud.AutopilotJsonUrl) {
-                    $Global:OSDCloud.AutopilotJsonObject = (Invoke-WebRequest -Uri $Global:OSDCloud.AutopilotJsonUrl).Content | ConvertFrom-Json
-                }
-            }
-            else {
-                $autopilotSearchName = '*.json'
-                if ($Global:OSDCloud.AutopilotJsonItem) {
-                    $autopilotSearchName = $Global:OSDCloud.AutopilotJsonItem.Name
-                }
-                elseif ($Global:OSDCloud.AutopilotJsonName) {
-                    $autopilotSearchName = $Global:OSDCloud.AutopilotJsonName
-                }
-
-                $Global:OSDCloud.AutopilotJsonChildItem = @(
-                    Find-OSDCloudFile -Name $autopilotSearchName -Path '\OSDCloud\Autopilot\Profiles\'
-                    Find-OSDCloudFile -Name $autopilotSearchName -Path '\OSDCloud\Config\AutopilotJSON\'
-                ) | Sort-Object FullName | Where-Object {$_.FullName -notlike 'C*'}
-
-                if ($Global:OSDCloud.AutopilotJsonChildItem) {
-                    if ($Global:OSDCloud.AutopilotJsonItem -or $Global:OSDCloud.AutopilotJsonName) {
-                        $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Select-Object -First 1
-                    }
-                    elseif ($Global:OSDCloud.ZTI -eq $true) {
-                        $Global:OSDCloud.AutopilotJsonItem = $Global:OSDCloud.AutopilotJsonChildItem | Select-Object -First 1
-                    }
-                    else {
-                        $Global:OSDCloud.AutopilotJsonItem = Select-OSDCloudAutopilotJsonItem
-                    }
-
-                    if ($Global:OSDCloud.AutopilotJsonItem) {
-                        $Global:OSDCloud.AutopilotJsonObject = Get-Content $Global:OSDCloud.AutopilotJsonItem.FullName | ConvertFrom-Json
-                    }
-                }
-            }
-
-            if ($Global:OSDCloud.AutopilotJsonObject) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud will apply the following Autopilot Configuration as AutopilotConfigurationFile.json"
-                $Global:OSDCloud.AutopilotJsonObject | Format-List | Out-Host
-            }
-            else {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] AutopilotConfigurationFile.json will not be configured for this deployment"
-            }
-        }
-        #endregion
+        Step-OSDCloudVerifyOperatingSystem
+        Step-OSDCloudVerifyAutopilotJson
 
         #region OSDCloudODTFile
         if ($Global:OSDCloud.SkipODT -ne $true) {
@@ -770,8 +699,8 @@ function Invoke-RecastOSDCloud {
             }
         }
         #endregion
-        Step-OSDCloudRestoreUSBDriveLetter
     #endregion Disk
+    Step-OSDCloudRestoreUSBDriveLetter
 
     #region Pre-Image
         #region Global:OSDCloud.Transcript
