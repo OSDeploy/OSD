@@ -22,7 +22,6 @@
 
     #region Block
     Block-WinPE
-    #Block-StandardUser
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #endregion
