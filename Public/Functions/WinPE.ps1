@@ -259,8 +259,10 @@ function Enable-PEWimPSGallery {
 		#	Blocks
 		#=================================================
 		Block-WinPE
-		Block-StandardUser
-		#=================================================
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
+        #=================================================
         $ErrorActionPreference = "Stop"
         #=================================================
     }
@@ -319,7 +321,9 @@ function Enable-PEWindowsImagePSGallery {
 		#	Blocks
 		#=================================================
 		Block-WinPE
-		Block-StandardUser
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
 		#=================================================
         #=================================================
         #   Get-WindowsImage Mounted
@@ -473,7 +477,9 @@ Author: David Segura - Recast Software
 		#	Blocks
 		#=================================================
 		Block-WinPE
-		Block-StandardUser
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
         #=================================================
     }
     process {
@@ -554,7 +560,9 @@ Author: David Segura - Recast Software
 		#	Blocks
 		#=================================================
 		#Block-WinPE
-		Block-StandardUser
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
         #=================================================
         #   Get-WindowsImage Mounted
         #=================================================

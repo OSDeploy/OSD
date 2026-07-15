@@ -28,7 +28,7 @@ function Backup-MyBitLockerKeys {
     )
     begin {
         if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
@@ -82,7 +82,7 @@ function Get-MyBitLockerKeyProtectors {
         #   Require Admin Rights
         #=================================================
         if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
@@ -186,7 +186,7 @@ function Save-MyBitLockerExternalKey {
         #   Require Admin Rights
         #=================================================
         if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
@@ -252,7 +252,7 @@ function Save-MyBitLockerKeyPackage {
         #   Require Admin Rights
         #=================================================
         if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
@@ -318,7 +318,7 @@ function Save-MyBitLockerRecoveryPassword {
         #   Require Admin Rights
         #=================================================
         if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume
@@ -419,7 +419,7 @@ function Unlock-MyBitLockerExternalKey {
         #   Require Admin Rights
         #=================================================
         if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] requires elevated administrator rights"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
         }
         #=================================================
         #   Get-Command Get-BitLockerVolume

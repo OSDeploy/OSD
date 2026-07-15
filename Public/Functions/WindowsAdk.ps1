@@ -669,7 +669,9 @@ Author: David Segura - Recast Software
 	#	Blocks
 	#=================================================
 	Block-WinPE
-	Block-StandardUser
+    if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+    }
     Block-PowerShellVersionLt5
     #=================================================
     #   Get Adk Paths
@@ -884,7 +886,9 @@ function New-WindowsAdkISO {
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Start"
 	#=================================================
 	Block-WinPE
-	Block-StandardUser
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
     Block-PowerShellVersionLt5
     #=================================================
     # Get Adk Paths
