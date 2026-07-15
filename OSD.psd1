@@ -185,7 +185,7 @@
         'Get-OSDCoreDriverPackCatalogPanasonic',
         'Get-OSDCoreDriverPackCatalogSurface',
         'Get-OSDCoreOperatingSystems',
-        'Start-RecastOSDCloud',
+        'Start-RecastOSDCloudCLI',
         'Start-RecastOSDCloudGUI',
         'Convert-KeyboardLayoutToLanguageCode'
     )
