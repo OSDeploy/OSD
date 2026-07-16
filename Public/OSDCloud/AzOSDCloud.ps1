@@ -26,7 +26,7 @@ function Get-AzOSDCloud {
     https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
-    https://github.com/OSDeploy/OSD/blob/master/Docs/Get-AzOSDCloud.md
+    https://github.com/OSDeploy/OSD/blob/master/docs/Get-AzOSDCloud.md
     #>
     [CmdletBinding()]
     param (

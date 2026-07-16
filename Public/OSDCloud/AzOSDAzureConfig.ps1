@@ -36,7 +36,7 @@ function Invoke-AzOSDAzureConfig {
     https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
-    https://github.com/OSDeploy/OSD/blob/master/Docs/Invoke-AzOSDAzureConfig.md
+    https://github.com/OSDeploy/OSD/blob/master/docs/Invoke-AzOSDAzureConfig.md
     #>
     [CmdletBinding()]
     param (

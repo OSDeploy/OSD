@@ -25,7 +25,7 @@ function Get-AzOSDTechId {
     https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
-    https://github.com/OSDeploy/OSD/blob/master/Docs/Get-AzOSDTechId.md
+    https://github.com/OSDeploy/OSD/blob/master/docs/Get-AzOSDTechId.md
     #>
     [CmdletBinding()]
     param (

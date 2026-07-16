@@ -29,7 +29,7 @@ function Get-AzClipboard {
     https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
-    https://github.com/OSDeploy/OSD/blob/master/Docs/Get-AzClipboard.md
+    https://github.com/OSDeploy/OSD/blob/master/docs/Get-AzClipboard.md
     #>
     [CmdletBinding()]
     param (
@@ -107,7 +107,7 @@ function Set-AzClipboard {
     https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
-    https://github.com/OSDeploy/OSD/blob/master/Docs/Set-AzClipboard.md
+    https://github.com/OSDeploy/OSD/blob/master/docs/Set-AzClipboard.md
     #>
     [CmdletBinding()]
     param (

@@ -27,7 +27,7 @@ function Connect-OSDCloudAzure {
     https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
-    https://github.com/OSDeploy/OSD/blob/master/Docs/Connect-OSDCloudAzure.md
+    https://github.com/OSDeploy/OSD/blob/master/docs/Connect-OSDCloudAzure.md
     #>
     [CmdletBinding()]
     param (
@@ -231,7 +231,7 @@ function Start-OSDCloudAzure {
     https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
-    https://github.com/OSDeploy/OSD/blob/master/Docs/Start-OSDCloudAzure.md
+    https://github.com/OSDeploy/OSD/blob/master/docs/Start-OSDCloudAzure.md
     #>
 
     [CmdletBinding()]
