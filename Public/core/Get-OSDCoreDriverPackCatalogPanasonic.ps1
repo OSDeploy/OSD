@@ -32,14 +32,14 @@ function Get-OSDCoreDriverPackCatalogPanasonic {
                 $sourceContent = Invoke-RestMethod -Uri $OemDriverPackCatalog -UseBasicParsing -ErrorAction Stop
 
                 if ($sourceContent) {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $tempCatalogPath"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $tempCatalogPath"
                     $sourceContent | Out-File -FilePath $tempCatalogPath -Encoding utf8 -Force
                     $JsonCatalogContent = $sourceContent
                 }
             } else {
                 Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Using temp Panasonic driver pack catalog"
                 if (Test-Path $tempCatalogPath) {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $tempCatalogPath"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $tempCatalogPath"
                     $JsonCatalogContent = Get-Content -Path $tempCatalogPath -Raw | ConvertFrom-Json
                 }
             }
@@ -50,11 +50,11 @@ function Get-OSDCoreDriverPackCatalogPanasonic {
 
         # Load offline catalog if online catalog failed
         if ($LocalOnly) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $LocalDriverPackCatalog"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $LocalDriverPackCatalog"
             $JsonCatalogContent = Get-Content -Path $LocalDriverPackCatalog -Raw | ConvertFrom-Json
         }
         elseif (-not $JsonCatalogContent) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $LocalDriverPackCatalog"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $LocalDriverPackCatalog"
             $JsonCatalogContent = Get-Content -Path $LocalDriverPackCatalog -Raw | ConvertFrom-Json
         }
 

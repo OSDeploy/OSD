@@ -101,14 +101,14 @@ function Get-OSDCoreDriverPackCatalogDell {
 
         # Load catalog content
         if ($LocalOnly) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $LocalDriverPackCatalog"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $LocalDriverPackCatalog"
             [xml]$XmlCatalogContent = Get-Content -Path $LocalDriverPackCatalog -Raw
         }
         elseif (Test-Path $tempCatalogPath) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $tempCatalogPath"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $tempCatalogPath"
             [xml]$XmlCatalogContent = Get-Content -Path $tempCatalogPath -Raw
         } else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $LocalDriverPackCatalog"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $LocalDriverPackCatalog"
             [xml]$XmlCatalogContent = Get-Content -Path $LocalDriverPackCatalog -Raw
         }
 

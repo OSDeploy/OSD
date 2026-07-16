@@ -73,12 +73,12 @@ function Get-OSDCoreDriverPackCatalogSurface {
         # Load from temp cache if available
         $useCache = $false
         if ((-not $Force) -and (Test-Path $tempCatalogPath)) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $tempCatalogPath"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $tempCatalogPath"
             $JsonCatalogContent = Get-Content -Path $tempCatalogPath -Raw -Encoding UTF8 | ConvertFrom-Json
             $useCache = $true
         }
         else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $LocalDriverPackCatalog"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $LocalDriverPackCatalog"
             $JsonCatalogContent = Get-Content -Path $LocalDriverPackCatalog -Raw -Encoding UTF8 | ConvertFrom-Json
         }
 

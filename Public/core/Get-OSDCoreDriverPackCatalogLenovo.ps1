@@ -77,7 +77,7 @@ function Get-OSDCoreDriverPackCatalogLenovo {
                 $sourceContent = Invoke-RestMethod -Uri $OemDriverPackCatalog -UseBasicParsing -ErrorAction Stop
 
                 if ($sourceContent) {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $tempCatalogPath"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $tempCatalogPath"
                     # Remove BOM (Byte Order Mark) from the beginning of the content
                     $catalogContent = $sourceContent.Substring(3)
                     $catalogContent | Out-File -FilePath $tempCatalogPath -Encoding utf8 -Force
@@ -86,7 +86,7 @@ function Get-OSDCoreDriverPackCatalogLenovo {
             } else {
                 Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Using temp catalog"
                 if (Test-Path $tempCatalogPath) {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $tempCatalogPath"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $tempCatalogPath"
                     [xml]$XmlCatalogContent = Get-Content -Path $tempCatalogPath -Raw
                 }
             }
@@ -97,11 +97,11 @@ function Get-OSDCoreDriverPackCatalogLenovo {
 
         # Load offline catalog if online catalog failed
         if ($LocalOnly) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $LocalDriverPackCatalog"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $LocalDriverPackCatalog"
             [xml]$XmlCatalogContent = Get-Content -Path $LocalDriverPackCatalog -Raw
         }
         elseif (-not $XmlCatalogContent) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Loading $LocalDriverPackCatalog"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $LocalDriverPackCatalog"
             [xml]$XmlCatalogContent = Get-Content -Path $LocalDriverPackCatalog -Raw
         }
 
