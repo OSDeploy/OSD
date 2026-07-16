@@ -36,7 +36,7 @@ Function osdcloud-InstallDCU {
     Write-Host "Expanding the Cab File..." -ForegroundColor Yellow
     $Expand = expand $CabPathIndex $DellCabExtractPath\CatalogIndexPC.xml
 
-    write-host "Loading Dell Catalog XML.... can take awhile" -ForegroundColor Yellow
+    write-host "Indexing Dell Catalog XML.... can take awhile" -ForegroundColor Yellow
     [xml]$XMLIndex = Get-Content "$DellCabExtractPath\CatalogIndexPC.xml" -Verbose
 
 
