@@ -12,7 +12,7 @@ function Step-OSDCloudMoveLogs {
     Starts transcript logging and captures debug diagnostics when enabled.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -21,7 +21,7 @@ function Step-OSDCloudMoveLogs {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-SectionHeader 'Saving PowerShell Transcript to C:\OSDCloud\Logs'
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Saving PowerShell Transcript to C:\OSDCloud\Logs"
     Write-Verbose -Message 'https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript'
     if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
         New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null

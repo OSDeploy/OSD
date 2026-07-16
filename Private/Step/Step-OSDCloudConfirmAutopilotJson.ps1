@@ -13,7 +13,7 @@ function Step-OSDCloudConfirmAutopilotJson {
     Resolves Autopilot JSON from configured sources and logs the effective outcome.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

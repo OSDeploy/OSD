@@ -12,7 +12,7 @@ function Step-OSDCloudAddWindowsDriverOemWinOS {
     Injects staged WinPE drivers into the offline Windows image at C:\.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

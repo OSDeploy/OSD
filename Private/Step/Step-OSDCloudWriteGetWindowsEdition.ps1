@@ -12,7 +12,7 @@ function Step-OSDCloudWriteGetWindowsEdition {
     Displays the current offline Windows edition metadata from C:\.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

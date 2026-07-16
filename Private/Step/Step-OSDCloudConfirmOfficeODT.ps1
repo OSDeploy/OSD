@@ -12,7 +12,7 @@ function Step-OSDCloudConfirmOfficeODT {
     Discovers and selects an Office Deployment Tool configuration for the deployment.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

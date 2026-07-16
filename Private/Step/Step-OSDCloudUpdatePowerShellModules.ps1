@@ -13,7 +13,7 @@ function Step-OSDCloudUpdatePowerShellModules {
     Checks gallery connectivity and updates any out-of-date modules in the local modules path.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

@@ -13,7 +13,7 @@ function Step-OSDCloudTelemetryPSGallery {
     Validates and installs the LaunchMethod module when needed.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

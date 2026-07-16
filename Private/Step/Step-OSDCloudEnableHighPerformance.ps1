@@ -12,7 +12,7 @@ function Step-OSDCloudEnableHighPerformance {
     Runs the validation checks and enables the High Performance power plan when supported.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

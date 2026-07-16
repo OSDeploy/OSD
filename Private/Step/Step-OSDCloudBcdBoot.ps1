@@ -12,7 +12,7 @@ function Step-OSDCloudBcdBoot {
     Executes bcdboot for the deployed image and writes output to C:\Windows\Temp\osdcloud-logs\bcdboot.txt.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

@@ -13,7 +13,7 @@ function Step-OSDCloudExportWindowsDriverOemWinPE {
     Exports matching OEM drivers from the current WinPE session to the staging path.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

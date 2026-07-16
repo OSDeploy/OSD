@@ -1,11 +1,11 @@
 function Step-OSDCloudConfirmDisk {
     <#
     .SYNOPSIS
-    Verifies that at least one fixed disk is available for OSDCloud deployment.
+    Confirms that at least one fixed disk is available for OSDCloud deployment.
 
     .DESCRIPTION
     Enumerates fixed disks, excluding the boot disk when running in WinPE, stores results
-    in $Global:OSDCloud.GetDiskFixed, and updates $Global:OSDCloud.SectionPassed. If no
+    in $global:OSDCloud.GetDiskFixed, and updates $global:OSDCloud.SectionPassed. If no
     suitable fixed disk is found, deployment is stopped.
 
     .EXAMPLE
@@ -13,7 +13,7 @@ function Step-OSDCloudConfirmDisk {
     Validates fixed-disk availability before running disk preparation steps.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -22,31 +22,42 @@ function Step-OSDCloudConfirmDisk {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-SectionHeader 'Validate Fixed Disks'
-    $Global:OSDCloud.SectionPassed = $false
-    if ($env:SystemDrive -ne 'X:') {
-        $Global:OSDCloud.GetDiskFixed = Get-LocalDisk | Sort-Object Number
-    }
-    else {
-        $Global:OSDCloud.GetDiskFixed = Get-LocalDisk | Where-Object {$_.IsBoot -eq $false} | Sort-Object Number
-    }
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    #=================================================
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm Fixed Disk Availability"
 
-    if ($Global:OSDCloud.GetDiskFixed) {
-        $Global:OSDCloud.SectionPassed = $true
+    try {
+        $allFixedDisks = @(Get-LocalDisk | Sort-Object Number)
     }
-    else {
+    catch {
+        $Global:OSDCloud.GetDiskFixed = @()
         $Global:OSDCloud.SectionPassed = $false
+        throw "[$(Get-Date -format s)] Unable to query fixed disks: $($_.Exception.Message)"
     }
 
-    if ($Global:OSDCloud.SectionPassed -eq $false) {
-        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Unable to locate a Fixed Disk. You may need to add additional HDC Drivers to WinPE"
-        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-        Start-Sleep -Seconds 86400
-        Exit
+    if ($env:SystemDrive -eq 'X:') {
+        # In WinPE, skip the boot media disk so only deployable disks remain.
+        $Global:OSDCloud.GetDiskFixed = @($allFixedDisks | Where-Object { $_.IsBoot -ne $true })
     }
     else {
-        #Write-SectionSuccess
+        $Global:OSDCloud.GetDiskFixed = $allFixedDisks
     }
+
+    $Global:OSDCloud.SectionPassed = [bool]($Global:OSDCloud.GetDiskFixed)
+
+    if ($Global:OSDCloud.SectionPassed -eq $true) {
+        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Done."
+        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Fixed Disks Detected:"
+        foreach ($disk in $Global:OSDCloud.GetDiskFixed) {
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Disk Number: $($disk.Number), Friendly Name: $($disk.FriendlyName), Size: $([math]::Round($disk.Size/1GB,2)) GB, Media Type: $($disk.MediaType)"
+        }
+    }
+    else {
+        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Unable to locate a fixed disk suitable for deployment."
+        throw "[$(Get-Date -format s)] Unable to locate a Fixed Disk. You may need to add additional HDC Drivers to WinPE"
+    }
+    #=================================================
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

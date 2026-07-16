@@ -13,7 +13,7 @@ function Step-OSDCloudNewDisk {
     Creates new partitions based on current OSDCloud settings.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

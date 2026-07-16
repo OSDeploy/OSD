@@ -12,7 +12,7 @@ function Step-OSDCloudPreinstallLogs {
     Ensures the OSDCloud log folder exists before continuing preinstall steps.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -21,7 +21,7 @@ function Step-OSDCloudPreinstallLogs {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-SectionHeader 'Initialize OSDCloud Logs'
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Initialize OSDCloud Logs"
     $ParamNewItem = @{
         Path = $Global:OSDCloud.Logs
         ItemType = 'Directory'

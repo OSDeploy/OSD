@@ -13,7 +13,7 @@ function Step-OSDCloudTelemetryPH {
     Collects deployment analytics and submits the osd_deploy event.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

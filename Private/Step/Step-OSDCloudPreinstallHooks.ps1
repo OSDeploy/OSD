@@ -12,7 +12,7 @@ function Step-OSDCloudPreinstallHooks {
     Discovers preinstall hooks and runs startup scripts before validation and deployment steps.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

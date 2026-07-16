@@ -13,7 +13,7 @@ function Step-OSDCloudConfirmOperatingSystem {
     Validates that an operating system source exists in the current OSDCloud context.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -24,7 +24,7 @@ function Step-OSDCloudConfirmOperatingSystem {
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Validate Operating System Source"
+    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm Operating System Source"
     $Global:OSDCloud.SectionPassed = [bool](
         $global:OSDCoreOperatingSystemObject -or
         $Global:OSDCloud.AzOSDCloudImage -or
@@ -34,7 +34,7 @@ function Step-OSDCloudConfirmOperatingSystem {
     )
 
     if ($Global:OSDCloud.SectionPassed -eq $true) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Done."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm Operating System Source. Done."
     }
     if ($Global:OSDCloud.SectionPassed -eq $false) {
         Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"

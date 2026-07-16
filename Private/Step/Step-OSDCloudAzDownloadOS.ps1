@@ -13,7 +13,7 @@ function Step-OSDCloudAzDownloadOS {
     Downloads the Azure OSDCloud image to C:\OSDCloud\Azure and updates ImageFileDestination.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
