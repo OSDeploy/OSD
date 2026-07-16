@@ -1,4 +1,4 @@
-function Step-OSDCloudVerifyODTFile {
+function Step-OSDCloudConfirmOfficeODT {
     <#
     .SYNOPSIS
     Verifies and selects the Office Deployment Tool configuration for OSDCloud.
@@ -8,7 +8,7 @@ function Step-OSDCloudVerifyODTFile {
     prompts for selection, and logs whether an Office configuration will be used.
 
     .EXAMPLE
-    Step-OSDCloudVerifyODTFile
+    Step-OSDCloudConfirmOfficeODT
     Discovers and selects an Office Deployment Tool configuration for the deployment.
 
     .LINK
