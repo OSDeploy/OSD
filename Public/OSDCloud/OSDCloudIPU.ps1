@@ -768,7 +768,7 @@ function Invoke-OSDCloudIPU {
     #============================================================================
     #region Functions
     #============================================================================
-    Function Get-TPMVer {
+    function Get-TPMVer {
     $Manufacturer = (Get-WmiObject -Class:Win32_ComputerSystem).Manufacturer
     if ($Manufacturer -match "HP")
         {

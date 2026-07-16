@@ -1,4 +1,4 @@
-Function Get-WiFiProfileKey {
+function Get-WiFiProfileKey {
     param (
     [String]$SSID
     )

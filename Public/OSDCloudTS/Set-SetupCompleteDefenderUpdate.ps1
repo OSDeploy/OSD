@@ -1,4 +1,4 @@
-Function Set-SetupCompleteDefenderUpdate {
+function Set-SetupCompleteDefenderUpdate {
     $ScriptsPath = "C:\Windows\Setup\scripts"
     if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
 

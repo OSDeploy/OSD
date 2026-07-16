@@ -1,4 +1,4 @@
-﻿Function Start-DISMFromOSDCloudUSB {
+﻿function Start-DISMFromOSDCloudUSB {
     [CmdletBinding()]
     param (
 

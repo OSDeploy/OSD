@@ -1,4 +1,4 @@
-Function Get-SetupCompleteOSDCloudUSB {
+function Get-SetupCompleteOSDCloudUSB {
     <#
     .SYNOPSIS
     This function checks for the presence of an OSDCloud SetupComplete Folder on any drive other than 'C'.

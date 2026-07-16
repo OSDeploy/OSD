@@ -1,5 +1,5 @@
 <# OLD - API was blocked unless subscription paid
-Function Get-TimeZoneFromIP {
+function Get-TimeZoneFromIP {
     $URIRequest = "https://timezoneapi.io/api/ip/?token=aZuNiKeSCzxosgrJGmCK"
     $TimeZoneAPI =  (Invoke-WebRequest -Uri $URIRequest -UseBasicParsing).Content
     $TimeZoneInfo = $TimeZoneAPI  | ConvertFrom-Json
@@ -12,7 +12,7 @@ Function Get-TimeZoneFromIP {
 
 #New Method
 #TimeZone Data from https://github.com/dmfilipenko/timezones.json/blob/master/timezones.json
-Function Get-TimeZoneFromIP {
+function Get-TimeZoneFromIP {
     $TimeZones = @"
 
 [

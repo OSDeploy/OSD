@@ -1,4 +1,4 @@
-Function Set-SetupCompleteStartWindowsUpdateDriver {
+function Set-SetupCompleteStartWindowsUpdateDriver {
     $ScriptsPath = "C:\Windows\Setup\scripts"
     if (!(Test-Path -Path $ScriptsPath)){New-Item -Path $ScriptsPath} 
 

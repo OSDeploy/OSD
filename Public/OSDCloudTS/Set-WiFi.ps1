@@ -1,4 +1,4 @@
-Function Set-WiFi {
+function Set-WiFi {
     #https://www.cyberdrain.com/automating-with-powershell-deploying-wifi-profiles/
     param(
         [string]$SSID,

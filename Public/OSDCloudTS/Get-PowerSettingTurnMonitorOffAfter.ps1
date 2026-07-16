@@ -1,4 +1,4 @@
-﻿Function Get-PowerSettingTurnMonitorOffAfter {
+﻿function Get-PowerSettingTurnMonitorOffAfter {
     <#
     .SYNOPSIS
     Gets the active power plan monitor-off timeout in minutes.

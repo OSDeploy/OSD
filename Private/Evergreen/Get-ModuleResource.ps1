@@ -1,4 +1,4 @@
-Function Get-ModuleResource {
+function Get-ModuleResource {
     <#
         .SYNOPSIS
             Reads the module strings from the JSON file and returns a hashtable.

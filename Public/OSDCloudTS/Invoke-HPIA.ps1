@@ -41,7 +41,7 @@ Function Write-CMTraceLog {
 }
 
 ####  Get-HPIALatestVersion
-Function Get-HPIALatestVersion{
+function Get-HPIALatestVersion{
     $script:TempWorkFolder = "$env:windir\Temp\HPIA"
     $ProgressPreference = 'SilentlyContinue' # to speed up web requests
     $HPIACABUrl = "https://hpia.hpcloud.hp.com/HPIAMsg.cab"
@@ -307,7 +307,7 @@ Function Invoke-HPIA {
     }
 
 }
-Function Get-HPIAXMLResult {
+function Get-HPIAXMLResult {
 <#  
 Grabs the output from a recent run of HPIA and parses the XML to find recommendations.
 #>
@@ -419,7 +419,7 @@ Grabs the output from a recent run of HPIA and parses the XML to find recommenda
     }
 }
 
-Function Get-HPIAJSONResult {
+function Get-HPIAJSONResult {
 <#  
 Grabs the JSON output from a recent run of HPIA to see what was installed and Exit Codes per item
 #>
