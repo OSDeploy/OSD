@@ -1,4 +1,4 @@
-function Step-OSDCloudRestoreUSBDriveLetter {
+function Step-OSDCloudRestoreUSBDrives {
     [CmdletBinding()]
     param ()
     #=================================================
