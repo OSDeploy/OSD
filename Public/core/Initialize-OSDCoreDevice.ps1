@@ -536,8 +536,25 @@ function Initialize-OSDCoreDevice {
             Name       = 'IsUSB'
             Expression = { $usbDiskNumbers.Contains([int]$_.DiskNumber) }
         }
-
+    # USB Partitions
     $USBPartitions = $GetPartition | Where-Object { $_.IsUSB -eq $true }
+
+    # USBVolumes
+    $usbDriveLetters = $USBPartitions |
+        ForEach-Object { $_.AccessPaths } |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+        ForEach-Object {
+            if ($_ -match '^(?<DriveLetter>[A-Z]):\\$') {
+                $Matches.DriveLetter
+            }
+        } |
+        Sort-Object -Unique
+
+    $USBVolumes = @()
+    if ($usbDriveLetters) {
+        $USBVolumes = Get-Volume -DriveLetter $usbDriveLetters -ErrorAction SilentlyContinue |
+            Sort-Object DriveLetter -Unique
+    }
     #=================================================
     #   OSDCloudEnv
     #=================================================
@@ -611,6 +628,7 @@ function Initialize-OSDCoreDevice {
         TpmManufacturerVersion    = $DeviceTpmManufacturerVersion
         TpmSpecVersion            = $DeviceTpmSpecVersion
         USBPartitions             = $USBPartitions
+        USBVolumes                = $USBVolumes
         UUID                      = $classWin32ComputerSystemProduct.UUID
     }
     $global:OSDCoreDevice | ConvertTo-Json -Depth 10 | Out-File "$LogsPath\OSDCoreDevice.json" -Force -Encoding utf8
