@@ -1,12 +1,40 @@
-<#
-.SYNOPSIS
-Downloads a file from the internet and returns a Get-Item Object
-.DESCRIPTION
-Downloads a file from the internet and returns a Get-Item Object
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-#>
 function Invoke-OSDCoreDownloadFile {
+    <#
+    .SYNOPSIS
+    Downloads a file to a local path and returns file information.
+
+    .DESCRIPTION
+    Downloads content from a source URL into a destination directory using
+    either curl or WebClient fallback logic, then returns a FileInfo object for
+    the downloaded file.
+
+    .PARAMETER SourceUrl
+    Source URL to download.
+
+    .PARAMETER DestinationName
+    Optional destination file name. If omitted, the file name is derived from
+    the source URL.
+
+    .PARAMETER DestinationDirectory
+    Destination directory for the downloaded file.
+
+    .PARAMETER Overwrite
+    Overwrites the destination file if it already exists.
+
+    .PARAMETER WebClient
+    Forces use of WebClient instead of curl.
+
+    .EXAMPLE
+    Invoke-OSDCoreDownloadFile -SourceUrl 'https://example.org/file.cab' -DestinationDirectory "$env:TEMP\OSD"
+    Downloads the file and returns a FileInfo object.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Moved help block inside function and expanded required sections
+    #>
     [CmdletBinding()]
     [OutputType([System.IO.FileInfo])]
     param

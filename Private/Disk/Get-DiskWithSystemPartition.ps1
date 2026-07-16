@@ -1,17 +1,23 @@
-<#
-.SYNOPSIS
-Gets the Disk containing the SYSTEM partition
-
-.DESCRIPTION
-Gets the Disk containing the SYSTEM partition
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-19.12.9    Created by David Segura @SeguraOSD
-#>
 function Get-DiskWithSystemPartition {
+    <#
+    .SYNOPSIS
+    Gets fixed disks that contain the system partition.
+
+    .DESCRIPTION
+    Returns online, fixed disks that have at least one partition and are marked
+    as system disks by the storage subsystem.
+
+    .EXAMPLE
+    Get-DiskWithSystemPartition
+    Returns the disk object representing the current system disk.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Moved help block inside function and normalized required sections
+    #>
     [CmdletBinding()]
     param ()
 

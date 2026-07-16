@@ -1,17 +1,23 @@
-<#
-.SYNOPSIS
-Gets the Disk containing the BOOT partition
-
-.DESCRIPTION
-Gets the Disk containing the BOOT partition
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-19.12.9    Created by David Segura @SeguraOSD
-#>
 function Get-DiskWithBootPartition {
+    <#
+    .SYNOPSIS
+    Gets fixed disks that contain the boot partition.
+
+    .DESCRIPTION
+    Returns online, fixed disks that have at least one partition and are marked
+    as boot disks by the storage subsystem.
+
+    .EXAMPLE
+    Get-DiskWithBootPartition
+    Returns the disk object representing the current boot disk.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Moved help block inside function and normalized required sections
+    #>
     [CmdletBinding()]
     param ()
 

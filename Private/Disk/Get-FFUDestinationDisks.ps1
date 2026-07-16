@@ -1,4 +1,23 @@
 function Get-FFUDestinationDisks {
+    <#
+    .SYNOPSIS
+    Returns valid local and network FFU destination targets.
+
+    .DESCRIPTION
+    Builds candidate destination entries from writable local partitions and
+    mapped network drives, then returns NTFS targets with size metadata.
+
+    .EXAMPLE
+    Get-FFUDestinationDisks
+    Returns local and network destinations that can store FFU output.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Added initial in-function help block
+    #>
     [CmdletBinding()]
     param ()
     #=================================================

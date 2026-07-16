@@ -205,44 +205,6 @@ function Copy-PSModuleToWindowsImage {
     }
     end {}
 }
-<#
-.SYNOPSIS
-Dismounts a Windows image from the directory it is mapped to.
-
-.DESCRIPTION
-The Dismount-WindowsImage cmdlet either saves or discards the changes to a Windows image and then dismounts the image.
-
-.PARAMETER Path
-Specifies the full path to the root directory of the offline Windows image that you will service.
-
-.PARAMETER Discard
-Discards the changes to a Windows image.
-
-.PARAMETER Save
-Saves the changes to a Windows image.
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.INPUTS
-System.String[]
-
-.INPUTS
-Microsoft.Dism.Commands.ImageObject
-
-.INPUTS
-Microsoft.Dism.Commands.MountedImageInfoObject
-
-.INPUTS
-Microsoft.Dism.Commands.ImageInfoObject
-
-.OUTPUTS
-Microsoft.Dism.Commands.BaseDismObject
-
-.NOTES
-19.11.21    Initial Release
-21.2.9      Renamed from Dismount-WindowsImageOSD
-#>
 function Dismount-MyWindowsImage {
 <#
 .SYNOPSIS
@@ -331,19 +293,6 @@ Author: David Segura - Recast Software
     }
     end {}
 }
-<#
-.SYNOPSIS
-Edits a mounted Windows Image
-
-.DESCRIPTION
-Edits a mounted Windows Image
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-19.11.22 David Segura @SeguraOSD
-#>
 function Edit-MyWindowsImage {
 <#
 .SYNOPSIS
@@ -1171,30 +1120,6 @@ Author: David Segura - Recast Software
     Return $Results
     #=================================================
 }
-<#
-.SYNOPSIS
-Mounts a WIM file
-
-.DESCRIPTION
-Mounts a WIM file automatically selecting the Path and the Index
-
-.PARAMETER ImagePath
-Specifies the full path to the Windows Image
-
-.PARAMETER Index
-Index of the Windows Image
-
-.PARAMETER ReadOnly
-Mount the Windows Image as Read Only
-
-.PARAMETER Explorer
-Opens Windows Explorer to the Mount Directory
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-#>
 function Mount-MyWindowsImage {
 <#
 .SYNOPSIS
@@ -1354,19 +1279,6 @@ Author: David Segura - Recast Software
     }
     end {}
 }
-<#
-.SYNOPSIS
-Removes Appx Packages and Appx Provisioned Packages for All Users
-
-.DESCRIPTION
-Removes Appx Packages and Appx Provisioned Packages for All Users
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-19.12.20 David Segura @SeguraOSD
-#>
 function Remove-AppxOnline {
 <#
 .SYNOPSIS
@@ -1507,27 +1419,6 @@ Author: David Segura - Recast Software
     }
     end {}
 }
-<#
-.SYNOPSIS
-Returns True if ImagePath is a Windows Image
-
-.DESCRIPTION
-Returns True if ImagePath is a Windows Image
-
-.PARAMETER ImagePath
-Specifies the full path to the Windows Image
-
-.PARAMETER Index
-Index of the Windows Image
-
-.PARAMETER Extension
-Test if the File Extension is .esd or .wim
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-#>
 function Test-WindowsImage {
 <#
 .SYNOPSIS
@@ -1650,24 +1541,6 @@ Author: David Segura - Recast Software
     Return $false
     #=================================================
 }
-<#
-.SYNOPSIS
-Returns True if ImagePath is Mounted
-
-.DESCRIPTION
-Returns True if ImagePath is Mounted
-
-.PARAMETER ImagePath
-Specifies the full path to the Windows Image
-
-.PARAMETER Index
-Index of the Windows Image
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-#>
 function Test-WindowsImageMounted {
 <#
 .SYNOPSIS
@@ -1713,21 +1586,6 @@ Author: David Segura - Recast Software
         Return $false
     }
 }
-<#
-.SYNOPSIS
-Returns True if Path is a Windows Image mount directory
-
-.DESCRIPTION
-Returns True if Path is a Windows Image mount directory
-
-.PARAMETER Path
-Full Path to a Windows Image mount directory
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-#>
 function Test-WindowsImageMountPath {
 <#
 .SYNOPSIS
@@ -1767,25 +1625,6 @@ Author: David Segura - Recast Software
         Return $false
     }
 }
-<#
-.SYNOPSIS
-    OSDBuilder function that tests the LCU and returns the Package Type
-
-.DESCRIPTION
-    OSDBuilder function that tests the LCU and returns the Package Type
-
-.PARAMETER PackagePath
-    Path to the Windows update package to test
-
-.PARAMETER Path
-    Directory path where the Windows Image is mounted
-
-.LINK
-https://www.osdcloud.com
-
-.NOTES
-    Credit to Lasse Meggele @lassemeggele for correcting some issues. Thanks!
-#>
 function Test-WindowsPackageCAB {
 <#
 .SYNOPSIS
@@ -1856,39 +1695,6 @@ Author: David Segura - Recast Software
     }
     Return $returnVal
 }
-<#
-.SYNOPSIS
-Updates a mounted WIM
-
-.DESCRIPTION
-Updates a mounted WIM files.  Requires WSUSXML Catalog
-
-.PARAMETER Path
-Specifies the full path to the root directory of the offline Windows image that you will service
-
-.PARAMETER Update
-Check or Install the specified Update Group
-Check = Validate installed Updates
-All = Install all required Updates
-AdobeSU = Adobe Security Update
-DotNet = DotNet Update
-DotNetCU = DotNet Cumulative Update
-LCU = Latest Cumulative Update
-SSU = Servicing Stack Update
-
-.PARAMETER BitsTransfer
-Download the file using BITS-Transfer
-Interactive Login required
-
-.PARAMETER Force
-Updates are only installed if they are needed
-Force parameter will install the update even if it is already installed
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-#>
 function Update-MyWindowsImage {
 <#
 .SYNOPSIS

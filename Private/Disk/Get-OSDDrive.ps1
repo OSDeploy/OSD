@@ -1,17 +1,26 @@
-<#
-.SYNOPSIS
-Similar to Get-PSDrive, but adds IsUSB and IsNetwork Property
-
-.DESCRIPTION
-Similar to Get-PSDrive, but adds IsUSB and IsNetwork Property
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-21.3.5      Initial Release
-#>
 function Get-OSDDrive {
+    <#
+    .SYNOPSIS
+    Returns PSDrive data with OSD-specific USB and network flags.
+
+    .DESCRIPTION
+    Collects PSDrive and OSD volume data, then enriches drive objects with
+    IsUSB and IsNetwork properties for deployment scripting.
+
+    .PARAMETER IsLocal
+    Optional local-only selector used by calling workflows.
+
+    .EXAMPLE
+    Get-OSDDrive
+    Returns drives with IsUSB and IsNetwork properties.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Moved help block inside function and normalized required sections
+    #>
     [CmdletBinding()]
     param (
         [string]$IsLocal

@@ -1,17 +1,41 @@
-<#
-.SYNOPSIS
-Creates a GPT or MBR System Partition
-
-.DESCRIPTION
-Creates a GPT or MBR System Partition
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-19.12.11     Created by David Segura @SeguraOSD
-#>
 function New-OSDPartitionSystem {
+    <#
+    .SYNOPSIS
+    Creates the system partition layout for GPT or MBR disks.
+
+    .DESCRIPTION
+    Creates and formats the system partition on the target disk, then applies
+    the expected partition attributes and drive letter for OSD workflows.
+
+    .PARAMETER DiskNumber
+    Target disk number.
+
+    .PARAMETER LabelSystem
+    Label to apply to the system partition.
+
+    .PARAMETER PartitionStyle
+    Partition style to use, GPT or MBR. If omitted, style is inferred.
+
+    .PARAMETER SizeSystemMbr
+    System partition size for MBR layouts.
+
+    .PARAMETER SizeSystemGpt
+    System partition size for GPT layouts.
+
+    .PARAMETER SizeMSR
+    MSR partition size for GPT layouts.
+
+    .EXAMPLE
+    New-OSDPartitionSystem -DiskNumber 0 -PartitionStyle GPT
+    Creates and formats GPT system and MSR partitions on disk 0.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Moved help block inside function and normalized required sections
+    #>
     [CmdletBinding()]
     param (
         #Fixed Disk Number

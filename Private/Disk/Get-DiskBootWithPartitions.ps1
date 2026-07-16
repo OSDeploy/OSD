@@ -1,4 +1,23 @@
 function Get-DiskBootWithPartitions {
+    <#
+    .SYNOPSIS
+    Returns online fixed boot disks that contain partitions.
+
+    .DESCRIPTION
+    Filters Get-Disk results to include only fixed, online, non-offline disks
+    with one or more partitions that are flagged as boot and system disks.
+
+    .EXAMPLE
+    Get-DiskBootWithPartitions
+    Returns disk records for the boot/system disk set.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Added initial in-function help block
+    #>
     [CmdletBinding()]
     param ()
 

@@ -1,4 +1,23 @@
 function Get-VolumesByDiskNumber {
+    <#
+    .SYNOPSIS
+    Returns NTFS volume information mapped to disk numbers.
+
+    .DESCRIPTION
+    Collects partition and volume metadata, joins on drive letter, and returns
+    NTFS volume details including size and remaining capacity by disk number.
+
+    .EXAMPLE
+    Get-VolumesByDiskNumber
+    Returns NTFS volumes with disk number and capacity details.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Added initial in-function help block
+    #>
     [CmdletBinding()]
     param ()
         #=================================================

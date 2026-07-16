@@ -1,17 +1,41 @@
-<#
-.SYNOPSIS
-New-OSDDisk Private Function
-
-.DESCRIPTION
-New-OSDDisk Private Function
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-19.10.10     Created by David Segura @SeguraOSD
-#>
 function New-OSDPartitionWindows {
+    <#
+    .SYNOPSIS
+    Creates the Windows and optional recovery partitions.
+
+    .DESCRIPTION
+    Builds partition layouts for GPT or MBR systems, formats partitions, and
+    assigns expected drive letters for Windows deployment workflows.
+
+    .PARAMETER DiskNumber
+    Target disk number.
+
+    .PARAMETER LabelRecovery
+    Label to apply to the recovery partition.
+
+    .PARAMETER LabelWindows
+    Label to apply to the Windows partition.
+
+    .PARAMETER PartitionStyle
+    Partition style to use, GPT or MBR. If omitted, style is inferred.
+
+    .PARAMETER SizeRecovery
+    Recovery partition size when recovery is created.
+
+    .PARAMETER NoRecoveryPartition
+    Skips creation of the recovery partition.
+
+    .EXAMPLE
+    New-OSDPartitionWindows -DiskNumber 0 -PartitionStyle GPT
+    Creates Windows and recovery partitions on disk 0.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Moved help block inside function and normalized required sections
+    #>
     [CmdletBinding()]
     param (
         #Fixed Disk Number

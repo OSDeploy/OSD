@@ -1,37 +1,30 @@
-<#
-.SYNOPSIS
-Initializes any RAW Disks.  Automatically selects GPT or MBR
-
-.DESCRIPTION
-Initializes any RAW Disks.  Automatically selects GPT or MBR
-
-.EXAMPLE
-Initialize-OSDDisk
-Interactive = True
-Sandbox     = True
-
-.EXAMPLE
-Initialize-OSDDisk -Confirm
-Interactive = True
-Sandbox     = True
-
-.EXAMPLE
-Initialize-OSDDisk -Force
-Interactive = False
-Sandbox     = False
-
-.EXAMPLE
-Initialize-OSDDisk -Confirm -Force
-Interactive = True
-Sandbox     = False
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-21.2.14     Initial Release
-#>
 function Initialize-OSDDisk {
+    <#
+    .SYNOPSIS
+    Initializes raw disks using GPT or MBR based on platform firmware mode.
+
+    .DESCRIPTION
+    Finds RAW, non-USB, non-virtual disks and initializes them with GPT on UEFI
+    systems or MBR on BIOS systems. Supports safety prompts and force mode.
+
+    .PARAMETER InputObject
+    Optional disk objects to initialize. If omitted, candidate disks are
+    discovered automatically.
+
+    .PARAMETER Force
+    Initializes discovered disks without informational stop messaging.
+
+    .EXAMPLE
+    Initialize-OSDDisk -Force
+    Initializes discovered RAW disks using the detected partition style.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Moved help block inside function and normalized required sections
+    #>
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         [Parameter(ValueFromPipeline = $true)]

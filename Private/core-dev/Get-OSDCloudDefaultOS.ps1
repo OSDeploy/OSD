@@ -1,45 +1,24 @@
-<#=================================================================================
-    Get-OSDCloudDefaultOS
-    ================================================================================
-    - Gets a single operating system record based on system architecture and
-      language preferences
-    - Filters from available OS records using a priority order for language codes
-    ================================================================================
+function Get-OSDCloudDefaultOS {
+    <#
     .SYNOPSIS
-        Gets a single operating system record from the OSDCloud catalog
+    Returns the default OSDCloud operating system record.
 
     .DESCRIPTION
-        Retrieves operating system metadata from Microsoft catalogs and filters
-        based on processor architecture and language preferences. The function
-        evaluates language codes in a specific priority order and returns the
-        first matching operating system record.
-
-    .PARAMETER None
-        This function does not accept parameters. Filtering is done through
-        environment variables and global variables.
+    Retrieves available OSDCloud operating systems and selects the first record
+    matching architecture and language preferences derived from environment and
+    global configuration values.
 
     .EXAMPLE
-        PS C:\> Get-OSDCloudDefaultOS
-        Returns the first matching operating system based on current culture
-
-    .EXAMPLE
-        PS C:\> Get-OSDCloudDefaultOS | Format-List *
-        Displays all properties of the selected operating system
-
-    .EXAMPLE
-        PS C:\> $os = Get-OSDCloudDefaultOS
-        PS C:\> $os.FileName
-        Returns the download filename for the selected operating system
-
-    .NOTES
-        Author: OSDeploy
-        Version: 1.0
-        GitHub: https://github.com/OSDeploy
+    Get-OSDCloudDefaultOS
+    Returns the first matching operating system entry for the current context.
 
     .LINK
-        https://www.osdeploy.com/
-=================================================================================#>
-function Get-OSDCloudDefaultOS {
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-16 - Moved help block inside function and normalized required sections
+    #>
     [CmdletBinding()]
     [OutputType([pscustomobject])]
     param ()
