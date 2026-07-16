@@ -74,7 +74,7 @@ function Start-OOBEDeploy {
     #=================================================
     if ($CustomProfile) {
         Write-Host -ForegroundColor DarkGray "========================================================================="
-        Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Loading OOBEDeploy Custom Profile $CustomProfile"
+        Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Indexing OOBEDeploy Custom Profile $CustomProfile"
 
         $CustomProfileJson = Get-ChildItem "$($MyInvocation.MyCommand.Module.ModuleBase)\Resources\CustomProfile\OOBEDeploy" *.json | Where-Object {$_.BaseName -eq $CustomProfile} | Select-Object -First 1
 
