@@ -1,4 +1,4 @@
-function Step-OSDCloudRemoveUSBDriveLetter {
+function Step-OSDCloudRemoveUSBDrives {
     [CmdletBinding()]
     param ()
     #=================================================
