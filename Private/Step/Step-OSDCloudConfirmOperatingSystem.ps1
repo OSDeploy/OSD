@@ -1,4 +1,4 @@
-function Step-OSDCloudVerifyOperatingSystem {
+function Step-OSDCloudConfirmOperatingSystem {
     <#
     .SYNOPSIS
     Verifies that an operating system source is available before deployment continues.
@@ -9,7 +9,7 @@ function Step-OSDCloudVerifyOperatingSystem {
     logs guidance for launch methods and stops execution.
 
     .EXAMPLE
-    Step-OSDCloudVerifyOperatingSystem
+    Step-OSDCloudConfirmOperatingSystem
     Validates that an operating system source exists in the current OSDCloud context.
 
     .LINK
