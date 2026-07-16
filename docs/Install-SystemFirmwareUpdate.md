@@ -13,8 +13,8 @@ Downloads and installs the system firmware update
 ## SYNTAX
 
 ```
-Install-SystemFirmwareUpdate [[-DestinationDirectory] <String>] [-Force] [-Restart]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Install-SystemFirmwareUpdate [[-DestinationDirectory] <String>] [-Force] [-Restart] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,20 +26,23 @@ Requires admin rights and PowerShell 5.1.
 ### EXAMPLE 1
 ```
 Install-SystemFirmwareUpdate
-Downloads and installs the latest firmware update
 ```
+
+Downloads and installs the latest firmware update
 
 ### EXAMPLE 2
 ```
 Install-SystemFirmwareUpdate -DestinationDirectory 'D:\Updates'
-Downloads firmware update to D:\Updates and installs it
 ```
+
+Downloads firmware update to D:\Updates and installs it
 
 ### EXAMPLE 3
 ```
 Install-SystemFirmwareUpdate -Force -Restart
-Downloads and installs the latest firmware update and restarts if required.
 ```
+
+Downloads and installs the latest firmware update and restarts if required.
 
 ## PARAMETERS
 
@@ -121,21 +124,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -152,3 +140,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

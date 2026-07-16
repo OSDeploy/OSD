@@ -13,7 +13,7 @@ Saves BitLocker recovery passwords to text files.
 ## SYNTAX
 
 ```
-Save-MyBitLockerRecoveryPassword [-Path] <String[]> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Save-MyBitLockerRecoveryPassword [-Path] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +25,9 @@ them as recovery key text files in one or more destination folders.
 ### EXAMPLE 1
 ```
 Save-MyBitLockerRecoveryPassword -Path 'D:\BitLockerBackup'
-Exports recovery password text files to D:\BitLockerBackup.
 ```
+
+Exports recovery password text files to D:\BitLockerBackup.
 
 ## PARAMETERS
 
@@ -45,21 +46,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -74,3 +60,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

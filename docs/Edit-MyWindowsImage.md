@@ -8,39 +8,38 @@ schema: 2.0.0
 # Edit-MyWindowsImage
 
 ## SYNOPSIS
-Edits a mounted Windows Image
+Edits MyWindowsImage content.
 
 ## SYNTAX
 
 ### Offline (Default)
 ```
 Edit-MyWindowsImage [-Path <String[]>] [-CleanupImage <String>] [-GridRemoveAppxPP] [-RemoveAppxPP <String[]>]
- [-DismountSave] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-DismountSave] [<CommonParameters>]
 ```
 
 ### Online
 ```
 Edit-MyWindowsImage [-Online] [-GridRemoveAppx] [-GridRemoveAppxPP] [-RemoveAppx <String[]>]
- [-RemoveAppxPP <String[]>] [-DismountSave] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-RemoveAppxPP <String[]>] [-DismountSave] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Edits a mounted Windows Image
+Applies modifications to MyWindowsImage in the current servicing workflow.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
 
-{{ Add example description here }}
+```
+
+Demonstrates a common way to run Edit-MyWindowsImage.
 
 ## PARAMETERS
 
 ### -Path
-Specifies the full path to the root directory of the offline Windows image that you will service.
-If the directory named Windows is not a subdirectory of the root directory, -WindowsDirectory must be specified.
+Specifies the Path to use when running Edit-MyWindowsImage.
 
 ```yaml
 Type: String[]
@@ -55,8 +54,7 @@ Accept wildcard characters: False
 ```
 
 ### -CleanupImage
-Dism Actions
-Analyze cannot be used for PassThru
+Specifies the CleanupImage to use when running Edit-MyWindowsImage.
 
 ```yaml
 Type: String
@@ -71,7 +69,7 @@ Accept wildcard characters: False
 ```
 
 ### -Online
-Specifies that the action is to be taken on the operating system that is currently running on the local computer.
+Specifies the Online to use when running Edit-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -86,7 +84,7 @@ Accept wildcard characters: False
 ```
 
 ### -GridRemoveAppx
-Appx Packages selected in GridView will be removed from the Windows Image
+Specifies the GridRemoveAppx to use when running Edit-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -101,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -GridRemoveAppxPP
-Appx Provisioned Packages selected in GridView will be removed from the Windows Image
+Specifies the GridRemoveAppxPP to use when running Edit-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -116,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemoveAppx
-Appx Packages matching the string will be removed
+Specifies the RemoveAppx to use when running Edit-MyWindowsImage.
 
 ```yaml
 Type: String[]
@@ -131,7 +129,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemoveAppxPP
-Appx Provisioned Packages matching the string will be removed
+Specifies the RemoveAppxPP to use when running Edit-MyWindowsImage.
 
 ```yaml
 Type: String[]
@@ -146,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -DismountSave
-{{ Fill DismountSave Description }}
+Specifies the DismountSave to use when running Edit-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -160,21 +158,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -183,8 +166,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-19.11.22 David Segura @SeguraOSD
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

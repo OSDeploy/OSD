@@ -17,7 +17,7 @@ Edit-OSDCloudWinPE [-CloudDriver <String[]>] [-StartOSDCloudGUI] [-DriverHWID <S
  [-DriverPath <String[]>] [-PSModuleCopy <String[]>] [-PSModuleInstall <String[]>] [-Startnet <String>]
  [-StartOSDCloud <String>] [-StartOSDPad <String>] [-StartPSCommand <String>] [-StartURL <String>] [-UpdateUSB]
  [-Wallpaper <FileInfo>] [-UseDefaultWallpaper] [-Brand <String>] [-WorkspacePath <String>] [-WirelessConnect]
- [-WifiProfile <FileInfo>] [-Add7Zip] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-WifiProfile <FileInfo>] [-Add7Zip] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,8 +28,9 @@ Provides the implementation for Edit-OSDCloudWinPE.
 ### EXAMPLE 1
 ```
 -StartOSDCloudGUI
-Runs Edit-OSDCloudWinPE with common parameters.
 ```
+
+Runs Edit-OSDCloudWinPE with common parameters.
 
 ## PARAMETERS
 
@@ -318,21 +319,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -347,3 +333,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

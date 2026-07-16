@@ -13,7 +13,7 @@ Downloads and applies the HP SP94937 softpaq to downgrade a TPM from 2.0 to 1.2.
 ## SYNTAX
 
 ```
-Invoke-HPTPMDowngrade [[-WorkingFolder] <Object>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-HPTPMDowngrade [[-WorkingFolder] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,8 +27,9 @@ applying the firmware change.
 ### EXAMPLE 1
 ```
 Invoke-HPTPMDowngrade
-Downloads SP94937 to $env:TEMP\TPM and downgrades the Infineon TPM to spec 1.2.
 ```
+
+Downloads SP94937 to $env:TEMP\TPM and downgrades the Infineon TPM to spec 1.2.
 
 ## PARAMETERS
 
@@ -43,21 +44,6 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -15,34 +15,33 @@ Optionally allows for execution by command or file.
 
 ### FromUriContent (Default)
 ```
-Get-PSCloudScript [-Uri] <String> [-Invoke <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-PSCloudScript [-Uri] <String> [-Invoke <String>] [<CommonParameters>]
 ```
 
 ### FromAzKeyVaultSecret
 ```
-Get-PSCloudScript -VaultName <String> [-Name <String[]>] [-Invoke <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-PSCloudScript -VaultName <String> [-Name <String[]>] [-Invoke <String>] [<CommonParameters>]
 ```
 
 ### FromClipboard
 ```
-Get-PSCloudScript [-Clipboard] [-Invoke <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-PSCloudScript [-Clipboard] [-Invoke <String>] [<CommonParameters>]
 ```
 
 ### FromFile
 ```
-Get-PSCloudScript -File <FileInfo> [-Invoke <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-PSCloudScript -File <FileInfo> [-Invoke <String>] [<CommonParameters>]
 ```
 
 ### FromString
 ```
-Get-PSCloudScript -String <String> [-Invoke <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-PSCloudScript -String <String> [-Invoke <String>] [<CommonParameters>]
 ```
 
 ### FromGitHubRepo
 ```
 Get-PSCloudScript -RepoOwner <String> -RepoName <String> [-GithubPath <String>] [-Invoke <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -201,21 +200,6 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
 
 Required: False
 Position: Named

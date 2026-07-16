@@ -13,7 +13,7 @@ Expands staged driver pack archives during Windows Setup
 ## SYNTAX
 
 ```
-Expand-StagedDriverPack [-Apply] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Expand-StagedDriverPack [-Apply] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +25,16 @@ Supports multiple vendor formats including Dell, HP, Lenovo, and generic package
 ### EXAMPLE 1
 ```
 Expand-StagedDriverPack
-Expands all driver packs in C:\Drivers
 ```
+
+Expands all driver packs in C:\Drivers
 
 ### EXAMPLE 2
 ```
 Expand-StagedDriverPack -Apply
-Expands driver packs and applies them during setup
 ```
+
+Expands driver packs and applies them during setup
 
 ## PARAMETERS
 
@@ -51,21 +53,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -80,3 +67,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

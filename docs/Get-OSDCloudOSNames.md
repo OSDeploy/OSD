@@ -13,7 +13,7 @@ Returns the Operating Systems names used by OSDCloud
 ## SYNTAX
 
 ```
-Get-OSDCloudOSNames [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-OSDCloudOSNames [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,25 +24,11 @@ Returns the Operating Systems names used by OSDCloud
 ### EXAMPLE 1
 ```
 Get-OSDCloudOSNames
-Returns the OSDCloud operating system name list from module resources.
 ```
+
+Returns the OSDCloud operating system name list from module resources.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -58,3 +44,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

@@ -13,7 +13,7 @@ Sets configuration values by using Set-OSDCloudWorkspace.
 ## SYNTAX
 
 ```
-Set-OSDCloudWorkspace [[-WorkspacePath] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Set-OSDCloudWorkspace [[-WorkspacePath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,8 +23,10 @@ Provides the implementation for Set-OSDCloudWorkspace.
 
 ### EXAMPLE 1
 ```
-Runs Set-OSDCloudWorkspace with common parameters.
+
 ```
+
+Runs Set-OSDCloudWorkspace with common parameters.
 
 ## PARAMETERS
 
@@ -43,21 +45,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -72,3 +59,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

@@ -13,7 +13,7 @@ Configures driver pack expansion during Windows Specialize phase
 ## SYNTAX
 
 ```
-Enable-SpecializeDriverPack [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Enable-SpecializeDriverPack [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,25 +25,11 @@ Requires admin rights and Windows 10 or later.
 ### EXAMPLE 1
 ```
 Enable-SpecializeDriverPack
-Configures the system to expand driver packs during Specialize phase
 ```
+
+Configures the system to expand driver packs during Specialize phase
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -59,3 +45,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

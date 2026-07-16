@@ -13,8 +13,7 @@ Downloads and installed a compatible BIOS Update for your Dell system
 ## SYNTAX
 
 ```
-Update-MyDellBios [[-DownloadPath] <String>] [-Force] [-Reboot] [-Silent] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Update-MyDellBios [[-DownloadPath] <String>] [-Force] [-Reboot] [-Silent] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,20 +26,24 @@ Logs to $env:TEMP\Update-MyDellBios.log
 ### EXAMPLE 1
 ```
 Update-MyDellBios
-Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update
 ```
+
+Downloads and launches the Dell BIOS Update. 
+Does not automatically install the BIOS Update
 
 ### EXAMPLE 2
 ```
 Update-MyDellBios -Silent
-Yes, this will update your BIOS silently, and NOT reboot when its done
 ```
+
+Yes, this will update your BIOS silently, and NOT reboot when its done
 
 ### EXAMPLE 3
 ```
 Update-MyDellBios -Silent -Reboot
-Yes, this will update your BIOS silently, AND reboot when its done
 ```
+
+Yes, this will update your BIOS silently, AND reboot when its done
 
 ## PARAMETERS
 
@@ -104,21 +107,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -134,3 +122,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

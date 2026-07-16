@@ -13,7 +13,7 @@ Tests DynamicValidateSet conditions.
 ## SYNTAX
 
 ```
-Test-DynamicValidateSet [-ProgressAction <ActionPreference>] -OSName <String> [<CommonParameters>]
+Test-DynamicValidateSet -OSName <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,8 +24,9 @@ Evaluates DynamicValidateSet state and returns a validation result for scripting
 ### EXAMPLE 1
 ```
 Test-DynamicValidateSet
-Demonstrates a common way to run Test-DynamicValidateSet.
 ```
+
+Demonstrates a common way to run Test-DynamicValidateSet.
 
 ## PARAMETERS
 
@@ -38,21 +39,6 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -74,3 +60,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

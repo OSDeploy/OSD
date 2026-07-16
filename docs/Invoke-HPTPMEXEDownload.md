@@ -13,7 +13,7 @@ Downloads the required HP TPM firmware EXE to C:\OSDCloud\HP\TPM.
 ## SYNTAX
 
 ```
-Invoke-HPTPMEXEDownload [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-HPTPMEXEDownload [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,25 +31,11 @@ BIOS via Set-HPBIOSSetting.
 ### EXAMPLE 1
 ```
 Invoke-HPTPMEXEDownload
-Determines the required TPM softpaq and downloads (or copies) it to C:\OSDCloud\HP\TPM.
 ```
+
+Determines the required TPM softpaq and downloads (or copies) it to C:\OSDCloud\HP\TPM.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

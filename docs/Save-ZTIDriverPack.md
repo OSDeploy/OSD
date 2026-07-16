@@ -13,8 +13,7 @@ Downloads the driver pack for a computer during MDT/ConfigMgr task sequence
 ## SYNTAX
 
 ```
-Save-ZTIDriverPack [[-Manufacturer] <String>] [[-Product] <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Save-ZTIDriverPack [[-Manufacturer] <String>] [[-Product] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,14 +25,16 @@ Requires an active task sequence environment.
 ### EXAMPLE 1
 ```
 Save-ZTIDriverPack
-Downloads the driver pack for the current computer during task sequence
 ```
+
+Downloads the driver pack for the current computer during task sequence
 
 ### EXAMPLE 2
 ```
 Save-ZTIDriverPack -Manufacturer 'Dell' -Product 'Latitude 5420'
-Downloads the driver pack for a specific Dell model
 ```
+
+Downloads the driver pack for a specific Dell model
 
 ## PARAMETERS
 
@@ -69,21 +70,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -98,3 +84,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

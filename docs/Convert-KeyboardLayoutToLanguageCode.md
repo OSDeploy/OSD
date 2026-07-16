@@ -14,7 +14,7 @@ Converts a Windows keyboard layout value to a language/culture code.
 
 ```
 Convert-KeyboardLayoutToLanguageCode [[-KeyboardLayout] <String>] [[-FallbackLanguageCode] <String>]
- [-LowerCase] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-LowerCase] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +30,24 @@ When conversion fails, a fallback language code is returned.
 ### EXAMPLE 1
 ```
 Convert-KeyboardLayoutToLanguageCode
+```
+
 Detects the active keyboard layout from Win32_Keyboard and returns the
 resolved language code.
-```
 
 ### EXAMPLE 2
 ```
 Convert-KeyboardLayoutToLanguageCode -KeyboardLayout '0000040C'
-Returns fr-FR.
 ```
+
+Returns fr-FR.
 
 ### EXAMPLE 3
 ```
 Convert-KeyboardLayoutToLanguageCode -KeyboardLayout '00000409' -LowerCase
-Returns en-us.
 ```
+
+Returns en-us.
 
 ## PARAMETERS
 
@@ -96,21 +99,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -128,3 +116,4 @@ Author: David Segura - Recast Software
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 
 [https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-language-pack-default-values](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-language-pack-default-values)
+

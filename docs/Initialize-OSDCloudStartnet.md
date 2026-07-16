@@ -13,8 +13,7 @@ Initializes the OSDCloud startnet environment.
 ## SYNTAX
 
 ```
-Initialize-OSDCloudStartnet [-WirelessConnect] [-WifiProfile] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Initialize-OSDCloudStartnet [-WirelessConnect] [-WifiProfile] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,8 +31,9 @@ This function initializes the OSDCloud startnet environment by performing the fo
 ### EXAMPLE 1
 ```
 Initialize-OSDCloudStartnet -WirelessConnect
-Initializes the OSDCloud startnet environment and attempts to connect to a wireless network.
 ```
+
+Initializes the OSDCloud startnet environment and attempts to connect to a wireless network.
 
 ## PARAMETERS
 
@@ -64,21 +64,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

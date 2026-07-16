@@ -14,7 +14,7 @@ Copies PowerShell modules into an offline Windows image.
 
 ```
 Copy-PSModuleToWim [[-ExecutionPolicy] <String>] [-ImagePath] <String[]> [[-Index] <UInt32>] [-Name] <String[]>
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,14 +26,16 @@ module path, optionally sets the image execution policy, and saves changes.
 ### EXAMPLE 1
 ```
 Copy-PSModuleToWim -ImagePath 'C:\Media\boot.wim' -Name OSD
-Copies the latest installed OSD module into index 1 of boot.wim.
 ```
+
+Copies the latest installed OSD module into index 1 of boot.wim.
 
 ### EXAMPLE 2
 ```
 Copy-PSModuleToWim -ImagePath 'C:\Media\boot.wim' -Index 2 -Name OSD -ExecutionPolicy RemoteSigned
-Copies modules to image index 2 and sets execution policy in the mounted image.
 ```
+
+Copies modules to image index 2 and sets execution policy in the mounted image.
 
 ## PARAMETERS
 
@@ -98,21 +100,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: True
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -127,3 +114,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

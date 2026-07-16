@@ -14,14 +14,12 @@ Downloads driver updates from Microsoft Update Catalog
 
 ### ByPNPClass (Default)
 ```
-Save-MsUpCatDriver [-DestinationDirectory <String>] [-PNPClass <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Save-MsUpCatDriver [-DestinationDirectory <String>] [-PNPClass <String>] [<CommonParameters>]
 ```
 
 ### ByHardwareID
 ```
-Save-MsUpCatDriver [-DestinationDirectory <String>] [-HardwareID <String[]>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Save-MsUpCatDriver [-DestinationDirectory <String>] [-HardwareID <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,8 +30,9 @@ Searches Microsoft Update Catalog for drivers matching specified hardware IDs or
 ### EXAMPLE 1
 ```
 Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
-Downloads network driver updates to C:\Drivers
 ```
+
+Downloads network driver updates to C:\Drivers
 
 ## PARAMETERS
 
@@ -84,21 +83,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -113,3 +97,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

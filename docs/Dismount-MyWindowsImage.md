@@ -8,38 +8,36 @@ schema: 2.0.0
 # Dismount-MyWindowsImage
 
 ## SYNOPSIS
-Dismounts a Windows image from the directory it is mapped to.
+Dismounts MyWindowsImage and finalizes changes.
 
 ## SYNTAX
 
 ### DismountDiscard (Default)
 ```
-Dismount-MyWindowsImage [-Path <String[]>] [-Discard] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Dismount-MyWindowsImage [-Path <String[]>] [-Discard] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### DismountSave
 ```
-Dismount-MyWindowsImage [-Path <String[]>] [-Save] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Dismount-MyWindowsImage [-Path <String[]>] [-Save] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Dismount-WindowsImage cmdlet either saves or discards the changes to a Windows image and then dismounts the image.
+Commits or discards changes to MyWindowsImage and then unmounts the image.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
 
-{{ Add example description here }}
+```
+
+Demonstrates a common way to run Dismount-MyWindowsImage.
 
 ## PARAMETERS
 
 ### -Path
-Specifies the full path to the root directory of the offline Windows image that you will service.
+Specifies the Path to use when running Dismount-MyWindowsImage.
 
 ```yaml
 Type: String[]
@@ -54,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -Discard
-Discards the changes to a Windows image.
+Specifies the Discard to use when running Dismount-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -69,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -Save
-Saves the changes to a Windows image.
+Specifies the Save to use when running Dismount-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -114,37 +112,19 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.String[]
-### Microsoft.Dism.Commands.ImageObject
-### Microsoft.Dism.Commands.MountedImageInfoObject
-### Microsoft.Dism.Commands.ImageInfoObject
 ## OUTPUTS
 
-### Microsoft.Dism.Commands.BaseDismObject
 ## NOTES
-19.11.21    Initial Release
-21.2.9      Renamed from Dismount-WindowsImageOSD
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

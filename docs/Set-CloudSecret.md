@@ -14,26 +14,22 @@ Convert content to an Azure Key Vault secret.
 
 ### FromUriContent (Default)
 ```
-Set-CloudSecret [-VaultName] <String> [-Name] <String> -Uri <Uri> [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Set-CloudSecret [-VaultName] <String> [-Name] <String> -Uri <Uri> [<CommonParameters>]
 ```
 
 ### FromClipboard
 ```
-Set-CloudSecret [-VaultName] <String> [-Name] <String> [-Clipboard] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Set-CloudSecret [-VaultName] <String> [-Name] <String> [-Clipboard] [<CommonParameters>]
 ```
 
 ### FromFile
 ```
-Set-CloudSecret [-VaultName] <String> [-Name] <String> -File <FileInfo> [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Set-CloudSecret [-VaultName] <String> [-Name] <String> -File <FileInfo> [<CommonParameters>]
 ```
 
 ### FromString
 ```
-Set-CloudSecret [-VaultName] <String> [-Name] <String> -String <String> [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Set-CloudSecret [-VaultName] <String> [-Name] <String> -String <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,14 +41,16 @@ Vault as a secret.
 ### EXAMPLE 1
 ```
 Set-CloudSecret -VaultName contoso -Name Script -File .\script.ps1
-Uploads file contents to Key Vault.
 ```
+
+Uploads file contents to Key Vault.
 
 ### EXAMPLE 2
 ```
 Set-CloudSecret -VaultName contoso -Name Script -Clipboard
-Stores clipboard contents in Key Vault.
 ```
+
+Stores clipboard contents in Key Vault.
 
 ## PARAMETERS
 
@@ -146,21 +144,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -175,3 +158,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

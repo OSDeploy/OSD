@@ -14,7 +14,7 @@ Converts an ESD file into an ISO image.
 
 ```
 Convert-EsdToIso [-esdFullName] <String> [[-isoFullName] <String>] [[-isoLabel] <String>] [-noPrompt] [-Demo]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,14 +26,16 @@ folder, then creates an ISO using Convert-FolderToIso.
 ### EXAMPLE 1
 ```
 Convert-EsdToIso -esdFullName 'C:\Media\install.esd'
-Converts install.esd to an ISO in the same directory.
 ```
+
+Converts install.esd to an ISO in the same directory.
 
 ### EXAMPLE 2
 ```
 Convert-EsdToIso -esdFullName 'C:\Media\install.esd' -isoFullName 'C:\ISO\Custom.iso' -isoLabel 'CustomISO' -noPrompt
-Converts the ESD to a custom-labeled ISO at the specified path.
 ```
+
+Converts the ESD to a custom-labeled ISO at the specified path.
 
 ## PARAMETERS
 
@@ -114,21 +116,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -143,3 +130,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

@@ -24,8 +24,9 @@ Returns NativeMatchineImage data for the current system or OSD session context.
 ### EXAMPLE 1
 ```
 Get-NativeMatchineImage
-Demonstrates a common way to run Get-NativeMatchineImage.
 ```
+
+Demonstrates a common way to run Get-NativeMatchineImage.
 
 ## PARAMETERS
 
@@ -43,3 +44,4 @@ Code from https://github.com/rweijnen/Posh-Snippets/blob/master/PoshWow64ApiSet
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

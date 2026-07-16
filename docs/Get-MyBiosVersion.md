@@ -13,7 +13,7 @@ Gets MyBiosVersion information.
 ## SYNTAX
 
 ```
-Get-MyBiosVersion [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-MyBiosVersion [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,25 +24,11 @@ Returns MyBiosVersion data for the current system or OSD session context.
 ### EXAMPLE 1
 ```
 Get-MyBiosVersion
-Demonstrates a common way to run Get-MyBiosVersion.
 ```
+
+Demonstrates a common way to run Get-MyBiosVersion.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -59,3 +45,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

@@ -16,22 +16,21 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSName <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-OSLanguage <String>] [-OSActivation <String>] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSVersion <String>] [-OSReleaseID <String>]
- [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>]
- [-OSImageIndex <Int32>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-OSImageIndex <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,14 +41,16 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ### EXAMPLE 1
 ```
 Start-OSDCloudCLI
-Starts OSDCloud CLI interactively.
 ```
+
+Starts OSDCloud CLI interactively.
 
 ### EXAMPLE 2
 ```
 Start-OSDCloudCLI -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us
-Starts OSDCloud CLI with explicit OS selections.
 ```
+
+Starts OSDCloud CLI with explicit OS selections.
 
 ## PARAMETERS
 
@@ -308,21 +309,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -337,3 +323,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

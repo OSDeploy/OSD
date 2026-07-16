@@ -13,7 +13,7 @@ Returns the DPI scaling percentage of the primary display
 ## SYNTAX
 
 ```
-Get-DisplayPrimaryScaling [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DisplayPrimaryScaling [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,25 +24,11 @@ Calculates the current DPI scaling percentage of the primary monitor by comparin
 ### EXAMPLE 1
 ```
 Get-DisplayPrimaryScaling
-Returns the DPI scaling percentage (e.g., 100, 125, 150)
 ```
+
+Returns the DPI scaling percentage (e.g., 100, 125, 150)
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -58,3 +44,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

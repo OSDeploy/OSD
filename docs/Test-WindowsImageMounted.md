@@ -8,31 +8,30 @@ schema: 2.0.0
 # Test-WindowsImageMounted
 
 ## SYNOPSIS
-Returns True if ImagePath is Mounted
+Tests WindowsImageMounted conditions.
 
 ## SYNTAX
 
 ```
-Test-WindowsImageMounted [-ImagePath] <String> [-Index <UInt32>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Test-WindowsImageMounted [-ImagePath] <String> [-Index <UInt32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns True if ImagePath is Mounted
+Evaluates WindowsImageMounted state and returns a validation result for scripting decisions.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
 
-{{ Add example description here }}
+```
+
+Demonstrates a common way to run Test-WindowsImageMounted.
 
 ## PARAMETERS
 
 ### -ImagePath
-Specifies the full path to the Windows Image
+Specifies the ImagePath to use when running Test-WindowsImageMounted.
 
 ```yaml
 Type: String
@@ -47,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Index
-Index of the Windows Image
+Specifies the Index to use when running Test-WindowsImageMounted.
 
 ```yaml
 Type: UInt32
@@ -61,21 +60,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -84,7 +68,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

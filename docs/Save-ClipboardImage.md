@@ -13,7 +13,7 @@ Saves ClipboardImage content.
 ## SYNTAX
 
 ```
-Save-ClipboardImage [-SaveAs] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Save-ClipboardImage [-SaveAs] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,8 +23,10 @@ Writes ClipboardImage output to disk or another target defined by parameters.
 
 ### EXAMPLE 1
 ```
-Demonstrates a common way to run Save-ClipboardImage.
+
 ```
+
+Demonstrates a common way to run Save-ClipboardImage.
 
 ## PARAMETERS
 
@@ -38,21 +40,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -73,3 +60,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

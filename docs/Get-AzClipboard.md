@@ -13,7 +13,7 @@ Read a secret value from the Azure clipboard Key Vault.
 ## SYNTAX
 
 ```
-Get-AzClipboard [[-Name] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-AzClipboard [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +25,16 @@ the named secret as plain text.
 ### EXAMPLE 1
 ```
 Get-AzClipboard
-Returns the value stored in the default Clipboard secret.
 ```
+
+Returns the value stored in the default Clipboard secret.
 
 ### EXAMPLE 2
 ```
 Get-AzClipboard -Name Clipboard
-Returns the value stored in the Clipboard secret explicitly.
 ```
+
+Returns the value stored in the Clipboard secret explicitly.
 
 ## PARAMETERS
 
@@ -48,21 +50,6 @@ Aliases:
 Required: False
 Position: 1
 Default value: Clipboard
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -83,4 +70,5 @@ Author: David Segura - Recast Software
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 
-[https://github.com/OSDeploy/OSD/blob/master/Docs/Get-AzClipboard.md](https://github.com/OSDeploy/OSD/blob/master/Docs/Get-AzClipboard.md)
+[https://github.com/OSDeploy/OSD/blob/master/docs/Get-AzClipboard.md](https://github.com/OSDeploy/OSD/blob/master/docs/Get-AzClipboard.md)
+

@@ -14,7 +14,7 @@ Downloads and parses the Dell driver pack catalog for Windows 11.
 
 ```
 Get-OSDCoreDriverPackCatalogDell [[-LocalDriverPackCatalog] <String>] [[-OemDriverPackCatalog] <String>]
- [-Force] [-LocalOnly] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-Force] [-LocalOnly] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -113,21 +113,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

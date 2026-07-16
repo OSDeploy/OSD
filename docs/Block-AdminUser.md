@@ -13,7 +13,7 @@ Blocks execution if the current user has Administrator rights
 ## SYNTAX
 
 ```
-Block-AdminUser [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Block-AdminUser [-Warn] [-Pause] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +25,16 @@ If admin rights are detected, writes a warning and breaks execution unless the -
 ### EXAMPLE 1
 ```
 Block-AdminUser
-Halts execution if the user is running as Administrator
 ```
+
+Halts execution if the user is running as Administrator
 
 ### EXAMPLE 2
 ```
 Block-AdminUser -Warn
-Shows a warning but continues execution even if user is Administrator
 ```
+
+Shows a warning but continues execution even if user is Administrator
 
 ## PARAMETERS
 
@@ -66,21 +68,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -95,3 +82,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

@@ -14,12 +14,12 @@ Lists registered COM ProgIDs from the local machine registry.
 
 ### FilterByName
 ```
-Get-ComObjects -Filter <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-ComObjects -Filter <String> [<CommonParameters>]
 ```
 
 ### ListAllComObjects
 ```
-Get-ComObjects [-ListAll] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-ComObjects [-ListAll] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,14 +31,16 @@ Use -ListAll to return the full list, or -Filter to return matching entries.
 ### EXAMPLE 1
 ```
 Get-ComObjects -ListAll
-Returns all COM ProgIDs that contain a CLSID registration.
 ```
+
+Returns all COM ProgIDs that contain a CLSID registration.
 
 ### EXAMPLE 2
 ```
 Get-ComObjects -Filter 'Microsoft.Update.*'
-Returns only COM ProgIDs that match the specified wildcard pattern.
 ```
+
+Returns only COM ProgIDs that match the specified wildcard pattern.
 
 ## PARAMETERS
 
@@ -72,21 +74,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -101,3 +88,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

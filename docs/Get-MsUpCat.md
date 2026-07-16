@@ -18,7 +18,7 @@ Get-MsUpCat [-Architecture <String>] [-Descending] [-ExcludeFramework] [-FromDat
  [-Format <String>] [-GetFramework] [-AllPages] [-IncludeDynamic] [-IncludeFileNames] [-IncludePreview]
  [-LastDays <Int32>] [-MaxSize <Double>] [-MinSize <Double>] [-Properties <String[]>] [-Search] <String>
  [-SizeUnit <String>] [-SortBy <String>] [-Strict] [-ToDate <DateTime>] [-UpdateType <String[]>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### OS
@@ -27,7 +27,7 @@ Get-MsUpCat [-Architecture <String>] [-Descending] [-ExcludeFramework] [-FromDat
  [-Format <String>] [-GetFramework] [-AllPages] [-IncludeDynamic] [-IncludeFileNames] [-IncludePreview]
  [-LastDays <Int32>] [-MaxSize <Double>] [-MinSize <Double>] -OperatingSystem <String> [-Properties <String[]>]
  [-SizeUnit <String>] [-SortBy <String>] [-Strict] [-ToDate <DateTime>] [-UpdateType <String[]>]
- [-Version <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-Version <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,8 +38,9 @@ Searches the Microsoft Update Catalog for updates and returns information about 
 ### EXAMPLE 1
 ```
 Get-MsUpCat -Architecture x64
-Retrieves x64 updates from Microsoft Update Catalog
 ```
+
+Retrieves x64 updates from Microsoft Update Catalog
 
 ## PARAMETERS
 
@@ -375,21 +376,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -404,3 +390,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

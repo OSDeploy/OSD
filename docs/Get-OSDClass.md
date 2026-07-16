@@ -13,7 +13,7 @@ Returns CimInstance information from common OSD Classes
 ## SYNTAX
 
 ```
-Get-OSDClass [[-Class] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-OSDClass [[-Class] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,11 +24,12 @@ Returns CimInstance information from common OSD Classes
 ### EXAMPLE 1
 ```
 OSDClass
+```
+
 Returns CimInstance Win32_ComputerSystem properties
 Option 1: Get-OSDClass
 Option 2: Get-OSDClass ComputerSystem
 Option 3: Get-OSDClass -Class ComputerSystem
-```
 
 ## PARAMETERS
 
@@ -81,21 +82,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -109,3 +95,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

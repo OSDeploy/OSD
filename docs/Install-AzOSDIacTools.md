@@ -13,7 +13,7 @@ Install prerequisite IaC tooling for OSDCloud Azure.
 ## SYNTAX
 
 ```
-Install-AzOSDIacTools [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Install-AzOSDIacTools [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,25 +25,11 @@ user's PATH, and verifies the OSD PowerShell modules needed by the Azure IaC wor
 ### EXAMPLE 1
 ```
 Install-AzOSDIacTools
-Installs any missing tooling and validates the OSD modules.
 ```
+
+Installs any missing tooling and validates the OSD modules.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -59,3 +45,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

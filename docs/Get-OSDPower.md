@@ -13,7 +13,7 @@ Displays Power Plan information using powercfg /LIST
 ## SYNTAX
 
 ```
-Get-OSDPower [[-Property] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-OSDPower [[-Property] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,19 +25,21 @@ Optionally Set an Active Power Plan
 ### EXAMPLE 1
 ```
 OSDPower
+```
+
 Returns Power Plan information using powercfg /LIST
 Option 1: Get-OSDPower
 Option 2: Get-OSDPower LIST
 Option 3: Get-OSDPower -Property LIST
-```
 
 ### EXAMPLE 2
 ```
 OSDPower High
+```
+
 Sets the active Power Plan to High Performance
 Option 1: Get-OSDPower High
 Option 2: Get-OSDPower -Property High
-```
 
 ## PARAMETERS
 
@@ -57,21 +59,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -85,3 +72,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

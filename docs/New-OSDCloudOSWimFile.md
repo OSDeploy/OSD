@@ -15,13 +15,13 @@ Builds Windows setup media content for an OSDCloud feature update.
 ### Default (Default)
 ```
 New-OSDCloudOSWimFile [-OSName <String>] [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>]
- [-CreateISO] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-CreateISO] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 New-OSDCloudOSWimFile [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,8 +32,9 @@ Resolves the target operating system image, determines the correct image index f
 ### EXAMPLE 1
 ```
 New-OSDCloudOSWimFile -OSName 'Windows 11 25H2 x64' -OSEdition Pro -OSLanguage en-us -OSActivation Retail -CreateISO
-Prepares the Windows 11 25H2 x64 Pro retail media and builds an ISO file.
 ```
+
+Prepares the Windows 11 25H2 x64 Pro retail media and builds an ISO file.
 
 ## PARAMETERS
 
@@ -112,21 +113,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -145,3 +131,4 @@ Author: David Segura - Recast Software
 [https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files](https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files)
 
 [https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11)
+

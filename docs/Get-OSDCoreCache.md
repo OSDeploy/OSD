@@ -13,8 +13,7 @@ Returns cached OSDCloud content found on local file system drives.
 ## SYNTAX
 
 ```
-Get-OSDCoreCache [[-Type] <String[]>] [[-Include] <String[]>] [[-Exclude] <String[]>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-OSDCoreCache [[-Type] <String[]>] [[-Include] <String[]>] [[-Exclude] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -126,21 +125,6 @@ Aliases:
 
 Required: False
 Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

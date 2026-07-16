@@ -13,7 +13,7 @@ Start-DiskImageGUI function.
 ## SYNTAX
 
 ```
-Start-DiskImageGUI [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Start-DiskImageGUI [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,25 +24,11 @@ Runs Start-DiskImageGUI and returns output based on the current OSD context.
 ### EXAMPLE 1
 ```
 Start-DiskImageGUI
-Demonstrates a common way to run Start-DiskImageGUI.
 ```
+
+Demonstrates a common way to run Start-DiskImageGUI.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -59,3 +45,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

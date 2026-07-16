@@ -15,12 +15,12 @@ Deploy OSDCloud Azure infrastructure with Bicep or Terraform.
 ### Bicep
 ```
 Invoke-AzOSDAzureConfig [-Location <Object>] [-ResourceGroupName <String>] [-AzOSDUserNameStart <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### Terraform
 ```
-Invoke-AzOSDAzureConfig [-UseTerraform <Boolean>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-AzOSDAzureConfig [-UseTerraform <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,14 +33,16 @@ the Terraform configuration in C:\OSDCloud.
 ### EXAMPLE 1
 ```
 Invoke-AzOSDAzureConfig -Location eastus -ResourceGroupName rg-osdcloud
-Runs the Bicep deployment path for the selected Azure region and resource group.
 ```
+
+Runs the Bicep deployment path for the selected Azure region and resource group.
 
 ### EXAMPLE 2
 ```
 Invoke-AzOSDAzureConfig -UseTerraform $true
-Runs the Terraform deployment path from C:\OSDCloud.
 ```
+
+Runs the Terraform deployment path from C:\OSDCloud.
 
 ## PARAMETERS
 
@@ -104,21 +106,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -134,4 +121,5 @@ Author: David Segura - Recast Software
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 
-[https://github.com/OSDeploy/OSD/blob/master/Docs/Invoke-AzOSDAzureConfig.md](https://github.com/OSDeploy/OSD/blob/master/Docs/Invoke-AzOSDAzureConfig.md)
+[https://github.com/OSDeploy/OSD/blob/master/docs/Invoke-AzOSDAzureConfig.md](https://github.com/OSDeploy/OSD/blob/master/docs/Invoke-AzOSDAzureConfig.md)
+

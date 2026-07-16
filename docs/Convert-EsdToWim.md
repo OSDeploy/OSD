@@ -13,8 +13,7 @@ Converts an ESD file into a WIM image.
 ## SYNTAX
 
 ```
-Convert-EsdToWim [-esdFullName] <String> [[-wimFullName] <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Convert-EsdToWim [-esdFullName] <String> [[-wimFullName] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +24,9 @@ Exports non-setup Windows indexes from an ESD source into a new WIM file.
 ### EXAMPLE 1
 ```
 Convert-EsdToWim -esdFullName 'C:\Media\install.esd'
-Exports Windows image indexes from the ESD into install.wim.
 ```
+
+Exports Windows image indexes from the ESD into install.wim.
 
 ## PARAMETERS
 
@@ -61,21 +61,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -90,3 +75,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

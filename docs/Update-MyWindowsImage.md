@@ -8,32 +8,30 @@ schema: 2.0.0
 # Update-MyWindowsImage
 
 ## SYNOPSIS
-Updates a mounted WIM
+Updates MyWindowsImage content.
 
 ## SYNTAX
 
 ```
-Update-MyWindowsImage [[-Path] <String[]>] [[-Update] <String>] [-BitsTransfer] [-Force]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Update-MyWindowsImage [[-Path] <String[]>] [[-Update] <String>] [-BitsTransfer] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Updates a mounted WIM files. 
-Requires WSUSXML Catalog
+Installs updates into MyWindowsImage according to the supplied parameters.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
 
-{{ Add example description here }}
+```
+
+Demonstrates a common way to run Update-MyWindowsImage.
 
 ## PARAMETERS
 
 ### -Path
-Specifies the full path to the root directory of the offline Windows image that you will service
+Specifies the Path to use when running Update-MyWindowsImage.
 
 ```yaml
 Type: String[]
@@ -48,14 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Update
-Check or Install the specified Update Group
-Check = Validate installed Updates
-All = Install all required Updates
-AdobeSU = Adobe Security Update
-DotNet = DotNet Update
-DotNetCU = DotNet Cumulative Update
-LCU = Latest Cumulative Update
-SSU = Servicing Stack Update
+Specifies the Update to use when running Update-MyWindowsImage.
 
 ```yaml
 Type: String
@@ -70,8 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -BitsTransfer
-Download the file using BITS-Transfer
-Interactive Login required
+Specifies the BitsTransfer to use when running Update-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -86,8 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -Force
-Updates are only installed if they are needed
-Force parameter will install the update even if it is already installed
+Specifies the Force to use when running Update-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -101,21 +90,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -124,7 +98,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

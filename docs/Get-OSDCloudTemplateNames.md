@@ -13,7 +13,7 @@ Gets information returned by Get-OSDCloudTemplateNames.
 ## SYNTAX
 
 ```
-Get-OSDCloudTemplateNames [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-OSDCloudTemplateNames [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,25 +24,11 @@ Provides the implementation for Get-OSDCloudTemplateNames.
 ### EXAMPLE 1
 ```
 Get-OSDCloudTemplateNames
-Runs Get-OSDCloudTemplateNames with common parameters.
 ```
+
+Runs Get-OSDCloudTemplateNames with common parameters.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -58,3 +44,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

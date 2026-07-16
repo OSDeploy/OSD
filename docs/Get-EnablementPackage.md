@@ -13,8 +13,7 @@ Returns the latest matching Windows enablement package metadata.
 ## SYNTAX
 
 ```
-Get-EnablementPackage [[-OSBuild] <String>] [[-OSArch] <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Get-EnablementPackage [[-OSBuild] <String>] [[-OSArch] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +24,9 @@ Retrieves enablement package metadata from the WSUSXML catalog and filters the r
 ### EXAMPLE 1
 ```
 Get-EnablementPackage -OSBuild 22H2 -OSArch x64
-Returns the newest x64 enablement package metadata for 22H2.
 ```
+
+Returns the newest x64 enablement package metadata for 22H2.
 
 ## PARAMETERS
 
@@ -60,21 +60,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -89,3 +74,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

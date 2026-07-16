@@ -14,8 +14,7 @@ Creates an ISO file from a bootable media directory using ADK
 
 ```
 New-WindowsAdkISO [-MediaPath] <FileInfo> [-isoFileName] <String> [-isoLabel] <String>
- [[-IsoDirectory] <FileInfo>] [[-WindowsAdkRoot] <FileInfo>] [-OpenExplorer]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-IsoDirectory] <FileInfo>] [[-WindowsAdkRoot] <FileInfo>] [-OpenExplorer] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -120,21 +119,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -151,3 +135,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

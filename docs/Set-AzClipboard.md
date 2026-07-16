@@ -13,7 +13,7 @@ Write the current clipboard text to the Azure clipboard Key Vault.
 ## SYNTAX
 
 ```
-Set-AzClipboard [[-Name] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Set-AzClipboard [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +25,16 @@ the current clipboard text in the named secret as plain text.
 ### EXAMPLE 1
 ```
 Set-AzClipboard
-Copies the current clipboard text into the default Clipboard secret.
 ```
+
+Copies the current clipboard text into the default Clipboard secret.
 
 ### EXAMPLE 2
 ```
 Set-AzClipboard -Name Clipboard
-Copies the current clipboard text into the Clipboard secret explicitly.
 ```
+
+Copies the current clipboard text into the Clipboard secret explicitly.
 
 ## PARAMETERS
 
@@ -52,21 +54,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -82,4 +69,5 @@ Author: David Segura - Recast Software
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 
-[https://github.com/OSDeploy/OSD/blob/master/Docs/Set-AzClipboard.md](https://github.com/OSDeploy/OSD/blob/master/Docs/Set-AzClipboard.md)
+[https://github.com/OSDeploy/OSD/blob/master/docs/Set-AzClipboard.md](https://github.com/OSDeploy/OSD/blob/master/docs/Set-AzClipboard.md)
+

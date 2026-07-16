@@ -13,7 +13,7 @@ Blocks execution if PowerShell version is less than 5
 ## SYNTAX
 
 ```
-Block-PowerShellVersionLt5 [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Block-PowerShellVersionLt5 [-Warn] [-Pause] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +25,9 @@ If the version is less than 5, writes a warning and breaks execution unless the 
 ### EXAMPLE 1
 ```
 Block-PowerShellVersionLt5
-Halts execution if PowerShell version is less than 5
 ```
+
+Halts execution if PowerShell version is less than 5
 
 ## PARAMETERS
 
@@ -60,21 +61,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -89,3 +75,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

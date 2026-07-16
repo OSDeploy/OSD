@@ -13,7 +13,7 @@ Saves available BitLocker key materials to one or more folders.
 ## SYNTAX
 
 ```
-Backup-MyBitLockerKeys [-Path] <String[]> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Backup-MyBitLockerKeys [-Path] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +25,9 @@ passwords for BitLocker-protected volumes.
 ### EXAMPLE 1
 ```
 Backup-MyBitLockerKeys -Path 'D:\BitLockerBackup'
-Exports BitLocker key materials to D:\BitLockerBackup.
 ```
+
+Exports BitLocker key materials to D:\BitLockerBackup.
 
 ## PARAMETERS
 
@@ -45,21 +46,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -74,3 +60,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

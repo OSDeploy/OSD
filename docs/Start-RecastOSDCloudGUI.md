@@ -15,8 +15,7 @@ Starts the Recast OSDCloud graphical deployment workflow.
 ```
 Start-RecastOSDCloudGUI [[-BrandName] <String>] [[-BrandColor] <String>] [[-OSArchitecture] <String>]
  [[-OSReleaseID] <String>] [[-OSLanguageCode] <String>] [[-OSActivation] <String>] [[-OSEdition] <String>]
- [[-OSDManufacturer] <String>] [[-OSDModel] <String>] [[-OSDProduct] <String>] [-v2]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-OSDManufacturer] <String>] [[-OSDModel] <String>] [[-OSDProduct] <String>] [-v2] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,20 +29,23 @@ the Recast OSDCloud GUI workflow.
 ### EXAMPLE 1
 ```
 Start-RecastOSDCloudGUI
-Starts OSDCloud GUI using detected device values and default branding.
 ```
+
+Starts OSDCloud GUI using detected device values and default branding.
 
 ### EXAMPLE 2
 ```
 Start-RecastOSDCloudGUI -BrandName 'Contoso' -BrandColor '#005A9C'
-Starts OSDCloud GUI with custom branding.
 ```
+
+Starts OSDCloud GUI with custom branding.
 
 ### EXAMPLE 3
 ```
 Start-RecastOSDCloudGUI -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2
-Starts OSDCloud GUI with an ARM64 Windows 11 Pro 24H2 deployment selection.
 ```
+
+Starts OSDCloud GUI with an ARM64 Windows 11 Pro 24H2 deployment selection.
 
 ## PARAMETERS
 
@@ -222,21 +224,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -253,3 +240,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

@@ -13,7 +13,7 @@ Returns the DriverPacks used by OSDCloud
 ## SYNTAX
 
 ```
-Get-OSDCloudDriverPacks [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-OSDCloudDriverPacks [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,25 +24,11 @@ Returns the DriverPacks used by OSDCloud
 ### EXAMPLE 1
 ```
 Get-OSDCloudDriverPacks
-Returns all OSDCloud driver packs from the module catalog.
 ```
+
+Returns all OSDCloud driver packs from the module catalog.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -58,3 +44,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

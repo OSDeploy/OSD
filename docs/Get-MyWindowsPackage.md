@@ -15,15 +15,13 @@ Gets MyWindowsPackage information.
 ### Online (Default)
 ```
 Get-MyWindowsPackage [-PackageState <String>] [-ReleaseType <String>] [-Category <String>]
- [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [<CommonParameters>]
 ```
 
 ### Offline
 ```
 Get-MyWindowsPackage -Path <String> [-PackageState <String>] [-ReleaseType <String>] [-Category <String>]
- [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,8 +31,10 @@ Returns MyWindowsPackage data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-Demonstrates a common way to run Get-MyWindowsPackage.
+
 ```
+
+Demonstrates a common way to run Get-MyWindowsPackage.
 
 ## PARAMETERS
 
@@ -158,21 +158,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -188,3 +173,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

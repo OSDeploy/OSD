@@ -14,7 +14,7 @@ Retrieves driver pack information for the specified manufacturer and operating s
 
 ```
 Get-OSDCoreDriverPacks [[-GenericDriverPackJson] <String>] [[-OSDManufacturer] <String>]
- [[-ProcessorArchitecture] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-ProcessorArchitecture] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,14 +29,16 @@ Supports Dell, HP, Lenovo, Microsoft (Surface), and generic devices.
 ### EXAMPLE 1
 ```
 Get-OSDCoreDriverPacks
-Returns driver packs for the current device's manufacturer and architecture.
 ```
+
+Returns driver packs for the current device's manufacturer and architecture.
 
 ### EXAMPLE 2
 ```
 Get-OSDCoreDriverPacks -OSDManufacturer 'Dell' -ProcessorArchitecture 'amd64'
-Returns driver packs for Dell devices with AMD64 architecture.
 ```
+
+Returns driver packs for Dell devices with AMD64 architecture.
 
 ## PARAMETERS
 
@@ -85,21 +87,6 @@ Aliases:
 Required: False
 Position: 3
 Default value: $env:PROCESSOR_ARCHITECTURE
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -13,8 +13,7 @@ Creates and synchronizes an offline HPIA repository for the local HP platform.
 ## SYNTAX
 
 ```
-Invoke-HPIAOfflineSync [[-Category] <Object>] [[-OS] <Object>] [[-Release] <Object>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-HPIAOfflineSync [[-Category] <Object>] [[-OS] <Object>] [[-Release] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,14 +27,16 @@ written to C:\OSDCloud\Logs\HPIAOfflineSync.log.
 ### EXAMPLE 1
 ```
 Invoke-HPIAOfflineSync
-Creates an offline repository for the local platform using default Driver, win11, and 23H2 filters.
 ```
+
+Creates an offline repository for the local platform using default Driver, win11, and 23H2 filters.
 
 ### EXAMPLE 2
 ```
 Invoke-HPIAOfflineSync -Category BIOS -OS win10 -Release 22H2
-Creates an offline repository filtered to Windows 10 22H2 BIOS content.
 ```
+
+Creates an offline repository filtered to Windows 10 22H2 BIOS content.
 
 ## PARAMETERS
 
@@ -86,21 +87,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -115,3 +101,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

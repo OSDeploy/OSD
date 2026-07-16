@@ -13,8 +13,7 @@ Enables PowerShell Gallery functionality in a WinPE WIM file
 ## SYNTAX
 
 ```
-Enable-PEWimPSGallery [-ImagePath] <String[]> [[-Index] <UInt32>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Enable-PEWimPSGallery [-ImagePath] <String[]> [[-Index] <UInt32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +24,9 @@ Mounts a WinPE WIM file and configures it to support PowerShell Gallery function
 ### EXAMPLE 1
 ```
 Enable-PEWimPSGallery -ImagePath 'C:\WinPE\winpe.wim'
-Enables PowerShell Gallery in the specified WIM file
 ```
+
+Enables PowerShell Gallery in the specified WIM file
 
 ## PARAMETERS
 
@@ -62,21 +62,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -91,3 +76,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

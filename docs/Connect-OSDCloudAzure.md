@@ -13,7 +13,7 @@ Connect to Azure and initialize OSDCloudAzure session state.
 ## SYNTAX
 
 ```
-Connect-OSDCloudAzure [-UseDeviceAuthentication] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Connect-OSDCloudAzure [-UseDeviceAuthentication] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,14 +26,16 @@ the global context, token, and header variables used by the Azure deployment wor
 ### EXAMPLE 1
 ```
 Connect-OSDCloudAzure
-Signs in to Azure using the interactive browser-based authentication flow.
 ```
+
+Signs in to Azure using the interactive browser-based authentication flow.
 
 ### EXAMPLE 2
 ```
 Connect-OSDCloudAzure -UseDeviceAuthentication
-Signs in to Azure by using device-code authentication.
 ```
+
+Signs in to Azure by using device-code authentication.
 
 ## PARAMETERS
 
@@ -48,21 +50,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -82,4 +69,5 @@ Author: David Segura - Recast Software
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 
-[https://github.com/OSDeploy/OSD/blob/master/Docs/Connect-OSDCloudAzure.md](https://github.com/OSDeploy/OSD/blob/master/Docs/Connect-OSDCloudAzure.md)
+[https://github.com/OSDeploy/OSD/blob/master/docs/Connect-OSDCloudAzure.md](https://github.com/OSDeploy/OSD/blob/master/docs/Connect-OSDCloudAzure.md)
+

@@ -15,8 +15,8 @@ Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 ```
 New-OSDisk [[-Input] <Object>] [[-DiskNumber] <UInt32>] [[-PartitionStyle] <String>] [[-LabelSystem] <String>]
  [[-SizeSystemGpt] <UInt64>] [[-SizeSystemMbr] <UInt64>] [[-SizeMSR] <UInt64>] [[-LabelWindows] <String>]
- [-NoRecoveryPartition] [[-LabelRecovery] <String>] [[-SizeRecovery] <UInt64>] [-Force]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-NoRecoveryPartition] [[-LabelRecovery] <String>] [[-SizeRecovery] <UInt64>] [-Force] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,14 +27,17 @@ Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 ### EXAMPLE 1
 ```
 New-OSDisk
-Displays Get-Help New-OSDisk
 ```
+
+Displays Get-Help New-OSDisk
 
 ### EXAMPLE 2
 ```
 New-OSDisk -Force
-Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
 ```
+
+Interactive. 
+Prompted to Confirm Clear-Disk for each Local Disk
 
 ## PARAMETERS
 
@@ -273,21 +276,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -302,3 +290,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

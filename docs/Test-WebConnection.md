@@ -8,30 +8,34 @@ schema: 2.0.0
 # Test-WebConnection
 
 ## SYNOPSIS
-Tests to see if a Uri by Invoke-WebRequest -Method Head
+Tests web connectivity to a target URI using an HTTP HEAD request.
 
 ## SYNTAX
 
 ```
-Test-WebConnection [[-Uri] <Uri>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Test-WebConnection [[-Uri] <Uri>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Tests to see if a Uri by Invoke-WebRequest -Method Head
+Sends an HTTP HEAD request to the specified URI and returns \`$true\` when the
+request succeeds, otherwise \`$false\`.
+If a URI is provided without a scheme,
+\`http://\` is assumed.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Test-WebConnection -Uri 'http://example.com'
 ```
 
-{{ Add example description here }}
+Returns \`$true\` when the target responds to an HTTP HEAD request.
 
 ## PARAMETERS
 
 ### -Uri
-Uri to test
+URI to test.
+Values from the pipeline are supported.
 
 ```yaml
 Type: Uri
@@ -40,23 +44,8 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: Google.com
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
+Default value: Http://www.google.com
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -68,7 +57,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+Author: David Segura - Recast Software
+2026-07-16 - Moved help block inside function and improved request handling
 
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

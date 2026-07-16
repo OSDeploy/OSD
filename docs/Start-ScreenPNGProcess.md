@@ -13,8 +13,7 @@ Starts a background process to capture screenshots
 ## SYNTAX
 
 ```
-Start-ScreenPNGProcess [-Directory] <String> [[-Delay] <UInt32>] [[-Count] <UInt32>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Start-ScreenPNGProcess [-Directory] <String> [[-Delay] <UInt32>] [[-Count] <UInt32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +24,16 @@ Launches a hidden PowerShell process that periodically captures screenshots and 
 ### EXAMPLE 1
 ```
 Start-ScreenPNGProcess -Directory 'C:\Screenshots'
-Starts capturing screenshots with default delay and count
 ```
+
+Starts capturing screenshots with default delay and count
 
 ### EXAMPLE 2
 ```
 Start-ScreenPNGProcess -Directory 'C:\Screenshots' -Count 5 -Delay 3
-Starts capturing 5 screenshots with 3-second intervals
 ```
+
+Starts capturing 5 screenshots with 3-second intervals
 
 ## PARAMETERS
 
@@ -84,21 +85,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -113,3 +99,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

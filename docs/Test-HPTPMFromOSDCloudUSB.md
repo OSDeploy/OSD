@@ -13,8 +13,7 @@ Tests whether HP TPM firmware packages exist on an OSDCloud USB drive.
 ## SYNTAX
 
 ```
-Test-HPTPMFromOSDCloudUSB [[-PackageID] <String>] [-TryToCopy] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Test-HPTPMFromOSDCloudUSB [[-PackageID] <String>] [-TryToCopy] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,14 +27,16 @@ Returns $true if the requested package(s) are found, otherwise $false.
 ### EXAMPLE 1
 ```
 Test-HPTPMFromOSDCloudUSB -PackageID SP94937
-Returns $true if SP94937.exe exists on the OSDCloud USB and copies it to C:\OSDCloud\HP.
 ```
+
+Returns $true if SP94937.exe exists on the OSDCloud USB and copies it to C:\OSDCloud\HP.
 
 ### EXAMPLE 2
 ```
 Test-HPTPMFromOSDCloudUSB
-Returns $true only if both SP87753.exe and SP94937.exe exist on the OSDCloud USB.
 ```
+
+Returns $true only if both SP87753.exe and SP94937.exe exist on the OSDCloud USB.
 
 ## PARAMETERS
 
@@ -69,21 +70,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

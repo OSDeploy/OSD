@@ -13,8 +13,7 @@ Starts the workflow for Start-OSDPadCategories.
 ## SYNTAX
 
 ```
-Start-OSDPadCategories [-RepoOwner] <String> [-RepoName] <String> [-OAuth <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Start-OSDPadCategories [-RepoOwner] <String> [-RepoName] <String> [-OAuth <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +24,9 @@ Provides the implementation for Start-OSDPadCategories.
 ### EXAMPLE 1
 ```
 -RepoName <RepoName>
-Runs Start-OSDPadCategories with common parameters.
 ```
+
+Runs Start-OSDPadCategories with common parameters.
 
 ## PARAMETERS
 
@@ -75,21 +75,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -104,3 +89,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

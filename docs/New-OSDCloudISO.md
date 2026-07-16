@@ -13,7 +13,7 @@ Creates resources by using New-OSDCloudISO.
 ## SYNTAX
 
 ```
-New-OSDCloudISO [[-WorkspacePath] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+New-OSDCloudISO [[-WorkspacePath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,8 +23,10 @@ Provides the implementation for New-OSDCloudISO.
 
 ### EXAMPLE 1
 ```
-Runs New-OSDCloudISO with common parameters.
+
 ```
+
+Runs New-OSDCloudISO with common parameters.
 
 ## PARAMETERS
 
@@ -43,21 +45,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -72,3 +59,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

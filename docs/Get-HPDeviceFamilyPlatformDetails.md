@@ -14,14 +14,12 @@ schema: 2.0.0
 
 ### Family (Default)
 ```
-Get-HPDeviceFamilyPlatformDetails [-biosFamily <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Get-HPDeviceFamilyPlatformDetails [-biosFamily <String>] [<CommonParameters>]
 ```
 
 ### SystemID
 ```
-Get-HPDeviceFamilyPlatformDetails [-platform <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Get-HPDeviceFamilyPlatformDetails [-platform <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -60,21 +58,6 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: SystemID
 Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
 
 Required: False
 Position: Named

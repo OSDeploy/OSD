@@ -24,8 +24,9 @@ Provides the implementation for New-OSDCloudWorkSpaceSetupCompleteTemplate.
 ### EXAMPLE 1
 ```
 New-OSDCloudWorkSpaceSetupCompleteTemplate
-Runs New-OSDCloudWorkSpaceSetupCompleteTemplate with common parameters.
 ```
+
+Runs New-OSDCloudWorkSpaceSetupCompleteTemplate with common parameters.
 
 ## PARAMETERS
 
@@ -40,3 +41,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

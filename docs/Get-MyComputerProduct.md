@@ -13,7 +13,7 @@ Gets MyComputerProduct information.
 ## SYNTAX
 
 ```
-Get-MyComputerProduct [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-MyComputerProduct [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,25 +24,11 @@ Returns MyComputerProduct data for the current system or OSD session context.
 ### EXAMPLE 1
 ```
 Get-MyComputerProduct
-Demonstrates a common way to run Get-MyComputerProduct.
 ```
+
+Demonstrates a common way to run Get-MyComputerProduct.
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -59,3 +45,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

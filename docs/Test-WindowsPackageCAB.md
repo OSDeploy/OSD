@@ -1,38 +1,37 @@
 ---
 external help file: OSD-help.xml
 Module Name: OSD
-online version: https://www.osdcloud.com
+online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
 # Test-WindowsPackageCAB
 
 ## SYNOPSIS
-OSDBuilder function that tests the LCU and returns the Package Type
+Tests WindowsPackageCAB conditions.
 
 ## SYNTAX
 
 ```
-Test-WindowsPackageCAB [-PackagePath] <String> [[-Path] <String>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Test-WindowsPackageCAB [-PackagePath] <String> [[-Path] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-OSDBuilder function that tests the LCU and returns the Package Type
+Evaluates WindowsPackageCAB state and returns a validation result for scripting decisions.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
 
-{{ Add example description here }}
+```
+
+Demonstrates a common way to run Test-WindowsPackageCAB.
 
 ## PARAMETERS
 
 ### -PackagePath
-Path to the Windows update package to test
+Specifies the PackagePath to use when running Test-WindowsPackageCAB.
 
 ```yaml
 Type: String
@@ -47,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-Directory path where the Windows Image is mounted
+Specifies the Path to use when running Test-WindowsPackageCAB.
 
 ```yaml
 Type: String
@@ -61,21 +60,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -84,10 +68,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Credit to Lasse Meggele @lassemeggele for correcting some issues.
-Thanks!
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 
 ## RELATED LINKS
 
-[https://www.osdcloud.com](https://www.osdcloud.com)
+[https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 

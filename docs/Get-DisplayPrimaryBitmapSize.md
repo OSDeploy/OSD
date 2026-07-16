@@ -13,7 +13,7 @@ Returns the primary display bitmap size accounting for DPI scaling
 ## SYNTAX
 
 ```
-Get-DisplayPrimaryBitmapSize [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DisplayPrimaryBitmapSize [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,25 +24,11 @@ Calculates the primary display monitor size in pixels, adjusted for the current 
 ### EXAMPLE 1
 ```
 Get-DisplayPrimaryBitmapSize
-Returns the scaled primary display dimensions
 ```
+
+Returns the scaled primary display dimensions
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -58,3 +44,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

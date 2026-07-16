@@ -13,8 +13,7 @@ Imports OSDCloud CloudDrivers into an MDT Deployment Share
 ## SYNTAX
 
 ```
-Import-MDTWinPECloudDriver [[-CloudDriver] <String[]>] [[-DriverHWID] <String[]>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Import-MDTWinPECloudDriver [[-CloudDriver] <String[]>] [[-DriverHWID] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +24,9 @@ Imports OSDCloud CloudDrivers into an MDT Deployment Share
 ### EXAMPLE 1
 ```
 Import-MDTWinPECloudDriver
-Imports OSDCloud WinPE cloud drivers into the configured MDT deployment share.
 ```
+
+Imports OSDCloud WinPE cloud drivers into the configured MDT deployment share.
 
 ## PARAMETERS
 
@@ -60,21 +60,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -89,3 +74,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

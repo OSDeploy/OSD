@@ -13,7 +13,7 @@ Enables PowerShell Gallery in a mounted Windows image
 ## SYNTAX
 
 ```
-Enable-PEWindowsImagePSGallery [[-Path] <String[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Enable-PEWindowsImagePSGallery [[-Path] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Configures a mounted Windows image to support PowerShell Gallery by adding neces
 ### EXAMPLE 1
 ```
 Enable-PEWindowsImagePSGallery
-Enables PowerShell Gallery in the currently mounted image
 ```
+
+Enables PowerShell Gallery in the currently mounted image
 
 ### EXAMPLE 2
 ```
 Enable-PEWindowsImagePSGallery -Path 'C:\Mount'
-Enables PowerShell Gallery in the image mounted at C:\Mount
 ```
+
+Enables PowerShell Gallery in the image mounted at C:\Mount
 
 ## PARAMETERS
 
@@ -51,21 +53,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -80,3 +67,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

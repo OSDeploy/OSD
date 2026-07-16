@@ -14,8 +14,7 @@ Starts an OSDCloud in-place upgrade workflow.
 
 ```
 Invoke-OSDCloudIPU [-OSName <String>] [-Silent] [-SkipDriverPack] [-NoReboot] [-DownloadOnly]
- [-DiagnosticPrompt] [-SkipFinalize] [-Finalize] [-DynamicUpdate] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [-DiagnosticPrompt] [-SkipFinalize] [-Finalize] [-DynamicUpdate] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,8 +25,9 @@ Validates elevation, inspects the current device and operating system, resolves 
 ### EXAMPLE 1
 ```
 Invoke-OSDCloudIPU -OSName 'Windows 11 24H2 x64' -Silent -DynamicUpdate
-Downloads the 24H2 x64 image and starts the upgrade with a quiet setup experience and Dynamic Update enabled.
 ```
+
+Downloads the 24H2 x64 image and starts the upgrade with a quiet setup experience and Dynamic Update enabled.
 
 ## PARAMETERS
 
@@ -166,21 +166,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -199,3 +184,4 @@ Author: David Segura - Recast Software
 [https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files](https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files)
 
 [https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11)
+

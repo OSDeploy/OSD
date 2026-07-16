@@ -14,7 +14,7 @@ Downloads and optionally expands the driver pack for the current computer
 
 ```
 Save-MyDriverPack [[-DownloadPath] <String>] [-Expand] [[-Manufacturer] <String>] [[-Product] <String>]
- [[-Guid] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [[-Guid] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,14 +26,16 @@ Can optionally extract and expand the driver pack after download.
 ### EXAMPLE 1
 ```
 Save-MyDriverPack
-Downloads the driver pack for the current computer to C:\Drivers
 ```
+
+Downloads the driver pack for the current computer to C:\Drivers
 
 ### EXAMPLE 2
 ```
 Save-MyDriverPack -DownloadPath 'D:\DriverPacks' -Expand
-Downloads and expands the driver pack to D:\DriverPacks
 ```
+
+Downloads and expands the driver pack to D:\DriverPacks
 
 ## PARAMETERS
 
@@ -115,21 +117,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -144,3 +131,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

@@ -8,31 +8,30 @@ schema: 2.0.0
 # Mount-MyWindowsImage
 
 ## SYNOPSIS
-Mounts a WIM file
+Mounts MyWindowsImage for servicing.
 
 ## SYNTAX
 
 ```
-Mount-MyWindowsImage [-ImagePath] <String[]> [-Index <UInt32>] [-ReadOnly] [-Explorer]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Mount-MyWindowsImage [-ImagePath] <String[]> [-Index <UInt32>] [-ReadOnly] [-Explorer] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Mounts a WIM file automatically selecting the Path and the Index
+Mounts MyWindowsImage and prepares it for offline servicing tasks.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
 
-{{ Add example description here }}
+```
+
+Demonstrates a common way to run Mount-MyWindowsImage.
 
 ## PARAMETERS
 
 ### -ImagePath
-Specifies the full path to the Windows Image
+Specifies the ImagePath to use when running Mount-MyWindowsImage.
 
 ```yaml
 Type: String[]
@@ -47,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Index
-Index of the Windows Image
+Specifies the Index to use when running Mount-MyWindowsImage.
 
 ```yaml
 Type: UInt32
@@ -62,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReadOnly
-Mount the Windows Image as Read Only
+Specifies the ReadOnly to use when running Mount-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -77,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -Explorer
-Opens Windows Explorer to the Mount Directory
+Specifies the Explorer to use when running Mount-MyWindowsImage.
 
 ```yaml
 Type: SwitchParameter
@@ -91,21 +90,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -114,7 +98,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

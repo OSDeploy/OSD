@@ -15,8 +15,7 @@ Retrieves disk objects suitable for OS deployment with enhanced filtering capabi
 ```
 Get-OSDCoreDeploymentDisk [[-Number] <UInt32>] [-BootFromDisk] [-IsBoot] [-IsReadOnly] [-IsSystem]
  [[-BusType] <String[]>] [[-BusTypeNot] <String[]>] [[-MediaType] <String[]>] [[-MediaTypeNot] <String[]>]
- [[-PartitionStyle] <String[]>] [[-PartitionStyleNot] <String[]>] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [[-PartitionStyle] <String[]>] [[-PartitionStyleNot] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -230,21 +229,6 @@ Aliases:
 
 Required: False
 Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

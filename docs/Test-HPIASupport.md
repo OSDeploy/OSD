@@ -26,8 +26,9 @@ available on this device.
 ### EXAMPLE 1
 ```
 Test-HPIASupport
-Returns True when the current device platform is listed in the HPIA platform catalog.
 ```
+
+Returns True when the current device platform is listed in the HPIA platform catalog.
 
 ## PARAMETERS
 
@@ -42,3 +43,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

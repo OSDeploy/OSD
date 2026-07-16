@@ -13,7 +13,7 @@ Gets MyComputerModel information.
 ## SYNTAX
 
 ```
-Get-MyComputerModel [-Brief] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-MyComputerModel [-Brief] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,8 +23,10 @@ Returns MyComputerModel data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-Demonstrates a common way to run Get-MyComputerModel.
+
 ```
+
+Demonstrates a common way to run Get-MyComputerModel.
 
 ## PARAMETERS
 
@@ -39,21 +41,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -73,3 +60,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

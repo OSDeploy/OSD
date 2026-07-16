@@ -14,7 +14,7 @@ Copies PowerShell modules to a mounted Windows image
 
 ```
 Copy-PSModuleToWindowsImage [-Name] <String[]> [-ExecutionPolicy <String>] [-Path <String[]>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +25,16 @@ Copies specified PowerShell modules from the running operating system to a mount
 ### EXAMPLE 1
 ```
 Copy-PSModuleToWindowsImage -Name 'OSD' -Path 'C:\Mount'
-Copies the OSD module to the mounted image at C:\\Mount
 ```
+
+Copies the OSD module to the mounted image at C:\\\\Mount
 
 ### EXAMPLE 2
 ```
 Copy-PSModuleToWindowsImage -Name 'OSD','ActiveDirectory' -ExecutionPolicy Bypass -Path 'C:\Mount'
-Copies multiple modules and sets execution policy
 ```
+
+Copies multiple modules and sets execution policy
 
 ## PARAMETERS
 
@@ -85,21 +87,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -114,3 +101,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

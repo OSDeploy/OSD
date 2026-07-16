@@ -13,7 +13,7 @@ Blocks execution if the system is running WinPE
 ## SYNTAX
 
 ```
-Block-WinPE [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Block-WinPE [-Warn] [-Pause] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +25,9 @@ If running in WinPE, writes a warning and breaks execution unless the -Warn para
 ### EXAMPLE 1
 ```
 Block-WinPE
-Halts execution if the system is running WinPE
 ```
+
+Halts execution if the system is running WinPE
 
 ## PARAMETERS
 
@@ -60,21 +61,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -89,3 +75,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

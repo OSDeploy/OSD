@@ -13,7 +13,7 @@ Sets the Windows Boot Manager timeout value in BCD.
 ## SYNTAX
 
 ```
-Set-BootmgrTimeout [-Timeout] <UInt32> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Set-BootmgrTimeout [-Timeout] <UInt32> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,8 +26,9 @@ how many seconds the boot menu waits before selecting the default entry.
 ### EXAMPLE 1
 ```
 Set-BootmgrTimeout -Timeout 10
-Sets the Boot Manager timeout to 10 seconds.
 ```
+
+Sets the Boot Manager timeout to 10 seconds.
 
 ## PARAMETERS
 
@@ -42,21 +43,6 @@ Aliases:
 Required: True
 Position: 1
 Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -76,3 +62,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

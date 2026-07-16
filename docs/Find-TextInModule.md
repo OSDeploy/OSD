@@ -13,8 +13,7 @@ Searches module files for matching text.
 ## SYNTAX
 
 ```
-Find-TextInModule [-Text] <String> [[-Module] <String>] [[-Include] <String[]>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Find-TextInModule [-Text] <String> [[-Module] <String>] [[-Include] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,8 +24,9 @@ Resolves the latest installed version of a module, searches its files for matchi
 ### EXAMPLE 1
 ```
 Find-TextInModule -Text Save-WebFile -Module OSD -Include *.ps1
-Searches PowerShell files in the latest installed OSD module for Save-WebFile.
 ```
+
+Searches PowerShell files in the latest installed OSD module for Save-WebFile.
 
 ## PARAMETERS
 
@@ -76,21 +76,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -105,3 +90,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

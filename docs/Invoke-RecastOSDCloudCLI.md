@@ -13,7 +13,7 @@ Executes the core OSDCloud deployment workflow.
 ## SYNTAX
 
 ```
-Invoke-RecastOSDCloudCLI [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Invoke-RecastOSDCloudCLI [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,35 +34,22 @@ the launch sequence.
 ### EXAMPLE 1
 ```
 Invoke-OSDCloud
-Runs OSDCloud using the current global configuration.
 ```
+
+Runs OSDCloud using the current global configuration.
 
 ### EXAMPLE 2
 ```
 $Global:MyOSDCloud = [ordered]@{
-    ZTI = $true
+```
+
+ZTI = $true
     SkipAutopilot = $true
 }
 Invoke-OSDCloud
 Applies custom values from $Global:MyOSDCloud and starts deployment.
-```
 
 ## PARAMETERS
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

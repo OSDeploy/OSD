@@ -13,7 +13,7 @@ Start an OSDCloud deployment from Azure Storage.
 ## SYNTAX
 
 ```
-Start-OSDCloudAzure [-Force] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Start-OSDCloudAzure [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +25,16 @@ available OSDCloud resources, and starts the deployment workflow when an image i
 ### EXAMPLE 1
 ```
 Start-OSDCloudAzure
-Starts an Azure-backed OSDCloud deployment using the current selection.
 ```
+
+Starts an Azure-backed OSDCloud deployment using the current selection.
 
 ### EXAMPLE 2
 ```
 Start-OSDCloudAzure -Force
-Resets the current Azure image selection and restarts the deployment flow.
 ```
+
+Resets the current Azure image selection and restarts the deployment flow.
 
 ## PARAMETERS
 
@@ -47,21 +49,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -81,4 +68,5 @@ Author: David Segura - Recast Software
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
 
-[https://github.com/OSDeploy/OSD/blob/master/Docs/Start-OSDCloudAzure.md](https://github.com/OSDeploy/OSD/blob/master/Docs/Start-OSDCloudAzure.md)
+[https://github.com/OSDeploy/OSD/blob/master/docs/Start-OSDCloudAzure.md](https://github.com/OSDeploy/OSD/blob/master/docs/Start-OSDCloudAzure.md)
+

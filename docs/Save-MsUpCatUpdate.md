@@ -14,8 +14,7 @@ Downloads updates from Microsoft Update Catalog for a specific Windows version
 
 ```
 Save-MsUpCatUpdate [[-OS] <String>] [[-Arch] <String>] [[-Build] <String>] [[-Category] <String>]
- [[-Include] <String[]>] [[-DestinationDirectory] <String>] [-Latest] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [[-Include] <String[]>] [[-DestinationDirectory] <String>] [-Latest] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,8 +25,9 @@ Downloads Microsoft updates for a specific Windows operating system version, arc
 ### EXAMPLE 1
 ```
 Save-MsUpCatUpdate -OS 'Windows 11' -Arch x64 -Build 22H2
-Downloads updates for Windows 11 22H2 x64 to the default location
 ```
+
+Downloads updates for Windows 11 22H2 x64 to the default location
 
 ## PARAMETERS
 
@@ -141,21 +141,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -170,3 +155,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+

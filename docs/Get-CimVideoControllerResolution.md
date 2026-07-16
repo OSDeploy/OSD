@@ -13,7 +13,7 @@ Returns CIM video controller resolution entries for the system display adapter.
 ## SYNTAX
 
 ```
-Get-CimVideoControllerResolution [-Interlaced] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CimVideoControllerResolution [-Interlaced] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +25,16 @@ either progressive or interlaced modes based on the selected switch.
 ### EXAMPLE 1
 ```
 Get-CimVideoControllerResolution
-Returns progressive resolutions with a horizontal resolution of 800 or higher.
 ```
+
+Returns progressive resolutions with a horizontal resolution of 800 or higher.
 
 ### EXAMPLE 2
 ```
 Get-CimVideoControllerResolution -Interlaced
-Returns interlaced resolutions with a horizontal resolution of 800 or higher.
 ```
+
+Returns interlaced resolutions with a horizontal resolution of 800 or higher.
 
 ## PARAMETERS
 
@@ -53,21 +55,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -82,3 +69,4 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
+
