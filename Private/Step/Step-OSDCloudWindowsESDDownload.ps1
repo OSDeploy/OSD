@@ -1,7 +1,12 @@
 function Step-OSDCloudWindowsESDDownload {
     [CmdletBinding()]
     param (
-        $OperatingSystemObject = $global:OSDCoreOperatingSystemObject
+        [Parameter()]
+        $OperatingSystemObject = $global:OSDCoreOperatingSystemObject,
+
+        [Parameter()]
+        [ValidateRange(0, 1)]
+        [int]$HashRetryCount = 0
     )
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
@@ -17,11 +22,52 @@ function Step-OSDCloudWindowsESDDownload {
     #=================================================
     # Destination settings
     $DownloadPath = 'C:\OSDCloud\OS'
-    $CacheDestinationPath = Join-Path -Path $DownloadPath -ChildPath $OperatingSystemObject.FileName
+    $LocalDestinationPath = Join-Path -Path $DownloadPath -ChildPath $OperatingSystemObject.FileName
     #=================================================
-    # Does the destination already exist?
-    if (Test-Path -LiteralPath $CacheDestinationPath) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Destination already exists: $CacheDestinationPath"
+    # Does the destination already exist? If so, validate hash before returning.
+    if (Test-Path -LiteralPath $LocalDestinationPath) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Destination already exists: $LocalDestinationPath"
+
+        $HashMismatch = $false
+        if ($OperatingSystemObject.SHA1) {
+            $ExistingFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA1
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Existing ESD SHA1: $($ExistingFileHash.Hash)"
+            if ($ExistingFileHash.Hash -ne $OperatingSystemObject.SHA1) {
+                $HashMismatch = $true
+            }
+            else {
+                Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
+            }
+        }
+        elseif ($OperatingSystemObject.SHA256) {
+            $ExistingFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA256
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Existing ESD SHA256: $($ExistingFileHash.Hash)"
+            if ($ExistingFileHash.Hash -ne $OperatingSystemObject.SHA256) {
+                $HashMismatch = $true
+            }
+            else {
+                Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
+            }
+        }
+
+        if ($HashMismatch) {
+            try {
+                Remove-Item -LiteralPath $LocalDestinationPath -Force -ErrorAction Stop
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Existing file hash mismatch. Removed: $LocalDestinationPath"
+            }
+            catch {
+                throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to remove hash-mismatched destination file: $LocalDestinationPath. $($_.Exception.Message)"
+            }
+
+            if ($HashRetryCount -lt 1) {
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Retrying download after removing hash-mismatched file"
+                Step-OSDCloudWindowsESDDownload -OperatingSystemObject $OperatingSystemObject -HashRetryCount ($HashRetryCount + 1)
+                return
+            }
+
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Hash mismatch persists after retry for destination file: $LocalDestinationPath"
+        }
+
         return
     }
     #=================================================
@@ -48,19 +94,18 @@ function Step-OSDCloudWindowsESDDownload {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject URI is not set."
     }
     #=================================================
-    # Create Download Directory
-    $DownloadPath = "C:\OSDCloud\OS"
+    # Create destination directory if needed
     $ItemParams = @{
-        ErrorAction = 'SilentlyContinue'
+        ErrorAction = 'Stop'
         Force       = $true
         ItemType    = 'Directory'
         Path        = $DownloadPath
     }
-    if (!(Test-Path $ItemParams.Path -ErrorAction SilentlyContinue)) {
+    if (-not (Test-Path -LiteralPath $ItemParams.Path -ErrorAction SilentlyContinue)) {
         New-Item @ItemParams | Out-Null
     }
     #=================================================
-    # Is there a USB drive available?
+    # Is there a USB drive available to cache?
     $USBDrive = $null
     if ($OSDCoreDevice.USBVolumes) {
         $USBDrive = $OSDCoreDevice.USBVolumes | Where-Object { ($_.FileSystemLabel -match "OSDCloud|USB-DATA") } | `
@@ -71,63 +116,55 @@ function Step-OSDCloudWindowsESDDownload {
         $USBDownloadPath = "$($USBDrive.DriveLetter):\OSDCloud\OS\$($OperatingSystemObject.OperatingSystem)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DownloadPath: $USBDownloadPath"
 
-        if (-not (Test-Path $USBDownloadPath)) {
+        if (-not (Test-Path -LiteralPath $USBDownloadPath -ErrorAction SilentlyContinue)) {
             $null = New-Item -Path $USBDownloadPath -ItemType Directory -Force
         }
-        $SaveWebFile = Invoke-OSDCloudDownloadFile -SourceUrl $OperatingSystemObject.FilePath -DestinationDirectory "$USBDownloadPath" -DestinationName $FileName
+        $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemObject.Url -DestinationDirectory "$USBDownloadPath" -DestinationName $FileName
 
         if ($SaveWebFile) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copy Offline OS to $DownloadPath"
             $null = Copy-Item -Path $SaveWebFile.FullName -Destination $DownloadPath -Force
-            $FileInfo = Get-Item "$DownloadPath\$($SaveWebFile.Name)"
+            $DestinationFile = Get-Item "$DownloadPath\$($SaveWebFile.Name)"
         }
     }
     else {
-        # $SaveWebFile is a FileInfo Object, not a path
+        # $SaveWebFile is a DestinationFile Object, not a path
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DownloadPath: $DownloadPath"
-        $SaveWebFile = Invoke-OSDCloudDownloadFile -SourceUrl $OperatingSystemObject.FilePath -DestinationDirectory $DownloadPath -ErrorAction Stop
-        $FileInfo = $SaveWebFile
+        $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemObject.Url -DestinationDirectory $DownloadPath -ErrorAction Stop
+        $DestinationFile = $SaveWebFile
     }
     #=================================================
     # Do we have FileInfo for the downloaded file?
     if (-not ($FileInfo)) {
-        Write-Warning "[$(Get-Date -format s)] Unable to download the WindowsImage from the Internet."
-        Write-Warning 'Press Ctrl+C to exit OSDCloud'
-        Start-Sleep -Seconds 86400
-        exit
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to download the WindowsImage from the Url"
     }
     #=================================================
-    # Store this as a FileInfo Object
-    $global:OSDCloudWorkflowInvoke.FileInfoWindowsImage = $FileInfo
-    $global:OSDCloudWorkflowInvoke.WindowsImagePath = $global:OSDCloudWorkflowInvoke.FileInfoWindowsImage.FullName
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] WindowsImagePath:  $($global:OSDCloudWorkflowInvoke.WindowsImagePath)"
+    # Test the file exists and return FileInfo object
+    if (Test-Path -LiteralPath $LocalDestinationPath) {
+        $DestinationFile = Get-Item -LiteralPath $LocalDestinationPath -ErrorAction SilentlyContinue
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Destination file exists: $($DestinationFile.FullName)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Size: $($DestinationFile.Length) bytes"
+    }
+    else {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Destination file does not exist after copy: $LocalDestinationPath"
+    }
     #=================================================
-    # Check the File Hash
-    if ($OperatingSystemObject.Sha1) {
-        $FileHash = (Get-FileHash -Path $FileInfo.FullName -Algorithm SHA1).Hash
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified ESD SHA1: $($OperatingSystemObject.Sha1)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Downloaded ESD SHA1: $FileHash"
-
-        if ($OperatingSystemObject.Sha1 -notmatch $FileHash) {
-            Write-Warning "[$(Get-Date -format s)] Unable to deploy this Operating System."
-            Write-Warning "[$(Get-Date -format s)] Downloaded ESD SHA1 does not match the verified Microsoft ESD SHA1."
-            Write-Warning 'Press Ctrl+C to exit OSDCloud'
-            Start-Sleep -Seconds 86400
+    # OperatingSystemObject will have either an SHA1 or SHA256 hash. Validate destination hash after copy.
+    if ($OperatingSystemObject.SHA1) {
+        $DestinationFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA1
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Downloaded ESD SHA1: $($DestinationFileHash.Hash)"
+        if ($DestinationFileHash.Hash -ne $OperatingSystemObject.SHA1) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] SHA1 hash mismatch for destination file: $LocalDestinationPath"
         }
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
         }
     }
-    if ($OperatingSystemObject.Sha256) {
-        $FileHash = (Get-FileHash -Path $FileInfo.FullName -Algorithm SHA256).Hash
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified ESD SHA256: $($OperatingSystemObject.Sha256)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Downloaded ESD SHA256: $FileHash"
-
-        if ($OperatingSystemObject.Sha256 -notmatch $FileHash) {
-            Write-Warning "[$(Get-Date -format s)] Unable to deploy this Operating System."
-            Write-Warning "[$(Get-Date -format s)] Downloaded ESD SHA256 does not match the verified Microsoft ESD SHA256."
-            Write-Warning 'Press Ctrl+C to exit OSDCloud'
-            Start-Sleep -Seconds 86400
+    elseif ($OperatingSystemObject.SHA256) {
+        $DestinationFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA256
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Downloaded ESD SHA256: $($DestinationFileHash.Hash)"
+        if ($DestinationFileHash.Hash -ne $OperatingSystemObject.SHA256) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] SHA256 hash mismatch for destination file: $LocalDestinationPath"
         }
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
