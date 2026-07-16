@@ -1,4 +1,4 @@
-function Step-OSDCloudWindowsESDDownload {
+function Step-OSDCloudSaveWindowsESD {
     [CmdletBinding()]
     param (
         [Parameter()]
@@ -20,7 +20,8 @@ function Step-OSDCloudWindowsESDDownload {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject.FileName is not set"
     }
     #=================================================
-    # Destination settings
+    # Destination settings for the local deployment workspace.
+    # This is the final on-disk path expected by downstream deployment steps.
     $DownloadPath = 'C:\OSDCloud\OS'
     $LocalDestinationPath = Join-Path -Path $DownloadPath -ChildPath $OperatingSystemObject.FileName
     #=================================================
@@ -28,8 +29,10 @@ function Step-OSDCloudWindowsESDDownload {
     if (Test-Path -LiteralPath $LocalDestinationPath) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Destination already exists: $LocalDestinationPath"
 
+        # Track whether existing content is reusable or must be removed/re-downloaded.
         $HashMismatch = $false
         if ($OperatingSystemObject.SHA1) {
+            # Legacy metadata path: compare destination hash to Microsoft-published SHA1.
             $ExistingFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA1
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Existing ESD SHA1: $($ExistingFileHash.Hash)"
             if ($ExistingFileHash.Hash -ne $OperatingSystemObject.SHA1) {
@@ -40,6 +43,7 @@ function Step-OSDCloudWindowsESDDownload {
             }
         }
         elseif ($OperatingSystemObject.SHA256) {
+            # Preferred metadata path: compare destination hash to Microsoft SHA256.
             $ExistingFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA256
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Existing ESD SHA256: $($ExistingFileHash.Hash)"
             if ($ExistingFileHash.Hash -ne $OperatingSystemObject.SHA256) {
@@ -51,6 +55,7 @@ function Step-OSDCloudWindowsESDDownload {
         }
 
         if ($HashMismatch) {
+            # Remove bad content before retry so the next attempt starts clean.
             try {
                 Remove-Item -LiteralPath $LocalDestinationPath -Force -ErrorAction Stop
                 Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Existing file hash mismatch. Removed: $LocalDestinationPath"
@@ -60,11 +65,13 @@ function Step-OSDCloudWindowsESDDownload {
             }
 
             if ($HashRetryCount -lt 1) {
+                # Single retry guard prevents unbounded recursion on persistent failures.
                 Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Retrying download after removing hash-mismatched file"
-                Step-OSDCloudWindowsESDDownload -OperatingSystemObject $OperatingSystemObject -HashRetryCount ($HashRetryCount + 1)
+                Step-OSDCloudSaveWindowsESD -OperatingSystemObject $OperatingSystemObject -HashRetryCount ($HashRetryCount + 1)
                 return
             }
 
+            # If retry already occurred, fail fast so caller can decide next action.
             throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Hash mismatch persists after retry for destination file: $LocalDestinationPath"
         }
 
@@ -77,6 +84,7 @@ function Step-OSDCloudWindowsESDDownload {
     }
     #=================================================
     # Is the Url reachable?
+    # Use a one-byte ranged GET as a lightweight reachability/content check.
     $OnlineCheckUri = if ($OperatingSystemObject.Url) { $OperatingSystemObject.Url } else { $OperatingSystemObject.FilePath }
 
     if ($OnlineCheckUri) {
@@ -95,6 +103,7 @@ function Step-OSDCloudWindowsESDDownload {
     }
     #=================================================
     # Create destination directory if needed
+    # Directory creation is idempotent and safe to call repeatedly.
     $ItemParams = @{
         ErrorAction = 'Stop'
         Force       = $true
@@ -106,6 +115,7 @@ function Step-OSDCloudWindowsESDDownload {
     }
     #=================================================
     # Is there a USB drive available to cache?
+    # Prefer removable media cache when available to reduce repeated WAN downloads.
     $USBDrive = $null
     if ($OSDCoreDevice.USBVolumes) {
         $USBDrive = $OSDCoreDevice.USBVolumes | Where-Object { ($_.FileSystemLabel -match "OSDCloud|USB-DATA") } | `
@@ -113,12 +123,14 @@ function Step-OSDCloudWindowsESDDownload {
     }
 
     if ($USBDrive) {
+        # USB path groups content by operating system family for reuse.
         $USBDownloadPath = "$($USBDrive.DriveLetter):\OSDCloud\OS\$($OperatingSystemObject.OperatingSystem)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DownloadPath: $USBDownloadPath"
 
         if (-not (Test-Path -LiteralPath $USBDownloadPath -ErrorAction SilentlyContinue)) {
             $null = New-Item -Path $USBDownloadPath -ItemType Directory -Force
         }
+        # Download once to USB cache, then copy local for active deployment usage.
         $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemObject.Url -DestinationDirectory "$USBDownloadPath" -DestinationName $FileName
 
         if ($SaveWebFile) {
@@ -129,17 +141,17 @@ function Step-OSDCloudWindowsESDDownload {
     }
     else {
         # $SaveWebFile is a DestinationFile Object, not a path
+        # Direct-to-local fallback when no suitable USB cache is present.
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DownloadPath: $DownloadPath"
         $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemObject.Url -DestinationDirectory $DownloadPath -ErrorAction Stop
         $DestinationFile = $SaveWebFile
     }
     #=================================================
-    # Do we have FileInfo for the downloaded file?
-    if (-not ($FileInfo)) {
+    # Confirm destination exists and cache file info for downstream workflow.
+    if (-not ($DestinationFile)) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to download the WindowsImage from the Url"
     }
-    #=================================================
-    # Test the file exists and return FileInfo object
+    # Re-reading FileInfo ensures size/path metadata reflects the actual destination.
     if (Test-Path -LiteralPath $LocalDestinationPath) {
         $DestinationFile = Get-Item -LiteralPath $LocalDestinationPath -ErrorAction SilentlyContinue
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Destination file exists: $($DestinationFile.FullName)"
@@ -149,8 +161,10 @@ function Step-OSDCloudWindowsESDDownload {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Destination file does not exist after copy: $LocalDestinationPath"
     }
     #=================================================
-    # OperatingSystemObject will have either an SHA1 or SHA256 hash. Validate destination hash after copy.
+    # Final integrity check on the destination file.
+    # Metadata includes either SHA1 or SHA256, never both.
     if ($OperatingSystemObject.SHA1) {
+        # Destination hash is the final trust gate before deployment can continue.
         $DestinationFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA1
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Downloaded ESD SHA1: $($DestinationFileHash.Hash)"
         if ($DestinationFileHash.Hash -ne $OperatingSystemObject.SHA1) {
@@ -158,9 +172,12 @@ function Step-OSDCloudWindowsESDDownload {
         }
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
+            # Persist verified destination for subsequent steps that consume this file.
+            $global:OSDCloudDeploy.OperatingSystemItem = $DestinationFile
         }
     }
-    elseif ($OperatingSystemObject.SHA256) {
+    if ($OperatingSystemObject.SHA256) {
+        # SHA256 path mirrors SHA1 behavior for consistency across metadata versions.
         $DestinationFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA256
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Downloaded ESD SHA256: $($DestinationFileHash.Hash)"
         if ($DestinationFileHash.Hash -ne $OperatingSystemObject.SHA256) {
@@ -168,6 +185,8 @@ function Step-OSDCloudWindowsESDDownload {
         }
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
+            # Persist verified destination for subsequent steps that consume this file.
+            $global:OSDCloudDeploy.OperatingSystemItem = $DestinationFile
         }
     }
     #=================================================
