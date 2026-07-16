@@ -6,7 +6,7 @@ Similar to Get-PSDrive, but adds IsUSB and IsNetwork Property
 Similar to Get-PSDrive, but adds IsUSB and IsNetwork Property
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.3.5      Initial Release

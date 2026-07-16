@@ -26,7 +26,7 @@ Interactive = True
 Sandbox     = False
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.2.14     Initial Release

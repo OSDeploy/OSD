@@ -20,7 +20,7 @@ function Invoke-CatalogRequest {
     Queries the Microsoft Update Catalog and returns a parsed MsUpCatResponse object.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

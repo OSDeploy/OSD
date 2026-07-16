@@ -26,7 +26,7 @@ Interactive = True
 Sandbox     = False
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.2.14     Initial Release
@@ -127,7 +127,7 @@ function Initialize-OSDDisk {
                 Write-Host ""
                 Start-Sleep -Seconds 3
             }
-            
+
             foreach ($Item in $ClearDisks) {
                 if ($PSCmdlet.ShouldProcess("$PartitionStyle Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle)]","Initialize-Disk")){
                     Write-Warning "Initializing Disk $($Item.Number) $($Item.BusType) $($Item.MediaType) $($Item.FriendlyName) [$($Item.PartitionStyle)]"

@@ -6,7 +6,7 @@ Gets the Disk containing the BOOT partition
 Gets the Disk containing the BOOT partition
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.12.9    Created by David Segura @SeguraOSD

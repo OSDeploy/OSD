@@ -4,7 +4,7 @@ Downloads a file from the internet and returns a Get-Item Object
 .DESCRIPTION
 Downloads a file from the internet and returns a Get-Item Object
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Invoke-OSDCoreDownloadFile {
     [CmdletBinding()]

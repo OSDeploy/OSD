@@ -43,7 +43,7 @@ Interactive = False
 Sandbox     = False
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.2.13     Initial Release
@@ -60,7 +60,7 @@ function Clear-WinPELocalDisks {
         [Alias('F')]
         [System.Management.Automation.SwitchParameter]$Force
     )
-    
+
     #=================================================
     #	OSD Module Information
     #=================================================
@@ -150,7 +150,7 @@ function Clear-WinPELocalDisks {
 $null = @"
 select disk $($item.Number)
 clean
-exit 
+exit
 "@ | diskpart.exe
         }
     }

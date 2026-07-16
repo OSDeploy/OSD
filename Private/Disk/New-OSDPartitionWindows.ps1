@@ -6,7 +6,7 @@ New-OSDDisk Private Function
 New-OSDDisk Private Function
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.10.10     Created by David Segura @SeguraOSD

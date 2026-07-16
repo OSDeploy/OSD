@@ -1,7 +1,7 @@
 {
 	"Module": {
 		"Project": "https://github.com/OSDeploy/OSD/",
-		"Docs": "https://github.com/OSDeploy/OSD/tree/master/Docs",
+		"Docs": "https://github.com/OSDeploy/OSD/tree/master/docs",
 		"Issues": "https://osd.osdeploy.com/",
 		"Info": "https://osd.osdeploy.com/"
 	},

@@ -6,7 +6,7 @@ Creates a GPT or MBR System Partition
 Creates a GPT or MBR System Partition
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.12.11     Created by David Segura @SeguraOSD

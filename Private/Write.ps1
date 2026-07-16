@@ -20,7 +20,7 @@ function Write-DarkGrayDate {
     Writes only the timestamp prefix in DarkGray without a trailing newline.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -55,7 +55,7 @@ function Write-DarkGrayHost {
     Writes Downloading content in DarkGray.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -83,7 +83,7 @@ function Write-DarkGrayLine {
     Runs the separator helper. In the current implementation, no text is written.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -110,7 +110,7 @@ function Write-SectionHeader {
     Writes a timestamped section header in DarkCyan.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -147,7 +147,7 @@ function Write-SectionSuccess {
     Writes a timestamped green success line with a custom message.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
