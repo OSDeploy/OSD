@@ -15,7 +15,7 @@ function Import-MDTWinPECloudDriver {
     2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (

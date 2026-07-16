@@ -6,7 +6,7 @@ Builds the Lenovo Bios Catalog
 Builds the Lenovo Bios Catalog
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

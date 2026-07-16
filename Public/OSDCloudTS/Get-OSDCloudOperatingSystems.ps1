@@ -32,7 +32,7 @@ function Get-OSDCloudOperatingSystems {
     One or more operating system entries returned by Get-OSDCoreOperatingSystems.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     25.2.17 Removed unnecessary Default ParameterSet Name

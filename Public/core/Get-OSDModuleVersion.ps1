@@ -16,7 +16,7 @@ function Get-OSDModuleVersion {
     Returns the currently loaded OSD module version.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

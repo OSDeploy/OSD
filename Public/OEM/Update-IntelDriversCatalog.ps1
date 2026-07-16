@@ -6,7 +6,7 @@ Updates the Intel Drivers Cats in the OSD Module
 Updates the Intel Drivers Cats in the OSD Module
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

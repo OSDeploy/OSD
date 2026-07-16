@@ -6,7 +6,7 @@ Selects Office Configuration Profiles
 Selects Office Configuration Profiles
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Select-OSDCloudODTFile {
     [CmdletBinding()]

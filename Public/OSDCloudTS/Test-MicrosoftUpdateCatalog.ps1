@@ -23,7 +23,7 @@ function Test-MicrosoftUpdateCatalog {
     Tests connectivity with a shorter timeout.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

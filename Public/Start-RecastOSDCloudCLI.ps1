@@ -48,7 +48,7 @@ function Start-RecastOSDCloudCLI {
     Starts OSDCloud CLI for an ARM64 Windows 11 Pro 24H2 deployment selection.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

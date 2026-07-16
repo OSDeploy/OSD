@@ -6,7 +6,7 @@ Returns the Microsoft Surface DriverPack Catalog
 Returns the Microsoft Surface DriverPack Catalog
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

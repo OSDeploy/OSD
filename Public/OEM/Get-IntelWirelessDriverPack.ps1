@@ -15,7 +15,7 @@ Removed support for x86 (32bit)
 Removed support for older OSes.  Only Supports Win10 & 11 now.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Get-IntelWirelessDriverPack {
     [CmdletBinding()]

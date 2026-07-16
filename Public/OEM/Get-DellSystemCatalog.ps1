@@ -18,7 +18,7 @@ Get-DellSystemCatalog -Component BIOS | Out-GridView
 Displays all the Dell BIOS Updates in GridView
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

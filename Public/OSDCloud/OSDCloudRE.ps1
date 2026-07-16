@@ -16,7 +16,7 @@ function Get-OSDCloudREAzureResources {
     2026-07-10 - Added in-function comment-based help block.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -119,7 +119,7 @@ function Get-OSDCloudREPartition {
     2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]
@@ -146,7 +146,7 @@ function Get-OSDCloudREPSDrive {
     2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]
@@ -172,7 +172,7 @@ function Get-OSDCloudREVolume {
     2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]
@@ -199,7 +199,7 @@ function Hide-OSDCloudREDrive {
     2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]
@@ -246,7 +246,7 @@ function Invoke-OSDCloudRE {
     2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -554,7 +554,7 @@ function New-OSDCloudREVolume {
     2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]
@@ -685,7 +685,7 @@ function Set-OSDCloudREBootmgr {
     2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]
@@ -794,7 +794,7 @@ function Show-OSDCloudREDrive {
     2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]
@@ -841,7 +841,7 @@ function Start-OSDCloudREAzure {
     2026-07-10 - Added NOTES to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]

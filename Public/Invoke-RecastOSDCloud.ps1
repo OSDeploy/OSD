@@ -43,8 +43,7 @@
     - Should be called from OSDCloud launch functions that prepare prerequisite state.
 
 .LINK
-    Start-OSDCloud
-    Start-OSDCloudCLI
+    https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Invoke-RecastOSDCloud {
     [CmdletBinding()]

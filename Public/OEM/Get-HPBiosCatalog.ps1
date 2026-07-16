@@ -10,7 +10,7 @@ If you have a HP System, this will filter the results based on your
 Baseboard Product value
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

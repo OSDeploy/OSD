@@ -18,7 +18,7 @@
     2026-07-09 - Requires OSD, OSDCloudCLI, OSDCloudGUI, and OSDCloudAzure modules.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()

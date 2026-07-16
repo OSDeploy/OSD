@@ -7,7 +7,7 @@ function Invoke-OSDCloudDriverPackCM {
     Downloads a matching DriverPack to %OSDisk%\Drivers
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Requires CURL - typically I run this command first in a previous step, "iex (irm sandbox.osdcloud.com)", which will setup your WinPE environment with installing curl.

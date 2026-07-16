@@ -31,7 +31,7 @@
     2026-07-09 - The v2 parameter remains deprecated and retained temporarily for compatibility.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]

@@ -17,7 +17,7 @@ function Get-OSDCloudAzureResources {
     2026-07-10 - Updated help to repo standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()

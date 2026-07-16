@@ -10,7 +10,7 @@
     Invoke-OSDCloud
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -257,7 +257,7 @@
     #endregion
 
     #region Initialize OSDCloud Logs
-    Write-SectionHeader 'Initialize OSDCloud Logs'
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Initialize OSDCloud Logs"
     $ParamNewItem = @{
         Path = $Global:OSDCloud.Logs
         ItemType = 'Directory'
@@ -539,8 +539,8 @@
         Send-OSDCloudDeployEvent -EventName $eventName -ApiKey $postApi -DistinctId $distinctId -Properties $eventProperties
         #endregion
 
-        #region Validate Operating System Source
-        Write-SectionHeader "Validate Operating System Source"
+        #region Confirm Operating System Source
+        Write-SectionHeader "Confirm Operating System Source"
 
         $Global:OSDCloud.SectionPassed = $false
         if ($Global:OSDCloud.AzOSDCloudImage) {
@@ -659,7 +659,7 @@
 
     #region Disk
         #region Validate Fixed Disk
-        Write-SectionHeader 'Validate Fixed Disks'
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Validate Fixed Disks"
 
         $Global:OSDCloud.SectionPassed = $false
 

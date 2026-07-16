@@ -17,7 +17,7 @@ function Invoke-IPUPreInstallNotifications {
     2026-07-10 - Standardized comment-based help metadata and links.
 
 .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
 .LINK
     https://garytown.com
@@ -247,7 +247,7 @@ function Invoke-IPUPreInstallNotificationLauncher {
     2026-07-10 - Standardized comment-based help metadata and links.
 
 .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
 .LINK
     https://garytown.com
@@ -705,7 +705,7 @@ function Invoke-OSDCloudIPU {
         2026-07-10 - Standardized comment-based help metadata and links.
 
     .LINK
-        https://github.com/OSDeploy/OSD/tree/master/Docs
+        https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
         https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files
@@ -1321,7 +1321,7 @@ function New-OSDCloudOSWimFile {
         2026-07-10 - Standardized comment-based help metadata and links.
 
     .LINK
-        https://github.com/OSDeploy/OSD/tree/master/Docs
+        https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
         https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files
@@ -1684,7 +1684,7 @@ function Set-Win11ReqBypassRegValues {
         2026-07-10 - Standardized comment-based help metadata and links.
 
     .LINK
-        https://github.com/OSDeploy/OSD/tree/master/Docs
+        https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
         https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11

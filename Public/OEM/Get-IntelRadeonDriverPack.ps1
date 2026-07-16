@@ -6,7 +6,7 @@ Returns the Intel Radeon Graphics Driver Object
 Returns the Intel Radeon Graphics Driver Object
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Get-IntelRadeonDriverPack {
     [CmdletBinding()]

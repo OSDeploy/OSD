@@ -13,7 +13,7 @@ function Test-HPIASupport {
     Returns True when the current device platform is listed in the HPIA platform catalog.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -74,7 +74,7 @@ function Get-HPOSSupport {
     Returns the maximum supported release ID for platform 83B2.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -160,7 +160,7 @@ function Get-HPSoftpaqListLatest {
     Returns system information metadata for platform 83B2.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -228,7 +228,7 @@ function Get-HPSoftPaqItems {
     Returns SoftPaq items for Windows 10 22H2 on platform 83B2.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -314,7 +314,7 @@ function Get-HPDriverPackLatest {
     Returns only the driver pack URL for platform 83B2.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -421,7 +421,7 @@ function Invoke-HPIAOfflineSync {
     Creates an offline repository filtered to Windows 10 22H2 BIOS content.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

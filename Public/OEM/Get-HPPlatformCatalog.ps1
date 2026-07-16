@@ -19,7 +19,7 @@ Get-HPPlatformCatalog | Out-GridView
 Displays all the HP System Ids with the applicable computer model names in GridView
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

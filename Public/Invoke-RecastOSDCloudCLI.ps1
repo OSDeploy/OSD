@@ -41,10 +41,6 @@
     - Uses and updates global variables including $Global:OSDCloud, $Global:StartOSDCloud,
       $Global:StartOSDCloudCLI, and $Global:MyOSDCloud when present.
     - Should be called from OSDCloud launch functions that prepare prerequisite state.
-
-.LINK
-    Start-OSDCloud
-    Start-OSDCloudCLI
 #>
 function Invoke-RecastOSDCloudCLI {
     [CmdletBinding()]

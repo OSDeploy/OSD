@@ -99,16 +99,7 @@
     - Intended to be run in WinPE or full Windows with administrative privileges.
 
 .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
-
-.LINK
-    Invoke-OSDCloud
-
-.LINK
-    Get-FeatureUpdate
-
-.LINK
-    Find-OSDCloudFile
+    https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Start-OSDCloud {
 

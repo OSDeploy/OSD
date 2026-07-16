@@ -6,7 +6,7 @@ Returns the 'Accessories Firmware and Driver' Component of the HP System Catalog
 Returns the 'Accessories Firmware and Driver' Component of the HP System Catalog
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

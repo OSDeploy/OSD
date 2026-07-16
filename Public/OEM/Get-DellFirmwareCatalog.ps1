@@ -6,7 +6,7 @@ Returns the Firmware Component of the Dell System Catalog
 Returns the Firmware Component of the Dell System Catalog
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

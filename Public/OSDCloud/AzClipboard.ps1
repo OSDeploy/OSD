@@ -26,7 +26,7 @@ function Get-AzClipboard {
     2026-07-10 - Updated help to repo standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
     https://github.com/OSDeploy/OSD/blob/master/Docs/Get-AzClipboard.md
@@ -104,7 +104,7 @@ function Set-AzClipboard {
     2026-07-10 - Updated help to repo standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
     https://github.com/OSDeploy/OSD/blob/master/Docs/Set-AzClipboard.md

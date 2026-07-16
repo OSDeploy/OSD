@@ -12,7 +12,7 @@ Get-DellWinPE10DriverPack
 $DellWinPEDriverPack = Get-DellWinPE10DriverPack
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Get-DellWinPE10DriverPack {
     [CmdletBinding()]

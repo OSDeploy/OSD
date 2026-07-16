@@ -20,7 +20,7 @@ function Test-OSDCloudInternetConnection
     Tests connectivity to a specific URI and returns $true or $false.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

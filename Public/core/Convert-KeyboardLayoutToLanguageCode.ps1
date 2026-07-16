@@ -34,7 +34,7 @@ function Convert-KeyboardLayoutToLanguageCode {
 	Returns en-us.
 
 	.LINK
-	https://github.com/OSDeploy/OSD/tree/master/Docs
+	https://github.com/OSDeploy/OSD/tree/master/docs
 
 	.LINK
 	https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-language-pack-default-values

@@ -6,7 +6,7 @@ Returns the Dell DriverPack Catalog
 Returns the Dell DriverPack Catalog
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>

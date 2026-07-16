@@ -15,7 +15,7 @@
     2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -69,7 +69,7 @@ function New-OSDCloudWorkspace {
     2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding(DefaultParameterSetName='fromTemplate')]
     param (
@@ -434,7 +434,7 @@ function Set-OSDCloudWorkspace {
     2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -485,7 +485,7 @@ function New-OSDCloudWorkSpaceSetupCompleteTemplate {
     2026-07-09 - Updated comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     $OSDCloudWS = Get-OSDCloudWorkspace

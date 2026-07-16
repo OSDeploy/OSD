@@ -14,7 +14,7 @@
     2026-07-09 - Standardized comment-based help metadata and links.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
     https://osd.osdeploy.com/

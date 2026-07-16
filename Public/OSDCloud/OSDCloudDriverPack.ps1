@@ -15,7 +15,7 @@ function Get-OSDCloudDriverPack {
     2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -79,7 +79,7 @@ function Get-OSDCloudDriverPacks {
     2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -103,7 +103,7 @@ function Save-OSDCloudDriverPack {
     2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
