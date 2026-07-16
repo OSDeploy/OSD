@@ -204,8 +204,8 @@ function Start-RecastOSDCloudCLI {
         $global:OSDCoreDriverPackObject | Out-Host
     }
     if ($global:OSDCoreOperatingSystemObject) {
-        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject:"
-        $global:OSDCoreOperatingSystemObject | Out-Host
+        # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject:"
+        # $global:OSDCoreOperatingSystemObject | Out-Host
     }
     #=================================================
     # Dependency guard: OSDCloud relies on curl.exe for downloads.
