@@ -638,6 +638,7 @@ function Initialize-OSDCoreDevice {
     #=================================================
     # OSDCoreOperatingSystems
     $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -match "$ProcessorArchitecture" }
+    $null = Set-OSDCoreOperatingSystemObject -OSArchitecture $ProcessorArchitecture
     #=================================================
     # OSDCoreDriverPacks
     $global:OSDCoreDriverPacks = Get-OSDCoreDriverPacks -OSDManufacturer $OSDManufacturer
