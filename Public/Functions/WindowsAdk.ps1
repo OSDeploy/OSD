@@ -6,7 +6,7 @@ Adds PowerShell and PowerShell Gallery support to ADK's x64 winpe.wim
 Adds PowerShell and PowerShell Gallery support to ADK's x64 winpe.wim.  This will speed things up with MDT and MEM CM going forward
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.3.15.2   Initial Release
@@ -24,7 +24,7 @@ Edit-AdkWinPEWIM
 Demonstrates a common way to run Edit-AdkWinPEWIM.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -192,7 +192,7 @@ function Get-WindowsAdkInstallPath {
     2026-07-10 - Updated help to follow OSD standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -234,7 +234,7 @@ function Get-WindowsAdkInstallVersion {
     2026-07-10 - Updated help to follow OSD standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -417,7 +417,7 @@ function Get-WindowsKitsInstallPath {
     2026-07-10 - Updated help to follow OSD standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -485,7 +485,7 @@ Author: David Segura - Recast Software
 2021-03-10 - Initial Release
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function New-AdkCopyPE {
 <#
@@ -506,7 +506,7 @@ New-AdkCopyPE -Path <value>
 Demonstrates a common way to run New-AdkCopyPE.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -600,7 +600,7 @@ Author: David Segura - Recast Software
 2021-03-16 - Initial Release
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function New-AdkISO {
 <#
@@ -636,7 +636,7 @@ New-AdkISO -WindowsAdkRoot <value>
 Demonstrates a common way to run New-AdkISO.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -829,7 +829,7 @@ function New-WindowsAdkISO {
     2025-02-26 - Initial Release replacing New-AdkISO
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (

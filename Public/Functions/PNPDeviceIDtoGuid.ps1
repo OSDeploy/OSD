@@ -23,7 +23,7 @@ function Convert-PNPDeviceIDtoGuid {
     System.String
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -34,7 +34,7 @@ function Convert-PNPDeviceIDtoGuid {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-        [Alias('DeviceID','PNPDeviceId')]
+        [Alias('DeviceID')]
         [ValidateNotNullOrEmpty()]
         [string]$PNPDeviceID
     )

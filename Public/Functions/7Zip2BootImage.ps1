@@ -25,7 +25,7 @@ function Add-7Zip2BootImage {
     Adds only 7zr.exe to the detected mounted image.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

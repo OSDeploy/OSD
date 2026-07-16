@@ -7,7 +7,7 @@ function Edit-MyWinPE {
     Mounts and edits a WinPE WIM file
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding(PositionalBinding = $false)]
@@ -243,7 +243,7 @@ function Enable-PEWimPSGallery {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -308,7 +308,7 @@ function Enable-PEWindowsImagePSGallery {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -425,7 +425,7 @@ Index of the WIM to Mount
 Default is 1
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.2.1  Initial Release
@@ -452,7 +452,7 @@ Set-WimExecutionPolicy -ExecutionPolicy <value>
 Demonstrates a common way to run Set-WimExecutionPolicy.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -514,7 +514,7 @@ Specifies the full path to the root directory of the offline Windows image that 
 If a Path is not specified, all mounted Windows Images will be modified
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.2.1  Initial Release
@@ -538,7 +538,7 @@ Set-WindowsImageExecutionPolicy -ExecutionPolicy <value>
 Demonstrates a common way to run Set-WindowsImageExecutionPolicy.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

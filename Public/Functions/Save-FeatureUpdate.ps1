@@ -10,7 +10,7 @@ function Save-FeatureUpdate {
     Save-FeatureUpdate
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'ByOSName')]

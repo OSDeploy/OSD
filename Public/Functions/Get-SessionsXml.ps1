@@ -6,7 +6,7 @@ Returns the Session.xml Updates that have been applied to an Operating System
 Returns the Session.xml Updates that have been applied to an Operating System
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Get-SessionsXml {
 <#
@@ -30,7 +30,7 @@ Get-SessionsXml -Path <value>
 Demonstrates a common way to run Get-SessionsXml.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

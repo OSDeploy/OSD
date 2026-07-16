@@ -13,7 +13,7 @@ Option 2: Get-OSDClass ComputerSystem
 Option 3: Get-OSDClass -Class ComputerSystem
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.10.1     David Segura @SeguraOSD
@@ -34,7 +34,7 @@ Get-OSDClass -C <value>
 Demonstrates a common way to run Get-OSDClass.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

@@ -27,7 +27,7 @@ function Add-WindowsPackageSSU {
     Applies SSU cab content to the running operating system.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -136,7 +136,7 @@ function Copy-PSModuleToWindowsImage {
     Copies multiple modules and sets execution policy
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -222,7 +222,7 @@ Discards the changes to a Windows image.
 Saves the changes to a Windows image.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .INPUTS
 System.String[]
@@ -265,7 +265,7 @@ Dismount-MyWindowsImage -Path <value>
 Demonstrates a common way to run Dismount-MyWindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -339,7 +339,7 @@ Edits a mounted Windows Image
 Edits a mounted Windows Image
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.11.22 David Segura @SeguraOSD
@@ -381,7 +381,7 @@ Edit-MyWindowsImage -Path <value>
 Demonstrates a common way to run Edit-MyWindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -644,7 +644,7 @@ Get-MyWindowsCapability -Path <value>
 Demonstrates a common way to run Get-MyWindowsCapability.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -929,7 +929,7 @@ Get-MyWindowsPackage -Path <value>
 Demonstrates a common way to run Get-MyWindowsPackage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1191,7 +1191,7 @@ Mount the Windows Image as Read Only
 Opens Windows Explorer to the Mount Directory
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>
@@ -1220,7 +1220,7 @@ Mount-MyWindowsImage -ImagePath <value>
 Demonstrates a common way to run Mount-MyWindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1362,7 +1362,7 @@ Removes Appx Packages and Appx Provisioned Packages for All Users
 Removes Appx Packages and Appx Provisioned Packages for All Users
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.12.20 David Segura @SeguraOSD
@@ -1389,7 +1389,7 @@ Remove-AppxOnline -GridRemoveAppx <value>
 Demonstrates a common way to run Remove-AppxOnline.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1524,7 +1524,7 @@ Index of the Windows Image
 Test if the File Extension is .esd or .wim
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>
@@ -1550,7 +1550,7 @@ Test-WindowsImage -ImagePath <value>
 Demonstrates a common way to run Test-WindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1664,7 +1664,7 @@ Specifies the full path to the Windows Image
 Index of the Windows Image
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>
@@ -1687,7 +1687,7 @@ Test-WindowsImageMounted -ImagePath <value>
 Demonstrates a common way to run Test-WindowsImageMounted.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1724,7 +1724,7 @@ Returns True if Path is a Windows Image mount directory
 Full Path to a Windows Image mount directory
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>
@@ -1744,7 +1744,7 @@ Test-WindowsImageMountPath -P <value>
 Demonstrates a common way to run Test-WindowsImageMountPath.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1805,7 +1805,7 @@ Test-WindowsPackageCAB -PackagePath <value>
 Demonstrates a common way to run Test-WindowsPackageCAB.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1885,7 +1885,7 @@ Updates are only installed if they are needed
 Force parameter will install the update even if it is already installed
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>
@@ -1914,7 +1914,7 @@ Update-MyWindowsImage -Path <value>
 Demonstrates a common way to run Update-MyWindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

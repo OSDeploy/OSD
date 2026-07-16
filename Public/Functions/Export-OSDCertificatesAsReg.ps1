@@ -11,7 +11,7 @@ function Export-OSDCertificatesAsReg {
     Opens a selection grid and exports registry-backed certificate entries for selected certificates to $env:Temp\Certs.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

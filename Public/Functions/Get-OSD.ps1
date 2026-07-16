@@ -6,7 +6,7 @@ Displays information about the OSD Module
 Displays information about the OSD Module
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 #>
@@ -23,7 +23,7 @@ Get-OSD
 Demonstrates a common way to run Get-OSD.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

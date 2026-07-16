@@ -32,7 +32,7 @@ function Copy-IsoToUsb {
     Creates an NTFS-formatted USB and copies the ISO contents.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

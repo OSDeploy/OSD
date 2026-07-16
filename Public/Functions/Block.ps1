@@ -25,7 +25,7 @@ function Block-AdminUser {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -68,7 +68,7 @@ function Block-ManufacturerNeLenovo {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -111,7 +111,7 @@ function Block-NoCurl {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -154,7 +154,7 @@ function Block-NoInternet {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -208,7 +208,7 @@ function Block-PowerShellVersionLt5 {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -258,7 +258,7 @@ function Block-PSModuleNotInstalled {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -306,7 +306,7 @@ function Block-StandardUser {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -349,7 +349,7 @@ function Block-WindowsReleaseIdLt1703 {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -392,7 +392,7 @@ function Block-WindowsVersionNe10 {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -435,7 +435,7 @@ function Block-WinOS {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -478,7 +478,7 @@ function Block-WinPE {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (

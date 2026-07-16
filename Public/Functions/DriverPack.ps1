@@ -11,7 +11,7 @@ function Enable-SpecializeDriverPack {
     Configures the system to expand driver packs during Specialize phase
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -77,7 +77,7 @@ function Expand-StagedDriverPack {
     Expands driver packs and applies them during setup
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -258,7 +258,7 @@ function Expand-ZTIDriverPack {
     Expands all driver packs in C:\Drivers during task sequence
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -444,7 +444,7 @@ function Get-MyDriverPack {
     Returns the driver pack for the specified model
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -507,7 +507,7 @@ function Save-MyDriverPack {
     Downloads and expands the driver pack to D:\DriverPacks
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -684,7 +684,7 @@ function Save-ZTIDriverPack {
     Downloads the driver pack for a specific Dell model
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

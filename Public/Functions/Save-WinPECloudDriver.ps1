@@ -8,7 +8,7 @@ function Save-WinPECloudDriver {
     This function must be run in Windows
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding(PositionalBinding = $false)]
     [OutputType([System.IO.FileInfo])]

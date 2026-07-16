@@ -11,7 +11,7 @@ function Backup-DiskToFFU {
     Prompts for source and destination disks, then captures the selected source disk to an FFU file.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .LINK
     https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-windows-using-full-flash-update--ffu
@@ -142,7 +142,7 @@ Clear-LocalDisk -Input <value>
 Demonstrates a common way to run Clear-LocalDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -314,7 +314,7 @@ Clear-USBDisk -Input <value>
 Demonstrates a common way to run Clear-USBDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -457,7 +457,7 @@ Get-DataDisk
 Demonstrates a common way to run Get-DataDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -540,7 +540,7 @@ Get-LocalDisk
 Demonstrates a common way to run Get-LocalDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -572,7 +572,7 @@ Get-LocalDiskPartition
 Demonstrates a common way to run Get-LocalDiskPartition.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -601,7 +601,7 @@ Get-LocalDiskVolume
 Demonstrates a common way to run Get-LocalDiskVolume.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -662,7 +662,7 @@ Get-OSDDisk -Number <value>
 Demonstrates a common way to run Get-OSDDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -757,7 +757,7 @@ Get-OSDPartition
 Demonstrates a common way to run Get-OSDPartition.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -806,7 +806,7 @@ Get-OSDVolume
 Demonstrates a common way to run Get-OSDVolume.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -859,7 +859,7 @@ Get-USBDisk
 Demonstrates a common way to run Get-USBDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -891,7 +891,7 @@ Get-USBPartition
 Demonstrates a common way to run Get-USBPartition.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -920,7 +920,7 @@ Get-USBVolume
 Demonstrates a common way to run Get-USBVolume.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -957,7 +957,7 @@ Invoke-SelectDataDisk -NotDiskNumber <value>
 Demonstrates a common way to run Invoke-SelectDataDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1040,7 +1040,7 @@ Invoke-SelectFFUDisk -Skip <value>
 Demonstrates a common way to run Invoke-SelectFFUDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1129,7 +1129,7 @@ Invoke-SelectLocalDisk -Input <value>
 Demonstrates a common way to run Invoke-SelectLocalDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1221,7 +1221,7 @@ Invoke-SelectLocalVolume -Input <value>
 Demonstrates a common way to run Invoke-SelectLocalVolume.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1317,7 +1317,7 @@ Invoke-SelectOSDDisk -Input <value>
 Demonstrates a common way to run Invoke-SelectOSDDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1409,7 +1409,7 @@ Invoke-SelectOSDVolume -Input <value>
 Demonstrates a common way to run Invoke-SelectOSDVolume.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1512,7 +1512,7 @@ Invoke-SelectUSBDisk -Input <value>
 Demonstrates a common way to run Invoke-SelectUSBDisk.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1611,7 +1611,7 @@ Invoke-SelectUSBVolume -Input <value>
 Demonstrates a common way to run Invoke-SelectUSBVolume.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1707,7 +1707,7 @@ New-BootableUSBDrive -BootLabel <value>
 Demonstrates a common way to run New-BootableUSBDrive.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -1914,7 +1914,7 @@ function New-OSDisk {
     Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     19.10.10    Created by David Segura @SeguraOSD
@@ -2172,7 +2172,7 @@ Start-DiskImageGUI
 Demonstrates a common way to run Start-DiskImageGUI.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

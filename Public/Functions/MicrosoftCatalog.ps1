@@ -24,7 +24,7 @@ function Get-MsUpCat {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding(DefaultParameterSetName = 'Search')]
     #[OutputType([MSCatalogUpdate[]])]
@@ -519,7 +519,7 @@ function Get-MsUpCatUpdate {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdLetBinding()]
     param (
@@ -678,7 +678,7 @@ function Invoke-MSCatalogParseDate {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     param (
         [String] $DateString
@@ -713,7 +713,7 @@ function Save-MsUpCatDriver {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding(DefaultParameterSetName = 'ByPNPClass')]
     param (
@@ -1063,7 +1063,7 @@ function Save-MsUpCatUpdate {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdLetBinding()]
     param (

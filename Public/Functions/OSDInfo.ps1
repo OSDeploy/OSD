@@ -7,7 +7,7 @@ function Invoke-OSDInfo {
     Displays OSD information, useful in an OS Deployment
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (

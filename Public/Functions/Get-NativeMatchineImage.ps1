@@ -11,7 +11,7 @@ Get-NativeMatchineImage
 Demonstrates a common way to run Get-NativeMatchineImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

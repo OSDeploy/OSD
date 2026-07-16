@@ -7,7 +7,7 @@ if ($env:SystemDrive -eq 'X:') {
     Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     19.10.1     David Segura @SeguraOSD
@@ -61,7 +61,7 @@ if ($env:SystemDrive -eq 'X:') {
     Demonstrates a common way to run Get-OSDWinPE.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -266,7 +266,7 @@ if ($env:SystemDrive -eq 'X:') {
         2026-07-10 - Added comment-based help
 
         .LINK
-        https://github.com/OSDeploy/OSD/tree/master/Docs
+        https://github.com/OSDeploy/OSD/tree/master/docs
         #>
         [CmdletBinding()]
         param (
@@ -331,7 +331,7 @@ $UnattendXml = @"
         2026-07-10 - Added comment-based help
 
         .LINK
-        https://github.com/OSDeploy/OSD/tree/master/Docs
+        https://github.com/OSDeploy/OSD/tree/master/docs
         #>
         [CmdletBinding()]
         param (

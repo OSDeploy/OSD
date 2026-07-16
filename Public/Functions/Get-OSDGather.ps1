@@ -17,7 +17,7 @@ $OSDGather.ComputerInfo
 Returns the Gather Results saved in a Variable
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.10.4.0   David Segura @SeguraOSD
@@ -41,7 +41,7 @@ Get-OSDGather -Property <value>
 Demonstrates a common way to run Get-OSDGather.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

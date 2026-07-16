@@ -32,7 +32,7 @@ Get-ScreenPNG -Env <value>
 Demonstrates a common way to run Get-ScreenPNG.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software
@@ -315,7 +315,7 @@ function Set-ClipboardScreenshot {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -378,7 +378,7 @@ function Start-ScreenPNGProcess {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -413,7 +413,7 @@ function Stop-ScreenPNGProcess {
     2026-07-10 - Added comment-based help
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()

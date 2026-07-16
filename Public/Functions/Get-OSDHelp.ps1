@@ -17,7 +17,7 @@ Get-OSDHelp -RepoFolder <value>
 Demonstrates a common way to run Get-OSDHelp.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

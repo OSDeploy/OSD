@@ -15,7 +15,7 @@ function Set-BootmgrTimeout {
     Sets the Boot Manager timeout to 10 seconds.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

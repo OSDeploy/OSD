@@ -18,7 +18,7 @@ function Convert-EsdToFolder {
     Expands the ESD into a setup folder beside the source file.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -130,7 +130,7 @@ function Convert-EsdToIso {
     Converts the ESD to a custom-labeled ISO at the specified path.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -259,7 +259,7 @@ function Convert-EsdToWim {
     Exports Windows image indexes from the ESD into install.wim.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -371,7 +371,7 @@ function Convert-FolderToIso {
     Creates a bootable ISO at the specified destination with a custom label.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

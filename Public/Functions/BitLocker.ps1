@@ -15,7 +15,7 @@ function Backup-MyBitLockerKeys {
     Exports BitLocker key materials to D:\BitLockerBackup.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -66,7 +66,7 @@ function Get-MyBitLockerKeyProtectors {
     Lists key protector details including recovery password values.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -170,7 +170,7 @@ function Save-MyBitLockerExternalKey {
     Exports external key files to D:\BitLockerBackup.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -236,7 +236,7 @@ function Save-MyBitLockerKeyPackage {
     Exports key package files to D:\BitLockerBackup.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -302,7 +302,7 @@ function Save-MyBitLockerRecoveryPassword {
     Exports recovery password text files to D:\BitLockerBackup.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -400,7 +400,7 @@ function Unlock-MyBitLockerExternalKey {
     Unlocks volumes using matching .BEK files found recursively.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

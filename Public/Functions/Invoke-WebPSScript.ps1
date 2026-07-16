@@ -12,7 +12,7 @@ The URL of the PowerShell script to execute. Redirects are not allowed.
 Invoke-WebPSScript -Uri 'https://example.com/script.ps1'
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

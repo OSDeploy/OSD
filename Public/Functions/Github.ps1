@@ -20,7 +20,7 @@ function Get-GithubRawContent {
     Retrieves content for each file in the gist.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -76,7 +76,7 @@ function Get-GithubRawUrl {
     Returns raw URLs for files in the specified gist.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

@@ -22,7 +22,7 @@ function Get-ComObjects {
     Returns only COM ProgIDs that match the specified wildcard pattern.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -63,7 +63,7 @@ function Get-ComObjMicrosoftUpdateAutoUpdate{
     Returns Windows Update automatic update settings from the local device.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -88,7 +88,7 @@ function Get-ComObjMicrosoftUpdateInstaller {
     Returns a Microsoft.Update.Installer COM object instance.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -113,7 +113,7 @@ function Get-ComObjMicrosoftUpdateServiceManager {
     Returns registered Windows Update services from the local system.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

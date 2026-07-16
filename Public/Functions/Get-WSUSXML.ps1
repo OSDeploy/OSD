@@ -48,7 +48,7 @@ Get-WSUSXML -Catalog <value>
 Demonstrates a common way to run Get-WSUSXML.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

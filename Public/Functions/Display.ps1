@@ -11,7 +11,7 @@ function Get-DisplayAllScreens {
     Returns all connected displays sorted by device name
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -36,7 +36,7 @@ function Get-DisplayPrimaryBitmapSize {
     Returns the scaled primary display dimensions
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -68,7 +68,7 @@ function Get-DisplayPrimaryMonitorSize {
     Returns primary monitor width and height
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -93,7 +93,7 @@ function Get-DisplayPrimaryScaling {
     Returns the DPI scaling percentage (e.g., 100, 125, 150)
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -145,7 +145,7 @@ function Get-DisplayVirtualScreen {
     Returns the combined dimensions of all displays
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -176,7 +176,7 @@ function Set-DisRes {
     Sets the primary display resolution to 1920x1080.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

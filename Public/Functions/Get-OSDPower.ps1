@@ -19,7 +19,7 @@ Option 1: Get-OSDPower High
 Option 2: Get-OSDPower -Property High
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.10.1     David Segura @SeguraOSD
@@ -40,7 +40,7 @@ Get-OSDPower -P <value>
 Demonstrates a common way to run Get-OSDPower.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

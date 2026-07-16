@@ -12,7 +12,7 @@ function Get-SystemFirmwareUpdate {
     Returns the latest available firmware update
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -126,7 +126,7 @@ function Save-SystemFirmwareUpdate {
     PSCustomObject. Returns details about the selected update, extraction path, and discovered INF files.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -244,7 +244,7 @@ function Install-SystemFirmwareUpdate {
     Downloads and installs the latest firmware update and restarts if required.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

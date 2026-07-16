@@ -17,7 +17,7 @@ function Get-EnablementPackage {
     Returns the newest x64 enablement package metadata for 22H2.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -74,7 +74,7 @@ function Save-EnablementPackage {
     Downloads the latest matching x64 enablement package for 22H2 to C:\Temp.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

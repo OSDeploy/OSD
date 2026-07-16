@@ -32,7 +32,7 @@ Show-RegistryXML -S <value>
 Demonstrates a common way to run Show-RegistryXML.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

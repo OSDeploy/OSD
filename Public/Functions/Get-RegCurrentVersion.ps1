@@ -6,7 +6,7 @@ Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\Current
 Returns the Registry Key values from HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion for Online and Offline Windows Images
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 19.11.20    Added Pipeline Support
@@ -31,7 +31,7 @@ Get-RegCurrentVersion -Path <value>
 Demonstrates a common way to run Get-RegCurrentVersion.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

@@ -11,7 +11,7 @@ Test-IsVM
 Demonstrates a common way to run Test-IsVM.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

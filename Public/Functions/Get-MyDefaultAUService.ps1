@@ -6,7 +6,7 @@ Returns the Default AU Service from Microsoft.Update.ServiceManager
 Returns the Default AU Service from Microsoft.Update.ServiceManager
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .LINK
 https://twitter.com/byteben/status/1356893619811155968
@@ -31,7 +31,7 @@ Get-MyDefaultAUService
 Demonstrates a common way to run Get-MyDefaultAUService.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

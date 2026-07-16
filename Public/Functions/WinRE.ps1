@@ -8,7 +8,7 @@ function Copy-WinREWIM {
     This function must be run in Windows
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     [OutputType([System.IO.FileInfo])]
@@ -117,7 +117,7 @@ function Get-ReAgentXml {
     2026-07-10 - Updated help to follow OSD standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -219,7 +219,7 @@ function Get-WinREPartition {
     2026-07-10 - Updated help to follow OSD standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]

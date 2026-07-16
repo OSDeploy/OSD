@@ -20,7 +20,7 @@ function Find-TextInFile {
 	Searches all .log files in C:\Logs for Error and shows the matches.
 
 	.LINK
-	https://github.com/OSDeploy/OSD/tree/master/Docs
+	https://github.com/OSDeploy/OSD/tree/master/docs
 
 	.NOTES
 	Author: David Segura - Recast Software

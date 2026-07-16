@@ -20,7 +20,7 @@ function Get-CimVideoControllerResolution {
     Returns interlaced resolutions with a horizontal resolution of 800 or higher.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

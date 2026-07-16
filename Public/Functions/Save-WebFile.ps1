@@ -4,7 +4,7 @@ Downloads a file from the internet and returns a Get-Item Object
 .DESCRIPTION
 Downloads a file from the internet and returns a Get-Item Object
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Save-WebFile {
 <#
@@ -19,7 +19,7 @@ Save-WebFile
 Demonstrates a common way to run Save-WebFile.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 Author: David Segura - Recast Software

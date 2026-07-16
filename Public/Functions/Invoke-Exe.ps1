@@ -16,7 +16,7 @@ function Invoke-Exe {
     Invoke-Exe dir c:\
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

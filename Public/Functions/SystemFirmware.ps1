@@ -11,7 +11,7 @@ function Get-SystemFirmwareDevice {
     Returns the system firmware device information
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -47,7 +47,7 @@ function Get-SystemFirmwareResource {
     Returns the firmware resource GUID
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

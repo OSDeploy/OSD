@@ -20,7 +20,7 @@ function Find-TextInModule {
     Searches PowerShell files in the latest installed OSD module for Save-WebFile.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

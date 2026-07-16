@@ -25,7 +25,7 @@ function Copy-PSModuleToFolder {
     Removes existing destination module content and copies fresh module versions.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -140,7 +140,7 @@ function Copy-PSModuleToWim {
     Copies modules to image index 2 and sets execution policy in the mounted image.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software

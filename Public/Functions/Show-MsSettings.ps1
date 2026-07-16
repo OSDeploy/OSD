@@ -15,7 +15,7 @@ function Show-MsSettings {
     This setting will be enabled after restart by Group Policy
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (

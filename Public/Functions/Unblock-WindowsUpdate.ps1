@@ -7,7 +7,7 @@ function Unblock-WindowsUpdate {
     Opens Windows Update and checks for WSUS configuration
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
