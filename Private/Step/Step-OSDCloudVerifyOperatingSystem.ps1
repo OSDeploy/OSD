@@ -22,6 +22,8 @@ function Step-OSDCloudVerifyOperatingSystem {
     [CmdletBinding()]
     param ()
     #=================================================
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    #=================================================
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Validate Operating System Source"
     $Global:OSDCloud.SectionPassed = [bool](
         $global:OSDCoreOperatingSystemObject -or
@@ -31,6 +33,9 @@ function Step-OSDCloudVerifyOperatingSystem {
         $Global:OSDCloud.ImageFileUrl
     )
 
+    if ($Global:OSDCloud.SectionPassed -eq $true) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Done."
+    }
     if ($Global:OSDCloud.SectionPassed -eq $false) {
         Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] An Operating System Source was not specified by any required Variables"
@@ -38,5 +43,7 @@ function Step-OSDCloudVerifyOperatingSystem {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Try using Start-OSDCloud, Start-OSDCloudGUI, or Start-OSDCloudAzure"
         throw "[$(Get-Date -format s)] OSDCloud Failed: An Operating System Source was not specified by any required Variables"
     }
+    #=================================================
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

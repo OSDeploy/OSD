@@ -21,6 +21,8 @@ function Step-OSDCloudVerifyODTFile {
     [CmdletBinding()]
     param ()
     #=================================================
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    #=================================================
     if ($Global:OSDCloud.SkipODT -ne $true) {
         $Global:OSDCloud.ODTFiles = Find-OSDCloudODTFile
 
@@ -36,5 +38,7 @@ function Step-OSDCloudVerifyODTFile {
             }
         }
     }
+    #=================================================
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }
