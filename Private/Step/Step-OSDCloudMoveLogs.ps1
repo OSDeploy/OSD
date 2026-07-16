@@ -1,4 +1,4 @@
-function Step-OSDCloudMigrateLogs {
+function Step-OSDCloudMoveLogs {
     <#
     .SYNOPSIS
     Initializes transcript and debug log capture before image deployment.
@@ -8,7 +8,7 @@ function Step-OSDCloudMigrateLogs {
     writes diagnostic details to OSDCloud debug log files.
 
     .EXAMPLE
-    Step-OSDCloudMigrateLogs
+    Step-OSDCloudMoveLogs
     Starts transcript logging and captures debug diagnostics when enabled.
 
     .LINK
