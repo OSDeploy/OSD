@@ -86,6 +86,7 @@ function Get-OSDCoreCache {
 
     $Error.Clear()
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Indexing ..."
 
     function Get-FileOnlySizeMB {
         param(
