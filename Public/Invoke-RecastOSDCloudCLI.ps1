@@ -46,7 +46,7 @@
     Start-OSDCloud
     Start-OSDCloudCLI
 #>
-function Invoke-RecastOSDCloud {
+function Invoke-RecastOSDCloudCLI {
     [CmdletBinding()]
     param ()
     #=================================================
@@ -330,8 +330,8 @@ function Invoke-RecastOSDCloud {
     #endregion
     Step-OSDCloudPreinstallHooks
     Step-OSDCloudConfirmOperatingSystem
-    Step-OSDCloudConfirmAutopilotJson
-    Step-OSDCloudConfirmOfficeODT
+    # Step-OSDCloudConfirmAutopilotJson
+    # Step-OSDCloudConfirmOfficeODT
     Step-OSDCloudConfirmDisk
     # Step-OSDCloudTelemetryPSGallery
     # Step-OSDCloudTelemetryPH
@@ -341,180 +341,11 @@ function Invoke-RecastOSDCloud {
     Step-OSDCloudRestoreUSBDrives
     Step-OSDCloudMoveLogs
     Step-OSDCloudEnableHighPerformance
-    if ($Global:OSDCloud.AzOSDCloudImage) {
-        Step-OSDCloudAzDownloadOS
-        $global:OSDCoreOperatingSystemObject = $null
-    }
-    else {
-        if ((-NOT ($global:OSDCoreOperatingSystemObject)) -and (-NOT ($Global:OSDCloud.ImageFileDestination)) -and (-NOT ($Global:OSDCloud.ImageFileUrl))) {
-            $global:OSDCoreOperatingSystemObject = Set-OSDCoreOperatingSystemObject
-        }
-        if ($global:OSDCoreOperatingSystemObject) {
-            Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject"
-            $global:OSDCoreOperatingSystemObject | Out-Host
-        }
-        else {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set"
-        }
-    }
-    #region WindowsImage Download
-    if ($global:OSDCoreOperatingSystemObject) {
-        Step-OSDCloudCopyWindowsESD
-        Step-OSDCloudSaveWindowsESD
-    }
-    elseif (!($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileUrl)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Download Operating System"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($Global:OSDCloud.ImageFileUrl)"
-
-        $null = New-Item -Path 'C:\OSDCloud\OS' -ItemType Directory -Force -ErrorAction Ignore
-        if (Test-WebConnection -Uri $Global:OSDCloud.ImageFileUrl) {
-            if ($Global:OSDCloud.ImageFileName) {
-                #=================================================
-                #	Cache to USB
-                #=================================================
-                $OSDCloudUSB = Get-USBVolume | Where-Object { $_.FileSystem -eq 'NTFS' } | Where-Object { $_.FileSystemLabel -match 'OSDCloud|BHIMAGE|USB-Data' } | Where-Object { $_.SizeGB -ge 8 } | Where-Object { $_.SizeRemainingGB -ge 5} | Select-Object -First 1
-
-                if ($OSDCloudUSB -and $Global:OSDCloud.OSVersion -and $Global:OSDCloud.OSReleaseID) {
-                    $OSDownloadChildPath = "$($OSDCloudUSB.DriveLetter):\OSDCloud\OS\$($Global:OSDCloud.OSVersion) $($Global:OSDCloud.OSReleaseID)"
-                    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Downloading OSDCloud Offline OS $OSDownloadChildPath"
-
-                    $OSDCloudUsbOS = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory "$OSDownloadChildPath" -DestinationName $Global:OSDCloud.ImageFileName
-
-                    if ($OSDCloudUsbOS) {
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying Offline OS to C:\OSDCloud\OS\$($OSDCloudUsbOS.Name)"
-                        $null = Copy-Item -Path $OSDCloudUsbOS.FullName -Destination "C:\OSDCloud\OS" -Force
-
-                        $Global:OSDCloud.ImageFileDestination = Get-Item "C:\OSDCloud\OS\$($OSDCloudUsbOS.Name)"
-                    }
-                }
-                else {
-                    $Global:OSDCloud.ImageFileDestination = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -DestinationName $Global:OSDCloud.ImageFileName -ErrorAction Stop
-                }
-            }
-            else {
-                $Global:OSDCloud.ImageFileDestination = Save-WebFile -SourceUrl $Global:OSDCloud.ImageFileUrl -DestinationDirectory 'C:\OSDCloud\OS' -ErrorAction Stop
-            }
-            if (!(Test-Path $Global:OSDCloud.ImageFileDestination.FullName)) {
-                $Global:OSDCloud.ImageFileDestination = Get-ChildItem -Path 'C:\OSDCloud\OS\*' -Include *.wim,*.esd,*.iso | Select-Object -First 1
-            }
-        }
-        else {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Could not verify an Internet connection for the Windows ImageFile"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-            Start-Sleep -Seconds 86400
-            Exit
-        }
-
-        if ($Global:OSDCloud.ImageFileDestination) {
-            Write-Verbose -Message "ImageFileDestination: $($Global:OSDCloud.ImageFileDestination.FullName)"
-        }
-    }
-    #endregion
-    #region CheckSHA1
-    # SHA1 may not exist, it may be null as Windows 25H2 is using SHA256 now
-    if ($Global:OSDCloud.CheckSHA1 -eq $true) {
-        if (($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileDestination.FullName)) {
-            $Global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
-            $Global:OSDCloud.ImageFileSHA1 = (Get-OSDCloudOperatingSystems | Where-Object {$_.FileName -eq $Global:OSDCloud.ImageFileName}).SHA1
-            if ($null -eq $Global:OSDCloud.ImageFileSHA1) {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Warning"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] No SHA1 Hash exists for $($Global:OSDCloud.ImageFileName) in the OSDCloud Catalog"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Skipping SHA1 Validation"
-            }
-            elseif ($Global:OSDCloud.ImageFileDestinationSHA1 -ne $Global:OSDCloud.ImageFileSHA1){
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] SHA1 Mismatch"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Downloaded ESD SHA1: $($Global:OSDCloud.ImageFileDestinationSHA1)"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Catalog ESD SHA1: $($Global:OSDCloud.ImageFileSHA1)"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-                Start-Sleep -Seconds 86400
-            }
-            else {
-                Write-Host -ForegroundColor Green "SHA1 Match"
-                Write-Host -ForegroundColor DarkGray " Catalog ESD SHA1:    $(($Global:OSDCloud.ImageFileSHA1).ToUpper())"
-                Write-Host -ForegroundColor DarkGray " Downloaded ESD SHA1: $($Global:OSDCloud.ImageFileDestinationSHA1)"
-            }
-        }
-    }
-    #endregion
-    #region Global:OSDCloud.ImageFileDestination
-    if (-not ($Global:OSDCloud.ImageFileDestination)) {
-        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] The Windows Image Source did not download properly to the Destination"
-        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-        Start-Sleep -Seconds 86400
-        Exit
-    }
-    #endregion
-    #region ISO Disk Image File
-    if ($Global:OSDCloud.ImageFileDestination.Extension -eq '.iso') {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud Windows ISO Deployment"
-
-        $Global:OSDCloud.IsoGetDiskImage = Get-DiskImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName
-
-        #ISO is already mounted (which should not be happening)
-        if ($Global:OSDCloud.IsoGetDiskImage.Attached) {
-            $Global:OSDCloud.IsoGetVolume = $Global:OSDCloud.IsoGetDiskImage | Get-Volume
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Windows ISO is attached to Drive Letter $($Global:OSDCloud.IsoGetVolume.DriveLetter)"
-        }
-        else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Mounting Windows ISO $($Global:OSDCloud.ImageFileDestination.FullName)"
-            $Global:OSDCloud.IsoMountDiskImage = Mount-DiskImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -PassThru -ErrorAction Stop
-
-            if ($Global:OSDCloud.IsoMountDiskImage.Attached) {
-                Start-Sleep -Seconds 10
-                $Global:OSDCloud.IsoGetVolume = $Global:OSDCloud.IsoMountDiskImage | Get-Volume
-
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Windows ISO is attached to Drive Letter $($Global:OSDCloud.IsoGetVolume.DriveLetter)"
-            }
-            else {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] The Windows ISO did not mount properly"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-                Start-Sleep -Seconds 86400
-                Exit
-            }
-        }
-        $Global:OSDCloud.ImageFileDestination = Get-ChildItem -Path "$($Global:OSDCloud.IsoGetVolume.DriveLetter):\*" -Include *.wim,*.esd -Recurse | Sort-Object Length -Descending | Select-Object -First 1
-
-        if (-not ($Global:OSDCloud.ImageFileDestination)) {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Unable to find a WIM or ESD file on the Mounted Windows ISO"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-            Start-Sleep -Seconds 86400
-            Exit
-        }
-    }
-    #endregion
-    #region Validate WindowsImage Index
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Validate WindowsImage Index"
-    if (Test-Path $Global:OSDCloud.ImageFileDestination.FullName) {
-        $Global:OSDCloud.WindowsImage = Get-WindowsImage -ImagePath $Global:OSDCloud.ImageFileDestination.FullName -ErrorAction Stop
-        $Global:OSDCloud.WindowsImageCount = ($Global:OSDCloud.WindowsImage).Count
-
-        # Image is corrupt
-        if ($null -eq $Global:OSDCloud.WindowsImageCount) {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Could not read the Windows Image properly"
-            Start-Sleep -Seconds 86400
-            Stop-Computer -Force
-            Exit
-        }
-        # Is there only one ImageIndex?
-        elseif ($Global:OSDCloud.WindowsImageCount -eq 1) {
-            $Global:OSDCloud.OSImageIndex = 1
-        }
-    }
-    else {
-        #=================================================
-        #	FAILED
-        #=================================================
-        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Could not find a proper Windows Image for deployment"
-        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to exit"
-        Start-Sleep -Seconds 86400
-        Exit
-    }
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject"
+    $global:OSDCoreOperatingSystemObject | Out-Host
+    Step-OSDCloudCopyWindowsESD
+    Step-OSDCloudSaveWindowsESD
+    Pause
     # Align the OSEdition with the OSEditionId
     $editionIdMap = @{
         'Home'                 = 'Core'

@@ -175,7 +175,7 @@
         'Get-OSDModuleVersion', 'Get-OSDCachePath',
         # OSD Core Functions
         'Initialize-OSDCoreDevice',
-        'Invoke-RecastOSDCloud',
+        'Invoke-RecastOSDCloudCLI',
         'Get-OSDCoreCache',
         'Get-OSDCoreDeploymentDisk',
         'Get-OSDCoreDriverPacks',

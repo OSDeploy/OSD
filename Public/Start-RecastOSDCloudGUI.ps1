@@ -238,11 +238,11 @@ function Start-RecastOSDCloudGUI {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
     if ($global:OSDCoreDriverPackObject) {
-        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackObject:"
+        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackObject"
         $global:OSDCoreDriverPackObject | Out-Host
     }
     if ($global:OSDCoreOperatingSystemObject) {
-        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject:"
+        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject"
         $global:OSDCoreOperatingSystemObject | Out-Host
     }
     #=================================================

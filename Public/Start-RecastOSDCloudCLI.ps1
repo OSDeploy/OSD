@@ -165,13 +165,13 @@ function Start-RecastOSDCloudCLI {
         }
     }
 
-    # Select the matching operating system object from the preloaded catalog based on the provided or default parameters.
-    $global:OSDCoreOperatingSystemObject = $global:OSDCoreOperatingSystems | `
-        Where-Object { $_.Activation -eq $OSActivation } | `
-        Where-Object { $_.Architecture -match $OSArchitecture } | `
-        Where-Object { $_.Language -eq $OSLanguageCode } | `
-        Where-Object { $_.ReleaseID -eq $OSReleaseID } | `
-        Where-Object { $_.Version -eq 'Windows 11' }
+    # Select and set the matching operating system object using core selection logic.
+    $global:OSDCoreOperatingSystemObject = Set-OSDCoreOperatingSystemObject `
+        -OSActivation $OSActivation `
+        -OSArchitecture $OSArchitecture `
+        -OSLanguageCode $OSLanguageCode `
+        -OSReleaseID $OSReleaseID `
+        -OSVersion 'Windows 11'
 
     if (-not $global:OSDCoreOperatingSystemObject) {
         throw "[$(Get-Date -format s)] Unable to find a matching operating system object for OSReleaseID '$OSReleaseID', OSArchitecture '$OSArchitecture', Activation '$OSActivation', and Language '$OSLanguageCode'."
@@ -200,7 +200,7 @@ function Start-RecastOSDCloudCLI {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
     if ($global:OSDCoreDriverPackObject) {
-        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackObject:"
+        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackObject"
         $global:OSDCoreDriverPackObject | Out-Host
     }
     if ($global:OSDCoreOperatingSystemObject) {
@@ -234,43 +234,45 @@ function Start-RecastOSDCloudCLI {
     # Build deployment state consumed by the broader OSDCloud workflow.
     $global:OSDCloudDeploy = $null
     $global:OSDCloudDeploy = [ordered]@{
-        DeploymentDiskObject  = $DeploymentDiskObject
+        DeploymentDiskObject = $DeploymentDiskObject
         # DriverFolderName          = $null
         # DriverFolderNames         = @()
         # DriverFolderPath          = $null
         # DriverFolderPaths         = @()
         # DriverFolderSelections    = @()
         # DriverPackName        = $DriverPackName
+        DriverPackItem       = $null
         # DriverPackObject      = $DriverPackObject
         # DriverPackValues      = [array]$DriverPackValues
         # Flows                     = [array]$global:OSDCloudWorkflowTasks
-        Function              = $($MyInvocation.MyCommand.Name)
+        Function             = $($MyInvocation.MyCommand.Name)
         # ImageFileName         = $ImageFileName
         # ImageFileUrl          = $ImageFileUrl
-        LaunchMethod          = 'RecastOSDCloud'
-        Module                = $($MyInvocation.MyCommand.Module.Name)
-        OperatingSystem       = $OperatingSystem
+        LaunchMethod         = 'RecastOSDCloud'
+        Module               = $($MyInvocation.MyCommand.Module.Name)
+        OperatingSystem      = $OperatingSystem
+        OperatingSystemItem  = $null
         # OperatingSystemObject = $OperatingSystemObject
         # OperatingSystemValues = $OperatingSystemValues
-        OSActivation          = $OSActivation
-        OSActivationValues    = $OSActivationValues
-        OSArchitecture        = $OSArchitecture
-        OSBuild               = $OSBuild
-        OSBuildVersion        = $OSBuildVersion
-        OSEdition             = $OSEdition
-        OSEditionId           = $OSEditionId
-        OSEditionValues       = $OSEditionValues
-        OSLanguageCode        = $OSLanguageCode
-        OSLanguageCodeValues  = $OSLanguageCodeValues
-        OSVersion             = $OSVersion
-        TimeStart             = $null
+        OSActivation         = $OSActivation
+        OSActivationValues   = $OSActivationValues
+        OSArchitecture       = $OSArchitecture
+        OSBuild              = $OSBuild
+        OSBuildVersion       = $OSBuildVersion
+        OSEdition            = $OSEdition
+        OSEditionId          = $OSEditionId
+        OSEditionValues      = $OSEditionValues
+        OSLanguageCode       = $OSLanguageCode
+        OSLanguageCodeValues = $OSLanguageCodeValues
+        OSVersion            = $OSVersion
+        TimeStart            = $null
         # WorkflowName              = $WorkflowName
         # WorkflowTaskName          = $WorkflowTaskName
         # WorkflowTaskObject        = $WorkflowTaskObject
     }
     #================================================
-    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] Starting Invoke-RecastOSDCloud in 5 seconds ..."
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] Starting Invoke-RecastOSDCloudCLI in 5 seconds ..."
     Start-Sleep -Seconds 5
-    Invoke-RecastOSDCloud
+    Invoke-RecastOSDCloudCLI
     #================================================
 }
