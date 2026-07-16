@@ -44,7 +44,7 @@ Author: David Segura - Recast Software
 
 The first `.LINK` entry must always be:
 
-`https://github.com/OSDeploy/OSD/tree/master/Docs`
+`https://github.com/OSDeploy/OSD/tree/master/docs`
 
 In canonical ordering, `.LINK` must appear before `.NOTES`.
 
@@ -54,7 +54,7 @@ Example:
 
 ```powershell
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .LINK
 https://example.vendor.com/reference
@@ -79,7 +79,7 @@ function Verb-Noun {
     Explain what this example does and expected outcome.
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
@@ -110,7 +110,7 @@ Before submitting changes, verify all items are true:
 1. Help block exists inside the function block and is the first statement after the opening `{`.
 2. Required sections are present and in the defined order.
 3. Every exposed parameter has a matching `.PARAMETER` entry.
-4. The first `.LINK` is exactly `https://github.com/OSDeploy/OSD/tree/master/Docs`.
+4. The first `.LINK` is exactly `https://github.com/OSDeploy/OSD/tree/master/docs`.
 5. Any additional links are placed after the required docs link.
 6. `.NOTES` contains:
    - `Author: David Segura - Recast Software`
