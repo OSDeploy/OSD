@@ -1,4 +1,4 @@
-function Step-OSDCloudVerifyAutopilotJson {
+function Step-OSDCloudConfirmAutopilotJson {
     <#
     .SYNOPSIS
     Verifies and loads Autopilot JSON configuration for OSDCloud deployments.
@@ -9,7 +9,7 @@ function Step-OSDCloudVerifyAutopilotJson {
     deployment continues without AutopilotConfigurationFile.json.
 
     .EXAMPLE
-    Step-OSDCloudVerifyAutopilotJson
+    Step-OSDCloudConfirmAutopilotJson
     Resolves Autopilot JSON from configured sources and logs the effective outcome.
 
     .LINK
