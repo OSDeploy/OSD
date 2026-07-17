@@ -12,6 +12,7 @@ function Get-OSDCloudOperatingSystems {
 
     Valid values:
     - x64
+    - amd64
     - arm64
 
     .EXAMPLE
@@ -23,6 +24,11 @@ function Get-OSDCloudOperatingSystems {
     Get-OSDCloudOperatingSystems -OSArch arm64
 
     Returns ARM64 operating system entries.
+
+    .EXAMPLE
+    Get-OSDCloudOperatingSystems -OSArch amd64
+
+    Returns x64/amd64 operating system entries.
 
     .INPUTS
     None. You cannot pipe input to this function.
@@ -42,9 +48,10 @@ function Get-OSDCloudOperatingSystems {
     [CmdletBinding()]
     [OutputType([pscustomobject[]])]
     param (
-        [ValidateSet('x64', 'arm64')]
+        # Supported values are normalized so x64 and amd64 are interchangeable.
+        [ValidateSet('x64', 'amd64', 'arm64')]
         [System.String]
-        $OSArch = 'x64'
+        $OSArch = $env:PROCESSOR_ARCHITECTURE
     )
 
     try {
@@ -59,10 +66,36 @@ function Get-OSDCloudOperatingSystems {
         return @()
     }
 
-    $normalizedArch = $OSArch.ToLowerInvariant()
+    $requestedArch = if ([string]::IsNullOrWhiteSpace($OSArch)) {
+        $env:PROCESSOR_ARCHITECTURE
+    }
+    else {
+        $OSArch
+    }
+
+    $normalizedArch = switch ($requestedArch.ToLowerInvariant()) {
+        'x64'     { 'x64' }
+        'amd64'   { 'x64' }
+        'arm64'   { 'arm64' }
+        default {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unsupported architecture '$requestedArch'. Use x64, amd64, or arm64."
+        }
+    }
+
+    $allowedArchitectures = if ($normalizedArch -in @('x64', 'amd64')) {
+        @('x64', 'amd64')
+    }
+    else {
+        @('arm64')
+    }
+
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Requested architecture '$requestedArch' normalized to '$normalizedArch'."
+
     $results = $allOperatingSystems |
-        Where-Object { $_.Architecture -and $_.Architecture.ToLowerInvariant() -eq $normalizedArch } |
+        Where-Object { $_.Architecture -and $_.Architecture.ToLowerInvariant() -in $allowedArchitectures } |
         Sort-Object -Property Name
+
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Returning $(@($results).Count) operating system entries."
 
     return $results
 }
