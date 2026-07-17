@@ -39,7 +39,7 @@ function Step-OSDCloudConfirmDriverPackOffline {
         $DriverPackObject = $global:OSDCoreDriverPackObject
     )
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm DriverPackObject Offline:"
     #=================================================
@@ -77,12 +77,12 @@ function Step-OSDCloudConfirmDriverPackOffline {
     #=================================================
     # Match the exact filename requested by the selected DriverPack metadata.
     # First match is intentional because filenames should be unique in cache.
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($DriverPackObject.FileName)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] FileName: $($DriverPackObject.FileName)"
     $CacheDriverPack = $global:OSDCoreCache | Where-Object { $_.Name -eq $DriverPackObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
     #=================================================
     # Stop quietly when the requested payload is not cached.
     if (-not $CacheDriverPack) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is not in the OSDCoreCache. OK."
+        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is not in the OSDCoreCache. OK."
         return
     }
     #=================================================
@@ -91,24 +91,24 @@ function Step-OSDCloudConfirmDriverPackOffline {
         # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Cached source file not found: $($CacheDriverPack.FullName)"
         return
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($CacheDriverPack.FullName)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] FullName: $($CacheDriverPack.FullName)"
     #=================================================
     # Validate the cached source against metadata first.
     # This prevents copying a stale or tampered cache file.
     if ($DriverPackObject.HashMD5) {
         # Validate cached payload before copy so we never replicate bad content.
         $SourceFileHash = Get-FileHash -Path $CacheDriverPack.FullName -Algorithm MD5
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified DriverPack MD5: $($DriverPackObject.HashMD5)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack MD5: $($DriverPackObject.HashMD5)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache MD5: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $DriverPackObject.HashMD5) {
             # Hash mismatch means the source cannot be trusted; skip copy.
-            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] MD5 hash mismatch for cached source file: $($CacheDriverPack.FullName)"
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCoreCache MD5 is not valid: $($CacheDriverPack.FullName)"
             return
         }
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is available in the OSDCoreCache. OK."
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is in OSDCoreCache. OK."
     $global:RecastOSDeploy.ConfirmDriverPackOffline = $true
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

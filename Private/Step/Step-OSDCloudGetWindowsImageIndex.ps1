@@ -45,7 +45,8 @@ function Step-OSDCloudGetWindowsImageIndex {
         $EditionId = $global:RecastOSDeploy.OSEditionId
     )
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Do we have a WindowsImage to test?
     if ($null -eq $ImagePath) {
@@ -107,6 +108,6 @@ function Step-OSDCloudGetWindowsImageIndex {
     # Everything we tried failed, so exit OSDCloud
     throw "[$(Get-Date -format s)] Unable to determine the ImageIndex to apply."
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

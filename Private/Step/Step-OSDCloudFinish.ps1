@@ -1,8 +1,35 @@
 function Step-OSDCloudFinish {
+    <#
+    .SYNOPSIS
+    Finalizes an OSDCloud deployment and performs the configured post-deployment action.
+
+    .DESCRIPTION
+    Records the deployment completion time and duration, prepares the shared OSDCloud log
+    directory, copies the WinPE DISM log and other WinPE logs when available, stops the
+    active transcript, and applies the configured WinPE post action. Restart and shutdown
+    actions are performed only when running in WinPE.
+
+    .PARAMETER None
+    This function does not define input parameters. It uses deployment state stored in
+    $global:RecastOSDeploy and the current system environment.
+
+    .EXAMPLE
+    Step-OSDCloudFinish
+    Finalizes the current OSDCloud deployment and applies the value of
+    $global:RecastOSDeploy.WinPEPostAction.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-17 - Added comment-based help
+    #>
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Capture the final deployment duration before any finish action is performed.
     if ($null -eq $global:RecastOSDeploy.TimeStart) {
@@ -40,7 +67,6 @@ function Step-OSDCloudFinish {
     switch ($global:RecastOSDeploy.WinPEPostAction) {
         'Quit' {
             # Exit without restarting or shutting down the operating system.
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Quitting OSDCloud ..."
             try {
                 # Stop-Transcript can fail when no transcript is active; do not mask completion.
                 Stop-Transcript | Out-Null

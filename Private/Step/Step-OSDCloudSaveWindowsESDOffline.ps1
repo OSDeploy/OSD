@@ -41,7 +41,8 @@ function Step-OSDCloudSaveWindowsESDOffline {
         [string]$DownloadPath = 'C:\OSDCloud\OS'
     )
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Is it offline?
     if (-not ($global:RecastOSDeploy.ConfirmWindowsESDOffline)) {
@@ -211,6 +212,6 @@ function Step-OSDCloudSaveWindowsESDOffline {
         }
     }
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

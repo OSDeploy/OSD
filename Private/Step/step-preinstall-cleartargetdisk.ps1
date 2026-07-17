@@ -6,9 +6,8 @@ function step-preinstall-cleartargetdisk {
         $Confirm = $true
     )
     #=================================================
-    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Debug -Message $Message; Write-Verbose -Message $Message
-    $Step = $global:OSDCloudCurrentStep
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     #region Main
     if ($global:OSDCloudDeploy.Force -eq $true) {

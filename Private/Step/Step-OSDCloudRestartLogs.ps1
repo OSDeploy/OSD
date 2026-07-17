@@ -23,7 +23,8 @@ function Step-OSDCloudRestartLogs {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     $LogsPath = "C:\Windows\Temp\osdcloud-logs"
 
@@ -43,6 +44,6 @@ function Step-OSDCloudRestartLogs {
 
     $null = Start-Transcript -Path $TranscriptFullName -ErrorAction SilentlyContinue
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

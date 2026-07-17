@@ -21,7 +21,8 @@ function Step-OSDCloudEnableHighPerformance {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     $HighPerformancePlanGuid = '8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c'
 
@@ -36,7 +37,7 @@ function Step-OSDCloudEnableHighPerformance {
     }
     #=================================================
     if ($env:SystemDrive -ne 'X:') {
-        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] $($MyInvocation.MyCommand.Name) is skipped when not running in WinPE (X:)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Skip. Not running in WinPE (X:)"
         return
     }
     #=================================================
@@ -49,6 +50,6 @@ function Step-OSDCloudEnableHighPerformance {
     }
     Write-Verbose -Message "[$(Get-Date -format s)] High Performance power plan enabled"
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

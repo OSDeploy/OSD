@@ -1,4 +1,4 @@
-function Step-OSDCloudNewItemContentFolders {
+function Step-OSDCloudContentFolders {
     <#
     .SYNOPSIS
     Creates required local content folders used by OSDCloud deployment steps.
@@ -9,7 +9,7 @@ function Step-OSDCloudNewItemContentFolders {
     folders are left unchanged.
 
     .EXAMPLE
-    Step-OSDCloudNewItemContentFolders
+    Step-OSDCloudContentFolders
     Creates any missing required folders such as C:\Drivers and
     C:\OSDCloud\Packages.
 
@@ -23,10 +23,11 @@ function Step-OSDCloudNewItemContentFolders {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     if ($env:SystemDrive -ne 'X:') {
-        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] $($MyInvocation.MyCommand.Name) is skipped when not running in WinPE (X:)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Skip. Not running in WinPE (X:)"
         return
     }
     #=================================================

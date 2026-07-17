@@ -22,7 +22,7 @@ function Step-OSDCloudConfirmOperatingSystem {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm Operating System Source"
@@ -35,7 +35,7 @@ function Step-OSDCloudConfirmOperatingSystem {
     )
 
     if ($Global:OSDCloud.SectionPassed -eq $true) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm Operating System Source. Done."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OK."
     }
     if ($Global:OSDCloud.SectionPassed -eq $false) {
         Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"

@@ -11,9 +11,8 @@ function step-preinstall-partitiontargetdisk {
         $DiskNumber = $global:OSDCloudWorkflowInvoke.DiskPartition.DiskNumber
     )
     #=================================================
-    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Debug -Message $Message; Write-Verbose -Message $Message
-    $Step = $global:OSDCloudCurrentStep
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     #region Main
     # Mental Math
@@ -43,7 +42,7 @@ function step-preinstall-partitiontargetdisk {
     }
     Start-Sleep -Seconds 5
 
-    # Make sure that there is a PSDrive 
+    # Make sure that there is a PSDrive
     if (!(Get-PSDrive -Name 'C')) {
         Write-Warning "[$(Get-Date -format s)] Failed to create a PSDrive FileSystem at C:\."
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Press Ctrl+C to exit OSDCloud"

@@ -35,7 +35,7 @@ function Step-OSDCloudConfirmWindowsESDOffline {
         $OperatingSystemObject = $global:OSDCoreOperatingSystemObject
     )
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm OperatingSystemObject Offline:"
     #=================================================
@@ -102,6 +102,6 @@ function Step-OSDCloudConfirmWindowsESDOffline {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is available in the OSDCoreCache. OK."
     $global:RecastOSDeploy.ConfirmWindowsESDOffline = $true
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

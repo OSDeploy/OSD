@@ -639,7 +639,7 @@ function Invoke-RecastOSDCloud {
     #=================================================
     Step-OSDCloudConfirmWindowsEdition
     Step-OSDCloudBcdBoot
-    Step-OSDCloudNewItemContentFolders
+    Step-OSDCloudContentFolders
     Step-OSDCloudExportWinPEOemDrivers
     Step-OSDCloudAddWinOSOemDrivers
     Step-OSDCloudAddWinREOemDrivers

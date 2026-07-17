@@ -26,7 +26,8 @@ function Step-OSDCloudExpandWindowsImage {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Validate required OSDCloud deployment context before applying the image.
     if ($null -eq $global:RecastOSDeploy) {
@@ -50,7 +51,7 @@ function Step-OSDCloudExpandWindowsImage {
     }
     #=================================================
     if ($env:SystemDrive -ne 'X:') {
-        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] $($MyInvocation.MyCommand.Name) is skipped when not running in WinPE (X:)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Skip. Not running in WinPE (X:)"
         return
     }
     #=================================================
@@ -107,6 +108,6 @@ function Step-OSDCloudExpandWindowsImage {
         }
     }
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

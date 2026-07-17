@@ -24,7 +24,8 @@ function Step-OSDCloudRemoveUSBDrives {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     if (-not $global:OSDCoreDevice.USBPartitions) {
         # If no USB partitions were discovered earlier, there is nothing to remove.

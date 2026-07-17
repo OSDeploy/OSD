@@ -21,7 +21,8 @@ function Step-OSDCloudConfirmOfficeODT {
     [CmdletBinding()]
     param ()
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     if ($Global:OSDCloud.SkipODT -ne $true) {
         $Global:OSDCloud.ODTFiles = Find-OSDCloudODTFile

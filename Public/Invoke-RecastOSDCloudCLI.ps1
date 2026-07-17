@@ -45,6 +45,7 @@
 function Invoke-RecastOSDCloudCLI {
     [CmdletBinding()]
     param ()
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     $global:RecastOSDeploy.TimeStart = [datetime](Get-Date)
     #=================================================
     #region Initialize-OSDCoreDevice
@@ -315,7 +316,7 @@ function Invoke-RecastOSDCloudCLI {
     Step-OSDCloudRestartLogs
     Step-OSDCloudConfirmWindowsEdition
     Step-OSDCloudBcdBoot
-    Step-OSDCloudNewItemContentFolders
+    Step-OSDCloudContentFolders
     Step-OSDCloudExportWinPEOemDrivers
     Step-OSDCloudAddWinOSOemDrivers
     Step-OSDCloudAddWinREOemDrivers

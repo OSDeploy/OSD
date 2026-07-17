@@ -39,7 +39,7 @@ function Step-OSDCloudConfirmDriverPackOnline {
         $DriverPackObject = $global:OSDCoreDriverPackObject
     )
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm DriverPackObject Online:"
     #=================================================
@@ -82,6 +82,6 @@ function Step-OSDCloudConfirmDriverPackOnline {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject URI is not reachable. OK."
     }
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

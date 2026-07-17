@@ -40,7 +40,7 @@ function Step-OSDCloudConfirmWindowsESDOnline {
         [string]$DownloadPath = 'C:\OSDCloud\OS'
     )
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm OperatingSystemObject Online:"
     #=================================================
@@ -68,6 +68,6 @@ function Step-OSDCloudConfirmWindowsESDOnline {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject URI is not reachable. OK."
     }
     #=================================================
-    Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }
