@@ -1,4 +1,4 @@
-function Step-OSDCloudAddWindowsDriverOemWinOS {
+function Step-OSDCloudAddWinOSOemDrivers {
     <#
     .SYNOPSIS
     Adds offline Windows drivers from the OSDCloud WinPE staging folder.
@@ -8,7 +8,7 @@ function Step-OSDCloudAddWindowsDriverOemWinOS {
     into C:\ using Add-WindowsDriver and writes DISM logging to the OSDCloud log path.
 
     .EXAMPLE
-    Step-OSDCloudAddWindowsDriverOemWinOS
+    Step-OSDCloudAddWinOSOemDrivers
     Injects staged WinPE drivers into the offline Windows image at C:\.
 
     .LINK

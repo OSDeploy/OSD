@@ -1,4 +1,4 @@
-function Step-OSDCloudExportWindowsDriverOemWinPE {
+function Step-OSDCloudExportWinPEOemDrivers {
     <#
     .SYNOPSIS
     Exports connected OEM WinPE drivers to the OSDCloud staging folder.
@@ -9,7 +9,7 @@ function Step-OSDCloudExportWindowsDriverOemWinPE {
     later OSDCloud driver injection steps.
 
     .EXAMPLE
-    Step-OSDCloudExportWindowsDriverOemWinPE
+    Step-OSDCloudExportWinPEOemDrivers
     Exports matching OEM drivers from the current WinPE session to the staging path.
 
     .LINK

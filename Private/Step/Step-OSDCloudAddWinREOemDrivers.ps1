@@ -1,4 +1,4 @@
-function Step-OSDCloudAddWindowsDriverOemWinRE {
+function Step-OSDCloudAddWinREOemDrivers {
     <#
     .SYNOPSIS
     Injects staged drivers into WinRE for OSDCloud.
@@ -8,7 +8,7 @@ function Step-OSDCloudAddWindowsDriverOemWinRE {
     driver staging folder, dismounts with save, and removes the temporary mount path.
 
     .EXAMPLE
-    Step-OSDCloudAddWindowsDriverOemWinRE
+    Step-OSDCloudAddWinREOemDrivers
     Mounts WinRE, injects staged drivers, and commits the image.
 
     .LINK
@@ -28,10 +28,10 @@ function Step-OSDCloudAddWindowsDriverOemWinRE {
         return
     }
     #=================================================
-    $LogPath = Join-Path -Path $env:windir -ChildPath 'Temp\osdcloud-logs'
-    $DriverPath = Join-Path -Path $env:windir -ChildPath 'Temp\osdcloud-drivers-winpe'
-    $WinrePath = Join-Path -Path $env:windir -ChildPath 'System32\Recovery\winre.wim'
-    $WinreMountPath = Join-Path -Path $env:windir -ChildPath 'Temp\mount-winre'
+    $LogPath = "C:\Windows\Temp\osdcloud-logs"
+    $DriverPath = "C:\Windows\Temp\osdcloud-drivers-winpe"
+    $WinrePath = "C:\Windows\System32\Recovery\winre.wim"
+    $WinreMountPath = "C:\Windows\Temp\mount-winre"
 
     $MountLogPath = Join-Path -Path $LogPath -ChildPath 'dism-mount-windowsimage-winre.log'
     $AddDriverLogPath = Join-Path -Path $LogPath -ChildPath 'dism-add-windowsdriver-winre.log'
