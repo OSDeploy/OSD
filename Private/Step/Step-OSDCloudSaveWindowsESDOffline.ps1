@@ -105,7 +105,7 @@ function Step-OSDCloudSaveWindowsESDOffline {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache SHA1: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemObject.SHA1) {
             # Hash mismatch means the source cannot be trusted; skip copy.
-            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] - SHA1 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA1 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
             return
         }
     }
@@ -116,7 +116,7 @@ function Step-OSDCloudSaveWindowsESDOffline {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache SHA256: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemObject.SHA256) {
             # Hash mismatch means the source cannot be trusted; skip copy.
-            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] - SHA256 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA256 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
             return
         }
     }
@@ -187,7 +187,7 @@ function Step-OSDCloudSaveWindowsESDOffline {
             return
         }
         else {
-            Write-Host -ForegroundColor Green "[$(Get-Date -format s)] - Copied SHA1 matches the verified Microsoft ESD SHA1. OK."
+            Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Copied SHA1 matches the verified Microsoft ESD SHA1. OK."
             # Persist verified destination for subsequent steps that consume this file.
             $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
             $global:RecastOSDeploy.ConfirmWindowsESDOnline = $false
@@ -204,7 +204,7 @@ function Step-OSDCloudSaveWindowsESDOffline {
             return
         }
         else {
-            Write-Host -ForegroundColor Green "[$(Get-Date -format s)] - Copied SHA256 matches the verified Microsoft ESD SHA256. OK."
+            Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Copied SHA256 matches the verified Microsoft ESD SHA256. OK."
             # Persist verified destination for subsequent steps that consume this file.
             $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
             $global:RecastOSDeploy.ConfirmWindowsESDOnline = $false

@@ -102,7 +102,7 @@ function Step-OSDCloudConfirmDriverPackOffline {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache MD5: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $DriverPackObject.HashMD5) {
             # Hash mismatch means the source cannot be trusted; skip copy.
-            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] - MD5 hash mismatch for cached source file: $($CacheDriverPack.FullName)"
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] MD5 hash mismatch for cached source file: $($CacheDriverPack.FullName)"
             return
         }
     }

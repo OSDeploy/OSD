@@ -84,7 +84,7 @@ function Step-OSDCloudConfirmWindowsESDOffline {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache SHA1: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemObject.SHA1) {
             # Hash mismatch means the source cannot be trusted; skip copy.
-            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] - SHA1 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA1 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
             return
         }
     }
@@ -95,7 +95,7 @@ function Step-OSDCloudConfirmWindowsESDOffline {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache SHA256: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemObject.SHA256) {
             # Hash mismatch means the source cannot be trusted; skip copy.
-            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] - SHA256 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA256 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
             return
         }
     }
