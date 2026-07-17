@@ -28,6 +28,7 @@ function Step-OSDCloudSaveWindowsESD {
     # Does the destination already exist? If so, validate hash before returning.
     if (Test-Path -LiteralPath $LocalDestinationPath) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Destination already exists: $LocalDestinationPath"
+        $DestinationFile = Get-Item -LiteralPath $LocalDestinationPath -ErrorAction SilentlyContinue
 
         # Track whether existing content is reusable or must be removed/re-downloaded.
         $HashMismatch = $false
@@ -40,6 +41,8 @@ function Step-OSDCloudSaveWindowsESD {
             }
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
+                # Get-Item for $DestinationFile
+                $global:OSDCloudDeploy.OperatingSystemItem = $DestinationFile
             }
         }
         elseif ($OperatingSystemObject.SHA256) {
@@ -51,6 +54,7 @@ function Step-OSDCloudSaveWindowsESD {
             }
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
+                $global:OSDCloudDeploy.OperatingSystemItem = $DestinationFile
             }
         }
 
