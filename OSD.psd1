@@ -187,7 +187,8 @@
         'Get-OSDCoreOperatingSystems',
         'Start-RecastOSDCloudCLI',
         'Start-RecastOSDCloudGUI',
-        'Convert-KeyboardLayoutToLanguageCode'
+        'Convert-KeyboardLayoutToLanguageCode',
+        'Get-OSDCoreLicense'
     )
     CmdletsToExport      = @()
     VariablesToExport    = @()
