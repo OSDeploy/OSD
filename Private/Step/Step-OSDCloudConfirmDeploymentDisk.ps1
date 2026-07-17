@@ -1,4 +1,4 @@
-function Step-OSDCloudConfirmDisk {
+function Step-OSDCloudConfirmDeploymentDisk {
     <#
     .SYNOPSIS
     Confirms that at least one fixed disk is available for OSDCloud deployment.
@@ -9,7 +9,7 @@ function Step-OSDCloudConfirmDisk {
     suitable fixed disk is found, deployment is stopped.
 
     .EXAMPLE
-    Step-OSDCloudConfirmDisk
+    Step-OSDCloudConfirmDeploymentDisk
     Validates fixed-disk availability before running disk preparation steps.
 
     .LINK
