@@ -435,6 +435,19 @@ function Start-OSDCloud {
         }
         $OSName = $Global:StartOSDCloud.OSName
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSName is set to $($Global:StartOSDCloud.OSName)"
+        #=================================================
+        #	Derive OSVersion and OSBuild from OSName so that downstream
+        #	logic (notably OSDCloudUSB OS caching in OSDCloud.ps1) works
+        #	identically to the Legacy parameter set. Without this, users
+        #	starting with -OSName get $null for OSVersion/OSBuild, which
+        #	silently disables the automatic OS cache to USB.
+        #=================================================
+        if ($Global:StartOSDCloud.OSName -match '^(Windows \d+)\s+(\S+)\s+x64$') {
+            $Global:StartOSDCloud.OSVersion = $Matches[1]
+            $Global:StartOSDCloud.OSBuild   = $Matches[2]
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSVersion derived from OSName: $($Global:StartOSDCloud.OSVersion)"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSBuild derived from OSName: $($Global:StartOSDCloud.OSBuild)"
+        }
     }
     elseif ($PSCmdlet.ParameterSetName -eq 'Legacy') {
         #=================================================
