@@ -23,7 +23,7 @@
             "Activation": "Retail",
             "Edition": "Pro",
             "Language": "en-us",
-            "Name": "Windows 11 25H2 ARM64",
+            "Name": "Windows 11 25H2 arm64",
             "ReleaseID": "25H2",
             "Version": "Windows 11",
             "ImageIndex": 0
@@ -96,19 +96,15 @@
                 "Windows 10 1909 x64"
             ],
             "NameARM64": [
-                "Windows 11 25H2 ARM64",
-                "Windows 11 24H2 ARM64",
-                "Windows 11 23H2 ARM64",
-                "Windows 10 22H2 ARM64"
+                "Windows 11 25H2 arm64",
+                "Windows 11 24H2 arm64"
             ],
             "ReleaseID": [
                 "25H2",
                 "24H2",
                 "23H2",
                 "22H2",
-                "21H2",
-                "20H2",
-                "1909"
+                "21H2"
             ],
             "Version": [
                 "Windows 11",
@@ -166,9 +162,8 @@
                 "zh-tw"
             ],
             "Name": [
-                "Windows 11 25H2 ARM64",
-                "Windows 11 24H2 ARM64",
-                "Windows 11 23H2 ARM64"
+                "Windows 11 25H2 arm64",
+                "Windows 11 24H2 arm64"
             ],
             "ReleaseID": [
                 "25H2",
