@@ -113,7 +113,7 @@ function Start-RecastOSDCloudCLI {
         [ValidateNotNullOrEmpty()]
         [ValidateSet('Quit','Restart','Shutdown')]
         [string]
-        $WinPEPostAction = 'Restart'
+        $WinPEPostAction = 'Quit'
     )
     #=================================================
     # Emit function/version context and surface legacy parameter usage.
@@ -210,8 +210,8 @@ function Start-RecastOSDCloudCLI {
         $global:OSDCoreDriverPackObject | Out-Host
     }
     if ($global:OSDCoreOperatingSystemObject) {
-        # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject:"
-        # $global:OSDCoreOperatingSystemObject | Out-Host
+        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject:"
+        $global:OSDCoreOperatingSystemObject | Out-Host
     }
     #=================================================
     # Dependency guard: OSDCloud relies on curl.exe for downloads.
@@ -240,48 +240,49 @@ function Start-RecastOSDCloudCLI {
     # Build deployment state consumed by the broader OSDCloud workflow.
     $global:RecastOSDeploy = $null
     $global:RecastOSDeploy = [ordered]@{
-        ConfirmDeploymentDisk = $false
+        ConfirmDeploymentDisk    = $false
         ConfirmDriverPackOffline = $false
-        ConfirmDriverPackOnline = $false
+        ConfirmDriverPackOnline  = $false
         ConfirmWindowsESDOffline = $false
-        ConfirmWindowsESDOnline = $false
-        DeploymentDiskObject = $DeploymentDiskObject
+        ConfirmWindowsESDOnline  = $false
+        DeploymentDiskObject     = $DeploymentDiskObject
         # DriverFolderName          = $null
         # DriverFolderNames         = @()
         # DriverFolderPath          = $null
         # DriverFolderPaths         = @()
         # DriverFolderSelections    = @()
         # DriverPackName        = $DriverPackName
-        DriverPackItem       = $null
+        DriverPackItem           = $null
         # DriverPackObject      = $DriverPackObject
         # DriverPackValues      = [array]$DriverPackValues
         # Flows                     = [array]$global:OSDCloudWorkflowTasks
-        Function             = $($MyInvocation.MyCommand.Name)
+        Function                 = $($MyInvocation.MyCommand.Name)
         # ImageFileName         = $ImageFileName
         # ImageFileUrl          = $ImageFileUrl
-        LaunchMethod         = 'RecastOSDCloud'
-        Module               = $($MyInvocation.MyCommand.Module.Name)
-        OperatingSystem      = $OperatingSystem
-        OperatingSystemItem  = $null
+        LaunchMethod             = 'RecastOSDCloud'
+        Module                   = $($MyInvocation.MyCommand.Module.Name)
+        OperatingSystem          = $OperatingSystem
+        OperatingSystemItem      = $null
         # OperatingSystemObject = $OperatingSystemObject
         # OperatingSystemValues = $OperatingSystemValues
-        OSActivation         = $OSActivation
-        OSActivationValues   = $OSActivationValues
-        OSArchitecture       = $OSArchitecture
-        OSBuild              = $OSBuild
-        OSBuildVersion       = $OSBuildVersion
-        OSEdition            = $OSEdition
-        OSEditionId          = $OSEditionId
-        OSEditionValues      = $OSEditionValues
-        OSLanguageCode       = $OSLanguageCode
-        OSLanguageCodeValues = $OSLanguageCodeValues
-        OSVersion            = $OSVersion
-        TimeSpan             = $null
-        TimeStart            = $null
-        WindowsEdition       = $null
-        WindowsImage         = $null
-        WindowsImageIndex    = $null
-        WinPEPostAction      = $WinPEPostAction
+        OSActivation             = $OSActivation
+        OSActivationValues       = $OSActivationValues
+        OSArchitecture           = $OSArchitecture
+        OSBuild                  = $OSBuild
+        OSBuildVersion           = $OSBuildVersion
+        OSEdition                = $OSEdition
+        OSEditionId              = $OSEditionId
+        OSEditionValues          = $OSEditionValues
+        OSLanguageCode           = $OSLanguageCode
+        OSLanguageCodeValues     = $OSLanguageCodeValues
+        OSVersion                = $OSVersion
+        TimeEnd                  = $null
+        TimeSpan                 = $null
+        TimeStart                = [datetime](Get-Date)
+        WindowsEdition           = $null
+        WindowsImage             = $null
+        WindowsImageIndex        = $null
+        WinPEPostAction          = $WinPEPostAction
         # WorkflowName              = $WorkflowName
         # WorkflowTaskName          = $WorkflowTaskName
         # WorkflowTaskObject        = $WorkflowTaskObject
