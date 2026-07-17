@@ -637,7 +637,7 @@ function Invoke-RecastOSDCloud {
     }
     #endregion
     #=================================================
-    Step-OSDCloudWriteGetWindowsEdition
+    Step-OSDCloudConfirmWindowsEdition
     Step-OSDCloudBcdBoot
     Step-OSDCloudNewItemContentFolders
     Step-OSDCloudExportWindowsDriverOemWinPE

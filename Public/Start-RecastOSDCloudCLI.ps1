@@ -266,6 +266,9 @@ function Start-RecastOSDCloudCLI {
         OSLanguageCodeValues = $OSLanguageCodeValues
         OSVersion            = $OSVersion
         TimeStart            = $null
+        WindowsEdition       = $null
+        WindowsImage         = $null
+        WindowsImageIndex    = $null
         # WorkflowName              = $WorkflowName
         # WorkflowTaskName          = $WorkflowTaskName
         # WorkflowTaskObject        = $WorkflowTaskObject
