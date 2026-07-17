@@ -1,0 +1,90 @@
+function Step-OSDCloudFinish {
+    [CmdletBinding()]
+    param ()
+    #=================================================
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    #=================================================
+    # Capture the final deployment duration before any finish action is performed.
+    if ($null -eq $global:RecastOSDeploy.TimeStart) {
+        # Keep direct calls safe when the caller did not initialize the start timestamp.
+        $global:RecastOSDeploy.TimeStart = [datetime](Get-Date)
+    }
+    $global:RecastOSDeploy.TimeEnd = [datetime](Get-Date)
+    $global:RecastOSDeploy.TimeSpan = New-TimeSpan -Start $global:RecastOSDeploy.TimeStart -End $global:RecastOSDeploy.TimeEnd
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Recast OSDCloud completed in $($global:RecastOSDeploy.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+
+    # Ensure the shared log directory exists before writing final deployment logs.
+    $logDirectory = 'C:\Windows\Temp\osdcloud-logs'
+    if (-not (Test-Path -LiteralPath $logDirectory)) {
+        New-Item -Path $logDirectory -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
+    }
+
+    # Save the RecastOSDeploy object to a JSON file for post-deployment analysis.
+    # $null = $global:RecastOSDeploy | ConvertTo-Json -Depth 2 | Out-File -FilePath (Join-Path $logDirectory 'RecastOSDCloud.json') -Encoding utf8 -Width 2000 -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+
+    # Capture the DISM Log
+    if (Test-Path -LiteralPath 'X:\windows\logs\DISM\dism.log') {
+        Copy-Item -Path 'X:\windows\logs\DISM\dism.log' -Destination (Join-Path $logDirectory 'dism.log') -Force
+    }
+
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Stopping transcript and saving logs to $logDirectory"
+    $null = Stop-Transcript -ErrorAction SilentlyContinue
+
+    # Copy existing WinPE Logs to C:\Windows\Temp\osdcloud-logs
+    if ($env:SystemDrive -eq 'X:') {
+        $null = robocopy "X:\Windows\Temp\osdcloud-logs" "C:\Windows\Temp\osdcloud-logs" *.* /e /ndl /r:0 /w:0
+    }
+
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Finish Action $($global:RecastOSDeploy.WinPEPostAction)"
+    # Apply the requested end-of-deployment action after final logs are saved.
+    switch ($global:RecastOSDeploy.WinPEPostAction) {
+        'Quit' {
+            # Exit without restarting or shutting down the operating system.
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Quitting OSDCloud ..."
+            try {
+                # Stop-Transcript can fail when no transcript is active; do not mask completion.
+                Stop-Transcript | Out-Null
+            }
+            catch {
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Stop-Transcript skipped: $($_.Exception.Message)"
+            }
+        }
+        'Restart' {
+            # Give the operator time to cancel before restarting WinPE.
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] WinPE is restarting in 30 seconds"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press CTRL + C to cancel"
+            Start-Sleep -Seconds 30
+            try {
+                # Close the transcript before handing control back to the firmware/OS.
+                Stop-Transcript | Out-Null
+            }
+            catch {
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Stop-Transcript skipped: $($_.Exception.Message)"
+            }
+            if ($env:SystemDrive -eq 'X:') {
+                # Restart only from WinPE; full Windows should remain running.
+                Restart-Computer
+            }
+        }
+        'Shutdown' {
+            # Give the operator time to cancel before shutting down WinPE.
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] WinPE will shutdown in 30 seconds"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press CTRL + C to cancel"
+            Start-Sleep -Seconds 30
+            try {
+                # Close the transcript before powering off the system.
+                Stop-Transcript | Out-Null
+            }
+            catch {
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Stop-Transcript skipped: $($_.Exception.Message)"
+            }
+            if ($env:SystemDrive -eq 'X:') {
+                # Shut down only from WinPE; full Windows should remain running.
+                Stop-Computer
+            }
+        }
+    }
+    #=================================================
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
+    #=================================================
+}
