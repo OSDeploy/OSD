@@ -41,7 +41,8 @@ function Step-OSDCloudConfirmWindowsESDOnline {
     )
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm OperatingSystemObject Online:"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm OperatingSystemObject Online:"
     #=================================================
     # Is there an OperatingSystem Object?
     if (-not ($OperatingSystemObject)) {
@@ -52,19 +53,19 @@ function Step-OSDCloudConfirmWindowsESDOnline {
     if (-not ($OperatingSystemObject.Url)) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystemObject does not have a Url"
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - $($OperatingSystemObject.Url)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($OperatingSystemObject.Url)"
     #=================================================
     # Is the Url reachable?
     # Use a HEAD request as a lightweight reachability/content check.
     try {
         $WebRequest = Invoke-WebRequest -Uri $OperatingSystemObject.Url -UseBasicParsing -Method Head -ErrorAction Stop
         if ($WebRequest.StatusCode -in 200, 206) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - OperatingSystemObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
             $global:RecastOSDeploy.ConfirmWindowsESDOnline = $true
         }
     }
     catch {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - OperatingSystemObject URI is not reachable. OK."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject URI is not reachable. OK."
     }
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"

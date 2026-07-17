@@ -26,7 +26,7 @@ function Step-OSDCloudNewItemContentFolders {
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
     if ($env:SystemDrive -ne 'X:') {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] $($MyInvocation.MyCommand.Name) is skipped when not running in WinPE (X:)"
         return
     }
     #=================================================

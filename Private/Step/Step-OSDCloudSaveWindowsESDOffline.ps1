@@ -80,12 +80,12 @@ function Step-OSDCloudSaveWindowsESDOffline {
     #=================================================
     # Match the exact filename requested by the selected OS metadata.
     # First match is intentional because filenames should be unique in cache.
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - $($OperatingSystemObject.FileName)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($OperatingSystemObject.FileName)"
     $CacheWindowsESD = $global:OSDCoreCache | Where-Object { $_.Name -eq $OperatingSystemObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
     #=================================================
     # Stop quietly when the requested payload is not cached.
     if (-not $CacheWindowsESD) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - OperatingSystemObject is not in the OSDCoreCache. OK."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is not in the OSDCoreCache. OK."
         return
     }
     #=================================================
@@ -94,15 +94,15 @@ function Step-OSDCloudSaveWindowsESDOffline {
         # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Cached source file not found: $($CacheWindowsESD.FullName)"
         return
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - $($CacheWindowsESD.FullName)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($CacheWindowsESD.FullName)"
     #=================================================
     # Validate the cached source against Microsoft metadata first.
     # This prevents copying a stale or tampered cache file.
     if ($OperatingSystemObject.SHA1) {
         # Validate cached payload before copy so we never replicate bad content.
         $SourceFileHash = Get-FileHash -Path $CacheWindowsESD.FullName -Algorithm SHA1
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - Microsoft Verified ESD SHA1: $($OperatingSystemObject.SHA1)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - OSDCoreCache SHA1: $($SourceFileHash.Hash)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified ESD SHA1: $($OperatingSystemObject.SHA1)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache SHA1: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemObject.SHA1) {
             # Hash mismatch means the source cannot be trusted; skip copy.
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] - SHA1 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
@@ -112,15 +112,15 @@ function Step-OSDCloudSaveWindowsESDOffline {
     if ($OperatingSystemObject.SHA256) {
         # Same source validation path for newer metadata that provides SHA256.
         $SourceFileHash = Get-FileHash -Path $CacheWindowsESD.FullName -Algorithm SHA256
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - Microsoft Verified ESD SHA256: $($OperatingSystemObject.SHA256)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - OSDCoreCache SHA256: $($SourceFileHash.Hash)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified ESD SHA256: $($OperatingSystemObject.SHA256)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache SHA256: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemObject.SHA256) {
             # Hash mismatch means the source cannot be trusted; skip copy.
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] - SHA256 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
             return
         }
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - OperatingSystemObject is available in the OSDCoreCache. OK."
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is available in the OSDCoreCache. OK."
     $global:RecastOSDeploy.ConfirmWindowsESDOffline = $true
     #=================================================
     # Create destination directory if needed
@@ -147,13 +147,13 @@ function Step-OSDCloudSaveWindowsESDOffline {
 
     # If destination exists and byte length matches cache, skip recopy.
     if ($DestinationFile -and $DestinationFile.Length -eq $CacheWindowsESD.Length) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - Cached file already exists at destination with matching size"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Cached file already exists at destination with matching size"
     }
     else {
         # Copy with -Force so partial/older files are replaced atomically by Copy-Item.
         # Any copy failure is terminal for this step because no valid destination exists.
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - Copying $($CacheWindowsESD.FullName)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - Copying to $LocalDestinationPath"
+        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $($CacheWindowsESD.FullName)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying to $LocalDestinationPath"
         try {
             $null = Copy-Item -LiteralPath $CacheWindowsESD.FullName -Destination $LocalDestinationPath -Force -ErrorAction Stop
         }
@@ -178,7 +178,7 @@ function Step-OSDCloudSaveWindowsESDOffline {
     if ($OperatingSystemObject.SHA1) {
         # Destination hash is the final trust gate before deployment can continue.
         $DestinationFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA1
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - Copied SHA1: $($DestinationFileHash.Hash)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copied SHA1: $($DestinationFileHash.Hash)"
         if ($DestinationFileHash.Hash -ne $OperatingSystemObject.SHA1) {
             # On mismatch, remove the suspect destination and stop this step cleanly.
             # Later orchestration can decide whether/when to attempt another source.
@@ -196,7 +196,7 @@ function Step-OSDCloudSaveWindowsESDOffline {
     if ($OperatingSystemObject.SHA256) {
         # SHA256 path mirrors SHA1 behavior for consistency across metadata versions.
         $DestinationFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA256
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - Copied SHA256: $($DestinationFileHash.Hash)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copied SHA256: $($DestinationFileHash.Hash)"
         if ($DestinationFileHash.Hash -ne $OperatingSystemObject.SHA256) {
             # Remove failed output to prevent accidental reuse of a bad payload.
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] - SHA256 hash mismatch for destination file, deleting: $LocalDestinationPath"

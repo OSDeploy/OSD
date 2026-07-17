@@ -40,45 +40,46 @@ function Step-OSDCloudConfirmDriverPackOnline {
     )
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm DriverPackObject Online:"
+    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm DriverPackObject Online:"
     #=================================================
     # Is there a DriverPack Object?
     if (-not ($DriverPackObject)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - DriverPackObject is not set. OK."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is not set. OK."
         return
     }
     #=================================================
     # Is DriverPackName set to None?
     if ($DriverPackName -eq 'None') {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - DriverPackName is set to None. OK."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackName is set to None. OK."
         return
     }
     #=================================================
     # Is DriverPackName set to Microsoft Update Catalog?
     if ($DriverPackName -eq 'Microsoft Update Catalog') {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - DriverPackName is set to Microsoft Update Catalog. OK."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackName is set to Microsoft Update Catalog. OK."
         return
     }
     #=================================================
     # Is there a URL?
     if (-not $($DriverPackObject.Url)) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - DriverPackObject does not have a Url to validate. OK."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject does not have a Url to validate. OK."
         $global:OSDCoreDriverPackObject = $null
         return
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - $($DriverPackObject.Url)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($DriverPackObject.Url)"
     #=================================================
     # Is the Url reachable?
     # Use a HEAD request as a lightweight reachability/content check.
     try {
         $WebRequest = Invoke-WebRequest -Uri $DriverPackObject.Url -UseBasicParsing -Method Head -ErrorAction Stop
         if ($WebRequest.StatusCode -in 200, 206) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - DriverPackObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
             $global:RecastOSDeploy.ConfirmDriverPackOnline = $true
         }
     }
     catch {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - DriverPackObject URI is not reachable. OK."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject URI is not reachable. OK."
     }
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
