@@ -28,15 +28,13 @@ function Step-OSDCloudExpandWindowsImage {
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
-    # Main
-    #=================================================
     # Validate required OSDCloud deployment context before applying the image.
-    if ($null -eq $global:OSDCloudDeploy) {
+    if ($null -eq $global:RecastOSDeploy) {
         throw "[$(Get-Date -format s)] OSDCloud deployment context was not found."
     }
 
-    $ImagePath = $global:OSDCloudDeploy.OperatingSystemItem.FullName
-    $ImageIndex = $global:OSDCloudDeploy.WindowsImageIndex
+    $ImagePath = $global:RecastOSDeploy.OperatingSystemItem.FullName
+    $ImageIndex = $global:RecastOSDeploy.WindowsImageIndex
     $ScratchDirectory = 'C:\OSDCloud\Temp'
 
     if ([string]::IsNullOrWhiteSpace($ImagePath)) {
@@ -50,12 +48,12 @@ function Step-OSDCloudExpandWindowsImage {
     if (($ImageIndex -as [int]) -lt 1) {
         throw "[$(Get-Date -format s)] OSDCloud deployment image index is invalid: $ImageIndex"
     }
-
+    #=================================================
     if ($env:SystemDrive -ne 'X:') {
-        Write-Verbose -Message "[$(Get-Date -format s)] SystemDrive is $env:SystemDrive. Skipping Expand-WindowsImage because this step is intended for WinPE."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
         return
     }
-
+    #=================================================
     try {
         if (-not (Test-Path -Path $ScratchDirectory -ErrorAction SilentlyContinue)) {
             New-Item -Path $ScratchDirectory -ItemType Directory -Force -ErrorAction Stop | Out-Null

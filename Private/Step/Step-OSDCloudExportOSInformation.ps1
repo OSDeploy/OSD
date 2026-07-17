@@ -4,6 +4,11 @@ function Step-OSDCloudExportOSInformation {
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
     # Grab Build from WinPE, as 24H2 has issues with some of these commands.
     $CurrentOSInfo = Get-Item -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'
     $CurrentOSBuild = $($CurrentOSInfo.GetValue('CurrentBuild'))

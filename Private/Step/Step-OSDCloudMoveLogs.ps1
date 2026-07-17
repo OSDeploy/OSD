@@ -21,6 +21,12 @@ function Step-OSDCloudMoveLogs {
     [CmdletBinding()]
     param ()
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
+    #=================================================
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Saving PowerShell Transcript to C:\OSDCloud\Logs"
     Write-Verbose -Message 'https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript'
     if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {

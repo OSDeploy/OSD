@@ -25,10 +25,15 @@ function Step-OSDCloudNewItemContentFolders {
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
     $ContentFolders = @(
-        'C:\Drivers'
-        'C:\OSDCloud\Packages'
-        'C:\OSDCloud\Scripts'
+        # 'C:\Drivers'
+        # 'C:\OSDCloud\Packages'
+        # 'C:\OSDCloud\Scripts'
         'C:\Windows\Panther'
         'C:\Windows\Provisioning\Autopilot'
         'C:\Windows\Setup\Scripts'

@@ -34,38 +34,19 @@ function Step-OSDCloudEnableHighPerformance {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] High Performance will not be enabled while on battery"
         return
     }
-
-    # Device is not in WinPE
+    #=================================================
     if ($env:SystemDrive -ne 'X:') {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] High Performance will not be enabled outside of WinPE"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
         return
     }
-
-    $powerSchemes = (powercfg.exe /L) 2>$null
-    if (-not $powerSchemes) {
-        Write-Warning "[$(Get-Date -format s)] Unable to enumerate power schemes with powercfg.exe"
-        return
-    }
-
-    if ($powerSchemes -notmatch [regex]::Escape($HighPerformancePlanGuid)) {
-        Write-Warning "[$(Get-Date -format s)] High Performance power plan $HighPerformancePlanGuid was not found"
-        return
-    }
-
-    # Debug Mode: Skip High Performance activation when debugging OSDCloud
-    if ($global:OSDCloud.Debug -eq $true) {
-        Write-DarkGrayHost 'Device is running in debug mode. Performance will not be adjusted'
-        return
-    }
-
+    #=================================================
     # Enable High Performance power plan
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] powercfg.exe -SetActive $HighPerformancePlanGuid"
-    powercfg.exe -SetActive $HighPerformancePlanGuid | Out-Null
+    powercfg.exe -SetActive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c | Out-Null
     if ($LASTEXITCODE -ne 0) {
         Write-Warning "[$(Get-Date -format s)] powercfg.exe returned exit code $LASTEXITCODE while enabling High Performance"
         return
     }
-
     Write-Verbose -Message "[$(Get-Date -format s)] High Performance power plan enabled"
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"

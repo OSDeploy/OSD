@@ -22,6 +22,11 @@ function Step-OSDCloudNewDisk {
     [CmdletBinding()]
     param ()
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
     # New Partitions will be created using Microsoft Standard Layout
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] New-OSDisk"
     if ($Global:OSDCloud.SkipNewOSDisk -eq $false) {

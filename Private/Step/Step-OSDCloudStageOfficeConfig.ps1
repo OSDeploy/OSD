@@ -4,6 +4,11 @@ function Step-OSDCloudStageOfficeConfig {
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
     if ($Global:OSDCloud.ODTFile) {
         Write-SectionHeader "Stage Office Config"
 

@@ -22,6 +22,11 @@ function Step-OSDCloudAzDownloadOS {
     [CmdletBinding()]
     param ()
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
     if ($Global:OSDCloud.AzOSDCloudImage) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud Azure Storage Windows Image Download"
 

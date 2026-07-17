@@ -7,6 +7,11 @@ function Step-OSDCloudSaveModule {
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
     Write-SectionHeader "Saving PowerShell Modules and Scripts"
     if ($Global:OSDCloud.IsWinPE -eq $true) {
         $PowerShellSavePath = 'C:\Program Files\WindowsPowerShell'

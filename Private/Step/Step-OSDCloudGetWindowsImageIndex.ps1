@@ -5,18 +5,18 @@ function Step-OSDCloudGetWindowsImageIndex {
 
         .DESCRIPTION
         Validates the provided Windows image path, enumerates available indexes,
-        and sets $global:OSDCloudDeploy.WindowsImageIndex. If only one index is
+        and sets $global:RecastOSDeploy.WindowsImageIndex. If only one index is
         present, index 1 is selected automatically. When an EditionId is supplied,
         it attempts to resolve a matching index. If no single match is found,
         the user is prompted to select an index interactively.
 
         .PARAMETER ImagePath
         Path to the Windows image file (WIM or ESD). Defaults to
-        $global:OSDCloudDeploy.OperatingSystemItem.FullName.
+        $global:RecastOSDeploy.OperatingSystemItem.FullName.
 
         .PARAMETER EditionId
         Optional EditionId used to auto-select a matching image index.
-        Defaults to $global:OSDCloudDeploy.OSEditionId.
+        Defaults to $global:RecastOSDeploy.OSEditionId.
 
         .EXAMPLE
         Step-OSDCloudGetWindowsImageIndex
@@ -38,11 +38,11 @@ function Step-OSDCloudGetWindowsImageIndex {
     param (
         [Parameter(Mandatory = $false)]
         [System.String]
-        $ImagePath = $global:OSDCloudDeploy.OperatingSystemItem.FullName,
+        $ImagePath = $global:RecastOSDeploy.OperatingSystemItem.FullName,
 
         [Parameter(Mandatory = $false)]
         [System.String]
-        $EditionId = $global:OSDCloudDeploy.OSEditionId
+        $EditionId = $global:RecastOSDeploy.OSEditionId
     )
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
@@ -70,7 +70,7 @@ function Step-OSDCloudGetWindowsImageIndex {
 
     if ($WindowsImageCount -eq 1) {
         # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud only found a single ImageIndex to expand"
-        $global:OSDCloudDeploy.WindowsImageIndex = 1
+        $global:RecastOSDeploy.WindowsImageIndex = 1
         return
     }
     #=================================================
@@ -81,9 +81,9 @@ function Step-OSDCloudGetWindowsImageIndex {
             Where-Object { $_.EditionId -eq $EditionId }
 
         if ($MatchingWindowsImage -and $MatchingWindowsImage.Count -eq 1) {
-            $global:OSDCloudDeploy.WindowsImage = $MatchingWindowsImage
-            $global:OSDCloudDeploy.WindowsImageIndex = $MatchingWindowsImage.ImageIndex
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] EditionId $EditionId found at ImageIndex $($global:OSDCloudDeploy.WindowsImageIndex)"
+            $global:RecastOSDeploy.WindowsImage = $MatchingWindowsImage
+            $global:RecastOSDeploy.WindowsImageIndex = $MatchingWindowsImage.ImageIndex
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] EditionId $EditionId found at ImageIndex $($global:RecastOSDeploy.WindowsImageIndex)"
             return
         }
     }
@@ -100,7 +100,7 @@ function Step-OSDCloudGetWindowsImageIndex {
         }
         until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $SelectWindowsImage.ImageIndex))))
 
-        $global:OSDCloudDeploy.WindowsImageIndex = $SelectReadHost
+        $global:RecastOSDeploy.WindowsImageIndex = $SelectReadHost
         return
     }
     #=================================================

@@ -9,6 +9,11 @@ function Step-OSDCloudDriverPackSave {
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
     # Is DriverPackName set to None?
     if ($DriverPackName -eq 'None') {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackName is set to None. OK."

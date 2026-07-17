@@ -21,6 +21,11 @@ function Step-OSDCloudPreinstallHooks {
     [CmdletBinding()]
     param ()
     #=================================================
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] This step will only run in WinPE (X:)"
+        return
+    }
+    #=================================================
     #region ----- ..\OSDCloud\Config\Scripts\Startup\*.ps1
     <#
     These scripts will be in the OSDCloud Workspace in Config\Scripts\Startup

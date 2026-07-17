@@ -51,7 +51,7 @@ function Step-OSDCloudTelemetryPH {
     $classWin32TimeZone = Get-CimInstance -ClassName Win32_TimeZone | Select-Object -Property *
     #=================================================
     $eventName = 'osd_deploy'
-    function Send-OSDCloudDeployEvent {
+    function Send-RecastOSDCloudEvent {
         [CmdletBinding()]
         param(
             [Parameter(Mandatory)]
@@ -143,6 +143,6 @@ function Step-OSDCloudTelemetryPH {
         osdcloudOSLanguageCode     = $OSDCloud.OSLanguage
     }
     $postApi = 'phc_2h7nQJCo41Hc5C64B2SkcEBZOvJ6mHr5xAHZyjPl3ZK'
-    Send-OSDCloudDeployEvent -EventName $eventName -ApiKey $postApi -DistinctId $distinctId -Properties $global:OSDCoreEvent
+    Send-RecastOSDCloudEvent -EventName $eventName -ApiKey $postApi -DistinctId $distinctId -Properties $global:OSDCoreEvent
     #=================================================
 }

@@ -64,21 +64,20 @@ function Step-OSDCloudRemoveUSBDrives {
         }
 
         foreach ($accessPath in $accessPaths) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Removing USB Volume $fileSystemLabel on AccessPath $accessPath"
-
-            if ($env:SystemDrive -eq 'C:') {
-                try {
-                    # Remove this path so USB media does not interfere with deployment steps.
-                    Remove-PartitionAccessPath -AccessPath $accessPath -DiskNumber $Item.DiskNumber -PartitionNumber $Item.PartitionNumber -ErrorAction Stop
-                }
-                catch {
-                    # Keep going if one partition fails so others can still be processed.
-                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to remove access path '$accessPath' (Disk $($Item.DiskNumber), Partition $($Item.PartitionNumber)): $($_.Exception.Message)"
-                }
+            # Do not attempt to remove canonical volume GUID paths.
+            if ($accessPath -match '^\\\\\?\\Volume\{[0-9a-fA-F\-]+\}\\$') {
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Skipped GUID access path '$accessPath'"
+                continue
             }
-            else {
-                # This action is limited to WinPE for safety.
-                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Skipped removing '$accessPath' because system drive is $env:SystemDrive"
+
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Removing USB Volume $fileSystemLabel on AccessPath $accessPath"
+            try {
+                # Remove this path so USB media does not interfere with deployment steps.
+                Remove-PartitionAccessPath -AccessPath $accessPath -DiskNumber $Item.DiskNumber -PartitionNumber $Item.PartitionNumber -ErrorAction Stop
+            }
+            catch {
+                # Keep going if one partition fails so others can still be processed.
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to remove access path '$accessPath' (Disk $($Item.DiskNumber), Partition $($Item.PartitionNumber)): $($_.Exception.Message)"
             }
         }
     }
