@@ -41,37 +41,30 @@ function Step-OSDCloudConfirmWindowsESDOnline {
     )
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm WindowsESD Online Availability"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm OperatingSystemObject Online:"
     #=================================================
     # Is there an OperatingSystem Object?
     if (-not ($OperatingSystemObject)) {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystemObject is not set"
     }
     #=================================================
     # Is there a Url?
     if (-not ($OperatingSystemObject.Url)) {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject does not have a Url"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystemObject does not have a Url"
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($OperatingSystemObject.Url)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - $($OperatingSystemObject.Url)"
     #=================================================
     # Is the Url reachable?
-    # Use a one-byte ranged GET as a lightweight reachability/content check.
-    $OnlineCheckUri = if ($OperatingSystemObject.Url) { $OperatingSystemObject.Url } else { $OperatingSystemObject.FilePath }
-
-    if ($OnlineCheckUri) {
-        try {
-            $WebRequest = Invoke-WebRequest -Uri $OnlineCheckUri -UseBasicParsing -Method Get -Headers @{ Range = 'bytes=0-0' } -ErrorAction Stop
-            if ($WebRequest.StatusCode -in 200, 206) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemObject URI is reachable (GET $($WebRequest.StatusCode)). OK."
-                $global:OSDCloudDeploy.ConfirmWindowsESDOnline = $true
-            }
-        }
-        catch {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemObject URI is not reachable."
+    # Use a HEAD request as a lightweight reachability/content check.
+    try {
+        $WebRequest = Invoke-WebRequest -Uri $OperatingSystemObject.Url -UseBasicParsing -Method Head -ErrorAction Stop
+        if ($WebRequest.StatusCode -in 200, 206) {
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - OperatingSystemObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
+            $global:RecastOSDeploy.ConfirmWindowsESDOnline = $true
         }
     }
-    else {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject URI is not set."
+    catch {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] - OperatingSystemObject URI is not reachable. OK."
     }
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"

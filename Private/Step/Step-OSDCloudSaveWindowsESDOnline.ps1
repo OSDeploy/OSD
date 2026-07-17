@@ -1,4 +1,4 @@
-function Step-OSDCloudSaveWindowsESD {
+function Step-OSDCloudSaveWindowsESDOnline {
     [CmdletBinding()]
     param (
         [Parameter()]
@@ -10,6 +10,12 @@ function Step-OSDCloudSaveWindowsESD {
     )
     #=================================================
     Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+    #=================================================
+    # Is it online?
+    if (-not ($global:RecastOSDeploy.ConfirmWindowsESDOnline)) {
+        return
+    }
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Save OperatingSystemObject Online:"
     #=================================================
     # Is there an OperatingSystem Object?
     if (-not ($OperatingSystemObject)) {
@@ -42,7 +48,7 @@ function Step-OSDCloudSaveWindowsESD {
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
                 # Get-Item for $DestinationFile
-                $global:OSDCloudDeploy.OperatingSystemItem = $DestinationFile
+                $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
             }
         }
         elseif ($OperatingSystemObject.SHA256) {
@@ -54,7 +60,7 @@ function Step-OSDCloudSaveWindowsESD {
             }
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
-                $global:OSDCloudDeploy.OperatingSystemItem = $DestinationFile
+                $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
             }
         }
 
@@ -71,7 +77,7 @@ function Step-OSDCloudSaveWindowsESD {
             if ($HashRetryCount -lt 1) {
                 # Single retry guard prevents unbounded recursion on persistent failures.
                 Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Retrying download after removing hash-mismatched file"
-                Step-OSDCloudSaveWindowsESD -OperatingSystemObject $OperatingSystemObject -HashRetryCount ($HashRetryCount + 1)
+                Step-OSDCloudSaveWindowsESDOnline -OperatingSystemObject $OperatingSystemObject -HashRetryCount ($HashRetryCount + 1)
                 return
             }
 
@@ -88,14 +94,14 @@ function Step-OSDCloudSaveWindowsESD {
     }
     #=================================================
     # Is the Url reachable?
-    # Use a one-byte ranged GET as a lightweight reachability/content check.
+    # Use a HEAD request as a lightweight reachability/content check.
     $OnlineCheckUri = if ($OperatingSystemObject.Url) { $OperatingSystemObject.Url } else { $OperatingSystemObject.FilePath }
 
     if ($OnlineCheckUri) {
         try {
-            $WebRequest = Invoke-WebRequest -Uri $OnlineCheckUri -UseBasicParsing -Method Get -Headers @{ Range = 'bytes=0-0' } -ErrorAction Stop
+            $WebRequest = Invoke-WebRequest -Uri $OnlineCheckUri -UseBasicParsing -Method Head -ErrorAction Stop
             if ($WebRequest.StatusCode -in 200, 206) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemObject URI is reachable (GET $($WebRequest.StatusCode)). OK."
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
             }
         }
         catch {
@@ -128,7 +134,7 @@ function Step-OSDCloudSaveWindowsESD {
 
     if ($USBDrive) {
         # USB path groups content by operating system family for reuse.
-        $USBDownloadPath = "$($USBDrive.DriveLetter):\OSDCloud\OS\$($OperatingSystemObject.OperatingSystem)"
+        $USBDownloadPath = "$($USBDrive.DriveLetter):\OSDCloud\OS\$($OperatingSystemObject.Version) $($OperatingSystemObject.ReleaseID)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DownloadPath: $USBDownloadPath"
 
         if (-not (Test-Path -LiteralPath $USBDownloadPath -ErrorAction SilentlyContinue)) {
@@ -177,7 +183,7 @@ function Step-OSDCloudSaveWindowsESD {
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:OSDCloudDeploy.OperatingSystemItem = $DestinationFile
+            $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
         }
     }
     if ($OperatingSystemObject.SHA256) {
@@ -190,7 +196,7 @@ function Step-OSDCloudSaveWindowsESD {
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:OSDCloudDeploy.OperatingSystemItem = $DestinationFile
+            $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
         }
     }
     #=================================================
