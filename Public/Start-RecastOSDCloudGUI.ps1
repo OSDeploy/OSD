@@ -270,8 +270,8 @@ function Start-RecastOSDCloudGUI {
     $DeploymentDiskObject = $DeploymentDiskObject | Select-Object -First 1
     #=================================================
     # Build deployment state consumed by the broader OSDCloud workflow.
-    $global:OSDCloudDeploy = $null
-    $global:OSDCloudDeploy = [ordered]@{
+    $global:RecastOSDeploy = $null
+    $global:RecastOSDeploy = [ordered]@{
         DeploymentDiskObject  = $DeploymentDiskObject
         # DriverFolderName          = $null
         # DriverFolderNames         = @()

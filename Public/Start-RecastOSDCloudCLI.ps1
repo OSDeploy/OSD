@@ -107,7 +107,13 @@ function Start-RecastOSDCloudCLI {
         [Parameter(Mandatory = $false, HelpMessage = 'Optional product/system ID override used for driver pack selection.')]
         [ValidateNotNullOrEmpty()]
         [string]
-        $OSDProduct
+        $OSDProduct,
+
+        [Parameter(Mandatory = $false, HelpMessage = 'WinPE Post Action.')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('Quit','Restart','Shutdown')]
+        [string]
+        $WinPEPostAction = 'Restart'
     )
     #=================================================
     # Emit function/version context and surface legacy parameter usage.
@@ -232,8 +238,13 @@ function Start-RecastOSDCloudCLI {
     $DeploymentDiskObject = $DeploymentDiskObject | Select-Object -First 1
     #=================================================
     # Build deployment state consumed by the broader OSDCloud workflow.
-    $global:OSDCloudDeploy = $null
-    $global:OSDCloudDeploy = [ordered]@{
+    $global:RecastOSDeploy = $null
+    $global:RecastOSDeploy = [ordered]@{
+        ConfirmDeploymentDisk = $false
+        ConfirmDriverPackOffline = $false
+        ConfirmDriverPackOnline = $false
+        ConfirmWindowsESDOffline = $false
+        ConfirmWindowsESDOnline = $false
         DeploymentDiskObject = $DeploymentDiskObject
         # DriverFolderName          = $null
         # DriverFolderNames         = @()
@@ -265,10 +276,12 @@ function Start-RecastOSDCloudCLI {
         OSLanguageCode       = $OSLanguageCode
         OSLanguageCodeValues = $OSLanguageCodeValues
         OSVersion            = $OSVersion
+        TimeSpan             = $null
         TimeStart            = $null
         WindowsEdition       = $null
         WindowsImage         = $null
         WindowsImageIndex    = $null
+        WinPEPostAction      = $WinPEPostAction
         # WorkflowName              = $WorkflowName
         # WorkflowTaskName          = $WorkflowTaskName
         # WorkflowTaskObject        = $WorkflowTaskObject

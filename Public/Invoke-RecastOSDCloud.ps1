@@ -331,7 +331,7 @@ function Invoke-RecastOSDCloud {
     Step-OSDCloudConfirmOperatingSystem
     Step-OSDCloudConfirmAutopilotJson
     Step-OSDCloudConfirmOfficeODT
-    Step-OSDCloudConfirmDisk
+    Step-OSDCloudConfirmDeploymentDisk
     # Step-OSDCloudTelemetryPSGallery
     # Step-OSDCloudTelemetryPH
     Step-OSDCloudRemoveUSBDrives
@@ -358,8 +358,8 @@ function Invoke-RecastOSDCloud {
     }
     #region WindowsImage Download
     if ($global:OSDCoreOperatingSystemObject) {
-        Step-OSDCloudCopyWindowsESD
-        Step-OSDCloudSaveWindowsESD
+        Step-OSDCloudSaveWindowsESDOffline
+        Step-OSDCloudSaveWindowsESDOnline
     }
     elseif (!($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileUrl)) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Download Operating System"
@@ -640,9 +640,9 @@ function Invoke-RecastOSDCloud {
     Step-OSDCloudConfirmWindowsEdition
     Step-OSDCloudBcdBoot
     Step-OSDCloudNewItemContentFolders
-    Step-OSDCloudExportWindowsDriverOemWinPE
-    Step-OSDCloudAddWindowsDriverOemWinOS
-    Step-OSDCloudAddWindowsDriverOemWinRE
+    Step-OSDCloudExportWinPEOemDrivers
+    Step-OSDCloudAddWinOSOemDrivers
+    Step-OSDCloudAddWinREOemDrivers
 
     #region Drivers
         #region Get-OSDCloudDriverPack
@@ -659,9 +659,9 @@ function Invoke-RecastOSDCloud {
             }
         }
 
-        if ($global:OSDCloudDeploy.DriverPackObject) {
+        if ($global:RecastOSDeploy.DriverPackObject) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud v2 DriverPack"
-            $Global:OSDCloud.DriverPack = $global:OSDCloudDeploy.DriverPackObject
+            $Global:OSDCloud.DriverPack = $global:RecastOSDeploy.DriverPackObject
         }
         elseif ($Global:OSDCloud.DriverPackName) {
             if ($Global:OSDCloud.DriverPackName -match 'None') {

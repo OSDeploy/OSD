@@ -444,7 +444,7 @@
         #=================================================
         #region Analytics
         $eventName = 'osd_deploy'
-        function Send-OSDCloudDeployEvent {
+        function Send-RecastOSDCloudEvent {
             [CmdletBinding()]
             param(
                 [Parameter(Mandatory)]
@@ -536,7 +536,7 @@
             osdcloudOSLanguageCode     = $OSDCloud.OSLanguage
         }
         $postApi = 'phc_2h7nQJCo41Hc5C64B2SkcEBZOvJ6mHr5xAHZyjPl3ZK'
-        Send-OSDCloudDeployEvent -EventName $eventName -ApiKey $postApi -DistinctId $distinctId -Properties $eventProperties
+        Send-RecastOSDCloudEvent -EventName $eventName -ApiKey $postApi -DistinctId $distinctId -Properties $eventProperties
         #endregion
 
         #region Confirm Operating System Source
