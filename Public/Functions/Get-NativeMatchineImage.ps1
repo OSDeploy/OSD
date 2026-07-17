@@ -1,4 +1,4 @@
-Function Get-NativeMatchineImage {
+function Get-NativeMatchineImage {
 <#
 .SYNOPSIS
 Gets NativeMatchineImage information.
