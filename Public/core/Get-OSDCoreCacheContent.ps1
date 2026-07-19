@@ -1,4 +1,4 @@
-function Get-OSDCoreCache {
+function Get-OSDCoreCacheContent {
     <#
     .SYNOPSIS
         Returns cached OSDCloud content found on local file system drives.
@@ -6,7 +6,8 @@ function Get-OSDCoreCache {
     .DESCRIPTION
         Enumerates mounted file system drives and discovers OSDCloud cache content.
         Returns objects with Type, Name, FullName, SizeMB,
-        DriveRoot, VolumeLabel, and VolumeUniqueId properties.
+        DriveRoot, VolumeLabel, VolumeUniqueId, and USB properties.
+        Exports the returned object to $env:Temp\OSDCoreCacheContent.xml each time the function runs.
 
         If Type is omitted, retur ns all supported cache content types.
 
@@ -41,30 +42,30 @@ function Get-OSDCoreCache {
 
     .OUTPUTS
         System.Object[]. Objects with Type, Name, FullName, SizeMB,
-        DriveRoot, VolumeLabel, and VolumeUniqueId.
+        DriveRoot, VolumeLabel, VolumeUniqueId, and USB.
 
     .EXAMPLE
-        Get-OSDCoreCache
+        Get-OSDCoreCacheContent
 
         Returns all supported cache content types.
 
     .EXAMPLE
-        Get-OSDCoreCache -Type ESD
+        Get-OSDCoreCacheContent -Type ESD
 
         Returns all .esd files under each discovered cache OS folder.
 
     .EXAMPLE
-        Get-OSDCoreCache -Type ESD,DriverPacks
+        Get-OSDCoreCacheContent -Type ESD,DriverPacks
 
         Returns all .esd files and driver pack files from each discovered cache.
 
     .EXAMPLE
-        Get-OSDCoreCache -Type *
+        Get-OSDCoreCacheContent -Type *
 
         Returns all supported cache content types.
 
     .EXAMPLE
-        Get-OSDCoreCache -Include C,D -Exclude D
+        Get-OSDCoreCacheContent -Include C,D -Exclude D
 
         Searches only drive C for supported cache content types.
     #>
@@ -86,7 +87,7 @@ function Get-OSDCoreCache {
 
     $Error.Clear()
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache is updating"
+    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent is updating"
 
     function Get-FileOnlySizeMB {
         param(
@@ -122,11 +123,18 @@ function Get-OSDCoreCache {
         )
 
         $volume = $null
+        $usb = $false
         if ($DriveRoot -match '^[A-Z]:\\$') {
             try {
-                $volume = Get-Volume -DriveLetter $DriveRoot.Substring(0, 1) -ErrorAction Stop
+                $driveLetter = $DriveRoot.Substring(0, 1)
+                $volume = Get-Volume -DriveLetter $driveLetter -ErrorAction Stop
+                $usb = [bool](Get-Disk -ErrorAction SilentlyContinue |
+                    Where-Object { $_.BusType -eq 'USB' } |
+                    Get-Partition -ErrorAction SilentlyContinue |
+                    Where-Object { $_.DriveLetter -eq $driveLetter })
             } catch {
                 $volume = $null
+                $usb = $false
             }
         }
 
@@ -134,6 +142,7 @@ function Get-OSDCoreCache {
             DriveRoot      = $DriveRoot
             VolumeLabel    = if ($volume) { [string]$volume.FileSystemLabel } else { $null }
             VolumeUniqueId = if ($volume) { [string]$volume.UniqueId } else { $null }
+            USB            = [bool]$usb
         }
     }
 
@@ -154,6 +163,7 @@ function Get-OSDCoreCache {
             FullName       = $ResultFullName
             SizeMB         = Get-FileOnlySizeMB -Path $ResultFullName
             Type           = $ResultType
+            USB            = [bool]$VolumeMetadata.USB
             DriveRoot      = [string]$VolumeMetadata.DriveRoot
             VolumeLabel    = [string]$VolumeMetadata.VolumeLabel
             VolumeUniqueId = [string]$VolumeMetadata.VolumeUniqueId
@@ -301,6 +311,7 @@ function Get-OSDCoreCache {
     }
 
     $result = @($result | Sort-Object -Property FullName, Type -Unique | Sort-Object -Property FullName)
+    $result | Export-Clixml -Path (Join-Path -Path $env:Temp -ChildPath 'OSDCoreCacheContent.xml') -Force
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Found $($result.Count) path(s)"
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
 
