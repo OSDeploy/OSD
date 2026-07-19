@@ -50,7 +50,7 @@ function Get-OSDCoreOperatingSystems {
     $srcRoot = Join-Path $($MyInvocation.MyCommand.Module.ModuleBase) 'core\operatingsystems'
 
     foreach ($file in (Get-ChildItem -Path $srcRoot -Filter '*.xml' -File | Sort-Object FullName)) {
-        Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Importing $($file.FullName)"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Importing $($file.FullName)"
 
         $xml = [xml](Get-Content -Path $file.FullName -Raw)
         $fileNodes = $xml.MCT.Catalogs.Catalog.PublishedMedia.Files.File
@@ -121,7 +121,7 @@ function Get-OSDCoreOperatingSystems {
     }
 
     foreach ($node in ($mctRecords | Sort-Object FileName, LanguageCode, Architecture)) {
-        Write-Verbose "[$(Get-Date -Format s)] [$($MyInvocation.MyCommand.Name)] Processing $($node.FileName)"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Processing $($node.FileName)"
 
         if ([string]::IsNullOrWhiteSpace($node.FileName) -or $node.FileName.Length -lt 5) {
             continue
