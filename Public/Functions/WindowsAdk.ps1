@@ -203,7 +203,7 @@ function Get-WindowsAdkInstallPath {
         $WindowsAdkInstallPath = Join-Path $WindowsKitsInstallPath 'Assessment and Deployment Kit'
 
         if (Test-Path "$WindowsAdkInstallPath") {
-            Write-Verbose "[$(Get-Date -format s)] Windows Assessment and Deployment Kit install path is $WindowsAdkInstallPath"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Windows Assessment and Deployment Kit install path is $WindowsAdkInstallPath"
             return $WindowsAdkInstallPath
         }
         else {
@@ -286,7 +286,7 @@ function Get-WindowsAdkPaths {
         $WindowsAdkRoot
     )
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Start"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     $Error.Clear()
     #=================================================
     # region Get Windows ADK information from the Registry
@@ -303,21 +303,21 @@ function Get-WindowsAdkPaths {
                 $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name $RegistryValue -ErrorAction SilentlyContinue
 
                 if (Test-Path -Path $KitsRoot10) {
-                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Found KitsRoot10 in $InstalledRoots64"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Found KitsRoot10 in $InstalledRoots64"
                 }
                 else {
-                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] KitsRoot10 path from registry does not exist: $KitsRoot10"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] KitsRoot10 path from registry does not exist: $KitsRoot10"
                     $KitsRoot10 = $null
                 }
             }
             else {
-                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Registry value $RegistryValue not found in $InstalledRoots64"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Registry value $RegistryValue not found in $InstalledRoots64"
             }
         }
 
         if (-NOT ($KitsRoot10)) {
             if (Test-Path -Path $DefaultPath) {
-                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Found KitsRoot10 in $DefaultPath"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Found KitsRoot10 in $DefaultPath"
                 $KitsRoot10 = $DefaultPath
             }
         }
@@ -329,12 +329,12 @@ function Get-WindowsAdkPaths {
                     $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots32 -Name $RegistryValue -ErrorAction SilentlyContinue
                 }
                 else {
-                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Registry value $RegistryValue not found in $InstalledRoots32"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Registry value $RegistryValue not found in $InstalledRoots32"
                 }
             }
         }
 
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] $KitsRoot10"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] $KitsRoot10"
 
         if ($KitsRoot10) {
             $WindowsAdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
@@ -397,7 +397,7 @@ function Get-WindowsAdkPaths {
     Return $Results
     #endregion
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }
 function Get-WindowsKitsInstallPath {
@@ -450,7 +450,7 @@ function Get-WindowsKitsInstallPath {
 
     if ($KitsRoot10) {
         if (Test-Path "$KitsRoot10") {
-            Write-Verbose "[$(Get-Date -format s)] Windows Kits install path is $KitsRoot10"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Windows Kits install path is $KitsRoot10"
             return $KitsRoot10
         }
         else {
@@ -883,7 +883,7 @@ function New-WindowsAdkISO {
     )
     #=================================================
     $Error.Clear()
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Start"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
 	#=================================================
 	Block-WinPE
         if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -905,10 +905,10 @@ function New-WindowsAdkISO {
     $PathOscdimg = $WindowsAdkPaths.PathOscdimg
     $oscdimgexe = $WindowsAdkPaths.oscdimgexe
 
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] IsoDirectory: $IsoDirectory"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] IsoFullName: $IsoFullName"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] PathOscdimg: $PathOscdimg"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] oscdimgexe: $oscdimgexe"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] IsoDirectory: $IsoDirectory"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] IsoFullName: $IsoFullName"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] PathOscdimg: $PathOscdimg"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] oscdimgexe: $oscdimgexe"
     #=================================================
     # Test Paths
     $DestinationBoot = Join-Path $MediaPath 'boot'
@@ -963,22 +963,22 @@ function New-WindowsAdkISO {
         $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys.bin'
     } #>
 
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] DestinationBoot: $DestinationBoot"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] etfsbootcom: $etfsbootcom"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Destinationetfsbootcom: $Destinationetfsbootcom"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] DestinationEfiBoot: $DestinationEfiBoot"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] efisysbin: $efisysbin"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Destinationefisysbin: $Destinationefisysbin"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] efisysnopromptbin: $efisysnopromptbin"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Destinationefisysnopromptbin: $Destinationefisysnopromptbin"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DestinationBoot: $DestinationBoot"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] etfsbootcom: $etfsbootcom"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Destinationetfsbootcom: $Destinationetfsbootcom"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DestinationEfiBoot: $DestinationEfiBoot"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] efisysbin: $efisysbin"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Destinationefisysbin: $Destinationefisysbin"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] efisysnopromptbin: $efisysnopromptbin"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Destinationefisysnopromptbin: $Destinationefisysnopromptbin"
     #=================================================
     # Strings
     $isoLabelString = '-l"{0}"' -f "$isoLabel"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] isoLabelString: $isoLabelString"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] isoLabelString: $isoLabelString"
     #=================================================
     # Create Prompt ISO
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysbin"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] BootDataString: $BootDataString"
 
     $Process = Start-Process $oscdimgexe -args @('-m', '-o', '-u2', "-bootdata:$BootDataString", '-u2', '-udfver102', $isoLabelString, "`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -WindowStyle Hidden
 
@@ -992,7 +992,7 @@ function New-WindowsAdkISO {
     # Create NoPrompt ISO
     $IsoFullName = "$($PromptIso.Directory)\$($PromptIso.BaseName)_NoPrompt.iso"
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysnopromptbin"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] BootDataString: $BootDataString"
 
     $Process = Start-Process $oscdimgexe -args @('-m', '-o', '-u2', "-bootdata:$BootDataString", '-u2', '-udfver102', $isoLabelString, "`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -WindowStyle Hidden
 

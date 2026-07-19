@@ -556,11 +556,11 @@ function Save-MyDriverPack {
             New-Item $DownloadPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
         }
 
-        Write-Verbose -Message "CatalogVersion: $($GetMyDriverPack.CatalogVersion)"
-        Write-Verbose -Message "Name: $($GetMyDriverPack.Name)"
-        Write-Verbose -Message "Product: $($GetMyDriverPack.Product)"
-        Write-Verbose -Message "Url: $($GetMyDriverPack.Url)"
-        Write-Verbose -Message "OutFile: $OutFile"
+        Write-Verbose "CatalogVersion: $($GetMyDriverPack.CatalogVersion)"
+        Write-Verbose "Name: $($GetMyDriverPack.Name)"
+        Write-Verbose "Product: $($GetMyDriverPack.Product)"
+        Write-Verbose "Url: $($GetMyDriverPack.Url)"
+        Write-Verbose "OutFile: $OutFile"
 
         Save-WebFile -SourceUrl $GetMyDriverPack.Url -DestinationDirectory $DownloadPath -DestinationName $GetMyDriverPack.FileName
 
@@ -578,7 +578,7 @@ function Save-MyDriverPack {
             if ($PSBoundParameters.ContainsKey('Expand')) {
 
                 $ExpandFile = $GetItemOutFile.FullName
-                Write-Verbose -Message "DriverPack: $ExpandFile"
+                Write-Verbose "DriverPack: $ExpandFile"
                 #=================================================
                 #   Cab
                 #=================================================
@@ -614,10 +614,10 @@ function Save-MyDriverPack {
                 #=================================================
                 if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
                     if (($GetItemOutFile.VersionInfo.InternalName -match 'hpsoftpaqwrapper') -or ($GetItemOutFile.VersionInfo.OriginalFilename -match 'hpsoftpaqwrapper.exe') -or ($GetItemOutFile.VersionInfo.FileDescription -like "HP *")) {
-                        Write-Verbose -Message "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
-                        Write-Verbose -Message "InternalName: $($GetItemOutFile.VersionInfo.InternalName)"
-                        Write-Verbose -Message "OriginalFilename: $($GetItemOutFile.VersionInfo.OriginalFilename)"
-                        Write-Verbose -Message "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
+                        Write-Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
+                        Write-Verbose "InternalName: $($GetItemOutFile.VersionInfo.InternalName)"
+                        Write-Verbose "OriginalFilename: $($GetItemOutFile.VersionInfo.OriginalFilename)"
+                        Write-Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
 
                         $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
 
@@ -632,8 +632,8 @@ function Save-MyDriverPack {
                 #=================================================
                 if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
                     if (($GetItemOutFile.VersionInfo.FileDescription -match 'Lenovo') -or ($GetItemOutFile.Name -match 'tc_') -or ($GetItemOutFile.Name -match 'tp_') -or ($GetItemOutFile.Name -match 'ts_') -or ($GetItemOutFile.Name -match '500w') -or ($GetItemOutFile.Name -match 'sccm_') -or ($GetItemOutFile.Name -match 'm710e') -or ($GetItemOutFile.Name -match 'tp10') -or ($GetItemOutFile.Name -match 'tp8') -or ($GetItemOutFile.Name -match 'yoga')) {
-                        Write-Verbose -Message "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
-                        Write-Verbose -Message "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
+                        Write-Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
+                        Write-Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
 
                         $DestinationPath = Join-Path $GetItemOutFile.Directory 'SCCM'
 

@@ -592,7 +592,7 @@ function New-OSDCloudREVolume {
                 #============================================
                 #	Shrink Windows Partition
                 #============================================
-                Write-Verbose "[$(Get-Date -format s)] Shrinking Windows partition"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Shrinking Windows partition"
                 $WindowsPartition | Resize-Partition -Size $WindowsShrinkSize
                 #============================================
                 #	Test WindowsPartition
@@ -602,7 +602,7 @@ function New-OSDCloudREVolume {
                     #============================================
                     #   Create NewPartition
                     #============================================
-                    Write-Verbose "[$(Get-Date -format s)] Creating OSDCloudRE Partition"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Creating OSDCloudRE Partition"
                     $Global:NewPartition = New-Partition -DiskNumber $WindowsDiskNumber -GptType '{de94bba4-06d1-4d40-a16a-bfd50179d6ac}' -UseMaximumSize
                     #============================================
                     #   Test NewPartition
@@ -729,49 +729,49 @@ function Set-OSDCloudREBootmgr {
 
     if ($SetRamdisk) {
         if ($OSDCloudREPartition) {
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /create '{4f534452-616d-6469-736b-536567757261}' /d OSDRamdisk /device"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /create '{4f534452-616d-6469-736b-536567757261}' /d OSDRamdisk /device"
             $null = bcdedit /create '{4f534452-616d-6469-736b-536567757261}' /d "OSDRamdisk" /device
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /set '{4f534452-616d-6469-736b-536567757261}' ramdisksdidevice partition=O:"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /set '{4f534452-616d-6469-736b-536567757261}' ramdisksdidevice partition=O:"
             $null = bcdedit /set '{4f534452-616d-6469-736b-536567757261}' ramdisksdidevice partition=O:
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /set '{4f534452-616d-6469-736b-536567757261}' ramdisksdipath \boot\boot.sdi"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /set '{4f534452-616d-6469-736b-536567757261}' ramdisksdipath \boot\boot.sdi"
             $null = bcdedit /set '{4f534452-616d-6469-736b-536567757261}' ramdisksdipath \boot\boot.sdi
         }
     }
 
     if ($SetOSloader) {
         if ($OSDCloudREPartition) {
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /create '{4f534443-6c6f-7564-5245-536567757261}' /d OSDCloudRE /application osloader"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /create '{4f534443-6c6f-7564-5245-536567757261}' /d OSDCloudRE /application osloader"
             $null = bcdedit /create '{4f534443-6c6f-7564-5245-536567757261}' /d "OSDCloudRE" /application osloader
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' device ramdisk=[O:]\sources\boot.wim,'{4f534452-616d-6469-736b-536567757261}'"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' device ramdisk=[O:]\sources\boot.wim,'{4f534452-616d-6469-736b-536567757261}'"
             $null = bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' device ramdisk=[O:]\sources\boot.wim,'{4f534452-616d-6469-736b-536567757261}'
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' osdevice ramdisk=[O:]\sources\boot.wim,'{4f534452-616d-6469-736b-536567757261}'"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' osdevice ramdisk=[O:]\sources\boot.wim,'{4f534452-616d-6469-736b-536567757261}'"
             $null = bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' osdevice ramdisk=[O:]\sources\boot.wim,'{4f534452-616d-6469-736b-536567757261}'
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' path \windows\system32\winload.efi"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' path \windows\system32\winload.efi"
             $null = bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' path \windows\system32\winload.efi
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' systemroot \Windows"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' systemroot \Windows"
             $null = bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' systemroot \Windows
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' detecthal Yes"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' detecthal Yes"
             $null = bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' detecthal Yes
-            Write-Verbose "[$(Get-Date -format s)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' winpe Yes"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' winpe Yes"
             $null = bcdedit /set '{4f534443-6c6f-7564-5245-536567757261}' winpe Yes
         }
     }
 
     if ($OSMenuAdd) {
-        Write-Verbose "[$(Get-Date -format s)] bcdedit /displayorder '{4f534443-6c6f-7564-5245-536567757261}' /addlast"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /displayorder '{4f534443-6c6f-7564-5245-536567757261}' /addlast"
         $null = bcdedit /displayorder '{4f534443-6c6f-7564-5245-536567757261}' /addlast
     }
 
     if ($OSMenuRemove) {
-        Write-Verbose "[$(Get-Date -format s)] bcdedit /displayorder '{4f534443-6c6f-7564-5245-536567757261}' /remove"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /displayorder '{4f534443-6c6f-7564-5245-536567757261}' /remove"
         $null = bcdedit /displayorder '{4f534443-6c6f-7564-5245-536567757261}' /remove
     }
 
     if ($BootToOSDCloudRE) {
-        Write-Verbose "[$(Get-Date -format s)] bcdedit /bootsequence '{4f534443-6c6f-7564-5245-536567757261}'"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] bcdedit /bootsequence '{4f534443-6c6f-7564-5245-536567757261}'"
         try {
             $null = bcdedit /bootsequence '{4f534443-6c6f-7564-5245-536567757261}'
-            Write-Verbose "[$(Get-Date -format s)] OSDCloudRE set for next boot"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCloudRE set for next boot"
         }
         catch {
             Write-Warning "[$(Get-Date -format s)] OSDCloudRE could not be set for next boot"

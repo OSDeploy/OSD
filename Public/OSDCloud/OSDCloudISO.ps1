@@ -105,7 +105,7 @@
             $isoPath = Join-Path $WorkspacePath $isoFileName
         }
 
-        Write-Verbose "[$(Get-Date -format s)] Created ISO at $isoPath"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Created ISO at $isoPath"
         Get-Item -Path $isoPath -ErrorAction SilentlyContinue
     }
     catch {

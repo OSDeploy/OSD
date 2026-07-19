@@ -408,7 +408,7 @@ function Convert-FolderToIso {
     )
     #=================================================
     $Error.Clear()
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Start"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     #=================================================
     #	Blocks
     #=================================================
@@ -432,9 +432,9 @@ function Convert-FolderToIso {
     #=================================================
     #	Variables
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] folderFullName: $folderFullName"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] isoFullName: $isoFullName"
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] isoLabel: $isoLabel"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] folderFullName: $folderFullName"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] isoFullName: $isoFullName"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] isoLabel: $isoLabel"
     #=================================================
     #   Test if existing file exists and writable
     #=================================================
@@ -533,6 +533,6 @@ function Convert-FolderToIso {
         Write-Error "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Something didn't work"
     }
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

@@ -146,14 +146,14 @@ function Save-OSDCloudDriverPack {
             if ($DriverPack) {
                 $OutFile = Join-Path $DownloadPath $DriverPack.FileName
 
-                Write-Verbose -Message "ReleaseDate: $($DriverPack.ReleaseDate)"
-                Write-Verbose -Message "Name: $($DriverPack.Name)"
-                Write-Verbose -Message "Product: $($DriverPack.Product)"
-                Write-Verbose -Message "Url: $($DriverPack.Url)"
+                Write-Verbose "ReleaseDate: $($DriverPack.ReleaseDate)"
+                Write-Verbose "Name: $($DriverPack.Name)"
+                Write-Verbose "Product: $($DriverPack.Product)"
+                Write-Verbose "Url: $($DriverPack.Url)"
                 if ($DriverPack.HashMD5) {
-                    Write-Verbose -Message "HashMD5: $($DriverPack.HashMD5)"
+                    Write-Verbose "HashMD5: $($DriverPack.HashMD5)"
                 }
-                Write-Verbose -Message "OutFile: $OutFile"
+                Write-Verbose "OutFile: $OutFile"
 
                 Save-WebFile -SourceUrl $DriverPack.Url -DestinationDirectory $DownloadPath -DestinationName $DriverPack.FileName
 

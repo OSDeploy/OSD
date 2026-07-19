@@ -186,7 +186,7 @@ function Save-FeatureUpdate {
             $Results = $Results | Where-Object { $_.ReleaseID -eq $OSNameReleaseID }
         }
         else {
-            Write-Verbose -Message "Unable to parse OSName '$OSName'; only architecture filter will be applied."
+            Write-Verbose "Unable to parse OSName '$OSName'; only architecture filter will be applied."
         }
     }
     else {

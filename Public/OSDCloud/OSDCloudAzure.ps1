@@ -118,10 +118,10 @@ function Connect-OSDCloudAzure {
         #Write-Host ''
 
         if ($OSDCloudLogs) {
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzSubscription.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzSubscription.json"
             $Global:AzSubscription | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzSubscription.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzContext.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzContext.json"
             $Global:AzContext | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzContext.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
@@ -135,10 +135,10 @@ function Connect-OSDCloudAzure {
             'ExpiresOn'     = $Global:AzAadGraphAccessToken.ExpiresOn
         }
         if ($OSDCloudLogs) {
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzAadGraphAccessToken.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzAadGraphAccessToken.json"
             $Global:AzAadGraphAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzAadGraphAccessToken.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzAadGraphHeaders.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzAadGraphHeaders.json"
             $Global:AzAadGraphHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzAadGraphHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
@@ -152,10 +152,10 @@ function Connect-OSDCloudAzure {
             'ExpiresOn'     = $Global:AzKeyVaultAccessToken.ExpiresOn
         }
         if ($OSDCloudLogs) {
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzKeyVaultAccessToken.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzKeyVaultAccessToken.json"
             $Global:AzKeyVaultAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzKeyVaultAccessToken.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzKeyVaultHeaders.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzKeyVaultHeaders.json"
             $Global:AzKeyVaultHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzKeyVaultHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
@@ -169,10 +169,10 @@ function Connect-OSDCloudAzure {
             'ExpiresOn'     = $Global:AzMSGraphHeaders.ExpiresOn
         }
         if ($OSDCloudLogs) {
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzMSGraphAccessToken.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzMSGraphAccessToken.json"
             $Global:AzMSGraphAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzMSGraphAccessToken.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzMSGraphHeaders.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzMSGraphHeaders.json"
             $Global:AzMSGraphHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzMSGraphHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================
@@ -186,10 +186,10 @@ function Connect-OSDCloudAzure {
             'ExpiresOn'     = $Global:AzStorageHeaders.ExpiresOn
         }
         if ($OSDCloudLogs) {
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzStorageAccessToken.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzStorageAccessToken.json"
             $Global:AzStorageAccessToken | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageAccessToken.json" -Encoding ascii -Width 2000 -Force
 
-            Write-Verbose "[$(Get-Date -format s)] Logging $OSDCloudLogs\AzStorageHeaders.json"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Logging $OSDCloudLogs\AzStorageHeaders.json"
             $Global:AzStorageHeaders | ConvertTo-Json | Out-File -FilePath "$OSDCloudLogs\AzStorageHeaders.json" -Encoding ascii -Width 2000 -Force
         }
         #=================================================

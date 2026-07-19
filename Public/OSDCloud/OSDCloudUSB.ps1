@@ -225,7 +225,7 @@
     #=================================================
     if ($MountDiskImage) {
         Start-Sleep -Seconds 3
-        Write-Verbose "[$(Get-Date -format s)] Dismounting $($MountDiskImage.ImagePath)"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Dismounting $($MountDiskImage.ImagePath)"
         $null = Dismount-DiskImage -ImagePath $MountDiskImage.ImagePath
     }
     #=================================================
