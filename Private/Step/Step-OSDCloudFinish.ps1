@@ -29,7 +29,7 @@ function Step-OSDCloudFinish {
     param ()
     #=================================================
     # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Capture the final deployment duration before any finish action is performed.
     if ($null -eq $global:RecastOSDeploy.TimeStart) {

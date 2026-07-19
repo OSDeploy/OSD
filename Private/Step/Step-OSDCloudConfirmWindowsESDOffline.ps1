@@ -36,7 +36,7 @@ function Step-OSDCloudConfirmWindowsESDOffline {
     )
     #=================================================
     # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm OperatingSystemObject Offline:"
     #=================================================
     # Is there an OperatingSystem Object?
@@ -51,20 +51,20 @@ function Step-OSDCloudConfirmWindowsESDOffline {
     #=================================================
     # Refresh cache inventory so we work with current cache state.
     # Cache can be updated by earlier steps, so do not rely on stale global data.
-    $global:OSDCoreCache = Get-OSDCoreCache
-    if (-not $global:OSDCoreCache) {
-        Write-Verbose -Message "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreCache is empty"
+    $global:OSDCoreCacheContent = Get-OSDCoreCacheContent
+    if (-not $global:OSDCoreCacheContent) {
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreCacheContent is empty"
         return
     }
     #=================================================
     # Match the exact filename requested by the selected OS metadata.
     # First match is intentional because filenames should be unique in cache.
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($OperatingSystemObject.FileName)"
-    $CacheWindowsESD = $global:OSDCoreCache | Where-Object { $_.Name -eq $OperatingSystemObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
+    $CacheWindowsESD = $global:OSDCoreCacheContent | Where-Object { $_.Name -eq $OperatingSystemObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
     #=================================================
     # Stop quietly when the requested payload is not cached.
     if (-not $CacheWindowsESD) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is not in the OSDCoreCache. OK."
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is not in the OSDCoreCacheContent. OK."
         return
     }
     #=================================================
@@ -81,7 +81,7 @@ function Step-OSDCloudConfirmWindowsESDOffline {
         # Validate cached payload before copy so we never replicate bad content.
         $SourceFileHash = Get-FileHash -Path $CacheWindowsESD.FullName -Algorithm SHA1
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified ESD SHA1: $($OperatingSystemObject.SHA1)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache SHA1: $($SourceFileHash.Hash)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent SHA1: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemObject.SHA1) {
             # Hash mismatch means the source cannot be trusted; skip copy.
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA1 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
@@ -92,14 +92,14 @@ function Step-OSDCloudConfirmWindowsESDOffline {
         # Same source validation path for newer metadata that provides SHA256.
         $SourceFileHash = Get-FileHash -Path $CacheWindowsESD.FullName -Algorithm SHA256
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified ESD SHA256: $($OperatingSystemObject.SHA256)"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCache SHA256: $($SourceFileHash.Hash)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent SHA256: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemObject.SHA256) {
             # Hash mismatch means the source cannot be trusted; skip copy.
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA256 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
             return
         }
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is available in the OSDCoreCache. OK."
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is available in the OSDCoreCacheContent. OK."
     $global:RecastOSDeploy.ConfirmWindowsESDOffline = $true
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"

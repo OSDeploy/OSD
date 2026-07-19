@@ -25,7 +25,7 @@ function Step-OSDCloudRestoreUSBDrives {
     param ()
     #=================================================
     # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     if (-not $global:OSDCoreDevice.USBPartitions) {
         # Nothing to restore when no USB partitions were captured earlier.

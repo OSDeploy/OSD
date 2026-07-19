@@ -22,7 +22,7 @@ function Step-OSDCloudPreinstallLogs {
     param ()
     #=================================================
     # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Initialize OSDCloud Logs"
     #=================================================
     $ParamNewItem = @{

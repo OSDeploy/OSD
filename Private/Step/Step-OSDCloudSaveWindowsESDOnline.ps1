@@ -10,7 +10,7 @@ function Step-OSDCloudSaveWindowsESDOnline {
     )
     #=================================================
     # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Is it online?
     if (-not ($global:RecastOSDeploy.ConfirmWindowsESDOnline)) {

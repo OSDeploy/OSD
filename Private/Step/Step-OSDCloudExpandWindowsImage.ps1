@@ -27,7 +27,7 @@ function Step-OSDCloudExpandWindowsImage {
     param ()
     #=================================================
     # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Validate required OSDCloud deployment context before applying the image.
     if ($null -eq $global:RecastOSDeploy) {
@@ -51,7 +51,7 @@ function Step-OSDCloudExpandWindowsImage {
     }
     #=================================================
     if ($env:SystemDrive -ne 'X:') {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Skip. Not running in WinPE (X:)"
+        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Skip. Not running in WinPE (X:)"
         return
     }
     #=================================================
@@ -82,7 +82,7 @@ function Step-OSDCloudExpandWindowsImage {
                 Remove-Item -Path $ImagePath -Force -ErrorAction Stop | Out-Null
             }
             catch {
-                Write-Verbose -Message "[$(Get-Date -format s)] Unable to remove source image $ImagePath. $_"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to remove source image $ImagePath. $_"
             }
         }
     }
@@ -93,7 +93,7 @@ function Step-OSDCloudExpandWindowsImage {
                 Remove-Item -Path $ScratchDirectory -Force -Recurse -ErrorAction Stop | Out-Null
             }
             catch {
-                Write-Verbose -Message "[$(Get-Date -format s)] Unable to remove scratch directory $ScratchDirectory. $_"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to remove scratch directory $ScratchDirectory. $_"
             }
         }
 
@@ -103,7 +103,7 @@ function Step-OSDCloudExpandWindowsImage {
                 Remove-Item -Path 'C:\OSDCloud' -Force -Recurse -ErrorAction Stop | Out-Null
             }
             catch {
-                Write-Verbose -Message "[$(Get-Date -format s)] Unable to remove C:\OSDCloud. $_"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to remove C:\OSDCloud. $_"
             }
         }
     }

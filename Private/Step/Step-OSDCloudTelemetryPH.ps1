@@ -82,10 +82,10 @@ function Step-OSDCloudTelemetryPH {
                 -TimeoutSec 2 `
                 -ErrorAction Stop | Out-Null
 
-            Write-Verbose "[$(Get-Date -format s)] [OSDCloud] Event sent: $EventName"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] [OSDCloud] Event sent: $EventName"
         }
         catch {
-            Write-Verbose "[$(Get-Date -format s)] [OSDCloud] Failed to send event: $($_.Exception.Message)"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] [OSDCloud] Failed to send event: $($_.Exception.Message)"
         }
     }
     # UUID
