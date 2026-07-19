@@ -13,7 +13,7 @@ function Get-ModuleResource {
     )
 
     try {
-        Write-Verbose -Message "$($MyInvocation.MyCommand): read module resource strings from: $Path"
+        Write-Verbose "$($MyInvocation.MyCommand): read module resource strings from: $Path"
         $params = @{
             Path        = $Path
             Raw         = $True

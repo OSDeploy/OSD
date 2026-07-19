@@ -32,7 +32,7 @@ function Step-OSDCloudWinpeDriverRecast {
     }
     #=================================================
     # Export Drivers to Disk
-    Write-Verbose "[$(Get-Date -format s)] Exporting drivers to: $ExpandPath"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Exporting drivers to: $ExpandPath"
     foreach ($Device in $PnputilDevices) {
         # Check that the Device has a DriverName
         if ($Device.Drivername) {
@@ -44,7 +44,7 @@ function Step-OSDCloudWinpeDriverRecast {
             }
             
             # Export the driver using pnputil
-            Write-Verbose "[$(Get-Date -format s)] Exporting $($Device.DriverName) to: $destinationPath"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Exporting $($Device.DriverName) to: $destinationPath"
             $null = & pnputil.exe /export-driver $Device.DriverName $destinationPath
         }
     }
