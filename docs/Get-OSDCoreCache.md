@@ -5,7 +5,7 @@ online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
-# Get-OSDCoreCache
+# Get-OSDCoreCacheContent
 
 ## SYNOPSIS
 Returns cached OSDCloud content found on local file system drives.
@@ -13,7 +13,7 @@ Returns cached OSDCloud content found on local file system drives.
 ## SYNTAX
 
 ```
-Get-OSDCoreCache [[-Type] <String[]>] [[-Include] <String[]>] [[-Exclude] <String[]>] [<CommonParameters>]
+Get-OSDCoreCacheContent [[-Type] <String[]>] [[-Include] <String[]>] [[-Exclude] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,35 +38,35 @@ Type values:
 
 ### EXAMPLE 1
 ```
-Get-OSDCoreCache
+Get-OSDCoreCacheContent
 ```
 
 Returns all supported cache content types.
 
 ### EXAMPLE 2
 ```
-Get-OSDCoreCache -Type ESD
+Get-OSDCoreCacheContent -Type ESD
 ```
 
 Returns all .esd files under each discovered cache OS folder.
 
 ### EXAMPLE 3
 ```
-Get-OSDCoreCache -Type ESD,DriverPacks
+Get-OSDCoreCacheContent -Type ESD,DriverPacks
 ```
 
 Returns all .esd files and driver pack files from each discovered cache.
 
 ### EXAMPLE 4
 ```
-Get-OSDCoreCache -Type *
+Get-OSDCoreCacheContent -Type *
 ```
 
 Returns all supported cache content types.
 
 ### EXAMPLE 5
 ```
-Get-OSDCoreCache -Include C,D -Exclude D
+Get-OSDCoreCacheContent -Include C,D -Exclude D
 ```
 
 Searches only drive C for supported cache content types.
