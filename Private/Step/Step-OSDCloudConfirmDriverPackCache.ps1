@@ -1,4 +1,4 @@
-function Step-OSDCloudConfirmDriverPackOffline {
+function Step-OSDCloudConfirmDriverPackCache {
     <#
     .SYNOPSIS
     Confirms the selected driver pack is available in OSDCore cache storage.
@@ -12,7 +12,7 @@ function Step-OSDCloudConfirmDriverPackOffline {
     Driver pack metadata object used to locate and validate the cached package file.
 
     .EXAMPLE
-    Step-OSDCloudConfirmDriverPackOffline
+    Step-OSDCloudConfirmDriverPackCache
     Uses the global driver pack object to validate that the selected package exists and passes hash
     checks in OSDCore cache.
 

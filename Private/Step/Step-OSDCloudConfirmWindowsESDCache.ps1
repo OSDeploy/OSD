@@ -1,4 +1,4 @@
-function Step-OSDCloudConfirmWindowsESDOffline {
+function Step-OSDCloudConfirmWindowsESDCache {
     <#
     .SYNOPSIS
     Confirms the selected Windows ESD is available in OSDCore cache storage.
@@ -14,12 +14,12 @@ function Step-OSDCloudConfirmWindowsESDOffline {
     Defaults to the global OSDCore operating system object.
 
     .EXAMPLE
-    Step-OSDCloudConfirmWindowsESDOffline
+    Step-OSDCloudConfirmWindowsESDCache
     Uses the global operating system object to validate that a matching cached ESD is present and
     trusted.
 
     .EXAMPLE
-    Step-OSDCloudConfirmWindowsESDOffline -OperatingSystemObject $OS
+    Step-OSDCloudConfirmWindowsESDCache -OperatingSystemObject $OS
     Validates the provided operating system object against cache contents and integrity hashes.
 
     .LINK
