@@ -10,24 +10,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- **OSD Core function surface expansion** — Added new core functions for deployment and catalog workflows, including `Get-OSDCoreOperatingSystems`, `Initialize-OSDCoreDevice`, `Invoke-OSDCoreDownloadFile`, `Get-OSDCoreCache`, `Get-OSDCoreDeploymentDisk`, and driver pack catalog helpers (`Get-OSDCoreDriverPackCatalogDell`, `Get-OSDCoreDriverPackCatalogHP`, `Get-OSDCoreDriverPackCatalogLenovo`, `Get-OSDCoreDriverPackCatalogPanasonic`, `Get-OSDCoreDriverPackCatalogSurface`, `Get-OSDCoreDriverPacks`).
-- **New OSDCloud workflow functions** — Added `Get-OSDCloudDefaultOS`, `Invoke-RecastOSDCloud`, and `Start-RecastOSDCloudGUI` to support default OS resolution and updated deployment UX workflows.
-- **New OSDCloud step functions** — Added `Step-OSDCloudDriverPackAdd`, `Step-OSDCloudDriverPackSave`, `Step-OSDCloudExportOSInformation`, `Step-OSDCloudSaveModule`, and `Step-OSDCloudStageOfficeConfig`.
-- **OOBE workflow enhancements** — Added OOBE-related capabilities and update management support with new/relocated environment OOBE entry points.
-- **Driver pack source artifacts** — Added core driver pack catalog files for Dell, HP, Lenovo, Surface, Panasonic, and generic mappings under `core/driverpacks`.
+- **OSD Core function surface expansion** — Added new core functions for deployment and catalog workflows, including `Get-OSDCoreOperatingSystems`, `Initialize-OSDCoreDevice`, `Invoke-OSDCoreDownloadFile`, `Get-OSDCoreCacheContent`, `Get-OSDCoreCacheDrive`, `Get-OSDCoreCachePathUSB`, `Test-OSDCoreCacheUSB`, `Get-OSDCoreDeploymentDisk`, `Get-OSDCoreLicense`, and driver pack catalog helpers (`Get-OSDCoreDriverPackCatalogDell`, `Get-OSDCoreDriverPackCatalogHP`, `Get-OSDCoreDriverPackCatalogLenovo`, `Get-OSDCoreDriverPackCatalogPanasonic`, `Get-OSDCoreDriverPackCatalogSurface`, `Get-OSDCoreDriverPacks`).
+- **New OSDCloud workflow functions** — Added `Get-OSDCloudDefaultOS`, `Invoke-RecastOSDCloud`, `Invoke-RecastOSDCloudCLI`, `Start-RecastOSDCloudCLI`, `Start-RecastOSDCloudGUI`, and `Update-RecastOSDCloudUSBCache` to support default OS resolution, CLI/GUI deployment UX, and USB cache maintenance workflows.
+- **New OSDCloud deployment steps** — Added step functions for preinstall logs, hooks, disk validation and partitioning, USB drive letter removal and restore, ODT and Autopilot JSON validation, Windows ESD copy/download/save, driver pack cache/online validation, driver pack offline/online save, Office staging, module save, OS information export, BCD boot configuration, WinPE and WinRE driver handling, telemetry, final logging, and workflow cleanup.
+- **Source validation helpers** — Added `Test-OSDCoreDriverPackObjectUrl`, `Test-OSDCoreOperatingSystemObjectUrl`, and hardened `Test-WebConnection` behavior for live TCP validation and cache-bypassed HTTP HEAD checks.
+- **OOBE, firmware, and utility functions** — Added OOBE deployment helpers, Microsoft Update COM object retrieval functions, GitHub raw content helpers, Azure Key Vault secret conversion, PSCloudScript retrieval, video resolution lookup, Bootmgr timeout configuration, Dell BIOS helpers, Windows Update manifest retrieval, and additional Windows settings, registry, cache path, module path, module version, and VM setting helpers.
+- **Driver pack and OEM artifacts** — Added core driver pack catalog files for Dell, HP, Lenovo, Surface, Panasonic, generic mappings under `core/driverpacks`, and OEM driver/BIOS catalog support scripts.
 - **Repository authoring guidance** — Added `.github/copilot-instructions.md` with standardized comment-based help authoring requirements.
 
 ### Changed
 
-- **Comment-based help standardization** — Updated and standardized help metadata and content across a broad set of public scripts, including Azure, OSDCloud setup, VM, TS, IPU, and module utility functions.
+- **Recast OSDCloud workflow refresh** — Reworked the Recast OSDCloud launch flow with timestamped output, deployment timing, telemetry handling, final log export, WinPE post-action cleanup, improved Windows edition and image metadata handling, and updated CLI/GUI parameter support.
+- **OSDCloud step state model** — Updated deployment steps to use clearer global state flags for cached operating system objects, cached driver pack objects, and online source tests.
+- **Cache and media handling** — Improved OSDCloud cache discovery, USB cache detection, Windows ESD copy/save behavior, hash validation, retry logging, and offline/online operating system and driver pack source selection.
+- **Device and keyboard detection** — Expanded `Initialize-OSDCoreDevice` with USB disk and partition information plus improved keyboard and language-code detection.
+- **Comment-based help standardization** — Updated and standardized help metadata, examples, notes, parameter descriptions, and link casing across a broad set of public scripts, docs, Azure functions, OSDCloud setup, VM, TS, IPU, system firmware, HPIA, Microsoft Update, and module utility functions.
 - **Author metadata normalization** — Updated author references in help documentation to align with Recast Software attribution standards.
-- **Logging timestamp format** — Changed log date formatting from `G` to `s` for consistent sortable timestamps.
-- **Cloud and launch script refresh** — Updated `cloud/functions.ps1` and multiple cloud subdomain scripts to align with new function exports and workflow changes.
-- **`OSD.psd1`** — Bumped module version to `26.7.10.1` and updated manifest exports for the new and reorganized function surface.
+- **Logging and diagnostics** — Standardized log date formatting from `G` to `s`, added command names to verbose/error messages, normalized logging colors, clarified administrative rights errors, and improved firmware, BitLocker, module resource, assembly loading, and catalog parsing diagnostics.
+- **Docs folder normalization** — Updated documentation links and generated docs to use the lowercase `docs` path consistently.
+- **Cloud and launch script refresh** — Updated `cloud/functions.ps1`, cloud subdomain scripts, OSDCloud workspace behavior, OSDCloud GUI project files, and launch scripts to align with new function exports and workflow changes.
+- **Dependency and export maintenance** — Updated dependencies and refreshed `OSD.psd1` exports for the new and reorganized function surface, including Recast, OSD Core cache, source validation, and USB cache commands.
 
 ### Removed
 
 - **Deprecated private operating system retrieval functions** — Removed `Private/operatingsystem/Get-CoreOperatingSystems.ps1` and legacy private `Get-OSDCoreOperatingSystems` implementation after migration to the public core function layout.
+- **Deprecated and relocated Recast entry points** — Removed old top-level `Public/Invoke-RecastOSDCloud.ps1` and `Public/Invoke-RecastOSDCloudCLI.ps1` after moving the Recast command implementations under `Public/recast`.
+- **Deprecated conversion and Intel driver pack scripts** — Removed deprecated ESD conversion wrappers, obsolete Intel Ethernet driver pack scripts, and older OSDCloud IPU support scripts superseded by the newer Windows Update manifest and conversion flows.
 
 ---
 

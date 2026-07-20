@@ -176,7 +176,10 @@
         # OSD Core Functions
         'Initialize-OSDCoreDevice',
         'Invoke-RecastOSDCloudCLI',
-        'Get-OSDCoreCache',
+        'Get-OSDCoreCacheContent',
+        'Get-OSDCoreCacheDrive',
+        'Get-OSDCoreCachePathUSB',
+        'Test-OSDCoreCacheUSB',
         'Get-OSDCoreDeploymentDisk',
         'Get-OSDCoreDriverPacks',
         'Get-OSDCoreDriverPackCatalogDell',
@@ -185,10 +188,13 @@
         'Get-OSDCoreDriverPackCatalogPanasonic',
         'Get-OSDCoreDriverPackCatalogSurface',
         'Get-OSDCoreOperatingSystems',
+        'Update-RecastOSDCloudUSBCache',
         'Start-RecastOSDCloudCLI',
         'Start-RecastOSDCloudGUI',
         'Convert-KeyboardLayoutToLanguageCode',
-        'Get-OSDCoreLicense'
+        'Get-OSDCoreLicense',
+        'Test-OSDCoreDriverPackObjectUrl',
+        'Test-OSDCoreOperatingSystemObjectUrl'
     )
     CmdletsToExport      = @()
     VariablesToExport    = @()
