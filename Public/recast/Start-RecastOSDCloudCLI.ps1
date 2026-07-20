@@ -208,6 +208,7 @@ function Start-RecastOSDCloudCLI {
     #================================================
     # OSDCoreOperatingSystemObject
     if ($global:OSDCoreOperatingSystemObject) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreOperatingSystemObject."
         # Confirm the selected operating system download URL before offering cache download work.
         $osdCoreOperatingSystemObjectUrlReachable = Test-OSDCoreOperatingSystemObjectUrl -OperatingSystemObject $global:OSDCoreOperatingSystemObject
         if ($osdCoreOperatingSystemObjectUrlReachable) {
@@ -259,6 +260,7 @@ function Start-RecastOSDCloudCLI {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
     if ($global:OSDCoreDriverPackObject) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreDriverPackObject."
         $osdCoreDriverPackObjectUrlReachable = Test-OSDCoreDriverPackObjectUrl -DriverPackObject $global:OSDCoreDriverPackObject
         if ($osdCoreDriverPackObjectUrlReachable) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack URL is reachable. OK."
