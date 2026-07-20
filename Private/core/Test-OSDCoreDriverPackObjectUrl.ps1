@@ -1,27 +1,27 @@
-function Test-OSDCoreOperatingSystemObjectUrl {
+function Test-OSDCoreDriverPackObjectUrl {
     <#
     .SYNOPSIS
-    Tests whether an OSDCore operating system object URL is reachable.
+    Tests whether an OSDCore driver pack object URL is reachable.
 
     .DESCRIPTION
-    Reads the Url property from the supplied operating system object, or from
-    $global:OSDCoreOperatingSystemObject when no object is supplied, and returns
+    Reads the Url property from the supplied driver pack object, or from
+    $global:OSDCoreDriverPackObject when no object is supplied, and returns
     $true when a live TCP connection and HTTP HEAD request can reach it. Returns $false when the object
     is missing, the Url property is empty, or the URL test fails. HTTP and HTTPS
     are both tested for host-only web URLs so systems with an invalid date can still
     detect basic network reachability over HTTP. Specific absolute file URLs are
     tested exactly as supplied.
 
-    .PARAMETER OperatingSystemObject
-    Operating system object containing a Url property to test.
+    .PARAMETER DriverPackObject
+    Driver pack object containing a Url property to test.
 
     .EXAMPLE
-    Test-OSDCoreOperatingSystemObjectUrl
-    Tests the Url property on $global:OSDCoreOperatingSystemObject.
+    Test-OSDCoreDriverPackObjectUrl
+    Tests the Url property on $global:OSDCoreDriverPackObject.
 
     .EXAMPLE
-    Test-OSDCoreOperatingSystemObjectUrl -OperatingSystemObject $global:OSDCoreOperatingSystemObject
-    Tests the Url property on the supplied operating system object.
+    Test-OSDCoreDriverPackObjectUrl -DriverPackObject $global:OSDCoreDriverPackObject
+    Tests the Url property on the supplied driver pack object.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
@@ -29,8 +29,6 @@ function Test-OSDCoreOperatingSystemObjectUrl {
     .NOTES
     Author: David Segura - Recast Software
     2026-07-19 - Initial private helper created
-    2026-07-19 - Removed Test-WebConnection dependency
-    2026-07-19 - Preserved supplied scheme for specific file URLs
     2026-07-20 - Added live TCP validation before HTTP HEAD to avoid cached success responses
     #>
     [CmdletBinding()]
@@ -39,35 +37,35 @@ function Test-OSDCoreOperatingSystemObjectUrl {
     (
         [Parameter(ValueFromPipeline)]
         [psobject]
-        $OperatingSystemObject = $global:OSDCoreOperatingSystemObject
+        $DriverPackObject = $global:OSDCoreDriverPackObject
     )
 
     process {
-        # The caller may pass an object explicitly or rely on the global OSDCore selection.
-        if ($null -eq $OperatingSystemObject) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set."
+        # The caller may pass an object explicitly or rely on the global OSDCore driver pack selection.
+        if ($null -eq $DriverPackObject) {
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackObject is not set."
             return $false
         }
 
         # A missing URL means there is nothing useful to test, so return the Boolean failure state.
-        $OperatingSystemObjectUrl = [string]$OperatingSystemObject.Url
-        if ([string]::IsNullOrWhiteSpace($OperatingSystemObjectUrl)) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject Url is not set."
+        $DriverPackObjectUrl = [string]$DriverPackObject.Url
+        if ([string]::IsNullOrWhiteSpace($DriverPackObjectUrl)) {
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackObject Url is not set."
             return $false
         }
 
         try {
             # Build the exact set of URLs to probe before making any web requests.
-            $OperatingSystemObjectUri = [System.Uri]$OperatingSystemObjectUrl
-            $IsSpecificAbsoluteUrl = $OperatingSystemObjectUri.IsAbsoluteUri -and -not [string]::IsNullOrWhiteSpace($OperatingSystemObjectUri.AbsolutePath) -and $OperatingSystemObjectUri.AbsolutePath -ne '/'
-            if ($OperatingSystemObjectUri.IsAbsoluteUri -and ($OperatingSystemObjectUri.Scheme -notin @('http','https') -or $IsSpecificAbsoluteUrl)) {
+            $DriverPackObjectUri = [System.Uri]$DriverPackObjectUrl
+            $IsSpecificAbsoluteUrl = $DriverPackObjectUri.IsAbsoluteUri -and -not [string]::IsNullOrWhiteSpace($DriverPackObjectUri.AbsolutePath) -and $DriverPackObjectUri.AbsolutePath -ne '/'
+            if ($DriverPackObjectUri.IsAbsoluteUri -and ($DriverPackObjectUri.Scheme -notin @('http','https') -or $IsSpecificAbsoluteUrl)) {
                 # Non-web absolute URIs and specific file URLs are tested as provided.
-                $RequestUris = @($OperatingSystemObjectUri)
+                $RequestUris = @($DriverPackObjectUri)
             }
             else {
-                if ($OperatingSystemObjectUri.IsAbsoluteUri) {
+                if ($DriverPackObjectUri.IsAbsoluteUri) {
                     # Host-only web URLs are checked over HTTPS first, then HTTP as a fallback for bad system time.
-                    $UriBuilder = New-Object System.UriBuilder $OperatingSystemObjectUri
+                    $UriBuilder = New-Object System.UriBuilder $DriverPackObjectUri
                     $UriBuilder.Scheme = 'https'
                     $UriBuilder.Port = -1
                     $HttpsUri = $UriBuilder.Uri
@@ -78,15 +76,15 @@ function Test-OSDCoreOperatingSystemObjectUrl {
                 }
                 else {
                     # Bare URLs are expanded to both HTTPS and HTTP targets.
-                    $HttpsUri = [System.Uri]::new("https://$($OperatingSystemObjectUri.OriginalString)")
-                    $HttpUri = [System.Uri]::new("http://$($OperatingSystemObjectUri.OriginalString)")
+                    $HttpsUri = [System.Uri]::new("https://$($DriverPackObjectUri.OriginalString)")
+                    $HttpUri = [System.Uri]::new("http://$($DriverPackObjectUri.OriginalString)")
                 }
 
                 $RequestUris = @($HttpsUri, $HttpUri)
             }
         }
         catch {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject Url is not valid: $OperatingSystemObjectUrl"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackObject Url is not valid: $DriverPackObjectUrl"
             return $false
         }
 
@@ -111,7 +109,7 @@ function Test-OSDCoreOperatingSystemObjectUrl {
                     }
                 }
                 catch {
-                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject TCP FAIL: $RequestUri"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackObject TCP FAIL: $RequestUri"
                     [pscustomobject]@{
                         Uri     = $RequestUri
                         Success = $false
@@ -123,7 +121,7 @@ function Test-OSDCoreOperatingSystemObjectUrl {
                 }
             }
 
-            # Use HEAD to validate reachability without downloading the operating system payload.
+            # Use HEAD to validate reachability without downloading the driver pack payload.
             $Params = @{
                 Method      = 'Head'
                 Uri         = $RequestUri
@@ -146,14 +144,14 @@ function Test-OSDCoreOperatingSystemObjectUrl {
             try {
                 [System.Net.WebRequest]::DefaultCachePolicy = New-Object System.Net.Cache.RequestCachePolicy ([System.Net.Cache.RequestCacheLevel]::NoCacheNoStore)
                 Invoke-WebRequest @Params | Out-Null
-                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject URL OK: $RequestUri"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackObject URL OK: $RequestUri"
                 [pscustomobject]@{
                     Uri     = $RequestUri
                     Success = $true
                 }
             }
             catch {
-                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject URL FAIL: $RequestUri"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackObject URL FAIL: $RequestUri"
                 [pscustomobject]@{
                     Uri     = $RequestUri
                     Success = $false
