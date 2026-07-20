@@ -207,61 +207,6 @@ function Invoke-RecastOSDCloudCLI {
     }
     #endregion
 
-    #region Merge Variables
-    <#  Overwrite the OSDCloud Master Settings by using custom variables
-        MyOSDCloud is the last and final customization variable
-    #>
-    if ($Global:InvokeOSDCloud) {
-        Write-DarkGrayHost '[i] Applying $Global:InvokeOSDCloud'
-        foreach ($Key in $Global:InvokeOSDCloud.Keys) {
-            $Global:OSDCloud.$Key = $Global:InvokeOSDCloud.$Key
-        }
-    }
-    else {
-        # Write-DarkGrayHost '[i] Not Used $Global:InvokeOSDCloud'
-    }
-
-    if ($Global:StartOSDCloud) {
-        Write-DarkGrayHost '[i] Applying $Global:StartOSDCloud'
-        foreach ($Key in $Global:StartOSDCloud.Keys) {
-            $Global:OSDCloud.$Key = $Global:StartOSDCloud.$Key
-        }
-    }
-    else {
-        # Write-DarkGrayHost '[i] Not Used $Global:StartOSDCloud'
-    }
-
-    if ($Global:StartOSDCloudCLI) {
-        Write-DarkGrayHost '[i] Applying $Global:StartOSDCloudCLI'
-        foreach ($Key in $Global:StartOSDCloudCLI.Keys) {
-            $Global:OSDCloud.$Key = $Global:StartOSDCloudCLI.$Key
-        }
-    }
-    else {
-        # Write-DarkGrayHost '[i] Not Used $Global:StartOSDCloudCLI'
-    }
-
-    if ($Global:InvokeOSDCloud) {
-        Write-DarkGrayHost '[i] Reapplying $Global:InvokeOSDCloud'
-        foreach ($Key in $Global:InvokeOSDCloud.Keys) {
-            $Global:OSDCloud.$Key = $Global:InvokeOSDCloud.$Key
-        }
-    }
-    else {
-        # Write-DarkGrayHost '[i] Not Used $Global:InvokeOSDCloud'
-    }
-
-    if ($Global:MyOSDCloud) {
-        Write-DarkGrayHost '[i] Applying $Global:MyOSDCloud'
-        foreach ($Key in $Global:MyOSDCloud.Keys) {
-            $Global:OSDCloud.$Key = $Global:MyOSDCloud.$Key
-        }
-    }
-    else {
-        # Write-DarkGrayHost '[i] Not Used $Global:MyOSDCloud'
-    }
-    #endregion
-
     #region Set Post-Merge Defaults
     $Global:OSDCloud.Version = [Version]$($MyInvocation.MyCommand.Module.Version)
 
