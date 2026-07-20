@@ -475,10 +475,10 @@
                     -TimeoutSec 2 `
                     -ErrorAction Stop | Out-Null
 
-                Write-Verbose "[$(Get-Date -format s)] [OSDCloud] Event sent: $EventName"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] [OSDCloud] Event sent: $EventName"
             }
             catch {
-                Write-Verbose "[$(Get-Date -format s)] [OSDCloud] Failed to send event: $($_.Exception.Message)"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] [OSDCloud] Failed to send event: $($_.Exception.Message)"
             }
         }
         # UUID
@@ -907,7 +907,7 @@
         #region Copy-Item Offline WindowsImage
         if ($Global:OSDCloud.ImageFileItem) {
             Write-SectionHeader "Copy Offline Windows Image (Copy-Item)"
-            Write-Verbose -Message "Copying Microsoft Windows Image from Offline Source"
+            Write-Verbose "Copying Microsoft Windows Image from Offline Source"
             #It's possible that Drive Letters may have changed if a USB is used
             #Check to see if the image file exists already after the USB Drive has been reinitialized
             if (Test-Path $Global:OSDCloud.ImageFileItem.FullName) {
@@ -1096,7 +1096,7 @@
             }
 
             if ($Global:OSDCloud.ImageFileDestination) {
-                Write-Verbose -Message "ImageFileDestination: $($Global:OSDCloud.ImageFileDestination.FullName)"
+                Write-Verbose "ImageFileDestination: $($Global:OSDCloud.ImageFileDestination.FullName)"
             }
         }
         #endregion
@@ -1739,10 +1739,10 @@
 
         #region Add-OfflineServicingWindowsDriver
         Write-SectionHeader "Add Windows Driver with Offline Servicing (Add-OfflineServicingWindowsDriver)"
-        Write-Verbose -Message "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
+        Write-Verbose "https://docs.microsoft.com/en-us/powershell/module/dism/add-windowsdriver"
         Write-DarkGrayHost "Drivers in C:\Drivers are being added to the offline Windows Image"
         Write-DarkGrayHost "This process can take up to 20 minutes"
-        Write-Verbose -Message "Add-OfflineServicingWindowsDriver"
+        Write-Verbose "Add-OfflineServicingWindowsDriver"
         if ($Global:OSDCloud.IsWinPE -eq $true) {
             Add-OfflineServicingWindowsDriver
         }
