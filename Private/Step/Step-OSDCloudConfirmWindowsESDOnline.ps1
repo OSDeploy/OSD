@@ -1,4 +1,4 @@
-function Step-OSDCloudConfirmWindowsESDOnline {
+function Step-OSDCloudConfirmWindowsESDXXXXX {
     <#
     .SYNOPSIS
     Confirms the selected Windows ESD is reachable from its online source URI.
@@ -17,11 +17,11 @@ function Step-OSDCloudConfirmWindowsESDOnline {
     Reserved path value for the OSDCloud operating system download location.
 
     .EXAMPLE
-    Step-OSDCloudConfirmWindowsESDOnline
+    Step-OSDCloudConfirmWindowsESDXXXXX
     Uses the global operating system object to verify that the online ESD source is reachable.
 
     .EXAMPLE
-    Step-OSDCloudConfirmWindowsESDOnline -OperatingSystemObject $OS -DownloadPath 'D:\OSDCloud\OS'
+    Step-OSDCloudConfirmWindowsESDXXXXX -OperatingSystemObject $OS -DownloadPath 'D:\OSDCloud\OS'
     Verifies online availability for the provided operating system object source URI.
 
     .LINK
@@ -61,7 +61,7 @@ function Step-OSDCloudConfirmWindowsESDOnline {
         $WebRequest = Invoke-WebRequest -Uri $OperatingSystemObject.Url -UseBasicParsing -Method Head -ErrorAction Stop
         if ($WebRequest.StatusCode -in 200, 206) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
-            $global:RecastOSDeploy.ConfirmWindowsESDOnline = $true
+            $global:RecastOSDeploy.TestOperatingSystemUrl = $true
         }
     }
     catch {

@@ -24,7 +24,7 @@ function step-finalize-exportofflineosinfo {
         }
     }
     catch {
-        Write-Verbose "[$(Get-Date -format s)] Unable to export $StepLogFile"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to export $StepLogFile"
     }
 
     #=================================================
@@ -38,7 +38,7 @@ function step-finalize-exportofflineosinfo {
         }
     }
     catch {
-        Write-Verbose "[$(Get-Date -format s)] Unable to export $StepLogFile"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to export $StepLogFile"
     }
 
     #=================================================
@@ -52,7 +52,7 @@ function step-finalize-exportofflineosinfo {
         }
     }
     catch {
-        Write-Verbose "[$(Get-Date -format s)] Unable to export $StepLogFile"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to export $StepLogFile"
     }
 
     #=================================================
@@ -66,7 +66,7 @@ function step-finalize-exportofflineosinfo {
         }
     }
     catch {
-        Write-Verbose "[$(Get-Date -format s)] Unable to export $StepLogFile"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to export $StepLogFile"
     }
 
     #=================================================
@@ -80,7 +80,7 @@ function step-finalize-exportofflineosinfo {
         }
     }
     catch {
-        Write-Verbose "[$(Get-Date -format s)] Unable to export $StepLogFile"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to export $StepLogFile"
     }
 
     #endregion

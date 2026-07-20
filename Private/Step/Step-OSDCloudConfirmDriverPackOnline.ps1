@@ -1,4 +1,4 @@
-function Step-OSDCloudConfirmDriverPackOnline {
+function Step-OSDCloudConfirmDriverPackXXXXX {
     <#
     .SYNOPSIS
     Confirms the selected driver pack source is reachable from its online URI.
@@ -16,12 +16,12 @@ function Step-OSDCloudConfirmDriverPackOnline {
     Driver pack metadata object containing the online URI to validate.
 
     .EXAMPLE
-    Step-OSDCloudConfirmDriverPackOnline
+    Step-OSDCloudConfirmDriverPackXXXXX
     Uses the global driver pack object to verify that the selected online package source is
     reachable.
 
     .EXAMPLE
-    Step-OSDCloudConfirmDriverPackOnline -DriverPackName $global:OSDCoreDriverPackObject.Name -DriverPackObject $global:OSDCoreDriverPackObject
+    Step-OSDCloudConfirmDriverPackXXXXX -DriverPackName $global:OSDCoreDriverPackObject.Name -DriverPackObject $global:OSDCoreDriverPackObject
     Verifies online source availability for a provided driver pack selection.
 
     .LINK
@@ -75,7 +75,7 @@ function Step-OSDCloudConfirmDriverPackOnline {
         $WebRequest = Invoke-WebRequest -Uri $DriverPackObject.Url -UseBasicParsing -Method Head -ErrorAction Stop
         if ($WebRequest.StatusCode -in 200, 206) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
-            $global:RecastOSDeploy.ConfirmDriverPackOnline = $true
+            $global:RecastOSDeploy.TestDriverPackUrl = $true
         }
     }
     catch {
