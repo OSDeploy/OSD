@@ -1,48 +1,31 @@
-﻿<#
-.SYNOPSIS
-    Executes the core OSDCloud deployment workflow.
+﻿function Invoke-RecastOSDCloudCLI {
+    <#
+    .SYNOPSIS
+    Executes the Recast OSDCloud command-line deployment workflow.
 
-.DESCRIPTION
-    Invoke-OSDCloud initializes runtime state in $Global:OSDCloud, merges user-provided configuration
-    from global customization hashtables, and runs the end-to-end operating system deployment process.
+    .DESCRIPTION
+    Initializes the OSDCloud runtime state from device and deployment context,
+    applies supported global customization hashtables, confirms selected operating
+    system and driver pack cache availability, prepares the deployment disk, and
+    runs the command-line operating system deployment workflow.
 
-    The function is the main execution engine used by OSDCloud entry points such as Start-OSDCloud,
-    Start-OSDCloudCLI, and GUI launch workflows. It discovers startup/shutdown scripts, applies
-    automation artifacts (for example Autopilot JSON), prepares deployment resources, and orchestrates
-    imaging and post-configuration actions.
+    This function does not accept direct parameters. It relies on module and global
+    state populated by Start-RecastOSDCloudCLI before invocation.
 
-    This function accepts no direct parameters and relies on module/global state populated earlier in
-    the launch sequence.
-
-.PARAMETER None
+    .PARAMETER None
     This function does not define input parameters.
 
-.INPUTS
-    None. Pipeline input is not supported.
+    .EXAMPLE
+    Invoke-RecastOSDCloudCLI
+    Runs the Recast OSDCloud CLI deployment workflow using existing global deployment state.
 
-.OUTPUTS
-    Primarily host/progress output and state changes in $Global:OSDCloud. The function is intended to
-    perform actions rather than emit structured pipeline objects.
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
-.EXAMPLE
-    Invoke-OSDCloud
-    Runs OSDCloud using the current global configuration.
-
-.EXAMPLE
-    $Global:MyOSDCloud = [ordered]@{
-        ZTI = $true
-        SkipAutopilot = $true
-    }
-    Invoke-OSDCloud
-    Applies custom values from $Global:MyOSDCloud and starts deployment.
-
-.NOTES
-    - Designed for OSDCloud automation and interactive deployment scenarios in WinPE and full Windows.
-    - Uses and updates global variables including $Global:OSDCloud, $Global:StartOSDCloud,
-      $Global:StartOSDCloudCLI, and $Global:MyOSDCloud when present.
-    - Should be called from OSDCloud launch functions that prepare prerequisite state.
-#>
-function Invoke-RecastOSDCloudCLI {
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-20 - Updated comment-based help for Recast OSDCloud CLI behavior.
+    #>
     [CmdletBinding()]
     param ()
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"

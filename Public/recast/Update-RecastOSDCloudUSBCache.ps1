@@ -39,13 +39,16 @@ function Update-RecastOSDCloudUSBCache {
     Overrides the detected computer product/system ID for driver pack matching.
     If omitted, the detected device product value is used.
 
-    .EXAMPLE
-    Start-RecastOSDCloudCLI
-    Starts OSDCloud CLI using detected device values and default deployment selection.
+    .PARAMETER WinPEPostAction
+    Specifies the action to take after the WinPE deployment workflow completes.
 
     .EXAMPLE
-    Start-RecastOSDCloudCLI -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2
-    Starts OSDCloud CLI for an ARM64 Windows 11 Pro 24H2 deployment selection.
+    Update-RecastOSDCloudUSBCache
+    Updates the Recast OSDCloud USB cache using detected device values and default deployment selection.
+
+    .EXAMPLE
+    Update-RecastOSDCloudUSBCache -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2
+    Updates the Recast OSDCloud USB cache for an ARM64 Windows 11 Pro 24H2 deployment selection.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
@@ -263,7 +266,7 @@ function Update-RecastOSDCloudUSBCache {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystem is ready at $($osdCoreOperatingSystemCacheContent.FullName)."
         }
         else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystem is not available on a USB drive."
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OperatingSystem is not available on a USB drive."
 
             # Do not offer a download when the catalog URL cannot be reached.
             if (-not $osdCoreOperatingSystemObjectUrlReachable) {
@@ -371,7 +374,7 @@ function Update-RecastOSDCloudUSBCache {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack is ready at $($osdCoreDriverPackCacheContent.FullName)"
         }
         else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack is not available on a USB Drive."
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] DriverPack is not available on a USB Drive."
 
             # Do not offer a download when the driver pack URL cannot be reached.
             if (-not $osdCoreDriverPackObjectUrlReachable) {

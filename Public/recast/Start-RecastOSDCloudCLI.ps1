@@ -39,6 +39,9 @@ function Start-RecastOSDCloudCLI {
     Overrides the detected computer product/system ID for driver pack matching.
     If omitted, the detected device product value is used.
 
+    .PARAMETER WinPEPostAction
+    Specifies the action to take after the WinPE deployment workflow completes.
+
     .EXAMPLE
     Start-RecastOSDCloudCLI
     Starts OSDCloud CLI using detected device values and default deployment selection.
@@ -247,7 +250,7 @@ function Start-RecastOSDCloudCLI {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystem is ready at $($osdCoreOperatingSystemCacheContent.FullName)."
         }
         else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystem is not available on a USB drive."
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OperatingSystem is not available on a USB drive."
         }
         # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject:"
         $tempOSDCoreOperatingSystemObject = $global:OSDCoreOperatingSystemObject | Select-Object -Property Name, FileName, Url, SHA1, SHA256
@@ -295,7 +298,7 @@ function Start-RecastOSDCloudCLI {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack is ready at $($osdCoreDriverPackCacheContent.FullName)"
         }
         else {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack is not available on a USB Drive."
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] DriverPack is not available on a USB Drive."
         }
         # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackObject"
         $global:OSDCoreDriverPackObject | Out-Host
@@ -373,10 +376,18 @@ function Start-RecastOSDCloudCLI {
         # WorkflowTaskName          = $WorkflowTaskName
         # WorkflowTaskObject        = $WorkflowTaskObject
     }
+    #=================================================
+    # Cannot continue if the selected operating system object is not set.
+    if ($null -eq $global:OSDCoreOperatingSystemObject) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set. OSDCloud cannot continue without a valid OS payload."
+    }
+    # Cannot continue if the selected operating system object is not reachable online and is not available offline.
+    if (($global:RecastOSDeploy.TestOperatingSystemUrl -eq $false) -and ($null -eq $global:RecastOSDeploy.CacheOperatingSystemObject)) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystem is not reachable online or available offline. OSDCloud cannot continue without a valid OS payload."
+    }
     #================================================
     Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] Starting Invoke-RecastOSDCloudCLI in 5 seconds ..."
     Start-Sleep -Seconds 5
-    Break
     Invoke-RecastOSDCloudCLI
     #================================================
 }
