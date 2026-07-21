@@ -1,4 +1,4 @@
-function Step-OSDCloudSaveWindowsESDOffline {
+function Step-OSDCloudCopyCacheOperatingSystemObject {
     <#
     .SYNOPSIS
     Copies the selected Windows ESD from OSDCore cache to C:\OSDCloud\OS.
@@ -19,7 +19,7 @@ function Step-OSDCloudSaveWindowsESDOffline {
     Defaults to C:\OSDCloud\OS.
 
     .EXAMPLE
-    Step-OSDCloudSaveWindowsESDOffline
+    Step-OSDCloudCopyCacheOperatingSystemObject
     Uses the global OSDCore operating system object and copies the matching cached
     ESD into C:\OSDCloud\OS when required.
 

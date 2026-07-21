@@ -1,4 +1,4 @@
-function Step-OSDCloudSaveWindowsESDOnline {
+function Step-OSDCloudSaveOnlineOperatingSystemObject {
     [CmdletBinding()]
     param (
         [Parameter()]
@@ -78,7 +78,7 @@ function Step-OSDCloudSaveWindowsESDOnline {
             if ($HashRetryCount -lt 1) {
                 # Single retry guard prevents unbounded recursion on persistent failures.
                 Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Retrying download after removing hash-mismatched file"
-                Step-OSDCloudSaveWindowsESDOnline -OperatingSystemObject $OperatingSystemObject -HashRetryCount ($HashRetryCount + 1)
+                Step-OSDCloudSaveOnlineOperatingSystemObject -OperatingSystemObject $OperatingSystemObject -HashRetryCount ($HashRetryCount + 1)
                 return
             }
 
