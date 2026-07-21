@@ -227,20 +227,37 @@
     Step-OSDCloudConfirmWindowsESDCache
     Step-OSDCloudConfirmDriverPackXXXXX
     Step-OSDCloudConfirmDriverPackCache
+    #=================================================
+    # Make sure there is an Operating System ESD available for deployment, either online or offline.
     if ($global:RecastOSDeploy.TestOperatingSystemUrl -eq $false -and $global:RecastOSDeploy.CacheOperatingSystemObject -eq $false) {
         throw "[$(Get-Date -format s)] WindowsImage ESD is not reachable online or offline. Please verify the source and try again."
     }
+    #=================================================
+    # Push deployment analytics to the Recast OSDCloud telemetry service.
     # Step-OSDCloudTelemetryPSGallery
     # Step-OSDCloudTelemetryPH
+    #=================================================
+    # Disk
     Step-OSDCloudRemoveUSBDrives
     Step-OSDCloudClearDisk
     Step-OSDCloudNewDisk
     Step-OSDCloudRestoreUSBDrives
+    #=================================================
+    # Power
     Step-OSDCloudEnableHighPerformance
-    Step-OSDCloudSaveWindowsESDOffline
-    Step-OSDCloudSaveWindowsESDOnline
+    #=================================================
+    # Save the Operating System ESD to the local cache if it is not already cached, or if the online URL is reachable for testing.
+    if ($global:RecastOSDeploy.CacheOperatingSystemObject -eq $true) {
+        Step-OSDCloudCopyCacheOperatingSystemObject
+    }
+    elseif ($global:RecastOSDeploy.TestOperatingSystemUrl -eq $true) {
+        Step-OSDCloudSaveOnlineOperatingSystemObject
+    }
+    #=================================================
+    # Expand the Operating System after verifying the proper ImageIndex
     Step-OSDCloudGetWindowsImageIndex
     Step-OSDCloudExpandWindowsImage
+
     Step-OSDCloudRestartLogs
     Step-OSDCloudConfirmWindowsEdition
     Step-OSDCloudBcdBoot

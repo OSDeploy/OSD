@@ -358,8 +358,8 @@ function Invoke-RecastOSDCloud {
     }
     #region WindowsImage Download
     if ($global:OSDCoreOperatingSystemObject) {
-        Step-OSDCloudSaveWindowsESDOffline
-        Step-OSDCloudSaveWindowsESDOnline
+        Step-OSDCloudCopyCacheOperatingSystemObject
+        Step-OSDCloudSaveOnlineOperatingSystemObject
     }
     elseif (!($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileUrl)) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Download Operating System"
