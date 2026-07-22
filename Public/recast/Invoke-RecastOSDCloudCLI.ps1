@@ -32,7 +32,7 @@
     $global:RecastOSDCloud.TimeStart = [datetime](Get-Date)
     #=================================================
     # Set OSDCloud LogsPath
-    $LogsPath = "$env:TEMP\osdcloud-logs"
+    $LogsPath = $global:RecastOSDCloud.LogsPath
     if (-not (Test-Path -LiteralPath $LogsPath -PathType Container)) {
         $null = New-Item -Path $LogsPath -ItemType Directory -Force -ErrorAction SilentlyContinue
     }
@@ -47,7 +47,7 @@
     }
     #=================================================
     # Make sure there is an Operating System ESD available for deployment, either online or offline.
-    if ($global:RecastOSDCloud.OperatingSystemUrlTest -eq $false -and $global:RecastOSDCloud.OperatingSystemCacheObject -eq $false) {
+    if ((-not $global:RecastOSDCloud.OperatingSystemUrlTest) -and (-not $global:RecastOSDCloud.OperatingSystemCacheObject)) {
         throw "[$(Get-Date -format s)] WindowsImage ESD is not reachable online or offline. Please verify the source and try again."
     }
     #=================================================
@@ -68,10 +68,10 @@
     #=================================================
     # v2 Save the Operating System ESD to the local cache if it is not already cached, or if the online URL is reachable for testing.
     # Only on RecastOSDCloud workflows.
-    if ($global:RecastOSDCloud.OperatingSystemCacheObject -eq $true) {
+    if ($global:RecastOSDCloud.OperatingSystemCacheObject) {
         Step-OSDCloudCopyOperatingSystemCacheObject
     }
-    elseif ($global:RecastOSDCloud.OperatingSystemUrlTest -eq $true) {
+    elseif ($global:RecastOSDCloud.OperatingSystemUrlTest) {
         Step-OSDCloudSaveOnlineOperatingSystemObject
     }
     #=================================================

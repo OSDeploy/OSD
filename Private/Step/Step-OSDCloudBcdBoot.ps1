@@ -38,12 +38,14 @@ function Step-OSDCloudBcdBoot {
     }
 
     $BcdBootArgs = @('C:\Windows', '/c')
+    <#
     if ($global:RecastOSDCloud -and $global:RecastOSDCloud.OSBuild -ge 26200) {
         $BcdBootArgs += '/bootex'
     }
     else {
         $BcdBootArgs += '/v'
     }
+    #>
 
     $CommandLine = "$BcdBootExe $($BcdBootArgs -join ' ')"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $CommandLine"

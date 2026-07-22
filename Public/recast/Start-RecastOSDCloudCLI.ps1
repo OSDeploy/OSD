@@ -169,9 +169,8 @@ function Start-RecastOSDCloudCLI {
     }
     #=================================================
     # OSDCoreOperatingSystems
-    if ($PSBoundParameters.ContainsKey('OSArchitecture')) {
-        $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -match "$OSArchitecture" }
-    }
+    # Always resolve catalog entries for the effective architecture value.
+    $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -eq $OSArchitecture }
 
     # Validate that the OS catalog was preloaded for this architecture.
     if (-not $global:OSDCoreOperatingSystems) {
@@ -216,7 +215,8 @@ function Start-RecastOSDCloudCLI {
     if ($PSBoundParameters.ContainsKey('OSDProduct')) {
         $global:OSDCoreDevice.OSDProduct = $OSDProduct
     }
-    $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $global:OSDCoreDevice.OSDProduct } | Select-Object -First 1
+    $targetSystemId = [string]$global:OSDCoreDevice.OSDProduct
+    $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { [string]$_.SystemId -eq $targetSystemId } | Select-Object -First 1
     #================================================
     # OSDCoreOperatingSystemObject
     if ($global:OSDCoreOperatingSystemObject) {
@@ -343,7 +343,7 @@ function Start-RecastOSDCloudCLI {
         DriverPackCacheObject      = Get-OSDCoreDriverPackCacheObject
         DriverPackItem             = $null
         OperatingSystemObject      = $global:OSDCoreOperatingSystemObject
-        OperatingSystemCacheObject = Get-OSDCoreOperatingSystemCacheObject
+        OperatingSystemCacheObject = [bool]$osdCoreOperatingSystemCacheContent
         OperatingSystemItem        = $null
         OperatingSystemUrlTest     = Test-OSDCoreOperatingSystemObjectUrl
         DeploymentDiskObject       = $DeploymentDiskObject
@@ -362,21 +362,21 @@ function Start-RecastOSDCloudCLI {
         # ImageFileUrl          = $ImageFileUrl
         LaunchMethod             = 'RecastOSDCloud'
         Module                   = $($MyInvocation.MyCommand.Module.Name)
-        LogsPath                  = $LogsPath
-        OperatingSystem          = $OperatingSystem
+        LogsPath                  = "$env:TEMP\osdcloud-logs"
+        # OperatingSystem          = $OperatingSystem
         # OperatingSystemObject = $OperatingSystemObject
         # OperatingSystemValues = $OperatingSystemValues
         OSActivation             = $OSActivation
-        OSActivationValues       = $OSActivationValues
+        # OSActivationValues       = $OSActivationValues
         OSArchitecture           = $OSArchitecture
-        OSBuild                  = $OSBuild
-        OSBuildVersion           = $OSBuildVersion
+        # OSBuild                  = $OSBuild
+        # OSBuildVersion           = $OSBuildVersion
         OSEdition                = $OSEdition
         OSEditionId              = $OSEditionId
         OSEditionValues          = $OSEditionValues
         OSLanguageCode           = $OSLanguageCode
-        OSLanguageCodeValues     = $OSLanguageCodeValues
-        OSVersion                = $OSVersion
+        # OSLanguageCodeValues     = $OSLanguageCodeValues
+        # OSVersion                = $OSVersion
         TimeEnd                  = $null
         TimeSpan                 = $null
         TimeStart                = [datetime](Get-Date)
@@ -394,7 +394,7 @@ function Start-RecastOSDCloudCLI {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set. OSDCloud cannot continue without a valid OS payload."
     }
     # Cannot continue if the selected operating system object is not reachable online and is not available offline.
-    if (($global:RecastOSDCloud.OperatingSystemUrlTest -eq $false) -and ($null -eq $global:RecastOSDCloud.OperatingSystemCacheObject)) {
+    if ((-not $global:RecastOSDCloud.OperatingSystemUrlTest) -and (-not $global:RecastOSDCloud.OperatingSystemCacheObject)) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystem is not reachable online or available offline. OSDCloud cannot continue without a valid OS payload."
     }
     #================================================
