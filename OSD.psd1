@@ -194,7 +194,8 @@
         'Convert-KeyboardLayoutToLanguageCode',
         'Get-OSDCoreLicense',
         'Test-OSDCoreDriverPackObjectUrl',
-        'Test-OSDCoreOperatingSystemObjectUrl'
+        'Test-OSDCoreOperatingSystemObjectUrl',
+        'Show-OSDCoreLicenseHelp'
     )
     CmdletsToExport      = @()
     VariablesToExport    = @()
