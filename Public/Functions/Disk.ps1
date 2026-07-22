@@ -258,7 +258,7 @@ Author: David Segura - Recast Software
         ))
         {
             Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
-            Diskpart-Clean -DiskNumber $Item.Number
+            Invoke-DiskpartClean -DiskNumber $Item.Number
 
             if ($Initialize -eq $true) {
                 Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName)"
@@ -2078,7 +2078,7 @@ function New-OSDisk {
     #Create from unpartitioned Disk
     elseif (($OSDisk.NumberOfPartitions -eq 0) -and ($OSDisk.PartitionStyle -ne $PartitionStyle)) {
         Write-Verbose "Cleaning Disk $($OSDisk.Number)"
-        Diskpart-Clean -DiskNumber $OSDisk.Number
+        Invoke-DiskpartClean -DiskNumber $OSDisk.Number
 
         Write-Verbose "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
         $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
@@ -2091,7 +2091,7 @@ function New-OSDisk {
         ))
         {
             Write-Warning "Cleaning Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.SizeGB) $($OSDisk.FriendlyName) $($OSDisk.Model) [$($OSDisk.PartitionStyle) $($OSDisk.NumberOfPartitions) Partitions]"
-            Diskpart-Clean -DiskNumber $OSDisk.Number
+            Invoke-DiskpartClean -DiskNumber $OSDisk.Number
 
             Write-Warning "Initializing $PartitionStyle Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.SizeGB) $($OSDisk.FriendlyName) $($OSDisk.Model)"
             $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle

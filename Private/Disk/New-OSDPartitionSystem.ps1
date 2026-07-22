@@ -76,43 +76,43 @@ function New-OSDPartitionSystem {
     #	PartitionStyle
     #=================================================
     if (-NOT ($PartitionStyle)) {
-        if (Get-OSDGather -Property IsUEFI) {
+        if ($global:OSDCloudDevice.IsUEFI -eq $true) {
             $PartitionStyle = 'GPT'
         } else {
             $PartitionStyle = 'MBR'
         }
     }
-    Write-Verbose "PartitionStyle is set to $PartitionStyle"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] PartitionStyle is set to $PartitionStyle"
     #=================================================
     #	GPT
     #=================================================
     if ($PartitionStyle -eq 'GPT') {
-        Write-Verbose "Creating GPT System Partition"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Creating GPT System Partition"
         $PartitionSystem = New-Partition -GptType '{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}' -DiskNumber $DiskNumber -Size $SizeSystemGpt
 
-        Write-Verbose "Formatting GPT System Partition FAT32 with Label $LabelSystem"
-        Diskpart-FormatSystemPartition -DiskNumber $DiskNumber -PartitionNumber $PartitionSystem.PartitionNumber -FileSystem 'fat32' -LabelSystem $LabelSystem
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Formatting GPT System Partition FAT32 with Label $LabelSystem"
+        Invoke-DiskpartFormatSystemPartition -DiskNumber $DiskNumber -PartitionNumber $PartitionSystem.PartitionNumber -FileSystem 'fat32' -LabelSystem $LabelSystem
 
-        Write-Verbose "Setting GPT System Partition GptType {c12a7328-f81f-11d2-ba4b-00a0c93ec93b}"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Setting GPT System Partition GptType {c12a7328-f81f-11d2-ba4b-00a0c93ec93b}"
         $PartitionSystem | Set-Partition -GptType '{c12a7328-f81f-11d2-ba4b-00a0c93ec93b}'
 
-        Write-Verbose "Setting GPT System Partition NewDriveLetter S"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Setting GPT System Partition NewDriveLetter S"
         $PartitionSystem | Set-Partition -NewDriveLetter S
-        
-        Write-Verbose "Creating MSR Partition GptType {e3c9e316-0b5c-4db8-817d-f92df00215ae}"
+
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Creating MSR Partition GptType {e3c9e316-0b5c-4db8-817d-f92df00215ae}"
         $null = New-Partition -DiskNumber $DiskNumber -Size $SizeMSR -GptType '{e3c9e316-0b5c-4db8-817d-f92df00215ae}'
     }
     #=================================================
     #	MBR
     #=================================================
     if ($PartitionStyle -eq 'MBR') {
-        Write-Verbose "Creating MBR System Partition as Active"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Creating MBR System Partition as Active"
         $PartitionSystem = New-Partition -DiskNumber $DiskNumber -Size $SizeSystemMbr -IsActive
-        
-        Write-Verbose "Formatting MBR System Partition NTFS with Label $LabelSystem"
-        Diskpart-FormatSystemPartition -DiskNumber $DiskNumber -PartitionNumber $PartitionSystem.PartitionNumber -FileSystem 'ntfs' -LabelSystem $LabelSystem
 
-        Write-Verbose "Setting MBR System Partition NewDriveLetter S"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Formatting MBR System Partition NTFS with Label $LabelSystem"
+        Invoke-DiskpartFormatSystemPartition -DiskNumber $DiskNumber -PartitionNumber $PartitionSystem.PartitionNumber -FileSystem 'ntfs' -LabelSystem $LabelSystem
+
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Setting MBR System Partition NewDriveLetter S"
         $PartitionSystem | Set-Partition -NewDriveLetter S
     }
 }
