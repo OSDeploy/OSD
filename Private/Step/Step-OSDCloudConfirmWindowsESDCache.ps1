@@ -100,7 +100,7 @@ function Step-OSDCloudConfirmWindowsESDCache {
         }
     }
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is available in the OSDCoreCacheContent. OK."
-    $global:RecastOSDeploy.CacheOperatingSystemObject = $true
+    $global:RecastOSDeploy.OperatingSystemCacheObject = $true
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================

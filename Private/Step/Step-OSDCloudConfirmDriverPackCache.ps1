@@ -84,7 +84,7 @@ function Step-OSDCloudConfirmDriverPackCache {
         }
     }
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is in OSDCoreCacheContent. OK."
-    $global:RecastOSDeploy.CacheDriverPackObject = $true
+    $global:RecastOSDeploy.DriverPackCacheObject = $true
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================

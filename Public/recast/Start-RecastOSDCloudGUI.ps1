@@ -7,7 +7,8 @@ function Start-RecastOSDCloudGUI {
     Initializes device and deployment context, discovers matching operating systems,
     resolves driver pack metadata for the current device (or supplied overrides),
     validates required dependencies, and then prepares global state consumed by
-    the Recast OSDCloud GUI workflow.
+    the Recast OSDCloud GUI workflow. The GUI launches only when the Force switch
+    is supplied.
 
     .PARAMETER BrandName
     Sets the branding text shown in the OSDCloud GUI title/header.
@@ -51,16 +52,20 @@ function Start-RecastOSDCloudGUI {
     Legacy compatibility switch. This parameter is non-functional and retained
     temporarily to avoid breaking existing scripts.
 
+    .PARAMETER Force
+    Confirms that OSDCloud should run after initialization. This switch is required
+    to launch the GUI because the workflow can modify the deployment disk.
+
     .EXAMPLE
-    Start-RecastOSDCloudGUI
+    Start-RecastOSDCloudGUI -Force
     Starts OSDCloud GUI using detected device values and default branding.
 
     .EXAMPLE
-    Start-RecastOSDCloudGUI -BrandName 'Contoso' -BrandColor '#005A9C'
+    Start-RecastOSDCloudGUI -BrandName 'Contoso' -BrandColor '#005A9C' -Force
     Starts OSDCloud GUI with custom branding.
 
     .EXAMPLE
-    Start-RecastOSDCloudGUI -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2
+    Start-RecastOSDCloudGUI -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2 -Force
     Starts OSDCloud GUI with an ARM64 Windows 11 Pro 24H2 deployment selection.
 
     .LINK
@@ -140,7 +145,11 @@ function Start-RecastOSDCloudGUI {
 
         [Parameter(Mandatory = $false, HelpMessage = 'Legacy compatibility switch. This parameter is deprecated and non-functional.')]
         [System.Management.Automation.SwitchParameter]
-        $v2
+        $v2,
+
+        [Parameter(Mandatory = $false, HelpMessage = 'Required to launch the OSDCloud GUI workflow.')]
+        [switch]
+        $Force
     )
     #=================================================
     # Parameter Changes
@@ -392,6 +401,10 @@ function Start-RecastOSDCloudGUI {
     Write-Host -ForegroundColor Green "OSDCloudGUI Configuration"
     $Global:OSDCloudGUI | Out-Host
     #================================================
+    if (-not $Force) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] -Force is required to run OSDCloud. Initialization completed, but the GUI was not launched."
+        return
+    }
     # Launch the WPF GUI entry point with the prepared global state.
     & "$($MyInvocation.MyCommand.Module.ModuleBase)\Projects\RecastOSDCloudGUI\MainWindow.ps1"
     Start-Sleep -Seconds 2

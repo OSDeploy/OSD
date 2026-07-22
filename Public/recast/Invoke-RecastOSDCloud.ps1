@@ -358,7 +358,7 @@ function Invoke-RecastOSDCloud {
     }
     #region WindowsImage Download
     if ($global:OSDCoreOperatingSystemObject) {
-        Step-OSDCloudCopyCacheOperatingSystemObject
+        Step-OSDCloudCopyOperatingSystemCacheObject
         Step-OSDCloudSaveOnlineOperatingSystemObject
     }
     elseif (!($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileUrl)) {

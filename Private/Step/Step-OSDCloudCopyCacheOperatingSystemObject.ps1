@@ -1,4 +1,4 @@
-function Step-OSDCloudCopyCacheOperatingSystemObject {
+function Step-OSDCloudCopyOperatingSystemCacheObject {
     <#
     .SYNOPSIS
     Copies the selected Windows ESD from OSDCore cache to C:\OSDCloud\OS.
@@ -19,7 +19,7 @@ function Step-OSDCloudCopyCacheOperatingSystemObject {
     Defaults to C:\OSDCloud\OS.
 
     .EXAMPLE
-    Step-OSDCloudCopyCacheOperatingSystemObject
+    Step-OSDCloudCopyOperatingSystemCacheObject
     Uses the global OSDCore operating system object and copies the matching cached
     ESD into C:\OSDCloud\OS when required.
 
@@ -47,7 +47,7 @@ function Step-OSDCloudCopyCacheOperatingSystemObject {
     # Honor the upstream execution mode gate.
     # This step only runs when offline media usage has already been confirmed.
     # Returning here is expected behavior in online flows and is not an error.
-    if (-not ($global:RecastOSDeploy.CacheOperatingSystemObject)) {
+    if (-not ($global:RecastOSDeploy.OperatingSystemCacheObject)) {
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Windows ESD was not confirmed for offline usage. Skipping this step."
         return
     }
@@ -126,7 +126,7 @@ function Step-OSDCloudCopyCacheOperatingSystemObject {
         }
     }
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject is available in the OSDCoreCacheContent. OK."
-    $global:RecastOSDeploy.CacheOperatingSystemObject = $true
+    $global:RecastOSDeploy.OperatingSystemCacheObject = $true
     #=================================================
     # Create destination directory if needed
     # Directory creation is idempotent and safe to call repeatedly.
@@ -195,7 +195,7 @@ function Step-OSDCloudCopyCacheOperatingSystemObject {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Copied SHA1 matches the verified Microsoft ESD SHA1. OK."
             # Persist verified destination for subsequent steps that consume this file.
             $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
-            $global:RecastOSDeploy.TestOperatingSystemUrl = $false
+            $global:RecastOSDeploy.OperatingSystemUrlTest = $false
         }
     }
     elseif ($OperatingSystemObject.SHA256) {
@@ -212,7 +212,7 @@ function Step-OSDCloudCopyCacheOperatingSystemObject {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Copied SHA256 matches the verified Microsoft ESD SHA256. OK."
             # Persist verified destination for subsequent steps that consume this file.
             $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
-            $global:RecastOSDeploy.TestOperatingSystemUrl = $false
+            $global:RecastOSDeploy.OperatingSystemUrlTest = $false
         }
     }
     else {

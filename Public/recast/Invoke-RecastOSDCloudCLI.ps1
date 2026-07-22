@@ -31,6 +31,16 @@
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     $global:RecastOSDeploy.TimeStart = [datetime](Get-Date)
     #=================================================
+    # Set OSDCloud LogsPath
+    $LogsPath = "$env:TEMP\osdcloud-logs"
+    if (-not (Test-Path -LiteralPath $LogsPath -PathType Container)) {
+        $null = New-Item -Path $LogsPath -ItemType Directory -Force -ErrorAction SilentlyContinue
+    }
+    $TranscriptFullName = Join-Path $LogsPath "transcript-$((Get-Date).ToString('yyyy-MM-dd-HHmmss')).log"
+    if (-not (Start-Transcript -Path $TranscriptFullName -ErrorAction SilentlyContinue)) {
+        Write-Warning "[$(Get-Date -format s)] Failed to start transcript at $TranscriptFullName"
+    }
+    #=================================================
     #region Initialize-OSDCoreDevice
     if (-not ($global:OSDCoreDevice)) {
         Initialize-OSDCoreDevice
@@ -217,44 +227,50 @@
         $Global:OSDCloud.ClearDiskConfirm = $false
     }
     #endregion
-    Step-OSDCloudPreinstallLogs
-    # Step-OSDCloudPreinstallHooks
-    Step-OSDCloudConfirmOperatingSystem
-    # Step-OSDCloudConfirmAutopilotJson
-    # Step-OSDCloudConfirmOfficeODT
-    Step-OSDCloudConfirmDeploymentDisk
-    Step-OSDCloudConfirmWindowsESDXXXXX
-    Step-OSDCloudConfirmWindowsESDCache
-    Step-OSDCloudConfirmDriverPackXXXXX
-    Step-OSDCloudConfirmDriverPackCache
     #=================================================
     # Make sure there is an Operating System ESD available for deployment, either online or offline.
-    if ($global:RecastOSDeploy.TestOperatingSystemUrl -eq $false -and $global:RecastOSDeploy.CacheOperatingSystemObject -eq $false) {
+    if ($global:RecastOSDeploy.OperatingSystemUrlTest -eq $false -and $global:RecastOSDeploy.OperatingSystemCacheObject -eq $false) {
         throw "[$(Get-Date -format s)] WindowsImage ESD is not reachable online or offline. Please verify the source and try again."
     }
     #=================================================
-    # Push deployment analytics to the Recast OSDCloud telemetry service.
+    # v1.5 Start the OSDCloud deployment workflow.
+    Step-OSDCloudConfirmDeploymentDisk
+    #=================================================
+    # v1.5 Push deployment analytics to the Recast OSDCloud telemetry service.
     # Step-OSDCloudTelemetryPSGallery
     # Step-OSDCloudTelemetryPH
     #=================================================
-    # Disk
+    # v2 USB
+    # Only on RecastOSDCloud workflows.
     Step-OSDCloudRemoveUSBDrives
+    #=================================================
+    # v1 Disk
     Step-OSDCloudClearDisk
     Step-OSDCloudNewDisk
-    Step-OSDCloudRestoreUSBDrives
     #=================================================
-    # Power
+    # v2 USB and Power
+    # Only on RecastOSDCloud workflows.
+    Step-OSDCloudRestoreUSBDrives
     Step-OSDCloudEnableHighPerformance
     #=================================================
-    # Save the Operating System ESD to the local cache if it is not already cached, or if the online URL is reachable for testing.
-    if ($global:RecastOSDeploy.CacheOperatingSystemObject -eq $true) {
-        Step-OSDCloudCopyCacheOperatingSystemObject
+    # v2 Save the Operating System ESD to the local cache if it is not already cached, or if the online URL is reachable for testing.
+    # Only on RecastOSDCloud workflows.
+    if ($global:RecastOSDeploy.OperatingSystemCacheObject -eq $true) {
+        Step-OSDCloudCopyOperatingSystemCacheObject
     }
-    elseif ($global:RecastOSDeploy.TestOperatingSystemUrl -eq $true) {
+    elseif ($global:RecastOSDeploy.OperatingSystemUrlTest -eq $true) {
         Step-OSDCloudSaveOnlineOperatingSystemObject
     }
+
+
+
+
+
+
+    Stop-Transcript
+    throw
     #=================================================
-    # Expand the Operating System after verifying the proper ImageIndex
+    # v2 Expand the Operating System after verifying the proper ImageIndex
     Step-OSDCloudGetWindowsImageIndex
     Step-OSDCloudExpandWindowsImage
 

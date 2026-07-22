@@ -250,7 +250,7 @@ function Update-RecastOSDCloudUSBCache {
         }
 
         # Check whether the selected OS payload is already present in the USB cache inventory.
-        $osdCoreOperatingSystemCacheContent = Get-OSDCoreCacheOperatingSystemObject -OperatingSystemObject $global:OSDCoreOperatingSystemObject
+        $osdCoreOperatingSystemCacheContent = Get-OSDCoreOperatingSystemCacheObject -OperatingSystemObject $global:OSDCoreOperatingSystemObject
         if ($osdCoreOperatingSystemCacheContent) {
             # Verify the cached payload before treating it as ready.
             if (-not [string]::IsNullOrWhiteSpace($expectedOperatingSystemHash)) {
@@ -358,7 +358,7 @@ function Update-RecastOSDCloudUSBCache {
         }
 
         # Check whether the selected driver pack is already present in the cache inventory.
-        $osdCoreDriverPackCacheContent = Get-OSDCoreCacheDriverPackObject -DriverPackObject $global:OSDCoreDriverPackObject
+        $osdCoreDriverPackCacheContent = Get-OSDCoreDriverPackCacheObject -DriverPackObject $global:OSDCoreDriverPackObject
         if ($osdCoreDriverPackCacheContent) {
             # Verify cached driver pack integrity when the catalog includes an MD5 hash.
             if (-not [string]::IsNullOrWhiteSpace($expectedDriverPackHashMD5)) {
