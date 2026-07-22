@@ -24,7 +24,7 @@ function Get-DellDriverPackCatalog {
     #=================================================
     #   Import Catalog
     #=================================================
-    $CatalogFile = "$(Get-OSDCachePath)\dell-catalogs\build-driverpack.xml"
+    $CatalogFile = "$(Get-OSDModuleCache)\dell-catalogs\build-driverpack.xml"
     Write-Verbose "Importing the Offline Catalog at $CatalogFile"
     $Results = Import-Clixml -Path $CatalogFile
     #=================================================
