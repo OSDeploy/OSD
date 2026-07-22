@@ -128,7 +128,7 @@
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('25H2','24H2','23H2','22H2','21H2')]
+        [ValidateSet('25H2','24H2','23H2','22H2')]
         [Alias('Build','OSBuild')]
         [System.String]
         $OSReleaseID,
