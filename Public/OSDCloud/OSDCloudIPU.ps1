@@ -1414,8 +1414,8 @@ function New-OSDCloudOSWimFile {
 
     if ($OSName -match "ARM64"){
         $OSArch = 'ARM64'
-        $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64) | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
-        $IndexMap = Get-OSDCloudOperatingSystemsIndexMap -OSArch ARM64 | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch arm64) | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        $IndexMap = Get-OSDCloudOperatingSystemsIndexMap -OSArch arm64 | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
     }
     else {
         $OSArch = 'x64'

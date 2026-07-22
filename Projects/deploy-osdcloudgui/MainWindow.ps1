@@ -7,20 +7,20 @@ $Global:MediaResources = Get-ChildItem -Path "$PSScriptRoot\Media" -ErrorAction 
 # This class allows the synchronized hashtable to be available across threads,
 # but also passes a couple of methods along with it to do GUI things via the
 # object's dispatcher.
-class SyncClass 
+class SyncClass
 {
     #Hashtable containing all forms/windows and controls - automatically created when newing up
-    [hashtable]$SyncHash = [hashtable]::Synchronized(@{}) 
-    
+    [hashtable]$SyncHash = [hashtable]::Synchronized(@{})
+
     # method to close the window - pass window name
-    [void]CloseWindow($windowName){ 
-        $this.SyncHash.$windowName.Dispatcher.Invoke([action]{$this.SyncHash.$windowName.Close()},"Normal") 
+    [void]CloseWindow($windowName){
+        $this.SyncHash.$windowName.Dispatcher.Invoke([action]{$this.SyncHash.$windowName.Close()},"Normal")
     }
-    
-    # method to update GUI - pass object name, property and value   
-    [void]UpdateElement($object,$property,$value){ 
-        $this.SyncHash.$object.Dispatcher.Invoke([action]{ $this.SyncHash.$object.$property = $value },"Normal") 
-    } 
+
+    # method to update GUI - pass object name, property and value
+    [void]UpdateElement($object,$property,$value){
+        $this.SyncHash.$object.Dispatcher.Invoke([action]{ $this.SyncHash.$object.$property = $value },"Normal")
+    }
 }
 $Global:SyncClass = [SyncClass]::new() # create a new instance of this SyncClass to use.
 
@@ -39,7 +39,7 @@ foreach($dll in $resources) { [System.Reflection.Assembly]::LoadFrom("$($dll.Ful
 $xp = '[^a-zA-Z_0-9]' # All characters that are not a-Z, 0-9, or _
 $vx = @()             # An array of XAML files loaded
 
-foreach($x in $XAML) { 
+foreach($x in $XAML) {
     # Items from XAML that are known to cause issues
     # when PowerShell parses them.
     $xamlToRemove = @(
@@ -51,10 +51,10 @@ foreach($x in $XAML) {
     $xaml = Get-Content $x.FullName # Load XAML
     $xaml = $xaml -replace "x:N",'N' # Rename x:Name to just Name (for consumption in variables later)
     foreach($xtr in $xamlToRemove){ $xaml = $xaml -replace $xtr } # Remove items from $xamlToRemove
-    
+
     # Create a new variable to store the XAML as XML
     New-Variable -Name "xaml$(($x.BaseName) -replace $xp, '_')" -Value ($xaml -as [xml]) -Force
-    
+
     # Add XAML to list of XAML documents processed
     $vx += "$(($x.BaseName) -replace $xp, '_')"
 }
@@ -78,20 +78,20 @@ if($MediaResources.Count -gt 0){
         $xml.DocumentElement.SetAttribute("xmlns:sys","clr-namespace:System;assembly=System")
 
         # if the document doesn't already have a "Window.Resources" create it
-        if($null -eq ($xml.DocumentElement.'Window.Resources')){ 
-            $fragment = "<Window.Resources>" 
+        if($null -eq ($xml.DocumentElement.'Window.Resources')){
+            $fragment = "<Window.Resources>"
             $fragment += "<ResourceDictionary>"
         }
-        
+
         # Add each StaticResource with the key of the base name and source to the full name
         foreach($sr in $MediaResources)
         {
             $srname = "$($sr.BaseName -replace $xp, '_')$($sr.Extension.Substring(1).ToUpper())" #convert name to basename + Uppercase Extension
             if($sr.Extension -in $imageFileTypes){ $fragment += "<BitmapImage x:Key=`"$srname`" UriSource=`"$($sr.FullName)`" />" }
-            if($sr.Extension -in $avFileTypes){ 
+            if($sr.Extension -in $avFileTypes){
                 $uri = [System.Uri]::new($sr.FullName)
-                $fragment += "<sys:Uri x:Key=`"$srname`">$uri</sys:Uri>" 
-            }    
+                $fragment += "<sys:Uri x:Key=`"$srname`">$uri</sys:Uri>"
+            }
         }
 
         # if the document doesn't already have a "Window.Resources" close it
@@ -181,7 +181,7 @@ foreach($x in $vx)
 ## Yo dawg... Runspace to clean up Runspaces
 ## Thank you Boe Prox / Stephen Owen
 #region RSCleanup
-$Script:JobCleanup = [hashtable]::Synchronized(@{}) 
+$Script:JobCleanup = [hashtable]::Synchronized(@{})
 $Script:Jobs = [system.collections.arraylist]::Synchronized((New-Object System.Collections.ArrayList)) #hashtable to store all these runspaces
 $jobCleanup.Flag = $True #cleanup jobs
 $newRunspace =[runspacefactory]::CreateRunspace() #create a new runspace for this job to cleanup jobs to live
@@ -192,14 +192,14 @@ $newRunspace.SessionStateProxy.SetVariable("jobCleanup",$jobCleanup) #pass the j
 $newRunspace.SessionStateProxy.SetVariable("jobs",$jobs) #pass the jobs variable to the runspace
 $jobCleanup.PowerShell = [PowerShell]::Create().AddScript({
     #Routine to handle completed runspaces
-    Do {    
-        Foreach($runspace in $jobs) {            
+    Do {
+        Foreach($runspace in $jobs) {
             If ($runspace.Runspace.isCompleted) {                         #if runspace is complete
                 [void]$runspace.powershell.EndInvoke($runspace.Runspace)  #then end the script
                 $runspace.powershell.dispose()                            #dispose of the memory
                 $runspace.Runspace = $null                                #additional garbage collection
                 $runspace.powershell = $null                              #additional garbage collection
-            } 
+            }
         }
         #Clean out unused runspace jobs
         $temphash = $jobs.clone()
@@ -207,12 +207,12 @@ $jobCleanup.PowerShell = [PowerShell]::Create().AddScript({
             $_.runspace -eq $Null
         } | ForEach {
             $jobs.remove($_)
-        }        
-        Start-Sleep -Seconds 1 #lets not kill the processor here 
+        }
+        Start-Sleep -Seconds 1 #lets not kill the processor here
     } while ($jobCleanup.Flag)
 })
 $jobCleanup.PowerShell.Runspace = $newRunspace
-$jobCleanup.Thread = $jobCleanup.PowerShell.BeginInvoke() 
+$jobCleanup.Thread = $jobCleanup.PowerShell.BeginInvoke()
 #endregion RSCleanup
 
 #This function creates a new runspace for a script block to execute
@@ -222,9 +222,9 @@ $jobCleanup.Thread = $jobCleanup.PowerShell.BeginInvoke()
 function Start-BackgroundScriptBlock($scriptBlock){
     $newRunspace =[runspacefactory]::CreateRunspace()
     $newRunspace.ApartmentState = "STA"
-    $newRunspace.ThreadOptions = "ReuseThread"          
+    $newRunspace.ThreadOptions = "ReuseThread"
     $newRunspace.Open()
-    $newRunspace.SessionStateProxy.SetVariable("SyncClass",$SyncClass) 
+    $newRunspace.SessionStateProxy.SetVariable("SyncClass",$SyncClass)
     $PowerShell = [PowerShell]::Create().AddScript($scriptBlock)
     $PowerShell.Runspace = $newRunspace
     $PowerShell.BeginInvoke()
@@ -289,8 +289,8 @@ if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
 if ($Manufacturer -match "Microsoft"){
     if ($Model -eq "Virtual Machine"){
         $HyperV = $true
-    } 
-}    
+    }
+}
 
 if ($HPEnterprise){
     Install-ModuleHPCMSL
@@ -301,18 +301,18 @@ if ($HPEnterprise){
     catch {
         $BIOS = 'Skip'
     }
-    
+
     $formMainWindowControlManufacturerFunction.Header = "HP Functions"
     $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
 
     $formMainWindowControlOption_Name_1.Header = "HPIA Drivers - Adds approx 20 minutes"
-    $formMainWindowControlOption_Name_1.IsChecked = $Global:OSDCloudGUI.HPIADrivers 
+    $formMainWindowControlOption_Name_1.IsChecked = $Global:OSDCloudGUI.HPIADrivers
     $formMainWindowControlOption_Name_2.Header = "HPIA Firmware - Adds approx 5 minutes"
-    $formMainWindowControlOption_Name_2.IsChecked = $Global:OSDCloudGUI.HPIAFirmware 
+    $formMainWindowControlOption_Name_2.IsChecked = $Global:OSDCloudGUI.HPIAFirmware
     $formMainWindowControlOption_Name_3.Header = "HPIA Software - Adds approx 10 minutes"
-    $formMainWindowControlOption_Name_3.IsChecked = $Global:OSDCloudGUI.HPIASoftware 
+    $formMainWindowControlOption_Name_3.IsChecked = $Global:OSDCloudGUI.HPIASoftware
     $formMainWindowControlOption_Name_4.Header = "HPIA All Options - Adds approx 25 minutes"
-    $formMainWindowControlOption_Name_4.IsChecked = $Global:OSDCloudGUI.HPIAALL 
+    $formMainWindowControlOption_Name_4.IsChecked = $Global:OSDCloudGUI.HPIAALL
     if ($TPM -eq $false){
         $formMainWindowControlOption_Name_5.Header = "HP TPM Firmware Already Current"
         $formMainWindowControlOption_Name_5.IsEnabled = $false
@@ -320,7 +320,7 @@ if ($HPEnterprise){
     else{
         $formMainWindowControlOption_Name_5.Visibility = 'Visible'
         $formMainWindowControlOption_Name_5.Header = "HP Update TPM Firmware: $TPM"
-        $formMainWindowControlOption_Name_5.IsChecked = $Global:OSDCloudGUI.HPTPMUpdate 
+        $formMainWindowControlOption_Name_5.IsChecked = $Global:OSDCloudGUI.HPTPMUpdate
     }
     if ($BIOS -eq $true){
         $CurrentVer = Get-HPBIOSVersion
@@ -332,7 +332,7 @@ if ($HPEnterprise){
         $CurrentVer = Get-HPBIOSVersion
         $formMainWindowControlOption_Name_6.Visibility = 'Visible'
         $formMainWindowControlOption_Name_6.Header = "HP Update System Firmwware from $CurrentVer to $LatestVer"
-        $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate 
+        $formMainWindowControlOption_Name_6.IsChecked = $Global:OSDCloudGUI.HPBIOSUpdate
     }
     elseif ($BIOS -eq "Skip"){
         $formMainWindowControlOption_Name_6.Header = "Unable to Determine HP BIOS Info, Skipping Firmware Update"
@@ -340,10 +340,10 @@ if ($HPEnterprise){
     }
     else {
         $formMainWindowControlOption_Name_6.Header = "Unable to Determine HP BIOS Info"
-        $formMainWindowControlOption_Name_6.IsEnabled = $false   
+        $formMainWindowControlOption_Name_6.IsEnabled = $false
     }
     # When HPIA All is selected, unselect Firmware & Software
-    
+
     #If HPIA All is selected, deselect other options
     $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_1.IsChecked = $false})
     $formMainWindowControlOption_Name_4.add_Checked({$formMainWindowControlOption_Name_2.IsChecked = $false})
@@ -357,7 +357,7 @@ if ($HPEnterprise){
 
 elseif ($HyperV){
     $formMainWindowControlManufacturerFunction.Header = "HyperV Functions"
-    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'    
+    $formMainWindowControlManufacturerFunction.Visibility = 'Visible'
     $formMainWindowControlOption_Name_1.Header = "Set PC Name to HyperV VM Name"
     $formMainWindowControlOption_Name_1.IsChecked = $false
     $formMainWindowControlOption_Name_2.Header = "Eject CD ISO"
@@ -371,22 +371,22 @@ else{
     $formMainWindowControlManufacturerFunction.Visibility = 'Hidden'
     $formMainWindowControlManufacturerFunction.IsEnabled = $false
     $formMainWindowControlOption_Name_1.IsChecked = $false
-    #$formMainWindowControlOption_Name_1.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_1.IsEnabled = $false
     #$formMainWindowControlOption_Name_1.Visibility = "Hidden"
     $formMainWindowControlOption_Name_2.IsChecked = $false
-    #$formMainWindowControlOption_Name_2.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_2.IsEnabled = $false
     #$formMainWindowControlOption_Name_2.Visibility = "Hidden"
     $formMainWindowControlOption_Name_3.IsChecked = $false
-    #$formMainWindowControlOption_Name_3.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_3.IsEnabled = $false
     #$formMainWindowControlOption_Name_3.Visibility = "Hidden"
     $formMainWindowControlOption_Name_4.IsChecked = $false
-    #$formMainWindowControlOption_Name_4.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_4.IsEnabled = $false
     #$formMainWindowControlOption_Name_4.Visibility = "Hidden"
     $formMainWindowControlOption_Name_5.IsChecked = $false
-    #$formMainWindowControlOption_Name_5.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_5.IsEnabled = $false
     #$formMainWindowControlOption_Name_5.Visibility = "Hidden"
     $formMainWindowControlOption_Name_6.IsChecked = $false
-    #$formMainWindowControlOption_Name_6.IsEnabled = $false 
+    #$formMainWindowControlOption_Name_6.IsEnabled = $false
     #$formMainWindowControlOption_Name_6.Visibility = "Hidden"
 }
 #>
@@ -503,11 +503,11 @@ $CustomImageChildItem = @()
 [array]$CustomImageChildItem += Find-OSDCloudFile -Name '*.esd' -Path '\OSDCloud\OS\'
 [array]$CustomImageChildItem += Find-OSDCloudFile -Name '*install.swm' -Path '\OSDCloud\OS\'
 $CustomImageChildItem = $CustomImageChildItem | Sort-Object -Property Length -Unique | Sort-Object FullName | Where-Object {$_.Length -gt 2GB}
-        
+
 if ($CustomImageChildItem) {
-    $OSCatalogAmd64 = Get-OSDCloudOperatingSystems
-    $OSCatalogArm64 = Get-OSDCloudOperatingSystems -OSArch ARM64
-    
+    $OSCatalogAmd64 = Get-OSDCloudOperatingSystems -OSArch amd64
+    $OSCatalogArm64 = Get-OSDCloudOperatingSystems -OSArch arm64
+
     $CustomImageChildItem = $CustomImageChildItem | Where-Object {(Split-Path $_.Name -Leaf) -notin $OSCatalogAmd64.FileName} | Where-Object {(Split-Path $_.Name -Leaf) -notin $OSCatalogArm64.FileName}
     $CustomImageChildItem | ForEach-Object {
         $formMainWindowControlOSNameCombobox.Items.Add($_) | Out-Null
@@ -530,8 +530,8 @@ if ($AutopilotJsonChildItem) {
     $formMainWindowControlAutopilotJsonCombobox.SelectedIndex = 1
 }
 else {
-    $formMainWindowControlAutopilotJsonLabel.Visibility = "Collapsed" 
-    $formMainWindowControlAutopilotJsonCombobox.Visibility = "Collapsed"  
+    $formMainWindowControlAutopilotJsonLabel.Visibility = "Collapsed"
+    $formMainWindowControlAutopilotJsonCombobox.Visibility = "Collapsed"
 }
 #================================================
 #   OOBEDeployCombobox
@@ -548,8 +548,8 @@ if ($OOBEDeployJsonChildItem) {
     $formMainWindowControlOOBEDeployCombobox.SelectedIndex = 1
 }
 else {
-    $formMainWindowControlOOBEDeployLabel.Visibility = "Collapsed"  
-    $formMainWindowControlOOBEDeployCombobox.Visibility = "Collapsed"  
+    $formMainWindowControlOOBEDeployLabel.Visibility = "Collapsed"
+    $formMainWindowControlOOBEDeployCombobox.Visibility = "Collapsed"
 }
 #================================================
 #   AutopilotOOBECombobox
@@ -566,8 +566,8 @@ if ($AutopilotOOBEJsonChildItem) {
     $formMainWindowControlAutopilotOOBECombobox.SelectedIndex = 1
 }
 else {
-    $formMainWindowControlAutopilotOOBELabel.Visibility = "Collapsed"  
-    $formMainWindowControlAutopilotOOBECombobox.Visibility = "Collapsed"  
+    $formMainWindowControlAutopilotOOBELabel.Visibility = "Collapsed"
+    $formMainWindowControlAutopilotOOBECombobox.Visibility = "Collapsed"
 }
 #================================================
 #   OS Edition Combobox to ImageIndex
@@ -716,18 +716,20 @@ $formMainWindowControlStartButton.add_Click({
 
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
         $OSName = $formMainWindowControlOSNameCombobox.SelectedValue
-        
+
         if ($Global:OSDCloudGUI.OSArchitecture -match 'arm64') {
-            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems -OSArch ARM64 | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems -OSArch arm64 | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
         }
         else {
-            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+            # Catalog operating system names use amd64 while the UI value uses x64.
+            $OSNameMatch = $OSName -replace '\bx64\b', 'amd64'
+            $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems -OSArch amd64 | Where-Object {$_.Name -match $OSNameMatch} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
         }
-        
+
         $OSBuild = $OSDCloudOperatingSystem.Build
         $OSReleaseID = $OSDCloudOperatingSystem.ReleaseID
         $OSVersion = $OSDCloudOperatingSystem.Version
-        
+
         $ImageFileName = $OSDCloudOperatingSystem.FileName
         $ImageFileUrl = $OSDCloudOperatingSystem.Url
 
