@@ -317,3 +317,287 @@ function Get-OSDCoreCacheContent {
 
     return $result
 }
+function Get-OSDCoreCacheDrive {
+    <#
+    .SYNOPSIS
+        Returns OSDCloud cache drive metadata from local file system drives.
+
+    .DESCRIPTION
+        Enumerates mounted file system drives that contain an OSDCloud cache path
+        and returns only USB, DriveRoot, VolumeLabel, and VolumeUniqueId properties.
+
+    .PARAMETER Include
+        Optional list of drive letters to include when searching for OSDCloud cache
+        paths. Accepts values such as 'C', 'D:', or 'E:\'.
+
+        When omitted, all mounted file system drive letters are considered.
+
+    .PARAMETER Exclude
+        Optional list of drive letters to exclude when searching for OSDCloud cache
+        paths. Accepts values such as 'C', 'D:', or 'E:\'.
+
+        Excluded drives are skipped even when they are also present in Include.
+
+    .OUTPUTS
+        System.Object[]. Objects with USB, DriveRoot, VolumeLabel, and VolumeUniqueId.
+
+    .EXAMPLE
+        Get-OSDCoreCacheDrive
+
+        Returns OSDCloud cache drive metadata for all mounted file system drives.
+
+    .EXAMPLE
+        Get-OSDCoreCacheDrive -Include C,D -Exclude D
+
+        Returns OSDCloud cache drive metadata only for drive C.
+
+    .LINK
+        https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+        Author: David Segura - Recast Software
+        2026-07-18 - Initial function created
+    #>
+    [CmdletBinding()]
+    [OutputType([System.Object[]])]
+    param (
+        [Parameter()]
+        [ValidatePattern('^[a-zA-Z](:\\)?$|^[a-zA-Z]$')]
+        [string[]]$Include,
+
+        [Parameter()]
+        [ValidatePattern('^[a-zA-Z](:\\)?$|^[a-zA-Z]$')]
+        [string[]]$Exclude
+    )
+
+    function Get-DriveVolumeMetadata {
+        param(
+            [Parameter(Mandatory)]
+            [string]$DriveRoot
+        )
+
+        $volume = $null
+        $usb = $false
+        if ($DriveRoot -match '^[A-Z]:\\$') {
+            try {
+                $driveLetter = $DriveRoot.Substring(0, 1)
+                $volume = Get-Volume -DriveLetter $driveLetter -ErrorAction Stop
+                $usb = [bool](Get-Disk -ErrorAction SilentlyContinue |
+                    Where-Object { $_.BusType -eq 'USB' } |
+                    Get-Partition -ErrorAction SilentlyContinue |
+                    Where-Object { $_.DriveLetter -eq $driveLetter })
+            } catch {
+                $volume = $null
+                $usb = $false
+            }
+        }
+
+        [PSCustomObject]@{
+            USB            = [bool]$usb
+            DriveRoot      = $DriveRoot
+            VolumeLabel    = if ($volume) { [string]$volume.FileSystemLabel } else { $null }
+            VolumeUniqueId = if ($volume) { [string]$volume.UniqueId } else { $null }
+        }
+    }
+
+    function ConvertTo-DriveLetterList {
+        param(
+            [Parameter()]
+            [string[]]$DriveLetters
+        )
+
+        $normalized = foreach ($driveLetter in $DriveLetters) {
+            if ([string]::IsNullOrWhiteSpace($driveLetter)) {
+                continue
+            }
+
+            $value = $driveLetter.Trim().TrimEnd('\\')
+            if ($value.Length -lt 1) {
+                continue
+            }
+
+            $letter = $value.Substring(0, 1).ToUpperInvariant()
+            if ($letter -match '^[A-Z]$') {
+                $letter
+            }
+        }
+
+        @($normalized | Sort-Object -Unique)
+    }
+
+    $includedDriveLetters = ConvertTo-DriveLetterList -DriveLetters $Include
+    $excludedDriveLetters = ConvertTo-DriveLetterList -DriveLetters $Exclude
+
+    $result = Get-PSDrive -PSProvider FileSystem |
+        Where-Object { $_.Root -match '^[A-Z]:\\$' } |
+        Where-Object {
+            $driveLetter = ([string]$_.Root).Substring(0, 1).ToUpperInvariant()
+            (($includedDriveLetters.Count -eq 0) -or ($driveLetter -in $includedDriveLetters)) -and
+            ($driveLetter -notin $excludedDriveLetters)
+        } |
+        ForEach-Object {
+            $driveRoot = [string]$_.Root
+            $osdCloudPath = Join-Path -Path $driveRoot -ChildPath 'OSDCloud'
+
+            if (Test-Path -LiteralPath $osdCloudPath) {
+                Get-DriveVolumeMetadata -DriveRoot $driveRoot
+            }
+        }
+
+    return @($result | Sort-Object -Property DriveRoot -Unique)
+}
+function Get-OSDCoreCacheUSBPath {
+    <#
+    .SYNOPSIS
+        Returns OSDCloud cache paths located on USB drives.
+
+    .DESCRIPTION
+        Uses Get-OSDCoreCacheDrive to enumerate OSDCloud cache drives and returns
+        the OSDCloud directory path for each discovered cache drive where USB is true,
+        the file system is NTFS or exFAT, and more than the specified free space is available.
+
+    .PARAMETER Include
+        Optional list of drive letters to include when searching for OSDCloud cache
+        drives. Accepts values such as 'C', 'D:', or 'E:\'.
+
+        When omitted, all mounted file system drive letters are considered.
+
+    .PARAMETER Exclude
+        Optional list of drive letters to exclude when searching for OSDCloud cache
+        drives. Accepts values such as 'C', 'D:', or 'E:\'.
+
+        Excluded drives are skipped even when they are also present in Include.
+
+    .PARAMETER SizeRemaining
+        Optional minimum free space required on the USB cache drive, in GB.
+
+        The default is 10 GB.
+
+    .OUTPUTS
+        System.String[]. OSDCloud directory paths located on USB drives with more
+        than the specified GB free and an NTFS or exFAT file system.
+
+    .EXAMPLE
+        Get-OSDCoreCacheUSBPath
+
+        Returns OSDCloud directory paths for all discovered USB cache drives with more than 10 GB free and an NTFS or exFAT file system.
+
+    .EXAMPLE
+        Get-OSDCoreCacheUSBPath -Include D
+
+        Returns the OSDCloud directory path when drive D contains an OSDCloud cache path, is a USB drive, has more than 10 GB free, and is formatted NTFS or exFAT.
+
+    .EXAMPLE
+        Get-OSDCoreCacheUSBPath -SizeRemaining 20
+
+        Returns OSDCloud directory paths for discovered USB cache drives with more than 20 GB free and an NTFS or exFAT file system.
+
+    .LINK
+        https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+        Author: David Segura - Recast Software
+        2026-07-18 - Initial function created
+    #>
+    [CmdletBinding()]
+    [OutputType([System.String[]])]
+    param (
+        [Parameter()]
+        [ValidatePattern('^[a-zA-Z](:\\)?$|^[a-zA-Z]$')]
+        [string[]]$Include,
+
+        [Parameter()]
+        [ValidatePattern('^[a-zA-Z](:\\)?$|^[a-zA-Z]$')]
+        [string[]]$Exclude,
+
+        [Parameter()]
+        [ValidateRange(0, [int]::MaxValue)]
+        [int]$SizeRemaining = 10
+    )
+
+    $cacheDriveParameters = @{}
+    if ($PSBoundParameters.ContainsKey('Include')) {
+        $cacheDriveParameters.Include = $Include
+    }
+    if ($PSBoundParameters.ContainsKey('Exclude')) {
+        $cacheDriveParameters.Exclude = $Exclude
+    }
+
+    $minimumSizeRemaining = [int64]$SizeRemaining * 1GB
+
+    $cacheUsb = Get-OSDCoreCacheDrive @cacheDriveParameters |
+        Where-Object {
+            $volume = $null
+            if ($_.USB -and $_.DriveRoot -match '^([A-Z]):\\$') {
+                try {
+                    $volume = Get-Volume -DriveLetter $Matches[1] -ErrorAction Stop
+                } catch {
+                    $volume = $null
+                }
+            }
+
+            $volume -and
+            ($volume.FileSystem -in @('NTFS', 'exFAT')) -and
+            ([int64]$volume.SizeRemaining -gt $minimumSizeRemaining)
+        } |
+        ForEach-Object { Join-Path -Path $_.DriveRoot -ChildPath 'OSDCloud' }
+
+    return @($cacheUsb | Sort-Object -Unique)
+}
+function Test-OSDCoreCacheUSB {
+    <#
+    .SYNOPSIS
+        Tests whether any OSDCloud cache drive is a USB drive.
+
+    .DESCRIPTION
+        Uses Get-OSDCoreCacheDrive to enumerate OSDCloud cache drives and returns
+        true when at least one discovered cache drive has USB set to true.
+
+    .PARAMETER Include
+        Optional list of drive letters to include when searching for OSDCloud cache
+        drives. Accepts values such as 'C', 'D:', or 'E:\'.
+
+        When omitted, all mounted file system drive letters are considered.
+
+    .PARAMETER Exclude
+        Optional list of drive letters to exclude when searching for OSDCloud cache
+        drives. Accepts values such as 'C', 'D:', or 'E:\'.
+
+        Excluded drives are skipped even when they are also present in Include.
+
+    .OUTPUTS
+        System.Boolean. True when an OSDCloud cache drive is on USB; otherwise false.
+
+    .EXAMPLE
+        Test-OSDCoreCacheUSB
+
+        Returns true if any discovered OSDCloud cache drive is a USB drive.
+
+    .EXAMPLE
+        Test-OSDCoreCacheUSB -Include D
+
+        Returns true if drive D contains an OSDCloud cache path and is a USB drive.
+
+    .LINK
+        https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+        Author: David Segura - Recast Software
+        2026-07-18 - Initial function created
+    #>
+    [CmdletBinding()]
+    [OutputType([System.Boolean])]
+    param (
+        [Parameter()]
+        [ValidatePattern('^[a-zA-Z](:\\)?$|^[a-zA-Z]$')]
+        [string[]]$Include,
+
+        [Parameter()]
+        [ValidatePattern('^[a-zA-Z](:\\)?$|^[a-zA-Z]$')]
+        [string[]]$Exclude
+    )
+
+    $cacheDrive = @(Get-OSDCoreCacheDrive @PSBoundParameters | Where-Object { $_.USB })
+
+    return [bool]($cacheDrive.Count -gt 0)
+}

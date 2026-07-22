@@ -1,4 +1,4 @@
-function Test-OSDCloudInternetConnection
+function Test-OSDCoreInternetConnection
 {
     <#
     .SYNOPSIS
@@ -12,11 +12,11 @@ function Test-OSDCloudInternetConnection
     The URI to test for internet connectivity. Defaults to google.com.
 
     .EXAMPLE
-    Test-OSDCloudInternetConnection
+    Test-OSDCoreInternetConnection
     Tests connectivity to the default URI and returns $true or $false.
 
     .EXAMPLE
-    Test-OSDCloudInternetConnection -Uri 'https://www.microsoft.com'
+    Test-OSDCoreInternetConnection -Uri 'https://www.microsoft.com'
     Tests connectivity to a specific URI and returns $true or $false.
 
     .LINK
@@ -42,12 +42,12 @@ function Test-OSDCloudInternetConnection
     }
 
     try {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Test-OSDCloudInternetConnection OK: $Uri"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Test-OSDCoreInternetConnection OK: $Uri"
         Invoke-WebRequest @Params | Out-Null
         $true
     }
     catch {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Test-OSDCloudInternetConnection FAIL: $Uri"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Test-OSDCoreInternetConnection FAIL: $Uri"
         $false
     }
     finally {

@@ -1,45 +1,37 @@
-<#=================================================================================
-    Get-OSDCoreOperatingSystems
-    ================================================================================
-        - Retrieves all operating system records from Microsoft catalogs
-        - Directly imports XML records from core\operatingsystems and extracts
-            OS build, version, architecture, language, and activation info
-    - Returns sorted array of operating system objects
-    ================================================================================
+function Get-OSDCoreOperatingSystems {
+    <#
     .SYNOPSIS
-        Retrieves all operating system records from the OSDCloud catalog
+    Gets the core operating system catalog entries that OSD uses for offline media selection.
 
     .DESCRIPTION
-        Enumerates all XML files under core\operatingsystems, parses each
-        PublishedMedia Files File node, normalizes and deduplicates metadata,
-        then parses file names and catalog properties to extract OS build
-        numbers, versions, architecture, language codes, activation, and
-        download information.
-
-    .PARAMETER None
-        This function does not accept parameters.
+    Imports the operating system catalog XML files stored under the module's core operating systems cache,
+    normalizes duplicate metadata, and returns a sorted list of operating system records with build,
+    architecture, language, activation, hash, and image metadata.
 
     .EXAMPLE
-        PS C:\> Get-OSDCoreOperatingSystems
-        Returns all available operating system records
+    Get-OSDCoreOperatingSystems
+
+    Returns all available core operating system records discovered in the module cache.
 
     .EXAMPLE
-        PS C:\> Get-OSDCoreOperatingSystems | Where-Object { $_.OSName -eq 'Windows 11' }
-        Returns only Windows 11 operating systems
+    Get-OSDCoreOperatingSystems | Where-Object Version -eq 'Windows 11'
 
-    .EXAMPLE
-        PS C:\> Get-OSDCoreOperatingSystems | Group-Object OperatingSystem
-        Groups operating systems by major version
+    Returns only Windows 11 operating system records.
 
-    .NOTES
-        Author: OSDeploy
-        Version: 1.0
-        GitHub: https://github.com/OSDeploy
+    .INPUTS
+    None. You cannot pipe input to this function.
+
+    .OUTPUTS
+    PSCustomObject
+    One or more normalized operating system records.
 
     .LINK
-        https://www.osdeploy.com/
-=================================================================================#>
-function Get-OSDCoreOperatingSystems {
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-22 - Initial help block created
+    #>
     [CmdletBinding()]
     [OutputType([pscustomobject[]])]
     param ()
