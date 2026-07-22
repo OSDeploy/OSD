@@ -23,38 +23,16 @@ function Step-OSDCloudConfirmDeploymentDisk {
     param ()
     #=================================================
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
-    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm Fixed Disk Availability"
     #=================================================
-    try {
-        $allFixedDisks = @(Get-LocalDisk | Sort-Object Number)
-    }
-    catch {
-        $Global:OSDCloud.GetDiskFixed = @()
-        $Global:OSDCloud.SectionPassed = $false
-        throw "[$(Get-Date -format s)] Unable to query fixed disks: $($_.Exception.Message)"
-    }
-
-    if ($env:SystemDrive -eq 'X:') {
-        # In WinPE, skip the boot media disk so only deployable disks remain.
-        $Global:OSDCloud.GetDiskFixed = @($allFixedDisks | Where-Object { $_.IsBoot -ne $true })
+    if ($global:RecastOSDeploy.GetDiskFixed) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Fixed Disk is valid. OK."
     }
     else {
-        $Global:OSDCloud.GetDiskFixed = $allFixedDisks
-    }
-
-    $Global:OSDCloud.SectionPassed = [bool]($Global:OSDCloud.GetDiskFixed)
-
-    if ($Global:OSDCloud.SectionPassed -eq $true) {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Done."
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Fixed Disks Detected:"
-        foreach ($disk in $Global:OSDCloud.GetDiskFixed) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Disk Number: $($disk.Number), Friendly Name: $($disk.FriendlyName), Size: $([math]::Round($disk.Size/1GB,2)) GB, Media Type: $($disk.MediaType)"
-        }
-    }
-    else {
-        Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] OSDCloud Failed"
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Unable to locate a fixed disk suitable for deployment."
-        throw "[$(Get-Date -format s)] Unable to locate a Fixed Disk. You may need to add additional HDC Drivers to WinPE"
+        Write-Warning "[$(Get-Date -format s)] Unable to detect a Fixed Disk."
+        Write-Warning "[$(Get-Date -format s)] WinPE may need additional Disk, SCSI or Raid Drivers."
+        Write-Warning 'Press Ctrl+C to exit OSDCloud'
+        Start-Sleep -Seconds 86400
+        exit
     }
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
