@@ -8,8 +8,7 @@ function Step-OSDCloudSaveDriverPackCacheObject {
         [string]$DownloadPath = 'C:\Windows\Temp\osdcloud-driverpack-download'
     )
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Honor the upstream execution mode gate.
     # This step only runs when offline media usage has already been confirmed.
@@ -107,6 +106,7 @@ function Step-OSDCloudSaveDriverPackCacheObject {
     # Log selected cache file for traceability.
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent: $($CacheDriverPack.FullName)"
     $DestinationFile = $null
+
     # Re-check destination (defensive) in case another step created it.
     # This avoids unnecessary copy work in race conditions.
     if (Test-Path -LiteralPath $LocalDestinationPath) {
@@ -126,7 +126,7 @@ function Step-OSDCloudSaveDriverPackCacheObject {
             $null = Copy-Item -LiteralPath $CacheDriverPack.FullName -Destination $LocalDestinationPath -Force -ErrorAction Stop
         }
         catch {
-            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to copy cached ESD from $($CacheDriverPack.FullName) to $LocalDestinationPath. $($_.Exception.Message)"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to copy CacheDriverPack from $($CacheDriverPack.FullName) to $LocalDestinationPath. $($_.Exception.Message)"
             return
         }
     }
@@ -143,6 +143,7 @@ function Step-OSDCloudSaveDriverPackCacheObject {
         return
     }
     #=================================================
+    # Final integrity check on the destination file.
     # Verify Cache file hash matches metadata after copy to ensure integrity.
     if ($DriverPackCloudObject.HashMD5) {
         $DestinationFileHash = Get-FileHash -Path $DestinationFile.FullName -Algorithm MD5
@@ -153,7 +154,7 @@ function Step-OSDCloudSaveDriverPackCacheObject {
             return
         }
     }
-    $global:RecastOSDCloud.DriverPackLocalObject = $DestinationFile
+    $global:RecastOSDCloud.DriverPackFileObject = $DestinationFile
     $global:RecastOSDCloud.DriverPackCloudObjectTest = $false
     #=================================================
     # Store this as a FileInfo Object

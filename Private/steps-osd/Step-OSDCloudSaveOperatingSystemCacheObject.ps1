@@ -1,7 +1,7 @@
 function Step-OSDCloudSaveOperatingSystemCacheObject {
     <#
     .SYNOPSIS
-    Copies the selected Windows ESD from OSDCore cache to C:\OSDCloud\OS.
+    Copies the selected OperatingSystemCacheObject from OSDCore cache to C:\OSDCloud\OS.
 
     .DESCRIPTION
     Validates the current operating system selection, checks for a matching file in
@@ -41,14 +41,13 @@ function Step-OSDCloudSaveOperatingSystemCacheObject {
         [string]$DownloadPath = 'C:\OSDCloud\OS'
     )
     #=================================================
-    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
+    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Honor the upstream execution mode gate.
     # This step only runs when offline media usage has already been confirmed.
     # Returning here is expected behavior in online flows and is not an error.
     if (-not ($global:RecastOSDCloud.OperatingSystemCacheObject)) {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Windows ESD was not confirmed for offline usage. Skipping this step."
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystemCacheObject was not confirmed for offline usage. Skipping this step."
         return
     }
     #=================================================
@@ -86,47 +85,46 @@ function Step-OSDCloudSaveOperatingSystemCacheObject {
     # Match the exact filename requested by the selected OS metadata.
     # First match is intentional because filenames should be unique in cache.
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($OperatingSystemCloudObject.FileName)"
-    $CacheWindowsESD = $global:OSDCoreCacheContent | Where-Object { $_.Name -eq $OperatingSystemCloudObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
+    $CacheOperatingSystem = $global:OSDCoreCacheContent | Where-Object { $_.Name -eq $OperatingSystemCloudObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
     #=================================================
     # Stop quietly when the requested payload is not cached.
-    if (-not $CacheWindowsESD) {
+    if (-not $CacheOperatingSystem) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemCloudObject is not in the OSDCoreCacheContent. OK."
         return
     }
     #=================================================
     # Ensure the cache entry points to a real file before we hash or copy.
-    if (-not (Test-Path -LiteralPath $CacheWindowsESD.FullName)) {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Cached source file not found: $($CacheWindowsESD.FullName)"
+    if (-not (Test-Path -LiteralPath $CacheOperatingSystem.FullName)) {
+        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Cached source file not found: $($CacheOperatingSystem.FullName)"
         return
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($CacheWindowsESD.FullName)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($CacheOperatingSystem.FullName)"
     #=================================================
     # Validate the cached source against Microsoft metadata first.
     # This prevents copying a stale or tampered cache file.
     if ($OperatingSystemCloudObject.SHA1) {
         # Validate cached payload before copy so we never replicate bad content.
-        $SourceFileHash = Get-FileHash -Path $CacheWindowsESD.FullName -Algorithm SHA1
+        $SourceFileHash = Get-FileHash -Path $CacheOperatingSystem.FullName -Algorithm SHA1
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified ESD SHA1: $($OperatingSystemCloudObject.SHA1)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent SHA1: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemCloudObject.SHA1) {
             # Hash mismatch means the source cannot be trusted; skip copy.
-            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA1 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA1 hash mismatch for cached source file: $($CacheOperatingSystem.FullName)"
             return
         }
     }
     if ($OperatingSystemCloudObject.SHA256) {
         # Same source validation path for newer metadata that provides SHA256.
-        $SourceFileHash = Get-FileHash -Path $CacheWindowsESD.FullName -Algorithm SHA256
+        $SourceFileHash = Get-FileHash -Path $CacheOperatingSystem.FullName -Algorithm SHA256
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Microsoft Verified ESD SHA256: $($OperatingSystemCloudObject.SHA256)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent SHA256: $($SourceFileHash.Hash)"
         if ($SourceFileHash.Hash -ne $OperatingSystemCloudObject.SHA256) {
             # Hash mismatch means the source cannot be trusted; skip copy.
-            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA256 hash mismatch for cached source file: $($CacheWindowsESD.FullName)"
+            Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] SHA256 hash mismatch for cached source file: $($CacheOperatingSystem.FullName)"
             return
         }
     }
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemCloudObject is available in the OSDCoreCacheContent. OK."
-    $global:RecastOSDCloud.OperatingSystemCacheObject = $true
     #=================================================
     # Create destination directory if needed
     # Directory creation is idempotent and safe to call repeatedly.
@@ -141,9 +139,9 @@ function Step-OSDCloudSaveOperatingSystemCacheObject {
     }
     #=================================================
     # Log selected cache file for traceability.
-    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent: $($CacheWindowsESD.FullName)"
-
+    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent: $($CacheOperatingSystem.FullName)"
     $DestinationFile = $null
+
     # Re-check destination (defensive) in case another step created it.
     # This avoids unnecessary copy work in race conditions.
     if (Test-Path -LiteralPath $LocalDestinationPath) {
@@ -151,19 +149,19 @@ function Step-OSDCloudSaveOperatingSystemCacheObject {
     }
 
     # If destination exists and byte length matches cache, skip recopy.
-    if ($DestinationFile -and $DestinationFile.Length -eq $CacheWindowsESD.Length) {
+    if ($DestinationFile -and $DestinationFile.Length -eq $CacheOperatingSystem.Length) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Cached file already exists at destination with matching size"
     }
     else {
         # Copy with -Force so partial/older files are replaced atomically by Copy-Item.
         # Any copy failure is terminal for this step because no valid destination exists.
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $($CacheWindowsESD.FullName)"
+        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $($CacheOperatingSystem.FullName)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying to $LocalDestinationPath"
         try {
-            $null = Copy-Item -LiteralPath $CacheWindowsESD.FullName -Destination $LocalDestinationPath -Force -ErrorAction Stop
+            $null = Copy-Item -LiteralPath $CacheOperatingSystem.FullName -Destination $LocalDestinationPath -Force -ErrorAction Stop
         }
         catch {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to copy cached ESD from $($CacheWindowsESD.FullName) to $LocalDestinationPath. $($_.Exception.Message)"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Failed to copy CacheOperatingSystem from $($CacheOperatingSystem.FullName) to $LocalDestinationPath. $($_.Exception.Message)"
         }
     }
     #=================================================
@@ -194,7 +192,7 @@ function Step-OSDCloudSaveOperatingSystemCacheObject {
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Copied SHA1 matches the verified Microsoft ESD SHA1. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
+            $global:RecastOSDCloud.OperatingSystemFileObject = $DestinationFile
             $global:RecastOSDCloud.OperatingSystemCloudObjectTest = $false
         }
     }
@@ -211,12 +209,14 @@ function Step-OSDCloudSaveOperatingSystemCacheObject {
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Copied SHA256 matches the verified Microsoft ESD SHA256. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
+            $global:RecastOSDCloud.OperatingSystemFileObject = $DestinationFile
             $global:RecastOSDCloud.OperatingSystemCloudObjectTest = $false
         }
     }
     else {
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystemCloudObject does not have SHA1 or SHA256 metadata to validate the cached source or copied destination"
+        $global:RecastOSDCloud.OperatingSystemFileObject = $DestinationFile
+        $global:RecastOSDCloud.OperatingSystemCloudObjectTest = $false
     }
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"

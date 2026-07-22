@@ -48,7 +48,7 @@ function Step-OSDCloudSaveOperatingSystemCloudObject {
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
                 # Get-Item for $DestinationFile
-                $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
+                $global:RecastOSDCloud.OperatingSystemFileObject = $DestinationFile
             }
         }
         elseif ($OperatingSystemCloudObject.SHA256) {
@@ -60,7 +60,7 @@ function Step-OSDCloudSaveOperatingSystemCloudObject {
             }
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
-                $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
+                $global:RecastOSDCloud.OperatingSystemFileObject = $DestinationFile
             }
         }
 
@@ -183,7 +183,7 @@ function Step-OSDCloudSaveOperatingSystemCloudObject {
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
+            $global:RecastOSDCloud.OperatingSystemFileObject = $DestinationFile
         }
     }
     if ($OperatingSystemCloudObject.SHA256) {
@@ -196,7 +196,7 @@ function Step-OSDCloudSaveOperatingSystemCloudObject {
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
+            $global:RecastOSDCloud.OperatingSystemFileObject = $DestinationFile
         }
     }
     #=================================================
