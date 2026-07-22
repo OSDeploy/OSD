@@ -51,10 +51,10 @@
         'Get-OSDCoreDriverPackCatalogPanasonic',
         'Get-OSDCoreDriverPackCatalogSurface',
         'Get-OSDCoreDriverPacks',
-        'Test-OSDCoreDriverPackObjectUrl',
+        'Test-OSDCoreDriverPackCloudObject',
         # OSDCoreOperatingSystem
         'Get-OSDCoreOperatingSystems',
-        'Test-OSDCoreOperatingSystemObjectUrl',
+        'Test-OSDCoreOperatingSystemCloudObject',
         # Manufacturer Dell
         'Get-DellApplicationCatalog',
         'Get-DellBiosCatalog',
