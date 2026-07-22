@@ -342,24 +342,24 @@ function Invoke-RecastOSDCloud {
     Step-OSDCloudEnableHighPerformance
     if ($Global:OSDCloud.AzOSDCloudImage) {
         Step-OSDCloudAzDownloadOS
-        $global:OSDCoreOperatingSystemObject = $null
+        $global:OSDCoreOperatingSystemCloudObject = $null
     }
     else {
-        if ((-NOT ($global:OSDCoreOperatingSystemObject)) -and (-NOT ($Global:OSDCloud.ImageFileDestination)) -and (-NOT ($Global:OSDCloud.ImageFileUrl))) {
-            $global:OSDCoreOperatingSystemObject = Set-OSDCoreOperatingSystemObject
+        if ((-NOT ($global:OSDCoreOperatingSystemCloudObject)) -and (-NOT ($Global:OSDCloud.ImageFileDestination)) -and (-NOT ($Global:OSDCloud.ImageFileUrl))) {
+            $global:OSDCoreOperatingSystemCloudObject = Set-OSDCoreOperatingSystemCloudObject
         }
-        if ($global:OSDCoreOperatingSystemObject) {
-            Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject"
-            $global:OSDCoreOperatingSystemObject | Out-Host
+        if ($global:OSDCoreOperatingSystemCloudObject) {
+            Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject"
+            $global:OSDCoreOperatingSystemCloudObject | Out-Host
         }
         else {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set"
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject is not set"
         }
     }
     #region WindowsImage Download
-    if ($global:OSDCoreOperatingSystemObject) {
-        Step-OSDCloudCopyOperatingSystemCacheObject
-        Step-OSDCloudSaveOnlineOperatingSystemObject
+    if ($global:OSDCoreOperatingSystemCloudObject) {
+        Step-OSDCloudSaveOperatingSystemCacheObject
+        Step-OSDCloudSaveOperatingSystemCloudObject
     }
     elseif (!($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileUrl)) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Download Operating System"
@@ -640,9 +640,9 @@ function Invoke-RecastOSDCloud {
     Step-OSDCloudConfirmWindowsEdition
     Step-OSDCloudBcdBoot
     Step-OSDCloudContentFolders
-    Step-OSDCloudExportWinPEOemDrivers
-    Step-OSDCloudAddWinOSOemDrivers
-    Step-OSDCloudAddWinREOemDrivers
+    Step-OSDCloudWinPEOemDriversExport
+    Step-OSDCloudWinPEOemDriversAddWinOS
+    Step-OSDCloudWinPEOemDriversAddWinRE
 
     #region Drivers
         #region Get-OSDCloudDriverPack
@@ -659,9 +659,9 @@ function Invoke-RecastOSDCloud {
             }
         }
 
-        if ($global:RecastOSDCloud.DriverPackObject) {
+        if ($global:RecastOSDCloud.DriverPackCloudObject) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud v2 DriverPack"
-            $Global:OSDCloud.DriverPack = $global:RecastOSDCloud.DriverPackObject
+            $Global:OSDCloud.DriverPack = $global:RecastOSDCloud.DriverPackCloudObject
         }
         elseif ($Global:OSDCloud.DriverPackName) {
             if ($Global:OSDCloud.DriverPackName -match 'None') {
@@ -678,13 +678,13 @@ function Invoke-RecastOSDCloud {
                         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Attempting to use HPCMSL Functions to download Latest Driver Pack for Model"
                         $HPDriverPack = Get-HPDriverPackLatest
                         if ($HPDriverPack -ne $false){
-                            $HPDriverPackObject = @{
+                            $HPDriverPackCloudObject = @{
                                 Name = $HPDriverPack.Name
                                 Product = Get-MyComputerProduct
                                 FileName = ($HPDriverPack.url).Split('/')[-1]
                                 Url = $HPDriverPack.Url
                             }
-                            $Global:OSDCloud.DriverPack = $HPDriverPackObject
+                            $Global:OSDCloud.DriverPack = $HPDriverPackCloudObject
                             $Global:OSDCloud.HPCMSLDriverPackLatestFound = $HPDriverPack
                             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Found HP Driver Pack via CMSL, Setting Variables"
                         }
@@ -728,8 +728,8 @@ function Invoke-RecastOSDCloud {
         }
 
         # OSDCloud v2 DriverPack
-        if ($global:InvokeOSDCloud.DriverPackObject) {
-            Step-OSDCloudSaveDriverPackOffline
+        if ($global:InvokeOSDCloud.DriverPackCloudObject) {
+            Step-OSDCloudSaveDriverPackCacheObject
             Step-OSDCloudDriverPackAdd
         }
         elseif ($Global:OSDCloud.DriverPack) {

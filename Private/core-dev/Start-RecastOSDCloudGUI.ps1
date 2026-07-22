@@ -213,14 +213,14 @@ function Start-RecastOSDCloudGUI {
     }
 
     # Select the matching operating system object from the preloaded catalog based on the provided or default parameters.
-    $global:OSDCoreOperatingSystemObject = $global:OSDCoreOperatingSystems | `
+    $global:OSDCoreOperatingSystemCloudObject = $global:OSDCoreOperatingSystems | `
         Where-Object { $_.Activation -eq $OSActivation } | `
         Where-Object { $_.Architecture -match $OSArchitecture } | `
         Where-Object { $_.Language -eq $OSLanguageCode } | `
         Where-Object { $_.ReleaseID -eq $OSReleaseID } | `
         Where-Object { $_.Version -eq 'Windows 11' }
 
-    if (-not $global:OSDCoreOperatingSystemObject) {
+    if (-not $global:OSDCoreOperatingSystemCloudObject) {
         throw "[$(Get-Date -format s)] Unable to find a matching operating system object for OSReleaseID '$OSReleaseID', OSArchitecture '$OSArchitecture', Activation '$OSActivation', and Language '$OSLanguageCode'."
     }
     #=================================================
@@ -240,19 +240,19 @@ function Start-RecastOSDCloudGUI {
     if ($PSBoundParameters.ContainsKey('OSDProduct')) {
         $global:OSDCoreDevice.OSDProduct = $OSDProduct
     }
-    $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $global:OSDCoreDevice.OSDProduct } | Select-Object -First 1
+    $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $global:OSDCoreDevice.OSDProduct } | Select-Object -First 1
     #================================================
     #   Output OSDCore Objects
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDManufacturer: $($global:OSDCoreDevice.OSDManufacturer)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
-    if ($global:OSDCoreDriverPackObject) {
-        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackObject"
-        $global:OSDCoreDriverPackObject | Out-Host
+    if ($global:OSDCoreDriverPackCloudObject) {
+        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackCloudObject"
+        $global:OSDCoreDriverPackCloudObject | Out-Host
     }
-    if ($global:OSDCoreOperatingSystemObject) {
-        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject"
-        $global:OSDCoreOperatingSystemObject | Out-Host
+    if ($global:OSDCoreOperatingSystemCloudObject) {
+        Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject"
+        $global:OSDCoreOperatingSystemCloudObject | Out-Host
     }
     #=================================================
     # Dependency guard: OSDCloud relies on curl.exe for downloads.
@@ -288,7 +288,7 @@ function Start-RecastOSDCloudGUI {
         # DriverFolderPaths         = @()
         # DriverFolderSelections    = @()
         # DriverPackName        = $DriverPackName
-        # DriverPackObject      = $DriverPackObject
+        # DriverPackCloudObject      = $DriverPackCloudObject
         # DriverPackValues      = [array]$DriverPackValues
         # Flows                     = [array]$global:OSDCloudWorkflowTasks
         Function              = $($MyInvocation.MyCommand.Name)
@@ -297,7 +297,7 @@ function Start-RecastOSDCloudGUI {
         LaunchMethod          = 'RecastOSDCloudGUI'
         Module                = $($MyInvocation.MyCommand.Module.Name)
         OperatingSystem       = $OperatingSystem
-        # OperatingSystemObject = $OperatingSystemObject
+        # OperatingSystemCloudObject = $OperatingSystemCloudObject
         # OperatingSystemValues = $OperatingSystemValues
         OSActivation          = $OSActivation
         OSActivationValues    = $OSActivationValues
@@ -331,7 +331,7 @@ function Start-RecastOSDCloudGUI {
         # DriverPack                  = $null
         # DriverPacks                 = $null
         # DriverPackName        = $DriverPackName
-        # DriverPackObject      = $DriverPackObject
+        # DriverPackCloudObject      = $DriverPackCloudObject
         # DriverPackValues      = [array]$DriverPackValues
         IsOnBattery           = [System.Boolean]$global:OSDCoreDevice.IsOnBattery
         OSActivation          = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Activation
