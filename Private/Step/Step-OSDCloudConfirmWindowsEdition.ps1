@@ -6,7 +6,7 @@ function Step-OSDCloudConfirmWindowsEdition {
     .DESCRIPTION
     Queries the offline Windows image at C:\ by using Get-WindowsEdition,
     writes the detected edition to the console, and stores the value in
-    $global:RecastOSDeploy.WindowsEdition for later OSDCloud steps.
+    $global:RecastOSDCloud.WindowsEdition for later OSDCloud steps.
 
     .EXAMPLE
     Step-OSDCloudConfirmWindowsEdition
@@ -33,7 +33,7 @@ function Step-OSDCloudConfirmWindowsEdition {
     try {
         $WindowsEdition = (Get-WindowsEdition -Path 'C:\' -ErrorAction Stop | Out-String).Trim()
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $WindowsEdition"
-        $global:RecastOSDeploy.WindowsEdition = $WindowsEdition
+        $global:RecastOSDCloud.WindowsEdition = $WindowsEdition
     }
     catch {
         Write-Warning "[$(Get-Date -format s)] Unable to get Windows Edition. OK."

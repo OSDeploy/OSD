@@ -74,7 +74,7 @@ function Step-OSDCloudConfirmDriverPackXXXXX {
         $WebRequest = Invoke-WebRequest -Uri $DriverPackObject.Url -UseBasicParsing -Method Head -ErrorAction Stop
         if ($WebRequest.StatusCode -in 200, 206) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
-            $global:RecastOSDeploy.DriverPackObjectUrlTest = $true
+            $global:RecastOSDCloud.DriverPackObjectUrlTest = $true
         }
     }
     catch {

@@ -38,7 +38,7 @@ function Step-OSDCloudBcdBoot {
     }
 
     $BcdBootArgs = @('C:\Windows', '/c')
-    if ($global:RecastOSDeploy -and $global:RecastOSDeploy.OSBuild -ge 26200) {
+    if ($global:RecastOSDCloud -and $global:RecastOSDCloud.OSBuild -ge 26200) {
         $BcdBootArgs += '/bootex'
     }
     else {

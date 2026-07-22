@@ -24,7 +24,7 @@ function Step-OSDCloudConfirmDeploymentDisk {
     #=================================================
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
-    if ($global:RecastOSDeploy.GetDiskFixed) {
+    if ($global:RecastOSDCloud.GetDiskFixed) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Fixed Disk is valid. OK."
     }
     else {

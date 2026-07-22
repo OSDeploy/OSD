@@ -60,7 +60,7 @@ function Step-OSDCloudConfirmWindowsESDXXXXX {
         $WebRequest = Invoke-WebRequest -Uri $OperatingSystemObject.Url -UseBasicParsing -Method Head -ErrorAction Stop
         if ($WebRequest.StatusCode -in 200, 206) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystemObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
-            $global:RecastOSDeploy.OperatingSystemUrlTest = $true
+            $global:RecastOSDCloud.OperatingSystemUrlTest = $true
         }
     }
     catch {

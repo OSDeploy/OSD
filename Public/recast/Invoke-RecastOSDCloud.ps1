@@ -659,9 +659,9 @@ function Invoke-RecastOSDCloud {
             }
         }
 
-        if ($global:RecastOSDeploy.DriverPackObject) {
+        if ($global:RecastOSDCloud.DriverPackObject) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud v2 DriverPack"
-            $Global:OSDCloud.DriverPack = $global:RecastOSDeploy.DriverPackObject
+            $Global:OSDCloud.DriverPack = $global:RecastOSDCloud.DriverPackObject
         }
         elseif ($Global:OSDCloud.DriverPackName) {
             if ($Global:OSDCloud.DriverPackName -match 'None') {

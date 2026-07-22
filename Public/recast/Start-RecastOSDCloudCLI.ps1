@@ -336,8 +336,8 @@ function Start-RecastOSDCloudCLI {
     $DeploymentDiskObject = $DeploymentDiskObject | Select-Object -First 1
     #=================================================
     # Build deployment state consumed by the broader OSDCloud workflow.
-    $global:RecastOSDeploy = $null
-    $global:RecastOSDeploy = [ordered]@{
+    $global:RecastOSDCloud = $null
+    $global:RecastOSDCloud = [ordered]@{
         DriverPackObject           = $global:OSDCoreDriverPackObject
         DriverPackObjectUrlTest    = Test-OSDCoreDriverPackObjectUrl
         DriverPackCacheObject      = Get-OSDCoreDriverPackCacheObject
@@ -394,13 +394,13 @@ function Start-RecastOSDCloudCLI {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set. OSDCloud cannot continue without a valid OS payload."
     }
     # Cannot continue if the selected operating system object is not reachable online and is not available offline.
-    if (($global:RecastOSDeploy.OperatingSystemUrlTest -eq $false) -and ($null -eq $global:RecastOSDeploy.OperatingSystemCacheObject)) {
+    if (($global:RecastOSDCloud.OperatingSystemUrlTest -eq $false) -and ($null -eq $global:RecastOSDCloud.OperatingSystemCacheObject)) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystem is not reachable online or available offline. OSDCloud cannot continue without a valid OS payload."
     }
     #================================================
     if (-not $Force) {
         Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] -Force is required to run OSDCloud. Initialization completed, but the deployment workflow was not started."
-        $global:RecastOSDeploy | Out-Host
+        $global:RecastOSDCloud | Out-Host
         return
     }
     Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] Starting Invoke-RecastOSDCloudCLI in 5 seconds ..."

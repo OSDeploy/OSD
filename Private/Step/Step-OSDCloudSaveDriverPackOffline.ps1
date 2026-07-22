@@ -14,7 +14,7 @@ function Step-OSDCloudSaveDriverPackOffline {
     # Honor the upstream execution mode gate.
     # This step only runs when offline media usage has already been confirmed.
     # Returning here is expected behavior in online flows and is not an error.
-    if (-not ($global:RecastOSDeploy.DriverPackCacheObject)) {
+    if (-not ($global:RecastOSDCloud.DriverPackCacheObject)) {
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DriverPackObject was not confirmed for offline usage. Skipping this step."
         return
     }
@@ -82,7 +82,7 @@ function Step-OSDCloudSaveDriverPackOffline {
         }
     }
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is in OSDCoreCacheContent. OK."
-    $global:RecastOSDeploy.DriverPackCacheObject = $true
+    $global:RecastOSDCloud.DriverPackCacheObject = $true
     #=================================================
     # Variables
     $LogPath = "C:\Windows\Temp\osdcloud-logs"
@@ -153,8 +153,8 @@ function Step-OSDCloudSaveDriverPackOffline {
             return
         }
     }
-    $global:RecastOSDeploy.DriverPackItem = $DestinationFile
-    $global:RecastOSDeploy.DriverPackObjectUrlTest = $false
+    $global:RecastOSDCloud.DriverPackItem = $DestinationFile
+    $global:RecastOSDCloud.DriverPackObjectUrlTest = $false
     #=================================================
     # Store this as a FileInfo Object
     $DriverPackObject | ConvertTo-Json | Out-File "$($DestinationFile.FullName).json" -Encoding ascii -Width 2000 -Force

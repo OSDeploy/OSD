@@ -12,7 +12,7 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Is it online?
-    if (-not ($global:RecastOSDeploy.OperatingSystemUrlTest)) {
+    if (-not ($global:RecastOSDCloud.OperatingSystemUrlTest)) {
         return
     }
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Save OperatingSystemObject Online:"
@@ -48,7 +48,7 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
                 # Get-Item for $DestinationFile
-                $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
+                $global:RecastOSDCloud.OperatingSystemItem = $DestinationFile
             }
         }
         elseif ($OperatingSystemObject.SHA256) {
@@ -60,7 +60,7 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
             }
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
-                $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
+                $global:RecastOSDCloud.OperatingSystemItem = $DestinationFile
             }
         }
 
@@ -183,7 +183,7 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
+            $global:RecastOSDCloud.OperatingSystemItem = $DestinationFile
         }
     }
     if ($OperatingSystemObject.SHA256) {
@@ -196,7 +196,7 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:RecastOSDeploy.OperatingSystemItem = $DestinationFile
+            $global:RecastOSDCloud.OperatingSystemItem = $DestinationFile
         }
     }
     #=================================================

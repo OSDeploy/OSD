@@ -29,12 +29,12 @@ function Step-OSDCloudExpandWindowsImage {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Validate required OSDCloud deployment context before applying the image.
-    if ($null -eq $global:RecastOSDeploy) {
+    if ($null -eq $global:RecastOSDCloud) {
         throw "[$(Get-Date -format s)] OSDCloud deployment context was not found."
     }
 
-    $ImagePath = $global:RecastOSDeploy.OperatingSystemItem.FullName
-    $ImageIndex = $global:RecastOSDeploy.WindowsImageIndex
+    $ImagePath = $global:RecastOSDCloud.OperatingSystemItem.FullName
+    $ImageIndex = $global:RecastOSDCloud.WindowsImageIndex
     $ScratchDirectory = 'C:\OSDCloud\Temp'
 
     if ([string]::IsNullOrWhiteSpace($ImagePath)) {

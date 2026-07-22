@@ -11,12 +11,12 @@ function Step-OSDCloudFinish {
 
     .PARAMETER None
     This function does not define input parameters. It uses deployment state stored in
-    $global:RecastOSDeploy and the current system environment.
+    $global:RecastOSDCloud and the current system environment.
 
     .EXAMPLE
     Step-OSDCloudFinish
     Finalizes the current OSDCloud deployment and applies the value of
-    $global:RecastOSDeploy.WinPEPostAction.
+    $global:RecastOSDCloud.WinPEPostAction.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
@@ -31,13 +31,13 @@ function Step-OSDCloudFinish {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Capture the final deployment duration before any finish action is performed.
-    if ($null -eq $global:RecastOSDeploy.TimeStart) {
+    if ($null -eq $global:RecastOSDCloud.TimeStart) {
         # Keep direct calls safe when the caller did not initialize the start timestamp.
-        $global:RecastOSDeploy.TimeStart = [datetime](Get-Date)
+        $global:RecastOSDCloud.TimeStart = [datetime](Get-Date)
     }
-    $global:RecastOSDeploy.TimeEnd = [datetime](Get-Date)
-    $global:RecastOSDeploy.TimeSpan = New-TimeSpan -Start $global:RecastOSDeploy.TimeStart -End $global:RecastOSDeploy.TimeEnd
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Recast OSDCloud completed in $($global:RecastOSDeploy.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
+    $global:RecastOSDCloud.TimeEnd = [datetime](Get-Date)
+    $global:RecastOSDCloud.TimeSpan = New-TimeSpan -Start $global:RecastOSDCloud.TimeStart -End $global:RecastOSDCloud.TimeEnd
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Recast OSDCloud completed in $($global:RecastOSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
 
     # Ensure the shared log directory exists before writing final deployment logs.
     $logDirectory = 'C:\Windows\Temp\osdcloud-logs'
@@ -46,7 +46,7 @@ function Step-OSDCloudFinish {
     }
 
     # Save the RecastOSDeploy object to a JSON file for post-deployment analysis.
-    # $null = $global:RecastOSDeploy | ConvertTo-Json -Depth 2 | Out-File -FilePath (Join-Path $logDirectory 'RecastOSDCloud.json') -Encoding utf8 -Width 2000 -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+    # $null = $global:RecastOSDCloud | ConvertTo-Json -Depth 2 | Out-File -FilePath (Join-Path $logDirectory 'RecastOSDCloud.json') -Encoding utf8 -Width 2000 -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 
     # Capture the DISM Log
     if (Test-Path -LiteralPath 'X:\windows\logs\DISM\dism.log') {
@@ -61,9 +61,9 @@ function Step-OSDCloudFinish {
         $null = robocopy "X:\Windows\Temp\osdcloud-logs" "C:\Windows\Temp\osdcloud-logs" *.* /e /ndl /r:0 /w:0
     }
 
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Finish Action $($global:RecastOSDeploy.WinPEPostAction)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Finish Action $($global:RecastOSDCloud.WinPEPostAction)"
     # Apply the requested end-of-deployment action after final logs are saved.
-    switch ($global:RecastOSDeploy.WinPEPostAction) {
+    switch ($global:RecastOSDCloud.WinPEPostAction) {
         'Quit' {
             # Exit without restarting or shutting down the operating system.
             try {
