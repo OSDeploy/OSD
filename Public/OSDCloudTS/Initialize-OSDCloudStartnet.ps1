@@ -89,7 +89,7 @@ function Initialize-OSDCloudStartnet {
             if (Test-Path -Path "C:\Windows\Temp\OSDCloud\Logs") {
                 Remove-Item -Path "C:\Windows\Temp\OSDCloud\Logs" -Recurse -Force
             }
-            Start-Transcript -Path "X:\OSDCloud\Logs\Deploy-OSDCloud.log"
+            Start-Transcript -Path "X:\Windows\Temp\OSDCloud\Logs\Deploy-OSDCloud.log"
             if (-NOT ($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase)) {
                 Import-Module OSD -Force -ErrorAction Ignore -WarningAction Ignore
             }
