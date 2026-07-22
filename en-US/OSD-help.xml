@@ -24216,19 +24216,19 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>New-OSDCloudWorkSpaceSetupCompleteTemplate</command:name>
+      <command:name>New-OSDCloudWorkspaceSetupCompleteTemplate</command:name>
       <command:verb>New</command:verb>
       <command:noun>OSDCloudWorkSpaceSetupCompleteTemplate</command:noun>
       <maml:description>
-        <maml:para>Creates resources by using New-OSDCloudWorkSpaceSetupCompleteTemplate.</maml:para>
+        <maml:para>Creates resources by using New-OSDCloudWorkspaceSetupCompleteTemplate.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Provides the implementation for New-OSDCloudWorkSpaceSetupCompleteTemplate.</maml:para>
+      <maml:para>Provides the implementation for New-OSDCloudWorkspaceSetupCompleteTemplate.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>New-OSDCloudWorkSpaceSetupCompleteTemplate</maml:name>
+        <maml:name>New-OSDCloudWorkspaceSetupCompleteTemplate</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
@@ -24242,9 +24242,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>New-OSDCloudWorkSpaceSetupCompleteTemplate</dev:code>
+        <dev:code>New-OSDCloudWorkspaceSetupCompleteTemplate</dev:code>
         <dev:remarks>
-          <maml:para>Runs New-OSDCloudWorkSpaceSetupCompleteTemplate with common parameters.</maml:para>
+          <maml:para>Runs New-OSDCloudWorkspaceSetupCompleteTemplate with common parameters.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

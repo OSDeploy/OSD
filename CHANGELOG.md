@@ -226,7 +226,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 *Implemented in OSD Module 24.2.20.1*
 
 - `Set-TimeZoneFromIP` — completely reworked due to previous API no longer being free ([Issue 110](https://github.com/OSDeploy/OSD/issues/110), thanks @JHBDO)
-- Added function `New-OSDCloudWorkSpaceSetupCompleteTemplate` ([Issue 107](https://github.com/OSDeploy/OSD/issues/107))
+- Added function `New-OSDCloudWorkspaceSetupCompleteTemplate` ([Issue 107](https://github.com/OSDeploy/OSD/issues/107))
   - Creates SetupComplete files on the WorkSpace drive (`%WorkSpace%\Config\Scripts\SetupComplete`)
   - Files are automatically copied to OSDCloud USB on update and applied during SetupComplete
 

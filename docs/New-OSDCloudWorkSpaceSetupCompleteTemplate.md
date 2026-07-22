@@ -5,28 +5,28 @@ online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
-# New-OSDCloudWorkSpaceSetupCompleteTemplate
+# New-OSDCloudWorkspaceSetupCompleteTemplate
 
 ## SYNOPSIS
-Creates resources by using New-OSDCloudWorkSpaceSetupCompleteTemplate.
+Creates resources by using New-OSDCloudWorkspaceSetupCompleteTemplate.
 
 ## SYNTAX
 
 ```
-New-OSDCloudWorkSpaceSetupCompleteTemplate
+New-OSDCloudWorkspaceSetupCompleteTemplate
 ```
 
 ## DESCRIPTION
-Provides the implementation for New-OSDCloudWorkSpaceSetupCompleteTemplate.
+Provides the implementation for New-OSDCloudWorkspaceSetupCompleteTemplate.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-New-OSDCloudWorkSpaceSetupCompleteTemplate
+New-OSDCloudWorkspaceSetupCompleteTemplate
 ```
 
-Runs New-OSDCloudWorkSpaceSetupCompleteTemplate with common parameters.
+Runs New-OSDCloudWorkspaceSetupCompleteTemplate with common parameters.
 
 ## PARAMETERS
 
@@ -41,4 +41,3 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
-

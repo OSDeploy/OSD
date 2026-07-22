@@ -21,7 +21,7 @@ New-OSDCloudTemplate -Name "OSDCloudWinPE"
 
 #New WorkSpace
 New-OSDCloudWorkspace -WorkspacePath $OSDCloudWorkspace
-New-OSDCloudWorkSpaceSetupCompleteTemplate #Creates Sample SetupComplete templates in Workspace
+New-OSDCloudWorkspaceSetupCompleteTemplate #Creates Sample SetupComplete templates in Workspace
 
 #Added HPCMSL into WinPE
 Edit-OSDCloudWinPE -PSModuleInstall HPCMSL

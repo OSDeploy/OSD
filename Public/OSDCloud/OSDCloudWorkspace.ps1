@@ -468,17 +468,17 @@ function Set-OSDCloudWorkspace {
     #endregion
 }
 
-function New-OSDCloudWorkSpaceSetupCompleteTemplate {
+function New-OSDCloudWorkspaceSetupCompleteTemplate {
     <#
     .SYNOPSIS
-    Creates resources by using New-OSDCloudWorkSpaceSetupCompleteTemplate.
+    Creates resources by using New-OSDCloudWorkspaceSetupCompleteTemplate.
 
     .DESCRIPTION
-    Provides the implementation for New-OSDCloudWorkSpaceSetupCompleteTemplate.
+    Provides the implementation for New-OSDCloudWorkspaceSetupCompleteTemplate.
 
     .EXAMPLE
-    New-OSDCloudWorkSpaceSetupCompleteTemplate
-    Runs New-OSDCloudWorkSpaceSetupCompleteTemplate with common parameters.
+    New-OSDCloudWorkspaceSetupCompleteTemplate
+    Runs New-OSDCloudWorkspaceSetupCompleteTemplate with common parameters.
 
     .NOTES
     Author: David Segura - Recast Software
