@@ -24,7 +24,7 @@ function Get-OSDCloudREAzureResources {
     Write-Host -ForegroundColor Green "Get-OSDCloudREAzureResources"
 
     if ($env:SystemDrive -eq 'X:') {
-        $OSDCloudLogs = "$env:Temp\OSDCloud\Logs"
+        $OSDCloudLogs = "$env:TEMP\osdcloud-logs"
         if (-not (Test-Path $OSDCloudLogs)) {
             New-Item $OSDCloudLogs -ItemType Directory -Force | Out-Null
         }
@@ -323,7 +323,7 @@ function Invoke-OSDCloudRE {
     #=================================================
     #region OSDCloudLogs
     if ($env:SystemDrive -eq 'X:') {
-        $OSDCloudLogs = "$env:Temp\OSDCloud\Logs"
+        $OSDCloudLogs = "$env:TEMP\osdcloud-logs"
         if (-not (Test-Path $OSDCloudLogs)) {
             New-Item $OSDCloudLogs -ItemType Directory -Force | Out-Null
         }

@@ -14,15 +14,15 @@ function Invoke-OSDSpecialize {
     #=================================================
     #region Transcript
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Saving PowerShell Transcript to C:\Windows\Temp\OSDCloud\Logs"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Saving PowerShell Transcript to C:\Windows\TEMP\osdcloud-logs"
     Write-Verbose "https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript"
 
-    if (-NOT (Test-Path 'C:\Windows\Temp\OSDCloud\Logs')) {
-        New-Item -Path 'C:\Windows\Temp\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
+    if (-NOT (Test-Path 'C:\Windows\TEMP\osdcloud-logs')) {
+        New-Item -Path 'C:\Windows\TEMP\osdcloud-logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
     }
     
     $Global:Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud-Specialize.log"
-    Start-Transcript -Path (Join-Path 'C:\Windows\Temp\OSDCloud\Logs' $Global:Transcript) -ErrorAction Ignore
+    Start-Transcript -Path (Join-Path 'C:\Windows\TEMP\osdcloud-logs' $Global:Transcript) -ErrorAction Ignore
     #endregion
     #=================================================
     #   Specialize DriverPacks

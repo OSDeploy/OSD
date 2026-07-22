@@ -20,7 +20,7 @@ Invoke-HPTPMEXEInstall [[-path] <Object>] [[-filename] <Object>] [[-spec] <Objec
 ## DESCRIPTION
 Locates the firmware EXE in C:\OSDCloud\HP\TPM, silently extracts it, then runs
 TPMConfig64.exe with the specified arguments to apply the TPM firmware update.
-Logs activity to C:\Windows\Temp\OSDCloud\Logs\TPMConfig.log.
+Logs activity to C:\Windows\TEMP\osdcloud-logs\TPMConfig.log.
 Outputs the exit code from
 TPMConfig64 along with a human-readable description for all documented exit codes.
 

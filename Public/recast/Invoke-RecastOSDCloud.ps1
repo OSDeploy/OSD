@@ -130,7 +130,7 @@ function Invoke-RecastOSDCloud {
         IsoMountDiskImage = $null
         IsoGetDiskImage = $null
         IsoGetVolume = $null
-        Logs = "$env:Temp\OSDCloud\Logs"
+        Logs = "$env:TEMP\osdcloud-logs"
         Manufacturer = $global:OSDCoreDevice.OSDManufacturer
         MSCatalogFirmware = $true
         MSCatalogDiskDrivers = $true
@@ -723,7 +723,7 @@ function Invoke-RecastOSDCloud {
             $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPackBaseName} | Select-Object -First 1
             if ($Global:OSDCloud.AzOSDCloudDriverPack) {
                 Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack has been located in Azure Storage"
-                $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\AzOSDCloudDriverPack.json' -Encoding ascii -Width 2000
+                $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath 'C:\Windows\TEMP\osdcloud-logs\AzOSDCloudDriverPack.json' -Encoding ascii -Width 2000
             }
         }
 
@@ -1200,7 +1200,7 @@ function Invoke-RecastOSDCloud {
                                 #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
                                 $timeoutSeconds = 60 # 1 Minite Timeout for BIOS Update
                                 $code = {
-                                    Start-Transcript -Path "C:\Windows\Temp\OSDCloud\Logs\HPBIOSUpdateJob.log"
+                                    Start-Transcript -Path "C:\Windows\TEMP\osdcloud-logs\HPBIOSUpdateJob.log"
                                     Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue -Verbose
                                     Stop-Transcript
                                 }
@@ -1209,7 +1209,7 @@ function Invoke-RecastOSDCloud {
                                 $Installing = Start-Job -ScriptBlock $code
                                 # Report the job ID (for diagnostic purposes)
                                 write-host -ForegroundColor DarkGray " BIOS Update Job ID: $($Installing.Id)"
-                                Write-Host -ForegroundColor DarkGray " See Log: C:\Windows\Temp\OSDCloud\Logs\HPBIOSUpdateJob.log for Details"
+                                Write-Host -ForegroundColor DarkGray " See Log: C:\Windows\TEMP\osdcloud-logs\HPBIOSUpdateJob.log for Details"
 
                                 # Wait for the job to complete or time out
                                 Wait-Job $Installing -Timeout $timeoutSeconds | Out-Null
@@ -1228,8 +1228,8 @@ function Invoke-RecastOSDCloud {
                                 }
                                 # Clean up the job
                                 Remove-Job -Force $Installing
-                                if (Test-Path -Path "C:\Windows\Temp\OSDCloud\Logs\HPBIOSUpdateJob.log"){
-                                    Write-Host -ForegroundColor Cyan " $((Get-content -Path "C:\Windows\Temp\OSDCloud\Logs\HPBIOSUpdateJob.log" -ReadCount 1) | Select-Object -last 6 | Select-Object -First 1)"
+                                if (Test-Path -Path "C:\Windows\TEMP\osdcloud-logs\HPBIOSUpdateJob.log"){
+                                    Write-Host -ForegroundColor Cyan " $((Get-content -Path "C:\Windows\TEMP\osdcloud-logs\HPBIOSUpdateJob.log" -ReadCount 1) | Select-Object -last 6 | Select-Object -First 1)"
                                 }
 
                             }
@@ -1593,9 +1593,9 @@ exit
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCloud Finished"
     $Global:OSDCloud.TimeEnd = Get-Date
     $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
-    $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\OSDCloud.json' -Encoding ascii -Width 2000 -Force
+    $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\Windows\TEMP\osdcloud-logs\OSDCloud.json' -Encoding ascii -Width 2000 -Force
     if (Test-Path x:\windows\logs\DISM\dism.log){
-        Copy-Item -Path x:\windows\logs\DISM\dism.log -Destination C:\Windows\Temp\OSDCloud\Logs\DISM-WinPE.log
+        Copy-Item -Path x:\windows\logs\DISM\dism.log -Destination C:\Windows\TEMP\osdcloud-logs\DISM-WinPE.log
     }
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
 

@@ -15,7 +15,7 @@ function Initialize-OSDCloudStartnetUpdate {
     }
 
     # Create the log path if it does not already exist
-    $LogsPath = "$env:Temp\OSDCloud\Logs"
+    $LogsPath = "$env:TEMP\osdcloud-logs"
     if (-NOT (Test-Path -Path $LogsPath)) {
         New-Item -Path $LogsPath -ItemType Directory -Force | Out-Null
     }

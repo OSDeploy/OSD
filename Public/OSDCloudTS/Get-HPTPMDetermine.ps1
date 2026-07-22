@@ -367,7 +367,7 @@ function Invoke-HPTPMEXEInstall {
 .DESCRIPTION
     Locates the firmware EXE in C:\OSDCloud\HP\TPM, silently extracts it, then runs
     TPMConfig64.exe with the specified arguments to apply the TPM firmware update.
-    Logs activity to C:\Windows\Temp\OSDCloud\Logs\TPMConfig.log. Outputs the exit code from
+    Logs activity to C:\Windows\TEMP\osdcloud-logs\TPMConfig.log. Outputs the exit code from
     TPMConfig64 along with a human-readable description for all documented exit codes.
 
 .PARAMETER path
@@ -416,7 +416,7 @@ function Invoke-HPTPMEXEInstall {
     $TPM = Get-HPTPMDetermine
     if ($TPM) {
         $DownloadFolder = "C:\OSDCloud\HP\TPM"
-        $LogFolder = "C:\Windows\Temp\OSDCloud\Logs"
+        $LogFolder = "C:\Windows\TEMP\osdcloud-logs"
         $TPMUpdate = (Get-ChildItem -Path $DownloadFolder -Filter *.exe).FullName
         if (Test-Path $TPMUpdate) {
             Start-Process -FilePath $TPMUpdate -ArgumentList "/s /e /f $DownloadFolder" -Wait

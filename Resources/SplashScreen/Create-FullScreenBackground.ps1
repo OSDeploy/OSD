@@ -9,11 +9,11 @@ GARY BLOK - Modified script from:
 #>
 
 Param($DeviceName)
-Start-Transcript X:\Windows\Temp\OSDCloud\Logs\Splash.log
+Start-Transcript X:\Windows\TEMP\osdcloud-logs\Splash.log
 function Get-LogLastHeading {
     if ($env:SystemDrive -eq 'X:') {
-        if (Test-Path "C:\Windows\Temp\OSDCloud\Logs"){$LogsPath = "C:\Windows\Temp\OSDCloud\Logs"}
-        else {$LogsPath = "$env:TEMP\OSDCloud\Logs"}
+        if (Test-Path "C:\Windows\TEMP\osdcloud-logs"){$LogsPath = "C:\Windows\TEMP\osdcloud-logs"}
+        else {$LogsPath = "$env:TEMP\osdcloud-logs"}
         $OSDLogFile = Get-ChildItem -Path "$LogsPath\*.log" | Where-Object {$_.Name -match "Deploy-OSDCloud.log"}
         }
     $RAWContent = Get-Content $OSDLogFile -ReadCount 1

@@ -25,7 +25,7 @@ function Get-OSDCloudAzureResources {
     Write-Host -ForegroundColor Green "Get-OSDCloudAzureResources"
 
     if ($env:SystemDrive -eq 'X:') {
-        $OSDCloudLogs = "$env:Temp\OSDCloud\Logs"
+        $OSDCloudLogs = "$env:TEMP\osdcloud-logs"
         if (-not (Test-Path $OSDCloudLogs)) {
             New-Item $OSDCloudLogs -ItemType Directory -Force | Out-Null
         }

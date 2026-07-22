@@ -36,7 +36,7 @@ function Step-OSDCloudAzDownloadOS {
         $Global:OSDCloud.DownloadFullName = "$($Global:OSDCloud.DownloadDirectory)\$($Global:OSDCloud.DownloadName)"
 
         # Export image metadata for troubleshooting and audit history.
-        $Global:OSDCloud.AzOSDCloudImage | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\AzOSDCloudImage.json' -Encoding ascii -Width 2000
+        $Global:OSDCloud.AzOSDCloudImage | ConvertTo-Json | Out-File -FilePath 'C:\Windows\TEMP\osdcloud-logs\AzOSDCloudImage.json' -Encoding ascii -Width 2000
 
         $ParamGetAzStorageBlobContent = @{
             CloudBlob = $Global:OSDCloud.AzOSDCloudImage.ICloudBlob

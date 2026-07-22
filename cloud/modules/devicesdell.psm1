@@ -168,7 +168,7 @@ function osdcloud-RunDCU {
     @{ReturnCode = "1002";  Description = "An error occurred while downloading a file during the apply updates operation."; Resolution = "Check your network connection, ensure there is Internet connectivity, and retry the command."}
 
     )
-    $LogFolder = "C:\Windows\Temp\OSDCloud\Logs"
+    $LogFolder = "C:\Windows\TEMP\osdcloud-logs"
     $LogFile = "$LogFolder\DCU.log"
     if (Test-path -Path 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'){
         $ProcessPath = 'C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe'

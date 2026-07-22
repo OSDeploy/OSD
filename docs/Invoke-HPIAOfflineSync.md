@@ -20,7 +20,7 @@ Invoke-HPIAOfflineSync [[-Category] <Object>] [[-OS] <Object>] [[-Release] <Obje
 Builds a local repository using HPCMSL commands, applies platform and OS
 filters, and downloads selected update content for offline use.
 Logs are
-written to C:\Windows\Temp\OSDCloud\Logs\HPIAOfflineSync.log.
+written to C:\Windows\TEMP\osdcloud-logs\HPIAOfflineSync.log.
 
 ## EXAMPLES
 
