@@ -1,20 +1,27 @@
-<#
-.SYNOPSIS
-This will return the latest compatible BIOS Update for your system as a PowerShell Object
-
-.DESCRIPTION
-This will return the latest compatible BIOS Update for your system as a PowerShell Object
-Shortcut for Get-DellSystemCatalog -Component BIOS -Compatible
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-21.3.11 Pulling data from Local due to issues with the Dell site being down
-21.3.5  Resolved issue with multiple objects
-21.3.4  Initial Release
-#>
 function Get-MyDellBios {
+    <#
+    .SYNOPSIS
+    Returns the latest compatible Dell BIOS update for the current system.
+
+    .DESCRIPTION
+    Detects the current Dell system SKU, filters the cached Dell BIOS catalog for
+    compatible entries, and returns the newest matching BIOS update object. This
+    function only returns data when it is run on Dell hardware.
+
+    .EXAMPLE
+    Get-MyDellBios
+    Returns the newest compatible Dell BIOS update object for the current Dell device.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2021-03-04 - Initial release
+    2021-03-05 - Resolved issue with multiple objects
+    2021-03-11 - Pulled data from local catalog due to Dell site availability issues
+    2026-07-22 - Updated comment-based help
+    #>
     [CmdletBinding()]
     param ()
 
@@ -54,6 +61,35 @@ function Get-MyDellBios {
     Return $GetMyDellBios
 }
 function Save-MyDellBios {
+    <#
+    .SYNOPSIS
+    Downloads the latest compatible Dell BIOS update to a local folder.
+
+    .DESCRIPTION
+    Resolves the current system's compatible Dell BIOS update and downloads the
+    BIOS package to the specified folder when it is not already present. This
+    function only operates on Dell hardware and returns the existing or newly
+    downloaded BIOS file when successful.
+
+    .PARAMETER DownloadPath
+    Specifies the directory where the Dell BIOS update should be stored. The
+    default location is the current user's temporary folder.
+
+    .EXAMPLE
+    Save-MyDellBios
+    Downloads the compatible Dell BIOS update to the default temporary folder.
+
+    .EXAMPLE
+    Save-MyDellBios -DownloadPath 'C:\OSDCloud\Firmware'
+    Downloads the compatible Dell BIOS update to C:\OSDCloud\Firmware.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-22 - Initial help block created
+    #>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -97,36 +133,57 @@ function Save-MyDellBios {
         }
     }
 }
-<#
-.SYNOPSIS
-Downloads and installed a compatible BIOS Update for your Dell system
-
-.DESCRIPTION
-Downloads and installed a compatible BIOS Update for your Dell system
-BitLocker friendly, but you need Admin Rights
-Logs to $env:TEMP\Update-MyDellBios.log
-
-.EXAMPLE
-Update-MyDellBios
-Downloads and launches the Dell BIOS Update.  Does not automatically install the BIOS Update
-
-.EXAMPLE
-Update-MyDellBios -Silent
-Yes, this will update your BIOS silently, and NOT reboot when its done
-
-.EXAMPLE
-Update-MyDellBios -Silent -Reboot
-Yes, this will update your BIOS silently, AND reboot when its done
-
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/docs
-
-.NOTES
-21.3.9  Started adding logic for WinPE
-21.3.5  Resolved issue with multiple objects
-21.3.4  Initial Release
-#>
 function Update-MyDellBios {
+    <#
+    .SYNOPSIS
+    Downloads and launches a compatible BIOS update for the current Dell system.
+
+    .DESCRIPTION
+    Downloads the latest compatible Dell BIOS update, optionally prepares the
+    Flash64W utility for WinPE x64 scenarios, suspends BitLocker on the operating
+    system volume when needed, and launches the BIOS update installer. The BIOS
+    installer log is written to $env:TEMP\Update-MyDellBios.log. Administrative
+    rights are required.
+
+    .PARAMETER DownloadPath
+    Specifies the directory used to cache the BIOS update and supporting files.
+    The default location is the current user's temporary folder.
+
+    .PARAMETER Force
+    Forces the update workflow even when the installed BIOS version comparison
+    would not normally trigger an update.
+
+    .PARAMETER Reboot
+    Adds reboot arguments to the BIOS installer so the system reboots after the
+    silent update completes.
+
+    .PARAMETER Silent
+    Runs the BIOS installer silently without automatically rebooting the system.
+
+    .EXAMPLE
+    Update-MyDellBios
+    Downloads and launches the compatible Dell BIOS update with the default
+    interactive installer behavior.
+
+    .EXAMPLE
+    Update-MyDellBios -Silent
+    Runs the compatible Dell BIOS update silently and does not add a reboot.
+
+    .EXAMPLE
+    Update-MyDellBios -Silent -Reboot
+    Runs the compatible Dell BIOS update silently and requests a reboot when the
+    installer completes.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2021-03-04 - Initial release
+    2021-03-05 - Resolved issue with multiple objects
+    2021-03-09 - Started adding logic for WinPE
+    2026-07-22 - Updated comment-based help
+    #>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -226,6 +283,35 @@ function Update-MyDellBios {
     }
 }
 function Save-MyDellBiosFlash64W {
+    <#
+    .SYNOPSIS
+    Downloads and extracts the Dell Flash64W BIOS utility.
+
+    .DESCRIPTION
+    Downloads the Flash64W support package referenced by the current compatible
+    Dell BIOS update and extracts Flash64W.exe to the specified folder. This is
+    primarily used to support BIOS flashing from WinPE x64 environments on Dell
+    hardware.
+
+    .PARAMETER DownloadPath
+    Specifies the directory where the Flash64W package should be downloaded and
+    extracted. The default location is the current user's temporary folder.
+
+    .EXAMPLE
+    Save-MyDellBiosFlash64W
+    Downloads and extracts Flash64W.exe to the default temporary folder.
+
+    .EXAMPLE
+    Save-MyDellBiosFlash64W -DownloadPath 'C:\OSDCloud\Firmware'
+    Downloads and extracts Flash64W.exe to C:\OSDCloud\Firmware.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-22 - Initial help block created
+    #>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -254,6 +340,26 @@ function Save-MyDellBiosFlash64W {
     }
 }
 function Test-MyDellBiosWebConnection {
+    <#
+    .SYNOPSIS
+    Tests connectivity to the current compatible Dell BIOS download URL.
+
+    .DESCRIPTION
+    Resolves the current compatible Dell BIOS update and validates whether the
+    BIOS download URL is reachable by using Test-WebConnection. Returns $false
+    when a compatible BIOS update cannot be determined.
+
+    .EXAMPLE
+    Test-MyDellBiosWebConnection
+    Returns True when the compatible Dell BIOS download URL is reachable.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-22 - Initial help block created
+    #>
     [CmdletBinding()]
     param ()
 
