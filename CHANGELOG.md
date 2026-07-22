@@ -186,7 +186,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 *Implemented in OSD Module 24.3.27.1*
 
 - Added Debug Mode checkbox to `Start-OSDCloudGUIDev` drop-down menu
-  - When `debugmode = $true` (via GUI or variable), creates additional logs in `C:\OSDCloud\Logs`:
+  - When `debugmode = $true` (via GUI or variable), creates additional logs in `C:\Windows\Temp\OSDCloud\Logs`:
     - DiskPart logs (before & after format step)
     - OSDCloudDebug logs: OSDCloud variables, Windows 11 readiness, TPM information, `MyComputerInfo`
 
@@ -273,7 +273,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - `OSDCloudUSB\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID`
     - `OSDCloudUSB\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerProduct`
   - Benefits: saves download time, reduces storage usage on device, all drivers present at first reboot
-- DISM log copied from `X:\Windows\Logs\DISM\dism.log` to `C:\OSDCloud\Logs\WinPE-DISM.log`
+- DISM log copied from `X:\Windows\Logs\DISM\dism.log` to `C:\Windows\Temp\OSDCloud\Logs\WinPE-DISM.log`
 
 ---
 

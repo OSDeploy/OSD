@@ -1,4 +1,4 @@
-<# 
+<#
 GARY BLOK - Modified script from:
  SMSAgent https://smsagent.blog/2018/08/21/create-a-custom-splash-screen-for-a-windows-10-in-place-upgrade/
  Creates a full screen 'background' styled for a Windows 10 upgrade, and hides the task bar
@@ -12,8 +12,8 @@ Param($DeviceName)
 Start-Transcript x:\OSDCloud\Logs\Splash.log
 function Get-LogLastHeading {
     if ($env:SystemDrive -eq 'X:') {
-        if (Test-Path "C:\OSDCloud\Logs"){$LogsPath = "C:\OSDCloud\Logs"}
-        else {$LogsPath = "X:\OSDCloud\Logs"}
+        if (Test-Path "C:\Windows\Temp\OSDCloud\Logs"){$LogsPath = "C:\Windows\Temp\OSDCloud\Logs"}
+        else {$LogsPath = "$env:TEMP\OSDCloud\Logs"}
         $OSDLogFile = Get-ChildItem -Path "$LogsPath\*.log" | Where-Object {$_.Name -match "Deploy-OSDCloud.log"}
         }
     $RAWContent = Get-Content $OSDLogFile -ReadCount 1
@@ -272,30 +272,30 @@ $script:i = 0
 $TimerCode = {
 
     $ProgressRing.IsActive = $True
-    
+
     # The IF statement number should equal the number of sentences in the TextArray
     $NumberofElements = $TextArray.Count -1
     If ($script:i -lt $NumberofElements)
     {
-        $FadeoutAnimation.Add_Completed({            
+        $FadeoutAnimation.Add_Completed({
             $TextBlock.Opacity = 0
             $TextBlock.Text = $TextArray[$script:i]
             $TextBlock.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeinAnimation)
 
-        })   
-        $TextBlock.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeoutAnimation) 
+        })
+        $TextBlock.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeoutAnimation)
     }
     # The final sentence to display ongoing
     ElseIf ($script:i -eq $NumberofElements)
     {
         $script:i = 0
-        $FadeoutAnimation.Add_Completed({            
+        $FadeoutAnimation.Add_Completed({
             $TextBlock.Opacity = 0
             $TextBlock.Text = "We're installing Windows on this PC"
             $TextBlock.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeinAnimation)
 
-        })   
-        $TextBlock.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeoutAnimation) 
+        })
+        $TextBlock.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeoutAnimation)
     }
     Else
         {
@@ -310,12 +310,12 @@ $TimerCode = {
         exit
         }
 
-    
 
 
-    $ColourBrighterAnimation.Add_Completed({            
+
+    $ColourBrighterAnimation.Add_Completed({
         $Window.Background.BeginAnimation([System.Windows.Media.SolidColorBrush]::ColorProperty,$ColourDarkerAnimation)
-    })   
+    })
     $Window.Background.BeginAnimation([System.Windows.Media.SolidColorBrush]::ColorProperty,$ColourBrighterAnimation)
 
     $Script:i++
@@ -336,9 +336,9 @@ $DispatcherTimerTS = New-Object -TypeName System.Windows.Threading.DispatcherTim
 $DispatcherTimerTS.Interval = [TimeSpan]::FromMilliseconds(1000)
 $DispatcherTimerTS.Add_Tick($TimerCodeTS)
 
-#Timer for Upgrade % - Should be inactivate until activated in the Main Text Timer when it reaches the upgrade step.    
+#Timer for Upgrade % - Should be inactivate until activated in the Main Text Timer when it reaches the upgrade step.
 $TimerCodeUpgrade = {
-        
+
         $CurlProcess = Get-Process -name Curl -ErrorAction SilentlyContinue
         if ($CurlProcess){
             $TextBlock4.Visibility = 'Visible'
@@ -364,7 +364,7 @@ $DispatcherTimerUpgrade.Add_Tick($TimerCodeUpgrade)
 
 # Event: Window loaded
 $Window.Add_Loaded({
-    
+
     # Activate the window to bring it to the fore
     $This.Activate()
 
@@ -387,9 +387,9 @@ $Window.Add_Loaded({
     $TextBlock3.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeinAnimation)
     $TextBlock4.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeinAnimation)
     $ProgressRing.BeginAnimation([System.Windows.Controls.TextBlock]::OpacityProperty,$FadeinAnimation)
-    $ColourBrighterAnimation.Add_Completed({            
+    $ColourBrighterAnimation.Add_Completed({
         $Window.Background.BeginAnimation([System.Windows.Media.SolidColorBrush]::ColorProperty,$ColourDarkerAnimation)
-    })   
+    })
     $Window.Background.BeginAnimation([System.Windows.Media.SolidColorBrush]::ColorProperty,$ColourBrighterAnimation)
 
 })

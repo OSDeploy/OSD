@@ -19,7 +19,7 @@ Unregister-ScheduledTask -TaskName "Register Bitlocker in AAD" -Confirm:$False
 #>
 $BitlockerFile = @'
 $date = Get-Date -Format yyyy-MM-dd-hhmmss
-Start-Transcript -Path "C:\OSDCloud\Logs\$($date)-SetupCompleteBitlocker.log" -ErrorAction Ignore
+Start-Transcript -Path "C:\Windows\Temp\OSDCloud\Logs\$($date)-SetupCompleteBitlocker.log" -ErrorAction Ignore
 
 $Users = (Get-Process -IncludeUserName).UserName | Select-Object -Unique
 $Users
@@ -30,7 +30,7 @@ elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {$WindowsPhase 
 elseif ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_AUDIT') {$WindowsPhase = 'AuditMode'}
 else {$WindowsPhase = 'Windows'}
 write-output "Windows Phase = $WindowsPhase"
-#Get-Process -IncludeUserName | Out-File "C:\osdcloud\Logs\$($date)-SetupCompleteBitlocker-RunningProcess.txt"
+#Get-Process -IncludeUserName | Out-File "C:\Windows\Temp\OSDCloud\Logs\$($date)-SetupCompleteBitlocker-RunningProcess.txt"
 #Test for AAD
 $subKey = Get-Item "HKLM:/SYSTEM/CurrentControlSet/Control/CloudDomainJoin/JoinInfo" -ErrorAction SilentlyContinue
 

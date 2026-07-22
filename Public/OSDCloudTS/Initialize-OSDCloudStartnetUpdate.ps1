@@ -9,13 +9,13 @@ function Initialize-OSDCloudStartnetUpdate {
     else {
         # Get the start time
         $Global:StartnetStart = Get-Date
-    
+
         # Export the Global Variable so it can be used in other PowerShell sessions
         $Global:StartnetStart | Export-Clixml -Path "$env:TEMP\StartnetStart.xml" -Force
     }
 
     # Create the log path if it does not already exist
-    $LogsPath = "$env:SystemDrive\OSDCloud\Logs"
+    $LogsPath = "$env:Temp\OSDCloud\Logs"
     if (-NOT (Test-Path -Path $LogsPath)) {
         New-Item -Path $LogsPath -ItemType Directory -Force | Out-Null
     }
@@ -35,7 +35,7 @@ function Initialize-OSDCloudStartnetUpdate {
     $Win32Processor | Out-File $LogsPath\Win32_Processor.txt -Width 4096 -Force
     $Win32PnPEntityError = Get-CimInstance -ClassName Win32_PnPEntity | Select-Object -Property * | Where-Object {$_.Status -eq 'Error'} | Sort-Object HardwareID -Unique | Sort-Object Name
     $Win32PnPEntityError | Out-File $LogsPath\Win32_PnPEntityError.txt -Width 4096 -Force
-    
+
     # Open backup PowerShell Sessions (minimized)
     $TimeSpan = New-TimeSpan -Start $Global:StartnetStart -End (Get-Date)
     Write-Host -ForegroundColor Green "$($TimeSpan.ToString("mm':'ss")) Opening PowerShell window to detail Network IP Configuration (minimized)"

@@ -92,7 +92,7 @@
         IsoMountDiskImage = $null
         IsoGetDiskImage = $null
         IsoGetVolume = $null
-        Logs = "$env:SystemDrive\OSDCloud\Logs"
+        Logs = "$env:Temp\OSDCloud\Logs"
         Manufacturer = Get-MyComputerManufacturer -Brief
         MSCatalogFirmware = $true
         MSCatalogDiskDrivers = $true
@@ -833,14 +833,14 @@
         #endregion
 
         #region Global:OSDCloud.Transcript
-        Write-SectionHeader 'Saving PowerShell Transcript to C:\OSDCloud\Logs'
+        Write-SectionHeader 'Saving PowerShell Transcript to C:\Windows\Temp\OSDCloud\Logs'
         Write-Verbose -Message 'https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.host/start-transcript'
-        if (-NOT (Test-Path 'C:\OSDCloud\Logs')) {
-            New-Item -Path 'C:\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
+        if (-NOT (Test-Path 'C:\Windows\Temp\OSDCloud\Logs')) {
+            New-Item -Path 'C:\Windows\Temp\OSDCloud\Logs' -ItemType Directory -Force -ErrorAction Stop | Out-Null
         }
 
         $Global:OSDCloud.Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Deploy-OSDCloud.log"
-        Start-Transcript -Path (Join-Path 'C:\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
+        Start-Transcript -Path (Join-Path 'C:\Windows\Temp\OSDCloud\Logs' $Global:OSDCloud.Transcript) -ErrorAction Ignore
         #endregion
 
         #region Global:OSDCloud.DebugMode
@@ -848,34 +848,34 @@
             Write-SectionHeader 'DebugMode: Capture Data to Logs'
             Write-DarkGrayHost "OSD Module: $((Get-Module -Name OSD -ListAvailable | Select-Object -First 1).Version)"
             Write-DarkGrayHost "Manufacurer | Model | Product : $(Get-MyComputerManufacturer) | $(Get-MyComputerModel) | $(Get-MyComputerProduct)"
-            Write-DarkGrayHost 'Writing Information to C:\OSDCloud\Logs\OSDCloudDebug.log'
+            Write-DarkGrayHost 'Writing Information to C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log'
 
             Write-DarkGrayHost ' OSDCloud Variables'
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log'
-            'OSD Cloud Variables' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            $OSDCloud | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            '=========================================================================' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log'
+            'OSD Cloud Variables' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            '=========================================================================' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            $OSDCloud | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
 
             Write-DarkGrayHost ' Windows 11 Readiness'
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            'Windows 11 Readiness' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            Get-Win11Readiness | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            '=========================================================================' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            'Windows 11 Readiness' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            '=========================================================================' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            Get-Win11Readiness | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
 
             Write-DarkGrayHost ' TPM Information'
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            'TPM Information' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            Get-CimInstance -Namespace root/CIMV2/Security/MicrosoftTpm -ClassName Win32_Tpm | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            '=========================================================================' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            'TPM Information' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            '=========================================================================' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            Get-CimInstance -Namespace root/CIMV2/Security/MicrosoftTpm -ClassName Win32_Tpm | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
 
             Write-DarkGrayHost ' My Computer Info'
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            'My Computer Info' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            '=========================================================================' | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
-            Get-ComputerInfo | Out-File 'C:\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            '=========================================================================' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            'My Computer Info' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            '=========================================================================' | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
+            Get-ComputerInfo | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDebug.log' -Append
 
-            $OSDISKPre | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPre.log'
-            $OSDISKPost | Out-File 'C:\OSDCloud\Logs\OSDCloudDiskPartPost.log'
+            $OSDISKPre | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDiskPartPre.log'
+            $OSDISKPost | Out-File 'C:\Windows\Temp\OSDCloud\Logs\OSDCloudDiskPartPost.log'
         }
         #endregion
 
@@ -991,7 +991,7 @@
             $Global:OSDCloud.DownloadFullName = "$($Global:OSDCloud.DownloadDirectory)\$($Global:OSDCloud.DownloadName)"
 
             #Export Image Information
-            $Global:OSDCloud.AzOSDCloudImage | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\AzOSDCloudImage.json' -Encoding ascii -Width 2000
+            $Global:OSDCloud.AzOSDCloudImage | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\AzOSDCloudImage.json' -Encoding ascii -Width 2000
 
             $ParamGetAzStorageBlobContent = @{
                 CloudBlob = $Global:OSDCloud.AzOSDCloudImage.ICloudBlob
@@ -1502,7 +1502,7 @@
             $Global:OSDCloud.AzOSDCloudDriverPack = $Global:OSDCloud.AzOSDCloudBlobDriverPack | Where-Object {$_.Name -match $Global:OSDCloud.DriverPackBaseName} | Select-Object -First 1
             if ($Global:OSDCloud.AzOSDCloudDriverPack) {
                 Write-DarkGrayHost "DriverPack has been located in Azure Storage"
-                $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\AzOSDCloudDriverPack.json' -Encoding ascii -Width 2000
+                $Global:OSDCloud.AzOSDCloudDriverPack | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\AzOSDCloudDriverPack.json' -Encoding ascii -Width 2000
             }
         }
 
@@ -1982,7 +1982,7 @@
                                 #Details: https://developers.hp.com/hp-client-management/doc/Get-HPBiosUpdates
                                 $timeoutSeconds = 60 # 1 Minite Timeout for BIOS Update
                                 $code = {
-                                    Start-Transcript -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log"
+                                    Start-Transcript -Path "C:\Windows\Temp\OSDCloud\Logs\HPBIOSUpdateJob.log"
                                     Get-HPBIOSUpdates -Flash -Yes -Offline -BitLocker Ignore -ErrorAction SilentlyContinue -Verbose
                                     Stop-Transcript
                                 }
@@ -1991,7 +1991,7 @@
                                 $Installing = Start-Job -ScriptBlock $code
                                 # Report the job ID (for diagnostic purposes)
                                 write-host -ForegroundColor DarkGray " BIOS Update Job ID: $($Installing.Id)"
-                                Write-Host -ForegroundColor DarkGray " See Log: C:\OSDCloud\Logs\HPBIOSUpdateJob.log for Details"
+                                Write-Host -ForegroundColor DarkGray " See Log: C:\Windows\Temp\OSDCloud\Logs\HPBIOSUpdateJob.log for Details"
 
                                 # Wait for the job to complete or time out
                                 Wait-Job $Installing -Timeout $timeoutSeconds | Out-Null
@@ -2010,8 +2010,8 @@
                                 }
                                 # Clean up the job
                                 Remove-Job -Force $Installing
-                                if (Test-Path -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log"){
-                                    Write-Host -ForegroundColor Cyan " $((Get-content -Path "C:\OSDCloud\Logs\HPBIOSUpdateJob.log" -ReadCount 1) | Select-Object -last 6 | Select-Object -First 1)"
+                                if (Test-Path -Path "C:\Windows\Temp\OSDCloud\Logs\HPBIOSUpdateJob.log"){
+                                    Write-Host -ForegroundColor Cyan " $((Get-content -Path "C:\Windows\Temp\OSDCloud\Logs\HPBIOSUpdateJob.log" -ReadCount 1) | Select-Object -last 6 | Select-Object -First 1)"
                                 }
 
                             }
@@ -2222,7 +2222,7 @@ exit
         #region Export OS Information
         <#
         The goal of this section is to export TXT files that contain information about the deployed Operating System
-        This information can then be reviewed after deployment in C:\OSDCloud\Logs
+        This information can then be reviewed after deployment in C:\Windows\Temp\OSDCloud\Logs
         You can use this information to write scripts to remove AppxProvisionedPackage, or perform other tasks
 
         This region has no dependencies with anything else in OSDCloud and can be removed if needed
@@ -2235,49 +2235,49 @@ exit
         if (Get-Command Get-AppxProvisionedPackage -ErrorAction Ignore) {
             Write-SectionHeader "Export Operating System Information"
 
-            Write-DarkGrayHost 'Export WinPE PowerShell Commands to C:\OSDCloud\Logs\Get-CommandWinPE.txt'
+            Write-DarkGrayHost 'Export WinPE PowerShell Commands to C:\Windows\Temp\OSDCloud\Logs\Get-CommandWinPE.txt'
             $Report = Get-Command -ErrorAction Ignore | Where-Object {($_.CommandType -eq 'Cmdlet') -or ($_.CommandType -eq 'Function')} | Where-Object {$_.ModuleName -gt 0} | Sort-Object ModuleName, Name, Version
-            $Report | Select-Object ModuleName, Name, Version | Out-File -FilePath 'C:\OSDCloud\Logs\Get-CommandWinPE.txt' -Force -Encoding ascii
+            $Report | Select-Object ModuleName, Name, Version | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\Get-CommandWinPE.txt' -Force -Encoding ascii
 
             if (Get-Command Get-AppxProvisionedPackage) {
-                Write-DarkGrayHost 'Export Appx Provisioned Packages to C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt'
+                Write-DarkGrayHost 'Export Appx Provisioned Packages to C:\Windows\Temp\OSDCloud\Logs\Get-AppxProvisionedPackage.txt'
                 $Report = Get-AppxProvisionedPackage -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object DisplayName
-                $Report | Select-Object DisplayName | Out-File -FilePath 'C:\OSDCloud\Logs\Get-AppxProvisionedPackage.txt' -Force -Encoding ascii
+                $Report | Select-Object DisplayName | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\Get-AppxProvisionedPackage.txt' -Force -Encoding ascii
             }
 
             if (Get-Command Get-WindowsCapability) {
-                Write-DarkGrayHost 'Export Windows Capability to C:\OSDCloud\Logs\Get-WindowsCapability.txt'
+                Write-DarkGrayHost 'Export Windows Capability to C:\Windows\Temp\OSDCloud\Logs\Get-WindowsCapability.txt'
                 if ($CurrentOSBuild -eq "26100"){
                     $ArgumentList = "/Image=C:\ /Get-Capabilities"
-                    $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow -RedirectStandardOutput 'C:\OSDCloud\Logs\Get-WindowsCapability.txt'
+                    $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow -RedirectStandardOutput 'C:\Windows\Temp\OSDCloud\Logs\Get-WindowsCapability.txt'
                 }
                 else {
                     $Report = Get-WindowsCapability -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object Name
-                    $Report | Select-Object Name, State | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsCapability.txt' -Force -Encoding ascii
+                    $Report | Select-Object Name, State | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\Get-WindowsCapability.txt' -Force -Encoding ascii
                 }
             }
 
             if (Get-Command Get-WindowsEdition) {
-                Write-DarkGrayHost 'Export Windows Edition to C:\OSDCloud\Logs\Get-WindowsEdition.txt'
+                Write-DarkGrayHost 'Export Windows Edition to C:\Windows\Temp\OSDCloud\Logs\Get-WindowsEdition.txt'
                 $Report = Get-WindowsEdition -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object Edition
-                $Report | Select-Object Edition | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsEdition.txt' -Force -Encoding ascii
+                $Report | Select-Object Edition | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\Get-WindowsEdition.txt' -Force -Encoding ascii
             }
 
             if (Get-Command Get-WindowsOptionalFeature) {
-                Write-DarkGrayHost 'Export Windows Optional Features to C:\OSDCloud\Logs\Get-WindowsOptionalFeature.txt'
+                Write-DarkGrayHost 'Export Windows Optional Features to C:\Windows\Temp\OSDCloud\Logs\Get-WindowsOptionalFeature.txt'
                 $Report = Get-WindowsOptionalFeature -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object FeatureName
-                $Report | Select-Object FeatureName, State | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsOptionalFeature.txt' -Force -Encoding ascii
+                $Report | Select-Object FeatureName, State | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\Get-WindowsOptionalFeature.txt' -Force -Encoding ascii
             }
 
             if (Get-Command Get-WindowsPackage) {
-                Write-DarkGrayHost 'Export Windows Packages to C:\OSDCloud\Logs\Get-WindowsPackage.txt'
+                Write-DarkGrayHost 'Export Windows Packages to C:\Windows\Temp\OSDCloud\Logs\Get-WindowsPackage.txt'
                 if ($CurrentOSBuild -eq "26100"){
                     $ArgumentList = "/Image=C:\ /Get-Packages"
-                    $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow -RedirectStandardOutput 'C:\OSDCloud\Logs\Get-WindowsPackage.txt'
+                    $null = Start-Process -FilePath 'dism.exe' -ArgumentList $ArgumentList -Wait -NoNewWindow -RedirectStandardOutput 'C:\Windows\Temp\OSDCloud\Logs\Get-WindowsPackage.txt'
                 }
                 else {
                     $Report = Get-WindowsPackage -Path C:\ -ErrorAction Ignore | Select-Object * | Sort-Object PackageName
-                    $Report | Select-Object PackageName, PackageState, ReleaseType | Out-File -FilePath 'C:\OSDCloud\Logs\Get-WindowsPackage.txt' -Force -Encoding ascii
+                    $Report | Select-Object PackageName, PackageState, ReleaseType | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\Get-WindowsPackage.txt' -Force -Encoding ascii
                 }
             }
         }
@@ -2556,9 +2556,9 @@ exit
     Write-SectionHeader "OSDCloud Finished"
     $Global:OSDCloud.TimeEnd = Get-Date
     $Global:OSDCloud.TimeSpan = New-TimeSpan -Start $Global:OSDCloud.TimeStart -End $Global:OSDCloud.TimeEnd
-    $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\OSDCloud\Logs\OSDCloud.json' -Encoding ascii -Width 2000 -Force
+    $Global:OSDCloud | ConvertTo-Json | Out-File -FilePath 'C:\Windows\Temp\OSDCloud\Logs\OSDCloud.json' -Encoding ascii -Width 2000 -Force
     if (Test-Path x:\windows\logs\DISM\dism.log){
-        Copy-Item -Path x:\windows\logs\DISM\dism.log -Destination C:\OSDCloud\Logs\DISM-WinPE.log
+        Copy-Item -Path x:\windows\logs\DISM\dism.log -Destination C:\Windows\Temp\OSDCloud\Logs\DISM-WinPE.log
     }
     Write-DarkGrayHost "Completed in $($Global:OSDCloud.TimeSpan.ToString("mm' minutes 'ss' seconds'"))"
 

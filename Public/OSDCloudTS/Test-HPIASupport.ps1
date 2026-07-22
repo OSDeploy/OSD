@@ -400,7 +400,7 @@ function Invoke-HPIAOfflineSync {
     .DESCRIPTION
     Builds a local repository using HPCMSL commands, applies platform and OS
     filters, and downloads selected update content for offline use. Logs are
-    written to C:\OSDCloud\Logs\HPIAOfflineSync.log.
+    written to C:\Windows\Temp\OSDCloud\Logs\HPIAOfflineSync.log.
 
     .PARAMETER Category
     Update category filter for repository content. Valid values are All, BIOS,
@@ -439,7 +439,7 @@ function Invoke-HPIAOfflineSync {
     )
 
     #Create HPIA Repo & Sync for this Platform (EXE / Online)
-    $LogFolder = "C:\OSDCloud\Logs"
+    $LogFolder = "C:\Windows\Temp\OSDCloud\Logs"
     $HPIARepoFolder = "C:\OSDCloud\HPIA\Repo"
     $PlatformCode = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
     New-Item -Path $LogFolder -ItemType Directory -Force | Out-Null

@@ -39,7 +39,7 @@ function Connect-OSDCloudAzure {
 
     if ($env:SystemDrive -eq 'X:') {
         $UseDeviceAuthentication = $true
-        $OSDCloudLogs = "$env:SystemDrive\OSDCloud\Logs"
+        $OSDCloudLogs = "$env:Temp\OSDCloud\Logs"
         if (-not (Test-Path $OSDCloudLogs)) {
             New-Item $OSDCloudLogs -ItemType Directory -Force | Out-Null
         }

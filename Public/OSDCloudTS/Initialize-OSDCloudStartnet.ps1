@@ -33,12 +33,12 @@ function Initialize-OSDCloudStartnet {
     if ($env:SystemDrive -eq 'X:') {
         # Get the start time
         $Global:StartnetStart = Get-Date
-    
+
         # Export the Global Variable so it can be used in other PowerShell sessions
         $Global:StartnetStart | Export-Clixml -Path "$env:TEMP\StartnetStart.xml" -Force
 
         # Create the log path if it does not already exist
-        $LogsPath = "$env:SystemDrive\OSDCloud\Logs"
+        $LogsPath = "$env:Temp\OSDCloud\Logs"
         if (-NOT (Test-Path -Path $LogsPath)) {
             New-Item -Path $LogsPath -ItemType Directory -Force | Out-Null
         }
@@ -69,7 +69,7 @@ function Initialize-OSDCloudStartnet {
             }
         }
 
-        # Initialize Splash Screen  
+        # Initialize Splash Screen
         # Looks for SPLASH.JSON files in OSDCloud\Config, if found, it will run a splash screen.
         Write-Host -ForegroundColor Cyan '[i] Splash Screen Configuration'
         $Global:SplashScreen = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -ne 'C' } | ForEach-Object {
@@ -86,8 +86,8 @@ function Initialize-OSDCloudStartnet {
                 $SplashJson = $Global:SplashScreen | Select-Object -Last 1
                 Write-Host -ForegroundColor DarkGray "Multiple Splash Screen configurations, using $($Item.FullName)"
             }
-            if (Test-Path -Path "C:\OSDCloud\Logs") {
-                Remove-Item -Path "C:\OSDCloud\Logs" -Recurse -Force
+            if (Test-Path -Path "C:\Windows\Temp\OSDCloud\Logs") {
+                Remove-Item -Path "C:\Windows\Temp\OSDCloud\Logs" -Recurse -Force
             }
             Start-Transcript -Path "X:\OSDCloud\Logs\Deploy-OSDCloud.log"
             if (-NOT ($Global:ModuleBase = (Get-Module -Name OSD).ModuleBase)) {

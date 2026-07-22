@@ -257,7 +257,7 @@ Function osdcloud-HPIAOfflineSync {
         )
 
     #Create HPIA Repo & Sync for this Platform (EXE / Online)
-    $LogFolder = "C:\OSDCloud\Logs"
+    $LogFolder = "C:\Windows\Temp\OSDCloud\Logs"
     $HPIARepoFolder = "C:\OSDCloud\HPIA\Repo"
     $PlatformCode = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
     New-Item -Path $LogFolder -ItemType Directory -Force | Out-Null
@@ -305,7 +305,7 @@ Function osdcloud-HPIAExecute {
             [ValidateSet("List", "Download", "Extract", "Install", "UpdateCVA")]
             $Action = "Install",
             [Parameter(Mandatory=$false)]
-            $LogFolder = "$env:systemdrive\OSDCloud\Logs",
+            $LogFolder = "$env:Temp\OSDCloud\Logs",
             [Parameter(Mandatory=$false)]
             $ReportsFolder = "$env:systemdrive\OSDCloud\HPIA",
             [Parameter(Mandatory=$false)]
@@ -320,7 +320,7 @@ Function osdcloud-HPIAExecute {
         $ProgressPreference = 'SilentlyContinue' # to speed up web requests
 
         #Record currently running Processes:
-        #Get-Process | Select-Object -Property Name, Description | Out-File C:\osdcloud\Logs\HPIA-RunningProcesses.txt
+        #Get-Process | Select-Object -Property Name, Description | Out-File C:\Windows\Temp\OSDCloud\Logs\HPIA-RunningProcesses.txt
 
         ################################
         ## Create Directory Structure ##

@@ -92,7 +92,7 @@ Start-Process -FilePath "$env:TEMP\ODT.exe" -ArgumentList "/extract:$($M365Stagi
 		    [int]$Type,
 		
 		    [Parameter(Mandatory=$false)]
-		    $LogFile = "C:\OSDCloud\Logs\M365_Install.log"
+		    $LogFile = "C:\Windows\Temp\OSDCloud\Logs\M365_Install.log"
 	    )
     <#
     Type: 1 = Normal, 2 = Warning (yellow), 3 = Error (red)
