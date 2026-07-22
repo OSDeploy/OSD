@@ -28,6 +28,13 @@
     #>
     [CmdletBinding()]
     param ()
+    #=================================================
+    $OSDCoreLicense = Get-OSDCoreLicense
+    if (-not $OSDCoreLicense -or $OSDCoreLicense.IsValid -ne $true) {
+        # Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] A valid Recast Core license is required."
+        Show-OSDCoreLicenseHelp
+        return
+    }
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     $global:RecastOSDCloud.TimeStart = [datetime](Get-Date)
     #=================================================
