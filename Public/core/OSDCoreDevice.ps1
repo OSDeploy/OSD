@@ -1,32 +1,32 @@
-<#
-.SYNOPSIS
-Collects local hardware, firmware, TPM, and network details for OSDCloud.
-
-.DESCRIPTION
-Initialize-OSDCoreDevice gathers device information from CIM classes, firmware,
-and environment data, then normalizes manufacturer/model/product values for
-workflow use. It writes diagnostic logs to $env:TEMP\osdcloud-logs, attempts to
-copy logs to an available OSDCloudLogs path, and populates
-$global:OSDCoreDevice with an ordered property set used by downstream OSDCloud
-deployment logic.
-
-.EXAMPLE
-Initialize-OSDCoreDevice
-
-Collects current device metadata, creates or updates
-$global:OSDCoreDevice, and writes log artifacts for troubleshooting.
-
-.OUTPUTS
-None. This function does not emit pipeline output.
-
-.NOTES
-Side effects:
-- Clears the current PowerShell error collection.
-- Updates date/time in WinPE when needed.
-- Writes logs to $env:TEMP\osdcloud-logs.
-- Sets $global:OSDCoreDevice.
-#>
 function Initialize-OSDCoreDevice {
+    <#
+    .SYNOPSIS
+    Collects local hardware, firmware, TPM, and network details for OSDCloud.
+
+    .DESCRIPTION
+    Initialize-OSDCoreDevice gathers device information from CIM classes, firmware,
+    and environment data, then normalizes manufacturer/model/product values for
+    workflow use. It writes diagnostic logs to $env:TEMP\osdcloud-logs, attempts to
+    copy logs to an available OSDCloudLogs path, and populates
+    $global:OSDCoreDevice with an ordered property set used by downstream OSDCloud
+    deployment logic.
+
+    .EXAMPLE
+    Initialize-OSDCoreDevice
+
+    Collects current device metadata, creates or updates
+    $global:OSDCoreDevice, and writes log artifacts for troubleshooting.
+
+    .OUTPUTS
+    None. This function does not emit pipeline output.
+
+    .NOTES
+    Side effects:
+    - Clears the current PowerShell error collection.
+    - Updates date/time in WinPE when needed.
+    - Writes logs to $env:TEMP\osdcloud-logs.
+    - Sets $global:OSDCoreDevice.
+    #>
     [CmdletBinding()]
     param ()
     #=================================================
