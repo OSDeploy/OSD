@@ -1,4 +1,4 @@
-function Set-OSDCoreOperatingSystemObject {
+function Set-OSDCoreOperatingSystemCloudObject {
     <#
     .SYNOPSIS
     Selects and sets the global OSD core operating system object.
@@ -6,7 +6,7 @@ function Set-OSDCoreOperatingSystemObject {
     .DESCRIPTION
     Filters the preloaded operating system catalog using activation, architecture,
     language, release ID, and version criteria, then sets
-    $global:OSDCoreOperatingSystemObject to the best match. If multiple matches
+    $global:OSDCoreOperatingSystemCloudObject to the best match. If multiple matches
     are found, the highest build is selected.
 
     .PARAMETER OSActivation
@@ -29,9 +29,9 @@ function Set-OSDCoreOperatingSystemObject {
     before filtering.
 
     .EXAMPLE
-    Set-OSDCoreOperatingSystemObject -OSArchitecture amd64 -OSReleaseID 25H2 -OSLanguageCode en-us
+    Set-OSDCoreOperatingSystemCloudObject -OSArchitecture amd64 -OSReleaseID 25H2 -OSLanguageCode en-us
     Selects the latest Windows 11 Retail amd64 en-us 25H2 catalog entry and sets
-    $global:OSDCoreOperatingSystemObject.
+    $global:OSDCoreOperatingSystemCloudObject.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
@@ -87,7 +87,7 @@ function Set-OSDCoreOperatingSystemObject {
         Where-Object { $_.ReleaseID -eq $OSReleaseID } |
         Where-Object { $_.Version -eq $OSVersion }
 
-    $global:OSDCoreOperatingSystemObject = $matches |
+    $global:OSDCoreOperatingSystemCloudObject = $matches |
         Sort-Object -Property @{ Expression = {
                 try {
                     [version]($_.Build -replace '[^0-9\.]', '')
@@ -98,9 +98,9 @@ function Set-OSDCoreOperatingSystemObject {
             }; Descending = $true } |
         Select-Object -First 1
 
-    if (-not $global:OSDCoreOperatingSystemObject) {
+    if (-not $global:OSDCoreOperatingSystemCloudObject) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to find a matching operating system object for OSReleaseID '$OSReleaseID', OSArchitecture '$normalizedArchitecture', Activation '$OSActivation', Language '$normalizedLanguageCode', and OSVersion '$OSVersion'."
     }
 
-    return $global:OSDCoreOperatingSystemObject
+    return $global:OSDCoreOperatingSystemCloudObject
 }

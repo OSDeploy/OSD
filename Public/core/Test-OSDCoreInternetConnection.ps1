@@ -1,5 +1,4 @@
-function Test-OSDCoreInternetConnection
-{
+function Test-OSDCoreInternetConnection {
     <#
     .SYNOPSIS
     Tests connectivity to a URI using an HTTP HEAD request.

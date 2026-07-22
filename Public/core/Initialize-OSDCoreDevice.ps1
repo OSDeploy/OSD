@@ -638,11 +638,11 @@ function Initialize-OSDCoreDevice {
     #=================================================
     # OSDCoreOperatingSystems
     $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -match "$ProcessorArchitecture" }
-    $null = Set-OSDCoreOperatingSystemObject -OSArchitecture $ProcessorArchitecture
+    $null = Set-OSDCoreOperatingSystemCloudObject -OSArchitecture $ProcessorArchitecture
     #=================================================
     # OSDCoreDriverPacks
     $global:OSDCoreDriverPacks = Get-OSDCoreDriverPacks -OSDManufacturer $OSDManufacturer
-    $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $OSDProduct } | Select-Object -First 1
+    $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $OSDProduct } | Select-Object -First 1
     #=================================================
     # OSDCloudLogs
     # Look for available drives (USB, mapped network drives, and local drives) with at least 1 GB of free space and write permissions for the current user to copy logs.
