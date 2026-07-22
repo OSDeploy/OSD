@@ -129,7 +129,7 @@ function Update-RecastOSDCloudUSBCache {
     }
     #=================================================
     # Require an eligible USB cache before doing any online catalog or download work.
-    $osdCoreCacheUsbPath = Get-OSDCoreCachePathUSB | Select-Object -First 1
+    $osdCoreCacheUsbPath = Get-OSDCoreCacheUSBPath | Select-Object -First 1
     if (-not $osdCoreCacheUsbPath) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No eligible OSDCoreCache USB drive was detected. Connect a USB drive with an OSDCloud directory, NTFS or exFAT format, and more than 10 GB free."
     }
@@ -273,7 +273,7 @@ function Update-RecastOSDCloudUSBCache {
                 Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OperatingSystem download was not offered because the URL is not reachable."
             }
             elseif (Test-OSDCoreCacheUSB) {
-                $osdCoreCacheUsbPath = Get-OSDCoreCachePathUSB | Select-Object -First 1
+                $osdCoreCacheUsbPath = Get-OSDCoreCacheUSBPath | Select-Object -First 1
                 if ($osdCoreCacheUsbPath) {
                     # Build the destination path used by the USB cache OS folder layout.
                     $osdCoreOperatingSystemDestinationChildPath = "$($global:OSDCoreOperatingSystemObject.Version) $($global:OSDCoreOperatingSystemObject.ReleaseID)"
@@ -381,7 +381,7 @@ function Update-RecastOSDCloudUSBCache {
                 Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] DriverPack download was not offered because the URL is not reachable."
             }
             elseif (Test-OSDCoreCacheUSB) {
-                $osdCoreCacheUsbPath = Get-OSDCoreCachePathUSB | Select-Object -First 1
+                $osdCoreCacheUsbPath = Get-OSDCoreCacheUSBPath | Select-Object -First 1
                 if ($osdCoreCacheUsbPath) {
                     # Store driver packs under the cache DriverPacks folder by manufacturer.
                     $osdCoreDriverPackDestination = [System.IO.Path]::GetFullPath((Join-Path -Path (Join-Path -Path ([string]$osdCoreCacheUsbPath) -ChildPath 'DriverPacks') -ChildPath ([string]$global:OSDCoreDriverPackObject.Manufacturer)))

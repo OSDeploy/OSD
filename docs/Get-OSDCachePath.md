@@ -5,7 +5,7 @@ online version: https://github.com/OSDeploy/OSD/tree/master/docs
 schema: 2.0.0
 ---
 
-# Get-OSDCachePath
+# Get-OSDModuleCache
 
 ## SYNOPSIS
 Returns the OSD module cache directory path.
@@ -13,7 +13,7 @@ Returns the OSD module cache directory path.
 ## SYNTAX
 
 ```
-Get-OSDCachePath [<CommonParameters>]
+Get-OSDModuleCache [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,7 +26,7 @@ for the installed OSD module.
 
 ### EXAMPLE 1
 ```
-Get-OSDCachePath
+Get-OSDModuleCache
 ```
 
 Returns the full path to the OSD module cache directory.
@@ -48,4 +48,3 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
-

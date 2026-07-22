@@ -12399,7 +12399,7 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-OSDCachePath</command:name>
+      <command:name>Get-OSDModuleCache</command:name>
       <command:verb>Get</command:verb>
       <command:noun>OSDCachePath</command:noun>
       <maml:description>
@@ -12411,7 +12411,7 @@
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-OSDCachePath</maml:name>
+        <maml:name>Get-OSDModuleCache</maml:name>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters />
@@ -12434,7 +12434,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-OSDCachePath</dev:code>
+        <dev:code>Get-OSDModuleCache</dev:code>
         <dev:remarks>
           <maml:para>Returns the full path to the OSD module cache directory.</maml:para>
         </dev:remarks>
