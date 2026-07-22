@@ -47,7 +47,7 @@
     }
     #=================================================
     # Make sure there is an Operating System ESD available for deployment, either online or offline.
-    if ((-not $global:RecastOSDCloud.OperatingSystemUrlTest) -and (-not $global:RecastOSDCloud.OperatingSystemCacheObject)) {
+    if ((-not $global:RecastOSDCloud.OperatingSystemCloudObjectTest) -and (-not $global:RecastOSDCloud.OperatingSystemCacheObject)) {
         throw "[$(Get-Date -format s)] WindowsImage ESD is not reachable online or offline. Please verify the source and try again."
     }
     #=================================================
@@ -59,20 +59,18 @@
     # Step-OSDCloudTelemetryPH
     #=================================================
     # v2 Disk
-    # Only on RecastOSDCloud workflows.
     Step-OSDCloudRemoveUSBDrives
     Step-OSDCloudClearDeploymentDisk
     Step-OSDCloudPartitionDeploymentDisk
     Step-OSDCloudRestoreUSBDrives
     Step-OSDCloudEnableHighPerformance
     #=================================================
-    # v2 Save the Operating System ESD to the local cache if it is not already cached, or if the online URL is reachable for testing.
-    # Only on RecastOSDCloud workflows.
+    # v2 Copy the OperatingSystemCloudObject from the Cache to the Staging folder, or download it from the online source if not cached.
     if ($global:RecastOSDCloud.OperatingSystemCacheObject) {
-        Step-OSDCloudCopyOperatingSystemCacheObject
+        Step-OSDCloudSaveOperatingSystemCacheObject
     }
-    elseif ($global:RecastOSDCloud.OperatingSystemUrlTest) {
-        Step-OSDCloudSaveOnlineOperatingSystemObject
+    elseif ($global:RecastOSDCloud.OperatingSystemCloudObjectTest) {
+        Step-OSDCloudSaveOperatingSystemCloudObject
     }
     #=================================================
     # v2 Expand the Operating System after verifying the proper ImageIndex
@@ -84,11 +82,20 @@
     Step-OSDCloudUpdateSetupDisplayedEula
     Step-OSDCloudUpdatePowerShellModules
     Step-OSDCloudContentFolders
-    Step-OSDCloudExportWinPEOemDrivers
-    Step-OSDCloudAddWinOSOemDrivers
-    Step-OSDCloudAddWinREOemDrivers
-    Step-OSDCloudSaveDriverPackOffline
-    # Step-OSDCloudSaveDriverPackOnline
+    #=================================================
+    # v2 WinPE OEM Drivers
+    Step-OSDCloudWinPEOemDriversExport
+    Step-OSDCloudWinPEOemDriversAddWinOS
+    Step-OSDCloudWinPEOemDriversAddWinRE
+    #=================================================
+    # v2 Copy the DriverPackCloudObject from the Cache to the Staging folder, or download it from the online source if not cached.
+    if ($global:RecastOSDCloud.DriverPackCacheObject) {
+        Step-OSDCloudSaveDriverPackCacheObject
+    }
+    elseif ($global:RecastOSDCloud.DriverPackCloudObjectTest) {
+        Step-OSDCloudSaveDriverPackCloudObject
+    }
+    #=================================================
     # Step-OSDCloudDriverPackAdd
     # step-Save-WindowsDriver-Firmware
     # step-Add-WindowsDriver-Firmware

@@ -188,14 +188,14 @@ function Start-RecastOSDCloudCLI {
     }
 
     # Select and set the matching operating system object using core selection logic.
-    $global:OSDCoreOperatingSystemObject = Set-OSDCoreOperatingSystemObject `
+    $global:OSDCoreOperatingSystemCloudObject = Set-OSDCoreOperatingSystemCloudObject `
         -OSActivation $OSActivation `
         -OSArchitecture $OSArchitecture `
         -OSLanguageCode $OSLanguageCode `
         -OSReleaseID $OSReleaseID `
         -OSVersion 'Windows 11'
 
-    if (-not $global:OSDCoreOperatingSystemObject) {
+    if (-not $global:OSDCoreOperatingSystemCloudObject) {
         throw "[$(Get-Date -format s)] Unable to find a matching operating system object for OSReleaseID '$OSReleaseID', OSArchitecture '$OSArchitecture', Activation '$OSActivation', and Language '$OSLanguageCode'."
     }
     #=================================================
@@ -216,14 +216,14 @@ function Start-RecastOSDCloudCLI {
         $global:OSDCoreDevice.OSDProduct = $OSDProduct
     }
     $targetSystemId = [string]$global:OSDCoreDevice.OSDProduct
-    $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { [string]$_.SystemId -eq $targetSystemId } | Select-Object -First 1
+    $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object { [string]$_.SystemId -eq $targetSystemId } | Select-Object -First 1
     #================================================
-    # OSDCoreOperatingSystemObject
-    if ($global:OSDCoreOperatingSystemObject) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreOperatingSystemObject."
+    # OSDCoreOperatingSystemCloudObject
+    if ($global:OSDCoreOperatingSystemCloudObject) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreOperatingSystemCloudObject."
         # Confirm the selected operating system download URL before offering cache download work.
-        $osdCoreOperatingSystemObjectUrlReachable = Test-OSDCoreOperatingSystemObjectUrl -OperatingSystemObject $global:OSDCoreOperatingSystemObject
-        if ($osdCoreOperatingSystemObjectUrlReachable) {
+        $OSDCoreOperatingSystemCloudObjectUrlReachable = Test-OSDCoreOperatingSystemCloudObject -OperatingSystemCloudObject $global:OSDCoreOperatingSystemCloudObject
+        if ($OSDCoreOperatingSystemCloudObjectUrlReachable) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystem URL is reachable. OK."
         }
         else {
@@ -233,23 +233,23 @@ function Start-RecastOSDCloudCLI {
         # Prefer SHA256 when the catalog provides it, and fall back to SHA1 for older entries.
         $expectedOperatingSystemHash = $null
         $expectedOperatingSystemHashAlgorithm = $null
-        if (-not [string]::IsNullOrWhiteSpace([string]$global:OSDCoreOperatingSystemObject.SHA256)) {
-            $expectedOperatingSystemHash = [string]$global:OSDCoreOperatingSystemObject.SHA256
+        if (-not [string]::IsNullOrWhiteSpace([string]$global:OSDCoreOperatingSystemCloudObject.SHA256)) {
+            $expectedOperatingSystemHash = [string]$global:OSDCoreOperatingSystemCloudObject.SHA256
             $expectedOperatingSystemHashAlgorithm = 'SHA256'
         }
-        elseif (-not [string]::IsNullOrWhiteSpace([string]$global:OSDCoreOperatingSystemObject.SHA1)) {
-            $expectedOperatingSystemHash = [string]$global:OSDCoreOperatingSystemObject.SHA1
+        elseif (-not [string]::IsNullOrWhiteSpace([string]$global:OSDCoreOperatingSystemCloudObject.SHA1)) {
+            $expectedOperatingSystemHash = [string]$global:OSDCoreOperatingSystemCloudObject.SHA1
             $expectedOperatingSystemHashAlgorithm = 'SHA1'
         }
 
         # Check whether the selected OS payload is already present in the USB cache inventory.
-        $osdCoreOperatingSystemCacheContent = Get-OSDCoreOperatingSystemCacheObject -OperatingSystemObject $global:OSDCoreOperatingSystemObject
+        $osdCoreOperatingSystemCacheContent = Get-OSDCoreOperatingSystemCacheObject -OperatingSystemCloudObject $global:OSDCoreOperatingSystemCloudObject
         if ($osdCoreOperatingSystemCacheContent) {
             # Verify the cached payload before treating it as ready.
             if (-not [string]::IsNullOrWhiteSpace($expectedOperatingSystemHash)) {
                 $actualOperatingSystemHash = (Get-FileHash -Path $osdCoreOperatingSystemCacheContent.FullName -Algorithm $expectedOperatingSystemHashAlgorithm -ErrorAction Stop).Hash
                 if ($actualOperatingSystemHash -ne $expectedOperatingSystemHash.Trim()) {
-                    throw "[$(Get-Date -format s)] OSDCoreOperatingSystemObject $expectedOperatingSystemHashAlgorithm hash mismatch for $($osdCoreOperatingSystemCacheContent.FullName). Expected $($expectedOperatingSystemHash.Trim()), found $actualOperatingSystemHash."
+                    throw "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject $expectedOperatingSystemHashAlgorithm hash mismatch for $($osdCoreOperatingSystemCacheContent.FullName). Expected $($expectedOperatingSystemHash.Trim()), found $actualOperatingSystemHash."
                 }
                 Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystem cached file $expectedOperatingSystemHashAlgorithm hash verified. OK."
             }
@@ -261,20 +261,20 @@ function Start-RecastOSDCloudCLI {
         else {
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OperatingSystem is not available on a USB drive."
         }
-        # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject:"
-        $tempOSDCoreOperatingSystemObject = $global:OSDCoreOperatingSystemObject | Select-Object -Property Name, FileName, Url, SHA1, SHA256
-        # $global:OSDCoreOperatingSystemObject | Out-Host
-        $tempOSDCoreOperatingSystemObject | Out-Host
+        # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject:"
+        $tempOSDCoreOperatingSystemCloudObject = $global:OSDCoreOperatingSystemCloudObject | Select-Object -Property Name, FileName, Url, SHA1, SHA256
+        # $global:OSDCoreOperatingSystemCloudObject | Out-Host
+        $tempOSDCoreOperatingSystemCloudObject | Out-Host
     }
     #================================================
-    # OSDCoreDriverPackObject
+    # OSDCoreDriverPackCloudObject
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDManufacturer: $($global:OSDCoreDevice.OSDManufacturer)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
-    if ($global:OSDCoreDriverPackObject) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreDriverPackObject."
-        $osdCoreDriverPackObjectUrlReachable = Test-OSDCoreDriverPackObjectUrl -DriverPackObject $global:OSDCoreDriverPackObject
-        if ($osdCoreDriverPackObjectUrlReachable) {
+    if ($global:OSDCoreDriverPackCloudObject) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreDriverPackCloudObject."
+        $OSDCoreDriverPackCloudObjectUrlReachable = Test-OSDCoreDriverPackCloudObject -DriverPackCloudObject $global:OSDCoreDriverPackCloudObject
+        if ($OSDCoreDriverPackCloudObjectUrlReachable) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack URL is reachable. OK."
         }
         else {
@@ -283,15 +283,15 @@ function Start-RecastOSDCloudCLI {
 
         # Driver pack catalogs use either HashMD5 or MD5Hash depending on the source.
         $expectedDriverPackHashMD5 = $null
-        if ($global:OSDCoreDriverPackObject.PSObject.Properties.Match('HashMD5').Count -gt 0) {
-            $expectedDriverPackHashMD5 = [string]$global:OSDCoreDriverPackObject.HashMD5
+        if ($global:OSDCoreDriverPackCloudObject.PSObject.Properties.Match('HashMD5').Count -gt 0) {
+            $expectedDriverPackHashMD5 = [string]$global:OSDCoreDriverPackCloudObject.HashMD5
         }
-        elseif ($global:OSDCoreDriverPackObject.PSObject.Properties.Match('MD5Hash').Count -gt 0) {
-            $expectedDriverPackHashMD5 = [string]$global:OSDCoreDriverPackObject.MD5Hash
+        elseif ($global:OSDCoreDriverPackCloudObject.PSObject.Properties.Match('MD5Hash').Count -gt 0) {
+            $expectedDriverPackHashMD5 = [string]$global:OSDCoreDriverPackCloudObject.MD5Hash
         }
 
         # Check whether the selected driver pack is already present in the cache inventory.
-        $osdCoreDriverPackCacheContent = Get-OSDCoreDriverPackCacheObject -DriverPackObject $global:OSDCoreDriverPackObject
+        $osdCoreDriverPackCacheContent = Get-OSDCoreDriverPackCacheObject -DriverPackCloudObject $global:OSDCoreDriverPackCloudObject
         if ($osdCoreDriverPackCacheContent) {
             # Verify cached driver pack integrity when the catalog includes an MD5 hash.
             if (-not [string]::IsNullOrWhiteSpace($expectedDriverPackHashMD5)) {
@@ -309,11 +309,11 @@ function Start-RecastOSDCloudCLI {
         else {
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] DriverPack is not available on a USB Drive."
         }
-        # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackObject"
-        $global:OSDCoreDriverPackObject | Out-Host
+        # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreDriverPackCloudObject"
+        $global:OSDCoreDriverPackCloudObject | Out-Host
     }
     else {
-        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCoreDriverPackObject is not set."
+        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCoreDriverPackCloudObject is not set."
         Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCloud will not apply a DriverPack for this device or on this network."
     }
     #=================================================
@@ -338,23 +338,23 @@ function Start-RecastOSDCloudCLI {
     # Build deployment state consumed by the broader OSDCloud workflow.
     $global:RecastOSDCloud = $null
     $global:RecastOSDCloud = [ordered]@{
-        DriverPackObject           = $global:OSDCoreDriverPackObject
-        DriverPackObjectUrlTest    = Test-OSDCoreDriverPackObjectUrl
-        DriverPackCacheObject      = Get-OSDCoreDriverPackCacheObject
-        DriverPackItem             = $null
-        OperatingSystemObject      = $global:OSDCoreOperatingSystemObject
-        OperatingSystemCacheObject = [bool]$osdCoreOperatingSystemCacheContent
-        OperatingSystemItem        = $null
-        OperatingSystemUrlTest     = Test-OSDCoreOperatingSystemObjectUrl
-        DeploymentDiskObject       = $DeploymentDiskObject
-        ConfirmDeploymentDisk      = $false
+        DriverPackCacheObject               = Get-OSDCoreDriverPackCacheObject
+        DriverPackCloudObject                    = $global:OSDCoreDriverPackCloudObject
+        DriverPackCloudObjectTest           = Test-OSDCoreDriverPackCloudObject
+        DriverPackLocalObject               = $null
+        OperatingSystemCloudObject               = $global:OSDCoreOperatingSystemCloudObject
+        OperatingSystemCacheObject          = [bool]$osdCoreOperatingSystemCacheContent
+        OperatingSystemCloudObjectTest      = Test-OSDCoreOperatingSystemCloudObject
+        OperatingSystemLocalItem            = $null
+        DeploymentDiskObject                = $DeploymentDiskObject
+        ConfirmDeploymentDisk               = $false
         # DriverFolderName          = $null
         # DriverFolderNames         = @()
         # DriverFolderPath          = $null
         # DriverFolderPaths         = @()
         # DriverFolderSelections    = @()
         # DriverPackName        = $DriverPackName
-        # DriverPackObject      = $DriverPackObject
+        # DriverPackCloudObject      = $DriverPackCloudObject
         # DriverPackValues      = [array]$DriverPackValues
         # Flows                     = [array]$global:OSDCloudWorkflowTasks
         Function                 = $($MyInvocation.MyCommand.Name)
@@ -364,7 +364,7 @@ function Start-RecastOSDCloudCLI {
         Module                   = $($MyInvocation.MyCommand.Module.Name)
         LogsPath                  = "$env:TEMP\osdcloud-logs"
         # OperatingSystem          = $OperatingSystem
-        # OperatingSystemObject = $OperatingSystemObject
+        # OperatingSystemCloudObject = $OperatingSystemCloudObject
         # OperatingSystemValues = $OperatingSystemValues
         OSActivation             = $OSActivation
         # OSActivationValues       = $OSActivationValues
@@ -390,11 +390,11 @@ function Start-RecastOSDCloudCLI {
     }
     #=================================================
     # Cannot continue if the selected operating system object is not set.
-    if ($null -eq $global:OSDCoreOperatingSystemObject) {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set. OSDCloud cannot continue without a valid OS payload."
+    if ($null -eq $global:OSDCoreOperatingSystemCloudObject) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject is not set. OSDCloud cannot continue without a valid OS payload."
     }
     # Cannot continue if the selected operating system object is not reachable online and is not available offline.
-    if ((-not $global:RecastOSDCloud.OperatingSystemUrlTest) -and (-not $global:RecastOSDCloud.OperatingSystemCacheObject)) {
+    if ((-not $global:RecastOSDCloud.OperatingSystemCloudObjectTest) -and (-not $global:RecastOSDCloud.OperatingSystemCacheObject)) {
         throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OperatingSystem is not reachable online or available offline. OSDCloud cannot continue without a valid OS payload."
     }
     #================================================

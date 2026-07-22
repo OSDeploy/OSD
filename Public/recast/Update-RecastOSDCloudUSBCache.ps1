@@ -191,14 +191,14 @@ function Update-RecastOSDCloudUSBCache {
     }
 
     # Select and set the matching operating system object using core selection logic.
-    $global:OSDCoreOperatingSystemObject = Set-OSDCoreOperatingSystemObject `
+    $global:OSDCoreOperatingSystemCloudObject = Set-OSDCoreOperatingSystemCloudObject `
         -OSActivation $OSActivation `
         -OSArchitecture $OSArchitecture `
         -OSLanguageCode $OSLanguageCode `
         -OSReleaseID $OSReleaseID `
         -OSVersion 'Windows 11'
 
-    if (-not $global:OSDCoreOperatingSystemObject) {
+    if (-not $global:OSDCoreOperatingSystemCloudObject) {
         throw "[$(Get-Date -format s)] Unable to find a matching operating system object for OSReleaseID '$OSReleaseID', OSArchitecture '$OSArchitecture', Activation '$OSActivation', and Language '$OSLanguageCode'."
     }
     #=================================================
@@ -218,19 +218,19 @@ function Update-RecastOSDCloudUSBCache {
     if ($PSBoundParameters.ContainsKey('OSDProduct')) {
         $global:OSDCoreDevice.OSDProduct = $OSDProduct
     }
-    $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $global:OSDCoreDevice.OSDProduct } | Select-Object -First 1
+    $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $global:OSDCoreDevice.OSDProduct } | Select-Object -First 1
     #================================================
-    # OSDCoreOperatingSystemObject
-    if ($global:OSDCoreOperatingSystemObject) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreOperatingSystemObject."
-        # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemObject:"
-        $tempOSDCoreOperatingSystemObject = $global:OSDCoreOperatingSystemObject | Select-Object -Property Name, FileName, Url, SHA1, SHA256
-        # $global:OSDCoreOperatingSystemObject | Out-Host
-        $tempOSDCoreOperatingSystemObject | Out-Host
+    # OSDCoreOperatingSystemCloudObject
+    if ($global:OSDCoreOperatingSystemCloudObject) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreOperatingSystemCloudObject."
+        # Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject:"
+        $tempOSDCoreOperatingSystemCloudObject = $global:OSDCoreOperatingSystemCloudObject | Select-Object -Property Name, FileName, Url, SHA1, SHA256
+        # $global:OSDCoreOperatingSystemCloudObject | Out-Host
+        $tempOSDCoreOperatingSystemCloudObject | Out-Host
 
         # Confirm the selected operating system download URL before offering cache download work.
-        $osdCoreOperatingSystemObjectUrlReachable = Test-OSDCoreOperatingSystemObjectUrl -OperatingSystemObject $global:OSDCoreOperatingSystemObject
-        if ($osdCoreOperatingSystemObjectUrlReachable) {
+        $OSDCoreOperatingSystemCloudObjectUrlReachable = Test-OSDCoreOperatingSystemCloudObject -OperatingSystemCloudObject $global:OSDCoreOperatingSystemCloudObject
+        if ($OSDCoreOperatingSystemCloudObjectUrlReachable) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystem URL is reachable. OK."
         }
         else {
@@ -240,23 +240,23 @@ function Update-RecastOSDCloudUSBCache {
         # Prefer SHA256 when the catalog provides it, and fall back to SHA1 for older entries.
         $expectedOperatingSystemHash = $null
         $expectedOperatingSystemHashAlgorithm = $null
-        if (-not [string]::IsNullOrWhiteSpace([string]$global:OSDCoreOperatingSystemObject.SHA256)) {
-            $expectedOperatingSystemHash = [string]$global:OSDCoreOperatingSystemObject.SHA256
+        if (-not [string]::IsNullOrWhiteSpace([string]$global:OSDCoreOperatingSystemCloudObject.SHA256)) {
+            $expectedOperatingSystemHash = [string]$global:OSDCoreOperatingSystemCloudObject.SHA256
             $expectedOperatingSystemHashAlgorithm = 'SHA256'
         }
-        elseif (-not [string]::IsNullOrWhiteSpace([string]$global:OSDCoreOperatingSystemObject.SHA1)) {
-            $expectedOperatingSystemHash = [string]$global:OSDCoreOperatingSystemObject.SHA1
+        elseif (-not [string]::IsNullOrWhiteSpace([string]$global:OSDCoreOperatingSystemCloudObject.SHA1)) {
+            $expectedOperatingSystemHash = [string]$global:OSDCoreOperatingSystemCloudObject.SHA1
             $expectedOperatingSystemHashAlgorithm = 'SHA1'
         }
 
         # Check whether the selected OS payload is already present in the USB cache inventory.
-        $osdCoreOperatingSystemCacheContent = Get-OSDCoreOperatingSystemCacheObject -OperatingSystemObject $global:OSDCoreOperatingSystemObject
+        $osdCoreOperatingSystemCacheContent = Get-OSDCoreOperatingSystemCacheObject -OperatingSystemCloudObject $global:OSDCoreOperatingSystemCloudObject
         if ($osdCoreOperatingSystemCacheContent) {
             # Verify the cached payload before treating it as ready.
             if (-not [string]::IsNullOrWhiteSpace($expectedOperatingSystemHash)) {
                 $actualOperatingSystemHash = (Get-FileHash -Path $osdCoreOperatingSystemCacheContent.FullName -Algorithm $expectedOperatingSystemHashAlgorithm -ErrorAction Stop).Hash
                 if ($actualOperatingSystemHash -ne $expectedOperatingSystemHash.Trim()) {
-                    throw "[$(Get-Date -format s)] OSDCoreOperatingSystemObject $expectedOperatingSystemHashAlgorithm hash mismatch for $($osdCoreOperatingSystemCacheContent.FullName). Expected $($expectedOperatingSystemHash.Trim()), found $actualOperatingSystemHash."
+                    throw "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject $expectedOperatingSystemHashAlgorithm hash mismatch for $($osdCoreOperatingSystemCacheContent.FullName). Expected $($expectedOperatingSystemHash.Trim()), found $actualOperatingSystemHash."
                 }
                 Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OperatingSystem cached file $expectedOperatingSystemHashAlgorithm hash verified. OK."
             }
@@ -269,16 +269,16 @@ function Update-RecastOSDCloudUSBCache {
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OperatingSystem is not available on a USB drive."
 
             # Do not offer a download when the catalog URL cannot be reached.
-            if (-not $osdCoreOperatingSystemObjectUrlReachable) {
+            if (-not $OSDCoreOperatingSystemCloudObjectUrlReachable) {
                 Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OperatingSystem download was not offered because the URL is not reachable."
             }
             elseif (Test-OSDCoreCacheUSB) {
                 $osdCoreCacheUsbPath = Get-OSDCoreCacheUSBPath | Select-Object -First 1
                 if ($osdCoreCacheUsbPath) {
                     # Build the destination path used by the USB cache OS folder layout.
-                    $osdCoreOperatingSystemDestinationChildPath = "$($global:OSDCoreOperatingSystemObject.Version) $($global:OSDCoreOperatingSystemObject.ReleaseID)"
+                    $osdCoreOperatingSystemDestinationChildPath = "$($global:OSDCoreOperatingSystemCloudObject.Version) $($global:OSDCoreOperatingSystemCloudObject.ReleaseID)"
                     $osdCoreOperatingSystemDestination = [System.IO.Path]::GetFullPath((Join-Path -Path (Join-Path -Path ([string]$osdCoreCacheUsbPath) -ChildPath 'OS') -ChildPath $osdCoreOperatingSystemDestinationChildPath))
-                    $osdCoreOperatingSystemDestinationFullName = Join-Path -Path $osdCoreOperatingSystemDestination -ChildPath ([string]$global:OSDCoreOperatingSystemObject.FileName)
+                    $osdCoreOperatingSystemDestinationFullName = Join-Path -Path $osdCoreOperatingSystemDestination -ChildPath ([string]$global:OSDCoreOperatingSystemCloudObject.FileName)
                     $downloadOperatingSystem = $true
 
                     # If the destination file already exists and verifies, skip the interactive download prompt.
@@ -299,23 +299,23 @@ function Update-RecastOSDCloudUSBCache {
 
                     # Prompt before downloading the OS payload because it can be large.
                     $caption = 'Download OperatingSystem to OSDCoreCache USB'
-                    $message = "Download $($global:OSDCoreOperatingSystemObject.FileName) to: $osdCoreOperatingSystemDestination"
+                    $message = "Download $($global:OSDCoreOperatingSystemCloudObject.FileName) to: $osdCoreOperatingSystemDestination"
                     $choices = @(
                         (New-Object System.Management.Automation.Host.ChoiceDescription '&Yes', 'Download the OperatingSystem to the USB cache.'),
                         (New-Object System.Management.Automation.Host.ChoiceDescription '&No', 'Skip the OperatingSystem download.')
                     )
                     if ($downloadOperatingSystem -and ($host.UI.PromptForChoice($caption, $message, $choices, 1) -eq 0)) {
-                        $savedOperatingSystem = Invoke-OSDCoreDownloadFile -SourceUrl $global:OSDCoreOperatingSystemObject.Url -DestinationDirectory $osdCoreOperatingSystemDestination -DestinationName $global:OSDCoreOperatingSystemObject.FileName -ErrorAction Stop
+                        $savedOperatingSystem = Invoke-OSDCoreDownloadFile -SourceUrl $global:OSDCoreOperatingSystemCloudObject.Url -DestinationDirectory $osdCoreOperatingSystemDestination -DestinationName $global:OSDCoreOperatingSystemCloudObject.FileName -ErrorAction Stop
 
                         # Verify the downloaded payload before refreshing the cache inventory.
                         if (-not [string]::IsNullOrWhiteSpace($expectedOperatingSystemHash)) {
                             $actualOperatingSystemHash = (Get-FileHash -Path $savedOperatingSystem.FullName -Algorithm $expectedOperatingSystemHashAlgorithm -ErrorAction Stop).Hash
                             if ($actualOperatingSystemHash -ne $expectedOperatingSystemHash.Trim()) {
-                                throw "[$(Get-Date -format s)] OSDCoreOperatingSystemObject $expectedOperatingSystemHashAlgorithm hash mismatch for $($savedOperatingSystem.FullName). Expected $($expectedOperatingSystemHash.Trim()), found $actualOperatingSystemHash."
+                                throw "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject $expectedOperatingSystemHashAlgorithm hash mismatch for $($savedOperatingSystem.FullName). Expected $($expectedOperatingSystemHash.Trim()), found $actualOperatingSystemHash."
                             }
-                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemObject $expectedOperatingSystemHashAlgorithm hash verified. OK."
+                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject $expectedOperatingSystemHashAlgorithm hash verified. OK."
                         }
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemObject downloaded to $($savedOperatingSystem.FullName)"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject downloaded to $($savedOperatingSystem.FullName)"
                         $global:OSDCoreCacheContent = Get-OSDCoreCacheContent
                     }
                 }
@@ -328,20 +328,20 @@ function Update-RecastOSDCloudUSBCache {
             }
         }
     } else {
-        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCoreOperatingSystemObject is not set."
+        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject is not set."
         Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCloud will not function on this device or on this network."
     }
     #================================================
-    # OSDCoreDriverPackObject
+    # OSDCoreDriverPackCloudObject
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDManufacturer: $($global:OSDCoreDevice.OSDManufacturer)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDModel: $($global:OSDCoreDevice.OSDModel)"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDProduct: $($global:OSDCoreDevice.OSDProduct)"
-    if ($global:OSDCoreDriverPackObject) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreDriverPackObject."
-        $global:OSDCoreDriverPackObject | Out-Host
+    if ($global:OSDCoreDriverPackCloudObject) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Verifying OSDCoreDriverPackCloudObject."
+        $global:OSDCoreDriverPackCloudObject | Out-Host
 
-        $osdCoreDriverPackObjectUrlReachable = Test-OSDCoreDriverPackObjectUrl -DriverPackObject $global:OSDCoreDriverPackObject
-        if ($osdCoreDriverPackObjectUrlReachable) {
+        $OSDCoreDriverPackCloudObjectUrlReachable = Test-OSDCoreDriverPackCloudObject -DriverPackCloudObject $global:OSDCoreDriverPackCloudObject
+        if ($OSDCoreDriverPackCloudObjectUrlReachable) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack URL is reachable. OK."
         }
         else {
@@ -350,15 +350,15 @@ function Update-RecastOSDCloudUSBCache {
 
         # Driver pack catalogs use either HashMD5 or MD5Hash depending on the source.
         $expectedDriverPackHashMD5 = $null
-        if ($global:OSDCoreDriverPackObject.PSObject.Properties.Match('HashMD5').Count -gt 0) {
-            $expectedDriverPackHashMD5 = [string]$global:OSDCoreDriverPackObject.HashMD5
+        if ($global:OSDCoreDriverPackCloudObject.PSObject.Properties.Match('HashMD5').Count -gt 0) {
+            $expectedDriverPackHashMD5 = [string]$global:OSDCoreDriverPackCloudObject.HashMD5
         }
-        elseif ($global:OSDCoreDriverPackObject.PSObject.Properties.Match('MD5Hash').Count -gt 0) {
-            $expectedDriverPackHashMD5 = [string]$global:OSDCoreDriverPackObject.MD5Hash
+        elseif ($global:OSDCoreDriverPackCloudObject.PSObject.Properties.Match('MD5Hash').Count -gt 0) {
+            $expectedDriverPackHashMD5 = [string]$global:OSDCoreDriverPackCloudObject.MD5Hash
         }
 
         # Check whether the selected driver pack is already present in the cache inventory.
-        $osdCoreDriverPackCacheContent = Get-OSDCoreDriverPackCacheObject -DriverPackObject $global:OSDCoreDriverPackObject
+        $osdCoreDriverPackCacheContent = Get-OSDCoreDriverPackCacheObject -DriverPackCloudObject $global:OSDCoreDriverPackCloudObject
         if ($osdCoreDriverPackCacheContent) {
             # Verify cached driver pack integrity when the catalog includes an MD5 hash.
             if (-not [string]::IsNullOrWhiteSpace($expectedDriverPackHashMD5)) {
@@ -377,15 +377,15 @@ function Update-RecastOSDCloudUSBCache {
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] DriverPack is not available on a USB Drive."
 
             # Do not offer a download when the driver pack URL cannot be reached.
-            if (-not $osdCoreDriverPackObjectUrlReachable) {
+            if (-not $OSDCoreDriverPackCloudObjectUrlReachable) {
                 Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] DriverPack download was not offered because the URL is not reachable."
             }
             elseif (Test-OSDCoreCacheUSB) {
                 $osdCoreCacheUsbPath = Get-OSDCoreCacheUSBPath | Select-Object -First 1
                 if ($osdCoreCacheUsbPath) {
                     # Store driver packs under the cache DriverPacks folder by manufacturer.
-                    $osdCoreDriverPackDestination = [System.IO.Path]::GetFullPath((Join-Path -Path (Join-Path -Path ([string]$osdCoreCacheUsbPath) -ChildPath 'DriverPacks') -ChildPath ([string]$global:OSDCoreDriverPackObject.Manufacturer)))
-                    $osdCoreDriverPackDestinationFullName = Join-Path -Path $osdCoreDriverPackDestination -ChildPath ([string]$global:OSDCoreDriverPackObject.FileName)
+                    $osdCoreDriverPackDestination = [System.IO.Path]::GetFullPath((Join-Path -Path (Join-Path -Path ([string]$osdCoreCacheUsbPath) -ChildPath 'DriverPacks') -ChildPath ([string]$global:OSDCoreDriverPackCloudObject.Manufacturer)))
+                    $osdCoreDriverPackDestinationFullName = Join-Path -Path $osdCoreDriverPackDestination -ChildPath ([string]$global:OSDCoreDriverPackCloudObject.FileName)
                     $downloadDriverPack = $true
 
                     # If a valid destination file already exists, refresh cache content and skip download.
@@ -406,13 +406,13 @@ function Update-RecastOSDCloudUSBCache {
 
                     # Prompt before downloading because driver packs can be large and vendor-specific.
                     $caption = 'Download DriverPack to OSDCoreCache USB'
-                    $message = "Download $($global:OSDCoreDriverPackObject.FileName) to: $osdCoreDriverPackDestination"
+                    $message = "Download $($global:OSDCoreDriverPackCloudObject.FileName) to: $osdCoreDriverPackDestination"
                     $choices = @(
                         (New-Object System.Management.Automation.Host.ChoiceDescription '&Yes', 'Download the driver pack to the USB cache.'),
                         (New-Object System.Management.Automation.Host.ChoiceDescription '&No', 'Skip the driver pack download.')
                     )
                     if ($downloadDriverPack -and ($host.UI.PromptForChoice($caption, $message, $choices, 1) -eq 0)) {
-                        $savedDriverPack = Invoke-OSDCoreDownloadFile -SourceUrl $global:OSDCoreDriverPackObject.Url -DestinationDirectory $osdCoreDriverPackDestination -DestinationName $global:OSDCoreDriverPackObject.FileName -ErrorAction Stop
+                        $savedDriverPack = Invoke-OSDCoreDownloadFile -SourceUrl $global:OSDCoreDriverPackCloudObject.Url -DestinationDirectory $osdCoreDriverPackDestination -DestinationName $global:OSDCoreDriverPackCloudObject.FileName -ErrorAction Stop
 
                         # Verify the downloaded driver pack before refreshing the cache inventory.
                         if (-not [string]::IsNullOrWhiteSpace($expectedDriverPackHashMD5)) {
@@ -436,7 +436,7 @@ function Update-RecastOSDCloudUSBCache {
         }
     }
     else {
-        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCoreDriverPackObject is not set."
+        Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCoreDriverPackCloudObject is not set."
         Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCloud will not apply a DriverPack for this device or on this network."
     }
     #================================================
