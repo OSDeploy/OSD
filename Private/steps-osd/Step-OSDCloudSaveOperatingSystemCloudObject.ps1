@@ -1,8 +1,8 @@
-function Step-OSDCloudSaveOnlineOperatingSystemObject {
+function Step-OSDCloudSaveOperatingSystemCloudObject {
     [CmdletBinding()]
     param (
         [Parameter()]
-        $OperatingSystemObject = $global:OSDCoreOperatingSystemObject,
+        $OperatingSystemCloudObject = $global:OSDCoreOperatingSystemCloudObject,
 
         [Parameter()]
         [ValidateRange(0, 1)]
@@ -12,24 +12,24 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Is it online?
-    if (-not ($global:RecastOSDCloud.OperatingSystemUrlTest)) {
+    if (-not ($global:RecastOSDCloud.OperatingSystemCloudObjectTest)) {
         return
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Save OperatingSystemObject Online:"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Save OperatingSystemCloudObject Online:"
     #=================================================
     # Is there an OperatingSystem Object?
-    if (-not ($OperatingSystemObject)) {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set"
+    if (-not ($OperatingSystemCloudObject)) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject is not set"
     }
 
-    if (-not $OperatingSystemObject.FileName) {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject.FileName is not set"
+    if (-not $OperatingSystemCloudObject.FileName) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject.FileName is not set"
     }
     #=================================================
     # Destination settings for the local deployment workspace.
     # This is the final on-disk path expected by downstream deployment steps.
     $DownloadPath = 'C:\OSDCloud\OS'
-    $LocalDestinationPath = Join-Path -Path $DownloadPath -ChildPath $OperatingSystemObject.FileName
+    $LocalDestinationPath = Join-Path -Path $DownloadPath -ChildPath $OperatingSystemCloudObject.FileName
     #=================================================
     # Does the destination already exist? If so, validate hash before returning.
     if (Test-Path -LiteralPath $LocalDestinationPath) {
@@ -38,29 +38,29 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
 
         # Track whether existing content is reusable or must be removed/re-downloaded.
         $HashMismatch = $false
-        if ($OperatingSystemObject.SHA1) {
+        if ($OperatingSystemCloudObject.SHA1) {
             # Legacy metadata path: compare destination hash to Microsoft-published SHA1.
             $ExistingFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA1
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Existing ESD SHA1: $($ExistingFileHash.Hash)"
-            if ($ExistingFileHash.Hash -ne $OperatingSystemObject.SHA1) {
+            if ($ExistingFileHash.Hash -ne $OperatingSystemCloudObject.SHA1) {
                 $HashMismatch = $true
             }
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
                 # Get-Item for $DestinationFile
-                $global:RecastOSDCloud.OperatingSystemItem = $DestinationFile
+                $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
             }
         }
-        elseif ($OperatingSystemObject.SHA256) {
+        elseif ($OperatingSystemCloudObject.SHA256) {
             # Preferred metadata path: compare destination hash to Microsoft SHA256.
             $ExistingFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA256
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Existing ESD SHA256: $($ExistingFileHash.Hash)"
-            if ($ExistingFileHash.Hash -ne $OperatingSystemObject.SHA256) {
+            if ($ExistingFileHash.Hash -ne $OperatingSystemCloudObject.SHA256) {
                 $HashMismatch = $true
             }
             else {
                 Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Existing ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
-                $global:RecastOSDCloud.OperatingSystemItem = $DestinationFile
+                $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
             }
         }
 
@@ -77,7 +77,7 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
             if ($HashRetryCount -lt 1) {
                 # Single retry guard prevents unbounded recursion on persistent failures.
                 Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Retrying download after removing hash-mismatched file"
-                Step-OSDCloudSaveOnlineOperatingSystemObject -OperatingSystemObject $OperatingSystemObject -HashRetryCount ($HashRetryCount + 1)
+                Step-OSDCloudSaveOperatingSystemCloudObject -OperatingSystemCloudObject $OperatingSystemCloudObject -HashRetryCount ($HashRetryCount + 1)
                 return
             }
 
@@ -89,27 +89,27 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
     }
     #=================================================
     # Is there a Url?
-    if (-not ($OperatingSystemObject.Url)) {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject does not have a Url"
+    if (-not ($OperatingSystemCloudObject.Url)) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject does not have a Url"
     }
     #=================================================
     # Is the Url reachable?
     # Use a HEAD request as a lightweight reachability/content check.
-    $OnlineCheckUri = if ($OperatingSystemObject.Url) { $OperatingSystemObject.Url } else { $OperatingSystemObject.FilePath }
+    $OnlineCheckUri = if ($OperatingSystemCloudObject.Url) { $OperatingSystemCloudObject.Url } else { $OperatingSystemCloudObject.FilePath }
 
     if ($OnlineCheckUri) {
         try {
             $WebRequest = Invoke-WebRequest -Uri $OnlineCheckUri -UseBasicParsing -Method Head -ErrorAction Stop
             if ($WebRequest.StatusCode -in 200, 206) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreOperatingSystemCloudObject URI is reachable (HEAD $($WebRequest.StatusCode)). OK."
             }
         }
         catch {
-            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject URI is not reachable."
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject URI is not reachable."
         }
     }
     else {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject URI is not set."
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject URI is not set."
     }
     #=================================================
     # Create destination directory if needed
@@ -134,14 +134,14 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
 
     if ($USBDrive) {
         # USB path groups content by operating system family for reuse.
-        $USBDownloadPath = "$($USBDrive.DriveLetter):\OSDCloud\OS\$($OperatingSystemObject.Version) $($OperatingSystemObject.ReleaseID)"
+        $USBDownloadPath = "$($USBDrive.DriveLetter):\OSDCloud\OS\$($OperatingSystemCloudObject.Version) $($OperatingSystemCloudObject.ReleaseID)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DownloadPath: $USBDownloadPath"
 
         if (-not (Test-Path -LiteralPath $USBDownloadPath -ErrorAction SilentlyContinue)) {
             $null = New-Item -Path $USBDownloadPath -ItemType Directory -Force
         }
         # Download once to USB cache, then copy local for active deployment usage.
-        $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemObject.Url -DestinationDirectory "$USBDownloadPath" -DestinationName $FileName
+        $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemCloudObject.Url -DestinationDirectory "$USBDownloadPath" -DestinationName $FileName
 
         if ($SaveWebFile) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copy Offline OS to $DownloadPath"
@@ -153,7 +153,7 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
         # $SaveWebFile is a DestinationFile Object, not a path
         # Direct-to-local fallback when no suitable USB cache is present.
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DownloadPath: $DownloadPath"
-        $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemObject.Url -DestinationDirectory $DownloadPath -ErrorAction Stop
+        $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemCloudObject.Url -DestinationDirectory $DownloadPath -ErrorAction Stop
         $DestinationFile = $SaveWebFile
     }
     #=================================================
@@ -173,30 +173,30 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
     #=================================================
     # Final integrity check on the destination file.
     # Metadata includes either SHA1 or SHA256, never both.
-    if ($OperatingSystemObject.SHA1) {
+    if ($OperatingSystemCloudObject.SHA1) {
         # Destination hash is the final trust gate before deployment can continue.
         $DestinationFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA1
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Downloaded ESD SHA1: $($DestinationFileHash.Hash)"
-        if ($DestinationFileHash.Hash -ne $OperatingSystemObject.SHA1) {
+        if ($DestinationFileHash.Hash -ne $OperatingSystemCloudObject.SHA1) {
             throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] SHA1 hash mismatch for destination file: $LocalDestinationPath"
         }
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA1 matches the verified Microsoft ESD SHA1. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:RecastOSDCloud.OperatingSystemItem = $DestinationFile
+            $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
         }
     }
-    if ($OperatingSystemObject.SHA256) {
+    if ($OperatingSystemCloudObject.SHA256) {
         # SHA256 path mirrors SHA1 behavior for consistency across metadata versions.
         $DestinationFileHash = Get-FileHash -Path $LocalDestinationPath -Algorithm SHA256
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Downloaded ESD SHA256: $($DestinationFileHash.Hash)"
-        if ($DestinationFileHash.Hash -ne $OperatingSystemObject.SHA256) {
+        if ($DestinationFileHash.Hash -ne $OperatingSystemCloudObject.SHA256) {
             throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] SHA256 hash mismatch for destination file: $LocalDestinationPath"
         }
         else {
             Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Downloaded ESD SHA256 matches the verified Microsoft ESD SHA256. OK."
             # Persist verified destination for subsequent steps that consume this file.
-            $global:RecastOSDCloud.OperatingSystemItem = $DestinationFile
+            $global:RecastOSDCloud.OperatingSystemLocalItem = $DestinationFile
         }
     }
     #=================================================

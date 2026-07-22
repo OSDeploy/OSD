@@ -1,8 +1,8 @@
-function Step-OSDCloudSaveDriverPackOffline {
+function Step-OSDCloudSaveDriverPackCacheObject {
     [CmdletBinding()]
     param (
         [Parameter()]
-        $DriverPackObject = $global:OSDCoreDriverPackObject,
+        $DriverPackCloudObject = $global:OSDCoreDriverPackCloudObject,
 
         [Parameter()]
         [string]$DownloadPath = 'C:\Windows\Temp\osdcloud-driverpack-download'
@@ -15,25 +15,25 @@ function Step-OSDCloudSaveDriverPackOffline {
     # This step only runs when offline media usage has already been confirmed.
     # Returning here is expected behavior in online flows and is not an error.
     if (-not ($global:RecastOSDCloud.DriverPackCacheObject)) {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DriverPackObject was not confirmed for offline usage. Skipping this step."
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DriverPackCloudObject was not confirmed for offline usage. Skipping this step."
         return
     }
     #=================================================
     # Is there a DriverPack Object?
-    if (-not ($DriverPackObject)) {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DriverPackObject is not set"
+    if (-not ($DriverPackCloudObject)) {
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DriverPackCloudObject is not set"
         return
     }
     #=================================================
     # Is there a DriverPack Object FileName?
-    if (-not $DriverPackObject.FileName) {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DriverPackObject.FileName is not set"
+    if (-not $DriverPackCloudObject.FileName) {
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DriverPackCloudObject.FileName is not set"
         return
     }
     #=================================================
     # Destination settings for the local deployment workspace.
     # This is the final on-disk path expected by downstream deployment steps.
-    $LocalDestinationPath = Join-Path -Path $DownloadPath -ChildPath $DriverPackObject.FileName
+    $LocalDestinationPath = Join-Path -Path $DownloadPath -ChildPath $DriverPackCloudObject.FileName
     #=================================================
     # If the destination file already exists, this step is a no-op.
     # Downstream steps can still use the existing file.
@@ -52,12 +52,12 @@ function Step-OSDCloudSaveDriverPackOffline {
     #=================================================
     # Match the exact filename requested by the selected DriverPack metadata.
     # First match is intentional because filenames should be unique in cache.
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] FileName: $($DriverPackObject.FileName)"
-    $CacheDriverPack = $global:OSDCoreCacheContent | Where-Object { $_.Name -eq $DriverPackObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] FileName: $($DriverPackCloudObject.FileName)"
+    $CacheDriverPack = $global:OSDCoreCacheContent | Where-Object { $_.Name -eq $DriverPackCloudObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
     #=================================================
     # Stop quietly when the requested payload is not cached.
     if (-not $CacheDriverPack) {
-        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is not in the OSDCoreCacheContent. OK."
+        # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackCloudObject is not in the OSDCoreCacheContent. OK."
         return
     }
     #=================================================
@@ -70,27 +70,27 @@ function Step-OSDCloudSaveDriverPackOffline {
     #=================================================
     # Validate the cached source against metadata first.
     # This prevents copying a stale or tampered cache file.
-    if ($DriverPackObject.HashMD5) {
+    if ($DriverPackCloudObject.HashMD5) {
         # Validate cached payload before copy so we never replicate bad content.
         $SourceFileHash = Get-FileHash -Path $CacheDriverPack.FullName -Algorithm MD5
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack MD5: $($DriverPackObject.HashMD5)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPack MD5: $($DriverPackCloudObject.HashMD5)"
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent MD5: $($SourceFileHash.Hash)"
-        if ($SourceFileHash.Hash -ne $DriverPackObject.HashMD5) {
+        if ($SourceFileHash.Hash -ne $DriverPackCloudObject.HashMD5) {
             # Hash mismatch means the source cannot be trusted; skip copy.
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] OSDCoreCacheContent MD5 is not valid: $($CacheDriverPack.FullName)"
             return
         }
     }
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackObject is in OSDCoreCacheContent. OK."
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DriverPackCloudObject is in OSDCoreCacheContent. OK."
     $global:RecastOSDCloud.DriverPackCacheObject = $true
     #=================================================
     # Variables
     $LogPath = "C:\Windows\Temp\osdcloud-logs"
-    $Manufacturer = $DriverPackObject.Manufacturer
+    $Manufacturer = $DriverPackCloudObject.Manufacturer
     $ScriptsPath = "C:\Windows\Setup\Scripts"
     $SetupCompleteCmd = "$ScriptsPath\SetupComplete.cmd"
     $SetupSpecializeCmd = "C:\Windows\Temp\osdcloud\SetupSpecialize.cmd"
-    $Url = $DriverPackObject.Url
+    $Url = $DriverPackCloudObject.Url
     #=================================================
     # Create destination directory if needed
     # Directory creation is idempotent and safe to call repeatedly.
@@ -144,20 +144,20 @@ function Step-OSDCloudSaveDriverPackOffline {
     }
     #=================================================
     # Verify Cache file hash matches metadata after copy to ensure integrity.
-    if ($DriverPackObject.HashMD5) {
+    if ($DriverPackCloudObject.HashMD5) {
         $DestinationFileHash = Get-FileHash -Path $DestinationFile.FullName -Algorithm MD5
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Destination MD5: $($DestinationFileHash.Hash)"
-        if ($DestinationFileHash.Hash -ne $DriverPackObject.HashMD5) {
+        if ($DestinationFileHash.Hash -ne $DriverPackCloudObject.HashMD5) {
             Write-Host -ForegroundColor DarkYellow "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] - MD5 hash mismatch for destination file, deleting: $LocalDestinationPath"
             Remove-Item -LiteralPath $LocalDestinationPath -Force -ErrorAction SilentlyContinue
             return
         }
     }
-    $global:RecastOSDCloud.DriverPackItem = $DestinationFile
-    $global:RecastOSDCloud.DriverPackObjectUrlTest = $false
+    $global:RecastOSDCloud.DriverPackLocalObject = $DestinationFile
+    $global:RecastOSDCloud.DriverPackCloudObjectTest = $false
     #=================================================
     # Store this as a FileInfo Object
-    $DriverPackObject | ConvertTo-Json | Out-File "$($DestinationFile.FullName).json" -Encoding ascii -Width 2000 -Force
+    $DriverPackCloudObject | ConvertTo-Json | Out-File "$($DestinationFile.FullName).json" -Encoding ascii -Width 2000 -Force
     #=================================================
     # Expand the DriverPack
     $DownloadedFile = $DestinationFile.FullName
@@ -276,7 +276,7 @@ function Step-OSDCloudSaveDriverPackOffline {
     #=================================================
     #   Lenovo
     #=================================================
-    if (($DestinationFile.Extension -eq '.exe') -and ($DriverPackObject.Manufacturer -match 'Lenovo')) {
+    if (($DestinationFile.Extension -eq '.exe') -and ($DriverPackCloudObject.Manufacturer -match 'Lenovo')) {
         if (-not (Test-Path $ScriptsPath)) {
             New-Item -Path $ScriptsPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
         }

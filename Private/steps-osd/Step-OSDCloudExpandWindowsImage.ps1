@@ -33,7 +33,7 @@ function Step-OSDCloudExpandWindowsImage {
         throw "[$(Get-Date -format s)] OSDCloud deployment context was not found."
     }
 
-    $ImagePath = $global:RecastOSDCloud.OperatingSystemItem.FullName
+    $ImagePath = $global:RecastOSDCloud.OperatingSystemLocalItem.FullName
     $ImageIndex = $global:RecastOSDCloud.WindowsImageIndex
     $ScratchDirectory = 'C:\OSDCloud\Temp'
 

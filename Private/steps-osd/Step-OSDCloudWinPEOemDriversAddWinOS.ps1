@@ -1,4 +1,4 @@
-function Step-OSDCloudAddWinOSOemDrivers {
+function Step-OSDCloudWinPEOemDriversAddWinOS {
     <#
     .SYNOPSIS
     Adds offline Windows drivers from the OSDCloud WinPE staging folder.
@@ -8,7 +8,7 @@ function Step-OSDCloudAddWinOSOemDrivers {
     into C:\ using Add-WindowsDriver and writes DISM logging to the OSDCloud log path.
 
     .EXAMPLE
-    Step-OSDCloudAddWinOSOemDrivers
+    Step-OSDCloudWinPEOemDriversAddWinOS
     Injects staged WinPE drivers into the offline Windows image at C:\.
 
     .LINK
@@ -28,8 +28,8 @@ function Step-OSDCloudAddWinOSOemDrivers {
         return
     }
     #=================================================
-    $LogPath = Join-Path -Path $env:windir -ChildPath 'Temp\osdcloud-logs'
-    $DriverPath = Join-Path -Path $env:windir -ChildPath 'Temp\osdcloud-drivers-winpe'
+    $LogPath = 'C:\Windows\Temp\osdcloud-logs'
+    $DriverPath = 'C:\Windows\Temp\osdcloud-drivers-winpe'
     $DismLogPath = Join-Path -Path $LogPath -ChildPath 'dism-add-windowsdriver-winpe.log'
 
     if (-not (Test-Path -Path $DriverPath -PathType Container)) {

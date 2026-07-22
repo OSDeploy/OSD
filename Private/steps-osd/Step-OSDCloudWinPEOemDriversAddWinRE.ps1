@@ -1,4 +1,4 @@
-function Step-OSDCloudAddWinREOemDrivers {
+function Step-OSDCloudWinPEOemDriversAddWinRE {
     <#
     .SYNOPSIS
     Injects staged drivers into WinRE for OSDCloud.
@@ -8,7 +8,7 @@ function Step-OSDCloudAddWinREOemDrivers {
     driver staging folder, dismounts with save, and removes the temporary mount path.
 
     .EXAMPLE
-    Step-OSDCloudAddWinREOemDrivers
+    Step-OSDCloudWinPEOemDriversAddWinRE
     Mounts WinRE, injects staged drivers, and commits the image.
 
     .LINK

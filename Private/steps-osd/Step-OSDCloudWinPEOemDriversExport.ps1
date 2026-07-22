@@ -1,4 +1,4 @@
-function Step-OSDCloudExportWinPEOemDrivers {
+function Step-OSDCloudWinPEOemDriversExport {
     <#
     .SYNOPSIS
     Exports connected OEM WinPE drivers to the OSDCloud staging folder.
@@ -9,7 +9,7 @@ function Step-OSDCloudExportWinPEOemDrivers {
     later OSDCloud driver injection steps.
 
     .EXAMPLE
-    Step-OSDCloudExportWinPEOemDrivers
+    Step-OSDCloudWinPEOemDriversExport
     Exports matching OEM drivers from the current WinPE session to the staging path.
 
     .LINK
@@ -30,11 +30,11 @@ function Step-OSDCloudExportWinPEOemDrivers {
     }
     #=================================================
     # Output Path
-    $OutputPath = Join-Path -Path $env:windir -ChildPath 'Temp\osdcloud-drivers-winpe'
+    $OutputPath = 'C:\Windows\Temp\osdcloud-drivers-winpe'
     if (-not (Test-Path -Path $OutputPath)) {
         New-Item -ItemType Directory -Path $OutputPath -Force | Out-Null
     }
-    $LogPath = Join-Path -Path $env:windir -ChildPath 'Temp\osdcloud-logs'
+    $LogPath = 'C:\Windows\Temp\osdcloud-logs'
     if (-not (Test-Path -Path $LogPath)) {
         New-Item -ItemType Directory -Path $LogPath -Force | Out-Null
     }
@@ -163,6 +163,11 @@ function Step-OSDCloudExportWinPEOemDrivers {
     }
     else {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No connected OEM drivers found for export."
+    }
+    #=================================================
+    # If $OutputPath does not contain any files, remove it to avoid confusion.
+    if (-not (Get-ChildItem -Path $OutputPath -Recurse -File -ErrorAction SilentlyContinue)) {
+        Remove-Item -Path $OutputPath -Recurse -Force -ErrorAction SilentlyContinue
     }
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"

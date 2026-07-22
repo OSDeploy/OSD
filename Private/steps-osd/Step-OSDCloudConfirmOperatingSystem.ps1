@@ -26,7 +26,7 @@ function Step-OSDCloudConfirmOperatingSystem {
     #=================================================
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm Operating System Source"
     $Global:OSDCloud.SectionPassed = [bool](
-        $global:OSDCoreOperatingSystemObject -or
+        $global:OSDCoreOperatingSystemCloudObject -or
         $Global:OSDCloud.AzOSDCloudImage -or
         $Global:OSDCloud.ImageFileItem -or
         $Global:OSDCloud.ImageFileDestination -or

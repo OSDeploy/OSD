@@ -12,7 +12,7 @@ function Step-OSDCloudGetWindowsImageIndex {
 
         .PARAMETER ImagePath
         Path to the Windows image file (WIM or ESD). Defaults to
-        $global:RecastOSDCloud.OperatingSystemItem.FullName.
+        $global:RecastOSDCloud.OperatingSystemLocalItem.FullName.
 
         .PARAMETER EditionId
         Optional EditionId used to auto-select a matching image index.
@@ -38,7 +38,7 @@ function Step-OSDCloudGetWindowsImageIndex {
     param (
         [Parameter(Mandatory = $false)]
         [System.String]
-        $ImagePath = $global:RecastOSDCloud.OperatingSystemItem.FullName,
+        $ImagePath = $global:RecastOSDCloud.OperatingSystemLocalItem.FullName,
 
         [Parameter(Mandatory = $false)]
         [System.String]
