@@ -1,26 +1,26 @@
-function Test-OSDCoreOperatingSystemObjectUrl {
+function Test-OSDCoreOperatingSystemCloudObject {
     <#
     .SYNOPSIS
     Tests whether an OSDCore operating system object URL is reachable.
 
     .DESCRIPTION
     Reads the Url property from the supplied operating system object, or from
-    $global:OSDCoreOperatingSystemObject when no object is supplied, and returns
+    $global:OSDCoreOperatingSystemCloudObject when no object is supplied, and returns
     $true when a live TCP connection and HTTP HEAD request can reach it. Returns $false when the object
     is missing, the Url property is empty, or the URL test fails. HTTP and HTTPS
     are both tested for host-only web URLs so systems with an invalid date can still
     detect basic network reachability over HTTP. Specific absolute file URLs are
     tested exactly as supplied.
 
-    .PARAMETER OperatingSystemObject
+    .PARAMETER OperatingSystemCloudObject
     Operating system object containing a Url property to test.
 
     .EXAMPLE
-    Test-OSDCoreOperatingSystemObjectUrl
-    Tests the Url property on $global:OSDCoreOperatingSystemObject.
+    Test-OSDCoreOperatingSystemCloudObject
+    Tests the Url property on $global:OSDCoreOperatingSystemCloudObject.
 
     .EXAMPLE
-    Test-OSDCoreOperatingSystemObjectUrl -OperatingSystemObject $global:OSDCoreOperatingSystemObject
+    Test-OSDCoreOperatingSystemCloudObject -OperatingSystemCloudObject $global:OSDCoreOperatingSystemCloudObject
     Tests the Url property on the supplied operating system object.
 
     .LINK
@@ -39,35 +39,35 @@ function Test-OSDCoreOperatingSystemObjectUrl {
     (
         [Parameter(ValueFromPipeline)]
         [psobject]
-        $OperatingSystemObject = $global:OSDCoreOperatingSystemObject
+        $OperatingSystemCloudObject = $global:OSDCoreOperatingSystemCloudObject
     )
 
     process {
         # The caller may pass an object explicitly or rely on the global OSDCore selection.
-        if ($null -eq $OperatingSystemObject) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set."
+        if ($null -eq $OperatingSystemCloudObject) {
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject is not set."
             return $false
         }
 
         # A missing URL means there is nothing useful to test, so return the Boolean failure state.
-        $OperatingSystemObjectUrl = [string]$OperatingSystemObject.Url
-        if ([string]::IsNullOrWhiteSpace($OperatingSystemObjectUrl)) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject Url is not set."
+        $OperatingSystemCloudObjectUrl = [string]$OperatingSystemCloudObject.Url
+        if ([string]::IsNullOrWhiteSpace($OperatingSystemCloudObjectUrl)) {
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject Url is not set."
             return $false
         }
 
         try {
             # Build the exact set of URLs to probe before making any web requests.
-            $OperatingSystemObjectUri = [System.Uri]$OperatingSystemObjectUrl
-            $IsSpecificAbsoluteUrl = $OperatingSystemObjectUri.IsAbsoluteUri -and -not [string]::IsNullOrWhiteSpace($OperatingSystemObjectUri.AbsolutePath) -and $OperatingSystemObjectUri.AbsolutePath -ne '/'
-            if ($OperatingSystemObjectUri.IsAbsoluteUri -and ($OperatingSystemObjectUri.Scheme -notin @('http','https') -or $IsSpecificAbsoluteUrl)) {
+            $OperatingSystemCloudObjectUri = [System.Uri]$OperatingSystemCloudObjectUrl
+            $IsSpecificAbsoluteUrl = $OperatingSystemCloudObjectUri.IsAbsoluteUri -and -not [string]::IsNullOrWhiteSpace($OperatingSystemCloudObjectUri.AbsolutePath) -and $OperatingSystemCloudObjectUri.AbsolutePath -ne '/'
+            if ($OperatingSystemCloudObjectUri.IsAbsoluteUri -and ($OperatingSystemCloudObjectUri.Scheme -notin @('http','https') -or $IsSpecificAbsoluteUrl)) {
                 # Non-web absolute URIs and specific file URLs are tested as provided.
-                $RequestUris = @($OperatingSystemObjectUri)
+                $RequestUris = @($OperatingSystemCloudObjectUri)
             }
             else {
-                if ($OperatingSystemObjectUri.IsAbsoluteUri) {
+                if ($OperatingSystemCloudObjectUri.IsAbsoluteUri) {
                     # Host-only web URLs are checked over HTTPS first, then HTTP as a fallback for bad system time.
-                    $UriBuilder = New-Object System.UriBuilder $OperatingSystemObjectUri
+                    $UriBuilder = New-Object System.UriBuilder $OperatingSystemCloudObjectUri
                     $UriBuilder.Scheme = 'https'
                     $UriBuilder.Port = -1
                     $HttpsUri = $UriBuilder.Uri
@@ -78,15 +78,15 @@ function Test-OSDCoreOperatingSystemObjectUrl {
                 }
                 else {
                     # Bare URLs are expanded to both HTTPS and HTTP targets.
-                    $HttpsUri = [System.Uri]::new("https://$($OperatingSystemObjectUri.OriginalString)")
-                    $HttpUri = [System.Uri]::new("http://$($OperatingSystemObjectUri.OriginalString)")
+                    $HttpsUri = [System.Uri]::new("https://$($OperatingSystemCloudObjectUri.OriginalString)")
+                    $HttpUri = [System.Uri]::new("http://$($OperatingSystemCloudObjectUri.OriginalString)")
                 }
 
                 $RequestUris = @($HttpsUri, $HttpUri)
             }
         }
         catch {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject Url is not valid: $OperatingSystemObjectUrl"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject Url is not valid: $OperatingSystemCloudObjectUrl"
             return $false
         }
 
@@ -111,7 +111,7 @@ function Test-OSDCoreOperatingSystemObjectUrl {
                     }
                 }
                 catch {
-                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject TCP FAIL: $RequestUri"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject TCP FAIL: $RequestUri"
                     [pscustomobject]@{
                         Uri     = $RequestUri
                         Success = $false
@@ -146,14 +146,14 @@ function Test-OSDCoreOperatingSystemObjectUrl {
             try {
                 [System.Net.WebRequest]::DefaultCachePolicy = New-Object System.Net.Cache.RequestCachePolicy ([System.Net.Cache.RequestCacheLevel]::NoCacheNoStore)
                 Invoke-WebRequest @Params | Out-Null
-                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject URL OK: $RequestUri"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject URL OK: $RequestUri"
                 [pscustomobject]@{
                     Uri     = $RequestUri
                     Success = $true
                 }
             }
             catch {
-                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject URL FAIL: $RequestUri"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject URL FAIL: $RequestUri"
                 [pscustomobject]@{
                     Uri     = $RequestUri
                     Success = $false

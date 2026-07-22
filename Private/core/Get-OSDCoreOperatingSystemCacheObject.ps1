@@ -8,15 +8,15 @@ function Get-OSDCoreOperatingSystemCacheObject {
     selected operating system object's FileName. Returns the matching cache content object when
     found, or $null when the operating system object, cache content, or matching cache item is missing.
 
-    .PARAMETER OperatingSystemObject
-    Operating system object containing the FileName property to match. Defaults to $global:OSDCoreOperatingSystemObject.
+    .PARAMETER OperatingSystemCloudObject
+    Operating system object containing the FileName property to match. Defaults to $global:OSDCoreOperatingSystemCloudObject.
 
     .PARAMETER CacheContent
     Cache content inventory to search. Defaults to $global:OSDCoreCacheContent.
 
     .EXAMPLE
     Get-OSDCoreOperatingSystemCacheObject
-    Returns the USB cache content object for $global:OSDCoreOperatingSystemObject when it exists.
+    Returns the USB cache content object for $global:OSDCoreOperatingSystemCloudObject when it exists.
 
     .EXAMPLE
     if (Get-OSDCoreOperatingSystemCacheObject) { 'Operating system cache content exists.' }
@@ -35,7 +35,7 @@ function Get-OSDCoreOperatingSystemCacheObject {
     (
         [Parameter(ValueFromPipeline)]
         [psobject]
-        $OperatingSystemObject = $global:OSDCoreOperatingSystemObject,
+        $OperatingSystemCloudObject = $global:OSDCoreOperatingSystemCloudObject,
 
         [Parameter()]
         [psobject[]]
@@ -43,14 +43,14 @@ function Get-OSDCoreOperatingSystemCacheObject {
     )
 
     process {
-        if ($null -eq $OperatingSystemObject) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject is not set."
+        if ($null -eq $OperatingSystemCloudObject) {
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject is not set."
             return $null
         }
 
-        $OperatingSystemFileName = [string]$OperatingSystemObject.FileName
+        $OperatingSystemFileName = [string]$OperatingSystemCloudObject.FileName
         if ([string]::IsNullOrWhiteSpace($OperatingSystemFileName)) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemObject FileName is not set."
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject FileName is not set."
             return $null
         }
 

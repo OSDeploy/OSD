@@ -8,15 +8,15 @@ function Get-OSDCoreDriverPackCacheObject {
     driver pack object's FileName. Returns the matching cache content object when found, or
     $null when the driver pack object, cache content, or matching cache item is missing.
 
-    .PARAMETER DriverPackObject
-    Driver pack object containing the FileName property to match. Defaults to $global:OSDCoreDriverPackObject.
+    .PARAMETER DriverPackCloudObject
+    Driver pack object containing the FileName property to match. Defaults to $global:OSDCoreDriverPackCloudObject.
 
     .PARAMETER CacheContent
     Cache content inventory to search. Defaults to $global:OSDCoreCacheContent.
 
     .EXAMPLE
     Get-OSDCoreDriverPackCacheObject
-    Returns the cache content object for $global:OSDCoreDriverPackObject when it exists.
+    Returns the cache content object for $global:OSDCoreDriverPackCloudObject when it exists.
 
     .EXAMPLE
     if (Get-OSDCoreDriverPackCacheObject) { 'Driver pack cache content exists.' }
@@ -35,7 +35,7 @@ function Get-OSDCoreDriverPackCacheObject {
     (
         [Parameter(ValueFromPipeline)]
         [psobject]
-        $DriverPackObject = $global:OSDCoreDriverPackObject,
+        $DriverPackCloudObject = $global:OSDCoreDriverPackCloudObject,
 
         [Parameter()]
         [psobject[]]
@@ -43,14 +43,14 @@ function Get-OSDCoreDriverPackCacheObject {
     )
 
     process {
-        if ($null -eq $DriverPackObject) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackObject is not set."
+        if ($null -eq $DriverPackCloudObject) {
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackCloudObject is not set."
             return $null
         }
 
-        $DriverPackFileName = [string]$DriverPackObject.FileName
+        $DriverPackFileName = [string]$DriverPackCloudObject.FileName
         if ([string]::IsNullOrWhiteSpace($DriverPackFileName)) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackObject FileName is not set."
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreDriverPackCloudObject FileName is not set."
             return $null
         }
 
