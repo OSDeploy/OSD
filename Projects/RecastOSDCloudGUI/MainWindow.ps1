@@ -421,8 +421,8 @@ $Global:OSDCloudGUI.OSActivationValues | ForEach-Object {
 $global:OSDCoreDriverPacks | ForEach-Object {
     $formMainWindowControlDriverPackCombobox.Items.Add($_.Name) | Out-Null
 }
-if ($global:OSDCoreDriverPackObject) {
-    $formMainWindowControlDriverPackCombobox.SelectedValue = $global:OSDCoreDriverPackObject.Name
+if ($global:OSDCoreDriverPackCloudObject) {
+    $formMainWindowControlDriverPackCombobox.SelectedValue = $global:OSDCoreDriverPackCloudObject.Name
 }
 #================================================
 #   Set-OSDCloudGUIDefaultOptions
@@ -688,16 +688,16 @@ $formMainWindowControlStartButton.add_Click({
     if ($formMainWindowControlOSNameCombobox.SelectedValue -like 'Windows 1*') {
         $tempOSNameCombo = $formMainWindowControlOSNameCombobox.SelectedValue
         $OSName = $tempOSNameCombo -replace 'x64', 'amd64'
-        $global:OSDCoreOperatingSystemObject = $global:OSDCoreOperatingSystems | Where-Object { $_.Name -match $OSName } | Where-Object { $_.Activation -eq $OSActivation } | Where-Object { $_.Language -eq $OSLanguage }
-        if (-not $global:OSDCoreOperatingSystemObject) {
+        $global:OSDCoreOperatingSystemCloudObject = $global:OSDCoreOperatingSystems | Where-Object { $_.Name -match $OSName } | Where-Object { $_.Activation -eq $OSActivation } | Where-Object { $_.Language -eq $OSLanguage }
+        if (-not $global:OSDCoreOperatingSystemCloudObject) {
             throw "[$(Get-Date -format s)] Unable to find a matching operating system object for OSName '$OSName', Activation '$OSActivation', and Language '$OSLanguage'."
         }
-        $OSBuild = $global:OSDCoreOperatingSystemObject.Build
-        $OSReleaseID = $global:OSDCoreOperatingSystemObject.ReleaseID
-        $OSVersion = $global:OSDCoreOperatingSystemObject.Version
-        $ImageFileName = $global:OSDCoreOperatingSystemObject.FileName
-        $ImageFileUrl = $global:OSDCoreOperatingSystemObject.Url
-        $ImageFileItem = Find-OSDCloudFile -Name $global:OSDCoreOperatingSystemObject.FileName -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object { $_.Length -gt 3GB }
+        $OSBuild = $global:OSDCoreOperatingSystemCloudObject.Build
+        $OSReleaseID = $global:OSDCoreOperatingSystemCloudObject.ReleaseID
+        $OSVersion = $global:OSDCoreOperatingSystemCloudObject.Version
+        $ImageFileName = $global:OSDCoreOperatingSystemCloudObject.FileName
+        $ImageFileUrl = $global:OSDCoreOperatingSystemCloudObject.Url
+        $ImageFileItem = Find-OSDCloudFile -Name $global:OSDCoreOperatingSystemCloudObject.FileName -Path '\OSDCloud\OS\' | Sort-Object FullName | Where-Object { $_.Length -gt 3GB }
         $ImageFileItem = $ImageFileItem | Where-Object { $_.FullName -notlike "C*" } | Where-Object { $_.FullName -notlike "X*" } | Select-Object -First 1
     }
     else {
@@ -724,18 +724,18 @@ $formMainWindowControlStartButton.add_Click({
     #================================================
     if ($formMainWindowControlDriverPackCombobox.Text) {
         $selectedDriverPackName = $formMainWindowControlDriverPackCombobox.Text
-        $global:OSDCoreDriverPackObject = $global:OSDCoreDriverPacks | Where-Object {$_.Name -eq $selectedDriverPackName}
+        $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object {$_.Name -eq $selectedDriverPackName}
     }
     #================================================
     #   Output OSDCore Objects
     #================================================
-    if ($global:OSDCoreOperatingSystemObject) {
+    if ($global:OSDCoreOperatingSystemCloudObject) {
         Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCloud Operating System Object:"
-        $global:OSDCoreOperatingSystemObject | Out-Host
+        $global:OSDCoreOperatingSystemCloudObject | Out-Host
     }
-    if ($global:OSDCoreDriverPackObject) {
+    if ($global:OSDCoreDriverPackCloudObject) {
         Write-Host -ForegroundColor DarkCyan "[$(Get-Date -format s)] OSDCloud DriverPack Object:"
-        $global:OSDCoreDriverPackObject | Out-Host
+        $global:OSDCoreDriverPackCloudObject | Out-Host
     }
     #================================================
     #   Global Variables
