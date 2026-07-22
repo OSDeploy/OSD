@@ -26,7 +26,6 @@ function Step-OSDCloudExpandWindowsImage {
     [CmdletBinding()]
     param ()
     #=================================================
-    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Validate required OSDCloud deployment context before applying the image.

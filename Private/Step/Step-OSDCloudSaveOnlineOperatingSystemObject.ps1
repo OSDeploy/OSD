@@ -9,7 +9,6 @@ function Step-OSDCloudSaveOnlineOperatingSystemObject {
         [int]$HashRetryCount = 0
     )
     #=================================================
-    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Is it online?

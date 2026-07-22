@@ -45,7 +45,6 @@ function Step-OSDCloudGetWindowsImageIndex {
         $EditionId = $global:RecastOSDeploy.OSEditionId
     )
     #=================================================
-    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     # Do we have a WindowsImage to test?

@@ -39,7 +39,6 @@ function Step-OSDCloudConfirmDriverPackXXXXX {
         $DriverPackObject = $global:OSDCoreDriverPackObject
     )
     #=================================================
-    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Confirm DriverPackObject Online:"
     #=================================================

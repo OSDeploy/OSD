@@ -23,7 +23,6 @@ function Step-OSDCloudContentFolders {
     [CmdletBinding()]
     param ()
     #=================================================
-    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     if ($env:SystemDrive -ne 'X:') {

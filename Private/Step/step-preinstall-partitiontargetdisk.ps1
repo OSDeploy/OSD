@@ -11,7 +11,6 @@ function step-preinstall-partitiontargetdisk {
         $DiskNumber = $global:OSDCloudWorkflowInvoke.DiskPartition.DiskNumber
     )
     #=================================================
-    # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
     #region Main
