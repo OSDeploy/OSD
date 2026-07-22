@@ -1,4 +1,4 @@
-function Get-OSDCoreCacheOperatingSystemObject {
+function Get-OSDCoreOperatingSystemCacheObject {
     <#
     .SYNOPSIS
     Gets the cached operating system content object for the selected OSDCore operating system.
@@ -15,11 +15,11 @@ function Get-OSDCoreCacheOperatingSystemObject {
     Cache content inventory to search. Defaults to $global:OSDCoreCacheContent.
 
     .EXAMPLE
-    Get-OSDCoreCacheOperatingSystemObject
+    Get-OSDCoreOperatingSystemCacheObject
     Returns the USB cache content object for $global:OSDCoreOperatingSystemObject when it exists.
 
     .EXAMPLE
-    if (Get-OSDCoreCacheOperatingSystemObject) { 'Operating system cache content exists.' }
+    if (Get-OSDCoreOperatingSystemCacheObject) { 'Operating system cache content exists.' }
     Tests whether the selected operating system payload exists in the USB cache inventory.
 
     .LINK

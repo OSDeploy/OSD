@@ -1,4 +1,4 @@
-function Get-OSDCoreCacheDriverPackObject {
+function Get-OSDCoreDriverPackCacheObject {
     <#
     .SYNOPSIS
     Gets the cached driver pack content object for the selected OSDCore driver pack.
@@ -15,11 +15,11 @@ function Get-OSDCoreCacheDriverPackObject {
     Cache content inventory to search. Defaults to $global:OSDCoreCacheContent.
 
     .EXAMPLE
-    Get-OSDCoreCacheDriverPackObject
+    Get-OSDCoreDriverPackCacheObject
     Returns the cache content object for $global:OSDCoreDriverPackObject when it exists.
 
     .EXAMPLE
-    if (Get-OSDCoreCacheDriverPackObject) { 'Driver pack cache content exists.' }
+    if (Get-OSDCoreDriverPackCacheObject) { 'Driver pack cache content exists.' }
     Tests whether the selected driver pack exists in the cache inventory.
 
     .LINK
