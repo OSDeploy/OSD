@@ -1322,7 +1322,7 @@ function New-OSDCloudDisk {
         [uint64]$SizeMSR = 16MB,
 
         [Alias('LW','LabelW')]
-        [string]$LabelWindows = 'OS',
+        [string]$LabelWindows = 'Windows',
 
         [Alias('SkipRecovery','SkipRecoveryPartition')]
         [System.Management.Automation.SwitchParameter]$NoRecoveryPartition,
