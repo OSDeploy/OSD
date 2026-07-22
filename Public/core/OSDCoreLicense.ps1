@@ -56,6 +56,16 @@ function Get-OSDCoreLicense {
 		[string]$PreferredEmail
 	)
 
+	if (-not (Test-Path -Path $Path -PathType Container)) {
+		try {
+			$null = New-Item -Path $Path -ItemType Directory -Force -ErrorAction Stop
+		}
+		catch {
+			Write-Verbose "Unable to create license path: $Path. Error: $($_.Exception.Message)"
+			return $null
+		}
+	}
+
 	Write-Verbose "Starting license discovery in path: $Path"
 
 	if (-not (Test-Path -Path $Path -PathType Container)) {
