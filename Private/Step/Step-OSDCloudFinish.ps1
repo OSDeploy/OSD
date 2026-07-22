@@ -45,7 +45,7 @@ function Step-OSDCloudFinish {
         New-Item -Path $logDirectory -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null
     }
 
-    # Save the RecastOSDeploy object to a JSON file for post-deployment analysis.
+    # Save the RecastOSDCloud object to a JSON file for post-deployment analysis.
     # $null = $global:RecastOSDCloud | ConvertTo-Json -Depth 2 | Out-File -FilePath (Join-Path $logDirectory 'RecastOSDCloud.json') -Encoding utf8 -Width 2000 -Force -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 
     # Capture the DISM Log

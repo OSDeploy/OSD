@@ -1,4 +1,4 @@
-function Step-OSDCloudConfirmDeploymentDisk {
+function Step-OSDCloudConfirmDeploymentDiskObject {
     <#
     .SYNOPSIS
     Confirms that at least one fixed disk is available for OSDCloud deployment.
@@ -9,7 +9,7 @@ function Step-OSDCloudConfirmDeploymentDisk {
     suitable fixed disk is found, deployment is stopped.
 
     .EXAMPLE
-    Step-OSDCloudConfirmDeploymentDisk
+    Step-OSDCloudConfirmDeploymentDiskObject
     Validates fixed-disk availability before running disk preparation steps.
 
     .LINK
@@ -24,15 +24,13 @@ function Step-OSDCloudConfirmDeploymentDisk {
     #=================================================
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
-    if ($global:RecastOSDCloud.GetDiskFixed) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Fixed Disk is valid. OK."
+    if ($global:RecastOSDCloud.DeploymentDiskObject) {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DeploymentDiskObject is valid. OK."
     }
     else {
-        Write-Warning "[$(Get-Date -format s)] Unable to detect a Fixed Disk."
+        Write-Warning "[$(Get-Date -format s)] Unable to detect a DeploymentDiskObject."
         Write-Warning "[$(Get-Date -format s)] WinPE may need additional Disk, SCSI or Raid Drivers."
-        Write-Warning 'Press Ctrl+C to exit OSDCloud'
-        Start-Sleep -Seconds 86400
-        exit
+        throw
     }
     #=================================================
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"

@@ -1,26 +1,18 @@
-function step-preinstall-partitiontargetdisk {
+function Step-OSDCloudPartitionDeploymentDisk {
     [CmdletBinding()]
     param (
-        [System.String]
-        $RecoveryPartitionForce = $global:OSDCloudWorkflowInvoke.RecoveryPartition.Force,
-
-        [System.String]
-        $RecoveryPartitionSkip = $global:OSDCloudWorkflowInvoke.RecoveryPartition.Skip,
-
         [Int32]
-        $DiskNumber = $global:OSDCloudWorkflowInvoke.DiskPartition.DiskNumber
+        $DiskNumber = $global:RecastOSDCloud.DeploymentDiskObject.DiskNumber
     )
     #=================================================
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]"
     #=================================================
-    #region Main
-    # Mental Math
-    $RecoveryPartition = $true
-    if ($IsVM -eq $true) { $RecoveryPartition = $false }
-    if ($RecoveryPartitionSkip) { $RecoveryPartition = $false }
-    if ($RecoveryPartitionForce) { $RecoveryPartition = $true }
-
-    if ($RecoveryPartition -eq $false) {
+    if ($env:SystemDrive -ne 'X:') {
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Skip. Not running in WinPE (X:)"
+        return
+    }
+    #=================================================
+    if ($global:OSDCoreDevice.IsVM -eq $true) {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Recovery Partition will not be created. OK."
         New-OSDCloudDisk -PartitionStyle GPT -NoRecoveryPartition -Force -ErrorAction Stop
         Write-Host "=========================================================================" -ForegroundColor DarkCyan
@@ -43,14 +35,9 @@ function step-preinstall-partitiontargetdisk {
 
     # Make sure that there is a PSDrive
     if (!(Get-PSDrive -Name 'C')) {
-        Write-Warning "[$(Get-Date -format s)] Failed to create a PSDrive FileSystem at C:\."
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Press Ctrl+C to exit OSDCloud"
-        Start-Sleep -Seconds 86400
-        exit
+        throw "[$(Get-Date -format s)] Failed to create a PSDrive FileSystem at C:\."
     }
-    #endregion
     #=================================================
-    $Message = "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
-    Write-Verbose -Message $Message; Write-Debug -Message $Message
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }

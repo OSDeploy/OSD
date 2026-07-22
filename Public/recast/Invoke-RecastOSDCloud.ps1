@@ -331,7 +331,7 @@ function Invoke-RecastOSDCloud {
     Step-OSDCloudConfirmOperatingSystem
     Step-OSDCloudConfirmAutopilotJson
     Step-OSDCloudConfirmOfficeODT
-    Step-OSDCloudConfirmDeploymentDisk
+    Step-OSDCloudConfirmDeploymentDiskObject
     # Step-OSDCloudTelemetryPSGallery
     # Step-OSDCloudTelemetryPH
     Step-OSDCloudRemoveUSBDrives
