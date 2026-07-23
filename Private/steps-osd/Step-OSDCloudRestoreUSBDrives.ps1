@@ -35,7 +35,7 @@ function Step-OSDCloudRestoreUSBDrives {
 
     # This step is intentionally limited to WinPE to avoid changing drive
     # letters on a live/full OS session.
-    if ($env:SystemDrive -ne 'C:') {
+    if ($env:SystemDrive -ne 'X:') {
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Skipped USB restore because system drive is $env:SystemDrive"
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
         return

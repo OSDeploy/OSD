@@ -44,6 +44,11 @@ function Step-OSDCloudSaveDriverPackCacheObject {
     # Refresh cache inventory so we work with current cache state.
     # Cache can be updated by earlier steps, so do not rely on stale global data.
     $global:OSDCoreCacheContent = Get-OSDCoreCacheContent
+    # Re-resolve the cache object after USB access paths have been restored.
+    # The original object can contain a stale drive-letter-based FullName.
+    $global:RecastOSDCloud.DriverPackCacheObject = Get-OSDCoreDriverPackCacheObject `
+        -DriverPackCloudObject $DriverPackCloudObject `
+        -CacheContent $global:OSDCoreCacheContent
     if (-not $global:OSDCoreCacheContent) {
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreCacheContent is empty"
         return
@@ -52,7 +57,7 @@ function Step-OSDCloudSaveDriverPackCacheObject {
     # Match the exact filename requested by the selected DriverPack metadata.
     # First match is intentional because filenames should be unique in cache.
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] FileName: $($DriverPackCloudObject.FileName)"
-    $CacheDriverPack = $global:OSDCoreCacheContent | Where-Object { $_.Name -eq $DriverPackCloudObject.FileName } | Where-Object { $_.DriveRoot -ne 'C:\' } | Select-Object -First 1
+    $CacheDriverPack = $global:RecastOSDCloud.DriverPackCacheObject
     #=================================================
     # Stop quietly when the requested payload is not cached.
     if (-not $CacheDriverPack) {
