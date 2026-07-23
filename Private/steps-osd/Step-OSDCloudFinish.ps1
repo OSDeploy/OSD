@@ -61,7 +61,7 @@ function Step-OSDCloudFinish {
         $null = robocopy "X:\Windows\Temp\osdcloud-logs" "C:\Windows\Temp\osdcloud-logs" *.* /e /ndl /r:0 /w:0
     }
 
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Finish Action $($global:RecastOSDCloud.WinPEPostAction)"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] WinPE Post Action: $($global:RecastOSDCloud.WinPEPostAction)"
     # Apply the requested end-of-deployment action after final logs are saved.
     switch ($global:RecastOSDCloud.WinPEPostAction) {
         'Quit' {
