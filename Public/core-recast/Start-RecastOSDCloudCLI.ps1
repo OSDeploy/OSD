@@ -223,7 +223,7 @@ function Start-RecastOSDCloudCLI {
         $global:OSDCoreDevice.OSDProduct = $OSDProduct
     }
     $targetSystemId = [string]$global:OSDCoreDevice.OSDProduct
-    $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object { [string]$_.SystemId -eq $targetSystemId } | Select-Object -First 1
+    $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object { [string]$_.SystemId -match $targetSystemId } | Sort-Object -Property CatalogVersion -Descending | Select-Object -First 1
     #================================================
     # OSDCoreOperatingSystemCloudObject
     if ($global:OSDCoreOperatingSystemCloudObject) {
