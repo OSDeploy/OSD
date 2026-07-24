@@ -14,7 +14,7 @@ Downloads and optionally expands the driver pack for the current computer
 
 ```
 Save-MyDriverPack [[-DownloadPath] <String>] [-Expand] [[-Manufacturer] <String>] [[-Product] <String>]
- [[-Guid] <String>] [<CommonParameters>]
+ [[-Guid] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,16 +26,14 @@ Can optionally extract and expand the driver pack after download.
 ### EXAMPLE 1
 ```
 Save-MyDriverPack
-```
-
 Downloads the driver pack for the current computer to C:\Drivers
+```
 
 ### EXAMPLE 2
 ```
 Save-MyDriverPack -DownloadPath 'D:\DriverPacks' -Expand
-```
-
 Downloads and expands the driver pack to D:\DriverPacks
+```
 
 ## PARAMETERS
 
@@ -112,6 +110,21 @@ Aliases:
 
 Required: False
 Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

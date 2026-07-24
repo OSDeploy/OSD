@@ -14,7 +14,7 @@ Returns an Array of Microsoft Updates
 
 ```
 Get-WSUSXML [[-Catalog] <String>] [-UpdateArch <String>] [-UpdateBuild <String>] [-UpdateGroup <String>]
- [-UpdateOS <String>] [-GridView] [-Silent] [<CommonParameters>]
+ [-UpdateOS <String>] [-GridView] [-Silent] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -132,6 +132,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

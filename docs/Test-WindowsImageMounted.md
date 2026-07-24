@@ -13,7 +13,8 @@ Tests WindowsImageMounted conditions.
 ## SYNTAX
 
 ```
-Test-WindowsImageMounted [-ImagePath] <String> [-Index <UInt32>] [<CommonParameters>]
+Test-WindowsImageMounted [-ImagePath] <String> [-Index <UInt32>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Evaluates WindowsImageMounted state and returns a validation result for scriptin
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Test-WindowsImageMounted.
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Required: False
 Position: Named
 Default value: 1
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

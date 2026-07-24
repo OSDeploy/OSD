@@ -13,7 +13,8 @@ Searches files for matching text and displays selectable results.
 ## SYNTAX
 
 ```
-Find-TextInFile [-Path] <String> [-Text] <String> [[-Include] <String[]>] [<CommonParameters>]
+Find-TextInFile [-Path] <String> [-Text] <String> [[-Include] <String[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +25,8 @@ Recursively searches files under a path using Select-String, displays matching l
 ### EXAMPLE 1
 ```
 Find-TextInFile -Path C:\Logs -Text Error -Include *.log
-```
-
 Searches all .log files in C:\Logs for Error and shows the matches.
+```
 
 ## PARAMETERS
 
@@ -71,6 +71,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: *.txt
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

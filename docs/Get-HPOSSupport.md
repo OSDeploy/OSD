@@ -13,7 +13,8 @@ Gets supported Windows releases for an HP platform from the HPIA catalog.
 ## SYNTAX
 
 ```
-Get-HPOSSupport [[-Platform] <String>] [-Latest] [-MaxOS] [-MaxOSVer] [-MaxOSNum] [<CommonParameters>]
+Get-HPOSSupport [[-Platform] <String>] [-Latest] [-MaxOS] [-MaxOSVer] [-MaxOSNum]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,16 +28,14 @@ switches can return only the latest supported OS values.
 ### EXAMPLE 1
 ```
 Get-HPOSSupport
-```
-
 Returns all supported OS entries for the local platform.
+```
 
 ### EXAMPLE 2
 ```
 Get-HPOSSupport -Platform 83B2 -MaxOSVer
-```
-
 Returns the maximum supported release ID for platform 83B2.
+```
 
 ## PARAMETERS
 
@@ -112,6 +111,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

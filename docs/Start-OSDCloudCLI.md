@@ -16,21 +16,22 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSName <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSActivation <String>] [<CommonParameters>]
+ [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-OSVersion <String>] [-OSReleaseID <String>]
- [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [<CommonParameters>]
+ [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloudCLI [-ComputerManufacturer <String>] [-ComputerProduct <String>] [-Firmware] [-Restart]
  [-Shutdown] [-Screenshot] [-SkipAutopilot] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>]
- [-OSImageIndex <Int32>] [<CommonParameters>]
+ [-OSImageIndex <Int32>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,16 +42,14 @@ Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitH
 ### EXAMPLE 1
 ```
 Start-OSDCloudCLI
-```
-
 Starts OSDCloud CLI interactively.
+```
 
 ### EXAMPLE 2
 ```
 Start-OSDCloudCLI -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us
-```
-
 Starts OSDCloud CLI with explicit OS selections.
+```
 
 ## PARAMETERS
 
@@ -305,6 +304,21 @@ Aliases: ImageIndex
 Required: False
 Position: Named
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

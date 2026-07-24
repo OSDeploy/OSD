@@ -13,7 +13,7 @@ Expands staged driver pack archives during Windows Setup
 ## SYNTAX
 
 ```
-Expand-StagedDriverPack [-Apply] [<CommonParameters>]
+Expand-StagedDriverPack [-Apply] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +25,14 @@ Supports multiple vendor formats including Dell, HP, Lenovo, and generic package
 ### EXAMPLE 1
 ```
 Expand-StagedDriverPack
-```
-
 Expands all driver packs in C:\Drivers
+```
 
 ### EXAMPLE 2
 ```
 Expand-StagedDriverPack -Apply
-```
-
 Expands driver packs and applies them during setup
+```
 
 ## PARAMETERS
 
@@ -49,6 +47,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

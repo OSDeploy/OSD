@@ -14,7 +14,8 @@ Clears LocalDisk data or state.
 
 ```
 Clear-LocalDisk [[-Input] <Object>] [[-DiskNumber] <UInt32>] [-Initialize] [[-PartitionStyle] <String>]
- [-Force] [-NoResults] [-ShowWarning] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Force] [-NoResults] [-ShowWarning] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,10 +25,8 @@ Removes existing LocalDisk data or configuration and applies the requested reset
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Clear-LocalDisk.
+```
 
 ## PARAMETERS
 
@@ -159,6 +158,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

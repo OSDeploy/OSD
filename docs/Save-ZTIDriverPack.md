@@ -13,7 +13,8 @@ Downloads the driver pack for a computer during MDT/ConfigMgr task sequence
 ## SYNTAX
 
 ```
-Save-ZTIDriverPack [[-Manufacturer] <String>] [[-Product] <String>] [<CommonParameters>]
+Save-ZTIDriverPack [[-Manufacturer] <String>] [[-Product] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +26,14 @@ Requires an active task sequence environment.
 ### EXAMPLE 1
 ```
 Save-ZTIDriverPack
-```
-
 Downloads the driver pack for the current computer during task sequence
+```
 
 ### EXAMPLE 2
 ```
 Save-ZTIDriverPack -Manufacturer 'Dell' -Product 'Latitude 5420'
-```
-
 Downloads the driver pack for a specific Dell model
+```
 
 ## PARAMETERS
 
@@ -66,6 +65,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: (Get-MyComputerProduct)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -15,13 +15,15 @@ Gets MyWindowsPackage information.
 ### Online (Default)
 ```
 Get-MyWindowsPackage [-PackageState <String>] [-ReleaseType <String>] [-Category <String>]
- [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [<CommonParameters>]
+ [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### Offline
 ```
 Get-MyWindowsPackage -Path <String> [-PackageState <String>] [-ReleaseType <String>] [-Category <String>]
- [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [<CommonParameters>]
+ [-Culture <String[]>] [-Like <String[]>] [-Match <String[]>] [-Detail] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,10 +33,8 @@ Returns MyWindowsPackage data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Get-MyWindowsPackage.
+```
 
 ## PARAMETERS
 
@@ -154,6 +154,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

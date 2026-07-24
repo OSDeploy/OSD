@@ -13,7 +13,7 @@ Displays Power Plan information using powercfg /LIST
 ## SYNTAX
 
 ```
-Get-OSDPower [[-Property] <String>] [<CommonParameters>]
+Get-OSDPower [[-Property] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,21 +25,19 @@ Optionally Set an Active Power Plan
 ### EXAMPLE 1
 ```
 OSDPower
-```
-
 Returns Power Plan information using powercfg /LIST
 Option 1: Get-OSDPower
 Option 2: Get-OSDPower LIST
 Option 3: Get-OSDPower -Property LIST
+```
 
 ### EXAMPLE 2
 ```
 OSDPower High
-```
-
 Sets the active Power Plan to High Performance
 Option 1: Get-OSDPower High
 Option 2: Get-OSDPower -Property High
+```
 
 ## PARAMETERS
 
@@ -55,6 +53,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: LIST
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

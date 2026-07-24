@@ -14,7 +14,7 @@ Retrieves updates for a specific Windows operating system version from Microsoft
 
 ```
 Get-MsUpCatUpdate [[-OS] <String>] [[-Arch] <String>] [[-Build] <String>] [[-Category] <String>] [-Insider]
- [-ListAvailable] [<CommonParameters>]
+ [-ListAvailable] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ Searches Microsoft Update Catalog for updates specific to a Windows operating sy
 ### EXAMPLE 1
 ```
 Get-MsUpCatUpdate -OS 'Windows 11' -Arch x64 -Build 22H2
-```
-
 Retrieves updates for Windows 11 22H2 x64
+```
 
 ## PARAMETERS
 
@@ -123,6 +122,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

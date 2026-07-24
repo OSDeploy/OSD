@@ -13,7 +13,8 @@ Gets OSDWinEvent information.
 ## SYNTAX
 
 ```
-Get-OSDWinEvent [[-Area] <String>] [[-DayCount] <Int32>] [[-LogName] <String[]>] [<CommonParameters>]
+Get-OSDWinEvent [[-Area] <String>] [[-DayCount] <Int32>] [[-LogName] <String[]>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Returns OSDWinEvent data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Get-OSDWinEvent.
+```
 
 ## PARAMETERS
 
@@ -71,6 +70,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: @('System','Application')
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

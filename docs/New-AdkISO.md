@@ -14,7 +14,7 @@ Creates an ISO file from a bootable media directory using ADK tools
 
 ```
 New-AdkISO [[-WindowsAdkRoot] <String>] [-MediaPath] <String> [-isoFileName] <String> [-isoLabel] <String>
- [-OpenExplorer] [<CommonParameters>]
+ [-OpenExplorer] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,9 +26,8 @@ Requires the Windows Assessment and Deployment Kit (ADK) to be installed.
 ### EXAMPLE 1
 ```
 New-AdkISO -MediaPath 'C:\BootMedia' -isoFileName 'WinPE.iso' -isoLabel 'WinPE'
-```
-
 Creates an ISO file from the bootable media
+```
 
 ## PARAMETERS
 
@@ -104,6 +103,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

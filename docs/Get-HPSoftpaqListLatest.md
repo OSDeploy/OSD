@@ -13,7 +13,8 @@ Gets the latest HPIA SoftPaq list for an HP platform.
 ## SYNTAX
 
 ```
-Get-HPSoftpaqListLatest [[-Platform] <String>] [-SystemInfo] [-MaxOSVer] [-MaxOSNum] [<CommonParameters>]
+Get-HPSoftpaqListLatest [[-Platform] <String>] [-SystemInfo] [-MaxOSVer] [-MaxOSNum]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,16 +27,14 @@ the extracted XML metadata.
 ### EXAMPLE 1
 ```
 Get-HPSoftpaqListLatest
-```
-
 Returns the latest SoftPaq list for the local platform.
+```
 
 ### EXAMPLE 2
 ```
 Get-HPSoftpaqListLatest -Platform 83B2 -SystemInfo
-```
-
 Returns system information metadata for platform 83B2.
+```
 
 ## PARAMETERS
 
@@ -96,6 +95,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

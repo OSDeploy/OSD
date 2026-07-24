@@ -13,7 +13,8 @@ Starts a background process to capture screenshots
 ## SYNTAX
 
 ```
-Start-ScreenPNGProcess [-Directory] <String> [[-Delay] <UInt32>] [[-Count] <UInt32>] [<CommonParameters>]
+Start-ScreenPNGProcess [-Directory] <String> [[-Delay] <UInt32>] [[-Count] <UInt32>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,16 +25,14 @@ Launches a hidden PowerShell process that periodically captures screenshots and 
 ### EXAMPLE 1
 ```
 Start-ScreenPNGProcess -Directory 'C:\Screenshots'
-```
-
 Starts capturing screenshots with default delay and count
+```
 
 ### EXAMPLE 2
 ```
 Start-ScreenPNGProcess -Directory 'C:\Screenshots' -Count 5 -Delay 3
-```
-
 Starts capturing 5 screenshots with 3-second intervals
+```
 
 ## PARAMETERS
 
@@ -81,6 +80,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: 9999
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

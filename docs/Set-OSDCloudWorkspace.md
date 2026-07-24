@@ -13,7 +13,7 @@ Sets configuration values by using Set-OSDCloudWorkspace.
 ## SYNTAX
 
 ```
-Set-OSDCloudWorkspace [[-WorkspacePath] <String>] [<CommonParameters>]
+Set-OSDCloudWorkspace [[-WorkspacePath] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +23,8 @@ Provides the implementation for Set-OSDCloudWorkspace.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Runs Set-OSDCloudWorkspace with common parameters.
+```
 
 ## PARAMETERS
 
@@ -41,6 +39,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: "$env:SystemDrive\OSDCloud"
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

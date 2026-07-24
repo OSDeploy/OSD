@@ -13,7 +13,8 @@ Gets HPIA SoftPaq items for a specific HP platform and OS release.
 ## SYNTAX
 
 ```
-Get-HPSoftPaqItems [[-Platform] <String>] [-osver] <String> [-os] <String> [<CommonParameters>]
+Get-HPSoftPaqItems [[-Platform] <String>] [-osver] <String> [-os] <String> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,16 +27,14 @@ returns the SoftPaq update entries from the extracted XML.
 ### EXAMPLE 1
 ```
 Get-HPSoftPaqItems -osver 23H2 -os 11.0
-```
-
 Returns SoftPaq items for Windows 11 23H2 on the local platform.
+```
 
 ### EXAMPLE 2
 ```
 Get-HPSoftPaqItems -Platform 83B2 -osver 22H2 -os 10.0
-```
-
 Returns SoftPaq items for Windows 10 22H2 on platform 83B2.
+```
 
 ## PARAMETERS
 
@@ -81,6 +80,21 @@ Aliases:
 
 Required: True
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

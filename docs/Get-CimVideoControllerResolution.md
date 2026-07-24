@@ -13,7 +13,7 @@ Returns CIM video controller resolution entries for the system display adapter.
 ## SYNTAX
 
 ```
-Get-CimVideoControllerResolution [-Interlaced] [<CommonParameters>]
+Get-CimVideoControllerResolution [-Interlaced] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +25,14 @@ either progressive or interlaced modes based on the selected switch.
 ### EXAMPLE 1
 ```
 Get-CimVideoControllerResolution
-```
-
 Returns progressive resolutions with a horizontal resolution of 800 or higher.
+```
 
 ### EXAMPLE 2
 ```
 Get-CimVideoControllerResolution -Interlaced
-```
-
 Returns interlaced resolutions with a horizontal resolution of 800 or higher.
+```
 
 ## PARAMETERS
 
@@ -51,6 +49,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

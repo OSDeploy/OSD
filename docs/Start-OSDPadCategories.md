@@ -13,7 +13,8 @@ Starts the workflow for Start-OSDPadCategories.
 ## SYNTAX
 
 ```
-Start-OSDPadCategories [-RepoOwner] <String> [-RepoName] <String> [-OAuth <String>] [<CommonParameters>]
+Start-OSDPadCategories [-RepoOwner] <String> [-RepoName] <String> [-OAuth <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +25,8 @@ Provides the implementation for Start-OSDPadCategories.
 ### EXAMPLE 1
 ```
 -RepoName <RepoName>
-```
-
 Runs Start-OSDPadCategories with common parameters.
+```
 
 ## PARAMETERS
 
@@ -67,6 +67,21 @@ Specifies the value for OAuth.
 Type: String
 Parameter Sets: (All)
 Aliases: OAuthToken
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

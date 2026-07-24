@@ -13,7 +13,7 @@ Gets OSDCloud operating system entries for a specific architecture.
 ## SYNTAX
 
 ```
-Get-OSDCloudOperatingSystems [[-OSArch] <String>] [<CommonParameters>]
+Get-OSDCloudOperatingSystems [[-OSArch] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,6 +36,13 @@ Get-OSDCloudOperatingSystems -OSArch arm64
 
 Returns ARM64 operating system entries.
 
+### EXAMPLE 3
+```
+Get-OSDCloudOperatingSystems -OSArch amd64
+```
+
+Returns x64/amd64 operating system entries.
+
 ## PARAMETERS
 
 ### -OSArch
@@ -43,6 +50,7 @@ Specifies the operating system architecture to return.
 
 Valid values:
 - x64
+- amd64
 - arm64
 
 ```yaml
@@ -52,7 +60,22 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: X64
+Default value: $env:PROCESSOR_ARCHITECTURE
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

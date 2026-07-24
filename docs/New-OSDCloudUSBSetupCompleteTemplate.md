@@ -24,9 +24,8 @@ Provides the implementation for New-OSDCloudUSBSetupCompleteTemplate.
 ### EXAMPLE 1
 ```
 New-OSDCloudUSBSetupCompleteTemplate
-```
-
 Runs New-OSDCloudUSBSetupCompleteTemplate with common parameters.
+```
 
 ## PARAMETERS
 

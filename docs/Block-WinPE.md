@@ -13,7 +13,7 @@ Blocks execution if the system is running WinPE
 ## SYNTAX
 
 ```
-Block-WinPE [-Warn] [-Pause] [<CommonParameters>]
+Block-WinPE [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ If running in WinPE, writes a warning and breaks execution unless the -Warn para
 ### EXAMPLE 1
 ```
 Block-WinPE
-```
-
 Halts execution if the system is running WinPE
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

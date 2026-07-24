@@ -13,7 +13,8 @@ Download and expand WinPE Drivers
 ## SYNTAX
 
 ```
-Save-WinPECloudDriver [-CloudDriver <String[]>] [-DriverHWID <String[]>] [-Path <String>] [<CommonParameters>]
+Save-WinPECloudDriver [-CloudDriver <String[]>] [-DriverHWID <String[]>] [-Path <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -69,6 +70,21 @@ If not specified, a random directory in $env:TEMP is selected
 Type: String
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

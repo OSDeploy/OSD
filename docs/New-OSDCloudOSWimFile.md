@@ -15,13 +15,13 @@ Builds Windows setup media content for an OSDCloud feature update.
 ### Default (Default)
 ```
 New-OSDCloudOSWimFile [-OSName <String>] [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>]
- [-CreateISO] [<CommonParameters>]
+ [-CreateISO] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 New-OSDCloudOSWimFile [-OSEdition <String>] [-OSLanguage <String>] [-OSActivation <String>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,9 +32,8 @@ Resolves the target operating system image, determines the correct image index f
 ### EXAMPLE 1
 ```
 New-OSDCloudOSWimFile -OSName 'Windows 11 25H2 x64' -OSEdition Pro -OSLanguage en-us -OSActivation Retail -CreateISO
-```
-
 Prepares the Windows 11 25H2 x64 Pro retail media and builds an ISO file.
+```
 
 ## PARAMETERS
 
@@ -109,6 +108,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

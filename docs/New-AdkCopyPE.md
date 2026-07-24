@@ -13,7 +13,7 @@ Creates an ADK CopyPE working directory
 ## SYNTAX
 
 ```
-New-AdkCopyPE [-Path] <String> [-WinPEArch <String>] [<CommonParameters>]
+New-AdkCopyPE [-Path] <String> [-WinPEArch <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +24,8 @@ Creates a working directory structure for ADK CopyPE media with bootable WinPE e
 ### EXAMPLE 1
 ```
 New-AdkCopyPE -MediaPath 'C:\CopyPEMedia'
-```
-
 Creates a CopyPE working directory at C:\CopyPEMedia
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Required: False
 Position: Named
 Default value: Amd64
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

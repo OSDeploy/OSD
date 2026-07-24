@@ -13,13 +13,15 @@ Returns cached OSDCloud content found on local file system drives.
 ## SYNTAX
 
 ```
-Get-OSDCoreCacheContent [[-Type] <String[]>] [[-Include] <String[]>] [[-Exclude] <String[]>] [<CommonParameters>]
+Get-OSDCoreCacheContent [[-Type] <String[]>] [[-Include] <String[]>] [[-Exclude] <String[]>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Enumerates mounted file system drives and discovers OSDCloud cache content.
 Returns objects with Type, Name, FullName, SizeMB,
-DriveRoot, VolumeLabel, and VolumeUniqueId properties.
+DriveRoot, VolumeLabel, VolumeUniqueId, and USB properties.
+Exports the returned object to $env:Temp\OSDCoreCacheContent.xml each time the function runs.
 
 If Type is omitted, retur ns all supported cache content types.
 
@@ -130,6 +132,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -138,7 +155,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object[]. Objects with Type, Name, FullName, SizeMB,
-### DriveRoot, VolumeLabel, and VolumeUniqueId.
+### DriveRoot, VolumeLabel, VolumeUniqueId, and USB.
 ## NOTES
 
 ## RELATED LINKS

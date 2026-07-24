@@ -15,13 +15,13 @@ Gets MyWindowsCapability information.
 ### Online (Default)
 ```
 Get-MyWindowsCapability [-State <String>] [-Category <String>] [-Culture <String[]>] [-Like <String[]>]
- [-Match <String[]>] [-Detail] [-DisableWSUS] [<CommonParameters>]
+ [-Match <String[]>] [-Detail] [-DisableWSUS] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Offline
 ```
 Get-MyWindowsCapability -Path <String> [-State <String>] [-Category <String>] [-Culture <String[]>]
- [-Like <String[]>] [-Match <String[]>] [-Detail] [<CommonParameters>]
+ [-Like <String[]>] [-Match <String[]>] [-Detail] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,10 +31,8 @@ Returns MyWindowsCapability data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Get-MyWindowsCapability.
+```
 
 ## PARAMETERS
 
@@ -154,6 +152,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

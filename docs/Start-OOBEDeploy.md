@@ -14,7 +14,8 @@ schema: 2.0.0
 
 ```
 Start-OOBEDeploy [[-CustomProfile] <String>] [-AddNetFX3] [-AddRSAT] [-Autopilot] [[-ProductKey] <String>]
- [[-RemoveAppx] <String[]>] [-UpdateDrivers] [-UpdateWindows] [[-SetEdition] <String>] [<CommonParameters>]
+ [[-RemoveAppx] <String[]>] [-UpdateDrivers] [-UpdateWindows] [[-SetEdition] <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -159,6 +160,21 @@ Accept wildcard characters: False
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

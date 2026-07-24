@@ -13,7 +13,8 @@ Retrieves the driver pack for the current computer from OSDCloud
 ## SYNTAX
 
 ```
-Get-MyDriverPack [[-Manufacturer] <String>] [[-Product] <String>] [<CommonParameters>]
+Get-MyDriverPack [[-Manufacturer] <String>] [[-Product] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,16 +25,14 @@ Queries OSDCloud for a matching driver pack based on computer manufacturer and p
 ### EXAMPLE 1
 ```
 Get-MyDriverPack
-```
-
 Returns the driver pack for the current computer
+```
 
 ### EXAMPLE 2
 ```
 Get-MyDriverPack -Manufacturer 'Lenovo' -Product 'ThinkPad X1'
-```
-
 Returns the driver pack for the specified model
+```
 
 ## PARAMETERS
 
@@ -65,6 +64,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: (Get-MyComputerProduct)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

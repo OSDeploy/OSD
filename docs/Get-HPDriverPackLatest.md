@@ -13,7 +13,8 @@ Gets the latest available HP driver pack for a platform.
 ## SYNTAX
 
 ```
-Get-HPDriverPackLatest [[-Platform] <String>] [-URL] [-download] [<CommonParameters>]
+Get-HPDriverPackLatest [[-Platform] <String>] [-URL] [-download] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,16 +27,14 @@ matching Driver Pack entry found in the HPIA SoftPaq catalog.
 ### EXAMPLE 1
 ```
 Get-HPDriverPackLatest
-```
-
 Returns the latest driver pack metadata for the local platform.
+```
 
 ### EXAMPLE 2
 ```
 Get-HPDriverPackLatest -Platform 83B2 -URL
-```
-
 Returns only the driver pack URL for platform 83B2.
+```
 
 ## PARAMETERS
 
@@ -81,6 +80,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

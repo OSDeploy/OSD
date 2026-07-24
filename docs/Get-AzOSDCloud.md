@@ -13,7 +13,7 @@ Initialize the local OSDCloud Azure workspace.
 ## SYNTAX
 
 ```
-Get-AzOSDCloud [-edit] [<CommonParameters>]
+Get-AzOSDCloud [-edit] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +25,14 @@ and Terraform templates into place, and optionally opens the workspace in Visual
 ### EXAMPLE 1
 ```
 Get-AzOSDCloud
-```
-
 Creates the local workspace and copies the Azure IaC templates.
+```
 
 ### EXAMPLE 2
 ```
 Get-AzOSDCloud -edit
-```
-
 Creates the local workspace and opens it in Visual Studio Code.
+```
 
 ## PARAMETERS
 
@@ -49,6 +47,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

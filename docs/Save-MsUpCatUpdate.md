@@ -14,7 +14,8 @@ Downloads updates from Microsoft Update Catalog for a specific Windows version
 
 ```
 Save-MsUpCatUpdate [[-OS] <String>] [[-Arch] <String>] [[-Build] <String>] [[-Category] <String>]
- [[-Include] <String[]>] [[-DestinationDirectory] <String>] [-Latest] [<CommonParameters>]
+ [[-Include] <String[]>] [[-DestinationDirectory] <String>] [-Latest] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +26,8 @@ Downloads Microsoft updates for a specific Windows operating system version, arc
 ### EXAMPLE 1
 ```
 Save-MsUpCatUpdate -OS 'Windows 11' -Arch x64 -Build 22H2
-```
-
 Downloads updates for Windows 11 22H2 x64 to the default location
+```
 
 ## PARAMETERS
 
@@ -137,6 +137,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

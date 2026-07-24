@@ -13,7 +13,7 @@ Retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
 ## SYNTAX
 
 ```
-Get-OSDMetrics [<CommonParameters>]
+Get-OSDMetrics [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,11 +26,25 @@ It also displays metrics for OSDCloud CLI, OSDCloud GUI, and OSDCloud Azure depl
 ### EXAMPLE 1
 ```
 Get-OSDMetrics
+This example retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
 ```
 
-This example retrieves metrics for the OSD PowerShell module and OSDCloud deployment methods.
-
 ## PARAMETERS
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

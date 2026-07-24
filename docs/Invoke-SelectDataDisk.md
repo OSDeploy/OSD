@@ -13,7 +13,8 @@ Invokes SelectDataDisk actions.
 ## SYNTAX
 
 ```
-Invoke-SelectDataDisk [[-NotDiskNumber] <Int32>] [-Skip] [-SelectOne] [<CommonParameters>]
+Invoke-SelectDataDisk [[-NotDiskNumber] <Int32>] [-Skip] [-SelectOne] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Runs interactive or workflow-oriented SelectDataDisk operations used by OSD task
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Invoke-SelectDataDisk.
+```
 
 ## PARAMETERS
 
@@ -71,6 +70,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

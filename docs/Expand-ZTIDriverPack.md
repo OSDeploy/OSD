@@ -13,7 +13,7 @@ Expands driver packs during Lite Touch or Zero Touch deployment
 ## SYNTAX
 
 ```
-Expand-ZTIDriverPack [<CommonParameters>]
+Expand-ZTIDriverPack [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,11 +25,25 @@ Supports CAB, EXE, MSI, and ZIP formats from multiple vendors.
 ### EXAMPLE 1
 ```
 Expand-ZTIDriverPack
+Expands all driver packs in C:\Drivers during task sequence
 ```
 
-Expands all driver packs in C:\Drivers during task sequence
-
 ## PARAMETERS
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

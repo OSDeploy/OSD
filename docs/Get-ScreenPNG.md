@@ -14,7 +14,7 @@ Gets ScreenPNG information.
 
 ```
 Get-ScreenPNG [[-Directory] <String>] [[-Prefix] <String>] [[-Delay] <UInt32>] [[-Count] <UInt32>] [-Clipboard]
- [-Primary] [<CommonParameters>]
+ [-Primary] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,10 +24,8 @@ Returns ScreenPNG data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Get-ScreenPNG.
+```
 
 ## PARAMETERS
 
@@ -117,6 +115,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -13,7 +13,7 @@ Retrieves the Windows Recovery Environment partition information
 ## SYNTAX
 
 ```
-Get-WinREPartition [<CommonParameters>]
+Get-WinREPartition [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,11 +25,25 @@ This function must be run in Windows.
 ### EXAMPLE 1
 ```
 Get-WinREPartition
+Returns the WinRE partition information
 ```
 
-Returns the WinRE partition information
-
 ## PARAMETERS
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

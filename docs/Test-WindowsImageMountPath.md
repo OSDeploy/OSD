@@ -13,7 +13,7 @@ Tests WindowsImageMountPath conditions.
 ## SYNTAX
 
 ```
-Test-WindowsImageMountPath [-Path] <String> [<CommonParameters>]
+Test-WindowsImageMountPath [-Path] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +23,8 @@ Evaluates WindowsImageMountPath state and returns a validation result for script
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Test-WindowsImageMountPath.
+```
 
 ## PARAMETERS
 
@@ -42,6 +40,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

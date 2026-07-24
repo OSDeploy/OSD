@@ -13,7 +13,8 @@ Updates MyWindowsImage content.
 ## SYNTAX
 
 ```
-Update-MyWindowsImage [[-Path] <String[]>] [[-Update] <String>] [-BitsTransfer] [-Force] [<CommonParameters>]
+Update-MyWindowsImage [[-Path] <String[]>] [[-Update] <String>] [-BitsTransfer] [-Force]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Installs updates into MyWindowsImage according to the supplied parameters.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Update-MyWindowsImage.
+```
 
 ## PARAMETERS
 
@@ -86,6 +85,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

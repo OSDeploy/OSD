@@ -24,9 +24,8 @@ Converts a date string in MM/DD/YYYY format (as returned by Microsoft Update Cat
 ### EXAMPLE 1
 ```
 Invoke-MSCatalogParseDate -DateString "01/15/2025"
-```
-
 Returns a DateTime object for January 15, 2025
+```
 
 ## PARAMETERS
 

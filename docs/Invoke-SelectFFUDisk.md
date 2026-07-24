@@ -13,7 +13,7 @@ Invokes SelectFFUDisk actions.
 ## SYNTAX
 
 ```
-Invoke-SelectFFUDisk [-Skip] [-SelectOne] [<CommonParameters>]
+Invoke-SelectFFUDisk [-Skip] [-SelectOne] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +23,8 @@ Runs interactive or workflow-oriented SelectFFUDisk operations used by OSD tasks
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Invoke-SelectFFUDisk.
+```
 
 ## PARAMETERS
 
@@ -56,6 +54,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

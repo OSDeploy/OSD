@@ -13,7 +13,7 @@ Saves available BitLocker key materials to one or more folders.
 ## SYNTAX
 
 ```
-Backup-MyBitLockerKeys [-Path] <String[]> [<CommonParameters>]
+Backup-MyBitLockerKeys [-Path] <String[]> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ passwords for BitLocker-protected volumes.
 ### EXAMPLE 1
 ```
 Backup-MyBitLockerKeys -Path 'D:\BitLockerBackup'
-```
-
 Exports BitLocker key materials to D:\BitLockerBackup.
+```
 
 ## PARAMETERS
 
@@ -43,6 +42,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

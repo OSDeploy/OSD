@@ -14,7 +14,7 @@ Converts an ESD file into an ISO image.
 
 ```
 Convert-EsdToIso [-esdFullName] <String> [[-isoFullName] <String>] [[-isoLabel] <String>] [-noPrompt] [-Demo]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,16 +26,14 @@ folder, then creates an ISO using Convert-FolderToIso.
 ### EXAMPLE 1
 ```
 Convert-EsdToIso -esdFullName 'C:\Media\install.esd'
-```
-
 Converts install.esd to an ISO in the same directory.
+```
 
 ### EXAMPLE 2
 ```
 Convert-EsdToIso -esdFullName 'C:\Media\install.esd' -isoFullName 'C:\ISO\Custom.iso' -isoLabel 'CustomISO' -noPrompt
-```
-
 Converts the ESD to a custom-labeled ISO at the specified path.
+```
 
 ## PARAMETERS
 
@@ -112,6 +110,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

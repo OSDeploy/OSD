@@ -13,7 +13,7 @@ Blocks execution if the computer is not manufactured by Lenovo
 ## SYNTAX
 
 ```
-Block-ManufacturerNeLenovo [-Warn] [-Pause] [<CommonParameters>]
+Block-ManufacturerNeLenovo [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ If the manufacturer is not Lenovo, writes a warning and breaks execution unless 
 ### EXAMPLE 1
 ```
 Block-ManufacturerNeLenovo
-```
-
 Halts execution if the computer is not a Lenovo device
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -13,7 +13,8 @@ Tests connectivity to Microsoft Update Catalog.
 ## SYNTAX
 
 ```
-Test-MicrosoftUpdateCatalog [[-Uri] <String>] [[-TimeoutSec] <Int32>] [<CommonParameters>]
+Test-MicrosoftUpdateCatalog [[-Uri] <String>] [[-TimeoutSec] <Int32>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,16 +28,14 @@ HEAD request first, then falls back to GET if needed.
 ### EXAMPLE 1
 ```
 Test-MicrosoftUpdateCatalog
-```
-
 Returns True when the default Microsoft Update Catalog endpoint is reachable.
+```
 
 ### EXAMPLE 2
 ```
 Test-MicrosoftUpdateCatalog -TimeoutSec 5
-```
-
 Tests connectivity with a shorter timeout.
+```
 
 ## PARAMETERS
 
@@ -66,6 +65,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: 15
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

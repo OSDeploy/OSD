@@ -13,7 +13,7 @@ Enables PowerShell Gallery in a mounted Windows image
 ## SYNTAX
 
 ```
-Enable-PEWindowsImagePSGallery [[-Path] <String[]>] [<CommonParameters>]
+Enable-PEWindowsImagePSGallery [[-Path] <String[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,16 +24,14 @@ Configures a mounted Windows image to support PowerShell Gallery by adding neces
 ### EXAMPLE 1
 ```
 Enable-PEWindowsImagePSGallery
-```
-
 Enables PowerShell Gallery in the currently mounted image
+```
 
 ### EXAMPLE 2
 ```
 Enable-PEWindowsImagePSGallery -Path 'C:\Mount'
-```
-
 Enables PowerShell Gallery in the image mounted at C:\Mount
+```
 
 ## PARAMETERS
 
@@ -50,6 +48,21 @@ Required: False
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

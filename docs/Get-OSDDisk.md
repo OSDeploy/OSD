@@ -16,7 +16,7 @@ Gets OSDDisk information.
 Get-OSDDisk [[-Number] <UInt32>] [[-BootFromDisk] <Boolean>] [[-IsBoot] <Boolean>] [[-IsReadOnly] <Boolean>]
  [[-IsSystem] <Boolean>] [[-BusType] <String[]>] [[-BusTypeNot] <String[]>] [[-MediaType] <String[]>]
  [[-MediaTypeNot] <String[]>] [[-PartitionStyle] <String[]>] [[-PartitionStyleNot] <String[]>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,10 +26,8 @@ Returns OSDDisk data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Get-OSDDisk.
+```
 
 ## PARAMETERS
 
@@ -193,6 +191,21 @@ Aliases:
 
 Required: False
 Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

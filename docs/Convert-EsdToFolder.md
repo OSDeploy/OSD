@@ -13,7 +13,8 @@ Expands an ESD file into a Windows setup folder structure.
 ## SYNTAX
 
 ```
-Convert-EsdToFolder [-esdFullName] <String> [[-folderFullName] <String>] [<CommonParameters>]
+Convert-EsdToFolder [-esdFullName] <String> [[-folderFullName] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +26,8 @@ exporting boot and install images to the destination structure.
 ### EXAMPLE 1
 ```
 Convert-EsdToFolder -esdFullName 'C:\Media\install.esd'
-```
-
 Expands the ESD into a setup folder beside the source file.
+```
 
 ## PARAMETERS
 
@@ -57,6 +57,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

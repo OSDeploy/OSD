@@ -14,22 +14,26 @@ Convert content to an Azure Key Vault secret.
 
 ### FromUriContent (Default)
 ```
-Set-CloudSecret [-VaultName] <String> [-Name] <String> -Uri <Uri> [<CommonParameters>]
+Set-CloudSecret [-VaultName] <String> [-Name] <String> -Uri <Uri> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### FromClipboard
 ```
-Set-CloudSecret [-VaultName] <String> [-Name] <String> [-Clipboard] [<CommonParameters>]
+Set-CloudSecret [-VaultName] <String> [-Name] <String> [-Clipboard] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### FromFile
 ```
-Set-CloudSecret [-VaultName] <String> [-Name] <String> -File <FileInfo> [<CommonParameters>]
+Set-CloudSecret [-VaultName] <String> [-Name] <String> -File <FileInfo> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### FromString
 ```
-Set-CloudSecret [-VaultName] <String> [-Name] <String> -String <String> [<CommonParameters>]
+Set-CloudSecret [-VaultName] <String> [-Name] <String> -String <String> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,16 +45,14 @@ Vault as a secret.
 ### EXAMPLE 1
 ```
 Set-CloudSecret -VaultName contoso -Name Script -File .\script.ps1
-```
-
 Uploads file contents to Key Vault.
+```
 
 ### EXAMPLE 2
 ```
 Set-CloudSecret -VaultName contoso -Name Script -Clipboard
-```
-
 Stores clipboard contents in Key Vault.
+```
 
 ## PARAMETERS
 
@@ -138,6 +140,21 @@ Parameter Sets: FromString
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

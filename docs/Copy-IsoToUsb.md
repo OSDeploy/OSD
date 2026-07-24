@@ -14,7 +14,7 @@ Creates a bootable USB drive from a Windows ISO.
 
 ```
 Copy-IsoToUsb [-ISOFile] <String> [-MakeBootable] [-NTFS] [-SplitWim] [[-USBLabel] <String>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,16 +28,14 @@ optional splitting of large install.wim files.
 ### EXAMPLE 1
 ```
 Copy-IsoToUsb -ISOFile 'C:\Temp\Win11.iso' -MakeBootable -USBLabel WIN11
-```
-
 Creates a bootable USB and copies the ISO contents.
+```
 
 ### EXAMPLE 2
 ```
 Copy-IsoToUsb -ISOFile 'C:\Temp\Win11.iso' -NTFS -USBLabel WIN11NTFS
-```
-
 Creates an NTFS-formatted USB and copies the ISO contents.
+```
 
 ## PARAMETERS
 
@@ -111,6 +109,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

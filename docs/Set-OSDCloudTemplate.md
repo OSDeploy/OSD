@@ -13,7 +13,7 @@ Sets configuration values by using Set-OSDCloudTemplate.
 ## SYNTAX
 
 ```
-Set-OSDCloudTemplate [[-Name] <String>] [<CommonParameters>]
+Set-OSDCloudTemplate [[-Name] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +23,8 @@ Provides the implementation for Set-OSDCloudTemplate.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Runs Set-OSDCloudTemplate with common parameters.
+```
 
 ## PARAMETERS
 
@@ -41,6 +39,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: Default
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

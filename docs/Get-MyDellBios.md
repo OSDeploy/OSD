@@ -8,28 +8,44 @@ schema: 2.0.0
 # Get-MyDellBios
 
 ## SYNOPSIS
-This will return the latest compatible BIOS Update for your system as a PowerShell Object
+Returns the latest compatible Dell BIOS update for the current system.
 
 ## SYNTAX
 
 ```
-Get-MyDellBios [<CommonParameters>]
+Get-MyDellBios [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This will return the latest compatible BIOS Update for your system as a PowerShell Object
-Shortcut for Get-DellSystemCatalog -Component BIOS -Compatible
+Detects the current Dell system SKU, filters the cached Dell BIOS catalog for
+compatible entries, and returns the newest matching BIOS update object.
+This
+function only returns data when it is run on Dell hardware.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-MyDellBios
+Returns the newest compatible Dell BIOS update object for the current Dell device.
 ```
 
-{{ Add example description here }}
-
 ## PARAMETERS
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -39,9 +55,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-21.3.11 Pulling data from Local due to issues with the Dell site being down
-21.3.5  Resolved issue with multiple objects
-21.3.4  Initial Release
+Author: David Segura - Recast Software
+2021-03-04 - Initial release
+2021-03-05 - Resolved issue with multiple objects
+2021-03-11 - Pulled data from local catalog due to Dell site availability issues
+2026-07-22 - Updated comment-based help
 
 ## RELATED LINKS
 

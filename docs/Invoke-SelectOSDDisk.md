@@ -13,7 +13,8 @@ Invokes SelectOSDDisk actions.
 ## SYNTAX
 
 ```
-Invoke-SelectOSDDisk [[-Input] <Object>] [-Skip] [-SelectOne] [<CommonParameters>]
+Invoke-SelectOSDDisk [[-Input] <Object>] [-Skip] [-SelectOne] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Runs interactive or workflow-oriented SelectOSDDisk operations used by OSD tasks
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Invoke-SelectOSDDisk.
+```
 
 ## PARAMETERS
 
@@ -71,6 +70,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

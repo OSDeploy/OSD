@@ -13,7 +13,7 @@ Blocks execution if the current user has Administrator rights
 ## SYNTAX
 
 ```
-Block-AdminUser [-Warn] [-Pause] [<CommonParameters>]
+Block-AdminUser [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +25,14 @@ If admin rights are detected, writes a warning and breaks execution unless the -
 ### EXAMPLE 1
 ```
 Block-AdminUser
-```
-
 Halts execution if the user is running as Administrator
+```
 
 ### EXAMPLE 2
 ```
 Block-AdminUser -Warn
-```
-
 Shows a warning but continues execution even if user is Administrator
+```
 
 ## PARAMETERS
 
@@ -64,6 +62,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -26,9 +26,8 @@ available on this device.
 ### EXAMPLE 1
 ```
 Test-HPIASupport
-```
-
 Returns True when the current device platform is listed in the HPIA platform catalog.
+```
 
 ## PARAMETERS
 

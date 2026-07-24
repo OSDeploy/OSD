@@ -13,7 +13,8 @@ Returns the latest matching Windows enablement package metadata.
 ## SYNTAX
 
 ```
-Get-EnablementPackage [[-OSBuild] <String>] [[-OSArch] <String>] [<CommonParameters>]
+Get-EnablementPackage [[-OSBuild] <String>] [[-OSArch] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +25,8 @@ Retrieves enablement package metadata from the WSUSXML catalog and filters the r
 ### EXAMPLE 1
 ```
 Get-EnablementPackage -OSBuild 22H2 -OSArch x64
-```
-
 Returns the newest x64 enablement package metadata for 22H2.
+```
 
 ## PARAMETERS
 
@@ -56,6 +56,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: X64
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

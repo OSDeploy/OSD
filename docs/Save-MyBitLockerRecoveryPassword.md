@@ -13,7 +13,7 @@ Saves BitLocker recovery passwords to text files.
 ## SYNTAX
 
 ```
-Save-MyBitLockerRecoveryPassword [-Path] <String[]> [<CommonParameters>]
+Save-MyBitLockerRecoveryPassword [-Path] <String[]> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ them as recovery key text files in one or more destination folders.
 ### EXAMPLE 1
 ```
 Save-MyBitLockerRecoveryPassword -Path 'D:\BitLockerBackup'
-```
-
 Exports recovery password text files to D:\BitLockerBackup.
+```
 
 ## PARAMETERS
 
@@ -43,6 +42,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

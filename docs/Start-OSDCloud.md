@@ -16,21 +16,21 @@ Prepare and start an OSDCloud deployment session (selects image, language, editi
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSName <String>] [-OSEdition <String>] [-OSLanguage <String>]
- [-OSActivation <String>] [<CommonParameters>]
+ [-OSActivation <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Legacy
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-OSVersion <String>] [-OSBuild <String>] [-OSEdition <String>]
- [-OSLanguage <String>] [-OSActivation <String>] [<CommonParameters>]
+ [-OSLanguage <String>] [-OSActivation <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### CustomImage
 ```
 Start-OSDCloud [-Manufacturer <String>] [-Product <String>] [-Firmware] [-Restart] [-Shutdown] [-Screenshot]
  [-SkipAutopilot] [-SkipODT] [-ZTI] [-FindImageFile] [-ImageFileUrl <String>] [-OSImageIndex <Int32>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,23 +49,20 @@ The function supports three parameter sets:
 ### EXAMPLE 1
 ```
 Start-OSDCloud
-```
-
 Interactive: choose image and options via menus.
+```
 
 ### EXAMPLE 2
 ```
 Start-OSDCloud -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us -SkipAutopilot
-```
-
 Non-interactive: specify OS selection and suppress autopilot.
+```
 
 ### EXAMPLE 3
 ```
 Start-OSDCloud -FindImageFile -ImageFileUrl 'https://server.example.com/images/install.wim' -OSImageIndex 1
-```
-
 Use a custom image URL.
+```
 
 ## PARAMETERS
 
@@ -355,6 +352,21 @@ Aliases: ImageIndex
 Required: False
 Position: Named
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

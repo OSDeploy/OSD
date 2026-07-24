@@ -13,7 +13,7 @@ Saves BitLocker external key protectors (.BEK) to destination folders.
 ## SYNTAX
 
 ```
-Save-MyBitLockerExternalKey [-Path] <String[]> [<CommonParameters>]
+Save-MyBitLockerExternalKey [-Path] <String[]> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ external key files to one or more target paths.
 ### EXAMPLE 1
 ```
 Save-MyBitLockerExternalKey -Path 'D:\BitLockerBackup'
-```
-
 Exports external key files to D:\BitLockerBackup.
+```
 
 ## PARAMETERS
 
@@ -43,6 +42,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

@@ -13,7 +13,7 @@ Saves BitLocker key packages to destination folders.
 ## SYNTAX
 
 ```
-Save-MyBitLockerKeyPackage [-Path] <String[]> [<CommonParameters>]
+Save-MyBitLockerKeyPackage [-Path] <String[]> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ non-TPM protector to one or more target paths.
 ### EXAMPLE 1
 ```
 Save-MyBitLockerKeyPackage -Path 'D:\BitLockerBackup'
-```
-
 Exports key package files to D:\BitLockerBackup.
+```
 
 ## PARAMETERS
 
@@ -43,6 +42,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

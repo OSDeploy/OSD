@@ -13,7 +13,7 @@ Blocks execution if curl.exe is not available
 ## SYNTAX
 
 ```
-Block-NoCurl [-Warn] [-Pause] [<CommonParameters>]
+Block-NoCurl [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ If curl.exe is not found, writes a warning and breaks execution unless the -Warn
 ### EXAMPLE 1
 ```
 Block-NoCurl
-```
-
 Halts execution if curl.exe is not available
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -14,12 +14,14 @@ Downloads driver updates from Microsoft Update Catalog
 
 ### ByPNPClass (Default)
 ```
-Save-MsUpCatDriver [-DestinationDirectory <String>] [-PNPClass <String>] [<CommonParameters>]
+Save-MsUpCatDriver [-DestinationDirectory <String>] [-PNPClass <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### ByHardwareID
 ```
-Save-MsUpCatDriver [-DestinationDirectory <String>] [-HardwareID <String[]>] [<CommonParameters>]
+Save-MsUpCatDriver [-DestinationDirectory <String>] [-HardwareID <String[]>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,9 +32,8 @@ Searches Microsoft Update Catalog for drivers matching specified hardware IDs or
 ### EXAMPLE 1
 ```
 Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
-```
-
 Downloads network driver updates to C:\Drivers
+```
 
 ## PARAMETERS
 
@@ -75,6 +76,21 @@ Valid values are DiskDrive, Display, Net, SCSIAdapter, SecurityDevices, or USB.
 Type: String
 Parameter Sets: ByPNPClass
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

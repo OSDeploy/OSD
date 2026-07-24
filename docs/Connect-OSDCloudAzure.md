@@ -13,7 +13,7 @@ Connect to Azure and initialize OSDCloudAzure session state.
 ## SYNTAX
 
 ```
-Connect-OSDCloudAzure [-UseDeviceAuthentication] [<CommonParameters>]
+Connect-OSDCloudAzure [-UseDeviceAuthentication] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,16 +26,14 @@ the global context, token, and header variables used by the Azure deployment wor
 ### EXAMPLE 1
 ```
 Connect-OSDCloudAzure
-```
-
 Signs in to Azure using the interactive browser-based authentication flow.
+```
 
 ### EXAMPLE 2
 ```
 Connect-OSDCloudAzure -UseDeviceAuthentication
-```
-
 Signs in to Azure by using device-code authentication.
+```
 
 ## PARAMETERS
 
@@ -50,6 +48,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

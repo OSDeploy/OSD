@@ -13,7 +13,7 @@ Blocks execution if Windows major version is not 10
 ## SYNTAX
 
 ```
-Block-WindowsVersionNe10 [-Warn] [-Pause] [<CommonParameters>]
+Block-WindowsVersionNe10 [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ If the major version is not 10, writes a warning and breaks execution unless the
 ### EXAMPLE 1
 ```
 Block-WindowsVersionNe10
-```
-
 Halts execution if Windows major version is not 10
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -14,7 +14,7 @@ OSDCloud imaging using the command line
 
 ```
 Start-OSDCloudGUIDev [[-BrandName] <String>] [[-BrandColor] <String>] [[-ComputerManufacturer] <String>]
- [[-ComputerProduct] <String>] [<CommonParameters>]
+ [[-ComputerProduct] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ OSDCloud imaging using the command line
 ### EXAMPLE 1
 ```
 Start-OSDCloudGUIDev
-```
-
 Starts the OSDCloud development GUI workflow.
+```
 
 ## PARAMETERS
 
@@ -87,6 +86,21 @@ Aliases:
 Required: False
 Position: 4
 Default value: (Get-MyComputerProduct)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

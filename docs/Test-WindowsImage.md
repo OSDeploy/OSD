@@ -13,7 +13,8 @@ Tests WindowsImage conditions.
 ## SYNTAX
 
 ```
-Test-WindowsImage [-ImagePath] <String> [-Index <UInt32>] [-Extension <String>] [<CommonParameters>]
+Test-WindowsImage [-ImagePath] <String> [-Index <UInt32>] [-Extension <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Evaluates WindowsImage state and returns a validation result for scripting decis
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Test-WindowsImage.
+```
 
 ## PARAMETERS
 
@@ -72,6 +71,21 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

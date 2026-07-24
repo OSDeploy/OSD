@@ -13,7 +13,8 @@ Creates BootableUSBDrive resources.
 ## SYNTAX
 
 ```
-New-BootableUSBDrive [[-BootLabel] <String>] [[-DataLabel] <String>] [<CommonParameters>]
+New-BootableUSBDrive [[-BootLabel] <String>] [[-DataLabel] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Builds new BootableUSBDrive resources based on the provided parameters.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run New-BootableUSBDrive.
+```
 
 ## PARAMETERS
 
@@ -56,6 +55,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: USB Data
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

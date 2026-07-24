@@ -13,7 +13,8 @@ Tests WindowsPackageCAB conditions.
 ## SYNTAX
 
 ```
-Test-WindowsPackageCAB [-PackagePath] <String> [[-Path] <String>] [<CommonParameters>]
+Test-WindowsPackageCAB [-PackagePath] <String> [[-Path] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Evaluates WindowsPackageCAB state and returns a validation result for scripting 
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Test-WindowsPackageCAB.
+```
 
 ## PARAMETERS
 
@@ -55,6 +54,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

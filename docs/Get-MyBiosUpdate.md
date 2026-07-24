@@ -13,7 +13,8 @@ Gets MyBiosUpdate information.
 ## SYNTAX
 
 ```
-Get-MyBiosUpdate [[-Manufacturer] <String>] [[-Product] <String>] [<CommonParameters>]
+Get-MyBiosUpdate [[-Manufacturer] <String>] [[-Product] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Returns MyBiosUpdate data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Get-MyBiosUpdate.
+```
 
 ## PARAMETERS
 
@@ -56,6 +55,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: (Get-MyComputerProduct)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

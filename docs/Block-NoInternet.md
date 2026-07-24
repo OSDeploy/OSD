@@ -13,7 +13,7 @@ Blocks execution if internet connectivity is not available
 ## SYNTAX
 
 ```
-Block-NoInternet [-Warn] [-Pause] [<CommonParameters>]
+Block-NoInternet [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ If connectivity cannot be established, writes a warning and breaks execution unl
 ### EXAMPLE 1
 ```
 Block-NoInternet
-```
-
 Halts execution if internet connectivity is not available
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

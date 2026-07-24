@@ -13,7 +13,8 @@ Enables PowerShell Gallery functionality in a WinPE WIM file
 ## SYNTAX
 
 ```
-Enable-PEWimPSGallery [-ImagePath] <String[]> [[-Index] <UInt32>] [<CommonParameters>]
+Enable-PEWimPSGallery [-ImagePath] <String[]> [[-Index] <UInt32>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +25,8 @@ Mounts a WinPE WIM file and configures it to support PowerShell Gallery function
 ### EXAMPLE 1
 ```
 Enable-PEWimPSGallery -ImagePath 'C:\WinPE\winpe.wim'
-```
-
 Enables PowerShell Gallery in the specified WIM file
+```
 
 ## PARAMETERS
 
@@ -59,6 +59,21 @@ Required: False
 Position: 2
 Default value: 1
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

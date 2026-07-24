@@ -13,7 +13,7 @@ Write the current clipboard text to the Azure clipboard Key Vault.
 ## SYNTAX
 
 ```
-Set-AzClipboard [[-Name] <String>] [<CommonParameters>]
+Set-AzClipboard [[-Name] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +25,14 @@ the current clipboard text in the named secret as plain text.
 ### EXAMPLE 1
 ```
 Set-AzClipboard
-```
-
 Copies the current clipboard text into the default Clipboard secret.
+```
 
 ### EXAMPLE 2
 ```
 Set-AzClipboard -Name Clipboard
-```
-
 Copies the current clipboard text into the Clipboard secret explicitly.
+```
 
 ## PARAMETERS
 
@@ -50,6 +48,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: Clipboard
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -13,7 +13,8 @@ Read a secret from Azure Key Vault.
 ## SYNTAX
 
 ```
-Get-CloudSecret [-VaultName] <String> [-Name] <String> [<CommonParameters>]
+Get-CloudSecret [-VaultName] <String> [-Name] <String> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +25,8 @@ Connects to Azure if needed and returns the named Key Vault secret as plain text
 ### EXAMPLE 1
 ```
 Get-CloudSecret -VaultName contoso -Name Script
-```
-
 Returns the secret text from the specified vault.
+```
 
 ## PARAMETERS
 
@@ -55,6 +55,21 @@ Aliases:
 
 Required: True
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

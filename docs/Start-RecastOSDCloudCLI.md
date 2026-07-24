@@ -15,7 +15,8 @@ Starts the Recast OSDCloud command-line deployment workflow.
 ```
 Start-RecastOSDCloudCLI [[-OSArchitecture] <String>] [[-OSReleaseID] <String>] [[-OSLanguageCode] <String>]
  [[-OSActivation] <String>] [[-OSEdition] <String>] [[-OSDManufacturer] <String>] [[-OSDModel] <String>]
- [[-OSDProduct] <String>] [<CommonParameters>]
+ [[-OSDProduct] <String>] [[-WinPEPostAction] <String>] [-Force] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,22 +24,22 @@ Initializes device and deployment context, discovers matching operating systems,
 resolves driver pack metadata for the current device (or supplied overrides),
 validates required dependencies, and prepares global state consumed by
 the Recast OSDCloud CLI workflow.
+The deployment workflow runs only when
+the Force switch is supplied.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Start-RecastOSDCloudCLI
-```
-
+Start-RecastOSDCloudCLI -Force
 Starts OSDCloud CLI using detected device values and default deployment selection.
+```
 
 ### EXAMPLE 2
 ```
-Start-RecastOSDCloudCLI -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2
-```
-
+Start-RecastOSDCloudCLI -OSArchitecture arm64 -OSEdition Pro -OSReleaseID 24H2 -Force
 Starts OSDCloud CLI for an ARM64 Windows 11 Pro 24H2 deployment selection.
+```
 
 ## PARAMETERS
 
@@ -163,6 +164,53 @@ Aliases:
 
 Required: False
 Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WinPEPostAction
+Specifies the action to take after the WinPE deployment workflow completes.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: Quit
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Force
+Confirms that OSDCloud should run after initialization.
+This switch is required
+to start the deployment workflow because it can modify the deployment disk.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -13,7 +13,8 @@ Downloads and extracts the latest system firmware update.
 ## SYNTAX
 
 ```
-Save-SystemFirmwareUpdate [[-DestinationDirectory] <String>] [<CommonParameters>]
+Save-SystemFirmwareUpdate [[-DestinationDirectory] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,16 +27,14 @@ directory.
 ### EXAMPLE 1
 ```
 Save-SystemFirmwareUpdate
-```
-
 Downloads and extracts the latest firmware update to the default temp path.
+```
 
 ### EXAMPLE 2
 ```
 Save-SystemFirmwareUpdate -DestinationDirectory C:\Drivers\SystemFirmware
-```
-
 Downloads and extracts the latest firmware update to C:\Drivers\SystemFirmware.
+```
 
 ## PARAMETERS
 
@@ -50,6 +49,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: "$env:TEMP\SystemFirmwareUpdate"
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

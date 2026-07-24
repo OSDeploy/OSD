@@ -15,8 +15,8 @@ Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 ```
 New-OSDisk [[-Input] <Object>] [[-DiskNumber] <UInt32>] [[-PartitionStyle] <String>] [[-LabelSystem] <String>]
  [[-SizeSystemGpt] <UInt64>] [[-SizeSystemMbr] <UInt64>] [[-SizeMSR] <UInt64>] [[-LabelWindows] <String>]
- [-NoRecoveryPartition] [[-LabelRecovery] <String>] [[-SizeRecovery] <UInt64>] [-Force] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-NoRecoveryPartition] [[-LabelRecovery] <String>] [[-SizeRecovery] <UInt64>] [-Force]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,17 +27,14 @@ Creates System | OS | Recovery Partitions for MBR or UEFI Drives in WinPE
 ### EXAMPLE 1
 ```
 New-OSDisk
-```
-
 Displays Get-Help New-OSDisk
+```
 
 ### EXAMPLE 2
 ```
 New-OSDisk -Force
+Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
 ```
-
-Interactive. 
-Prompted to Confirm Clear-Disk for each Local Disk
 
 ## PARAMETERS
 
@@ -268,6 +265,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

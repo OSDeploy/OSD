@@ -13,7 +13,7 @@ Retrieves the installation path of the Windows Kit directory.
 ## SYNTAX
 
 ```
-Get-WindowsKitsInstallPath [<CommonParameters>]
+Get-WindowsKitsInstallPath [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,11 +24,25 @@ Retrieves the installation path of the Windows Kits (which includes ADK and othe
 ### EXAMPLE 1
 ```
 Get-WindowsKitsInstallPath
+Returns the Windows Kits installation directory path
 ```
 
-Returns the Windows Kits installation directory path
-
 ## PARAMETERS
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

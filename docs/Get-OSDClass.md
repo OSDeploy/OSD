@@ -13,7 +13,7 @@ Returns CimInstance information from common OSD Classes
 ## SYNTAX
 
 ```
-Get-OSDClass [[-Class] <String>] [<CommonParameters>]
+Get-OSDClass [[-Class] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,12 +24,11 @@ Returns CimInstance information from common OSD Classes
 ### EXAMPLE 1
 ```
 OSDClass
-```
-
 Returns CimInstance Win32_ComputerSystem properties
 Option 1: Get-OSDClass
 Option 2: Get-OSDClass ComputerSystem
 Option 3: Get-OSDClass -Class ComputerSystem
+```
 
 ## PARAMETERS
 
@@ -78,6 +77,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: ComputerSystem
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

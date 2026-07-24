@@ -32,9 +32,7 @@
         'Get-OSDCoreLicense',
         'Show-OSDCoreLicenseHelp',
         # RecastOSDCloud
-        'Invoke-RecastOSDCloudCLI',
         'Start-RecastOSDCloudCLI',
-        'Start-RecastOSDCloudGUI',
         'Update-RecastOSDCloudUSBCache',
         # OSDCoreCache
         'Get-OSDCoreCacheContent',

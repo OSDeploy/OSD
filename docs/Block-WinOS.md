@@ -13,7 +13,7 @@ Blocks execution if the system is not running WinPE
 ## SYNTAX
 
 ```
-Block-WinOS [-Warn] [-Pause] [<CommonParameters>]
+Block-WinOS [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ If not in WinPE, writes a warning and breaks execution unless the -Warn paramete
 ### EXAMPLE 1
 ```
 Block-WinOS
-```
-
 Halts execution if the system is not running WinPE
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -14,7 +14,8 @@ schema: 2.0.0
 
 ```
 Invoke-HPAnalyzer [-all] [-RecommendedSoftware] [-ShowHWID] [-DebugOutput] [[-XmlFile] <String>]
- [[-CsvLog] <String>] [[-LogFile] <String>] [-NoDots] [-Silent] [-OSVerOverride] [-Help] [<CommonParameters>]
+ [[-CsvLog] <String>] [[-LogFile] <String>] [-NoDots] [-Silent] [-OSVerOverride] [-Help]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -188,6 +189,21 @@ Accept wildcard characters: False
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

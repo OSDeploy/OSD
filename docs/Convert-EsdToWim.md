@@ -13,7 +13,8 @@ Converts an ESD file into a WIM image.
 ## SYNTAX
 
 ```
-Convert-EsdToWim [-esdFullName] <String> [[-wimFullName] <String>] [<CommonParameters>]
+Convert-EsdToWim [-esdFullName] <String> [[-wimFullName] <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +25,8 @@ Exports non-setup Windows indexes from an ESD source into a new WIM file.
 ### EXAMPLE 1
 ```
 Convert-EsdToWim -esdFullName 'C:\Media\install.esd'
-```
-
 Exports Windows image indexes from the ESD into install.wim.
+```
 
 ## PARAMETERS
 
@@ -56,6 +56,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

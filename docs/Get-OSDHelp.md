@@ -13,7 +13,8 @@ Gets OSDHelp information.
 ## SYNTAX
 
 ```
-Get-OSDHelp [[-RepoFolder] <String>] [-OAuth <String>] [<CommonParameters>]
+Get-OSDHelp [[-RepoFolder] <String>] [-OAuth <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Returns OSDHelp data for the current system or OSD session context.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Get-OSDHelp.
+```
 
 ## PARAMETERS
 
@@ -52,6 +51,21 @@ Specifies the OAuth to use when running Get-OSDHelp.
 Type: String
 Parameter Sets: (All)
 Aliases: OAuthToken
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

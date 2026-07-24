@@ -14,12 +14,14 @@ Dismounts MyWindowsImage and finalizes changes.
 
 ### DismountDiscard (Default)
 ```
-Dismount-MyWindowsImage [-Path <String[]>] [-Discard] [-WhatIf] [-Confirm] [<CommonParameters>]
+Dismount-MyWindowsImage [-Path <String[]>] [-Discard] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### DismountSave
 ```
-Dismount-MyWindowsImage [-Path <String[]>] [-Save] [-WhatIf] [-Confirm] [<CommonParameters>]
+Dismount-MyWindowsImage [-Path <String[]>] [-Save] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,10 +31,8 @@ Commits or discards changes to MyWindowsImage and then unmounts the image.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Dismount-MyWindowsImage.
+```
 
 ## PARAMETERS
 
@@ -104,6 +104,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

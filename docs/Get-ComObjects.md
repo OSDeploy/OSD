@@ -14,12 +14,12 @@ Lists registered COM ProgIDs from the local machine registry.
 
 ### FilterByName
 ```
-Get-ComObjects -Filter <String> [<CommonParameters>]
+Get-ComObjects -Filter <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### ListAllComObjects
 ```
-Get-ComObjects [-ListAll] [<CommonParameters>]
+Get-ComObjects [-ListAll] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,16 +31,14 @@ Use -ListAll to return the full list, or -Filter to return matching entries.
 ### EXAMPLE 1
 ```
 Get-ComObjects -ListAll
-```
-
 Returns all COM ProgIDs that contain a CLSID registration.
+```
 
 ### EXAMPLE 2
 ```
 Get-ComObjects -Filter 'Microsoft.Update.*'
-```
-
 Returns only COM ProgIDs that match the specified wildcard pattern.
+```
 
 ## PARAMETERS
 
@@ -70,6 +68,21 @@ Aliases:
 Required: True
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

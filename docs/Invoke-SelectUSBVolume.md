@@ -14,7 +14,7 @@ Invokes SelectUSBVolume actions.
 
 ```
 Invoke-SelectUSBVolume [[-Input] <Object>] [[-MinimumSizeGB] <Int32>] [[-FileSystem] <String>] [-Skip]
- [-SelectOne] [<CommonParameters>]
+ [-SelectOne] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,10 +24,8 @@ Runs interactive or workflow-oriented SelectUSBVolume operations used by OSD tas
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Invoke-SelectUSBVolume.
+```
 
 ## PARAMETERS
 
@@ -102,6 +100,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

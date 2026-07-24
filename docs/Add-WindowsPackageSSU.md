@@ -14,12 +14,14 @@ Adds a Servicing Stack Update package to Windows.
 
 ### Offline (Default)
 ```
-Add-WindowsPackageSSU -PackagePath <String> -Path <String> [-LogPath <String>] [<CommonParameters>]
+Add-WindowsPackageSSU -PackagePath <String> -Path <String> [-LogPath <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Online
 ```
-Add-WindowsPackageSSU -PackagePath <String> [-Online] [-LogPath <String>] [<CommonParameters>]
+Add-WindowsPackageSSU -PackagePath <String> [-Online] [-LogPath <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,16 +32,14 @@ Extracts SSU cabinet files from a .cab or .msu package and applies them to an on
 ### EXAMPLE 1
 ```
 Add-WindowsPackageSSU -PackagePath C:\Updates\windows10.0-kbxxxx.msu -Path C:\Mount
-```
-
 Extracts SSU content from the MSU and applies it to the mounted image at C:\Mount.
+```
 
 ### EXAMPLE 2
 ```
 Add-WindowsPackageSSU -PackagePath C:\Updates\ssu.cab -Online
-```
-
 Applies SSU cab content to the running operating system.
+```
 
 ## PARAMETERS
 
@@ -99,6 +99,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: "$env:windir\Logs\Dism\dism.log"
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

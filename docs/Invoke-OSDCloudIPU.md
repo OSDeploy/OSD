@@ -14,7 +14,8 @@ Starts an OSDCloud in-place upgrade workflow.
 
 ```
 Invoke-OSDCloudIPU [-OSName <String>] [-Silent] [-SkipDriverPack] [-NoReboot] [-DownloadOnly]
- [-DiagnosticPrompt] [-SkipFinalize] [-Finalize] [-DynamicUpdate] [<CommonParameters>]
+ [-DiagnosticPrompt] [-SkipFinalize] [-Finalize] [-DynamicUpdate] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +26,8 @@ Validates elevation, inspects the current device and operating system, resolves 
 ### EXAMPLE 1
 ```
 Invoke-OSDCloudIPU -OSName 'Windows 11 24H2 x64' -Silent -DynamicUpdate
-```
-
 Downloads the 24H2 x64 image and starts the upgrade with a quiet setup experience and Dynamic Update enabled.
+```
 
 ## PARAMETERS
 
@@ -162,6 +162,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

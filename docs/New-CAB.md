@@ -13,7 +13,7 @@ Creates a CAB file from a Directory
 ## SYNTAX
 
 ```
-New-CAB [-SourceDirectory] <String> [<CommonParameters>]
+New-CAB [-SourceDirectory] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,10 +24,9 @@ Creates a CAB file from a Directory
 ### EXAMPLE 1
 ```
 New-CAB -SourceDirectory C:\DeploymentShare\OSDeploy\OSConfig
-```
-
 Creates LZX High Compression CAB from of C:\DeploymentShare\OSDeploy\OSConfig
 Saves file in Parent Directory C:\DeploymentShare\OSDeploy\OSConfig.cab
+```
 
 ## PARAMETERS
 
@@ -41,6 +40,21 @@ Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -13,7 +13,8 @@ Searches module files for matching text.
 ## SYNTAX
 
 ```
-Find-TextInModule [-Text] <String> [[-Module] <String>] [[-Include] <String[]>] [<CommonParameters>]
+Find-TextInModule [-Text] <String> [[-Module] <String>] [[-Include] <String[]>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +25,8 @@ Resolves the latest installed version of a module, searches its files for matchi
 ### EXAMPLE 1
 ```
 Find-TextInModule -Text Save-WebFile -Module OSD -Include *.ps1
-```
-
 Searches PowerShell files in the latest installed OSD module for Save-WebFile.
+```
 
 ## PARAMETERS
 
@@ -72,6 +72,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: *.*
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

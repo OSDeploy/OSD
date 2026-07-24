@@ -13,7 +13,8 @@ Adds 7-Zip command-line binaries to a mounted Windows image.
 ## SYNTAX
 
 ```
-Add-7Zip2BootImage [[-MountPath] <String>] [-Use7zr] [-TempTest] [<CommonParameters>]
+Add-7Zip2BootImage [[-MountPath] <String>] [-Use7zr] [-TempTest] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +26,14 @@ extracted binaries into Windows\System32 for the target mount path.
 ### EXAMPLE 1
 ```
 Add-7Zip2BootImage -MountPath 'C:\Mount'
-```
-
 Downloads and copies 7-Zip binaries into C:\Mount\Windows\System32.
+```
 
 ### EXAMPLE 2
 ```
 Add-7Zip2BootImage -Use7zr
-```
-
 Adds only 7zr.exe to the detected mounted image.
+```
 
 ## PARAMETERS
 
@@ -80,6 +79,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

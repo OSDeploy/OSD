@@ -13,7 +13,7 @@ Returns all display screens on the system
 ## SYNTAX
 
 ```
-Get-DisplayAllScreens [<CommonParameters>]
+Get-DisplayAllScreens [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,11 +24,25 @@ Enumerates all display screens connected to the system using Windows Forms assem
 ### EXAMPLE 1
 ```
 Get-DisplayAllScreens
+Returns all connected displays sorted by device name
 ```
 
-Returns all connected displays sorted by device name
-
 ## PARAMETERS
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

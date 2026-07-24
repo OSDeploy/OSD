@@ -13,7 +13,8 @@ Copies PowerShell modules to a destination module path.
 ## SYNTAX
 
 ```
-Copy-PSModuleToFolder [-Name] <String[]> [-Destination] <String> [-RemoveOldVersions] [<CommonParameters>]
+Copy-PSModuleToFolder [-Name] <String[]> [-Destination] <String> [-RemoveOldVersions]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +26,14 @@ the destination using the standard module\version folder layout.
 ### EXAMPLE 1
 ```
 Copy-PSModuleToFolder -Name OSD -Destination 'C:\Modules'
+Copies the latest installed OSD module to C:\Modules\OSD\<version>.
 ```
-
-Copies the latest installed OSD module to C:\Modules\OSD\\\<version\>.
 
 ### EXAMPLE 2
 ```
 Copy-PSModuleToFolder -Name OSD,PackageManagement -Destination 'C:\Modules' -RemoveOldVersions
-```
-
 Removes existing destination module content and copies fresh module versions.
+```
 
 ## PARAMETERS
 
@@ -79,6 +78,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

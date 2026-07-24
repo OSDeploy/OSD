@@ -18,7 +18,7 @@ Get-MsUpCat [-Architecture <String>] [-Descending] [-ExcludeFramework] [-FromDat
  [-Format <String>] [-GetFramework] [-AllPages] [-IncludeDynamic] [-IncludeFileNames] [-IncludePreview]
  [-LastDays <Int32>] [-MaxSize <Double>] [-MinSize <Double>] [-Properties <String[]>] [-Search] <String>
  [-SizeUnit <String>] [-SortBy <String>] [-Strict] [-ToDate <DateTime>] [-UpdateType <String[]>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### OS
@@ -27,7 +27,7 @@ Get-MsUpCat [-Architecture <String>] [-Descending] [-ExcludeFramework] [-FromDat
  [-Format <String>] [-GetFramework] [-AllPages] [-IncludeDynamic] [-IncludeFileNames] [-IncludePreview]
  [-LastDays <Int32>] [-MaxSize <Double>] [-MinSize <Double>] -OperatingSystem <String> [-Properties <String[]>]
  [-SizeUnit <String>] [-SortBy <String>] [-Strict] [-ToDate <DateTime>] [-UpdateType <String[]>]
- [-Version <String>] [<CommonParameters>]
+ [-Version <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,9 +38,8 @@ Searches the Microsoft Update Catalog for updates and returns information about 
 ### EXAMPLE 1
 ```
 Get-MsUpCat -Architecture x64
-```
-
 Retrieves x64 updates from Microsoft Update Catalog
+```
 
 ## PARAMETERS
 
@@ -368,6 +367,21 @@ endregion Parameters
 Type: String
 Parameter Sets: OS
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

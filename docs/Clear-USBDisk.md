@@ -14,7 +14,7 @@ Clears USBDisk data or state.
 
 ```
 Clear-USBDisk [[-Input] <Object>] [[-DiskNumber] <UInt32>] [-Initialize] [[-PartitionStyle] <String>] [-Force]
- [-ShowWarning] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-ShowWarning] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,10 +24,8 @@ Removes existing USBDisk data or configuration and applies the requested reset b
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Clear-USBDisk.
+```
 
 ## PARAMETERS
 
@@ -144,6 +142,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

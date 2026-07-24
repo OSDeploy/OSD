@@ -13,7 +13,7 @@ Extracts GUID values from a PNP Device ID string.
 ## SYNTAX
 
 ```
-Convert-PNPDeviceIDtoGuid [-PNPDeviceID] <String> [<CommonParameters>]
+Convert-PNPDeviceIDtoGuid [-PNPDeviceID] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,16 +27,14 @@ pipeline.
 ### EXAMPLE 1
 ```
 Convert-PNPDeviceIDtoGuid -PNPDeviceID 'USB\\VID_1234&PID_5678\\{12345678-1234-1234-1234-1234567890AB}'
-```
-
 Returns the GUID found in the PNP device ID.
+```
 
 ### EXAMPLE 2
 ```
 'USB\\VID_1234&PID_5678\\{12345678-1234-1234-1234-1234567890AB}' | Convert-PNPDeviceIDtoGuid
-```
-
 Returns the GUID found in the piped PNP device ID.
+```
 
 ## PARAMETERS
 
@@ -52,6 +50,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

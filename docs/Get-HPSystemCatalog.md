@@ -13,7 +13,8 @@ Converts the HP Client Catalog for Microsoft System Center Product to a PowerShe
 ## SYNTAX
 
 ```
-Get-HPSystemCatalog [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>] [<CommonParameters>]
+Get-HPSystemCatalog [[-DownloadPath] <String>] [-Compatible] [[-Component] <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,24 +26,20 @@ Requires Internet Access to download HpCatalogForSms.latest.cab
 ### EXAMPLE 1
 ```
 Get-HPSystemCatalog
-```
-
 Don't do this, you will get an almost endless list
+```
 
 ### EXAMPLE 2
 ```
 $Results = Get-HPSystemCatalog
+Yes do this.  Save it in a Variable
 ```
-
-Yes do this. 
-Save it in a Variable
 
 ### EXAMPLE 3
 ```
 Get-HPSystemCatalog -Component BIOS | Out-GridView
-```
-
 Displays all the HP BIOS updates in GridView
+```
 
 ## PARAMETERS
 
@@ -86,6 +83,21 @@ Aliases:
 
 Required: False
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

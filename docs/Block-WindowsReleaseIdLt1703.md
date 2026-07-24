@@ -13,7 +13,7 @@ Blocks execution if Windows ReleaseId is less than 1703
 ## SYNTAX
 
 ```
-Block-WindowsReleaseIdLt1703 [-Warn] [-Pause] [<CommonParameters>]
+Block-WindowsReleaseIdLt1703 [-Warn] [-Pause] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ If the ReleaseId is less than 1703, writes a warning and breaks execution unless
 ### EXAMPLE 1
 ```
 Block-WindowsReleaseIdLt1703
-```
-
 Halts execution if Windows ReleaseId is less than 1703
+```
 
 ## PARAMETERS
 
@@ -57,6 +56,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

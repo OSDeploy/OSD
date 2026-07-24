@@ -13,7 +13,7 @@ Retrieves content from GitHub or Gist raw URLs.
 ## SYNTAX
 
 ```
-Get-GithubRawContent [-Uri] <Uri[]> [<CommonParameters>]
+Get-GithubRawContent [-Uri] <Uri[]> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,16 +27,14 @@ successful responses continue to stream to the pipeline.
 ### EXAMPLE 1
 ```
 Get-GithubRawContent -Uri 'https://github.com/OSDeploy/OSD/blob/master/README.md'
-```
-
 Retrieves the raw README.md content.
+```
 
 ### EXAMPLE 2
 ```
 'https://gist.github.com/user/0123456789abcdef' | Get-GithubRawContent
-```
-
 Retrieves content for each file in the gist.
+```
 
 ## PARAMETERS
 
@@ -52,6 +50,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

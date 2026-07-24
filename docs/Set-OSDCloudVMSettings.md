@@ -15,7 +15,7 @@ Sets configuration values by using Set-OSDCloudVMSettings.
 ```
 Set-OSDCloudVMSettings [[-CheckpointVM] <Boolean>] [[-Generation] <UInt16>] [[-MemoryStartupGB] <UInt16>]
  [[-NamePrefix] <String>] [[-ProcessorCount] <UInt16>] [[-StartVM] <Boolean>] [[-SwitchName] <String>]
- [[-VHDSizeGB] <UInt16>] [<CommonParameters>]
+ [[-VHDSizeGB] <UInt16>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,9 +26,8 @@ Provides the implementation for Set-OSDCloudVMSettings.
 ### EXAMPLE 1
 ```
 -Generation <Generation>
-```
-
 Runs Set-OSDCloudVMSettings with common parameters.
+```
 
 ## PARAMETERS
 
@@ -148,6 +147,21 @@ Aliases:
 Required: False
 Position: 8
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

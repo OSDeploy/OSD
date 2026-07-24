@@ -15,12 +15,12 @@ Deploy OSDCloud Azure infrastructure with Bicep or Terraform.
 ### Bicep
 ```
 Invoke-AzOSDAzureConfig [-Location <Object>] [-ResourceGroupName <String>] [-AzOSDUserNameStart <String>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### Terraform
 ```
-Invoke-AzOSDAzureConfig [-UseTerraform <Boolean>] [<CommonParameters>]
+Invoke-AzOSDAzureConfig [-UseTerraform <Boolean>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,16 +33,14 @@ the Terraform configuration in C:\OSDCloud.
 ### EXAMPLE 1
 ```
 Invoke-AzOSDAzureConfig -Location eastus -ResourceGroupName rg-osdcloud
-```
-
 Runs the Bicep deployment path for the selected Azure region and resource group.
+```
 
 ### EXAMPLE 2
 ```
 Invoke-AzOSDAzureConfig -UseTerraform $true
-```
-
 Runs the Terraform deployment path from C:\OSDCloud.
+```
 
 ## PARAMETERS
 
@@ -102,6 +100,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: True
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -14,7 +14,7 @@ Downloads a matching Windows enablement package.
 
 ```
 Save-EnablementPackage [[-DownloadPath] <String>] [[-OSBuild] <String>] [[-OSArch] <String>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ Resolves an enablement package for the requested build and architecture, verifie
 ### EXAMPLE 1
 ```
 Save-EnablementPackage -DownloadPath C:\Temp -OSBuild 22H2 -OSArch x64
-```
-
 Downloads the latest matching x64 enablement package for 22H2 to C:\Temp.
+```
 
 ## PARAMETERS
 
@@ -72,6 +71,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: X64
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

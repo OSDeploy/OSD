@@ -13,7 +13,7 @@ Downloads and extracts the required HP TPM firmware update softpaq using HPCMSL.
 ## SYNTAX
 
 ```
-Invoke-HPTPMDownload [[-WorkingFolder] <Object>] [<CommonParameters>]
+Invoke-HPTPMDownload [[-WorkingFolder] <Object>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,16 +29,14 @@ Intended for manual download and testing scenarios.
 ### EXAMPLE 1
 ```
 Invoke-HPTPMDownload
-```
-
 Downloads and extracts the required TPM firmware softpaq to $env:TEMP\TPM.
+```
 
 ### EXAMPLE 2
 ```
 Invoke-HPTPMDownload -WorkingFolder 'C:\Temp\TPMWork'
-```
-
 Downloads and extracts the required TPM firmware softpaq to C:\Temp\TPMWork.
+```
 
 ## PARAMETERS
 
@@ -53,6 +51,21 @@ Aliases:
 
 Required: False
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

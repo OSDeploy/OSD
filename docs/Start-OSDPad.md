@@ -14,19 +14,22 @@ Starts the workflow for Start-OSDPad.
 
 ### Standalone (Default)
 ```
-Start-OSDPad [-Brand <String>] [-Color <String>] [-Hide <String[]>] [<CommonParameters>]
+Start-OSDPad [-Brand <String>] [-Color <String>] [-Hide <String[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### GitHub
 ```
 Start-OSDPad [-RepoOwner] <String> [-RepoName] <String> [[-RepoFolder] <String>] [-OAuth <String>]
- [-Brand <String>] [-Color <String>] [-Hide <String[]>] [<CommonParameters>]
+ [-Brand <String>] [-Color <String>] [-Hide <String[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### GitLab
 ```
 Start-OSDPad [-RepoName] <String> [[-RepoFolder] <String>] -RepoDomain <String> [-OAuth <String>]
- [-Brand <String>] [-Color <String>] [-Hide <String[]>] [<CommonParameters>]
+ [-Brand <String>] [-Color <String>] [-Hide <String[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,9 +40,8 @@ Provides the implementation for Start-OSDPad.
 ### EXAMPLE 1
 ```
 -RepoName <RepoName> -RepoDomain <RepoDomain>
-```
-
 Runs Start-OSDPad with common parameters.
+```
 
 ## PARAMETERS
 
@@ -155,6 +157,21 @@ Specifies the value for Hide.
 Type: String[]
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

@@ -13,7 +13,7 @@ Installs or updates the HP Client Management Script Library (HPCMSL) PowerShell 
 ## SYNTAX
 
 ```
-Install-ModuleHPCMSL [<CommonParameters>]
+Install-ModuleHPCMSL [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,11 +28,25 @@ After installation, the module is imported into the global scope.
 ### EXAMPLE 1
 ```
 Install-ModuleHPCMSL
+Installs or updates HPCMSL 1.8.5 for all users and imports it into the current session.
 ```
 
-Installs or updates HPCMSL 1.8.5 for all users and imports it into the current session.
-
 ## PARAMETERS
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

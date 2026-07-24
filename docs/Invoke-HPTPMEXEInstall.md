@@ -14,7 +14,7 @@ Extracts and installs the HP TPM firmware update from C:\OSDCloud\HP\TPM.
 
 ```
 Invoke-HPTPMEXEInstall [[-path] <Object>] [[-filename] <Object>] [[-spec] <Object>] [[-logsuffix] <Object>]
- [[-WorkingFolder] <Object>] [<CommonParameters>]
+ [[-WorkingFolder] <Object>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,16 +29,14 @@ TPMConfig64 along with a human-readable description for all documented exit code
 ### EXAMPLE 1
 ```
 Invoke-HPTPMEXEInstall
-```
-
 Installs the TPM firmware using default TPMConfig64 arguments.
+```
 
 ### EXAMPLE 2
 ```
 Invoke-HPTPMEXEInstall -spec '1.2'
-```
-
 Installs the TPM firmware targeting the 1.2 specification.
+```
 
 ## PARAMETERS
 
@@ -116,6 +114,21 @@ Aliases:
 
 Required: False
 Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

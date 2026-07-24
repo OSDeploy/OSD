@@ -24,9 +24,8 @@ Returns NativeMatchineImage data for the current system or OSD session context.
 ### EXAMPLE 1
 ```
 Get-NativeMatchineImage
-```
-
 Demonstrates a common way to run Get-NativeMatchineImage.
+```
 
 ## PARAMETERS
 

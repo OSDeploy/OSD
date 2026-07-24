@@ -14,7 +14,7 @@ Imports OSDCloud CloudDrivers into an MDT Deployment Share
 
 ```
 Import-OSDCloudWinPEDriverMDT [[-Driver] <String[]>] [[-DriverHWID] <String[]>] [[-ShareName] <String>]
- [<CommonParameters>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,8 @@ Imports OSDCloud CloudDrivers into an MDT Deployment Share
 ### EXAMPLE 1
 ```
 Import-OSDCloudWinPEDriverMDT
-```
-
 Imports OSDCloud WinPE cloud drivers into an MDT deployment share.
+```
 
 ## PARAMETERS
 
@@ -71,6 +70,21 @@ Aliases: Share
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

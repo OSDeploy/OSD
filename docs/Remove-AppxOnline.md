@@ -13,7 +13,8 @@ Removes AppxOnline items.
 ## SYNTAX
 
 ```
-Remove-AppxOnline [-GridRemoveAppx] [-GridRemoveAppxPP] [[-Name] <String[]>] [<CommonParameters>]
+Remove-AppxOnline [-GridRemoveAppx] [-GridRemoveAppxPP] [[-Name] <String[]>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,10 +24,8 @@ Deletes matching AppxOnline items from the current context.
 
 ### EXAMPLE 1
 ```
-
-```
-
 Demonstrates a common way to run Remove-AppxOnline.
+```
 
 ## PARAMETERS
 
@@ -70,6 +69,21 @@ Aliases:
 
 Required: False
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

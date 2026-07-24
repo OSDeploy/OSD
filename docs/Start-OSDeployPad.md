@@ -13,7 +13,8 @@ Starts the workflow for Start-OSDeployPad.
 ## SYNTAX
 
 ```
-Start-OSDeployPad [[-RepoFolder] <String>] [-OAuth <String>] [<CommonParameters>]
+Start-OSDeployPad [[-RepoFolder] <String>] [-OAuth <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,9 +25,8 @@ Provides the implementation for Start-OSDeployPad.
 ### EXAMPLE 1
 ```
 -OAuth <OAuth>
-```
-
 Runs Start-OSDeployPad with common parameters.
+```
 
 ## PARAMETERS
 
@@ -52,6 +52,21 @@ Specifies the value for OAuth.
 Type: String
 Parameter Sets: (All)
 Aliases: OAuthToken
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named

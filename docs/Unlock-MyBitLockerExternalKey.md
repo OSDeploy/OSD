@@ -13,7 +13,8 @@ Unlocks BitLocker volumes using external key files.
 ## SYNTAX
 
 ```
-Unlock-MyBitLockerExternalKey [[-Path] <String[]>] [-Recurse] [<CommonParameters>]
+Unlock-MyBitLockerExternalKey [[-Path] <String[]>] [-Recurse] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,16 +26,14 @@ BitLocker volumes that use external key protectors.
 ### EXAMPLE 1
 ```
 Unlock-MyBitLockerExternalKey -Path 'D:\BitLockerBackup'
-```
-
 Unlocks volumes using matching .BEK files in the specified folder.
+```
 
 ### EXAMPLE 2
 ```
 Unlock-MyBitLockerExternalKey -Path 'D:\BitLockerBackup' -Recurse
-```
-
 Unlocks volumes using matching .BEK files found recursively.
+```
 
 ## PARAMETERS
 
@@ -65,6 +64,21 @@ Required: False
 Position: 2
 Default value: False
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

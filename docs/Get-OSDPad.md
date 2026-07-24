@@ -14,13 +14,15 @@ Gets information returned by Get-OSDPad.
 
 ### Standalone (Default)
 ```
-Get-OSDPad [-Brand <String>] [-Color <String>] [-Hide <String[]>] [<CommonParameters>]
+Get-OSDPad [-Brand <String>] [-Color <String>] [-Hide <String[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ### GitHub
 ```
 Get-OSDPad [-RepoOwner] <String> [-RepoName] <String> [[-RepoFolder] <String>] [-OAuth <String>]
- [-Brand <String>] [-Color <String>] [-Hide <String[]>] [<CommonParameters>]
+ [-Brand <String>] [-Color <String>] [-Hide <String[]>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,9 +33,8 @@ Provides the implementation for Get-OSDPad.
 ### EXAMPLE 1
 ```
 -RepoName <RepoName>
-```
-
 Runs Get-OSDPad with common parameters.
+```
 
 ## PARAMETERS
 
@@ -134,6 +135,21 @@ Specifies the value for Hide.
 Type: String[]
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named
