@@ -89,11 +89,11 @@
         [System.Management.Automation.SwitchParameter]
         $Firmware = $Global:OSDModuleResource.StartOSDCloudGUI.updateFirmware,
 
-        #Restart the computer after Invoke-OSDCloud to OOBE
+        #Restart the computer after Invoke-OSDCloudCLI to OOBE
         [System.Management.Automation.SwitchParameter]
         $Restart,
 
-        #Shutdown the computer after Invoke-OSDCloud
+        #Shutdown the computer after Invoke-OSDCloudCLI
         [System.Management.Automation.SwitchParameter]
         $Shutdown,
 
@@ -712,7 +712,7 @@
         Write-Host -ForegroundColor Yellow $Global:StartOSDCloudCLI.DriverPack.Url
     }
     #=================================================
-    #   Invoke-OSDCloud
+    #   Invoke-OSDCloudCLI
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
     Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Start-OSDCloudCLI Configuration"
@@ -762,9 +762,9 @@
     catch {
     }
     #================================================
-    #   Invoke-OSDCloud
+    #   Invoke-OSDCloudCLI
     #================================================
-    Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Starting Invoke-OSDCloud in 5 seconds ..."
+    Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Starting Invoke-OSDCloudCLI in 5 seconds ..."
     Start-Sleep -Seconds 5
-    Invoke-OSDCloud
+    Invoke-OSDCloudCLI
 }

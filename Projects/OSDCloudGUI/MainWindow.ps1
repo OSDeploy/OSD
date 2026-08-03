@@ -855,15 +855,15 @@ $formMainWindowControlStartButton.add_Click({
     }
     #>
     #=================================================
-    #   Invoke-OSDCloud.ps1
+    #   Invoke-OSDCloudGUI.ps1
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Invoke-OSDCloud Configuration"
+    Write-Host -ForegroundColor Green "Invoke-OSDCloudGUI Configuration"
     $Global:InvokeOSDCloud | Out-Host
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "Invoke-OSDCloud ... Starting in 5 seconds..."
+    Write-Host -ForegroundColor Green "Invoke-OSDCloudGUI ... Starting in 5 seconds..."
     Start-Sleep -Seconds 5
-    Invoke-OSDCloud
+    Invoke-OSDCloudGUI
     #=================================================
 })
 #================================================
