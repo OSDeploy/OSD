@@ -1,7 +1,7 @@
 <#PSScriptInfo
 .VERSION 22.9.13.1
 .GUID c480a6f6-f482-45af-9ba6-28b2a409101d
-.AUTHOR David Segura @SeguraOSD
+.AUTHOR David Segura - Recast Software
 .COMPANYNAME osdeploy.com
 .COPYRIGHT (c) 2022 David Segura osdeploy.com. All rights reserved.
 .TAGS OSDeploy OSDCloud WinPE OOBE Windows AutoPilot
@@ -30,10 +30,10 @@ powershell iex (irm go.osdcloud.com/hash)
     powershell iex (irm go.osdcloud.com/hash)
 #>
 if ($env:SystemDrive -eq 'X:') {
-    Write-Warning "[$(Get-Date -format G)] go.osdcloud.com/hash cannot be run from WinPE"
+    Write-Warning "[$(Get-Date -format s)] go.osdcloud.com/hash cannot be run from WinPE"
 }
 elseif (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-    Write-Warning "[$(Get-Date -format G)] go.osdcloud.com/hash requires elevated Admin Rights"
+    Write-Warning "[$(Get-Date -format s)] go.osdcloud.com/hash requires elevated Admin Rights"
 }
 else {
     $TempSession = New-CimSession
@@ -46,7 +46,7 @@ else {
         $Global:hardwareIdentifier
     }
     else {
-        Write-Warning "[$(Get-Date -format G)] go.osdcloud.com/hash is unable to retrieve device hardware data (hash) from computer"
+        Write-Warning "[$(Get-Date -format s)] go.osdcloud.com/hash is unable to retrieve device hardware data (hash) from computer"
     }
 
     Remove-CimSession $TempSession

@@ -6,11 +6,32 @@
     .DESCRIPTION
     OSDCloud imaging using the command line
 
+    .PARAMETER BrandName
+    Sets the GUI brand text shown in the header/title.
+
+    .PARAMETER BrandColor
+    Sets the GUI brand color.
+
+    .PARAMETER ComputerManufacturer
+    Overrides detected manufacturer for driver pack filtering.
+
+    .PARAMETER ComputerProduct
+    Overrides detected product/system identifier for driver pack filtering.
+
+    .PARAMETER v2
+    Legacy compatibility switch for manufacturer-based driver pack filtering.
+
     .EXAMPLE
     Start-OSDCloudGUI
+    Starts OSDCloud GUI with detected device values.
 
     .NOTES
-    25.1.17 Added a temporary parameter v2 to filter DriverPacks by Manufacturer
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
+    2026-07-09 - The v2 parameter remains deprecated and retained temporarily for compatibility.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding()]
@@ -49,7 +70,7 @@
             Invoke-Expression (Invoke-RestMethod -Uri $HotfixUrl -UseBasicParsing)
         }
         else {
-            Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] OSDCloud failed to reach the Hotfix URL"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCloud failed to reach the Hotfix URL"
             Write-Warning $HotfixUrl
         }
     }
@@ -128,7 +149,7 @@
     #================================================
     #   OSDCloud Automate
     #================================================
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Exporting default configuration to $env:Temp\Start-OSDCloudGUI.json"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Exporting default configuration to $env:Temp\Start-OSDCloudGUI.json"
     $Global:OSDCloudGUI | ConvertTo-Json -Depth 10 | Out-File -FilePath "$env:TEMP\Start-OSDCloudGUI.json" -Force
 
     $Global:OSDCloudGUI.AutomateJsonFile = Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Name -ne 'C'} | ForEach-Object {
@@ -136,7 +157,7 @@
     }
     if ($Global:OSDCloudGUI.AutomateJsonFile) {
         foreach ($Item in $Global:OSDCloudGUI.AutomateJsonFile) {
-            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] $($Item.FullName)"
+            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $($Item.FullName)"
             $Global:OSDCloudGUI.AutomateConfiguration = Get-Content -Path "$($Item.FullName)" -Raw | ConvertFrom-Json -ErrorAction "Stop" | ConvertTo-Hashtable
         }
     }
@@ -170,37 +191,37 @@
         $Win32Tpm = Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_Tpm
 
         if ($null -eq $Win32Tpm) {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Autopilot: Not Supported"
             Start-Sleep -Seconds 5
         }
         elseif ($Win32Tpm.SpecVersion) {
             if ($null -eq $Win32Tpm.SpecVersion) {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Unable to detect the TPM Version"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] TPM: Unable to detect the TPM Version"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Autopilot: Not Supported"
                 Start-Sleep -Seconds 5
             }
 
             $majorVersion = $Win32Tpm.SpecVersion.Split(",")[0] -as [int]
             if ($majorVersion -lt 2) {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Version is less than 2.0"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] TPM: Version is less than 2.0"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Autopilot: Not Supported"
                 Start-Sleep -Seconds 5
             }
             else {
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
-                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] TPM 2.0: Supported"
-                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Autopilot: Supported"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format s)] TPM 2.0: Supported"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Autopilot: Supported"
             }
         }
         else {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Autopilot: Not Supported"
             Start-Sleep -Seconds 5
         }
     }

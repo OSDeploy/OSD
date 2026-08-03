@@ -7,12 +7,67 @@ if ($env:SystemDrive -eq 'X:') {
     Common WinPE Commands using wpeutil and Microsoft DaRT RemoteRecovery
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     19.10.1     David Segura @SeguraOSD
     #>
     function Get-OSDWinPE {
+    <#
+    .SYNOPSIS
+    Gets OSDWinPE information.
+
+    .DESCRIPTION
+    Returns OSDWinPE data for the current system or OSD session context.
+
+    .PARAMETER GetModules
+    Specifies the GetModules to use when running Get-OSDWinPE.
+
+    .PARAMETER GetScript
+    Specifies the GetScript to use when running Get-OSDWinPE.
+
+    .PARAMETER GetScripts
+    Specifies the GetScripts to use when running Get-OSDWinPE.
+
+    .PARAMETER InitializeNetwork
+    Specifies the InitializeNetwork to use when running Get-OSDWinPE.
+
+    .PARAMETER InitializeNetworkNoWait
+    Specifies the InitializeNetworkNoWait to use when running Get-OSDWinPE.
+
+    .PARAMETER WaitForNetwork
+    Specifies the WaitForNetwork to use when running Get-OSDWinPE.
+
+    .PARAMETER WaitForRemovableStorage
+    Specifies the WaitForRemovableStorage to use when running Get-OSDWinPE.
+
+    .PARAMETER DisableFirewall
+    Specifies the DisableFirewall to use when running Get-OSDWinPE.
+
+    .PARAMETER UpdateBootInfo
+    Specifies the UpdateBootInfo to use when running Get-OSDWinPE.
+
+    .PARAMETER RemoteRecovery
+    Specifies the RemoteRecovery to use when running Get-OSDWinPE.
+
+    .PARAMETER Reboot
+    Specifies the Reboot to use when running Get-OSDWinPE.
+
+    .PARAMETER Shutdown
+    Specifies the Shutdown to use when running Get-OSDWinPE.
+
+    .EXAMPLE
+    Get-OSDWinPE -GetModules <value>
+    Demonstrates a common way to run Get-OSDWinPE.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-13 - Initial help block created
+    2026-07-13 - Refined generated help text
+    #>
         [CmdletBinding()]
         param (
             #Find and Copy PowerShell Modules to WinPE
@@ -188,6 +243,31 @@ if ($env:SystemDrive -eq 'X:') {
         }
     }
     function Add-OfflineServicingWindowsDriver {
+        <#
+        .SYNOPSIS
+        Configures drivers for offline servicing in Windows Setup
+
+        .DESCRIPTION
+        Creates and applies an unattend XML file to configure driver paths for offline servicing during Windows Setup. This allows drivers to be installed on both x86 and x64 architectures.
+
+        .PARAMETER Path
+        Path to the drivers directory. Default is C:\Drivers
+
+        .EXAMPLE
+        Add-OfflineServicingWindowsDriver
+        Configures C:\Drivers for offline servicing
+
+        .EXAMPLE
+        Add-OfflineServicingWindowsDriver -Path 'E:\CustomDrivers'
+        Configures E:\CustomDrivers for offline servicing
+
+        .NOTES
+        Author: David Segura - Recast Software
+        2026-07-10 - Added comment-based help
+
+        .LINK
+        https://github.com/OSDeploy/OSD/tree/master/docs
+        #>
         [CmdletBinding()]
         param (
             [string]$Path = 'C:\Drivers'
@@ -228,6 +308,31 @@ $UnattendXml = @"
         #=================================================
     }
     function Use-WinPEContent {
+        <#
+        .SYNOPSIS
+        Processes and integrates content into WinPE environment
+
+        .DESCRIPTION
+        Finds and processes WinPE content including drivers, files, modules, registry settings, and scripts from connected drives or USB media. This function searches for content in standardized directories and applies it to the WinPE system.
+
+        .PARAMETER Content
+        Type of content to process. Valid values are Drivers, Files, Modules, Registry, Scripts, or * for all. Default is all content types.
+
+        .EXAMPLE
+        Use-WinPEContent
+        Processes all available content types in WinPE
+
+        .EXAMPLE
+        Use-WinPEContent -Content 'Drivers','Modules'
+        Processes only drivers and modules
+
+        .NOTES
+        Author: David Segura - Recast Software
+        2026-07-10 - Added comment-based help
+
+        .LINK
+        https://github.com/OSDeploy/OSD/tree/master/docs
+        #>
         [CmdletBinding()]
         param (
             [ValidateSet('*','Drivers','Files','Modules','Registry','Scripts')]

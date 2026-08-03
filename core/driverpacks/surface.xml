@@ -1,0 +1,1033 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface 3 [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface 3</S>
+      <S N="SystemId">Surface_3</S>
+      <S N="FileName">Surface3_WiFi_Win10_18362_1902003_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/c/5/c/c5c75dc4-0807-44a8-bcc1-6064cfd150f2/Surface3_WiFi_Win10_18362_1902003_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="1">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface 3 LTE ATT [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface 3 LTE ATT</S>
+      <S N="SystemId">Surface_3_US1</S>
+      <S N="FileName">Surface3_4GLTE-ATT_Win10_18362_1902003_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/9/7/2/9728fcd1-a108-4ee6-adfd-fb33c2320ccf/Surface3_4GLTE-ATT_Win10_18362_1902003_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="2">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface 3 LTE North America [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface 3 LTE North America</S>
+      <S N="SystemId">Surface_3_NAG</S>
+      <S N="FileName">Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/7/5/7/757b0c6e-0c22-400b-90ea-d8afbd64cc16/Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="3">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface 3 LTE Rest of World [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface 3 LTE Rest of World</S>
+      <S N="SystemId">Surface_3_ROW</S>
+      <S N="FileName">Surface3_4GLTE-RestOfTheWorld_Win10_18362_1902003_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/d/b/9/db9ac338-1f7a-4cfe-97e1-b089ded46831/Surface3_4GLTE-RestOfTheWorld_Win10_18362_1902003_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="4">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface 3 LTE Verizon [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface 3 LTE Verizon</S>
+      <S N="SystemId">Surface_3_US2</S>
+      <S N="FileName">Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/7/5/7/757b0c6e-0c22-400b-90ea-d8afbd64cc16/Surface3_4GLTE-NorthAmericaUnlocked_Win10_18362_1902003_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="5">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">25.08.07</S>
+      <S N="Name">Surface Book [25.08.07]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Book</S>
+      <S N="SystemId">Surface_Book</S>
+      <S N="FileName">SurfaceBook_Win10_18362_21.062.17202.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/d/8/b/d8bb7912-5db3-4aff-8554-8f2e0b4cab41/SurfaceBook_Win10_18362_21.062.17202.0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="6">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Book 2 [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Book 2</S>
+      <Obj N="SystemId" RefId="7">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>Surface_Book_1793</S>
+          <S>Surface_Book_1832</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceBook2_Win11_22000_23.092.25731.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/9/4/f/94f7aed2-d3ed-4a60-ab94-a0d078fe6df6/SurfaceBook2_Win11_22000_23.092.25731.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="8">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">25.04.03</S>
+      <S N="Name">Surface Book 3 [25.04.03]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Book 3</S>
+      <Obj N="SystemId" RefId="9">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Book_3_1899</S>
+          <S>Surface_Book_3_1900</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceBook3_Win11_22621_25.013.34389.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/6dc0552d-48b4-416f-8137-3b9a845cc283/SurfaceBook3_Win11_22621_25.013.34389.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="10">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Go [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Go</S>
+      <Obj N="SystemId" RefId="11">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Go_1824_Commercial</S>
+          <S>Surface_Go_1824_Consumer</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceGo_Win10_19042_22.104.24060_WiFi_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/1/9/2/19206af7-09ce-4aa6-8966-051d2e79e62b/SurfaceGo_Win10_19042_22.104.24060_WiFi_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="12">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.12.30</S>
+      <S N="Name">Surface Go 2 [24.12.30]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Go 2</S>
+      <Obj N="SystemId" RefId="13">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Go_2_1901</S>
+          <S>Surface_Go_2_1926</S>
+          <S>Surface_Go_2_1927</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceGo2_Win10_19044_24.092.15180_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/d/7/1/d71163b8-03a8-40c7-8a9f-fc2006c6bccb/SurfaceGo2_Win10_19044_24.092.15180_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="14">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.01.16</S>
+      <S N="Name">Surface Go 3 [26.01.16]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Go 3</S>
+      <Obj N="SystemId" RefId="15">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Go_3_1901</S>
+          <S>Surface_Go_3_1926</S>
+          <S>Surface_Go_3_2022</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceGo3_Win11_22631_25.121.13675.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/100ded78-f124-4076-ab44-4be7375925fa/SurfaceGo3_Win11_22631_25.121.13675.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=103504</S>
+    </MS>
+  </Obj>
+  <Obj RefId="16">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.05</S>
+      <S N="Name">Surface Go 4 [26.02.05]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Go 4</S>
+      <S N="SystemId">Surface_Go_4_2067</S>
+      <S N="FileName">SurfaceGo4_Win11_22631_25.124.44069.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/92ba4c24-544a-4be5-9b07-f261ffc5a58b/SurfaceGo4_Win11_22631_25.124.44069.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=105609</S>
+    </MS>
+  </Obj>
+  <Obj RefId="17">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Go LTE [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Go LTE</S>
+      <S N="SystemId">Surface_Go_1825_Commercial</S>
+      <S N="FileName">SurfaceGo_Win10_19042_22.104.24060_LTE_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/b/0/c/b0cd6c8e-5ae4-4072-bd43-b981209606e5/SurfaceGo_Win10_19042_22.104.24060_LTE_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="18">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.01.21</S>
+      <S N="Name">Surface Hub 2S and 3 [26.01.21]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Hub 2S and 3</S>
+      <Obj N="SystemId" RefId="19">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface Hub 2S</S>
+          <S>Surface Hub 2S 85</S>
+          <S>Surface Hub 3 50</S>
+          <S>Surface Hub 3 85</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceHub3_Hub2S_Win11_22631_25.122.21598.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/e421ce83-c5a6-47a9-83a5-35ed280d6ef1/SurfaceHub3_Hub2S_Win11_22631_25.122.21598.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=101974</S>
+    </MS>
+  </Obj>
+  <Obj RefId="20">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Laptop [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop</S>
+      <S N="SystemId">Surface_Laptop</S>
+      <S N="FileName">SurfaceLaptop_Win10_18362_21.101.11476.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/4/3/c/43c2bea2-3c14-4dc1-b984-7556b389ac2e/SurfaceLaptop_Win10_18362_21.101.11476.0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="21">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Laptop 2 [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 2</S>
+      <Obj N="SystemId" RefId="22">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_2_1769_Commercial</S>
+          <S>Surface_Laptop_2_1769_Consumer</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop2_Win10_19041_22.080.1424.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/e/7/5/e75e02dd-0acf-4953-9f42-8408f96e0702/SurfaceLaptop2_Win10_19041_22.080.1424.0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="23">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.08.09</S>
+      <S N="Name">Surface Laptop 3 AMD [24.08.09]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 3 AMD</S>
+      <S N="SystemId">Surface_Laptop_3_1873</S>
+      <S N="FileName">SurfaceLaptop3_AMD_Win11_22000_24.012.26136.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/6/f/e/6fe2a0c9-7218-4e17-8628-229b89a8b650/SurfaceLaptop3_AMD_Win11_22000_24.012.26136.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="24">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.08.15</S>
+      <S N="Name">Surface Laptop 3 Intel [24.08.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 3 Intel</S>
+      <Obj N="SystemId" RefId="25">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_3_1867:1868</S>
+          <S>Surface_Laptop_3_1872</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop3_Intel_Win11_22000_24.080.2664.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/3/f/4/3f4f5dff-b6a9-4006-87aa-142a8e6f77cb/SurfaceLaptop3_Intel_Win11_22000_24.080.2664.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="26">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.03.05</S>
+      <S N="Name">Surface Laptop 4 AMD [26.03.05]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 4 AMD</S>
+      <Obj N="SystemId" RefId="27">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_4_1952:1953</S>
+          <S>Surface_Laptop_4_1958:1959</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop4_AMD_Win11_22631_26.021.7718.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/7ee743a7-aac6-4b0c-83bf-218070e93e39/SurfaceLaptop4_AMD_Win11_22631_26.021.7718.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=102923</S>
+    </MS>
+  </Obj>
+  <Obj RefId="28">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.27</S>
+      <S N="Name">Surface Laptop 4 Intel [26.02.27]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 4 Intel</S>
+      <Obj N="SystemId" RefId="29">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_4_1950:1951</S>
+          <S>Surface_Laptop_4_1978:1979</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop4_Intel_Win11_22631_26.020.2313.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/dddb6b6d-02da-40ac-b945-37df889d4045/SurfaceLaptop4_Intel_Win11_22631_26.020.2313.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=102924</S>
+    </MS>
+  </Obj>
+  <Obj RefId="30">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.01.28</S>
+      <S N="Name">Surface Laptop 5 [26.01.28]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 5</S>
+      <Obj N="SystemId" RefId="31">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_5_1950:1951</S>
+          <S>Surface_Laptop_5_1979</S>
+          <S>Surface_Laptop_5_for_Business_1950:1951</S>
+          <S>Surface_Laptop_5_for_Business_1979</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop5_Win11_22631_26.011.7745.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/68992368-8d70-4231-a9e4-23dfaede832b/SurfaceLaptop5_Win11_22631_26.011.7745.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=104679</S>
+    </MS>
+  </Obj>
+  <Obj RefId="32">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.13</S>
+      <S N="Name">Surface Laptop 5G [26.02.13]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 5G</S>
+      <S N="SystemId">Surface_Laptop_5G_7th_Edition_With_Intel_For_Business_2119</S>
+      <S N="FileName">SurfaceLaptop7-5GforBusinesswithIntel_Win11_22631_26.013.30281.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/b6ba11a9-2e1b-401b-8cbc-2af02cda74e8/SurfaceLaptop7-5GforBusinesswithIntel_Win11_22631_26.013.30281.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=108347</S>
+    </MS>
+  </Obj>
+  <Obj RefId="33">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.03</S>
+      <S N="Name">Surface Laptop 6 [26.02.03]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 6</S>
+      <Obj N="SystemId" RefId="34">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_6_for_Business_2033</S>
+          <S>Surface_Laptop_6_for_Business_2035</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop6forBusiness_Win11_22631_26.013.29554.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/a53facb0-c939-4302-a0d3-53aa18217230/SurfaceLaptop6forBusiness_Win11_22631_26.013.29554.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=105946</S>
+    </MS>
+  </Obj>
+  <Obj RefId="35">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.27</S>
+      <S N="Name">Surface Laptop 7 ARM [26.02.27]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 7 ARM</S>
+      <Obj N="SystemId" RefId="36">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_7th_Edition_2036</S>
+          <S>Surface_Laptop_7th_Edition_2037</S>
+          <S>Surface_Laptop_7th_Edition_For_Business_2036</S>
+          <S>Surface_Laptop_7th_Edition_For_Business_2037</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop7_ARM_Win11_26100_26.011.9344.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/b7ca2c3f-d320-4795-be0f-529a0117abb4/SurfaceLaptop7_ARM_Win11_26100_26.011.9344.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">arm64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=106120</S>
+    </MS>
+  </Obj>
+  <Obj RefId="37">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.03.18</S>
+      <S N="Name">Surface Laptop 7 Intel [26.03.18]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop 7 Intel</S>
+      <Obj N="SystemId" RefId="38">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_7th_Edition_With_Intel_For_Business_2107</S>
+          <S>Surface_Laptop_7th_Edition_With_Intel_For_Business_2108</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop7withIntel_Win11_22631_26.022.24632.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/1543bd80-9cae-498d-8b0f-9841e4d7b2a8/SurfaceLaptop7withIntel_Win11_22631_26.022.24632.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=108014</S>
+    </MS>
+  </Obj>
+  <Obj RefId="39">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.10.15</S>
+      <S N="Name">Surface Laptop Go [24.10.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop Go</S>
+      <S N="SystemId">Surface_Laptop_Go_1943</S>
+      <S N="FileName">SurfaceLaptopGo_Win11_22621_24.074.44497.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/5/9/4/594604a4-26c0-405c-ac04-b385d824c30c/SurfaceLaptopGo_Win11_22621_24.074.44497.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="40">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.01.28</S>
+      <S N="Name">Surface Laptop Go 2 [26.01.28]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop Go 2</S>
+      <S N="SystemId">Surface_Laptop_Go_2_2013</S>
+      <S N="FileName">SurfaceLaptopGo2_Win11_22631_25.121.13746.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/8ba2cbfd-02b1-42ba-b588-4aecd0e992aa/SurfaceLaptopGo2_Win11_22631_25.121.13746.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=104251</S>
+    </MS>
+  </Obj>
+  <Obj RefId="41">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.05</S>
+      <S N="Name">Surface Laptop Go 3 [26.02.05]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop Go 3</S>
+      <S N="SystemId">Surface_Laptop_Go_3_2013</S>
+      <S N="FileName">SurfaceLaptopGo3_Win11_22631_26.011.6467.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/cad99f30-7b1c-4ee5-a88b-71e729362b2b/SurfaceLaptopGo3_Win11_22631_26.011.6467.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=105608</S>
+    </MS>
+  </Obj>
+  <Obj RefId="42">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.24</S>
+      <S N="Name">Surface Laptop Snapdragon 13-inch [26.02.24]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop Snapdragon 13-inch</S>
+      <Obj N="SystemId" RefId="43">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Laptop_13in_1st_Ed_with_Snapdragon_2095</S>
+          <S>Surface_Laptop_for_Business_13in_1st_Ed_with_Snapdragon_2095</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfaceLaptop_13in_1st_Edition_Win11_26100_26.014.40185.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/924f1449-b531-4e66-9fc5-870b6eb30b5e/SurfaceLaptop_13in_1st_Edition_Win11_26100_26.014.40185.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">arm64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=108198</S>
+    </MS>
+  </Obj>
+  <Obj RefId="44">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.01.16</S>
+      <S N="Name">Surface Laptop Studio [26.01.16]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop Studio</S>
+      <S N="SystemId">Surface_Laptop_Studio_1964</S>
+      <S N="FileName">SurfaceLaptopStudio_Win11_22631_25.121.13744.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/8f0976ca-44ec-4f34-a7ed-49cfb3a8ddbd/SurfaceLaptopStudio_Win11_22631_25.121.13744.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=103505</S>
+    </MS>
+  </Obj>
+  <Obj RefId="45">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.01.28</S>
+      <S N="Name">Surface Laptop Studio 2 [26.01.28]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Laptop Studio 2</S>
+      <S N="SystemId">Surface_Laptop_Studio_2_2029</S>
+      <S N="FileName">SurfaceLaptopStudio2_Win11_22631_26.011.7026.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/68949314-91cb-46dc-bcff-a50479d6ec4f/SurfaceLaptopStudio2_Win11_22631_26.011.7026.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=105610</S>
+    </MS>
+  </Obj>
+  <Obj RefId="46">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Pro [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro</S>
+      <S N="SystemId">Surface_Pro</S>
+      <S N="FileName">SurfacePro_Win10_150723_0.zip</S>
+      <S N="Url">https://download.microsoft.com/download/b/d/a/bda70a48-7447-463c-bd91-1df6c6e5bf50/Surface Pro/SurfacePro_Win10_150723_0.zip</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="47">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Pro 2 [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 2</S>
+      <S N="SystemId">Surface_Pro_2</S>
+      <S N="FileName">SurfacePro2_Win10_160501_2.zip</S>
+      <S N="Url">https://download.microsoft.com/download/a/d/f/adf87383-7e81-4157-a1c3-d2cce3446d7b/SurfacePro2_Win10_160501_2.zip</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="48">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Pro 3 [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 3</S>
+      <S N="SystemId">Surface_Pro_3</S>
+      <S N="FileName">SurfacePro3_Win10_18362_1902002_0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/2/0/7/2073c22f-2f31-4f4a-8059-e54c91c564a9/SurfacePro3_Win10_18362_1902002_0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="49">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Pro 4 [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 4</S>
+      <S N="SystemId">Surface_Pro_4</S>
+      <S N="FileName">SurfacePro4_Win10_18362_21.061.12819.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/6/a/c/6acb37c4-e4c1-4e0e-bbae-ac7a0c303593/SurfacePro4_Win10_18362_21.061.12819.0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="50">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Pro 5 [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 5</S>
+      <S N="SystemId">Surface_Pro_1796</S>
+      <S N="FileName">SurfacePro_Win11_22000_24.010.4410.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/4/c/7/4c7da85d-03de-4b89-b8e0-386437331c46/SurfacePro_Win11_22000_24.010.4410.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="51">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Pro 5 LTE [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 5 LTE</S>
+      <S N="SystemId">Surface_Pro_1807</S>
+      <S N="FileName">SurfacePro_Win11_22000_24.010.4410.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/4/1/6/416d7d4f-64d9-4633-a5cc-922a941854fd/SurfacePro_Win11_22000_24.010.4410.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="52">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Pro 6 [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 6</S>
+      <Obj N="SystemId" RefId="53">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_6_1796_Commercial</S>
+          <S>Surface_Pro_6_1796_Consumer</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro6_Win11_22000_23.093.28805.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/8/9/8/8986de75-9e21-478a-b002-a7e92ba0f053/SurfacePro6_Win11_22000_23.093.28805.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="54">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">25.12.03</S>
+      <S N="Name">Surface Pro 7 [25.12.03]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 7</S>
+      <S N="SystemId">Surface_Pro_7_1866</S>
+      <S N="FileName">SurfacePro7_Win11_22621_25.090.3489.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/b7ea0d32-93fb-4733-b78c-4263b314dbf4/SurfacePro7_Win11_22621_25.090.3489.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="55">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.01.16</S>
+      <S N="Name">Surface Pro 7+ [26.01.16]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 7+</S>
+      <Obj N="SystemId" RefId="56">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_7+_1960</S>
+          <S>Surface_Pro_7+_with_LTE_Advanced_1961</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro7+_Win11_22631_25.122.23303.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/0195da46-88f9-4f56-8046-babe15cafe2e/SurfacePro7+_Win11_22631_25.122.23303.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=102633</S>
+    </MS>
+  </Obj>
+  <Obj RefId="57">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.23</S>
+      <S N="Name">Surface Pro 8 [26.02.23]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 8</S>
+      <Obj N="SystemId" RefId="58">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_8_1983</S>
+          <S>Surface_Pro_8_for_Business_1983</S>
+          <S>Surface_Pro_8_for_Business_with_LTE_Advanced_1982</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro8_Win11_22631_26.012.27969.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/6a5b8acd-9bb2-4813-8cdd-09f603f91ee5/SurfacePro8_Win11_22631_26.012.27969.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=103503</S>
+    </MS>
+  </Obj>
+  <Obj RefId="59">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.03.18</S>
+      <S N="Name">Surface Pro 9 [26.03.18]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 9</S>
+      <Obj N="SystemId" RefId="60">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_9_2038</S>
+          <S>Surface_Pro_9_for_Business_2038</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro9_Win11_22631_26.022.22105.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/9a27d0e5-cbce-4933-8fc6-ec5fe5315c69/SurfacePro9_Win11_22631_26.022.22105.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=104680</S>
+    </MS>
+  </Obj>
+  <Obj RefId="61">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">25.12.03</S>
+      <S N="Name">Surface Pro 9 5G [25.12.03]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 9 5G</S>
+      <Obj N="SystemId" RefId="62">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_9_With_5G_1996</S>
+          <S>Surface_Pro_9_With_5G_1997</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro9-5G_Win11_22621_25.070.2191.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/9ba185b4-fd54-44da-9c54-adb8b2bc6c09/SurfacePro9-5G_Win11_22621_25.070.2191.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">arm64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=105941</S>
+    </MS>
+  </Obj>
+  <Obj RefId="63">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.07.15</S>
+      <S N="Name">Surface Studio [24.07.15]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Studio</S>
+      <S N="SystemId">Surface_Studio</S>
+      <S N="FileName">SurfaceStudio_Win10_19041_21.093.33210.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/4/5/2/452a1a18-1584-423c-a2d0-d76249ea989a/SurfaceStudio_Win10_19041_21.093.33210.0.msi</S>
+      <S N="OperatingSystem">Windows 10</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="64">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">24.10.03</S>
+      <S N="Name">Surface Studio 2 [24.10.03]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Studio 2</S>
+      <S N="SystemId">Surface_Studio_2_1707_Commercial</S>
+      <S N="FileName">SurfaceStudio2_Win11_22621_24.093.36095.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/2/e/a/2ea15c93-3aee-4627-a6b9-b2906a1ad192/SurfaceStudio2_Win11_22621_24.093.36095.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <Nil N="UpdatePage" />
+    </MS>
+  </Obj>
+  <Obj RefId="65">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.23</S>
+      <S N="Name">Surface Studio 2+ [26.02.23]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Studio 2+</S>
+      <S N="SystemId">Surface_Studio_2+_2028</S>
+      <S N="FileName">SurfaceStudio2+_Win11_22631_25.122.22050.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/3fcf5151-489a-4091-ac14-d5662ad964f3/SurfaceStudio2+_Win11_22631_25.122.22050.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=104681</S>
+    </MS>
+  </Obj>
+  <Obj RefId="66">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.04.06</S>
+      <S N="Name">Surface Pro 10 [26.04.06]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 10</S>
+      <Obj N="SystemId" RefId="67">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_10_for_Business_2079</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro10forBusiness_Win11_22631_26.032.16435.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/9185dccf-8be8-4395-8eda-a45cbf93ed91/SurfacePro10forBusiness_Win11_22631_26.032.16435.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=105947</S>
+    </MS>
+  </Obj>
+  <Obj RefId="68">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.03.19</S>
+      <S N="Name">Surface Pro 10 5G [26.03.19]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 10 5G</S>
+      <Obj N="SystemId" RefId="69">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_10_with_5G_for_Business_2077</S>
+          <S>Surface_Pro_10_with_5G_for_Business_2078</S>
+          <S>Surface_Pro_10_with_5G_for_Business_2121</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro10forBusiness_Win11_22631_26.032.16435.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/9185dccf-8be8-4395-8eda-a45cbf93ed91/SurfacePro10forBusiness_Win11_22631_26.032.16435.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/en-us/download/details.aspx?id=106292</S>
+    </MS>
+  </Obj>
+  <Obj RefId="70">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.02.23</S>
+      <S N="Name">Surface Pro 11 ARM64 [26.02.23]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 11 ARM64</S>
+      <Obj N="SystemId" RefId="71">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_11th_Edition_2076</S>
+          <S>Surface_Pro_11th_Edition_For_Business_2085</S>
+          <S>Surface_Pro_with_5G_11th_Edition_2077</S>
+          <S>Surface_Pro_with_5G_11th_Edition_2078</S>
+          <S>Surface_Pro_with_5G_11th_Edition_For_Business_2077</S>
+          <S>Surface_Pro_with_5G_11th_Edition_For_Business_2078</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro11_ARM_Win11_26100_26.011.9363.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/92821b24-203a-4ce5-9a3a-5df3160a2fe3/SurfacePro11_ARM_Win11_26100_26.011.9363.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">arm64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=106119</S>
+    </MS>
+  </Obj>
+  <Obj RefId="72">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.03.12</S>
+      <S N="Name">Surface Pro 11 Intel [26.03.12]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro 11 Intel</S>
+      <S N="SystemId">Surface_Pro_11th_Edition_With_Intel_For_Business_2103</S>
+      <S N="FileName">SurfacePro11withIntel_Win11_22631_26.022.27267.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/c26c62fe-da4b-41d1-b276-c855751c247c/SurfacePro11withIntel_Win11_22631_26.022.27267.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">amd64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=108013</S>
+    </MS>
+  </Obj>
+  <Obj RefId="73">
+    <TNRef RefId="0" />
+    <MS>
+      <S N="CatalogVersion">26.04.06</S>
+      <S N="ReleaseDate">26.01.28</S>
+      <S N="Name">Surface Pro Snapdragon 12-inch [26.01.28]</S>
+      <S N="Manufacturer">Microsoft</S>
+      <S N="Model">Surface Pro Snapdragon 12-inch</S>
+      <Obj N="SystemId" RefId="74">
+        <TNRef RefId="1" />
+        <LST>
+          <S>Surface_Pro_12in_1st_Ed_with_Snapdragon_2110</S>
+          <S>Surface_Pro_for_Business_12in_1st_Ed_with_Snapdragon_2109</S>
+        </LST>
+      </Obj>
+      <S N="FileName">SurfacePro_12in_1st_Edition_Win11_26100_25.124.41983.0.msi</S>
+      <S N="Url">https://download.microsoft.com/download/3f42130f-64d6-4a85-8a18-ec1b70f5ef82/SurfacePro_12in_1st_Edition_Win11_26100_25.124.41983.0.msi</S>
+      <S N="OperatingSystem">Windows 11</S>
+      <S N="OSArchitecture">arm64</S>
+      <Nil N="HashMD5" />
+      <S N="UpdatePage">https://www.microsoft.com/download/details.aspx?id=108199</S>
+    </MS>
+  </Obj>
+</Objs>

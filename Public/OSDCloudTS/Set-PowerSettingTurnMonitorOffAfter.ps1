@@ -1,4 +1,4 @@
-Function Set-PowerSettingTurnMonitorOffAfter
+function Set-PowerSettingTurnMonitorOffAfter
 {
 	[CmdletBinding()]
 	param

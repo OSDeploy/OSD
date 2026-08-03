@@ -6,12 +6,31 @@ Adds PowerShell and PowerShell Gallery support to ADK's x64 winpe.wim
 Adds PowerShell and PowerShell Gallery support to ADK's x64 winpe.wim.  This will speed things up with MDT and MEM CM going forward
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.3.15.2   Initial Release
 #>
 function Edit-AdkWinPEWIM {
+<#
+.SYNOPSIS
+Edits AdkWinPEWIM content.
+
+.DESCRIPTION
+Applies modifications to AdkWinPEWIM in the current servicing workflow.
+
+.EXAMPLE
+Edit-AdkWinPEWIM
+Demonstrates a common way to run Edit-AdkWinPEWIM.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
 
@@ -23,7 +42,12 @@ function Edit-AdkWinPEWIM {
     #	Blocks
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-NoCurl
     #=================================================
     #	Set VerbosePreference
@@ -154,13 +178,21 @@ function Edit-AdkWinPEWIM {
 function Get-WindowsAdkInstallPath {
     <#
     .SYNOPSIS
-    Retrieves the installation path of the Windows Assessment and Deployment Kit (Windows ADK) from the registry.
+    Retrieves the installation path of the Windows Assessment and Deployment Kit (ADK)
 
     .DESCRIPTION
-    Retrieves the installation path of the Windows Assessment and Deployment Kit (Windows ADK) from the registry.
+    Retrieves the installation path of the Windows Assessment and Deployment Kit (ADK) from the registry.
+
+    .EXAMPLE
+    Get-WindowsAdkInstallPath
+    Returns the ADK installation directory path
 
     .NOTES
-    Author: David Segura
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -171,30 +203,38 @@ function Get-WindowsAdkInstallPath {
         $WindowsAdkInstallPath = Join-Path $WindowsKitsInstallPath 'Assessment and Deployment Kit'
 
         if (Test-Path "$WindowsAdkInstallPath") {
-            Write-Verbose "[$(Get-Date -format G)] Windows Assessment and Deployment Kit install path is $WindowsAdkInstallPath"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Windows Assessment and Deployment Kit install path is $WindowsAdkInstallPath"
             return $WindowsAdkInstallPath
         }
         else {
-            Write-Warning "[$(Get-Date -format G)] Windows Assessment and Deployment Kit is not installed"
+            Write-Warning "[$(Get-Date -format s)] Windows Assessment and Deployment Kit is not installed"
             return $null
         }
 
     }
     else {
-        Write-Warning "[$(Get-Date -format G)] Windows Assessment and Deployment Kit is not installed"
+        Write-Warning "[$(Get-Date -format s)] Windows Assessment and Deployment Kit is not installed"
         return $null
     }
 }
 function Get-WindowsAdkInstallVersion {
     <#
     .SYNOPSIS
-    Retrieves the installed version of the Windows Assessment and Deployment Kit (Windows ADK) from the registry.
+    Retrieves the installed version of the Windows Assessment and Deployment Kit (ADK)
 
     .DESCRIPTION
-    Retrieves the installed version of the Windows Assessment and Deployment Kit (Windows ADK) from the registry.
+    Retrieves the installed version of the Windows Assessment and Deployment Kit (ADK) from the registry.
+
+    .EXAMPLE
+    Get-WindowsAdkInstallVersion
+    Returns the ADK version string
 
     .NOTES
-    Author: David Segura
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -246,7 +286,7 @@ function Get-WindowsAdkPaths {
         $WindowsAdkRoot
     )
     #=================================================
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Start"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
     $Error.Clear()
     #=================================================
     # region Get Windows ADK information from the Registry
@@ -256,28 +296,28 @@ function Get-WindowsAdkPaths {
         $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
         $RegistryValue = 'KitsRoot10'
         $KitsRoot10 = $null
- 
+
         if (Test-Path -Path $InstalledRoots64) {
             $RegistryKey = Get-Item -Path $InstalledRoots64
             if ($null -ne $RegistryKey.GetValue($RegistryValue)) {
                 $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots64 -Name $RegistryValue -ErrorAction SilentlyContinue
 
                 if (Test-Path -Path $KitsRoot10) {
-                    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Found KitsRoot10 in $InstalledRoots64"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Found KitsRoot10 in $InstalledRoots64"
                 }
                 else {
-                    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] KitsRoot10 path from registry does not exist: $KitsRoot10"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] KitsRoot10 path from registry does not exist: $KitsRoot10"
                     $KitsRoot10 = $null
                 }
             }
             else {
-                Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Registry value $RegistryValue not found in $InstalledRoots64"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Registry value $RegistryValue not found in $InstalledRoots64"
             }
         }
 
         if (-NOT ($KitsRoot10)) {
             if (Test-Path -Path $DefaultPath) {
-                Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Found KitsRoot10 in $DefaultPath"
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Found KitsRoot10 in $DefaultPath"
                 $KitsRoot10 = $DefaultPath
             }
         }
@@ -289,18 +329,18 @@ function Get-WindowsAdkPaths {
                     $KitsRoot10 = Get-ItemPropertyValue -Path $InstalledRoots32 -Name $RegistryValue -ErrorAction SilentlyContinue
                 }
                 else {
-                    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Registry value $RegistryValue not found in $InstalledRoots32"
+                    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Registry value $RegistryValue not found in $InstalledRoots32"
                 }
             }
         }
 
-        Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] $KitsRoot10"
+        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] $KitsRoot10"
 
         if ($KitsRoot10) {
             $WindowsAdkRoot = Join-Path $KitsRoot10 'Assessment and Deployment Kit'
         }
         else {
-            Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Unable to determine ADK Path"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Unable to determine ADK Path"
             return
         }
     }
@@ -309,7 +349,7 @@ function Get-WindowsAdkPaths {
     # region Validate Windows ADK Path
     $WinPERoot = Join-Path $WindowsAdkRoot 'Windows Preinstallation Environment'
     if (-NOT (Test-Path $WinPERoot -PathType Container)) {
-        Write-Warning "[$(Get-Date -format G)] WinPERoot is not a valid path $WinPERoot"
+        Write-Warning "[$(Get-Date -format s)] WinPERoot is not a valid path $WinPERoot"
         $WinPERoot = $null
         return
     }
@@ -357,7 +397,7 @@ function Get-WindowsAdkPaths {
     Return $Results
     #endregion
     #=================================================
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] End"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
     #=================================================
 }
 function Get-WindowsKitsInstallPath {
@@ -366,10 +406,18 @@ function Get-WindowsKitsInstallPath {
     Retrieves the installation path of the Windows Kit directory.
 
     .DESCRIPTION
-    Retrieves the installation path of the Windows Kit directory.
+    Retrieves the installation path of the Windows Kits (which includes ADK and other Windows development tools) from the registry.
+
+    .EXAMPLE
+    Get-WindowsKitsInstallPath
+    Returns the Windows Kits installation directory path
 
     .NOTES
-    Author: David Segura
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -378,7 +426,7 @@ function Get-WindowsKitsInstallPath {
     $InstalledRoots32 = 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'
     # 64-bit Registry
     $InstalledRoots64 = 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows Kits\Installed Roots'
-    
+
     $RegistryValue = 'KitsRoot10'
     $KitsRoot10 = $null
 
@@ -402,35 +450,69 @@ function Get-WindowsKitsInstallPath {
 
     if ($KitsRoot10) {
         if (Test-Path "$KitsRoot10") {
-            Write-Verbose "[$(Get-Date -format G)] Windows Kits install path is $KitsRoot10"
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Windows Kits install path is $KitsRoot10"
             return $KitsRoot10
         }
         else {
-            Write-Warning "[$(Get-Date -format G)] Windows Kits install path from the registry does not exist at $KitsRoot10"
+            Write-Warning "[$(Get-Date -format s)] Windows Kits install path from the registry does not exist at $KitsRoot10"
             return $null
         }
     }
     else {
-        Write-Warning "[$(Get-Date -format G)] Windows Kits is not installed"
+        Write-Warning "[$(Get-Date -format s)] Windows Kits is not installed"
         return $null
     }
 }
 <#
 .SYNOPSIS
-Creates an ADK CopyPE Working Directory
+Creates an ADK CopyPE working directory
 
 .DESCRIPTION
-Creates an ADK CopyPE Working Directory
+Creates a working directory structure for ADK CopyPE media with bootable WinPE environment.
 
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+.PARAMETER MediaPath
+Path where the CopyPE working directory will be created. This parameter is mandatory.
+
+.EXAMPLE
+New-AdkCopyPE -MediaPath 'C:\CopyPEMedia'
+Creates a CopyPE working directory at C:\CopyPEMedia
 
 .NOTES
-21.5.27.2   Resolved issue with paths
-21.3.15.2   Renamed to make it easier to understand what it does
-21.3.10     Initial Release
+Author: David Segura - Recast Software
+2026-07-10 - Updated help to follow OSD standard
+2021-05-27 - Resolved issue with paths
+2021-03-15 - Renamed to make it easier to understand what it does
+2021-03-10 - Initial Release
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function New-AdkCopyPE {
+<#
+.SYNOPSIS
+Creates AdkCopyPE resources.
+
+.DESCRIPTION
+Builds new AdkCopyPE resources based on the provided parameters.
+
+.PARAMETER Path
+Specifies the Path to use when running New-AdkCopyPE.
+
+.PARAMETER WinPEArch
+Specifies the WinPEArch to use when running New-AdkCopyPE.
+
+.EXAMPLE
+New-AdkCopyPE -Path <value>
+Demonstrates a common way to run New-AdkCopyPE.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -488,30 +570,79 @@ function New-AdkCopyPE {
 }
 <#
 .SYNOPSIS
-Creates an .iso file from a bootable media directory.  ADK is required
+Creates an ISO file from a bootable media directory using ADK tools
 
 .DESCRIPTION
-Creates a .iso file from a bootable media directory.  ADK is required
+Creates an ISO file from a bootable media directory. Requires the Windows Assessment and Deployment Kit (ADK) to be installed.
 
 .PARAMETER MediaPath
-Directory containing the bootable media
+Path to the directory containing the bootable media
 
 .PARAMETER isoFileName
-File Name of the ISO
+Filename of the output ISO file
 
 .PARAMETER isoLabel
-Label of the ISO.  Limited to 16 characters
+Label of the ISO (limited to 16 characters)
+
+.PARAMETER WindowsAdkRoot
+Path to Windows ADK root directory. Optional if ADK is in default location.
 
 .PARAMETER OpenExplorer
-Opens Windows Explorer to the parent directory of the ISO File
+Switch to open Windows Explorer to the parent directory of the ISO file after creation
 
-.LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+.EXAMPLE
+New-AdkISO -MediaPath 'C:\BootMedia' -isoFileName 'WinPE.iso' -isoLabel 'WinPE'
+Creates an ISO file from the bootable media
 
 .NOTES
-21.3.16     Initial Release
+Author: David Segura - Recast Software
+2026-07-10 - Updated help to follow OSD standard
+2021-03-16 - Initial Release
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function New-AdkISO {
+<#
+.SYNOPSIS
+Creates AdkISO resources.
+
+.DESCRIPTION
+Builds new AdkISO resources based on the provided parameters.
+
+.PARAMETER WindowsAdkRoot
+Specifies the WindowsAdkRoot to use when running New-AdkISO.
+
+.PARAMETER MediaPath
+Specifies the MediaPath to use when running New-AdkISO.
+
+.PARAMETER isoFileName
+Specifies the isoFileName to use when running New-AdkISO.
+
+.PARAMETER isoLabel
+Specifies the isoLabel to use when running New-AdkISO.
+
+.PARAMETER NoPrompt
+Specifies the NoPrompt to use when running New-AdkISO.
+
+.PARAMETER Mount
+Specifies the Mount to use when running New-AdkISO.
+
+.PARAMETER OpenExplorer
+Specifies the OpenExplorer to use when running New-AdkISO.
+
+.EXAMPLE
+New-AdkISO -WindowsAdkRoot <value>
+Demonstrates a common way to run New-AdkISO.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Alias('AdkRoot')]
@@ -538,7 +669,9 @@ function New-AdkISO {
 	#	Blocks
 	#=================================================
 	Block-WinPE
-	Block-StandardUser
+    if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+    }
     Block-PowerShellVersionLt5
     #=================================================
     #   Get Adk Paths
@@ -630,7 +763,7 @@ function New-AdkISO {
         Break
     }
     $PromptIso = Get-Item -Path $IsoFullName
-    #Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] ISO created at $PromptIso"
+    #Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] ISO created at $PromptIso"
     #=================================================
     #   Create NoPrompt ISO
     #=================================================
@@ -645,7 +778,7 @@ function New-AdkISO {
         Break
     }
     $NoPromptIso = Get-Item -Path $IsoFullName
-    #Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] ISO created at $NoPromptIso"
+    #Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] ISO created at $NoPromptIso"
     #=================================================
     #   OpenExplorer
     #=================================================
@@ -668,16 +801,35 @@ function New-AdkISO {
 }
 function New-WindowsAdkISO {
     <#
-        .SYNOPSIS
-        Creates an .iso file from a bootable media directory.  ADK is required
+    .SYNOPSIS
+    Creates an ISO file from a bootable media directory using ADK
 
-        .DESCRIPTION
-        Creates a .iso file from a bootable media directory.  ADK is required
+    .DESCRIPTION
+    Creates an ISO file from a bootable media directory using Windows Assessment and Deployment Kit (ADK) tools.
 
-        .NOTES
-        David Segura
-        25.02.26     Initial Release replacing New-AdkISO
-        25.03.01     Updated to use Get-WindowsAdkPaths
+    .PARAMETER MediaPath
+    Path to the directory containing the bootable media
+
+    .PARAMETER isoFileName
+    Filename for the output ISO file
+
+    .PARAMETER isoLabel
+    Label for the ISO volume (limited to 16 characters)
+
+    .PARAMETER WindowsAdkRoot
+    Path to the Windows ADK root directory (optional if installed in default location)
+
+    .EXAMPLE
+    New-WindowsAdkISO -MediaPath 'C:\\Media' -isoFileName 'boot.iso' -isoLabel 'BootMedia'\n    Creates an ISO file from the bootable media
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
+    2025-03-01 - Updated to use Get-WindowsAdkPaths
+    2025-02-26 - Initial Release replacing New-AdkISO
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param (
@@ -731,10 +883,12 @@ function New-WindowsAdkISO {
     )
     #=================================================
     $Error.Clear()
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Start"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
 	#=================================================
 	Block-WinPE
-	Block-StandardUser
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
     Block-PowerShellVersionLt5
     #=================================================
     # Get Adk Paths
@@ -744,29 +898,29 @@ function New-WindowsAdkISO {
         $WindowsAdkPaths = Get-WindowsAdkPaths
     }
     if ($null -eq $WindowsAdkPaths) {
-        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Could not get ADK going, sorry"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Could not get ADK going, sorry"
         Break
     }
     $IsoFullName = Join-Path $IsoDirectory $isoFileName
     $PathOscdimg = $WindowsAdkPaths.PathOscdimg
     $oscdimgexe = $WindowsAdkPaths.oscdimgexe
 
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] IsoDirectory: $IsoDirectory"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] IsoFullName: $IsoFullName"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] PathOscdimg: $PathOscdimg"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] oscdimgexe: $oscdimgexe"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] IsoDirectory: $IsoDirectory"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] IsoFullName: $IsoFullName"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] PathOscdimg: $PathOscdimg"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] oscdimgexe: $oscdimgexe"
     #=================================================
     # Test Paths
     $DestinationBoot = Join-Path $MediaPath 'boot'
     if (-NOT (Test-Path $DestinationBoot)) {
-        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Cannot locate $DestinationBoot"
-        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] This does not appear to be a valid bootable ISO"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Cannot locate $DestinationBoot"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] This does not appear to be a valid bootable ISO"
         Break
     }
     $DestinationEfiBoot = Join-Path $MediaPath 'efi\microsoft\boot'
     if (-NOT (Test-Path $DestinationEfiBoot)) {
-        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Cannot locate $DestinationEfiBoot"
-        Write-Warning "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] This does not appear to be a valid bootable ISO"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Cannot locate $DestinationEfiBoot"
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] This does not appear to be a valid bootable ISO"
         Break
     }
     #=================================================
@@ -774,7 +928,7 @@ function New-WindowsAdkISO {
     $etfsbootcom = $WindowsAdkPaths.etfsbootcom
     $Destinationetfsbootcom = Join-Path $DestinationBoot 'etfsboot.com'
     if (Test-Path $Destinationetfsbootcom) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Using existing $Destinationetfsbootcom"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Using existing $Destinationetfsbootcom"
     }
     else {
         Copy-Item -Path $etfsbootcom -Destination $DestinationBoot -Force -ErrorAction Stop
@@ -784,7 +938,7 @@ function New-WindowsAdkISO {
     $efisysbin = $WindowsAdkPaths.efisysbin
     $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys.bin'
     if (Test-Path $Destinationefisysbin) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Using existing $Destinationefisysbin"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Using existing $Destinationefisysbin"
     }
     else {
         Copy-Item -Path $efisysbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
@@ -793,7 +947,7 @@ function New-WindowsAdkISO {
     $efisysnopromptbin = $WindowsAdkPaths.efisysnopromptbin
     $Destinationefisysnopromptbin = Join-Path $DestinationEfiBoot 'efisys_noprompt.bin'
     if (Test-Path $Destinationefisysnopromptbin) {
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Using existing $Destinationefisysnopromptbin"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Using existing $Destinationefisysnopromptbin"
     }
     else {
         Copy-Item -Path $efisysnopromptbin -Destination $DestinationEfiBoot -Force -ErrorAction Stop
@@ -809,45 +963,45 @@ function New-WindowsAdkISO {
         $Destinationefisysbin = Join-Path $DestinationEfiBoot 'efisys.bin'
     } #>
 
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] DestinationBoot: $DestinationBoot"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] etfsbootcom: $etfsbootcom"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Destinationetfsbootcom: $Destinationetfsbootcom"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] DestinationEfiBoot: $DestinationEfiBoot"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] efisysbin: $efisysbin"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Destinationefisysbin: $Destinationefisysbin"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] efisysnopromptbin: $efisysnopromptbin"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Destinationefisysnopromptbin: $Destinationefisysnopromptbin"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DestinationBoot: $DestinationBoot"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] etfsbootcom: $etfsbootcom"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Destinationetfsbootcom: $Destinationetfsbootcom"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] DestinationEfiBoot: $DestinationEfiBoot"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] efisysbin: $efisysbin"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Destinationefisysbin: $Destinationefisysbin"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] efisysnopromptbin: $efisysnopromptbin"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Destinationefisysnopromptbin: $Destinationefisysnopromptbin"
     #=================================================
     # Strings
     $isoLabelString = '-l"{0}"' -f "$isoLabel"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] isoLabelString: $isoLabelString"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] isoLabelString: $isoLabelString"
     #=================================================
     # Create Prompt ISO
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysbin"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] BootDataString: $BootDataString"
 
     $Process = Start-Process $oscdimgexe -args @('-m', '-o', '-u2', "-bootdata:$BootDataString", '-u2', '-udfver102', $isoLabelString, "`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -WindowStyle Hidden
 
     if (-NOT (Test-Path $IsoFullName)) {
-        Write-Error "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Something didn't work"
+        Write-Error "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Something didn't work"
         Break
     }
     $PromptIso = Get-Item -Path $IsoFullName
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] ISO created at $PromptIso"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] ISO created at $PromptIso"
     #=================================================
     # Create NoPrompt ISO
     $IsoFullName = "$($PromptIso.Directory)\$($PromptIso.BaseName)_NoPrompt.iso"
     $BootDataString = '2#p0,e,b"{0}"#pEF,e,b"{1}"' -f "$Destinationetfsbootcom", "$Destinationefisysnopromptbin"
-    Write-Verbose "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] BootDataString: $BootDataString"
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] BootDataString: $BootDataString"
 
     $Process = Start-Process $oscdimgexe -args @('-m', '-o', '-u2', "-bootdata:$BootDataString", '-u2', '-udfver102', $isoLabelString, "`"$MediaPath`"", "`"$IsoFullName`"") -PassThru -Wait -WindowStyle Hidden
 
     if (-NOT (Test-Path $IsoFullName)) {
-        Write-Error "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] Something didn't work"
+        Write-Error "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] Something didn't work"
         Break
     }
     $NoPromptIso = Get-Item -Path $IsoFullName
-    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand)] ISO created at $NoPromptIso"
+    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand)] ISO created at $NoPromptIso"
     #=================================================
     # Open Windows Explorer
     if ($PSBoundParameters.ContainsKey('OpenExplorer')) {

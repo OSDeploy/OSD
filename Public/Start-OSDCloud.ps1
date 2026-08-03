@@ -3,7 +3,7 @@
     Prepare and start an OSDCloud deployment session (selects image, language, edition and other options).
 
 .DESCRIPTION
-    Start-OSDCloud gathers system information, validates prerequisites (PowerShell version, network, 
+    Start-OSDCloud gathers system information, validates prerequisites (PowerShell version, network,
     presence of required utilities), and prepares a global configuration used by the OSDCloud workflow.
     It can select a Windows Feature Update image from local catalogs or an image URL, prompt the user
     for OS version/build/edition/culture when needed, and then calls Invoke-OSDCloud to run the deployment.
@@ -78,26 +78,28 @@
     selected configuration and then invokes Invoke-OSDCloud. It does not return structured objects to the
     pipeline beyond writing progress and informational messages.
 
-.EXAMPLES
-    # Interactive: choose image and options via menus
+.EXAMPLE
     Start-OSDCloud
+    Interactive: choose image and options via menus.
 
-    # Non-interactive: specify OS selection and suppress autopilot
+.EXAMPLE
     Start-OSDCloud -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us -SkipAutopilot
+    Non-interactive: specify OS selection and suppress autopilot.
 
-    # Use a custom image URL
+.EXAMPLE
     Start-OSDCloud -FindImageFile -ImageFileUrl 'https://server.example.com/images/install.wim' -OSImageIndex 1
+    Use a custom image URL.
 
 .NOTES
-    - Requires the OSD module helper functions used by the workflow (Get-FeatureUpdate, Invoke-OSDCloud, 
+    Author: David Segura - Recast Software
+    2026-07-09 - Standardized comment-based help metadata and links.
+    - Requires the OSD module helper functions used by the workflow (Get-FeatureUpdate, Invoke-OSDCloud,
       Find-OSDCloudFile, Get-MyComputerManufacturer, Get-MyComputerProduct, Start-ScreenPNGProcess, etc.).
     - This function changes global state: $Global:StartOSDCloud and may interact with $Global:StartOSDCloudGUI.
     - Intended to be run in WinPE or full Windows with administrative privileges.
 
 .LINK
-    Invoke-OSDCloud
-    Get-FeatureUpdate
-    Find-OSDCloudFile
+    https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Start-OSDCloud {
 
@@ -285,7 +287,12 @@ function Start-OSDCloud {
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-PowerShellVersionLt5
     Block-NoCurl
     #=================================================
@@ -311,7 +318,7 @@ function Start-OSDCloud {
     #	Computer Information
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] $($Global:StartOSDCloud.Function) | Manufacturer: $Manufacturer | Product: $Product"
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] $($Global:StartOSDCloud.Function) | Manufacturer: $Manufacturer | Product: $Product"
     #=================================================
     #	Battery
     #=================================================
@@ -350,7 +357,7 @@ function Start-OSDCloud {
     #	Test Web Connection
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Test-WebConnection" -NoNewline
+    Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Test-WebConnection" -NoNewline
     #Write-Host -ForegroundColor DarkGray "google.com"
 
     if (Test-WebConnection -Uri "google.com") {
@@ -411,7 +418,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select an Operating System"
 
             $i = $null
             $Global:StartOSDCloud.OSNameMenu = foreach ($Item in $Global:StartOSDCloud.OSNames) {
@@ -434,7 +441,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSName = $Global:StartOSDCloud.OSNameMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSName = $Global:StartOSDCloud.OSName
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSName is set to $($Global:StartOSDCloud.OSName)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSName is set to $($Global:StartOSDCloud.OSName)"
     }
     elseif ($PSCmdlet.ParameterSetName -eq 'Legacy') {
         #=================================================
@@ -452,7 +459,7 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select an Operating System"
             $Global:StartOSDCloud.OSVersionNames = @('Windows 11','Windows 10')
 
             $i = $null
@@ -476,7 +483,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.OSVersion = $Global:StartOSDCloud.OSVersionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSVersion = $Global:StartOSDCloud.OSVersion
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSVersion is set to $($Global:StartOSDCloud.OSVersion)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSVersion is set to $($Global:StartOSDCloud.OSVersion)"
         #=================================================
         #	OSBuild
         #=================================================
@@ -487,31 +494,31 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select a Build for $OSVersion x64"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select a Build for $OSVersion x64"
             $Global:StartOSDCloud.OSBuildNames = @('25H2','24H2','23H2','22H2')
-            
+
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSBuildMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSBuildMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSBuild = $Global:StartOSDCloud.OSBuildMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSBuild = $Global:StartOSDCloud.OSBuild
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSBuild is set to $($Global:StartOSDCloud.OSBuild)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSBuild is set to $($Global:StartOSDCloud.OSBuild)"
     }
         #=================================================
         #	OSEdition
@@ -524,27 +531,27 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System Edition"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select an Operating System Edition"
             $Global:StartOSDCloud.OSEditionNames = @('Home','Home N','Home Single Language','Education','Education N','Enterprise','Enterprise N','Pro','Pro N')
 
             $i = $null
             $Global:StartOSDCloud.OSEditionMenu = foreach ($Item in $Global:StartOSDCloud.OSEditionNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSEditionMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSEditionMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSEdition = $Global:StartOSDCloud.OSEditionMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         #=================================================
@@ -593,27 +600,27 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System License"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select an Operating System License"
             $Global:StartOSDCloud.OSActivationNames = @('Retail Windows Consumer Editions','Volume Windows Business Editions')
-            
+
             $i = $null
             $Global:StartOSDCloud.OSActivationMenu = foreach ($Item in $Global:StartOSDCloud.OSActivationNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection           = $i
                     Name                = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSActivationMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection Number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSActivationMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSActivationMenu = $Global:StartOSDCloud.OSActivationMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
 
             if ($Global:StartOSDCloud.OSActivationMenu -match 'Retail') {
@@ -640,31 +647,31 @@ function Start-OSDCloud {
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
-            Write-Host -ForegroundColor Cyan "[$(Get-Date -format G)] Select an Operating System Language"
+            Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select an Operating System Language"
             $Global:StartOSDCloud.OSLanguageNames = @('ar-sa','bg-bg','cs-cz','da-dk','de-de','el-gr','en-gb','en-us','es-es','es-mx','et-ee','fi-fi','fr-ca','fr-fr','he-il','hr-hr','hu-hu','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','zh-cn','zh-tw')
-            
+
             $i = $null
             $Global:StartOSDCloud.OSLanguageMenu = foreach ($Item in $Global:StartOSDCloud.OSLanguageNames) {
                 $i++
-            
+
                 $ObjectProperties = @{
                     Selection   = $i
                     Name     = $Item
                 }
                 New-Object -TypeName PSObject -Property $ObjectProperties
             }
-            
+
             $Global:StartOSDCloud.OSLanguageMenu | Select-Object -Property Selection, Name | Format-Table | Out-Host
-            
+
             do {
                 $SelectReadHost = Read-Host -Prompt "Enter the Selection number"
             }
             until (((($SelectReadHost -ge 0) -and ($SelectReadHost -in $Global:StartOSDCloud.OSLanguageMenu.Selection))))
-            
+
             $Global:StartOSDCloud.OSLanguage = $Global:StartOSDCloud.OSLanguageMenu | Where-Object {$_.Selection -eq $SelectReadHost} | Select-Object -ExpandProperty Name
         }
         $OSLanguage = $Global:StartOSDCloud.OSLanguage
-        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] OSLanguage is set to $($Global:StartOSDCloud.OSLanguage)"
+        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSLanguage is set to $($Global:StartOSDCloud.OSLanguage)"
     }
     #=================================================
     #	Default
@@ -746,7 +753,7 @@ function Start-OSDCloud {
     #   Invoke-OSDCloud
     #=================================================
     Write-Host -ForegroundColor DarkGray "========================================================================="
-    Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Start-OSDCloud Configuration"
+    Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Start-OSDCloud Configuration"
     $Global:StartOSDCloudCLI | Out-Host
     Write-Host -ForegroundColor DarkGray "========================================================================="
     #================================================
@@ -756,37 +763,37 @@ function Start-OSDCloud {
         $Win32Tpm = Get-CimInstance -Namespace "ROOT\cimv2\Security\MicrosoftTpm" -ClassName Win32_Tpm
 
         if ($null -eq $Win32Tpm) {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Autopilot: Not Supported"
             Start-Sleep -Seconds 5
         }
         elseif ($Win32Tpm.SpecVersion) {
             if ($null -eq $Win32Tpm.SpecVersion) {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Unable to detect the TPM Version"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] TPM: Unable to detect the TPM Version"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Autopilot: Not Supported"
                 Start-Sleep -Seconds 5
             }
 
             $majorVersion = $Win32Tpm.SpecVersion.Split(",")[0] -as [int]
             if ($majorVersion -lt 2) {
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Version is less than 2.0"
-                Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] TPM: Version is less than 2.0"
+                Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Autopilot: Not Supported"
                 Start-Sleep -Seconds 5
             }
             else {
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
-                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
-                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] TPM 2.0: Supported"
-                Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Autopilot: Supported"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsActivated: $($Win32Tpm.IsActivated_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsEnabled: $($Win32Tpm.IsEnabled_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM IsOwned: $($Win32Tpm.IsOwned_InitialValue)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM Manufacturer: $($Win32Tpm.ManufacturerIdTxt)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM Manufacturer Version: $($Win32Tpm.ManufacturerVersion)"
+                #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] TPM SpecVersion: $($Win32Tpm.SpecVersion)"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format s)] TPM 2.0: Supported"
+                Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Autopilot: Supported"
             }
         }
         else {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] TPM: Not Supported"
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] Autopilot: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] TPM: Not Supported"
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Autopilot: Not Supported"
             Start-Sleep -Seconds 5
         }
     }
@@ -795,7 +802,7 @@ function Start-OSDCloud {
     #================================================
     #   Invoke-OSDCloud
     #================================================
-    Write-Host -ForegroundColor Green "[$(Get-Date -format G)] Starting Invoke-OSDCloud in 5 seconds ..."
+    Write-Host -ForegroundColor Green "[$(Get-Date -format s)] Starting Invoke-OSDCloud in 5 seconds ..."
     Start-Sleep -Seconds 5
     Invoke-OSDCloud
 }

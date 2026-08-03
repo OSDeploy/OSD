@@ -2,9 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
----
+## Unreleased
 
 ## [26.8.1.1] - 2026-07-06
 
@@ -13,9 +11,48 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **`Invoke-OSDCloud` analytics instrumentation** (`Public/OSDCloud.ps1`) — Added deployment analytics event handling in the launch validation flow, including privacy-safe hashed device UUID generation for correlation and expanded deployment telemetry property collection.
 - **`OSD.psd1`** — Bumped module version to `26.8.1.1` and updated generated-on date to `2026-07-06`.
 
+## 26.7.22.1 - July 22, 2026
+
+### Added
+
+- **OSD Core function surface expansion** — Added new core functions for deployment, cache, license, module, source validation, and catalog workflows, including `Get-OSDCoreOperatingSystems`, `Initialize-OSDCoreDevice`, `Invoke-OSDCoreDownloadFile`, `Get-OSDCoreCacheContent`, `Get-OSDCoreCacheDrive`, `Get-OSDCoreCacheUSBPath`, `Test-OSDCoreCacheUSB`, `Get-OSDCoreDeploymentDisk`, `Get-OSDCoreLicense`, `Get-OSDModuleCache`, `Get-OSDModulePath`, `Get-OSDModuleVersion`, `Set-OSDCoreOperatingSystemCloudObject`, `Test-OSDCoreInternetConnection`, and driver pack catalog helpers (`Get-OSDCoreDriverPackCatalogDell`, `Get-OSDCoreDriverPackCatalogHP`, `Get-OSDCoreDriverPackCatalogLenovo`, `Get-OSDCoreDriverPackCatalogPanasonic`, `Get-OSDCoreDriverPackCatalogSurface`, `Get-OSDCoreDriverPacks`).
+- **New Recast OSDCloud workflow functions** — Added `Get-OSDCloudDefaultOS`, `Invoke-RecastOSDCloud`, `Invoke-RecastOSDCloudCLI`, `Start-RecastOSDCloudCLI`, `Start-RecastOSDCloudGUI`, and `Update-RecastOSDCloudUSBCache` to support default OS resolution, CLI/GUI deployment UX, and USB cache maintenance workflows.
+- **Recast OSDCloud GUI project** — Added the `Projects/RecastOSDCloudGUI` WPF project, XAML view, PowerShell launcher logic, project metadata, resources, and settings files.
+- **New OSDCloud deployment steps** — Added step functions for preinstall logs, hooks, disk validation and partitioning, USB drive letter removal and restore, ODT and Autopilot JSON validation, Windows ESD copy/download/save, driver pack cache/online validation, driver pack offline/online save, Office staging, module save, OS information export, BCD boot configuration, WinPE and WinRE driver handling, telemetry, final logging, and workflow cleanup.
+- **Source validation helpers** — Added `Test-OSDCoreDriverPackCloudObject`, `Test-OSDCoreOperatingSystemCloudObject`, and hardened `Test-WebConnection` behavior for live TCP validation and cache-bypassed HTTP HEAD checks.
+- **OOBE, firmware, and utility functions** — Added OOBE deployment helpers, Microsoft Update COM object retrieval functions, GitHub raw content helpers, Azure Key Vault secret conversion, PSCloudScript retrieval, video resolution lookup, Bootmgr timeout configuration, Dell BIOS helpers, Windows Update manifest retrieval, screenshot helpers, enablement package helpers, feature update helpers, web script invocation, dynamic validate set testing, and additional Windows settings, registry, cache path, module path, module version, and VM setting helpers.
+- **Driver pack and OEM artifacts** — Added core driver pack catalog files for Dell, HP, Lenovo, Surface, Panasonic, generic mappings under `core/driverpacks`, and OEM driver/BIOS catalog support scripts.
+- **Generated documentation expansion** — Added generated markdown documentation for new OSD Core, Recast OSDCloud, Azure, cache, firmware, HPIA, Microsoft Update, SetupComplete, disk, USB, WinPE, and utility functions under `docs`.
+- **Repository authoring guidance** — Added `.github/copilot-instructions.md` with standardized comment-based help authoring requirements.
+
+### Changed
+
+- **Recast OSDCloud workflow refresh** — Reworked the Recast OSDCloud launch flow with timestamped output, deployment timing, telemetry handling, final log export, WinPE post-action cleanup, improved Windows edition and image metadata handling, and updated CLI/GUI parameter support.
+- **OSDCloud public module consolidation** — Consolidated OSDCloud Azure, driver pack, IPU, ISO, RE, secret, template, USB, VM, WinPE, workspace, OSDPad, MDT, metrics, OOBE, and Windows Update manifest functions under `Public/OSDCloud` with refreshed exports.
+- **Public function layout cleanup** — Flattened and reorganized public function folders for conversion, COM, GitHub, ISO, PSModule, firmware, system, OEM catalog, WinPE, Windows ADK, and utility commands while preserving command exports.
+- **Disk implementation refactor** — Replaced many legacy private disk helper scripts with consolidated `Private/disk` implementations for core disk handling, OSDCloud v1/v2 disk workflows, and FFU selection.
+- **OSDCloud step state model** — Updated deployment steps to use clearer global state flags for cached operating system objects, cached driver pack objects, and online source tests.
+- **Cache and media handling** — Improved OSDCloud cache discovery, USB cache detection, Windows ESD copy/save behavior, hash validation, retry logging, and offline/online operating system and driver pack source selection.
+- **Device and keyboard detection** — Expanded `Initialize-OSDCoreDevice` with USB disk and partition information plus improved keyboard and language-code detection.
+- **Windows 11 25H2 catalog refresh** — Updated `OSD.json` and the Windows 11 25H2 operating system catalog from build `26200.8653` to `26200.8873`.
+- **Comment-based help standardization** — Updated and standardized help metadata, examples, notes, parameter descriptions, and link casing across a broad set of public scripts, docs, Azure functions, OSDCloud setup, VM, TS, IPU, system firmware, HPIA, Microsoft Update, and module utility functions.
+- **Author metadata normalization** — Updated author references in help documentation to align with Recast Software attribution standards.
+- **Logging and diagnostics** — Standardized log date formatting from `G` to `s`, added command names to verbose/error messages, normalized logging colors, clarified administrative rights errors, and improved firmware, BitLocker, module resource, assembly loading, and catalog parsing diagnostics.
+- **Docs folder normalization** — Renamed generated documentation from `Docs` to lowercase `docs` and updated links to use the lowercase path consistently.
+- **Cloud and launch script refresh** — Updated `cloud/functions.ps1`, cloud subdomain scripts, OSDCloud workspace behavior, OSDCloud GUI project files, and launch scripts to align with new function exports and workflow changes.
+- **Dependency and export maintenance** — Updated dependencies, bumped `OSD.psd1` to `26.7.22.1`, and refreshed exports for the new and reorganized function surface, including Recast, OSD Core cache, source validation, and USB cache commands.
+
+### Removed
+
+- **Deprecated private operating system retrieval functions** — Removed `Private/operatingsystem/Get-CoreOperatingSystems.ps1` and legacy private `Get-OSDCoreOperatingSystems` implementation after migration to the public core function layout.
+- **Legacy private disk helper layout** — Removed the old `Private/Disk` helper scripts after consolidating disk behavior into the new `Private/disk` implementation files.
+- **Deprecated OSDCloud folder layouts** — Removed legacy split folders such as `Public/OSDCloudAzure`, `Public/OSDCloudIPU`, `Public/OSDCloudRE`, `Public/OSDCloudSetup`, and `Public/OSDCloudVM` after moving commands under the consolidated `Public/OSDCloud` layout.
+- **Deprecated public function subfolders** — Removed legacy nested public function locations for COM, Convert, ESD, EnablementPackage, FeatureUpdate, GitHub, Other, PSModule, System, WebPSScript, WindowsUpdate, and related utility commands after moving or consolidating their implementations.
+- **Deprecated conversion and Intel driver pack scripts** — Removed deprecated ESD conversion wrappers, obsolete Intel Ethernet driver pack text scripts, and older OSDCloud IPU support scripts superseded by the newer Windows Update manifest and conversion flows.
+
 ---
 
-## [26.7.6.1] - 2026-07-06
+## 26.7.6.1 - July 6, 2026
 
 ### Changed
 
@@ -24,7 +61,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [26.6.25.1] - 2026-06-25
+## 26.6.25.1 - June 25, 2026
 
 ### Added
 
@@ -48,7 +85,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [26.6.23.1] - 2026-06-23
+## 26.6.23.1 - June 23, 2026
 
 ### Changed
 
@@ -58,7 +95,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [26.4.23.1] - 2026-04-23
+## 26.4.23.1 - April 23, 2026
 
 ### Changed
 
@@ -74,13 +111,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [25.2.26] - 2025-02-26
+## 25.2.26 - February 26, 2025
 
 - `Invoke-OSDCloudIPU` — added `SkipFinalize` parameter ([Issue 247](https://github.com/OSDeploy/OSD/issues/247))
 
 ---
 
-## [25.2.25] - 2025-02-25
+## 25.2.25 - February 25, 2025
 
 - Several updates released since previous note
 - ARM support removed from template creation — will be reworked and re-added at a future date
@@ -93,7 +130,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.11.15] - 2024-11-15
+## 24.11.15 - November 15, 2024
 
 - Several minor changes and a bug fix — see closed issues for this period
 - Completely revamped index lookup in the DEV GUI — now uses a generic Index Map for all build versions, eliminating the need to build a new Index Map per release
@@ -102,13 +139,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.11.14] - 2024-11-14
+## 24.11.14 - November 14, 2024
 
 - Updated the Windows 11 24H2 catalog file with the latest public MS release (2024-10-04)
 
 ---
 
-## [24.10.1] - 2024-10-01
+## 24.10.1 - October 1, 2024
 
 - Windows 11 24H2 x64 and ARM64 support
   - Updated Catalog JSON & XML files
@@ -118,14 +155,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.7.8] - 2024-07-08
+## 24.7.8 - July 8, 2024
 
 - Added function `Add-7Zip2BootImage`
   - Used by `New-OSDCloudTemplate` & `Edit-OSDCloudWinPE` to add 7-Zip into boot images
 
 ---
 
-## [24.7.3] - 2024-07-03
+## 24.7.3 - July 3, 2024
 
 - Added HP functions that mirror HP CMSL but work in WinPE:
   - `Get-HPDriverPackLatest` — finds the latest driver pack for a platform, with download or URL options
@@ -140,7 +177,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.3.27] - 2024-03-27
+## 24.3.27 - March 27, 2024
 
 *Implemented in OSD Module 24.3.27.1*
 
@@ -149,7 +186,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.3.22] - 2024-03-22
+## 24.3.22 - March 22, 2024
 
 *Implemented in OSD Module 24.3.27.1*
 
@@ -157,18 +194,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.3.20] - 2024-03-20
+## 24.3.20 - March 20, 2024
 
 *Implemented in OSD Module 24.3.27.1*
 
 - Added Debug Mode checkbox to `Start-OSDCloudGUIDev` drop-down menu
-  - When `debugmode = $true` (via GUI or variable), creates additional logs in `C:\OSDCloud\Logs`:
+  - When `debugmode = $true` (via GUI or variable), creates additional logs in `C:\Windows\TEMP\osdcloud-logs`:
     - DiskPart logs (before & after format step)
     - OSDCloudDebug logs: OSDCloud variables, Windows 11 readiness, TPM information, `MyComputerInfo`
 
 ---
 
-## [24.3.19] - 2024-03-19
+## 24.3.19 - March 19, 2024
 
 *Implemented in OSD Module 24.3.20.1*
 
@@ -178,7 +215,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.3.12] - 2024-03-12
+## 24.3.12 - March 12, 2024
 
 *Implemented in OSD Module 24.3.20.1*
 
@@ -188,7 +225,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.3.6] - 2024-03-06
+## 24.3.6 - March 6, 2024
 
 *Implemented in OSD Module 24.3.10.1*
 
@@ -197,18 +234,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.2.15] - 2024-02-15
+## 24.2.15 - February 15, 2024
 
 *Implemented in OSD Module 24.2.20.1*
 
 - `Set-TimeZoneFromIP` — completely reworked due to previous API no longer being free ([Issue 110](https://github.com/OSDeploy/OSD/issues/110), thanks @JHBDO)
-- Added function `New-OSDCloudWorkSpaceSetupCompleteTemplate` ([Issue 107](https://github.com/OSDeploy/OSD/issues/107))
+- Added function `New-OSDCloudWorkspaceSetupCompleteTemplate` ([Issue 107](https://github.com/OSDeploy/OSD/issues/107))
   - Creates SetupComplete files on the WorkSpace drive (`%WorkSpace%\Config\Scripts\SetupComplete`)
   - Files are automatically copied to OSDCloud USB on update and applied during SetupComplete
 
 ---
 
-## [24.2.7] - 2024-02-07
+## 24.2.7 - February 7, 2024
 
 *Implemented in OSD Module 24.2.13.1*
 
@@ -218,7 +255,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.1.22] - 2024-01-22
+## 24.1.22 - January 22, 2024
 
 *Implemented in OSD Module 24.2.4.1*
 
@@ -230,7 +267,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.1.17] - 2024-01-17
+## 24.1.17 - January 17, 2024
 
 *Implemented in OSD Module 24.2.4.1*
 
@@ -240,7 +277,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.1.9] - 2024-01-09
+## 24.1.9 - January 9, 2024
 
 *Implemented in OSD Module 24.1.11.1*
 
@@ -249,11 +286,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - `OSDCloudUSB\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$PackageID`
     - `OSDCloudUSB\OSDCloud\DriverPacks\DISM\$ComputerManufacturer\$ComputerProduct`
   - Benefits: saves download time, reduces storage usage on device, all drivers present at first reboot
-- DISM log copied from `X:\Windows\Logs\DISM\dism.log` to `C:\OSDCloud\Logs\WinPE-DISM.log`
+- DISM log copied from `X:\Windows\Logs\DISM\dism.log` to `C:\Windows\TEMP\osdcloud-logs\WinPE-DISM.log`
 
 ---
 
-## [24.1.3] - 2024-01-03
+## 24.1.3 - January 3, 2024
 
 *Implemented in OSD Module 24.1.11.1*
 
@@ -264,7 +301,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [24.1.2] - 2024-01-02
+## 24.1.2 - January 2, 2024
 
 *Implemented in OSD Module 24.1.3.1*
 
@@ -285,7 +322,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [23.12.1] - 2023-12-01
+## 23.12.1 - December 1, 2023
 
 - Moved ESD file references in catalog from WSUS data to Microsoft Creation Tool catalogs
 - Process: [Build-OSDCloudOperatingSystemsv3.ps1](https://github.com/OSDeploy/OSD/blob/master/build/Build-OSDCloudOperatingSystemsv3.ps1)

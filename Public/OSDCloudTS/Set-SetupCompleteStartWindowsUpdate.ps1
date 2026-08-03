@@ -1,4 +1,4 @@
-Function Set-SetupCompleteStartWindowsUpdate {
+function Set-SetupCompleteStartWindowsUpdate {
     $ScriptsPath = "C:\Windows\Setup\scripts"
     $RunScript = @(@{ Script = "SetupComplete"; BatFile = 'SetupComplete.cmd'; ps1file = 'SetupComplete.ps1';Type = 'Setup'; Path = "$ScriptsPath"})
     $PSFilePath = "$($RunScript.Path)\$($RunScript.ps1File)"

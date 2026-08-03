@@ -1,4 +1,31 @@
 function Get-MsUpCat {
+    <#
+    .SYNOPSIS
+    Retrieves Microsoft updates from the Microsoft Update Catalog
+
+    .DESCRIPTION
+    Searches the Microsoft Update Catalog for updates and returns information about available patches, driver packs, and other updates.
+
+    .PARAMETER Architecture
+    Filter results by processor architecture. Valid values are All, x64, x86, or arm64. Default is All.
+
+    .PARAMETER Descending
+    Sort results in descending order by release date.
+
+    .PARAMETER ExcludeFramework
+    Exclude .NET Framework updates from results.
+
+    .EXAMPLE
+    Get-MsUpCat -Architecture x64
+    Retrieves x64 updates from Microsoft Update Catalog
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdletBinding(DefaultParameterSetName = 'Search')]
     #[OutputType([MSCatalogUpdate[]])]
     #[OutputType([MsUpCat[]])]
@@ -467,6 +494,33 @@ function Get-MsUpCat {
 }
 
 function Get-MsUpCatUpdate {
+    <#
+    .SYNOPSIS
+    Retrieves updates for a specific Windows operating system version from Microsoft Update Catalog
+
+    .DESCRIPTION
+    Searches Microsoft Update Catalog for updates specific to a Windows operating system and build version.
+
+    .PARAMETER OS
+    Operating system to search for updates. Valid values are Windows 11, Windows 10, Windows Server, Windows Server 2016, Windows Server 2019, or Windows Server 2022. Default is Windows 11.
+
+    .PARAMETER Arch
+    Processor architecture filter. Valid values are x64 or x86. Default is x64.
+
+    .PARAMETER Build
+    Windows build or release ID. Valid values include 22H2, 21H2, 21H1, 20H2, and others. Default is 22H2.
+
+    .EXAMPLE
+    Get-MsUpCatUpdate -OS 'Windows 11' -Arch x64 -Build 22H2
+    Retrieves updates for Windows 11 22H2 x64
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdLetBinding()]
     param (
         [ValidateSet('Windows 11','Windows 10','Windows Server','Windows Server 2016','Windows Server 2019','Windows Server 2022')]
@@ -605,6 +659,27 @@ function Get-MsUpCatUpdate {
     #=================================================
 }
 function Invoke-MSCatalogParseDate {
+    <#
+    .SYNOPSIS
+    Parses a date string from Microsoft Update Catalog format
+
+    .DESCRIPTION
+    Converts a date string in MM/DD/YYYY format (as returned by Microsoft Update Catalog) into a PowerShell DateTime object.
+
+    .PARAMETER DateString
+    Date string in MM/DD/YYYY format to parse
+
+    .EXAMPLE
+    Invoke-MSCatalogParseDate -DateString "01/15/2025"
+    Returns a DateTime object for January 15, 2025
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     param (
         [String] $DateString
     )
@@ -613,6 +688,33 @@ function Invoke-MSCatalogParseDate {
     Get-Date -Year $Array[2] -Month $Array[0] -Day $Array[1]
 }
 function Save-MsUpCatDriver {
+    <#
+    .SYNOPSIS
+    Downloads driver updates from Microsoft Update Catalog
+
+    .DESCRIPTION
+    Searches Microsoft Update Catalog for drivers matching specified hardware IDs or Plug and Play device classes and downloads them to a destination directory.
+
+    .PARAMETER DestinationDirectory
+    Directory where downloaded drivers will be saved
+
+    .PARAMETER HardwareID
+    One or more hardware IDs to search for drivers (ParameterSet: ByHardwareID)
+
+    .PARAMETER PNPClass
+    Plug and Play device class to search for drivers. Valid values are DiskDrive, Display, Net, SCSIAdapter, SecurityDevices, or USB. (ParameterSet: ByPNPClass)
+
+    .EXAMPLE
+    Save-MsUpCatDriver -DestinationDirectory 'C:\Drivers' -PNPClass 'Net'
+    Downloads network driver updates to C:\Drivers
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdletBinding(DefaultParameterSetName = 'ByPNPClass')]
     param (
         [System.String]$DestinationDirectory,
@@ -767,19 +869,19 @@ function Save-MsUpCatDriver {
                                 }
                             }
                             else {
-                                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $($Item.Name) $FindHardwareID"
+                                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No Results: $($Item.Name) $FindHardwareID"
                                 #Write-Host -ForegroundColor DarkGray "HardwareID: $FindHardwareID"
                                 #Write-Host -ForegroundColor DarkGray "SearchString: $SearchString"
                                 #Write-Host -ForegroundColor DarkGray "Save-MsUpCatDriver: Could not find a Windows Update GUID"
                             }
                         }
                         catch{
-                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Unable to get Driver for Hardware component"
+                            Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to get Driver for Hardware component"
                         }   
                     }
                     else {
                         Write-Verbose "DeviceID: $($Item.DeviceID)"
-                        #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
+                        #Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                     }
                 }
             }
@@ -896,11 +998,11 @@ function Save-MsUpCatDriver {
                         }
                     }
                     else {
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                     }
                 }
                 else {
-                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
+                    Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] No Results: $FindHardwareID"
                 }
             }
         }
@@ -920,22 +1022,49 @@ function Save-MsUpCatDriver {
                         $Destination = $MSUpCatDriversOSDCloudUSBPath #OSDCloud Flash Drive cache folder
 
                         Write-Host -ForegroundColor Cyan "Syncing MS Update Catalog Drivers to OSDCloud USB Cache"
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Transfering $([Math]::Round($MsUpCatDriverCacheSizeGB,2)) GB of MS Update Drivers to $Destination"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Transfering $([Math]::Round($MsUpCatDriverCacheSizeGB,2)) GB of MS Update Drivers to $Destination"
                         Invoke-Exe robocopy $Source $Destination *.* /s /ndl /nfl /njh /njs
                     }
                     else {
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Not enough Free Space on OSDCloudUSB to sync drivers"
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] Requires $([Math]::Round(($MsUpCatDriverCacheSizeGB + 5),2)) GB, but only $($OSDCloudUSB.SizeRemainingGB) GB available"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Not enough Free Space on OSDCloudUSB to sync drivers"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Requires $([Math]::Round(($MsUpCatDriverCacheSizeGB + 5),2)) GB, but only $($OSDCloudUSB.SizeRemainingGB) GB available"
                     }
                 }
             }
             else {
-                # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] [$($MyInvocation.MyCommand.Name)] OSDCloudUSB not detected to sync drivers back to, skipping sync"
+                # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCloudUSB not detected to sync drivers back to, skipping sync"
             }
         }
     }
 }
 function Save-MsUpCatUpdate {
+    <#
+    .SYNOPSIS
+    Downloads updates from Microsoft Update Catalog for a specific Windows version
+
+    .DESCRIPTION
+    Downloads Microsoft updates for a specific Windows operating system version, architecture, and build from Microsoft Update Catalog to a destination directory.
+
+    .PARAMETER OS
+    Operating system version. Valid values are Windows 10, Windows Server, Windows Server 2016, Windows Server 2019, or Windows Server 2022. Default is Windows 11.
+
+    .PARAMETER Arch
+    Processor architecture. Valid values are x64 or x86. Default is x64.
+
+    .PARAMETER Build
+    Windows build or release ID such as 22H2, 21H2, 21H1, 20H2, and others. Default is 22H2.
+
+    .EXAMPLE
+    Save-MsUpCatUpdate -OS 'Windows 11' -Arch x64 -Build 22H2
+    Downloads updates for Windows 11 22H2 x64 to the default location
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdLetBinding()]
     param (
         [ValidateSet('Windows 10','Windows Server','Windows Server 2016','Windows Server 2019')]

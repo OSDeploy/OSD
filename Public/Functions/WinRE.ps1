@@ -8,7 +8,7 @@ function Copy-WinREWIM {
     This function must be run in Windows
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     [OutputType([System.IO.FileInfo])]
@@ -27,7 +27,12 @@ function Copy-WinREWIM {
     #	Block
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=================================================
@@ -35,7 +40,7 @@ function Copy-WinREWIM {
     #=================================================
     $GetPartitionWinRE = Get-WinREPartition -ErrorAction Stop
     #$GetPartitionWinRE | Select-Object -Property * | Format-List
-    
+
     if ($GetPartitionWinRE) {
         #=================================================
         #	Get WinrePartitionDriveLetter
@@ -98,14 +103,21 @@ function Copy-WinREWIM {
 function Get-ReAgentXml {
     <#
     .SYNOPSIS
-    Returns information from the Reagent XML file
+    Returns information from the Windows Recovery Agent XML file
 
     .DESCRIPTION
-    Returns information from the Reagent XML file
-    This function must be run in Windows
+    Reads and parses the Reagent.xml file to extract Windows Recovery Environment configuration and status information. This function must be run in Windows.
+
+    .EXAMPLE
+    Get-ReAgentXml
+    Returns ReAgent.xml configuration details
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     param ()
@@ -113,7 +125,12 @@ function Get-ReAgentXml {
     #	Block
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=================================================
@@ -127,7 +144,7 @@ function Get-ReAgentXml {
 
         $XmlDocument.SelectNodes('WindowsRE') | ForEach-Object {
 
-            
+
             $WinreLocationGuid = $_.WinreLocation.guid
             $WinreLocationId = $_.WinreLocation.id
             $WinreLocationOffset = $_.WinreLocation.offset
@@ -188,14 +205,21 @@ function Get-ReAgentXml {
 function Get-WinREPartition {
     <#
     .SYNOPSIS
-    Returns the Partition containing Windows Recovery Environment WIM
+    Retrieves the Windows Recovery Environment partition information
 
     .DESCRIPTION
-    Returns the Partition containing Windows Recovery Environment WIM
-    This function must be run in Windows
+    Returns the partition information for the Windows Recovery Environment (WinRE) WIM file. This function must be run in Windows.
+
+    .EXAMPLE
+    Get-WinREPartition
+    Returns the WinRE partition information
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Updated help to follow OSD standard
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
     [CmdletBinding()]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]

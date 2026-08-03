@@ -1,17 +1,25 @@
-<#
-.SYNOPSIS
-Saves a Drive as Full Flash Update Windows Image (FFU)
-
-.DESCRIPTION
-Saves a Drive as Full Flash Update Windows Image (FFU)
-
-.LINK
-https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-windows-using-full-flash-update--ffu
-
-.NOTES
-21.1.27    Initial Release
-#>
 function Backup-DiskToFFU {
+    <#
+    .SYNOPSIS
+    Captures a physical disk to a Full Flash Update (FFU) image.
+
+    .DESCRIPTION
+    Interactively selects a source disk and destination data disk, then uses DISM /Capture-FFU to create an FFU backup from WinPE.
+
+    .EXAMPLE
+    Backup-DiskToFFU
+    Prompts for source and destination disks, then captures the selected source disk to an FFU file.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .LINK
+    https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deploy-windows-using-full-flash-update--ffu
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Moved help block inside function and expanded sections
+    #>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -31,7 +39,12 @@ function Backup-DiskToFFU {
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=================================================
@@ -79,7 +92,7 @@ function Backup-DiskToFFU {
     Write-Host -ForegroundColor Cyan        'Cmd Syntax:'
     Write-Host -ForegroundColor White       "DISM.exe /Capture-FFU /ImageFile=`"$ImageFile`" /CaptureDrive=\\.\PhysicalDrive$DiskNumber /Name:`"$Name`" /Description:`"$Description`" /Compress:$Compress"
     Write-Host -ForegroundColor DarkGray    '======================================================================================================'
-    
+
     do {$ConfirmFFU = Read-Host "Type FFU to create the Backup, or X to Exit"}
     until (($ConfirmFFU -eq 'FFU') -or ($ConfirmFFU -eq 'X'))
 
@@ -96,6 +109,46 @@ function Backup-DiskToFFU {
     }
 }
 function Clear-LocalDisk {
+<#
+.SYNOPSIS
+Clears LocalDisk data or state.
+
+.DESCRIPTION
+Removes existing LocalDisk data or configuration and applies the requested reset behavior.
+
+.PARAMETER Input
+Specifies the Input to use when running Clear-LocalDisk.
+
+.PARAMETER DiskNumber
+Specifies the DiskNumber to use when running Clear-LocalDisk.
+
+.PARAMETER Initialize
+Specifies the Initialize to use when running Clear-LocalDisk.
+
+.PARAMETER PartitionStyle
+Specifies the PartitionStyle to use when running Clear-LocalDisk.
+
+.PARAMETER Force
+Specifies the Force to use when running Clear-LocalDisk.
+
+.PARAMETER NoResults
+Specifies the NoResults to use when running Clear-LocalDisk.
+
+.PARAMETER ShowWarning
+Specifies the ShowWarning to use when running Clear-LocalDisk.
+
+.EXAMPLE
+Clear-LocalDisk -Input <value>
+Demonstrates a common way to run Clear-LocalDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -129,7 +182,12 @@ function Clear-LocalDisk {
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     #=================================================
     #	Enable Verbose if Force parameter is not $true
@@ -178,7 +236,7 @@ function Clear-LocalDisk {
     FriendlyName,Model, PartitionStyle,`
     @{Name='Partitions';Expression={$_.NumberOfPartitions}} | `
     Format-Table | Out-Host
-    
+
     if ($IsForcePresent -eq $false) {
         Break
     }
@@ -200,13 +258,13 @@ function Clear-LocalDisk {
         ))
         {
             Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
-            Diskpart-Clean -DiskNumber $Item.Number
+            Invoke-DiskpartClean -DiskNumber $Item.Number
 
             if ($Initialize -eq $true) {
                 Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName)"
                 $Item | Initialize-Disk -PartitionStyle $PartitionStyle
             }
-            
+
             $ClearDisk += Get-OSDDisk -Number $Item.Number
         }
     }
@@ -226,6 +284,43 @@ function Clear-LocalDisk {
     #=================================================
 }
 function Clear-USBDisk {
+<#
+.SYNOPSIS
+Clears USBDisk data or state.
+
+.DESCRIPTION
+Removes existing USBDisk data or configuration and applies the requested reset behavior.
+
+.PARAMETER Input
+Specifies the Input to use when running Clear-USBDisk.
+
+.PARAMETER DiskNumber
+Specifies the DiskNumber to use when running Clear-USBDisk.
+
+.PARAMETER Initialize
+Specifies the Initialize to use when running Clear-USBDisk.
+
+.PARAMETER PartitionStyle
+Specifies the PartitionStyle to use when running Clear-USBDisk.
+
+.PARAMETER Force
+Specifies the Force to use when running Clear-USBDisk.
+
+.PARAMETER ShowWarning
+Specifies the ShowWarning to use when running Clear-USBDisk.
+
+.EXAMPLE
+Clear-USBDisk -Input <value>
+Demonstrates a common way to run Clear-USBDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -257,7 +352,12 @@ function Clear-USBDisk {
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     #=================================================
     #	Enable Verbose if Force parameter is not $true
@@ -304,7 +404,7 @@ function Clear-USBDisk {
     $GetDisk | Select-Object -Property Number, BusType, MediaType,`
     FriendlyName, PartitionStyle, NumberOfPartitions,`
     @{Name='SizeGB';Expression={[int]($_.Size / 1000000000)}} | Format-Table
-    
+
     if ($IsForcePresent -eq $false) {
         Break
     }
@@ -327,12 +427,12 @@ function Clear-USBDisk {
         {
             Write-Warning "Cleaning Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName) [$($Item.PartitionStyle) $($Item.NumberOfPartitions) Partitions]"
             Clear-Disk -Number $Item.Number -RemoveData -RemoveOEM -ErrorAction Stop
-            
+
             if ($Initialize -eq $true) {
                 Write-Warning "Initializing $PartitionStyle Disk $($Item.Number) $($Item.BusType) $([int]($Item.Size / 1000000000))GB $($Item.FriendlyName)"
                 $Item | Initialize-Disk -PartitionStyle $PartitionStyle
             }
-            
+
             $ClearDisk += Get-OSDDisk -Number $Item.Number
         }
     }
@@ -345,6 +445,25 @@ function Clear-USBDisk {
     #=================================================
 }
 function Get-DataDisk {
+<#
+.SYNOPSIS
+Gets DataDisk information.
+
+.DESCRIPTION
+Returns DataDisk data for the current system or OSD session context.
+
+.EXAMPLE
+Get-DataDisk
+Demonstrates a common way to run Get-DataDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -369,7 +488,7 @@ function Get-DataDisk {
     $LocalResults = foreach ($Item in $GetPartition) {
         $GetVolumeProperties = $GetVolume | Where-Object {$_.DriveLetter -eq $Item.DriveLetter}
         $ObjectProperties = @{
-            
+
             DiskNumber          = $Item.DiskNumber
             DriveLetter         = $GetVolumeProperties.DriveLetter
             FileSystem          = $GetVolumeProperties.FileSystem
@@ -409,6 +528,25 @@ function Get-DataDisk {
     Return [array]$Results
 }
 function Get-LocalDisk {
+<#
+.SYNOPSIS
+Gets LocalDisk information.
+
+.DESCRIPTION
+Returns LocalDisk data for the current system or OSD session context.
+
+.EXAMPLE
+Get-LocalDisk
+Demonstrates a common way to run Get-LocalDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -422,6 +560,25 @@ function Get-LocalDisk {
     #=================================================
 }
 function Get-LocalDiskPartition {
+<#
+.SYNOPSIS
+Gets LocalDiskPartition information.
+
+.DESCRIPTION
+Returns LocalDiskPartition data for the current system or OSD session context.
+
+.EXAMPLE
+Get-LocalDiskPartition
+Demonstrates a common way to run Get-LocalDiskPartition.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
 
@@ -432,6 +589,25 @@ function Get-LocalDiskPartition {
     #=================================================
 }
 function Get-LocalDiskVolume {
+<#
+.SYNOPSIS
+Gets LocalDiskVolume information.
+
+.DESCRIPTION
+Returns LocalDiskVolume data for the current system or OSD session context.
+
+.EXAMPLE
+Get-LocalDiskVolume
+Demonstrates a common way to run Get-LocalDiskVolume.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -441,6 +617,58 @@ function Get-LocalDiskVolume {
     #=================================================
 }
 function Get-OSDDisk {
+<#
+.SYNOPSIS
+Gets OSDDisk information.
+
+.DESCRIPTION
+Returns OSDDisk data for the current system or OSD session context.
+
+.PARAMETER Number
+Specifies the Number to use when running Get-OSDDisk.
+
+.PARAMETER BootFromDisk
+Specifies the BootFromDisk to use when running Get-OSDDisk.
+
+.PARAMETER IsBoot
+Specifies the IsBoot to use when running Get-OSDDisk.
+
+.PARAMETER IsReadOnly
+Specifies the IsReadOnly to use when running Get-OSDDisk.
+
+.PARAMETER IsSystem
+Specifies the IsSystem to use when running Get-OSDDisk.
+
+.PARAMETER BusType
+Specifies the BusType to use when running Get-OSDDisk.
+
+.PARAMETER BusTypeNot
+Specifies the BusTypeNot to use when running Get-OSDDisk.
+
+.PARAMETER MediaType
+Specifies the MediaType to use when running Get-OSDDisk.
+
+.PARAMETER MediaTypeNot
+Specifies the MediaTypeNot to use when running Get-OSDDisk.
+
+.PARAMETER PartitionStyle
+Specifies the PartitionStyle to use when running Get-OSDDisk.
+
+.PARAMETER PartitionStyleNot
+Specifies the PartitionStyleNot to use when running Get-OSDDisk.
+
+.EXAMPLE
+Get-OSDDisk -Number <value>
+Demonstrates a common way to run Get-OSDDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Alias('Disk','DiskNumber')]
@@ -455,7 +683,7 @@ function Get-OSDDisk {
         [string[]]$BusType,
         [ValidateSet('1394','ATA','ATAPI','Fibre Channel','File Backed Virtual','iSCSI','MMC','MAX','Microsoft Reserved','NVMe','RAID','SAS','SATA','SCSI','SD','SSA','Storage Spaces','USB','Virtual')]
         [string[]]$BusTypeNot,
-        
+
         [ValidateSet('SSD','HDD','SCM','Unspecified')]
         [string[]]$MediaType,
         [ValidateSet('SSD','HDD','SCM','Unspecified')]
@@ -517,6 +745,25 @@ function Get-OSDDisk {
     #=================================================
 }
 function Get-OSDPartition {
+<#
+.SYNOPSIS
+Gets OSDPartition information.
+
+.DESCRIPTION
+Returns OSDPartition data for the current system or OSD session context.
+
+.EXAMPLE
+Get-OSDPartition
+Demonstrates a common way to run Get-OSDPartition.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -547,6 +794,25 @@ function Get-OSDPartition {
     #=================================================
 }
 function Get-OSDVolume {
+<#
+.SYNOPSIS
+Gets OSDVolume information.
+
+.DESCRIPTION
+Returns OSDVolume data for the current system or OSD session context.
+
+.EXAMPLE
+Get-OSDVolume
+Demonstrates a common way to run Get-OSDVolume.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -581,6 +847,25 @@ function Get-OSDVolume {
     #=================================================
 }
 function Get-USBDisk {
+<#
+.SYNOPSIS
+Gets USBDisk information.
+
+.DESCRIPTION
+Returns USBDisk data for the current system or OSD session context.
+
+.EXAMPLE
+Get-USBDisk
+Demonstrates a common way to run Get-USBDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -594,6 +879,25 @@ function Get-USBDisk {
     #=================================================
 }
 function Get-USBPartition {
+<#
+.SYNOPSIS
+Gets USBPartition information.
+
+.DESCRIPTION
+Returns USBPartition data for the current system or OSD session context.
+
+.EXAMPLE
+Get-USBPartition
+Demonstrates a common way to run Get-USBPartition.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
 
@@ -604,6 +908,25 @@ function Get-USBPartition {
     #=================================================
 }
 function Get-USBVolume {
+<#
+.SYNOPSIS
+Gets USBVolume information.
+
+.DESCRIPTION
+Returns USBVolume data for the current system or OSD session context.
+
+.EXAMPLE
+Get-USBVolume
+Demonstrates a common way to run Get-USBVolume.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -613,6 +936,34 @@ function Get-USBVolume {
     #=================================================
 }
 function Invoke-SelectDataDisk {
+<#
+.SYNOPSIS
+Invokes SelectDataDisk actions.
+
+.DESCRIPTION
+Runs interactive or workflow-oriented SelectDataDisk operations used by OSD tasks.
+
+.PARAMETER NotDiskNumber
+Specifies the NotDiskNumber to use when running Invoke-SelectDataDisk.
+
+.PARAMETER Skip
+Specifies the Skip to use when running Invoke-SelectDataDisk.
+
+.PARAMETER SelectOne
+Specifies the SelectOne to use when running Invoke-SelectDataDisk.
+
+.EXAMPLE
+Invoke-SelectDataDisk -NotDiskNumber <value>
+Demonstrates a common way to run Invoke-SelectDataDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [int]$NotDiskNumber,
@@ -656,7 +1007,7 @@ function Invoke-SelectDataDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Disk to save the FFU on by DriveLetter, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DriveLetter) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -671,6 +1022,31 @@ function Invoke-SelectDataDisk {
     }
 }
 function Invoke-SelectFFUDisk {
+<#
+.SYNOPSIS
+Invokes SelectFFUDisk actions.
+
+.DESCRIPTION
+Runs interactive or workflow-oriented SelectFFUDisk operations used by OSD tasks.
+
+.PARAMETER Skip
+Specifies the Skip to use when running Invoke-SelectFFUDisk.
+
+.PARAMETER SelectOne
+Specifies the SelectOne to use when running Invoke-SelectFFUDisk.
+
+.EXAMPLE
+Invoke-SelectFFUDisk -Skip <value>
+Demonstrates a common way to run Invoke-SelectFFUDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]$Skip,
@@ -717,7 +1093,7 @@ function Invoke-SelectFFUDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Fixed Disk to Backup by DiskNumber, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DiskNumber) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -732,6 +1108,34 @@ function Invoke-SelectFFUDisk {
     }
 }
 function Invoke-SelectLocalDisk {
+<#
+.SYNOPSIS
+Invokes SelectLocalDisk actions.
+
+.DESCRIPTION
+Runs interactive or workflow-oriented SelectLocalDisk operations used by OSD tasks.
+
+.PARAMETER Input
+Specifies the Input to use when running Invoke-SelectLocalDisk.
+
+.PARAMETER Skip
+Specifies the Skip to use when running Invoke-SelectLocalDisk.
+
+.PARAMETER SelectOne
+Specifies the SelectOne to use when running Invoke-SelectLocalDisk.
+
+.EXAMPLE
+Invoke-SelectLocalDisk -Input <value>
+Demonstrates a common way to run Invoke-SelectLocalDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -775,7 +1179,7 @@ function Invoke-SelectLocalDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Fixed Disk by DiskNumber, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DiskNumber) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -790,6 +1194,40 @@ function Invoke-SelectLocalDisk {
     }
 }
 function Invoke-SelectLocalVolume {
+<#
+.SYNOPSIS
+Invokes SelectLocalVolume actions.
+
+.DESCRIPTION
+Runs interactive or workflow-oriented SelectLocalVolume operations used by OSD tasks.
+
+.PARAMETER Input
+Specifies the Input to use when running Invoke-SelectLocalVolume.
+
+.PARAMETER MinimumSizeGB
+Specifies the MinimumSizeGB to use when running Invoke-SelectLocalVolume.
+
+.PARAMETER FileSystem
+Specifies the FileSystem to use when running Invoke-SelectLocalVolume.
+
+.PARAMETER Skip
+Specifies the Skip to use when running Invoke-SelectLocalVolume.
+
+.PARAMETER SelectOne
+Specifies the SelectOne to use when running Invoke-SelectLocalVolume.
+
+.EXAMPLE
+Invoke-SelectLocalVolume -Input <value>
+Demonstrates a common way to run Invoke-SelectLocalVolume.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -843,7 +1281,7 @@ function Invoke-SelectLocalVolume {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Fixed Volume by DriveLetter, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DriveLetter) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -858,6 +1296,34 @@ function Invoke-SelectLocalVolume {
     }
 }
 function Invoke-SelectOSDDisk {
+<#
+.SYNOPSIS
+Invokes SelectOSDDisk actions.
+
+.DESCRIPTION
+Runs interactive or workflow-oriented SelectOSDDisk operations used by OSD tasks.
+
+.PARAMETER Input
+Specifies the Input to use when running Invoke-SelectOSDDisk.
+
+.PARAMETER Skip
+Specifies the Skip to use when running Invoke-SelectOSDDisk.
+
+.PARAMETER SelectOne
+Specifies the SelectOne to use when running Invoke-SelectOSDDisk.
+
+.EXAMPLE
+Invoke-SelectOSDDisk -Input <value>
+Demonstrates a common way to run Invoke-SelectOSDDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -901,7 +1367,7 @@ function Invoke-SelectOSDDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Disk by DiskNumber, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $GetDisk.DiskNumber) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -916,6 +1382,40 @@ function Invoke-SelectOSDDisk {
     }
 }
 function Invoke-SelectOSDVolume {
+<#
+.SYNOPSIS
+Invokes SelectOSDVolume actions.
+
+.DESCRIPTION
+Runs interactive or workflow-oriented SelectOSDVolume operations used by OSD tasks.
+
+.PARAMETER Input
+Specifies the Input to use when running Invoke-SelectOSDVolume.
+
+.PARAMETER MinimumSizeGB
+Specifies the MinimumSizeGB to use when running Invoke-SelectOSDVolume.
+
+.PARAMETER FileSystem
+Specifies the FileSystem to use when running Invoke-SelectOSDVolume.
+
+.PARAMETER Skip
+Specifies the Skip to use when running Invoke-SelectOSDVolume.
+
+.PARAMETER SelectOne
+Specifies the SelectOne to use when running Invoke-SelectOSDVolume.
+
+.EXAMPLE
+Invoke-SelectOSDVolume -Input <value>
+Demonstrates a common way to run Invoke-SelectOSDVolume.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -970,7 +1470,7 @@ function Invoke-SelectOSDVolume {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a Volume by DriveLetter, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DriveLetter) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -985,11 +1485,45 @@ function Invoke-SelectOSDVolume {
     }
 }
 function Invoke-SelectUSBDisk {
+<#
+.SYNOPSIS
+Invokes SelectUSBDisk actions.
+
+.DESCRIPTION
+Runs interactive or workflow-oriented SelectUSBDisk operations used by OSD tasks.
+
+.PARAMETER Input
+Specifies the Input to use when running Invoke-SelectUSBDisk.
+
+.PARAMETER MinimumSizeGB
+Specifies the MinimumSizeGB to use when running Invoke-SelectUSBDisk.
+
+.PARAMETER MaximumSizeGB
+Specifies the MaximumSizeGB to use when running Invoke-SelectUSBDisk.
+
+.PARAMETER Skip
+Specifies the Skip to use when running Invoke-SelectUSBDisk.
+
+.PARAMETER SelectOne
+Specifies the SelectOne to use when running Invoke-SelectUSBDisk.
+
+.EXAMPLE
+Invoke-SelectUSBDisk -Input <value>
+Demonstrates a common way to run Invoke-SelectUSBDisk.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
         [Object]$Input,
-        
+
         [Alias('Min','MinGB','MinSize')]
         [int]$MinimumSizeGB = 8,
 
@@ -1035,7 +1569,7 @@ function Invoke-SelectUSBDisk {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a USB Disk by DiskNumber, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DiskNumber) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -1050,6 +1584,40 @@ function Invoke-SelectUSBDisk {
     }
 }
 function Invoke-SelectUSBVolume {
+<#
+.SYNOPSIS
+Invokes SelectUSBVolume actions.
+
+.DESCRIPTION
+Runs interactive or workflow-oriented SelectUSBVolume operations used by OSD tasks.
+
+.PARAMETER Input
+Specifies the Input to use when running Invoke-SelectUSBVolume.
+
+.PARAMETER MinimumSizeGB
+Specifies the MinimumSizeGB to use when running Invoke-SelectUSBVolume.
+
+.PARAMETER FileSystem
+Specifies the FileSystem to use when running Invoke-SelectUSBVolume.
+
+.PARAMETER Skip
+Specifies the Skip to use when running Invoke-SelectUSBVolume.
+
+.PARAMETER SelectOne
+Specifies the SelectOne to use when running Invoke-SelectUSBVolume.
+
+.EXAMPLE
+Invoke-SelectUSBVolume -Input <value>
+Demonstrates a common way to run Invoke-SelectUSBVolume.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -1061,7 +1629,7 @@ function Invoke-SelectUSBVolume {
 
         [System.Management.Automation.SwitchParameter]
         $Skip,
-        
+
         [System.Management.Automation.SwitchParameter]
         $SelectOne
     )
@@ -1106,7 +1674,7 @@ function Invoke-SelectUSBVolume {
         if ($PSBoundParameters.ContainsKey('Skip')) {
             do {$Selection = Read-Host -Prompt "Select a USB Volume by DriveLetter, or press S to SKIP"}
             until (($Selection -ge 0) -and ($Selection -in $Results.DriveLetter) -or ($Selection -eq 'S'))
-            
+
             if ($Selection -eq 'S') {Return $false}
         }
         else {
@@ -1121,6 +1689,31 @@ function Invoke-SelectUSBVolume {
     }
 }
 function New-BootableUSBDrive {
+<#
+.SYNOPSIS
+Creates BootableUSBDrive resources.
+
+.DESCRIPTION
+Builds new BootableUSBDrive resources based on the provided parameters.
+
+.PARAMETER BootLabel
+Specifies the BootLabel to use when running New-BootableUSBDrive.
+
+.PARAMETER DataLabel
+Specifies the DataLabel to use when running New-BootableUSBDrive.
+
+.EXAMPLE
+New-BootableUSBDrive -BootLabel <value>
+Demonstrates a common way to run New-BootableUSBDrive.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [ValidateLength(0,11)]
@@ -1143,7 +1736,12 @@ function New-BootableUSBDrive {
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-WindowsReleaseIdLt1703
@@ -1211,7 +1809,7 @@ function New-BootableUSBDrive {
     if ($GetUSBDisk.SizeGB -le 2000) {
         Write-Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
         $DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop
-        
+
         Write-Verbose '$BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel'
         $BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel -ErrorAction Stop
     }
@@ -1316,7 +1914,7 @@ function New-OSDisk {
     Interactive.  Prompted to Confirm Clear-Disk for each Local Disk
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     19.10.10    Created by David Segura @SeguraOSD
@@ -1375,7 +1973,12 @@ function New-OSDisk {
     #=================================================
     #	Block
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     Block-WinOS
     #=================================================
@@ -1430,7 +2033,7 @@ function New-OSDisk {
         FriendlyName, Model, PartitionStyle,`
         @{Name='Partitions';Expression={$_.NumberOfPartitions}} | `
         Format-Table | Out-Host
-        
+
         Break
     }
     #=================================================
@@ -1475,7 +2078,7 @@ function New-OSDisk {
     #Create from unpartitioned Disk
     elseif (($OSDisk.NumberOfPartitions -eq 0) -and ($OSDisk.PartitionStyle -ne $PartitionStyle)) {
         Write-Verbose "Cleaning Disk $($OSDisk.Number)"
-        Diskpart-Clean -DiskNumber $OSDisk.Number
+        Invoke-DiskpartClean -DiskNumber $OSDisk.Number
 
         Write-Verbose "Initializing Disk $($OSDisk.Number) as $PartitionStyle"
         $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
@@ -1488,7 +2091,7 @@ function New-OSDisk {
         ))
         {
             Write-Warning "Cleaning Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.SizeGB) $($OSDisk.FriendlyName) $($OSDisk.Model) [$($OSDisk.PartitionStyle) $($OSDisk.NumberOfPartitions) Partitions]"
-            Diskpart-Clean -DiskNumber $OSDisk.Number
+            Invoke-DiskpartClean -DiskNumber $OSDisk.Number
 
             Write-Warning "Initializing $PartitionStyle Disk $($OSDisk.Number) $($OSDisk.BusType) $($OSDisk.SizeGB) $($OSDisk.FriendlyName) $($OSDisk.Model)"
             $OSDisk | Initialize-Disk -PartitionStyle $PartitionStyle
@@ -1557,12 +2160,36 @@ function New-OSDisk {
     Format-Table | Out-Host
 }
 function Start-DiskImageGUI {
+<#
+.SYNOPSIS
+Start-DiskImageGUI function.
+
+.DESCRIPTION
+Runs Start-DiskImageGUI and returns output based on the current OSD context.
+
+.EXAMPLE
+Start-DiskImageGUI
+Demonstrates a common way to run Start-DiskImageGUI.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param ()
     #=======================================================================
     #	Block
     #=======================================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     #=======================================================================

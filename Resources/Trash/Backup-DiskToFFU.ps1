@@ -6,7 +6,7 @@ Saves a Drive as Full Flash Update Windows Image (FFU)
 Saves a Drive as Full Flash Update Windows Image (FFU)
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.1.27    Initial Release

@@ -1,4 +1,4 @@
-Function Set-LatestUpdatesASAPEnabled {
+function Set-LatestUpdatesASAPEnabled {
     Write-Host "Enable 'Get the latest updates as soon as they’re available' Reg Value" -ForegroundColor DarkGray
     if ($env:SystemDrive -eq 'X:') {
         $WindowsPhase = 'WinPE'

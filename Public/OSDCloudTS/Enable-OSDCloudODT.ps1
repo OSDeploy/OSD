@@ -7,9 +7,9 @@ function Enable-OSDCloudODT {
     Enables ODT Support in an OSDCloud Workspace
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
-    
+
     [CmdletBinding()]
     param ()
     #=================================================
@@ -20,7 +20,12 @@ function Enable-OSDCloudODT {
     #	Blocks
     #=================================================
     Block-WinPE
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     Block-PowerShellVersionLt5
     Block-NoCurl
@@ -208,7 +213,7 @@ $ProPlus2019Volume = @'
     $ODTEndTime = Get-Date
     $ODTTimeSpan = New-TimeSpan -Start $ODTStartTime -End $ODTEndTime
     Write-Host -ForegroundColor DarkGray "================================================"
-    Write-Host -ForegroundColor Yellow "[$(Get-Date -format G)] $($MyInvocation.MyCommand.Name) " -NoNewline
+    Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] $($MyInvocation.MyCommand.Name) " -NoNewline
     Write-Host -ForegroundColor Cyan "Completed in $($ODTTimeSpan.ToString("mm' minutes 'ss' seconds'"))"
     #=================================================
 }

@@ -7,7 +7,7 @@ function Edit-MyWinPE {
     Mounts and edits a WinPE WIM file
 
     .LINK
-    https://github.com/OSDeploy/OSD/tree/master/Docs
+    https://github.com/OSDeploy/OSD/tree/master/docs
     #>
 
     [CmdletBinding(PositionalBinding = $false)]
@@ -58,7 +58,12 @@ function Edit-MyWinPE {
         #	Block
         #=================================================
         Block-WinPE
-        Block-StandardUser
+        $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+        if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+            return
+        }
         Block-WindowsVersionNe10
         Block-PowerShellVersionLt5
         #=================================================
@@ -117,7 +122,7 @@ function Edit-MyWinPE {
 
             if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
                 Write-Warning "$($MyInvocation.MyCommand) can only service WinPE with MajorVersion 10"
-                
+
                 $MountMyWindowsImage | Dismount-MyWindowsImage -Discard
                 Continue
             }
@@ -168,7 +173,7 @@ function Edit-MyWinPE {
             #   Wallpaper
             #=================================================
             if ($Wallpaper) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Wallpaper: $Wallpaper"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Wallpaper: $Wallpaper"
                 Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winpe.jpg" -Force | Out-Null
                 Copy-Item -Path $Wallpaper -Destination "$env:TEMP\winre.jpg" -Force | Out-Null
                 robocopy "$env:TEMP" "$MountPath\Windows\System32" winpe.jpg /ndl /njh /njs /b /np /r:0 /w:0
@@ -180,26 +185,26 @@ function Edit-MyWinPE {
             foreach ($Module in $PSModuleInstall) {
                 if ($Module -eq 'DellBiosProvider') {
                     if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $env:SystemRoot\System32\msvcp140.dll to WinPE"
                         Copy-Item -Path "$env:SystemRoot\System32\msvcp140.dll" -Destination "$MountPath\System32" -Force | Out-Null
                     }
                     if (Test-Path "$env:SystemRoot\System32\vcruntime140.dll") {
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $env:SystemRoot\System32\vcruntime140.dll to WinPE"
                         Copy-Item -Path "$env:SystemRoot\System32\vcruntime140.dll" -Destination "$MountPath\System32" -Force | Out-Null
                     }
                     if (Test-Path "$env:SystemRoot\System32\msvcp140.dll") {
-                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
+                        Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copying $env:SystemRoot\System32\vcruntime140_1.dll to WinPE"
                         Copy-Item -Path "$env:SystemRoot\System32\vcruntime140_1.dll" -Destination "$MountPath\System32" -Force | Out-Null
                     }
                 }
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Saving $Module to $MountPath\Program Files\WindowsPowerShell\Modules"
                 Save-Module -Name $Module -Path "$MountPath\Program Files\WindowsPowerShell\Modules" -Force
             }
             #=================================================
             #   PSModuleCopy
             #=================================================
             foreach ($Module in $PSModuleCopy) {
-                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format G)] Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
+                Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath"
                 Copy-PSModuleToWindowsImage -Name $Module -Path $MountPath
             }
             #=================================================
@@ -216,6 +221,30 @@ function Edit-MyWinPE {
     end {}
 }
 function Enable-PEWimPSGallery {
+    <#
+    .SYNOPSIS
+    Enables PowerShell Gallery functionality in a WinPE WIM file
+
+    .DESCRIPTION
+    Mounts a WinPE WIM file and configures it to support PowerShell Gallery functionality by modifying registry settings and environment variables.
+
+    .PARAMETER ImagePath
+    Full path to the WinPE WIM file to modify. This parameter is mandatory and accepts pipeline input.
+
+    .PARAMETER Index
+    Index of the WIM to mount. Default is 1
+
+    .EXAMPLE
+    Enable-PEWimPSGallery -ImagePath 'C:\WinPE\winpe.wim'
+    Enables PowerShell Gallery in the specified WIM file
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName)]
@@ -230,8 +259,10 @@ function Enable-PEWimPSGallery {
 		#	Blocks
 		#=================================================
 		Block-WinPE
-		Block-StandardUser
-		#=================================================
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
+        #=================================================
         $ErrorActionPreference = "Stop"
         #=================================================
     }
@@ -254,6 +285,31 @@ function Enable-PEWimPSGallery {
     end {}
 }
 function Enable-PEWindowsImagePSGallery {
+    <#
+    .SYNOPSIS
+    Enables PowerShell Gallery in a mounted Windows image
+
+    .DESCRIPTION
+    Configures a mounted Windows image to support PowerShell Gallery by adding necessary registry entries and environment variables to the system profile.
+
+    .PARAMETER Path
+    Path to the mounted Windows image root directory. If not specified, will use the currently mounted image.
+
+    .EXAMPLE
+    Enable-PEWindowsImagePSGallery
+    Enables PowerShell Gallery in the currently mounted image
+
+    .EXAMPLE
+    Enable-PEWindowsImagePSGallery -Path 'C:\Mount'
+    Enables PowerShell Gallery in the image mounted at C:\Mount
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
@@ -265,7 +321,9 @@ function Enable-PEWindowsImagePSGallery {
 		#	Blocks
 		#=================================================
 		Block-WinPE
-		Block-StandardUser
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
 		#=================================================
         #=================================================
         #   Get-WindowsImage Mounted
@@ -367,12 +425,40 @@ Index of the WIM to Mount
 Default is 1
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.2.1  Initial Release
 #>
 function Set-WimExecutionPolicy {
+<#
+.SYNOPSIS
+Sets WimExecutionPolicy configuration.
+
+.DESCRIPTION
+Configures WimExecutionPolicy settings using the provided parameters and current OSD context.
+
+.PARAMETER ExecutionPolicy
+Specifies the ExecutionPolicy to use when running Set-WimExecutionPolicy.
+
+.PARAMETER ImagePath
+Specifies the ImagePath to use when running Set-WimExecutionPolicy.
+
+.PARAMETER Index
+Specifies the Index to use when running Set-WimExecutionPolicy.
+
+.EXAMPLE
+Set-WimExecutionPolicy -ExecutionPolicy <value>
+Demonstrates a common way to run Set-WimExecutionPolicy.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -391,7 +477,9 @@ function Set-WimExecutionPolicy {
 		#	Blocks
 		#=================================================
 		Block-WinPE
-		Block-StandardUser
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
         #=================================================
     }
     process {
@@ -426,12 +514,37 @@ Specifies the full path to the root directory of the offline Windows image that 
 If a Path is not specified, all mounted Windows Images will be modified
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
 21.2.1  Initial Release
 #>
 function Set-WindowsImageExecutionPolicy {
+<#
+.SYNOPSIS
+Sets WindowsImageExecutionPolicy configuration.
+
+.DESCRIPTION
+Configures WindowsImageExecutionPolicy settings using the provided parameters and current OSD context.
+
+.PARAMETER ExecutionPolicy
+Specifies the ExecutionPolicy to use when running Set-WindowsImageExecutionPolicy.
+
+.PARAMETER Path
+Specifies the Path to use when running Set-WindowsImageExecutionPolicy.
+
+.EXAMPLE
+Set-WindowsImageExecutionPolicy -ExecutionPolicy <value>
+Demonstrates a common way to run Set-WindowsImageExecutionPolicy.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0,Mandatory = $true,ValueFromPipelineByPropertyName = $true)]
@@ -447,7 +560,9 @@ function Set-WindowsImageExecutionPolicy {
 		#	Blocks
 		#=================================================
 		#Block-WinPE
-		Block-StandardUser
+        if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Elevated Administrator rights are required"
+        }
         #=================================================
         #   Get-WindowsImage Mounted
         #=================================================

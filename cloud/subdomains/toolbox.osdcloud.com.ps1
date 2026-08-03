@@ -1,7 +1,7 @@
 <#PSScriptInfo
 .VERSION 23.5.25.1
 .GUID e3d1ff59-7fd0-4615-9016-ca081344a592
-.AUTHOR David Segura @SeguraOSD
+.AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
 .COPYRIGHT (c) 2023 David Segura osdcloud.com. All rights reserved.
 .TAGS OSDeploy OSDCloud WinPE OOBE Windows AutoPilot

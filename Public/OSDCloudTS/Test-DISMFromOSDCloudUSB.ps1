@@ -1,4 +1,4 @@
-﻿Function Test-DISMFromOSDCloudUSB {
+﻿function Test-DISMFromOSDCloudUSB {
     [CmdletBinding()]
     param (
 
@@ -48,4 +48,3 @@
         return $false
     }
 }
-

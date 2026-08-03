@@ -1,29 +1,38 @@
-<#
-.SYNOPSIS
-Adds the SSU from a Cumulative Update .cab or .msu to a Windows Image
-
-.DESCRIPTION
-The Add-WindowsPackageSSU cmdlet installs a specified .cab or .msu package in the image
-
-.PARAMETER Path
-Specifies the full path to the root directory of the offline Windows image that you will service.
-
-.PARAMETER PackagePath
-Specifies the location of the package to add to the image
-
-.PARAMETER Online
-Specifies that the action is to be taken on the operating system that is currently running on the local computer.
-
-.PARAMETER LogPath
-Specifies the full path and file name to log to. If not set, the default is %WINDIR%\Logs\Dism\dism.log.
-In Windows PE, the default directory is the RAMDISK scratch space which can be as low as 32 MB. The log file will automatically be archived. The archived log file will be saved with .bak appended to the file name and a new log file will be generated. Each time the log file is archived the .bak file will be overwritten. 
-When using a network share that is not joined to a domain, use the net use command together with domain credentials to set access permissions before you set the log path for the DISM log.
-
-.LINK
-
-.NOTES
-#>
 function Add-WindowsPackageSSU {
+    <#
+    .SYNOPSIS
+    Adds a Servicing Stack Update package to Windows.
+
+    .DESCRIPTION
+    Extracts SSU cabinet files from a .cab or .msu package and applies them to an online or offline Windows image using Add-WindowsPackage.
+
+    .PARAMETER PackagePath
+    Full path to the source .cab or .msu package file.
+
+    .PARAMETER Path
+    Full path to the root directory of the offline mounted Windows image.
+
+    .PARAMETER Online
+    Applies the SSU to the currently running operating system.
+
+    .PARAMETER LogPath
+    Full path to the DISM log file used during package application.
+
+    .EXAMPLE
+    Add-WindowsPackageSSU -PackagePath C:\Updates\windows10.0-kbxxxx.msu -Path C:\Mount
+    Extracts SSU content from the MSU and applies it to the mounted image at C:\Mount.
+
+    .EXAMPLE
+    Add-WindowsPackageSSU -PackagePath C:\Updates\ssu.cab -Online
+    Applies SSU cab content to the running operating system.
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-11 - Moved help block inside function and expanded sections
+    #>
     [CmdletBinding(DefaultParameterSetName = 'Offline')]
     param (
         [Parameter(Mandatory = $true)]
@@ -40,7 +49,12 @@ function Add-WindowsPackageSSU {
     #=================================================
     #   Blocks
     #=================================================
-    Block-StandardUser
+    $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+    if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+        return
+    }
     Block-WindowsVersionNe10
     #=================================================
     #   Test PackagePath
@@ -97,6 +111,37 @@ function Add-WindowsPackageSSU {
     #=================================================
 }
 function Copy-PSModuleToWindowsImage {
+    <#
+    .SYNOPSIS
+    Copies PowerShell modules to a mounted Windows image
+
+    .DESCRIPTION
+    Copies specified PowerShell modules from the running operating system to a mounted Windows image for offline servicing.
+
+    .PARAMETER Name
+    Name of the PowerShell module(s) to copy. Wildcard patterns are supported. This parameter is mandatory.
+
+    .PARAMETER ExecutionPolicy
+    Sets the PowerShell Execution Policy in the Windows image. Valid values are Restricted, AllSigned, RemoteSigned, Unrestricted, Bypass, and Undefined.
+
+    .PARAMETER Path
+    Path to the mounted Windows image. If not specified, will use the currently mounted image.
+
+    .EXAMPLE
+    Copy-PSModuleToWindowsImage -Name 'OSD' -Path 'C:\Mount'
+    Copies the OSD module to the mounted image at C:\\Mount
+
+    .EXAMPLE
+    Copy-PSModuleToWindowsImage -Name 'OSD','ActiveDirectory' -ExecutionPolicy Bypass -Path 'C:\Mount'
+    Copies multiple modules and sets execution policy
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
@@ -160,45 +205,35 @@ function Copy-PSModuleToWindowsImage {
     }
     end {}
 }
+function Dismount-MyWindowsImage {
 <#
 .SYNOPSIS
-Dismounts a Windows image from the directory it is mapped to.
+Dismounts MyWindowsImage and finalizes changes.
 
 .DESCRIPTION
-The Dismount-WindowsImage cmdlet either saves or discards the changes to a Windows image and then dismounts the image.
+Commits or discards changes to MyWindowsImage and then unmounts the image.
 
 .PARAMETER Path
-Specifies the full path to the root directory of the offline Windows image that you will service.
+Specifies the Path to use when running Dismount-MyWindowsImage.
 
 .PARAMETER Discard
-Discards the changes to a Windows image.
+Specifies the Discard to use when running Dismount-MyWindowsImage.
 
 .PARAMETER Save
-Saves the changes to a Windows image.
+Specifies the Save to use when running Dismount-MyWindowsImage.
+
+.EXAMPLE
+Dismount-MyWindowsImage -Path <value>
+Demonstrates a common way to run Dismount-MyWindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
-
-.INPUTS
-System.String[]
-
-.INPUTS
-Microsoft.Dism.Commands.ImageObject
-
-.INPUTS
-Microsoft.Dism.Commands.MountedImageInfoObject
-
-.INPUTS
-Microsoft.Dism.Commands.ImageInfoObject
-
-.OUTPUTS
-Microsoft.Dism.Commands.BaseDismObject
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
-19.11.21    Initial Release
-21.2.9      Renamed from Dismount-WindowsImageOSD
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Dismount-MyWindowsImage {
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'DismountDiscard')]
     param (
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -258,20 +293,50 @@ function Dismount-MyWindowsImage {
     }
     end {}
 }
+function Edit-MyWindowsImage {
 <#
 .SYNOPSIS
-Edits a mounted Windows Image
+Edits MyWindowsImage content.
 
 .DESCRIPTION
-Edits a mounted Windows Image
+Applies modifications to MyWindowsImage in the current servicing workflow.
+
+.PARAMETER Path
+Specifies the Path to use when running Edit-MyWindowsImage.
+
+.PARAMETER CleanupImage
+Specifies the CleanupImage to use when running Edit-MyWindowsImage.
+
+.PARAMETER Online
+Specifies the Online to use when running Edit-MyWindowsImage.
+
+.PARAMETER GridRemoveAppx
+Specifies the GridRemoveAppx to use when running Edit-MyWindowsImage.
+
+.PARAMETER GridRemoveAppxPP
+Specifies the GridRemoveAppxPP to use when running Edit-MyWindowsImage.
+
+.PARAMETER RemoveAppx
+Specifies the RemoveAppx to use when running Edit-MyWindowsImage.
+
+.PARAMETER RemoveAppxPP
+Specifies the RemoveAppxPP to use when running Edit-MyWindowsImage.
+
+.PARAMETER DismountSave
+Specifies the DismountSave to use when running Edit-MyWindowsImage.
+
+.EXAMPLE
+Edit-MyWindowsImage -Path <value>
+Demonstrates a common way to run Edit-MyWindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
-19.11.22 David Segura @SeguraOSD
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Edit-MyWindowsImage {
     [CmdletBinding(DefaultParameterSetName = 'Offline')]
     param (
         #Specifies the full path to the root directory of the offline Windows image that you will service.
@@ -363,7 +428,7 @@ function Edit-MyWindowsImage {
                         Write-Verbose "$($_.Name): Removing Appx Package $($_.PackageFullName)" -Verbose
                         Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
                         Catch {Write-Warning "$($_.Name): Removing Appx Package $($_.PackageFullName) did not complete successfully"}
-                    } 
+                    }
                 }
             }
             #=================================================
@@ -375,7 +440,7 @@ function Edit-MyWindowsImage {
                         Write-Verbose "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName)" -Verbose
                         Try {Remove-AppxProvisionedPackage -Online -AllUsers -PackageName $_.PackageName | Out-Null}
                         Catch {Write-Warning "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName) did not complete successfully"}
-                    } 
+                    }
                 }
             }
             #=================================================
@@ -423,10 +488,10 @@ function Edit-MyWindowsImage {
                 #=================================================
                 Write-Verbose "Verifying WinPE 10"
                 $GetRegCurrentVersion = Get-RegCurrentVersion -Path $MountMyWindowsImage.Path
-    
+
                 if ($GetRegCurrentVersion.CurrentMajorVersionNumber -ne 10) {
                     Write-Warning "$($MyInvocation.MyCommand) can only service WinPE with MajorVersion 10"
-                    
+
                     $MountMyWindowsImage | Dismount-MyWindowsImage -Discard
                     Continue
                 }
@@ -447,7 +512,7 @@ function Edit-MyWindowsImage {
                             $DismLog = "$env:TEMP\OSD\$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Edit-MyWindowsImage.log"
                             Write-Verbose "$($_.DisplayName): Removing Appx Provisioned Package $($_.PackageName)" -Verbose
                             Remove-AppxProvisionedPackage -Path $_.Path -PackageName $_.PackageName -LogPath $DismLog | Out-Null
-                        } 
+                        }
                     }
                 }
                 #=================================================
@@ -492,6 +557,49 @@ function Edit-MyWindowsImage {
     end {}
 }
 function Get-MyWindowsCapability {
+<#
+.SYNOPSIS
+Gets MyWindowsCapability information.
+
+.DESCRIPTION
+Returns MyWindowsCapability data for the current system or OSD session context.
+
+.PARAMETER Path
+Specifies the Path to use when running Get-MyWindowsCapability.
+
+.PARAMETER State
+Specifies the State to use when running Get-MyWindowsCapability.
+
+.PARAMETER Category
+Specifies the Category to use when running Get-MyWindowsCapability.
+
+.PARAMETER Culture
+Specifies the Culture to use when running Get-MyWindowsCapability.
+
+.PARAMETER Like
+Specifies the Like to use when running Get-MyWindowsCapability.
+
+.PARAMETER Match
+Specifies the Match to use when running Get-MyWindowsCapability.
+
+.PARAMETER Detail
+Specifies the Detail to use when running Get-MyWindowsCapability.
+
+.PARAMETER DisableWSUS
+Specifies the DisableWSUS to use when running Get-MyWindowsCapability.
+
+.EXAMPLE
+Get-MyWindowsCapability -Path <value>
+Demonstrates a common way to run Get-MyWindowsCapability.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding(DefaultParameterSetName = 'Online')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = "Offline", ValueFromPipeline = $false, ValueFromPipelineByPropertyName = $true)]
@@ -734,6 +842,49 @@ function Get-MyWindowsCapability {
     }
 }
 function Get-MyWindowsPackage {
+<#
+.SYNOPSIS
+Gets MyWindowsPackage information.
+
+.DESCRIPTION
+Returns MyWindowsPackage data for the current system or OSD session context.
+
+.PARAMETER Path
+Specifies the Path to use when running Get-MyWindowsPackage.
+
+.PARAMETER PackageState
+Specifies the PackageState to use when running Get-MyWindowsPackage.
+
+.PARAMETER ReleaseType
+Specifies the ReleaseType to use when running Get-MyWindowsPackage.
+
+.PARAMETER Category
+Specifies the Category to use when running Get-MyWindowsPackage.
+
+.PARAMETER Culture
+Specifies the Culture to use when running Get-MyWindowsPackage.
+
+.PARAMETER Like
+Specifies the Like to use when running Get-MyWindowsPackage.
+
+.PARAMETER Match
+Specifies the Match to use when running Get-MyWindowsPackage.
+
+.PARAMETER Detail
+Specifies the Detail to use when running Get-MyWindowsPackage.
+
+.EXAMPLE
+Get-MyWindowsPackage -Path <value>
+Demonstrates a common way to run Get-MyWindowsPackage.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding(DefaultParameterSetName = 'Online')]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = "Offline", ValueFromPipeline = $false, ValueFromPipelineByPropertyName = $true)]
@@ -969,31 +1120,38 @@ function Get-MyWindowsPackage {
     Return $Results
     #=================================================
 }
+function Mount-MyWindowsImage {
 <#
 .SYNOPSIS
-Mounts a WIM file
+Mounts MyWindowsImage for servicing.
 
 .DESCRIPTION
-Mounts a WIM file automatically selecting the Path and the Index
+Mounts MyWindowsImage and prepares it for offline servicing tasks.
 
 .PARAMETER ImagePath
-Specifies the full path to the Windows Image
+Specifies the ImagePath to use when running Mount-MyWindowsImage.
 
 .PARAMETER Index
-Index of the Windows Image
+Specifies the Index to use when running Mount-MyWindowsImage.
 
 .PARAMETER ReadOnly
-Mount the Windows Image as Read Only
+Specifies the ReadOnly to use when running Mount-MyWindowsImage.
 
 .PARAMETER Explorer
-Opens Windows Explorer to the Mount Directory
+Specifies the Explorer to use when running Mount-MyWindowsImage.
+
+.EXAMPLE
+Mount-MyWindowsImage -ImagePath <value>
+Demonstrates a common way to run Mount-MyWindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Mount-MyWindowsImage {
     [CmdletBinding()]
     param (
         [Parameter(
@@ -1121,20 +1279,35 @@ function Mount-MyWindowsImage {
     }
     end {}
 }
+function Remove-AppxOnline {
 <#
 .SYNOPSIS
-Removes Appx Packages and Appx Provisioned Packages for All Users
+Removes AppxOnline items.
 
 .DESCRIPTION
-Removes Appx Packages and Appx Provisioned Packages for All Users
+Deletes matching AppxOnline items from the current context.
+
+.PARAMETER GridRemoveAppx
+Specifies the GridRemoveAppx to use when running Remove-AppxOnline.
+
+.PARAMETER GridRemoveAppxPP
+Specifies the GridRemoveAppxPP to use when running Remove-AppxOnline.
+
+.PARAMETER Name
+Specifies the Name to use when running Remove-AppxOnline.
+
+.EXAMPLE
+Remove-AppxOnline -GridRemoveAppx <value>
+Demonstrates a common way to run Remove-AppxOnline.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
-19.12.20 David Segura @SeguraOSD
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Remove-AppxOnline {
     [CmdletBinding()]
     param (
         #Appx Packages selected in GridView will be removed from the Windows Image
@@ -1151,7 +1324,12 @@ function Remove-AppxOnline {
         #=================================================
         #   Blocks
         #=================================================
-        Block-StandardUser
+        $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+        if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+            return
+        }
         Block-WindowsVersionNe10
         #=================================================
     }
@@ -1185,7 +1363,7 @@ function Remove-AppxOnline {
             if (Get-Command Get-AppxPackage) {
                 if ((Get-Command Get-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                     Get-AppxPackage -AllUsers | Select-Object * | Where-Object {$_.NonRemovable -ne $true} | Where-Object {$_.Name -Match $Item} | ForEach-Object {
-                        
+
                         Write-Host -ForegroundColor DarkCyan $_.Name
                         if ((Get-Command Remove-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                             Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
@@ -1202,7 +1380,7 @@ function Remove-AppxOnline {
                     }
                 } else {
                     Get-AppxPackage | Select-Object * | Where-Object {$_.NonRemovable -ne $true} | Where-Object {$_.Name -Match $Item} | ForEach-Object {
-                        
+
                         Write-Host -ForegroundColor DarkCyan $_.Name
                         if ((Get-Command Remove-AppxPackage).Parameters.ContainsKey('AllUsers')) {
                             Try {Remove-AppxPackage -AllUsers -Package $_.PackageFullName | Out-Null}
@@ -1241,28 +1419,35 @@ function Remove-AppxOnline {
     }
     end {}
 }
+function Test-WindowsImage {
 <#
 .SYNOPSIS
-Returns True if ImagePath is a Windows Image
+Tests WindowsImage conditions.
 
 .DESCRIPTION
-Returns True if ImagePath is a Windows Image
+Evaluates WindowsImage state and returns a validation result for scripting decisions.
 
 .PARAMETER ImagePath
-Specifies the full path to the Windows Image
+Specifies the ImagePath to use when running Test-WindowsImage.
 
 .PARAMETER Index
-Index of the Windows Image
+Specifies the Index to use when running Test-WindowsImage.
 
 .PARAMETER Extension
-Test if the File Extension is .esd or .wim
+Specifies the Extension to use when running Test-WindowsImage.
+
+.EXAMPLE
+Test-WindowsImage -ImagePath <value>
+Demonstrates a common way to run Test-WindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Test-WindowsImage {
     [CmdletBinding()]
     param (
         [Parameter(
@@ -1356,25 +1541,32 @@ function Test-WindowsImage {
     Return $false
     #=================================================
 }
+function Test-WindowsImageMounted {
 <#
 .SYNOPSIS
-Returns True if ImagePath is Mounted
+Tests WindowsImageMounted conditions.
 
 .DESCRIPTION
-Returns True if ImagePath is Mounted
+Evaluates WindowsImageMounted state and returns a validation result for scripting decisions.
 
 .PARAMETER ImagePath
-Specifies the full path to the Windows Image
+Specifies the ImagePath to use when running Test-WindowsImageMounted.
 
 .PARAMETER Index
-Index of the Windows Image
+Specifies the Index to use when running Test-WindowsImageMounted.
+
+.EXAMPLE
+Test-WindowsImageMounted -ImagePath <value>
+Demonstrates a common way to run Test-WindowsImageMounted.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Test-WindowsImageMounted {
     [CmdletBinding()]
     param (
         [Parameter(
@@ -1394,22 +1586,29 @@ function Test-WindowsImageMounted {
         Return $false
     }
 }
+function Test-WindowsImageMountPath {
 <#
 .SYNOPSIS
-Returns True if Path is a Windows Image mount directory
+Tests WindowsImageMountPath conditions.
 
 .DESCRIPTION
-Returns True if Path is a Windows Image mount directory
+Evaluates WindowsImageMountPath state and returns a validation result for scripting decisions.
 
 .PARAMETER Path
-Full Path to a Windows Image mount directory
+Specifies the Path to use when running Test-WindowsImageMountPath.
+
+.EXAMPLE
+Test-WindowsImageMountPath -P <value>
+Demonstrates a common way to run Test-WindowsImageMountPath.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Test-WindowsImageMountPath {
     [CmdletBinding()]
     param (
         [Parameter(
@@ -1426,26 +1625,32 @@ function Test-WindowsImageMountPath {
         Return $false
     }
 }
+function Test-WindowsPackageCAB {
 <#
 .SYNOPSIS
-    OSDBuilder function that tests the LCU and returns the Package Type
+Tests WindowsPackageCAB conditions.
 
 .DESCRIPTION
-    OSDBuilder function that tests the LCU and returns the Package Type
+Evaluates WindowsPackageCAB state and returns a validation result for scripting decisions.
 
 .PARAMETER PackagePath
-    Path to the Windows update package to test
+Specifies the PackagePath to use when running Test-WindowsPackageCAB.
 
 .PARAMETER Path
-    Directory path where the Windows Image is mounted
+Specifies the Path to use when running Test-WindowsPackageCAB.
+
+.EXAMPLE
+Test-WindowsPackageCAB -PackagePath <value>
+Demonstrates a common way to run Test-WindowsPackageCAB.
 
 .LINK
-https://www.osdcloud.com
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
-    Credit to Lasse Meggele @lassemeggele for correcting some issues. Thanks!
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Test-WindowsPackageCAB {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -1456,7 +1661,7 @@ function Test-WindowsPackageCAB {
         [System.String]
         $Path
     )
-    
+
     try {
         $WinPackage = $null
         if ($Path) {
@@ -1469,7 +1674,7 @@ function Test-WindowsPackageCAB {
     catch {
         Write-Verbose -Message $_.Exception.Message
     }
-    
+
     Write-Verbose -Message $PackagePath
     Write-Verbose -Message $Path
 
@@ -1490,40 +1695,38 @@ function Test-WindowsPackageCAB {
     }
     Return $returnVal
 }
+function Update-MyWindowsImage {
 <#
 .SYNOPSIS
-Updates a mounted WIM
+Updates MyWindowsImage content.
 
 .DESCRIPTION
-Updates a mounted WIM files.  Requires WSUSXML Catalog
+Installs updates into MyWindowsImage according to the supplied parameters.
 
 .PARAMETER Path
-Specifies the full path to the root directory of the offline Windows image that you will service
+Specifies the Path to use when running Update-MyWindowsImage.
 
 .PARAMETER Update
-Check or Install the specified Update Group
-Check = Validate installed Updates
-All = Install all required Updates
-AdobeSU = Adobe Security Update
-DotNet = DotNet Update
-DotNetCU = DotNet Cumulative Update
-LCU = Latest Cumulative Update
-SSU = Servicing Stack Update
+Specifies the Update to use when running Update-MyWindowsImage.
 
 .PARAMETER BitsTransfer
-Download the file using BITS-Transfer
-Interactive Login required
+Specifies the BitsTransfer to use when running Update-MyWindowsImage.
 
 .PARAMETER Force
-Updates are only installed if they are needed
-Force parameter will install the update even if it is already installed
+Specifies the Force to use when running Update-MyWindowsImage.
+
+.EXAMPLE
+Update-MyWindowsImage -Path <value>
+Demonstrates a common way to run Update-MyWindowsImage.
 
 .LINK
-https://github.com/OSDeploy/OSD/tree/master/Docs
+https://github.com/OSDeploy/OSD/tree/master/docs
 
 .NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
 #>
-function Update-MyWindowsImage {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -1541,7 +1744,12 @@ function Update-MyWindowsImage {
         #=================================================
         #   Block
         #=================================================
-        Block-StandardUser
+        $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+        if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+            return
+        }
         Block-WindowsVersionNe10
         #=================================================
         #   Get-WindowsImage Mounted
@@ -1634,7 +1842,7 @@ function Update-MyWindowsImage {
                 }
 
                 if ($Update -eq 'Check') {Continue}
-                
+
 <#                 if ($BitsTransfer.IsPresent) {
                     $UpdateFile = Save-OSDDownload -SourceUrl $item.OriginUri -BitsTransfer -Verbose
                 } else {

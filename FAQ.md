@@ -21,7 +21,7 @@ New-OSDCloudTemplate -Name "OSDCloudWinPE"
 
 #New WorkSpace
 New-OSDCloudWorkspace -WorkspacePath $OSDCloudWorkspace
-New-OSDCloudWorkSpaceSetupCompleteTemplate #Creates Sample SetupComplete templates in Workspace
+New-OSDCloudWorkspaceSetupCompleteTemplate #Creates Sample SetupComplete templates in Workspace
 
 #Added HPCMSL into WinPE
 Edit-OSDCloudWinPE -PSModuleInstall HPCMSL
@@ -33,7 +33,7 @@ New-OSDCloudUSB
 
 ### Creating a Issue after you've done troubleshooting
 - Please provide:
-  - All Logs in C:\OSDCloud\Logs (Which will provide us with:)
+  - All Logs in C:\Windows\TEMP\osdcloud-logs (Which will provide us with:)
     - Machine Make / Model / Product
     - OSD Module Version
     - WinPE Version
@@ -50,4 +50,3 @@ New-OSDCloudUSB
 ### How do I run OSDCloud via command line automated?
  - Wrapper Script
  - Command Line
-

@@ -1,4 +1,44 @@
 function Get-ScreenPNG {
+<#
+.SYNOPSIS
+Gets ScreenPNG information.
+
+.DESCRIPTION
+Returns ScreenPNG data for the current system or OSD session context.
+
+.PARAMETER Env
+Specifies the Env to use when running Get-ScreenPNG.
+
+.PARAMETER Directory
+Specifies the Directory to use when running Get-ScreenPNG.
+
+.PARAMETER Prefix
+Specifies the Prefix to use when running Get-ScreenPNG.
+
+.PARAMETER Delay
+Specifies the Delay to use when running Get-ScreenPNG.
+
+.PARAMETER Count
+Specifies the Count to use when running Get-ScreenPNG.
+
+.PARAMETER Clipboard
+Specifies the Clipboard to use when running Get-ScreenPNG.
+
+.PARAMETER Primary
+Specifies the Primary to use when running Get-ScreenPNG.
+
+.EXAMPLE
+Get-ScreenPNG -Env <value>
+Demonstrates a common way to run Get-ScreenPNG.
+
+.LINK
+https://github.com/OSDeploy/OSD/tree/master/docs
+
+.NOTES
+Author: David Segura - Recast Software
+2026-07-13 - Initial help block created
+2026-07-13 - Refined generated help text
+#>
     [CmdletBinding()]
     param (
         #Directory where the Screenshots will be saved
@@ -259,6 +299,24 @@ function Get-ScreenPNG {
     end {}
 }
 function Set-ClipboardScreenshot {
+    <#
+    .SYNOPSIS
+    Captures a screenshot and copies it to the clipboard
+
+    .DESCRIPTION
+    Takes a screenshot of the current display(s) and copies the image to the clipboard using Windows Forms bitmap functionality.
+
+    .EXAMPLE
+    Set-ClipboardScreenshot
+    Captures the current screen and copies to clipboard
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdletBinding()]
     param ()
 
@@ -291,6 +349,37 @@ function Set-ClipboardScreenshot {
     Return Get-Clipboard -Format Image
 }
 function Start-ScreenPNGProcess {
+    <#
+    .SYNOPSIS
+    Starts a background process to capture screenshots
+
+    .DESCRIPTION
+    Launches a hidden PowerShell process that periodically captures screenshots and saves them to the specified directory.
+
+    .PARAMETER Directory
+    Directory where screenshots will be saved. This parameter is mandatory.
+
+    .PARAMETER Count
+    Total number of screenshots to capture. Default is 9999
+
+    .PARAMETER Delay
+    Delay in seconds between screenshots. Default is 2 seconds
+
+    .EXAMPLE
+    Start-ScreenPNGProcess -Directory 'C:\Screenshots'
+    Starts capturing screenshots with default delay and count
+
+    .EXAMPLE
+    Start-ScreenPNGProcess -Directory 'C:\Screenshots' -Count 5 -Delay 3
+    Starts capturing 5 screenshots with 3-second intervals
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -308,6 +397,24 @@ function Start-ScreenPNGProcess {
     $Global:ScreenPNGProcess = ([System.Diagnostics.Process]::Start($StartInfo)).Id
 }
 function Stop-ScreenPNGProcess {
+    <#
+    .SYNOPSIS
+    Stops the background screenshot capture process
+
+    .DESCRIPTION
+    Terminates the background PowerShell process that is capturing screenshots and clears related global variables.
+
+    .EXAMPLE
+    Stop-ScreenPNGProcess
+    Stops the background screenshot process
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+    #>
     [CmdletBinding()]
     param ()
 

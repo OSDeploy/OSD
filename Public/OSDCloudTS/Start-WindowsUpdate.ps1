@@ -1,4 +1,4 @@
-Function Start-WindowsUpdate{
+function Start-WindowsUpdate{
     if (-not (Test-WindowsUpdateEnvironment)) {
         return
     }

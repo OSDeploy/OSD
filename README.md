@@ -183,7 +183,7 @@ Start-OSDCloud -OSName "Windows 11 24H2 x64" -OSEdition Pro
 | `Invoke-oobeAddNetFX3` | Adds .NET Framework 3.5 during OOBE |
 | `Invoke-oobeAddRSAT` | Adds RSAT tools during OOBE |
 | `New-OSDCloudUSBSetupCompleteTemplate` | Creates SetupComplete script templates on OSDCloud USB |
-| `New-OSDCloudWorkSpaceSetupCompleteTemplate` | Creates SetupComplete script templates in the workspace |
+| `New-OSDCloudWorkspaceSetupCompleteTemplate` | Creates SetupComplete script templates in the workspace |
 
 ### WinRE & WiFi
 

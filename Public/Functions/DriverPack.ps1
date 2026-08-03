@@ -1,4 +1,22 @@
 function Enable-SpecializeDriverPack {
+    <#
+    .SYNOPSIS
+    Configures driver pack expansion during Windows Specialize phase
+
+    .DESCRIPTION
+    Sets up an unattend XML file to automatically expand driver packs during the Windows Specialize pass. Requires admin rights and Windows 10 or later.
+
+    .EXAMPLE
+    Enable-SpecializeDriverPack
+    Configures the system to expand driver packs during Specialize phase
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+    #>
     [CmdletBinding()]
     param ()
 $UnattendXml = @'
@@ -22,14 +40,14 @@ $UnattendXml = @'
     #=================================================
     Block-WinOS
     Block-WindowsVersionNe10
-    Block-PowerShellVersionLt5  
+    Block-PowerShellVersionLt5
     #=================================================
     #	Set Unattend in the Registry
     #   HKEY_LOCAL_MACHINE\System\Setup\UnattendFile
     #   Specifies a pointer in the registry to an answer file
     #   The answer file is not required to be named Unattend.xml
     #   https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-automation-overview
-    #=================================================  
+    #=================================================
     reg load HKLM\TempSYSTEM "C:\Windows\System32\Config\SYSTEM"
     reg add HKLM\TempSYSTEM\Setup /v UnattendFile /d "C:\Windows\Panther\Expand-StagedDriverPack.xml" /f
     reg unload HKLM\TempSYSTEM
@@ -40,6 +58,31 @@ $UnattendXml = @'
     #=================================================
 }
 function Expand-StagedDriverPack {
+    <#
+    .SYNOPSIS
+    Expands staged driver pack archives during Windows Setup
+
+    .DESCRIPTION
+    Extracts and processes staged driver pack files (CAB, EXE, MSI, ZIP) from the C:\Drivers directory. Supports multiple vendor formats including Dell, HP, Lenovo, and generic packages.
+
+    .PARAMETER Apply
+    Applies drivers during PnP unattend phase
+
+    .EXAMPLE
+    Expand-StagedDriverPack
+    Expands all driver packs in C:\Drivers
+
+    .EXAMPLE
+    Expand-StagedDriverPack -Apply
+    Expands driver packs and applies them during setup
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [System.Management.Automation.SwitchParameter]$Apply
@@ -66,7 +109,7 @@ function Expand-StagedDriverPack {
             #=================================================
             if ($Item.Extension -eq '.cab') {
                 $DestinationPath = Join-Path $Item.Directory $Item.BaseName
-    
+
                 if (-NOT (Test-Path "$DestinationPath")) {
                     New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
 
@@ -116,7 +159,7 @@ function Expand-StagedDriverPack {
                     Write-Verbose -Verbose "InternalName: $($Item.VersionInfo.InternalName)"
                     Write-Verbose -Verbose "OriginalFilename: $($Item.VersionInfo.OriginalFilename)"
                     Write-Verbose -Verbose "ProductVersion: $($Item.VersionInfo.ProductVersion)"
-                    
+
                     $DestinationPath = Join-Path $Item.Directory $Item.BaseName
 
                     if (-NOT (Test-Path "$DestinationPath")) {
@@ -183,7 +226,7 @@ function Expand-StagedDriverPack {
                 if (-NOT (Test-Path "$DestinationPath")) {
                     Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
                     Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
-                
+
                     if ($Apply) {
                         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths" -Name 1 -Force
                         New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Name Path -Value $DestinationPath -Force
@@ -203,6 +246,24 @@ function Expand-StagedDriverPack {
     }
 }
 function Expand-ZTIDriverPack {
+    <#
+    .SYNOPSIS
+    Expands driver packs during Lite Touch or Zero Touch deployment
+
+    .DESCRIPTION
+    Processes and extracts driver pack files from C:\Drivers directory during MDT/ConfigMgr task sequence execution. Supports CAB, EXE, MSI, and ZIP formats from multiple vendors.
+
+    .EXAMPLE
+    Expand-ZTIDriverPack
+    Expands all driver packs in C:\Drivers during task sequence
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+    #>
     [CmdletBinding()]
     param ()
     #=================================================
@@ -282,7 +343,7 @@ function Expand-ZTIDriverPack {
                 Write-Verbose -Verbose "InternalName: $($Item.VersionInfo.InternalName)"
                 Write-Verbose -Verbose "OriginalFilename: $($Item.VersionInfo.OriginalFilename)"
                 Write-Verbose -Verbose "ProductVersion: $($Item.VersionInfo.ProductVersion)"
-                
+
                 $DestinationPath = Join-Path $Item.Directory $Item.BaseName
 
                 if (-NOT (Test-Path "$DestinationPath")) {
@@ -345,7 +406,7 @@ function Expand-ZTIDriverPack {
             if (-NOT (Test-Path "$DestinationPath")) {
                 Write-Verbose -Verbose "Expanding ZIP Driver Pack to $DestinationPath"
                 Expand-Archive -Path $ExpandFile -DestinationPath $DestinationPath -Force
-            
+
                 New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths" -Name 1 -Force
                 New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\UnattendSettings\PnPUnattend\DriverPaths\1" -Name Path -Value $DestinationPath -Force
                 pnpunattend.exe AuditSystem /L
@@ -361,6 +422,34 @@ function Expand-ZTIDriverPack {
     }
 }
 function Get-MyDriverPack {
+    <#
+    .SYNOPSIS
+    Retrieves the driver pack for the current computer from OSDCloud
+
+    .DESCRIPTION
+    Queries OSDCloud for a matching driver pack based on computer manufacturer and product model.
+
+    .PARAMETER Manufacturer
+    Computer manufacturer. Default is auto-detected from current system
+
+    .PARAMETER Product
+    Computer product model. Default is auto-detected from current system
+
+    .EXAMPLE
+    Get-MyDriverPack
+    Returns the driver pack for the current computer
+
+    .EXAMPLE
+    Get-MyDriverPack -Manufacturer 'Lenovo' -Product 'ThinkPad X1'
+    Returns the driver pack for the specified model
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [System.String]$Manufacturer = (Get-MyComputerManufacturer -Brief),
@@ -387,6 +476,43 @@ function Get-MyDriverPack {
     #=================================================
 }
 function Save-MyDriverPack {
+    <#
+    .SYNOPSIS
+    Downloads and optionally expands the driver pack for the current computer
+
+    .DESCRIPTION
+    Downloads the matching driver pack from OSDCloud for the current or specified computer. Can optionally extract and expand the driver pack after download.
+
+    .PARAMETER DownloadPath
+    Directory where the driver pack will be saved. Default is C:\Drivers
+
+    .PARAMETER Expand
+    Automatically expands the driver pack archive after download
+
+    .PARAMETER Manufacturer
+    Computer manufacturer. Default is auto-detected
+
+    .PARAMETER Product
+    Computer product model. Default is auto-detected
+
+    .PARAMETER Guid
+    GUID of a specific driver pack to download
+
+    .EXAMPLE
+    Save-MyDriverPack
+    Downloads the driver pack for the current computer to C:\Drivers
+
+    .EXAMPLE
+    Save-MyDriverPack -DownloadPath 'D:\DriverPacks' -Expand
+    Downloads and expands the driver pack to D:\DriverPacks
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline = $true)]
@@ -403,7 +529,12 @@ function Save-MyDriverPack {
     #   Block
     #=================================================
     if ($Expand) {
-        Block-StandardUser
+        $CurrentIdentity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $CurrentPrincipal = [Security.Principal.WindowsPrincipal]::new($CurrentIdentity)
+        if (-not $CurrentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Administrative rights are required"
+            return
+        }
     }
     Block-WindowsVersionNe10
     #=================================================
@@ -425,16 +556,16 @@ function Save-MyDriverPack {
             New-Item $DownloadPath -ItemType Directory -Force -ErrorAction Stop | Out-Null
         }
 
-        Write-Verbose -Message "CatalogVersion: $($GetMyDriverPack.CatalogVersion)"
-        Write-Verbose -Message "Name: $($GetMyDriverPack.Name)"
-        Write-Verbose -Message "Product: $($GetMyDriverPack.Product)"
-        Write-Verbose -Message "Url: $($GetMyDriverPack.Url)"
-        Write-Verbose -Message "OutFile: $OutFile"
-        
+        Write-Verbose "CatalogVersion: $($GetMyDriverPack.CatalogVersion)"
+        Write-Verbose "Name: $($GetMyDriverPack.Name)"
+        Write-Verbose "Product: $($GetMyDriverPack.Product)"
+        Write-Verbose "Url: $($GetMyDriverPack.Url)"
+        Write-Verbose "OutFile: $OutFile"
+
         Save-WebFile -SourceUrl $GetMyDriverPack.Url -DestinationDirectory $DownloadPath -DestinationName $GetMyDriverPack.FileName
 
         if (! (Test-Path $OutFile)) {
-            Write-Warning "[$(Get-Date -format G)] Driver Pack failed to download"
+            Write-Warning "[$(Get-Date -format s)] Driver Pack failed to download"
         }
         else {
             $GetItemOutFile = Get-Item $OutFile
@@ -445,18 +576,18 @@ function Save-MyDriverPack {
         #=================================================
         if ($GetItemOutFile) {
             if ($PSBoundParameters.ContainsKey('Expand')) {
-    
+
                 $ExpandFile = $GetItemOutFile.FullName
-                Write-Verbose -Message "DriverPack: $ExpandFile"
+                Write-Verbose "DriverPack: $ExpandFile"
                 #=================================================
                 #   Cab
                 #=================================================
                 if ($GetItemOutFile.Extension -eq '.cab') {
                     $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
-        
+
                     if (-NOT (Test-Path "$DestinationPath")) {
                         New-Item $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
-    
+
                         Write-Verbose -Verbose "Expanding CAB Driver Pack to $DestinationPath"
                         Expand -R "$ExpandFile" -F:* "$DestinationPath" | Out-Null
                     }
@@ -468,9 +599,9 @@ function Save-MyDriverPack {
                     if ($GetItemOutFile.VersionInfo.FileDescription -match 'Dell') {
                         Write-Verbose -Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
                         Write-Verbose -Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
-    
+
                         $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
-    
+
                         if (-NOT (Test-Path "$DestinationPath")) {
                             Write-Verbose -Verbose "Expanding Dell Driver Pack to $DestinationPath"
                             $null = New-Item -Path $DestinationPath -ItemType Directory -Force -ErrorAction Ignore | Out-Null
@@ -483,13 +614,13 @@ function Save-MyDriverPack {
                 #=================================================
                 if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
                     if (($GetItemOutFile.VersionInfo.InternalName -match 'hpsoftpaqwrapper') -or ($GetItemOutFile.VersionInfo.OriginalFilename -match 'hpsoftpaqwrapper.exe') -or ($GetItemOutFile.VersionInfo.FileDescription -like "HP *")) {
-                        Write-Verbose -Message "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
-                        Write-Verbose -Message "InternalName: $($GetItemOutFile.VersionInfo.InternalName)"
-                        Write-Verbose -Message "OriginalFilename: $($GetItemOutFile.VersionInfo.OriginalFilename)"
-                        Write-Verbose -Message "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
-                        
+                        Write-Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
+                        Write-Verbose "InternalName: $($GetItemOutFile.VersionInfo.InternalName)"
+                        Write-Verbose "OriginalFilename: $($GetItemOutFile.VersionInfo.OriginalFilename)"
+                        Write-Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
+
                         $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
-    
+
                         if (-NOT (Test-Path "$DestinationPath")) {
                             Write-Verbose -Verbose "Expanding HP Driver Pack to $DestinationPath"
                             Start-Process -FilePath $ExpandFile -ArgumentList "/s /e /f `"$DestinationPath`"" -Wait
@@ -501,11 +632,11 @@ function Save-MyDriverPack {
                 #=================================================
                 if (($GetItemOutFile.Extension -eq '.exe') -and ($env:SystemDrive -ne 'X:')) {
                     if (($GetItemOutFile.VersionInfo.FileDescription -match 'Lenovo') -or ($GetItemOutFile.Name -match 'tc_') -or ($GetItemOutFile.Name -match 'tp_') -or ($GetItemOutFile.Name -match 'ts_') -or ($GetItemOutFile.Name -match '500w') -or ($GetItemOutFile.Name -match 'sccm_') -or ($GetItemOutFile.Name -match 'm710e') -or ($GetItemOutFile.Name -match 'tp10') -or ($GetItemOutFile.Name -match 'tp8') -or ($GetItemOutFile.Name -match 'yoga')) {
-                        Write-Verbose -Message "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
-                        Write-Verbose -Message "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
-    
+                        Write-Verbose "FileDescription: $($GetItemOutFile.VersionInfo.FileDescription)"
+                        Write-Verbose "ProductVersion: $($GetItemOutFile.VersionInfo.ProductVersion)"
+
                         $DestinationPath = Join-Path $GetItemOutFile.Directory 'SCCM'
-    
+
                         if (-NOT (Test-Path "$DestinationPath")) {
                             Write-Verbose -Verbose "Expanding Lenovo Driver Pack to $DestinationPath"
                             Start-Process -FilePath $ExpandFile -ArgumentList "/SILENT /SUPPRESSMSGBOXES" -Wait
@@ -517,7 +648,7 @@ function Save-MyDriverPack {
                 #=================================================
                 if (($GetItemOutFile.Extension -eq '.msi') -and ($env:SystemDrive -ne 'X:')) {
                     $DestinationPath = Join-Path $GetItemOutFile.Directory $GetItemOutFile.BaseName
-    
+
                     if (-NOT (Test-Path "$DestinationPath")) {
                         #Need to sort out what to do here
                     }
@@ -531,6 +662,34 @@ function Save-MyDriverPack {
     }
 }
 function Save-ZTIDriverPack {
+    <#
+    .SYNOPSIS
+    Downloads the driver pack for a computer during MDT/ConfigMgr task sequence
+
+    .DESCRIPTION
+    Downloads and stages the matching driver pack from OSDCloud during Lite Touch or Zero Touch deployment. Requires an active task sequence environment.
+
+    .PARAMETER Manufacturer
+    Computer manufacturer. Default is auto-detected
+
+    .PARAMETER Product
+    Computer product model. Default is auto-detected
+
+    .EXAMPLE
+    Save-ZTIDriverPack
+    Downloads the driver pack for the current computer during task sequence
+
+    .EXAMPLE
+    Save-ZTIDriverPack -Manufacturer 'Dell' -Product 'Latitude 5420'
+    Downloads the driver pack for a specific Dell model
+
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
+    .NOTES
+    Author: David Segura - Recast Software
+    2026-07-10 - Added comment-based help
+    #>
     [CmdletBinding()]
     param (
         [string]$Manufacturer = (Get-MyComputerManufacturer -Brief),

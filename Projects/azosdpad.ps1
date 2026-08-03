@@ -76,7 +76,7 @@ $XamlMainWindow.SelectNodes("//*[@Name]") | %{
     catch{throw}
     }
 
-Function Get-FormVariables{
+function Get-FormVariables{
 if ($global:ReadmeDisplay -ne $true){Write-host "If you need to reference this display again, run Get-FormVariables" -ForegroundColor Yellow;$global:ReadmeDisplay=$true}
 write-host "Found the following interactable elements from our form" -ForegroundColor Cyan
 get-variable *WPF*

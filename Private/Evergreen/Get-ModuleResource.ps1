@@ -1,4 +1,4 @@
-Function Get-ModuleResource {
+function Get-ModuleResource {
     <#
         .SYNOPSIS
             Reads the module strings from the JSON file and returns a hashtable.
@@ -8,12 +8,12 @@ Function Get-ModuleResource {
     param (
         [Parameter(Mandatory = $False, Position = 0)]
         [ValidateNotNull()]
-        [ValidateScript( { If (Test-Path -Path $_ -PathType 'Leaf') { $True } Else { Throw "Cannot find file $_" } })]
+        [ValidateScript( { If (Test-Path -Path $_ -PathType 'Leaf') { $True } Else { throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)]Cannot find file $_" } })]
         [System.String] $Path = (Join-Path -Path $MyInvocation.MyCommand.Module.ModuleBase -ChildPath "OSD.json")
     )
 
     try {
-        Write-Verbose -Message "$($MyInvocation.MyCommand): read module resource strings from: $Path"
+        Write-Verbose "$($MyInvocation.MyCommand): read module resource strings from: $Path"
         $params = @{
             Path        = $Path
             Raw         = $True

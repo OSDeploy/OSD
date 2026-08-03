@@ -1,4 +1,4 @@
-Function Get-WindowsUpdateDriver{
+function Get-WindowsUpdateDriver{
 
     $WUDownloader=(New-Object -ComObject Microsoft.Update.Session).CreateUpdateDownloader()
     $WUInstaller=(New-Object -ComObject Microsoft.Update.Session).CreateUpdateInstaller()
@@ -20,7 +20,7 @@ Function Get-WindowsUpdateDriver{
         #$InstallUpdateCount = $WUInstaller.Updates.count
     }
 }
-Function Start-WindowsUpdateDriver{
+function Start-WindowsUpdateDriver{
     if (-not (Test-WindowsUpdateEnvironment)) {
         return
     }
@@ -70,14 +70,14 @@ Function Start-WindowsUpdateDriver{
                     $WUDownloader.Download() | Out-Null
                 }
                 $InstallUpdateCount = $WUInstaller.Updates.count
-                
+
                 #Run the Install of detected Drivers.
                 if ($InstallUpdateCount -ge 1){
-                    Write-Output "Installing $InstallUpdateCount Updates | Time: $($(Get-Date).ToString("hh:mm:ss"))"        
+                    Write-Output "Installing $InstallUpdateCount Updates | Time: $($(Get-Date).ToString("hh:mm:ss"))"
                     $script:Install = $WUInstaller.Install()
                     $ResultMeaning = ($Results | Where-Object {$_.ResultCode -eq $script:Install.ResultCode}).Meaning
                     Write-Output "WU Return Code ($($script:Install.ResultCode)) Meaning: $ResultMeaning"
-                } 
+                }
             }
             else {Write-Output "No Updates Found"}
         }
@@ -85,7 +85,7 @@ Function Start-WindowsUpdateDriver{
         $Installing = Start-Job -ScriptBlock $code
         # Report the job ID (for diagnostic purposes)
         "Job ID: $($Installing.Id)"
-        
+
         # Wait for the job to complete or time out
         Wait-Job $Installing -Timeout $timeoutSeconds | Out-Null
         Receive-Job -Job $Installing
@@ -106,6 +106,6 @@ Function Start-WindowsUpdateDriver{
 
         #Start-sleep
         Start-sleep -seconds 10
-        
+
     }
 }

@@ -1,0 +1,8 @@
+{
+  "Invoke-WinPEStartup:InstallModule": ["OSD"],
+  "Invoke-WinPEStartup:InvokeMainCommand": [
+    "Start-RecastOSDCloudCLI -Force"
+  ],
+  "Invoke-WinPEStartup:InvokeMainCommandNoExit": true,
+  "Invoke-WinPEStartup:InvokeMainCommandEA": "Continue"
+}
