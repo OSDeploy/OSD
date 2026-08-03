@@ -1687,8 +1687,8 @@
                 Write-DarkGrayHost "Firmware Updates will be downloaded from Microsoft Update Catalog to C:\Drivers\Firmware"
                 Write-DarkGrayHost "Some systems do not support a driver Firmware Update"
                 Write-DarkGrayHost "You may have to enable this setting in your BIOS or Firmware Settings"
-
-                Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
+                # TODO Issue with MSUpdateCatalog
+                # Save-SystemFirmwareUpdate -DestinationDirectory 'C:\Drivers\Firmware'
             }
             else {
                 Write-Warning "Unable to download or find firware for his Device"
@@ -1704,27 +1704,28 @@
         }
         else {
             if (Test-MicrosoftUpdateCatalog) {
+                # TODO Issue with MSUpdateCatalog
                 $DestinationDirectory = 'C:\Drivers\MsUpCatDrivers'
                 if ($Global:OSDCloud.DriverPackName -eq 'Microsoft Update Catalog') {
-                    Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
-                    Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory
+                    # Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                    # Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory
                 }
                 elseif ($null -eq $SaveMyDriverPack) {
-                    Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
-                    Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory
+                    # Write-DarkGrayHost "Drivers for all devices will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                    # Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory
                 }
                 else {
                     if ($OSDCloud.MSCatalogDiskDrivers) {
-                        Write-DarkGrayHost "Drivers for PNPClass DiskDrive will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
-                        Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'DiskDrive'
+                        # Write-DarkGrayHost "Drivers for PNPClass DiskDrive will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                        # Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'DiskDrive'
                     }
                     if ($OSDCloud.MSCatalogNetDrivers) {
-                        Write-DarkGrayHost "Drivers for PNPClass Net will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
-                        Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'Net'
+                        # Write-DarkGrayHost "Drivers for PNPClass Net will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                        # Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'Net'
                     }
                     if ($OSDCloud.MSCatalogScsiDrivers) {
-                        Write-DarkGrayHost "Drivers for PNPClass SCSIAdapter will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
-                        Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'SCSIAdapter'
+                        # Write-DarkGrayHost "Drivers for PNPClass SCSIAdapter will be downloaded from Microsoft Update Catalog to $DestinationDirectory"
+                        #Save-MsUpCatDriver -DestinationDirectory $DestinationDirectory -PNPClass 'SCSIAdapter'
                     }
                 }
             }

@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [26.8.1.1] - 2026-07-06
+
+### Changed
+
+- **`Invoke-OSDCloud` analytics instrumentation** (`Public/OSDCloud.ps1`) — Added deployment analytics event handling in the launch validation flow, including privacy-safe hashed device UUID generation for correlation and expanded deployment telemetry property collection.
+- **`OSD.psd1`** — Bumped module version to `26.8.1.1` and updated generated-on date to `2026-07-06`.
+
 ## 26.7.22.1 - July 22, 2026
 
 ### Added
