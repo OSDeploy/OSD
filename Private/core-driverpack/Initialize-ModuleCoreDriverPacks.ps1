@@ -1,4 +1,4 @@
-function Get-ModuleCoreDriverPacks {
+function Initialize-ModuleCoreDriverPacks {
     <#
     .SYNOPSIS
     Retrieves driver pack information for the specified manufacturer and operating system architecture.
@@ -21,11 +21,11 @@ function Get-ModuleCoreDriverPacks {
     Array of driver pack objects containing driver information for the specified manufacturer and architecture.
 
     .EXAMPLE
-    PS> Get-ModuleCoreDriverPacks
+    PS> Initialize-ModuleCoreDriverPacks
     Returns driver packs for the current device's manufacturer and architecture.
 
     .EXAMPLE
-    PS> Get-ModuleCoreDriverPacks -OSDManufacturer 'Dell' -ProcessorArchitecture 'amd64'
+    PS> Initialize-ModuleCoreDriverPacks -OSDManufacturer 'Dell' -ProcessorArchitecture 'amd64'
     Returns driver packs for Dell devices with AMD64 architecture.
 
     .NOTES
