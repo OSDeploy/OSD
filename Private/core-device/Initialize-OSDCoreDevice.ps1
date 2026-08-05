@@ -641,7 +641,7 @@ function Initialize-OSDCoreDevice {
     $null = Set-OSDCoreOperatingSystemCloudObject -OSArchitecture $ProcessorArchitecture
     #=================================================
     # OSDCoreDriverPacks
-    $global:OSDCoreDriverPacks = Get-OSDCoreDriverPacks -OSDManufacturer $OSDManufacturer
+    $global:OSDCoreDriverPacks = Get-ModuleCoreDriverPacks -OSDManufacturer $OSDManufacturer
     $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $OSDProduct } | Select-Object -First 1
     #=================================================
     # OSDCloudLogs
