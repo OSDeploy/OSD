@@ -8,7 +8,7 @@
 @{
     # --- Identity ---
     RootModule           = 'OSD.psm1'
-    ModuleVersion        = '26.8.2.1'
+    ModuleVersion        = '26.8.5.1'
     CompatiblePSEditions = @('Core', 'Desktop')
     GUID                 = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
 
@@ -16,7 +16,10 @@
     Author               = 'David Segura'
     CompanyName          = 'Recast Software'
     Copyright            = '(c) 2026 Recast Software. All rights reserved.'
-    Description          = 'Root module for OSD.'
+    Description          = @'
+PowerShell module for OSD and OSDCloud v1 deployment automation from recastsoftware.com.
+Includes operating system, driver pack, and device provisioning workflows.
+'@
 
     # --- Requirements ---
     PowerShellVersion    = '5.1'
@@ -33,22 +36,9 @@
         'Show-OSDCoreLicenseHelp',
         # RecastOSDCloud
         'Start-RecastOSDCloudCLI',
-        'Update-RecastOSDCloudUSBCache',
         # OSDCoreCache
-        'Get-OSDCoreCacheContent',
-        'Get-OSDCoreCacheDrive',
-        'Get-OSDCoreCacheUSBPath',
-        'Test-OSDCoreCacheUSB',
-        # OSDCoreDevice
-        'Initialize-OSDCoreDevice',
         'Get-OSDCoreDeploymentDisk',
         # OSDCoreDriverPack
-        'Get-OSDCoreDriverPackCatalogDell',
-        'Get-OSDCoreDriverPackCatalogHP',
-        'Get-OSDCoreDriverPackCatalogLenovo',
-        'Get-OSDCoreDriverPackCatalogPanasonic',
-        'Get-OSDCoreDriverPackCatalogSurface',
-        'Get-OSDCoreDriverPacks',
         'Test-OSDCoreDriverPackCloudObject',
         # OSDCoreOperatingSystem
         'Get-OSDCoreOperatingSystems',

@@ -2,14 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 26.8.5.1 - August 5, 2026
 
-## [26.8.1.1] - 2026-07-06
+### Added
+
+- **New private core operating system module helpers** — Added `Private/core-operatingsystem/Get-ModuleCoreOperatingSystems.ps1` and `Private/core-operatingsystem/Get-OSDCloudCoreOperatingSystems.ps1` to support normalized operating system catalog parsing for core selection and deployment workflows.
+- **New private core device cache helpers** — Added `Private/core-device/Get-OSDCoreCacheDrive.ps1`, `Private/core-device/Get-OSDCoreCacheUSBPath.ps1`, and `Private/core-device/Test-OSDCoreCacheUSB.ps1`.
+
+### Changed
+
+- **Core operating system helper reorganization** — Moved operating system helper implementations into `Private/core-operatingsystem`, including `Get-OSDCoreOperatingSystems`, `Set-OSDCoreOperatingSystemCloudObject`, and `dev/Get-OSDCloudDefaultOS`.
+- **Core driver pack helper reorganization** — Moved `Get-OSDCoreDriverPacks` implementation from `Public/core` to `Private/core-driverpack` as `Get-ModuleCoreDriverPacks`.
+- **Core device/cache helper reorganization** — Moved cache and device implementations into `Private/core-device`, including `Get-OSDCoreCacheContent`, `Initialize-OSDCoreDevice`, and `Sync-OSDCoreDateTime`.
+- **Recast USB cache updater relocation** — Moved `Update-RecastOSDCloudUSBCache` implementation from `Public/core-recast` to `Private/core-device`.
+- **Recast CLI/GUI driver pack lookup update** — Updated `Start-RecastOSDCloudCLI` and `Start-RecastOSDCloudGUI` to use `Get-ModuleCoreDriverPacks` for manufacturer override resolution.
+- **Module manifest metadata refresh** (`OSD.psd1`) — Bumped module version to `26.8.5.1` and replaced the module description with a multi-line summary that references `recastsoftware.com`.
+- **Export surface cleanup** (`OSD.psd1`) — Removed direct exports for cache, device, driver pack catalog, and USB cache update commands that were migrated to internal/private implementations.
+- **Help and docs refresh** — Updated `docs/Get-OSDCoreOperatingSystems.md` with expanded description/examples and regenerated `en-US/OSD-help.xml` to align with the refactored command surface.
+
+### Removed
+
+- **Deprecated generated docs for migrated internal commands** — Removed generated docs for cache, driver pack catalog, device initialization, USB cache test, and USB cache update command topics under `docs` (for example: `Get-OSDCoreCacheContent`, `Get-OSDCoreCacheDrive`, `Get-OSDCoreCacheUSBPath`, `Get-OSDCoreDriverPacks`, `Initialize-OSDCoreDevice`, `Test-OSDCoreCacheUSB`, `Update-RecastOSDCloudUSBCache`).
+
+## 26.8.1.1 - August 1, 2026
 
 ### Changed
 
 - **`Invoke-OSDCloud` analytics instrumentation** (`Public/OSDCloud.ps1`) — Added deployment analytics event handling in the launch validation flow, including privacy-safe hashed device UUID generation for correlation and expanded deployment telemetry property collection.
-- **`OSD.psd1`** — Bumped module version to `26.8.1.1` and updated generated-on date to `2026-07-06`.
+- **`OSD.psd1`** — Bumped module version to `26.8.1.1`.
 
 ## 26.7.22.1 - July 22, 2026
 

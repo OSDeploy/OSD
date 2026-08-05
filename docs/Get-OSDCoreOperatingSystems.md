@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-OSDCoreOperatingSystems
 
 ## SYNOPSIS
-Gets the core operating system catalog entries that OSD uses for offline media selection.
+Gets parsed OSD core operating system catalog entries.
 
 ## SYNTAX
 
@@ -17,9 +17,12 @@ Get-OSDCoreOperatingSystems [-ProgressAction <ActionPreference>] [<CommonParamet
 ```
 
 ## DESCRIPTION
-Imports the operating system catalog XML files stored under the module's core operating systems cache,
-normalizes duplicate metadata, and returns a sorted list of operating system records with build,
-architecture, language, activation, hash, and image metadata.
+Imports normalized raw catalog records from Get-ModuleCoreOperatingSystems and
+transforms them into OSD core operating system objects used by selection and
+deployment workflows.
+The function derives build identity, Windows family and
+release, normalized architecture, activation channel, and compatibility flags,
+then returns unique sorted records.
 
 ## EXAMPLES
 
@@ -28,7 +31,7 @@ architecture, language, activation, hash, and image metadata.
 Get-OSDCoreOperatingSystems
 ```
 
-Returns all available core operating system records discovered in the module cache.
+Returns all available parsed core operating system records.
 
 ### EXAMPLE 2
 ```
@@ -36,6 +39,13 @@ Get-OSDCoreOperatingSystems | Where-Object Version -eq 'Windows 11'
 ```
 
 Returns only Windows 11 operating system records.
+
+### EXAMPLE 3
+```
+Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -eq 'arm64' }
+```
+
+Returns only arm64 operating system records.
 
 ## PARAMETERS
 
@@ -59,14 +69,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None. You cannot pipe input to this function.
+### None
+### You cannot pipe input to this function.
 ## OUTPUTS
 
-### PSCustomObject
-### One or more normalized operating system records.
+### PSCustomObject[]
+### Parsed operating system records with OSD-specific properties.
 ## NOTES
 Author: David Segura - Recast Software
 2026-07-22 - Initial help block created
+2026-08-05 - Expanded help content and examples
 
 ## RELATED LINKS
 
