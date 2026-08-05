@@ -1,29 +1,37 @@
 function Get-OSDCoreOperatingSystems {
     <#
     .SYNOPSIS
-    Gets the core operating system catalog entries that OSD uses for offline media selection.
+    Gets parsed OSD core operating system catalog entries.
 
     .DESCRIPTION
-    Imports the operating system catalog XML files stored under the module's core operating systems cache,
-    normalizes duplicate metadata, and returns a sorted list of operating system records with build,
-    architecture, language, activation, hash, and image metadata.
+    Imports normalized raw catalog records from Get-ModuleCoreOperatingSystems and
+    transforms them into OSD core operating system objects used by selection and
+    deployment workflows. The function derives build identity, Windows family and
+    release, normalized architecture, activation channel, and compatibility flags,
+    then returns unique sorted records.
 
     .EXAMPLE
     Get-OSDCoreOperatingSystems
 
-    Returns all available core operating system records discovered in the module cache.
+    Returns all available parsed core operating system records.
 
     .EXAMPLE
     Get-OSDCoreOperatingSystems | Where-Object Version -eq 'Windows 11'
 
     Returns only Windows 11 operating system records.
 
+    .EXAMPLE
+    Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -eq 'arm64' }
+
+    Returns only arm64 operating system records.
+
     .INPUTS
-    None. You cannot pipe input to this function.
+    None
+    You cannot pipe input to this function.
 
     .OUTPUTS
-    PSCustomObject
-    One or more normalized operating system records.
+    PSCustomObject[]
+    Parsed operating system records with OSD-specific properties.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
@@ -31,82 +39,17 @@ function Get-OSDCoreOperatingSystems {
     .NOTES
     Author: David Segura - Recast Software
     2026-07-22 - Initial help block created
+    2026-08-05 - Expanded help content and examples
     #>
     [CmdletBinding()]
     [OutputType([pscustomobject[]])]
     param ()
+
     $ErrorActionPreference = 'Stop'
     $records = @()
     $mctRecords = @()
 
-    $srcRoot = Join-Path $($MyInvocation.MyCommand.Module.ModuleBase) 'core\operatingsystems'
-
-    foreach ($file in (Get-ChildItem -Path $srcRoot -Filter '*.xml' -File | Sort-Object FullName)) {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Importing $($file.FullName)"
-
-        $xml = [xml](Get-Content -Path $file.FullName -Raw)
-        $fileNodes = $xml.MCT.Catalogs.Catalog.PublishedMedia.Files.File
-
-        if (-not $fileNodes) {
-            continue
-        }
-
-        foreach ($node in ($fileNodes | Sort-Object FileName, LanguageCode, Edition)) {
-            $properties = [ordered]@{
-                Sha1   = $null
-                Sha256 = $null
-            }
-
-            $excludedProperties = @('Edition', 'Key', 'Architecture_Loc', 'ArchitectureLoc', 'Edition_Loc', 'EditionLoc', 'IsRetailOnly')
-
-            foreach ($child in $node.ChildNodes) {
-                if ($child.NodeType -ne [System.Xml.XmlNodeType]::Element) {
-                    continue
-                }
-
-                $name = $child.LocalName
-                $value = $child.InnerText
-
-                if ($name -match '^Sha1$') {
-                    $name = 'Sha1'
-                }
-                elseif ($name -match '^Sha256$') {
-                    $name = 'Sha256'
-                }
-
-                if ($excludedProperties -contains $name) {
-                    continue
-                }
-
-                if ($properties.Contains($name)) {
-                    if ($name -in @('Sha1', 'Sha256') -or [string]::IsNullOrWhiteSpace($properties[$name])) {
-                        $properties[$name] = $value
-                    }
-                    else {
-                        $suffix = 2
-                        while ($properties.Contains("$name$suffix")) {
-                            $suffix++
-                        }
-                        $properties["$name$suffix"] = $value
-                    }
-                }
-                else {
-                    $properties[$name] = $value
-                }
-            }
-
-            $mctRecords += [pscustomobject]$properties
-        }
-    }
-
-    $mctRecords = $mctRecords |
-        Group-Object -Property FilePath, FileName, LanguageCode, Architecture |
-        ForEach-Object {
-            $_.Group |
-                Sort-Object -Property @{ Expression = { [string]::IsNullOrWhiteSpace($_.Sha256) }; Ascending = $true }, @{ Expression = { [string]::IsNullOrWhiteSpace($_.Sha1) }; Ascending = $true } |
-                Select-Object -First 1
-        } |
-        Sort-Object -Property FilePath, FileName, LanguageCode, Architecture
+    $mctRecords = Get-ModuleCoreOperatingSystems
 
     if (-not $mctRecords) {
         return $records

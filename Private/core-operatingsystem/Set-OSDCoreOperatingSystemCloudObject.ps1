@@ -33,12 +33,27 @@ function Set-OSDCoreOperatingSystemCloudObject {
     Selects the latest Windows 11 Retail amd64 en-us 25H2 catalog entry and sets
     $global:OSDCoreOperatingSystemCloudObject.
 
+    .EXAMPLE
+    Set-OSDCoreOperatingSystemCloudObject -OSActivation Volume -OSArchitecture arm64 -OSLanguageCode en-us -OSReleaseID 24H2 -RefreshCatalog
+
+    Refreshes the catalog cache and selects the latest matching Volume arm64 record.
+
+    .INPUTS
+    None
+    You cannot pipe input to this function.
+
+    .OUTPUTS
+    PSCustomObject
+    The selected operating system object assigned to
+    $global:OSDCoreOperatingSystemCloudObject.
+
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
 
     .NOTES
     Author: David Segura - Recast Software
     2026-07-15 - Initial implementation to centralize OS catalog object selection.
+    2026-08-05 - Expanded help content and examples
     #>
     [CmdletBinding()]
     [OutputType([pscustomobject])]
