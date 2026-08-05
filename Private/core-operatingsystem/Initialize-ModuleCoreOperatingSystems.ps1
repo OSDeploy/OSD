@@ -1,4 +1,4 @@
-function Get-ModuleCoreOperatingSystems {
+function Initialize-ModuleCoreOperatingSystems {
     <#
     .SYNOPSIS
     Gets normalized module core operating system catalog records.
@@ -11,12 +11,12 @@ function Get-ModuleCoreOperatingSystems {
     by hash availability.
 
     .EXAMPLE
-    Get-ModuleCoreOperatingSystems
+    Initialize-ModuleCoreOperatingSystems
 
     Returns all normalized catalog records discovered in the module core operating systems cache.
 
     .EXAMPLE
-    Get-ModuleCoreOperatingSystems | Where-Object { $_.LanguageCode -eq 'en-us' }
+    Initialize-ModuleCoreOperatingSystems | Where-Object { $_.LanguageCode -eq 'en-us' }
 
     Returns only catalog records for en-us language media.
 

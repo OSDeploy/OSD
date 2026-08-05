@@ -4,7 +4,7 @@ function Get-OSDCloudCoreOperatingSystems {
     Gets parsed operating system records for OSDCloud selection workflows.
 
     .DESCRIPTION
-    Converts raw module catalog records from Get-ModuleCoreOperatingSystems into
+    Converts raw module catalog records from Initialize-ModuleCoreOperatingSystems into
     normalized OSDCloud operating system objects. The function maps build numbers
     to known Windows releases, derives build versions, normalizes architecture,
     identifies activation channel, and emits sorted records with media metadata
@@ -48,14 +48,14 @@ function Get-OSDCloudCoreOperatingSystems {
     $records = @()
     $mctRecords = @()
 
-    $mctRecords = Get-ModuleCoreOperatingSystems
+    $mctRecords = Initialize-ModuleCoreOperatingSystems
 
     if (-not $mctRecords) {
         return $records
     }
 
     foreach ($node in ($mctRecords | Sort-Object FileName, LanguageCode, Architecture)) {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Processing $($node.FileName)"
+        # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Processing $($node.FileName)"
 
         if ([string]::IsNullOrWhiteSpace($node.FileName) -or $node.FileName.Length -lt 5) {
             continue
