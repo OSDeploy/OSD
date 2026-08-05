@@ -48,7 +48,7 @@
         Write-Warning "[$(Get-Date -format s)] Failed to start transcript at $TranscriptFullName"
     }
     #=================================================
-    #region Initialize-OSDCoreDevice
+    # Initialize-OSDCoreDevice
     if (-not ($global:OSDCoreDevice)) {
         Initialize-OSDCoreDevice
     }
