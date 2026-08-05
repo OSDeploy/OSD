@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 26.8.5.2 - August 5, 2026
+
+### Added
+
+- **Dedicated OSDCloud IPU public function scripts** — Added `Public/OSDCloudIPU/Invoke-IPUPreInstallNotification.ps1`, `Public/OSDCloudIPU/Invoke-IPUPreInstallNotificationLauncher.ps1`, `Public/OSDCloudIPU/Invoke-OSDCloudIPU.ps1`, `Public/OSDCloudIPU/New-OSDCloudOSWimFile.ps1`, and `Public/OSDCloudIPU/Set-Win11ReqBypassRegValues.ps1` to split IPU functionality into focused, discoverable command files.
+
+### Changed
+
+- **OSDCloud IPU public layout modernization** — Reorganized the IPU implementation from `Public/OSDCloud/OSDCloudIPU.ps1` into the `Public/OSDCloudIPU` folder structure for cleaner command ownership and easier maintenance.
+- **Module manifest version bump** (`OSD.psd1`) — Updated module version to `26.8.5.2`.
+
+### Removed
+
+- **Legacy monolithic IPU script** — Removed `Public/OSDCloud/OSDCloudIPU.ps1` after migrating its function surface to dedicated script files.
+
 ## 26.8.5.1 - August 5, 2026
 
 ### Added
