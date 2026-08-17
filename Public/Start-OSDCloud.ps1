@@ -386,7 +386,7 @@ function Start-OSDCloud {
             Write-Host -ForegroundColor DarkGray "OSImageIndex: $($Global:StartOSDCloud.OSImageIndex)"
         }
         if ($PSBoundParameters.ContainsKey('FindImageFile')) {
-            $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim
+            $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim -ZTI:$Global:StartOSDCloud.ZTI
 
             if ($Global:StartOSDCloud.ImageFileItem) {
                 $Global:StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName -ZTI:$Global:StartOSDCloud.ZTI

@@ -10,7 +10,9 @@ https://github.com/OSDeploy/OSD/tree/master/docs
 #>
 function Select-OSDCloudFileWim {
     [CmdletBinding()]
-    param ()
+    param (
+        [switch]$ZTI
+    )
 
     $i = $null
     $Results = @()
@@ -33,6 +35,13 @@ function Select-OSDCloudFileWim {
         }
 
         $Results | Select-Object -Property Selection, Name, Directory | Format-Table | Out-Host
+
+        if ($ZTI) {
+            if (($Results | Measure-Object).Count -eq 1) {
+                Return Get-Item (Join-Path $Results.Directory $Results.Name)
+            }
+            throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] -ZTI requires exactly one Windows Image candidate under \OSDCloud\OS\, found $(($Results | Measure-Object).Count). Remove the extras or run without -ZTI to select interactively."
+        }
 
         do {
             $SelectReadHost = Read-Host -Prompt "Select a Windows Image to apply by Selection [Number]"
