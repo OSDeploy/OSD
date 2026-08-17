@@ -15,6 +15,10 @@
     .PARAMETER fromIsoUrl
     Specifies the value for fromIsoUrl.
 
+    .PARAMETER BootFirst
+    Switch. Creates the WinPE Boot partition first (at the start of the disk) instead of last.
+    Lets the Data partition be extended into trailing free space later, e.g. after cloning onto a larger USB drive.
+
     .EXAMPLE
     New-OSDCloudUSB -WorkspacePath <WorkspacePath> -fromIsoFile <fromIsoFile>
     Runs New-OSDCloudUSB with common parameters.
@@ -41,7 +45,11 @@
         #Path to an OSDCloud ISO saved on the internet
         #This file will be downloaded and mounted and the contents will be copied to the OSDCloud USB
         [Parameter(ParameterSetName='fromIsoUrl',Mandatory)]
-        [System.String]$fromIsoUrl
+        [System.String]$fromIsoUrl,
+
+        #Creates the WinPE Boot partition first (at the start of the disk) instead of last
+        #Lets the Data partition be extended into trailing free space later, e.g. after cloning onto a larger USB drive
+        [switch]$BootFirst
     )
     #=================================================
     #	Block
@@ -182,18 +190,21 @@
     #=================================================
     #	New-BootableUSBDrive
     #=================================================
-    $BootableUSBDrive = New-BootableUSBDrive -BootLabel $BootLabel -DataLabel $DataLabel
+    $BootableUSBDrive = New-BootableUSBDrive -BootLabel $BootLabel -DataLabel $DataLabel -BootFirst:$BootFirst
     $BootableUSBDrive = $BootableUSBDrive | Select-Object -First 1
     #=================================================
     #	Test USB Volumes
     #=================================================
-    $WinPEPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $BootableUSBDrive.DiskNumber) -and ($_.PartitionNumber -eq 2)}
+    $WinPEPartitionNumber = if ($BootFirst) { 1 } else { 2 }
+    $OSDCloudPartitionNumber = if ($BootFirst) { 2 } else { 1 }
+
+    $WinPEPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $BootableUSBDrive.DiskNumber) -and ($_.PartitionNumber -eq $WinPEPartitionNumber)}
     if (-NOT ($WinPEPartition)) {
         Write-Warning "[$(Get-Date -format s)] Unable to create OSDCloud WinPE Partition"
         Write-Warning "[$(Get-Date -format s)] Something went very very wrong in this process"
         Break
     }
-    $OSDCloudPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $BootableUSBDrive.DiskNumber) -and ($_.PartitionNumber -eq 1)}
+    $OSDCloudPartition = Get-USBPartition | Where-Object {($_.DiskNumber -eq $BootableUSBDrive.DiskNumber) -and ($_.PartitionNumber -eq $OSDCloudPartitionNumber)}
     if (-NOT ($OSDCloudPartition)) {
         Write-Warning "[$(Get-Date -format s)] Unable to create OSDCloud Data Partition"
         Write-Warning "[$(Get-Date -format s)] Something went very very wrong in this process"
