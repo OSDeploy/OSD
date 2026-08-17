@@ -389,7 +389,7 @@ function Start-OSDCloud {
             $Global:StartOSDCloud.ImageFileItem = Select-OSDCloudFileWim
 
             if ($Global:StartOSDCloud.ImageFileItem) {
-                $Global:StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName
+                $Global:StartOSDCloud.OSImageIndex = Select-OSDCloudImageIndex -ImagePath $Global:StartOSDCloud.ImageFileItem.FullName -ZTI:$Global:StartOSDCloud.ZTI
 
                 Write-Host -ForegroundColor DarkGray "ImageFileItem: $($Global:StartOSDCloud.ImageFileItem.FullName)"
                 Write-Host -ForegroundColor DarkGray "OSImageIndex: $($Global:StartOSDCloud.OSImageIndex)"
