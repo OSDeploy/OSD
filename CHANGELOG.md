@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## 26.9.8.1 - September 8, 2026
+
+### Changed
+
+- **Core device initialization and USB cache flow** — Expanded `Initialize-OSDCoreDevice` help and diagnostics, initialized and validated the module operating system catalog during device discovery, selected the appropriate OSD or OSDCloud operating system provider by module context, and aligned USB cache updates with the renamed catalog initializer.
+- **Core operating system initialization and selection** — Renamed `Get-ModuleCoreOperatingSystems` to `Initialize-ModuleCoreOperatingSystems`, updated its callers, and enhanced `Set-OSDCoreOperatingSystemCloudObject` with module-aware catalog refreshes, support for both OSD and OSDCloud property schemas, normalized filtering, detailed verbose diagnostics, and clearer provider errors.
+- **Core driver pack initialization** — Renamed `Get-ModuleCoreDriverPacks` to `Initialize-ModuleCoreDriverPacks` and updated device initialization plus Recast OSDCloud CLI/GUI manufacturer override flows to use the new command name.
+- **Recast OSDCloud startup alignment** — Updated CLI and GUI launch paths to use the renamed operating system and driver pack initializers, ensured the module operating system catalog is initialized before CLI selection, clarified catalog validation errors, and aligned CLI execution with the GUI workflow.
+- **WinPE startup profiles** — Moved the OSDCloud CLI and GUI profiles from `core/OSDRepo/winpe-profiles` to `core/winpestartup-profiles` and renamed them to `[OSD] OSDCloudCLI.json` and `[OSD] OSDCloudGUI.json`.
+- **Driver pack catalogs** — Refreshed Dell, HP, Lenovo, and Surface driver pack catalog data, including current Surface package versions and release details.
+- **Windows 11 25H2 catalog** — Updated x64 and ARM64 media metadata, download locations, sizes, and hashes from build `26200.8873` to `26200.9168`.
+- **Module manifest** (`OSD.psd1`) — Bumped the module version to `26.9.8.1`.
+
+### Removed
+
+- **Legacy WinPE startup profiles** — Removed the duplicate `Start-RecastOSDCloudCLI.json` and `Start-RecastOSDCloudCLI -Force.json` profiles from `core/OSDRepo/winpe-profiles` after consolidating startup profiles under `core/winpestartup-profiles`.
+
 ## 26.8.5.2 - August 5, 2026
 
 ### Added

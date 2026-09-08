@@ -4,7 +4,7 @@ function Get-OSDCoreOperatingSystems {
     Gets parsed OSD core operating system catalog entries.
 
     .DESCRIPTION
-    Imports normalized raw catalog records from Get-ModuleCoreOperatingSystems and
+    Imports normalized raw catalog records from Initialize-ModuleCoreOperatingSystems and
     transforms them into OSD core operating system objects used by selection and
     deployment workflows. The function derives build identity, Windows family and
     release, normalized architecture, activation channel, and compatibility flags,
@@ -49,14 +49,14 @@ function Get-OSDCoreOperatingSystems {
     $records = @()
     $mctRecords = @()
 
-    $mctRecords = Get-ModuleCoreOperatingSystems
+    $mctRecords = Initialize-ModuleCoreOperatingSystems
 
     if (-not $mctRecords) {
         return $records
     }
 
     foreach ($node in ($mctRecords | Sort-Object FileName, LanguageCode, Architecture)) {
-        Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Processing $($node.FileName)"
+        # Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Processing $($node.FileName)"
 
         if ([string]::IsNullOrWhiteSpace($node.FileName) -or $node.FileName.Length -lt 5) {
             continue

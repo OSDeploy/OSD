@@ -1,31 +1,64 @@
 function Initialize-OSDCoreDevice {
     <#
     .SYNOPSIS
-    Collects local hardware, firmware, TPM, and network details for OSDCloud.
+        Initializes the OSDCore device inventory and diagnostics context.
 
     .DESCRIPTION
-    Initialize-OSDCoreDevice gathers device information from CIM classes, firmware,
-    and environment data, then normalizes manufacturer/model/product values for
-    workflow use. It writes diagnostic logs to $env:TEMP\osdcloud-logs, attempts to
-    copy logs to an available OSDCloudLogs path, and populates
-    $global:OSDCoreDevice with an ordered property set used by downstream OSDCloud
-    deployment logic.
+        Initialize-OSDCoreDevice collects local hardware, firmware, TPM, keyboard,
+        and network information from CIM, environment variables, and UEFI checks.
+        It creates diagnostic artifacts in $env:TEMP\osdcloud-logs, normalizes key
+        identity values such as manufacturer/model/product, and builds
+        $global:OSDCoreDevice as an ordered property bag used by deployment and
+        workflow orchestration functions.
+
+        The function is intended for internal module initialization and is called
+        before workflow execution so downstream steps can rely on a consistent
+        device state snapshot.
 
     .EXAMPLE
     Initialize-OSDCoreDevice
 
-    Collects current device metadata, creates or updates
-    $global:OSDCoreDevice, and writes log artifacts for troubleshooting.
+        Collects current device metadata, creates or updates
+        $global:OSDCoreDevice, and writes log artifacts for troubleshooting.
+
+
+    .EXAMPLE
+    Initialize-OSDCoreDevice -Verbose
+
+        Runs initialization and emits additional details about discovered disks,
+        network adapters, keyboard selection, and support checks.
+
+    .INPUTS
+    None. You cannot pipe input to this function.
 
     .OUTPUTS
     None. This function does not emit pipeline output.
 
     .NOTES
-    Side effects:
-    - Clears the current PowerShell error collection.
-    - Updates date/time in WinPE when needed.
-    - Writes logs to $env:TEMP\osdcloud-logs.
-    - Sets $global:OSDCoreDevice.
+        Side effects:
+        - Clears the current PowerShell error collection.
+        - Attempts to sync date/time (best effort) through Sync-OSDCoreDateTime.
+        - Writes diagnostic logs to $env:TEMP\osdcloud-logs.
+        - Attempts to stage logs in an OSDCloudLogs destination when available.
+        - Updates global state in $global:OSDCoreDevice.
+
+        Changelog:
+        - 2026-08-05 | pending | Resolve OS catalog provider selection overwrite.
+            Replaced unconditional dual assignment of OSDCoreOperatingSystems with
+            command-aware selection logic that uses the available provider function
+            and throws a descriptive error when neither provider is present.
+        - 2026-08-05 | ef3e4fb | Core catalog initialization wiring update.
+            Integrated initializer into the broader core startup path and aligned
+            device state dependencies for downstream catalog and workflow logic.
+        - 2026-08-04 | 538d747 | Initial OSDCoreDevice initializer introduced.
+            Added core CIM collection, log export pipeline, normalization helpers,
+            and baseline global property map for workflow consumers.
+
+        Maintainer guidance:
+        - Add a new changelog entry in this NOTES section for every functional
+            behavior change in this function.
+        - Keep entries in reverse chronological order using this format:
+            YYYY-MM-DD | <short-hash> | <summary>
     #>
     [CmdletBinding()]
     param ()
@@ -636,13 +669,32 @@ function Initialize-OSDCoreDevice {
     # OSDCoreCacheContent
     $global:OSDCoreCacheContent = Get-OSDCoreCacheContent
     #=================================================
+    # ModuleCoreOperatingSystems
+    $global:ModuleCoreOperatingSystems = Initialize-ModuleCoreOperatingSystems
+    # Validate ModuleCoreOperatingSystems
+    if (-not ($global:ModuleCoreOperatingSystems)) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to load Module Core Operating Systems."
+    }
+    #=================================================
     # OSDCoreOperatingSystems
-    $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -match "$ProcessorArchitecture" }
+    # Select the provider that exists in the current module context.
+    $ModuleName = $($MyInvocation.MyCommand.Module.Name)
+    if ($ModuleName -eq 'OSD') {
+        $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems |
+            Where-Object { $_.Architecture -match "$ProcessorArchitecture" }
+    }
+    elseif ($ModuleName -eq 'OSDCloud') {
+        $global:OSDCoreOperatingSystems = Get-OSDCloudCoreOperatingSystems |
+            Where-Object { $_.OSArchitecture -match "$ProcessorArchitecture" }
+    }
+    else {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to load core operating systems provider command."
+    }
     $null = Set-OSDCoreOperatingSystemCloudObject -OSArchitecture $ProcessorArchitecture
     #=================================================
     # OSDCoreDriverPacks
-    $global:OSDCoreDriverPacks = Get-ModuleCoreDriverPacks -OSDManufacturer $OSDManufacturer
-    $global:OSDCoreDriverPackCloudObject = $global:OSDCoreDriverPacks | Where-Object { $_.SystemId -match $OSDProduct } | Select-Object -First 1
+    $global:ModuleCoreDriverPacks = Initialize-ModuleCoreDriverPacks -OSDManufacturer $OSDManufacturer
+    $global:OSDCoreDriverPackCloudObject = $global:ModuleCoreDriverPacks | Where-Object { $_.SystemId -match $OSDProduct } | Select-Object -First 1
     #=================================================
     # OSDCloudLogs
     # Look for available drives (USB, mapped network drives, and local drives) with at least 1 GB of free space and write permissions for the current user to copy logs.

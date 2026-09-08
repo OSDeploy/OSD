@@ -228,7 +228,7 @@ function Start-RecastOSDCloudGUI {
     # Resolve driver pack metadata for the detected device, with optional manufacturer overrides supplied by the caller.
     if ($PSBoundParameters.ContainsKey('OSDManufacturer')) {
         $global:OSDCoreDevice.OSDManufacturer = $OSDManufacturer
-        $global:OSDCoreDriverPacks = Get-ModuleCoreDriverPacks -OSDManufacturer $OSDManufacturer
+        $global:OSDCoreDriverPacks = Initialize-ModuleCoreDriverPacks -OSDManufacturer $OSDManufacturer
     }
 
     # Resolve driver pack metadata for the detected device, with optional model overrides supplied by the caller.

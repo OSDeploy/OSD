@@ -139,11 +139,6 @@ function Start-RecastOSDCloudCLI {
     $ModuleVersion = $($MyInvocation.MyCommand.Module.Version)
     Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] $ModuleVersion"
     #=================================================
-    # Dependency guard: OSDCloud relies on curl.exe for downloads.
-    if (-not (Get-Command -Name 'curl.exe' -ErrorAction SilentlyContinue)) {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCloud requires 'curl.exe' which is not available on this system. Please ensure curl.exe is available in the system PATH."
-    }
-    #=================================================
     # Resolve architecture-specific edition constraints and normalize edition metadata.
     $OSEditionValuesByArchitecture = @{
         amd64 = @('Home','Home N','Education','Education N','Pro','Pro N','Enterprise','Enterprise N')
@@ -170,20 +165,31 @@ function Start-RecastOSDCloudCLI {
     }
     $OSEditionId = $OSEditionIdByName[$OSEdition]
     #=================================================
+    # Dependency guard: OSDCloud relies on curl.exe for downloads.
+    if (-not (Get-Command -Name 'curl.exe' -ErrorAction SilentlyContinue)) {
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCloud requires 'curl.exe' which is not available on this system. Please ensure curl.exe is available in the system PATH."
+    }
+    #=================================================
     # OSDCoreDevice
     if (-not ($global:OSDCoreDevice)) {
         Initialize-OSDCoreDevice
     }
     #=================================================
-    # OSDCoreOperatingSystems
+    # ModuleCoreOperatingSystems
+    if (-not ($global:ModuleCoreOperatingSystems)) {
+        $global:ModuleCoreOperatingSystems = Initialize-ModuleCoreOperatingSystems
+    }
+    #=================================================
+    # OSDCloud Operating Systems
     # Always resolve catalog entries for the effective architecture value.
     $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems | Where-Object { $_.Architecture -eq $OSArchitecture }
 
     # Validate that the OS catalog was preloaded for this architecture.
     if (-not $global:OSDCoreOperatingSystems) {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to load Operating Systems"
+        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to load OSDCloud Operating Systems."
     }
-
+    #=================================================
+    # Parameter OSLanguageCode
     # Automatically determine default OSLanguageCode from the detected keyboard layout if not explicitly provided.
     if (-not $PSBoundParameters.ContainsKey('OSLanguageCode')) {
         if (Get-Command -Name 'Convert-KeyboardLayoutToLanguageCode' -ErrorAction SilentlyContinue) {
@@ -210,7 +216,7 @@ function Start-RecastOSDCloudCLI {
     # Resolve driver pack metadata for the detected device, with optional manufacturer overrides supplied by the caller.
     if ($PSBoundParameters.ContainsKey('OSDManufacturer')) {
         $global:OSDCoreDevice.OSDManufacturer = $OSDManufacturer
-        $global:OSDCoreDriverPacks = Get-ModuleCoreDriverPacks -OSDManufacturer $OSDManufacturer
+        $global:OSDCoreDriverPacks = Initialize-ModuleCoreDriverPacks -OSDManufacturer $OSDManufacturer
     }
 
     # Resolve driver pack metadata for the detected device, with optional model overrides supplied by the caller.
