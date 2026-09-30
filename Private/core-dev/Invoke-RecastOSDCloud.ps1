@@ -411,7 +411,7 @@ function Invoke-RecastOSDCloud {
     }
     #endregion
     #region CheckSHA1
-    # SHA1 may not exist, it may be null as Windows 25H2 is using SHA256 now
+    # SHA1 may not exist because current Windows media uses SHA256.
     if ($Global:OSDCloud.CheckSHA1 -eq $true) {
         if (($Global:OSDCloud.ImageFileDestination) -and ($Global:OSDCloud.ImageFileDestination.FullName)) {
             $Global:OSDCloud.ImageFileDestinationSHA1 = (Get-FileHash -Path $Global:OSDCloud.ImageFileDestination.FullName -Algorithm SHA1).Hash
@@ -626,6 +626,7 @@ function Invoke-RecastOSDCloud {
         try {
             Write-DarkGrayHost -Message 'Expand-WindowsImage'
             Expand-WindowsImage @ExpandWindowsImage
+            Initialize-OSDCloudSetupScripts
         }
         catch {
             Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Expand-WindowsImage failed."

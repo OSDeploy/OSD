@@ -69,7 +69,7 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: 25H2
+Default value: 26H2
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -231,4 +231,3 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
-

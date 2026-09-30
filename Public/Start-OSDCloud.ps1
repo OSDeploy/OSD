@@ -42,14 +42,14 @@
     Switch. Zero-touch install mode (ZTI). When set, disk wipes proceed automatically without prompting.
 
 .PARAMETER OSName
-    (Default parameter set) A validated OS selection string such as 'Windows 11 25H2 x64'. If omitted the
+    (Default parameter set) A validated OS selection string such as 'Windows 11 26H2 x64'. If omitted the
     function prompts interactively (unless ZTI is used which selects sensible defaults).
 
 .PARAMETER OSVersion
     (Legacy parameter set) Operating system family, e.g. 'Windows 11' or 'Windows 10'.
 
 .PARAMETER OSBuild
-    (Legacy parameter set) Operating system build (alias: Build) such as '25H2','24H2','23H2','22H2'.
+    (Legacy parameter set) Operating system build (alias: Build) such as '26H2','25H2','24H2','23H2','22H2'.
 
 .PARAMETER OSEdition
     Edition of Windows to install (e.g. 'Enterprise', 'Pro', 'Home'). Affects edition mapping and activation
@@ -83,7 +83,7 @@
     Interactive: choose image and options via menus.
 
 .EXAMPLE
-    Start-OSDCloud -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us -SkipAutopilot
+    Start-OSDCloud -OSName 'Windows 11 26H2 x64' -OSEdition Enterprise -OSLanguage en-us -SkipAutopilot
     Non-interactive: specify OS selection and suppress autopilot.
 
 .EXAMPLE
@@ -143,6 +143,7 @@ function Start-OSDCloud {
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
+            'Windows 11 26H2 x64',
             'Windows 11 25H2 x64',
             'Windows 11 24H2 x64',
             'Windows 11 23H2 x64',
@@ -160,7 +161,7 @@ function Start-OSDCloud {
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('25H2','24H2','23H2','22H2')]
+        [ValidateSet('26H2','25H2','24H2','23H2','22H2')]
         [Alias('Build')]
         [System.String]
         $OSBuild,
@@ -238,7 +239,7 @@ function Start-OSDCloud {
         ImageFileSource = $null
         ImageFileDestination = $null
         ImageFileUrl = $ImageFileUrl
-        IsOnBattery = Get-OSDGather -Property IsOnBattery
+        IsOnBattery = Test-OSDIsOnBattery
         Manufacturer = $Manufacturer
         MSCatalogFirmware = $false
         MSCatalogDiskDrivers = $true
@@ -262,7 +263,7 @@ function Start-OSDCloud {
         OSLanguageNames = $null
         OSName = $OSName
         OSNameMenu = $null
-        OSNames = @('Windows 11 25H2 x64', 'Windows 11 24H2 x64', 'Windows 11 23H2 x64', 'Windows 11 22H2 x64', 'Windows 10 22H2 x64')
+        OSNames = @('Windows 11 26H2 x64', 'Windows 11 25H2 x64', 'Windows 11 24H2 x64', 'Windows 11 23H2 x64', 'Windows 11 22H2 x64', 'Windows 10 22H2 x64')
         OSVersion = $OSVersion
         OSVersionMenu = $null
         OSVersionNames = @('Windows 11','Windows 10')
@@ -414,7 +415,7 @@ function Start-OSDCloud {
         if ($Global:StartOSDCloud.OSName) {
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSName = 'Windows 11 25H2 x64'
+            $Global:StartOSDCloud.OSName = 'Windows 11 26H2 x64'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -453,7 +454,7 @@ function Start-OSDCloud {
         elseif ($Global:StartOSDCloud.ZTI) {
             $Global:StartOSDCloud.OSVersion = 'Windows 11'
         }
-        elseif ($Global:StartOSDCloud.OSBuild -match "25H2|24H2|23H2") {
+        elseif ($Global:StartOSDCloud.OSBuild -match "26H2|25H2|24H2|23H2") {
             # We know the OSVersion already if using one of these
             $Global:StartOSDCloud.OSVersion = 'Windows 11'
         }
@@ -490,12 +491,12 @@ function Start-OSDCloud {
         if ($Global:StartOSDCloud.OSBuild) {
         }
         elseif ($Global:StartOSDCloud.ZTI) {
-            $Global:StartOSDCloud.OSBuild = '25H2'
+            $Global:StartOSDCloud.OSBuild = '26H2'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
             Write-Host -ForegroundColor Cyan "[$(Get-Date -format s)] Select a Build for $OSVersion x64"
-            $Global:StartOSDCloud.OSBuildNames = @('25H2','24H2','23H2','22H2')
+            $Global:StartOSDCloud.OSBuildNames = @('26H2','25H2','24H2','23H2','22H2')
 
             $i = $null
             $Global:StartOSDCloud.OSBuildMenu = foreach ($Item in $Global:StartOSDCloud.OSBuildNames) {

@@ -12,6 +12,9 @@ function Initialize-ModuleCoreDriverPacks {
     The device manufacturer name. Defaults to the value from $global:OSDCoreDevice.OSDManufacturer.
     Supported values: Dell, HP, Lenovo, Microsoft, or any other value will use the Default catalog.
 
+    .PARAMETER GenericDriverPackJson
+    Path to the bundled generic driver pack catalog used for unsupported manufacturers and architectures.
+
     .PARAMETER ProcessorArchitecture
     The operating system architecture. Defaults to the value from $global:OSDCoreDevice.ProcessorArchitecture.
     Typically 'amd64' or 'arm64'.
@@ -28,7 +31,12 @@ function Initialize-ModuleCoreDriverPacks {
     PS> Initialize-ModuleCoreDriverPacks -OSDManufacturer 'Dell' -ProcessorArchitecture 'amd64'
     Returns driver packs for Dell devices with AMD64 architecture.
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
     .NOTES
+    Author: David Segura - Recast Software
+    2026-09-30 - Added Panasonic routing and core catalog documentation
     Requires manufacturer-specific cmdlets (Get-OSDCoreDriverPackCatalogDell, Get-OSDCoreDriverPackCatalogHP, etc.) to be available.
     #>
     [CmdletBinding()]
@@ -42,6 +50,9 @@ function Initialize-ModuleCoreDriverPacks {
         [System.String]$ProcessorArchitecture = $env:PROCESSOR_ARCHITECTURE
     )
 
+    $Error.Clear()
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
+
     # Load Generic driver pack catalog for fallback
     $GenericCatalog = Get-Content -Path $GenericDriverPackJson -Raw | ConvertFrom-Json
 
@@ -51,6 +62,7 @@ function Initialize-ModuleCoreDriverPacks {
             'HP' { Get-OSDCoreDriverPackCatalogHP }
             'Lenovo' { Get-OSDCoreDriverPackCatalogLenovo }
             'Microsoft' { Get-OSDCoreDriverPackCatalogSurface }
+            'Panasonic' { Get-OSDCoreDriverPackCatalogPanasonic }
             default { $GenericCatalog }
         }
     }
@@ -62,4 +74,6 @@ function Initialize-ModuleCoreDriverPacks {
     }
 
     $DriverPackValues | Where-Object { $_.OSArchitecture -eq $ProcessorArchitecture }
+
+    Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
 }
