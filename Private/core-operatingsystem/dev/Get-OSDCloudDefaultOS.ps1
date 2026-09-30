@@ -4,7 +4,7 @@ function Get-OSDCloudDefaultOS {
     Gets the default OSDCloud operating system record for the current context.
 
     .DESCRIPTION
-    Retrieves operating system records from Get-OSDCloudCoreOperatingSystems and
+    Retrieves operating system records from Get-OSDCoreOperatingSystems and
     applies architecture and language preference filters to select a single default
     record. Language preference order is:
     1) $global:OSDCLOUD_OSLANGUAGECODE
@@ -71,7 +71,7 @@ function Get-OSDCloudDefaultOS {
         FilePath        : http://dl.delivery.mp.microsoft.com/filestreamingservice/files/79a3f5e0-d04d-4689-a5d4-3ea35f8b189a/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_x64FRE_en-gb.esd
     #>
 
-    $records = Get-OSDCloudCoreOperatingSystems
+    $records = Get-OSDCoreOperatingSystems
     #=================================================
     # Limit the results based on $env:PROCESSOR_ARCHITECTURE
     $ProcessorArchitecture = $env:PROCESSOR_ARCHITECTURE
