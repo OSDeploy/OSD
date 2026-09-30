@@ -264,7 +264,7 @@ function Show-PowershellWindow() {
 if (Test-WebConnection -Uri "google.com") {
     $WebConnection = $True
 }
-if ($WebConnection -eq $true){
+if ($WebConnection -eq $true) {
     function Test-HPIASupport {
         $CabPath = "$env:TEMP\platformList.cab"
         $XMLPath = "$env:TEMP\platformList.xml"
@@ -274,25 +274,26 @@ if ($WebConnection -eq $true){
         [xml]$XML = Get-Content $XMLPath
         $Platforms = $XML.ImagePal.Platform.SystemID
         $MachinePlatform = (Get-CimInstance -Namespace root/cimv2 -ClassName Win32_BaseBoard).Product
-        if ($MachinePlatform -in $Platforms){$HPIASupport = $true}
-        else {$HPIASupport = $false}
+        if ($MachinePlatform -in $Platforms) { $HPIASupport = $true }
+        else { $HPIASupport = $false }
         return $HPIASupport
     }
 }
 
 $Manufacturer = (Get-CimInstance -Class:Win32_ComputerSystem).Manufacturer
 $Model = (Get-CimInstance -Class:Win32_ComputerSystem).Model
-if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard"){
+if ($Manufacturer -match "HP" -or $Manufacturer -match "Hewlett-Packard") {
     $Manufacturer = "HP"
-    if ($WebConnection -eq $true){$HPEnterprise = Test-HPIASupport}
-    }
-if ($Manufacturer -match "Microsoft"){
-    if ($Model -eq "Virtual Machine"){
+    if ($WebConnection -eq $true) { $HPEnterprise = Test-HPIASupport }
+}
+if ($Manufacturer -match "Microsoft") {
+    if ($Model -eq "Virtual Machine") {
         $HyperV = $true
     }
 }
-
-if ($HPEnterprise){
+# 26.9.30.1 Removed functionality temporarily
+$HPEnterprise = $false
+if ($HPEnterprise) {
     Install-ModuleHPCMSL
     $TPM = get-HPTPMDetermine
     try {
