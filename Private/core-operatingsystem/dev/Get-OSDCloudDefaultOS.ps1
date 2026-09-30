@@ -68,7 +68,7 @@ function Get-OSDCloudDefaultOS {
         Sha1            :
         Sha256          : 6c5d2f9a2916b3c580bf0f7b510535abfa3f192bdf638910661e343c3c9dd226
         FileName        : 26300.9457.260913-1737.26h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_x64FRE_en-gb.esd
-        FilePath        : http://dl.delivery.mp.microsoft.com/filestreamingservice/files/79a3f5e0-d04d-4689-a5d4-3ea35f8b189a/26200.7462.251207-0044.25h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_x64FRE_en-gb.esd
+        FilePath        : http://dl.delivery.mp.microsoft.com/filestreamingservice/files/2a0e5ba9-88b3-4255-b89c-6aab9dfdc7d0/26300.9457.260913-1737.26h2_ge_release_svc_refresh_CLIENTCONSUMER_RET_x64FRE_en-gb.esd
     #>
 
     $records = Get-OSDCoreOperatingSystems

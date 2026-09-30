@@ -1335,7 +1335,7 @@
                 Initialize-OSDCloudSetupScripts
             }
             catch {
-                Write-Warning "[$(Get-Date -format s)] Expand-WindowsImage failed."
+                Write-Warning "[$(Get-Date -format s)] Expand-WindowsImage or Initialize-OSDCloudSetupScripts failed."
                 Write-Warning "[$(Get-Date -format s)] $_"
                 Write-Warning 'Press Ctrl+C to cancel OSDCloud'
                 Start-Sleep -Seconds 86400

@@ -629,7 +629,7 @@ function Invoke-RecastOSDCloud {
             Initialize-OSDCloudSetupScripts
         }
         catch {
-            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Expand-WindowsImage failed."
+            Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Expand-WindowsImage or Initialize-OSDCloudSetupScripts failed."
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] $_"
             Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Press Ctrl+C to cancel OSDCloud"
             Start-Sleep -Seconds 86400

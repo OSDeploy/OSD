@@ -75,7 +75,7 @@ function Step-OSDCloudExpandWindowsImage {
             Initialize-OSDCloudSetupScripts
         }
         catch {
-            throw "[$(Get-Date -format s)] Expand-WindowsImage failed. $_"
+            throw "[$(Get-Date -format s)] Expand-WindowsImage or Initialize-OSDCloudSetupScripts failed. $_"
         }
 
         if (Test-Path -Path $ImagePath -ErrorAction SilentlyContinue) {

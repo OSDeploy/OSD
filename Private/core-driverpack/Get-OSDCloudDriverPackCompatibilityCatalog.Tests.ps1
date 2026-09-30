@@ -57,6 +57,22 @@ BeforeAll {
     "HashMD5": "FEDCBA9876543210FEDCBA9876543210"
 }
 '@
+    $script:testLegacyDriverPackCatalogJson = @'
+[
+    {
+        "Manufacturer": "Test",
+        "Model": "Test Model",
+        "FileName": "test.cab",
+        "Guid": "11111111-1111-1111-1111-111111111111"
+    },
+    {
+        "Manufacturer": "Test",
+        "Model": "Test Model",
+        "FileName": "test.cab",
+        "Guid": "22222222-2222-2222-2222-222222222222"
+    }
+]
+'@
 }
 
 Describe 'Get-OSDCloudDriverPackCompatibilityCatalog' {
@@ -67,15 +83,25 @@ Describe 'Get-OSDCloudDriverPackCompatibilityCatalog' {
         Mock Get-OSDCoreDriverPackCatalogLenovo { @() }
         Mock Get-OSDCoreDriverPackCatalogPanasonic { @() }
         Mock Get-OSDCoreDriverPackCatalogSurface { @() }
-        Mock Get-Content { $script:testGenericDriverPackJson }
+        Mock Get-Content {
+            if ($LiteralPath -like '*build-driverpacks.json') {
+                $script:testLegacyDriverPackCatalogJson
+            }
+            else {
+                $script:testGenericDriverPackJson
+            }
+        }
     }
 
     It 'reads local core catalogs and returns compatibility objects' {
-        $result = @(Get-OSDCloudDriverPackCompatibilityCatalog -ModuleBase 'C:\OSD')
+        $result = @(Get-OSDCloudDriverPackCompatibilityCatalog -ModuleBase $TestDrive)
 
         $result | Should -HaveCount 2
         $result.Product | Should -Contain 'TEST-01'
         $result.Product | Should -Contain 'GENERIC-01'
+        $testDriverPack = $result | Where-Object { $_.Product -contains 'TEST-01' }
+        $testDriverPack.Guid | Should -Be '11111111-1111-1111-1111-111111111111'
+        $testDriverPack.GuidAliases | Should -Contain '22222222-2222-2222-2222-222222222222'
         Should -Invoke Get-OSDCoreDriverPackCatalogDell -Exactly 1 -ParameterFilter { $LocalOnly }
         Should -Invoke Get-OSDCoreDriverPackCatalogSurface -Exactly 1 -ParameterFilter { $LocalOnly }
     }
@@ -83,7 +109,7 @@ Describe 'Get-OSDCloudDriverPackCompatibilityCatalog' {
     It 'throws when a required core catalog is missing' {
         Mock Test-Path { $false }
 
-        { Get-OSDCloudDriverPackCompatibilityCatalog -ModuleBase 'C:\OSD' } |
+        { Get-OSDCloudDriverPackCompatibilityCatalog -ModuleBase $TestDrive } |
             Should -Throw '*Required driver pack catalog was not found*'
     }
 }

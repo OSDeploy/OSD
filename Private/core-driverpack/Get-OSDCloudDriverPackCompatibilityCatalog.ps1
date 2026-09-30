@@ -58,6 +58,12 @@ function Get-OSDCloudDriverPackCompatibilityCatalog {
 
     $genericCatalogContent = Get-Content -LiteralPath (Join-Path $driverPackCatalogPath 'generic.json') -Raw -ErrorAction Stop
     $genericDriverPacks = $genericCatalogContent | ConvertFrom-Json
+    $legacyDriverPackCatalog = @()
+    $legacyDriverPackCatalogPath = Join-Path -Path $ModuleBase -ChildPath 'cache\driverpack-catalogs\build-driverpacks.json'
+    if (Test-Path -LiteralPath $legacyDriverPackCatalogPath -PathType Leaf) {
+        $legacyCatalogContent = Get-Content -LiteralPath $legacyDriverPackCatalogPath -Raw -ErrorAction Stop
+        $legacyDriverPackCatalog = @($legacyCatalogContent | ConvertFrom-Json)
+    }
 
     $coreDriverPacks = @(
         Get-OSDCoreDriverPackCatalogDell -LocalOnly -LocalDriverPackCatalog (Join-Path $driverPackCatalogPath 'dell.xml') 6>$null
@@ -71,7 +77,7 @@ function Get-OSDCloudDriverPackCompatibilityCatalog {
     )
 
     $coreDriverPacks |
-        ConvertTo-OSDCloudDriverPack |
+        ConvertTo-OSDCloudDriverPack -LegacyDriverPackCatalog $legacyDriverPackCatalog |
         Sort-Object -Property Manufacturer, Model, Name
 
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"

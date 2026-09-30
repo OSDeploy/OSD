@@ -55,6 +55,7 @@ BeforeAll {
             OSArchitecture = 'amd64'
             HashMD5        = 'FEDCBA9876543210FEDCBA9876543210'
             Guid           = '22222222-2222-2222-2222-222222222222'
+            GuidAliases    = @('33333333-3333-3333-3333-333333333333')
         }
     )
 }
@@ -87,6 +88,21 @@ Describe 'OSDCloud driver pack public compatibility' {
         }
 
         Save-OSDCloudDriverPack -Guid '22222222-2222-2222-2222-222222222222' -DownloadPath $TestDrive
+
+        Should -Invoke Save-WebFile -Exactly 1 -ParameterFilter {
+            $SourceUrl -eq 'https://example.test/test-25h2.cab' -and
+            $DestinationName -eq 'test-25h2.cab'
+        }
+    }
+
+    It 'uses legacy GUID aliases when saving a driver pack' {
+        Mock Block-WindowsVersionNe10 {}
+        Mock Save-WebFile {
+            New-Item -Path $DestinationDirectory -ItemType Directory -Force | Out-Null
+            New-Item -Path (Join-Path $DestinationDirectory $DestinationName) -ItemType File -Force | Out-Null
+        }
+
+        Save-OSDCloudDriverPack -Guid '33333333-3333-3333-3333-333333333333' -DownloadPath $TestDrive
 
         Should -Invoke Save-WebFile -Exactly 1 -ParameterFilter {
             $SourceUrl -eq 'https://example.test/test-25h2.cab' -and
