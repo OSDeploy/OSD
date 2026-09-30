@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Added OSDCloud `FilePath` support to `Test-OSDCoreOperatingSystemCloudObject` without changing its Boolean output contract.
 - Made bundled operating-system catalogs win equal-revision ties while retaining newer ProgramData and mounted-drive overlays.
 - Updated `Get-OSDCoreOperatingSystems` to share one implementation with RecastOSDCloud while retaining OSD's existing public property schema.
+- Migrated public driver pack discovery to the bundled `core/driverpacks` catalogs while retaining the existing public object properties and GUID-based selection.
 - Updated device initialization and default operating-system resolution to use the unified operating-system provider.
 - Refreshed the Dell, HP, Lenovo, and Microsoft Surface driver pack catalogs.
 - Reformatted legacy OSDCloud GUI hardware detection and temporarily disabled HP Enterprise HPIA and TPM setup.
@@ -33,6 +34,7 @@ All notable changes to this project will be documented in this file.
 
 - Removed the redundant private `Get-OSDCloudCoreOperatingSystems` provider after migrating its callers to the unified function.
 - Removed the legacy Surface XML driver pack snapshot now superseded by `surface.json`.
+- Removed the duplicate legacy driver pack source catalogs under `catalogs/driverpack`; retained generated cache artifacts as unreferenced historical data.
 - Removed the legacy `Invoke-OSDCoreDownloadFile` command name.
 
 ## 26.9.8.1 - September 8, 2026

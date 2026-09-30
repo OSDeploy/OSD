@@ -6,9 +6,10 @@ function Step-OSDCloudExpandWindowsImage {
     .DESCRIPTION
     Creates a temporary scratch directory, builds parameters from the active
     OSDCloud deployment context, and applies the selected Windows image to C:\.
-    In WinPE, the function runs Expand-WindowsImage, removes the source image
-    file after a successful apply, and then removes the scratch directory when
-    the operation completes.
+    In WinPE, the function runs Expand-WindowsImage, initializes
+    SetupComplete.cmd and OOBE.cmd, removes the source image file after a
+    successful apply, and then removes the scratch directory when the operation
+    completes.
 
     .EXAMPLE
     Step-OSDCloudExpandWindowsImage
@@ -22,6 +23,7 @@ function Step-OSDCloudExpandWindowsImage {
     2026-07-17 - Added comment-based help block
     2026-07-17 - Improved input validation and scratch directory lifecycle handling
     2026-07-17 - Remove source image file after successful expansion
+    2026-09-30 - Initialize Windows setup command files after expansion
     #>
     [CmdletBinding()]
     param ()
@@ -70,6 +72,7 @@ function Step-OSDCloudExpandWindowsImage {
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Expand WindowsImage to C:\"
         try {
             Expand-WindowsImage @ExpandWindowsImageParams | Out-Null
+            Initialize-OSDCloudSetupScripts
         }
         catch {
             throw "[$(Get-Date -format s)] Expand-WindowsImage failed. $_"

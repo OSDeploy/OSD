@@ -626,6 +626,7 @@ function Invoke-RecastOSDCloud {
         try {
             Write-DarkGrayHost -Message 'Expand-WindowsImage'
             Expand-WindowsImage @ExpandWindowsImage
+            Initialize-OSDCloudSetupScripts
         }
         catch {
             Write-Host -ForegroundColor Yellow "[$(Get-Date -format s)] Expand-WindowsImage failed."

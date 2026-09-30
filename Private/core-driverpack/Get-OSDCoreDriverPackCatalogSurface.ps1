@@ -46,7 +46,12 @@ function Get-OSDCoreDriverPackCatalogSurface {
         Objects with CatalogVersion, ReleaseDate, Name, Manufacturer, Model, SystemId, FileName,
         Url, OperatingSystem, OSArchitecture, and HashMD5 properties.
 
+    .LINK
+        https://github.com/OSDeploy/OSD/tree/master/docs
+
     .NOTES
+        Author: David Segura - Recast Software
+        2026-09-30 - Ensured LocalOnly bypasses and does not rewrite the temp cache
         Base catalog: core/driverpacks/surface.json (bundled with the module)
         Temp cache:   $env:TEMP\osdcloud-driverpack-surface.json
     #>
@@ -72,7 +77,7 @@ function Get-OSDCoreDriverPackCatalogSurface {
         #=================================================
         # Load from temp cache if available
         $useCache = $false
-        if ((-not $Force) -and (Test-Path $tempCatalogPath)) {
+        if ((-not $LocalOnly) -and (-not $Force) -and (Test-Path $tempCatalogPath)) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Indexing $tempCatalogPath"
             $JsonCatalogContent = Get-Content -Path $tempCatalogPath -Raw -Encoding UTF8 | ConvertFrom-Json
             $useCache = $true
@@ -99,6 +104,12 @@ function Get-OSDCoreDriverPackCatalogSurface {
         #=================================================
         if ($useCache) {
             Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Returning $($JsonCatalogContent.Count) entries from cache"
+            $JsonCatalogContent
+            return
+        }
+
+        if ($LocalOnly) {
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Returning $($JsonCatalogContent.Count) entries from the bundled catalog"
             $JsonCatalogContent
             return
         }

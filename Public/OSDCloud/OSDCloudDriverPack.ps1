@@ -68,22 +68,25 @@ function Get-OSDCloudDriverPacks {
     Returns the DriverPacks used by OSDCloud
 
     .DESCRIPTION
-    Returns the DriverPacks used by OSDCloud
+    Returns the DriverPacks used by OSDCloud. Driver pack metadata is read from the
+    bundled core\driverpacks catalogs and projected to the legacy public property schema.
 
     .EXAMPLE
     Get-OSDCloudDriverPacks
     Returns all OSDCloud driver packs from the module catalog.
 
+    .LINK
+    https://github.com/OSDeploy/OSD/tree/master/docs
+
     .NOTES
     Author: David Segura - Recast Software
     2026-07-10 - Added NOTES and EXAMPLE to align with OSD help standards.
-
-    .LINK
-    https://github.com/OSDeploy/OSD/tree/master/docs
+    2026-09-30 - Migrated the data source to core driver pack catalogs.
     #>
     [CmdletBinding()]
     param ()
-    $Results = Import-Clixml -Path "$(Get-OSDModulePath)\cache\driverpack-catalogs\build-driverpacks.xml"
+    $Error.Clear()
+    $Results = Get-OSDCloudDriverPackCompatibilityCatalog
     $Results
 }
 function Save-OSDCloudDriverPack {
