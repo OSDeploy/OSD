@@ -31,7 +31,7 @@
     Enables zero-touch mode and suppresses disk wipe prompts.
 
     .PARAMETER OSName
-    Default parameter set OS selection, for example 'Windows 11 25H2 x64'.
+    Default parameter set OS selection, for example 'Windows 11 26H2 x64'.
 
     .PARAMETER OSVersion
     Legacy parameter set operating system family.
@@ -62,7 +62,7 @@
     Starts OSDCloud CLI interactively.
 
     .EXAMPLE
-    Start-OSDCloudCLI -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us
+    Start-OSDCloudCLI -OSName 'Windows 11 26H2 x64' -OSEdition Enterprise -OSLanguage en-us
     Starts OSDCloud CLI with explicit OS selections.
 
     .NOTES
@@ -111,6 +111,7 @@
 
         [Parameter(ParameterSetName = 'Default')]
         [ValidateSet(
+            'Windows 11 26H2 x64',
             'Windows 11 25H2 x64',
             'Windows 11 24H2 x64',
             'Windows 11 23H2 x64',
@@ -128,7 +129,7 @@
         #Operating System Build of the Windows installation
         #Alias = Build
         [Parameter(ParameterSetName = 'Legacy')]
-        [ValidateSet('25H2','24H2','23H2','22H2')]
+        [ValidateSet('26H2','25H2','24H2','23H2','22H2')]
         [Alias('Build','OSBuild')]
         [System.String]
         $OSReleaseID,
@@ -350,7 +351,7 @@
             #Do nothing
         }
         elseif ($Global:StartOSDCloudCLI.ZTI) {
-            $Global:StartOSDCloudCLI.OSName = 'Windows 11 25H2 x64'
+            $Global:StartOSDCloudCLI.OSName = 'Windows 11 26H2 x64'
         }
         else {
             Write-Host -ForegroundColor DarkGray "========================================================================="
@@ -386,6 +387,9 @@
         }
         $OSVersion = $Global:StartOSDCloudCLI.OSVersion
 
+        if ($OSName -match '26H2') {
+            $Global:StartOSDCloudCLI.OSReleaseID = '26H2'
+        }
         if ($OSName -match '25H2') {
             $Global:StartOSDCloudCLI.OSReleaseID = '25H2'
         }

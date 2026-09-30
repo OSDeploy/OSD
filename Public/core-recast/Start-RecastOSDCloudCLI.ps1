@@ -73,9 +73,9 @@ function Start-RecastOSDCloudCLI {
 
         [Parameter(Mandatory = $false, HelpMessage = 'Operating system release identifier for deployment selection.')]
         [ValidateNotNullOrEmpty()]
-        [ValidateSet('25H2','24H2','23H2','22H2','21H2')]
+        [ValidateSet('26H2','25H2','24H2','23H2','22H2','21H2')]
         [string]
-        $OSReleaseID = '25H2',
+        $OSReleaseID = '26H2',
 
         [Parameter(Mandatory = $false, HelpMessage = 'Operating system language code for deployment selection.')]
         [ValidateNotNullOrEmpty()]

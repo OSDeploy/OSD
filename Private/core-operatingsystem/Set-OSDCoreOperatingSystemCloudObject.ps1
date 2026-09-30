@@ -29,8 +29,8 @@ function Set-OSDCoreOperatingSystemCloudObject {
     system catalog provider before filtering.
 
     .EXAMPLE
-    Set-OSDCoreOperatingSystemCloudObject -OSArchitecture amd64 -OSReleaseID 25H2 -OSLanguageCode en-us
-    Selects the latest Windows 11 Retail amd64 en-us 25H2 catalog entry and sets
+    Set-OSDCoreOperatingSystemCloudObject -OSArchitecture amd64 -OSReleaseID 26H2 -OSLanguageCode en-us
+    Selects the latest Windows 11 Retail amd64 en-us 26H2 catalog entry and sets
     $global:OSDCoreOperatingSystemCloudObject.
 
     .EXAMPLE

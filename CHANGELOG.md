@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Module version bumped to `26.9.30.1` and the module description updated to identify the Windows 11 26H2 GA release.
 - Renamed bundled operating-system catalogs to include their build and media release timestamp.
 - Updated operating-system selection to normalize x64 input, refresh incompatible cached object shapes, and select the highest native build property.
+- Expanded active OSDCloud deployment, media, feature-update, USB, and GUI/CLI defaults and selectors to Windows 11 26H2.
 - Added OSDCloud `FilePath` support to `Test-OSDCoreOperatingSystemCloudObject` without changing its Boolean output contract.
 - Made bundled operating-system catalogs win equal-revision ties while retaining newer ProgramData and mounted-drive overlays.
 - Updated `Get-OSDCoreOperatingSystems` to share one implementation with RecastOSDCloud while retaining OSD's existing public property schema.

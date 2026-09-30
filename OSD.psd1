@@ -7,7 +7,7 @@
 @{
     # --- Identity ---
     RootModule           = 'OSD.psm1'
-    ModuleVersion        = '26.9.30.1'
+    ModuleVersion        = '26.9.30'
     CompatiblePSEditions = @('Core', 'Desktop')
     GUID                 = '9fe5b9b6-0224-4d87-9018-a8978529f6f5'
 
@@ -414,7 +414,8 @@ Windows 11 26H2 GA Release
             LicenseUri   = 'https://github.com/OSDeploy/OSD/blob/master/LICENSE'
             ProjectUri   = 'https://github.com/OSDeploy/OSD'
             IconUri      = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/OSD.png'
-            ReleaseNotes = 'https://osd.osdeploy.com'
+            ReleaseNotes = 'https://www.osdeploy.com'
+            Prerelease   = 'preview'
         }
     }
 }
