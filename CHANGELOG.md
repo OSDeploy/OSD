@@ -2,18 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
-## 26.9.30.1 - September 30, 2026
+## 26.9.30-preview - September 30, 2026
 
 ### Added
 
+- Added native Windows battery-power detection through `Test-OSDIsOnBattery`.
 - Added centralized Windows build conversion for operating-system name and release metadata.
 - Added the private validated operating-system catalog refresh implementation synchronized from RecastOSDCloud.
 - Added a read-only GitHub Actions workflow that detects operating-system parity drift against RecastOSDCloud.
 - Added Windows 11 25H2 catalog snapshots for builds `26200.8653`, `26200.8873`, and `26200.9457`, plus Windows 11 26H2 build `26300.9457`.
+- Added OSDCore cache initialization and USB cache inventory refresh after operating-system and driver-pack downloads.
+- Added driver-pack compatibility conversion and catalog aggregation helpers with tests for schema conversion, catalog compatibility, and public OSDCloud driver-pack behavior.
+- Added setup-script initialization that preserves existing `SetupComplete.cmd` and `OOBE.cmd` content while appending OSDCloud markers, with test coverage.
 
 ### Changed
 
-- Module version bumped to `26.9.30.1` and the module description updated to identify the Windows 11 26H2 GA release.
+- Module version updated to `26.9.30-preview`, marked as a prerelease, and the module description updated to identify the Windows 11 26H2 GA release.
+- Replaced legacy `Get-OSDGather` battery checks across OSDCloud entry points with the Boolean `Test-OSDIsOnBattery` helper.
 - Renamed bundled operating-system catalogs to include their build and media release timestamp.
 - Updated operating-system selection to normalize x64 input, refresh incompatible cached object shapes, and select the highest native build property.
 - Expanded active OSDCloud deployment, media, feature-update, USB, and GUI/CLI defaults and selectors to Windows 11 26H2.
@@ -21,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Made bundled operating-system catalogs win equal-revision ties while retaining newer ProgramData and mounted-drive overlays.
 - Updated `Get-OSDCoreOperatingSystems` to share one implementation with RecastOSDCloud while retaining OSD's existing public property schema.
 - Migrated public driver pack discovery to the bundled `core/driverpacks` catalogs while retaining the existing public object properties and GUID-based selection.
+- Reorganized USB cache helpers under `Private/core-cache`, exported cache inventory to `OSDCoreCache.xml`, and improved cache validation, download hash checks, and progress logging.
 - Updated device initialization and default operating-system resolution to use the unified operating-system provider.
 - Refreshed the Dell, HP, Lenovo, and Microsoft Surface driver pack catalogs.
 - Reformatted legacy OSDCloud GUI hardware detection and temporarily disabled HP Enterprise HPIA and TPM setup.
@@ -34,7 +40,7 @@ All notable changes to this project will be documented in this file.
 
 - Removed the redundant private `Get-OSDCloudCoreOperatingSystems` provider after migrating its callers to the unified function.
 - Removed the legacy Surface XML driver pack snapshot now superseded by `surface.json`.
-- Removed the duplicate legacy driver pack source catalogs under `catalogs/driverpack`; retained generated cache artifacts as unreferenced historical data.
+- Removed the duplicate Dell, HP, Lenovo, Microsoft, default, and Panasonic driver pack source catalogs under `catalogs/driverpack`; retained generated cache artifacts as unreferenced historical data.
 - Removed the legacy `Invoke-OSDCoreDownloadFile` command name.
 
 ## 26.9.8.1 - September 8, 2026
