@@ -677,19 +677,8 @@ function Initialize-OSDCoreDevice {
     }
     #=================================================
     # OSDCoreOperatingSystems
-    # Select the provider that exists in the current module context.
-    $ModuleName = $($MyInvocation.MyCommand.Module.Name)
-    if ($ModuleName -eq 'OSD') {
-        $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems |
-            Where-Object { $_.Architecture -match "$ProcessorArchitecture" }
-    }
-    elseif ($ModuleName -eq 'OSDCloud') {
-        $global:OSDCoreOperatingSystems = Get-OSDCloudCoreOperatingSystems |
-            Where-Object { $_.OSArchitecture -match "$ProcessorArchitecture" }
-    }
-    else {
-        throw "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to load core operating systems provider command."
-    }
+    $global:OSDCoreOperatingSystems = Get-OSDCoreOperatingSystems |
+        Where-Object { ($_.Architecture -match "$ProcessorArchitecture") -or ($_.OSArchitecture -match "$ProcessorArchitecture") }
     $null = Set-OSDCoreOperatingSystemCloudObject -OSArchitecture $ProcessorArchitecture
     #=================================================
     # OSDCoreDriverPacks
