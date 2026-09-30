@@ -22,11 +22,17 @@ All notable changes to this project will be documented in this file.
 - Updated device initialization and default operating-system resolution to use the unified operating-system provider.
 - Refreshed the Dell, HP, Lenovo, and Microsoft Surface driver pack catalogs.
 - Reformatted legacy OSDCloud GUI hardware detection and temporarily disabled HP Enterprise HPIA and TPM setup.
+- Unified the shared private core utilities with OSDCloud and renamed the centralized download helper to `Invoke-RecastOSDDownloadFile`.
+
+### Fixed
+
+- Corrected the shared download helper's forced WebClient path so it no longer overwrites the typed switch parameter.
 
 ### Removed
 
 - Removed the redundant private `Get-OSDCloudCoreOperatingSystems` provider after migrating its callers to the unified function.
 - Removed the legacy Surface XML driver pack snapshot now superseded by `surface.json`.
+- Removed the legacy `Invoke-OSDCoreDownloadFile` command name.
 
 ## 26.9.8.1 - September 8, 2026
 

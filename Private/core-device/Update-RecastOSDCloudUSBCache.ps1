@@ -312,7 +312,7 @@ function Update-RecastOSDCloudUSBCache {
                         (New-Object System.Management.Automation.Host.ChoiceDescription '&No', 'Skip the OperatingSystem download.')
                     )
                     if ($downloadOperatingSystem -and ($host.UI.PromptForChoice($caption, $message, $choices, 1) -eq 0)) {
-                        $savedOperatingSystem = Invoke-OSDCoreDownloadFile -SourceUrl $global:OSDCoreOperatingSystemCloudObject.Url -DestinationDirectory $osdCoreOperatingSystemDestination -DestinationName $global:OSDCoreOperatingSystemCloudObject.FileName -ErrorAction Stop
+                        $savedOperatingSystem = Invoke-RecastOSDDownloadFile -SourceUrl $global:OSDCoreOperatingSystemCloudObject.Url -DestinationDirectory $osdCoreOperatingSystemDestination -DestinationName $global:OSDCoreOperatingSystemCloudObject.FileName -ErrorAction Stop
 
                         # Verify the downloaded payload before refreshing the cache inventory.
                         if (-not [string]::IsNullOrWhiteSpace($expectedOperatingSystemHash)) {
@@ -419,7 +419,7 @@ function Update-RecastOSDCloudUSBCache {
                         (New-Object System.Management.Automation.Host.ChoiceDescription '&No', 'Skip the driver pack download.')
                     )
                     if ($downloadDriverPack -and ($host.UI.PromptForChoice($caption, $message, $choices, 1) -eq 0)) {
-                        $savedDriverPack = Invoke-OSDCoreDownloadFile -SourceUrl $global:OSDCoreDriverPackCloudObject.Url -DestinationDirectory $osdCoreDriverPackDestination -DestinationName $global:OSDCoreDriverPackCloudObject.FileName -ErrorAction Stop
+                        $savedDriverPack = Invoke-RecastOSDDownloadFile -SourceUrl $global:OSDCoreDriverPackCloudObject.Url -DestinationDirectory $osdCoreDriverPackDestination -DestinationName $global:OSDCoreDriverPackCloudObject.FileName -ErrorAction Stop
 
                         # Verify the downloaded driver pack before refreshing the cache inventory.
                         if (-not [string]::IsNullOrWhiteSpace($expectedDriverPackHashMD5)) {
