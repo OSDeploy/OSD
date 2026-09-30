@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## 26.9.30.1 - September 30, 2026
+
+### Added
+
+- Added centralized Windows build conversion for operating-system name and release metadata.
+- Added the private validated operating-system catalog refresh implementation synchronized from RecastOSDCloud.
+- Added a read-only GitHub Actions workflow that detects operating-system parity drift against RecastOSDCloud.
+- Added Windows 11 25H2 catalog snapshots for builds `26200.8653`, `26200.8873`, and `26200.9457`, plus Windows 11 26H2 build `26300.9457`.
+
+### Changed
+
+- Module version bumped to `26.9.30.1` and the module description updated to identify the Windows 11 26H2 GA release.
+- Renamed bundled operating-system catalogs to include their build and media release timestamp.
+- Updated operating-system selection to normalize x64 input, refresh incompatible cached object shapes, and select the highest native build property.
+- Added OSDCloud `FilePath` support to `Test-OSDCoreOperatingSystemCloudObject` without changing its Boolean output contract.
+- Made bundled operating-system catalogs win equal-revision ties while retaining newer ProgramData and mounted-drive overlays.
+- Updated `Get-OSDCoreOperatingSystems` to share one implementation with RecastOSDCloud while retaining OSD's existing public property schema.
+- Updated device initialization and default operating-system resolution to use the unified operating-system provider.
+- Refreshed the Dell, HP, Lenovo, and Microsoft Surface driver pack catalogs.
+- Reformatted legacy OSDCloud GUI hardware detection and temporarily disabled HP Enterprise HPIA and TPM setup.
+
+### Removed
+
+- Removed the redundant private `Get-OSDCloudCoreOperatingSystems` provider after migrating its callers to the unified function.
+- Removed the legacy Surface XML driver pack snapshot now superseded by `surface.json`.
+
 ## 26.9.8.1 - September 8, 2026
 
 ### Changed

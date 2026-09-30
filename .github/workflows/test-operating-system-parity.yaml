@@ -1,0 +1,30 @@
+name: Test Operating System Parity
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout OSD
+        uses: actions/checkout@v5
+        with:
+          path: OSD
+
+      - name: Checkout RecastOSDCloud
+        uses: actions/checkout@v5
+        with:
+          repository: RecastSoftware/RecastOSDCloud
+          path: RecastOSDCloud
+
+      - name: Check operating system parity
+        shell: pwsh
+        run: |
+          & '.\RecastOSDCloud\.github\scripts\Sync-OSDOperatingSystemParity.ps1' `
+              -DestinationRepositoryPath '.\OSD' `
+              -Check
