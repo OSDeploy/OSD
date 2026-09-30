@@ -72,7 +72,7 @@
         DriverPacks                 = [array](Get-OSDCloudDriverPacks)
         DriverPackName              = $null
 
-        IsOnBattery                 = [System.Boolean](Get-OSDGather -Property IsOnBattery)
+        IsOnBattery                 = [System.Boolean](Test-OSDIsOnBattery)
 
         OSActivation                = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Activation
         OSEdition                   = [System.String]$Global:OSDModuleResource.OSDCloud.Default.Edition

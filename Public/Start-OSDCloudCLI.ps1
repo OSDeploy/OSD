@@ -199,7 +199,7 @@
         ImageFileItem = $null
         ImageFileName = $null
         ImageFileUrl = $ImageFileUrl
-        IsOnBattery = Get-OSDGather -Property IsOnBattery
+        IsOnBattery = Test-OSDIsOnBattery
         MSCatalogDiskDrivers = $true
         MSCatalogFirmware = $true
         MSCatalogNetDrivers = $true

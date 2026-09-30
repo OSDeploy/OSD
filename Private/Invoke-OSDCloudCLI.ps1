@@ -85,7 +85,7 @@
         ImageFileDestinationSHA1 = $null
         ImageFileUrl = $null
         ImageFileSHA1 = $null
-        IsOnBattery = $(Get-OSDGather -Property IsOnBattery)
+        IsOnBattery = $(Test-OSDIsOnBattery)
         IsTest = ($env:SystemDrive -ne 'X:')
         IsVirtualMachine = $(Test-IsVM)
         IsWinPE = ($env:SystemDrive -eq 'X:')
