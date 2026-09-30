@@ -2,34 +2,29 @@ name: Test Operating System Parity
 
 on:
   workflow_dispatch:
-  # pull_request:
-  #   paths:
-  #     - '.github/workflows/test-operating-system-parity.yaml'
-  #     - 'Private/core-operatingsystem/**'
-  #     - 'Private/core/Test-OSDCoreOperatingSystemCloudObject.ps1'
-  #     - 'Public/OSDCloudTS/Get-OSDCloudOperatingSystems.ps1'
-  #     - 'core/operatingsystems/**'
-  #     - 'tests/core-operatingsystem/**'
 
 permissions:
   contents: read
 
 jobs:
-  test:
+  check:
     runs-on: windows-latest
 
     steps:
       - name: Checkout OSD
         uses: actions/checkout@v5
+        with:
+          path: OSD
 
-      - name: Test with Windows PowerShell 5.1
-        shell: powershell
-        run: |
-          Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Force -SkipPublisherCheck
-          Invoke-Pester -Path '.\tests\core-operatingsystem' -Output Detailed
+      - name: Checkout RecastOSDCloud
+        uses: actions/checkout@v5
+        with:
+          repository: RecastSoftware/RecastOSDCloud
+          path: RecastOSDCloud
 
-      - name: Test with PowerShell 7
+      - name: Check operating system parity
         shell: pwsh
         run: |
-          Install-Module Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Force -SkipPublisherCheck
-          Invoke-Pester -Path '.\tests\core-operatingsystem' -Output Detailed
+          & '.\RecastOSDCloud\.github\scripts\Sync-OSDOperatingSystemParity.ps1' `
+              -DestinationRepositoryPath '.\OSD' `
+              -Check
