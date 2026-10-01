@@ -6,11 +6,11 @@ function Initialize-ModuleCoreDriverPacks {
     .DESCRIPTION
     Gets driver pack catalogs based on the device manufacturer and OS architecture. For AMD64 architecture,
     manufacturer-specific catalogs are loaded. For ARM64 and other architectures, the default catalog is returned.
-    Supports Dell, HP, Lenovo, Microsoft (Surface), and generic devices.
+    Supports Dell, HP, Lenovo, Microsoft (Surface), Panasonic, and generic devices.
 
     .PARAMETER OSDManufacturer
     The device manufacturer name. Defaults to the value from $global:OSDCoreDevice.OSDManufacturer.
-    Supported values: Dell, HP, Lenovo, Microsoft, or any other value will use the Default catalog.
+    Supported values: Dell, HP, Lenovo, Microsoft, Panasonic, or any other value will use the Default catalog.
 
     .PARAMETER GenericDriverPackJson
     Path to the bundled generic driver pack catalog used for unsupported manufacturers and architectures.

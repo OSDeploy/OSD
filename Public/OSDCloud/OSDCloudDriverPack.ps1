@@ -144,7 +144,7 @@ function Save-OSDCloudDriverPack {
     }
     process {
         foreach($Item in $Guid) {
-            $DriverPack = $DriverPackList | Where-Object { $_.Guid -eq $Item }
+            $DriverPack = $DriverPackList | Where-Object { $_.Guid -eq $Item -or $_.GuidAliases -contains $Item }
 
             if ($DriverPack) {
                 $OutFile = Join-Path $DownloadPath $DriverPack.FileName

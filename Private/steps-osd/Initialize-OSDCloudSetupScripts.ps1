@@ -37,6 +37,14 @@ function Initialize-OSDCloudSetupScripts {
     $marker = ":: OSDCloud $(Get-Date -format s)"
     foreach ($fileName in @('SetupComplete.cmd', 'OOBE.cmd')) {
         $filePath = Join-Path -Path $scriptsPath -ChildPath $fileName
+        if (Test-Path -LiteralPath $filePath -PathType Leaf -ErrorAction SilentlyContinue) {
+            $existingContent = Get-Content -LiteralPath $filePath -Raw -ErrorAction Stop
+            if ($existingContent.Length -gt 0 -and
+                -not $existingContent.EndsWith("`n") -and
+                -not $existingContent.EndsWith("`r")) {
+                [System.IO.File]::AppendAllText($filePath, [Environment]::NewLine, [System.Text.Encoding]::ASCII)
+            }
+        }
         $marker | Out-File -FilePath $filePath -Append -Encoding ascii -Width 2000 -Force -ErrorAction Stop
     }
 }

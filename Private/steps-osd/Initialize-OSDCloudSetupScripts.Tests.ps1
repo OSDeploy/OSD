@@ -36,6 +36,26 @@ Describe 'Initialize-OSDCloudSetupScripts' {
         $oobeContent[1] | Should -BeLike ':: OSDCloud *'
     }
 
+    It 'starts the marker on a new line when existing files lack a trailing newline' {
+        $scriptsPath = Join-Path -Path $script:windowsPath -ChildPath 'Setup\Scripts'
+        New-Item -Path $scriptsPath -ItemType Directory -Force | Out-Null
+        $setupCompletePath = Join-Path -Path $scriptsPath -ChildPath 'SetupComplete.cmd'
+        $oobePath = Join-Path -Path $scriptsPath -ChildPath 'OOBE.cmd'
+        [System.IO.File]::WriteAllText($setupCompletePath, 'existing setup command', [System.Text.Encoding]::ASCII)
+        [System.IO.File]::WriteAllText($oobePath, 'existing OOBE command', [System.Text.Encoding]::ASCII)
+
+        Initialize-OSDCloudSetupScripts -WindowsPath $script:windowsPath
+
+        $setupCompleteContent = @(Get-Content -Path $setupCompletePath)
+        $oobeContent = @(Get-Content -Path $oobePath)
+        $setupCompleteContent | Should -HaveCount 2
+        $setupCompleteContent[0] | Should -Be 'existing setup command'
+        $setupCompleteContent[1] | Should -BeLike ':: OSDCloud *'
+        $oobeContent | Should -HaveCount 2
+        $oobeContent[0] | Should -Be 'existing OOBE command'
+        $oobeContent[1] | Should -BeLike ':: OSDCloud *'
+    }
+
     It 'writes ASCII content without a byte-order mark' {
         Initialize-OSDCloudSetupScripts -WindowsPath $script:windowsPath
 
