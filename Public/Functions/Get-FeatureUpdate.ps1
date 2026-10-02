@@ -50,6 +50,7 @@ function Get-FeatureUpdate {
     .NOTES
     Author: David Segura - Recast Software
     2026-07-16 - Updated comment-based help to match OSD standards
+    2026-10-02 - Added OSName values used by New-OSDCloudOSWimFile to ValidateSet
     #>
 
     [CmdletBinding()]
@@ -67,8 +68,14 @@ function Get-FeatureUpdate {
             'Windows 11 24H2 arm64',
             'Windows 11 24H2 x64',
             'Windows 11 23H2 amd64',
+            'Windows 11 23H2 arm64',
             'Windows 11 23H2 x64',
+            'Windows 11 22H2 amd64',
+            'Windows 11 22H2 x64',
+            'Windows 11 21H2 amd64',
+            'Windows 11 21H2 x64',
             'Windows 10 22H2 amd64',
+            'Windows 10 22H2 arm64',
             'Windows 10 22H2 x64'
             )]
         [Alias('Name')]
