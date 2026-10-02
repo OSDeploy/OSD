@@ -88,23 +88,33 @@ function New-OSDCloudOSWimFile {
     }
     #>
 
+    # Catalog entry names use amd64 instead of x64 (e.g. 'Windows 11 26H2 amd64 en-us Retail 26300.9457')
+    $OSNameFilter = $OSName -replace '(?i)\bx64$','amd64'
+
     if ($OSName -match "ARM64"){
         $OSArch = 'ARM64'
-        $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64) | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        $OSDCloudOperatingSystem = (Get-OSDCloudOperatingSystems -OSArch ARM64) | Where-Object {$_.Name -match $OSNameFilter} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
         $IndexMap = Get-OSDCloudOperatingSystemsIndexMap -OSArch ARM64 | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
     }
     else {
         $OSArch = 'x64'
-        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems -OSArch x64 | Where-Object {$_.Name -match $OSName} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
+        $OSDCloudOperatingSystem = Get-OSDCloudOperatingSystems -OSArch x64 | Where-Object {$_.Name -match $OSNameFilter} | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
         $IndexMap = Get-OSDCloudOperatingSystemsIndexMap -OSArch x64 | Where-Object {$_.Activation -eq $OSActivation} | Where-Object {$_.Language -eq $OSLanguage}
     }
-    
+    $OSDCloudOperatingSystem = $OSDCloudOperatingSystem | Sort-Object -Property Build -Descending | Select-Object -First 1
+    $IndexMap = $IndexMap | Select-Object -First 1
+
+    if (-not $OSDCloudOperatingSystem){
+        Write-Host -ForegroundColor Red "Unable to find Operating System for $OSName $OSActivation $OSLanguage"
+        throw "Unable to find Operating System for $OSName $OSActivation $OSLanguage"
+    }
+
     $OSEditionID = "$($OSDCloudOperatingSystem.Version) $OSEdition"
     $OSImageIndex = $IndexMap.Indexes.$OSEditionID
 
-    if ($OSImageIndex -eq $null){
+    if ($null -eq $OSImageIndex){
         Write-Host -ForegroundColor Red "Unable to determine OSImageIndex for Index $OSEdition"
-        Write-Host -ForegroundColor Yellow "Available Indexes are $($OSDCloudOperatingSystem.IndexNames.replace($(($OSDCloudOperatingSystem).Version),'') -join ', ')"
+        Write-Host -ForegroundColor Yellow "Available Indexes are $(@($IndexMap.IndexNames) -join ', ')"
         throw "Unable to determine OSImageIndex for $OSName $OSEdition $OSActivation $OSLanguage"
     }
     
