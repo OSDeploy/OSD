@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 26.10.6.1 - October 6, 2026
+
+### Added
+
+- Added dedicated WinPE startup profiles for the OSDCloud CLI and GUI workflows.
+
+### Changed
+
+- Updated the module version to `26.10.6.1` and removed the prerelease designation for the Windows 11 26H2 GA release.
+- Refreshed the module description and release metadata to reflect the current OSDCloud deployment release.
+
+### Fixed
+
+- Fixed `New-OSDCloudOSWimFile` OS lookup failures when targeting x64 deployments.
+
 ## 26.9.30-preview - September 30, 2026
 
 ### Added
