@@ -6,7 +6,7 @@
 
 A PowerShell module for Windows deployment, built around **OSDCloud** — a modern, internet-based OS deployment framework that runs entirely from WinPE.
 
-- **Current repository module version:** `26.9.30-preview`
+- **Current repository module version:** `26.10.6.1`
 - **Author:** David Segura
 - **Project site:** https://osd.osdeploy.com
 - **GitHub:** https://github.com/OSDeploy/OSD
@@ -89,7 +89,7 @@ Boot from the OSDCloud USB drive. From WinPE, launch the deployment:
 Start-OSDCloudGUI
 
 # Command line
-Start-OSDCloud -OSName "Windows 11 24H2 x64" -OSEdition Pro
+Start-OSDCloud -OSName "Windows 11 26H2 x64" -OSEdition Pro
 ```
 
 ---
