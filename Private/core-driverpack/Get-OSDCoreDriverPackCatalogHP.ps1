@@ -139,10 +139,11 @@ function Get-OSDCoreDriverPackCatalogHP {
 
         # Extract catalog version from DateReleased attribute of root element
         $HpCatalogRoot = $XmlCatalogContent.NewDataSet.HPClientDriverPackCatalog
-        if ($HpCatalogRoot -and $HpCatalogRoot.DateReleased) {
+        $dtDateReleased = [datetime]::MinValue
+        if ($HpCatalogRoot -and $HpCatalogRoot.DateReleased -and
+            [datetime]::TryParseExact("$($HpCatalogRoot.DateReleased)".Trim(), 'yyyy-MM-dd', [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$dtDateReleased)) {
             # DateReleased is in format: 2026-06-11
-            $dtDateReleased = [datetime]::ParseExact($HpCatalogRoot.DateReleased, 'yyyy-MM-dd', $null)
-            $CatalogVersion = $dtDateReleased.ToString('yy.MM.dd')
+            $CatalogVersion = $dtDateReleased.ToString('yy.MM.dd', [System.Globalization.CultureInfo]::InvariantCulture)
         } else {
             # Fallback to current date if DateReleased is not available
             $CatalogVersion = Get-Date -Format yy.MM.dd
@@ -167,10 +168,17 @@ function Get-OSDCoreDriverPackCatalogHP {
             $OSVersion = $Item.OSName
             $OSVersion = $OSVersion.Substring($OSVersion.Length - 4)
 
-            $template = "M/d/yyyy hh:mm:ss tt"
-            $timeinfo = $HpSoftPaq.DateReleased
-            $dtReleaseDate = [datetime]::ParseExact($timeinfo, $template, $null)
-            $ReleaseDate = $dtReleaseDate.ToString("yy.MM.dd")
+            # Parse culture-independently (WinPE may use a non-English culture)
+            $Culture = [System.Globalization.CultureInfo]::InvariantCulture
+            $Formats = [string[]]@('M/d/yyyy hh:mm:ss tt', 'M/d/yyyy h:mm:ss tt', 'M/d/yyyy', 'yyyy-MM-dd', 'yyyy-MM-ddTHH:mm:ss', 'yyyy-MM-dd HH:mm:ss')
+            $timeinfo = "$($HpSoftPaq.DateReleased)".Trim()
+            $dtReleaseDate = [datetime]::MinValue
+            if (-not [datetime]::TryParseExact($timeinfo, $Formats, $Culture, [System.Globalization.DateTimeStyles]::None, [ref]$dtReleaseDate) -and
+                -not [datetime]::TryParse($timeinfo, $Culture, [System.Globalization.DateTimeStyles]::None, [ref]$dtReleaseDate)) {
+                Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Unable to parse DateReleased '$timeinfo' for SoftPaq $($Item.SoftPaqId)"
+                $dtReleaseDate = [datetime]::MinValue
+            }
+            $ReleaseDate = $dtReleaseDate.ToString('yy.MM.dd', $Culture)
 
             # Handle null SystemId
             $SystemIds = if ($Item.SystemId) {

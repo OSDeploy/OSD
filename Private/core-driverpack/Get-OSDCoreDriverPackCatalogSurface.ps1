@@ -271,9 +271,9 @@ function Get-OSDCoreDriverPackCatalogSurface {
                             $now = [datetime]::UtcNow
                             foreach ($m in [regex]::Matches($html, $using:datePattern)) {
                                 try {
-                                    $parsed = [datetime]::ParseExact($m.Groups[1].Value, 'M/d/yyyy', $null)
+                                    $parsed = [datetime]::ParseExact($m.Groups[1].Value, 'M/d/yyyy', [System.Globalization.CultureInfo]::InvariantCulture)
                                     if ($parsed.Year -ge 2015 -and $parsed -le $now.AddMonths(3)) {
-                                        $newDate = $parsed.ToString('yy.MM.dd')
+                                        $newDate = $parsed.ToString('yy.MM.dd', [System.Globalization.CultureInfo]::InvariantCulture)
                                         break
                                     }
                                 }
@@ -349,9 +349,9 @@ function Get-OSDCoreDriverPackCatalogSurface {
                             $now     = [datetime]::UtcNow
                             foreach ($m in [regex]::Matches($html, $datePattern)) {
                                 try {
-                                    $parsed = [datetime]::ParseExact($m.Groups[1].Value, 'M/d/yyyy', $null)
+                                    $parsed = [datetime]::ParseExact($m.Groups[1].Value, 'M/d/yyyy', [System.Globalization.CultureInfo]::InvariantCulture)
                                     if ($parsed.Year -ge 2015 -and $parsed -le $now.AddMonths(3)) {
-                                        $newDate = $parsed.ToString('yy.MM.dd')
+                                        $newDate = $parsed.ToString('yy.MM.dd', [System.Globalization.CultureInfo]::InvariantCulture)
                                         break
                                     }
                                 }
