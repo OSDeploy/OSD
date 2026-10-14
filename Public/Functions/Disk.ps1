@@ -870,8 +870,14 @@ Author: David Segura - Recast Software
     param ()
     #=================================================
     #	Get-OSDDisk
+    #   Hyper-V VM: look for passthrough disks that are likely Offline USB (SSD/NVMe) drives
     #=================================================
-    $GetDisk = Get-OSDDisk -BusType USB
+    if ((Get-CimInstance Win32_ComputerSystem).Model -eq 'Virtual Machine' -and (Get-CimInstance Win32_ComputerSystem).Manufacturer -eq 'Microsoft Corporation') {
+        $GetDisk = Get-OSDDisk -MediaType SSD
+    }
+    else {
+        $GetDisk = Get-OSDDisk -BusType USB
+    }
     #=================================================
     #	Return
     #=================================================
