@@ -6,7 +6,7 @@
 
 A PowerShell module for Windows deployment, built around **OSDCloud** — a modern, internet-based OS deployment framework that runs entirely from WinPE.
 
-- **Current repository module version:** `26.10.6.1`
+- **Current repository module version:** `26.10.16.1`
 - **Author:** David Segura
 - **Project site:** https://osd.osdeploy.com
 - **GitHub:** https://github.com/OSDeploy/OSD

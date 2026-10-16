@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 26.10.16.1 - October 16, 2026
+
+### Added
+
+- Added a Windows 11 26H2 operating system catalog snapshot for build `26300.9711`.
+
+### Changed
+
+- Updated driver pack catalog parsing to handle version and release date formats more reliably across vendor catalogs.
+- Updated the module version to `26.10.16.1`.
+
 ## 26.10.6.1 - October 6, 2026
 
 ### Added
