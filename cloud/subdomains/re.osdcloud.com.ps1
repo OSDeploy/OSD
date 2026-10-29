@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.9.13.1
+.VERSION 26.10.29.1
 .GUID 68790315-3c3f-4a9a-b191-84928e5d6a83
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -19,7 +19,7 @@
 .DESCRIPTION
     PSCloudScript
 .NOTES
-    Version 22.9.13.1
+    Version 26.10.29.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/re.osdcloud.com.ps1
 .EXAMPLE
@@ -32,7 +32,31 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'OSDCloud RE'
-$ScriptVersion = '22.9.13.1'
+$ScriptVersion = '26.10.29.1'
+
+#region Usage
+# Anonymous usage count: one event per run with a random id and no device or user data.
+$global:OSDCloudScriptEventSent = 're.osdcloud.com'
+& {
+    try {
+        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+        $payload = @{
+            api_key    = 'phc_2h7nQJCo41Hc5C64B2SkcEBZOvJ6mHr5xAHZyjPl3ZK'
+            event      = 're.osdcloud.com'
+            properties = @{
+                distinct_id               = [guid]::NewGuid().ToString()
+                '$process_person_profile' = $false
+                '$geoip_disable'          = $true
+            }
+            timestamp  = [datetime]::UtcNow.ToString('o')
+        }
+        Invoke-RestMethod -Method Post -Uri 'https://us.i.posthog.com/capture/' -Body ($payload | ConvertTo-Json -Compress) -ContentType 'application/json' -TimeoutSec 2 -ErrorAction Stop | Out-Null
+    }
+    catch {
+        Write-Verbose "Usage event not sent: $($_.Exception.Message)"
+    }
+}
+#endregion
 #=================================================
 #region Initialize
 

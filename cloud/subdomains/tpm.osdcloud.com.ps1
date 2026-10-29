@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 24.2.24.1
+.VERSION 26.10.29.1
 .GUID 0bf5a9ca-9bc5-4c8a-8e58-b5759c99b33d
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm tpm.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports TPM (Trusted Platform Module)
 .NOTES
-    Version 24.2.24.1
+    Version 26.10.29.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/tpm.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,31 @@ powershell iex (irm tpm.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'tpm.osdcloud.com'
-$ScriptVersion = '24.2.24.1'
+$ScriptVersion = '26.10.29.1'
+
+#region Usage
+# Anonymous usage count: one event per run with a random id and no device or user data.
+$global:OSDCloudScriptEventSent = 'tpm.osdcloud.com'
+& {
+    try {
+        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+        $payload = @{
+            api_key    = 'phc_2h7nQJCo41Hc5C64B2SkcEBZOvJ6mHr5xAHZyjPl3ZK'
+            event      = 'tpm.osdcloud.com'
+            properties = @{
+                distinct_id               = [guid]::NewGuid().ToString()
+                '$process_person_profile' = $false
+                '$geoip_disable'          = $true
+            }
+            timestamp  = [datetime]::UtcNow.ToString('o')
+        }
+        Invoke-RestMethod -Method Post -Uri 'https://us.i.posthog.com/capture/' -Body ($payload | ConvertTo-Json -Compress) -ContentType 'application/json' -TimeoutSec 2 -ErrorAction Stop | Out-Null
+    }
+    catch {
+        Write-Verbose "Usage event not sent: $($_.Exception.Message)"
+    }
+}
+#endregion
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
