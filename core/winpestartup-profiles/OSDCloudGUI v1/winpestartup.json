@@ -1,4 +1,8 @@
 {
+  "env": {
+    "WINPESTARTUP_AUTHOR": "OSDeploy",
+    "WINPESTARTUP_PROFILE": "OSDCloudGUI v1"
+  },
   "Invoke-WinPEStartup:InstallModule": ["OSD"],
   "Invoke-WinPEStartup:InvokeMainCommand": [
     "Show-OSDCloudDeviceInfo",

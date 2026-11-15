@@ -7,7 +7,7 @@ function Get-OSDCoreCacheContent {
         Enumerates mounted file system drives and discovers OSDCloud cache content.
         Returns objects with Type, Name, FullName, SizeMB,
         DriveRoot, VolumeLabel, VolumeUniqueId, and USB properties.
-        Exports the returned object to $env:Temp\OSDCoreCacheContent.xml each time the function runs.
+        Exports the returned object to $env:Temp\OSDCoreCache.xml each time the function runs.
 
         If Type is omitted, retur ns all supported cache content types.
 
@@ -87,7 +87,7 @@ function Get-OSDCoreCacheContent {
 
     $Error.Clear()
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Start"
-    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] OSDCoreCacheContent is updating"
+    # Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] [INFO] OSDCoreCacheContent is updating"
 
     function Get-FileOnlySizeMB {
         param(
@@ -311,7 +311,7 @@ function Get-OSDCoreCacheContent {
     }
 
     $result = @($result | Sort-Object -Property FullName, Type -Unique | Sort-Object -Property FullName)
-    $result | Export-Clixml -Path (Join-Path -Path $env:Temp -ChildPath 'OSDCoreCacheContent.xml') -Force
+    $result | Export-Clixml -Path (Join-Path -Path $env:Temp -ChildPath 'OSDCoreCache.xml') -Force
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Found $($result.Count) path(s)"
     Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] End"
 

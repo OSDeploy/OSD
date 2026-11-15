@@ -54,7 +54,7 @@ Interactive: choose image and options via menus.
 
 ### EXAMPLE 2
 ```
-Start-OSDCloud -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us -SkipAutopilot
+Start-OSDCloud -OSName 'Windows 11 26H2 x64' -OSEdition Enterprise -OSLanguage en-us -SkipAutopilot
 Non-interactive: specify OS selection and suppress autopilot.
 ```
 
@@ -214,7 +214,7 @@ Accept wildcard characters: False
 ```
 
 ### -OSName
-(Default parameter set) A validated OS selection string such as 'Windows 11 25H2 x64'.
+(Default parameter set) A validated OS selection string such as 'Windows 11 26H2 x64'.
 If omitted the
 function prompts interactively (unless ZTI is used which selects sensible defaults).
 
@@ -247,7 +247,7 @@ Accept wildcard characters: False
 ```
 
 ### -OSBuild
-(Legacy parameter set) Operating system build (alias: Build) such as '25H2','24H2','23H2','22H2'.
+(Legacy parameter set) Operating system build (alias: Build) such as '26H2','25H2','24H2','23H2','22H2'.
 
 ```yaml
 Type: String
@@ -393,4 +393,3 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
-

@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 23.6.10.1
+.VERSION 26.10.29.1
 .GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm az.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports the OSDCloud Azure environment
 .NOTES
-    Version 23.6.10.1
+    Version 26.10.29.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/az.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,31 @@ powershell iex (irm az.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'az.osdcloud.com'
-$ScriptVersion = '23.6.10.1'
+$ScriptVersion = '26.10.29.1'
+
+#region Usage
+# Anonymous usage count: one event per run with a random id and no device or user data.
+$global:OSDCloudScriptEventSent = 'az.osdcloud.com'
+& {
+    try {
+        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+        $payload = @{
+            api_key    = 'phc_2h7nQJCo41Hc5C64B2SkcEBZOvJ6mHr5xAHZyjPl3ZK'
+            event      = 'az.osdcloud.com'
+            properties = @{
+                distinct_id               = [guid]::NewGuid().ToString()
+                '$process_person_profile' = $false
+                '$geoip_disable'          = $true
+            }
+            timestamp  = [datetime]::UtcNow.ToString('o')
+        }
+        Invoke-RestMethod -Method Post -Uri 'https://us.i.posthog.com/capture/' -Body ($payload | ConvertTo-Json -Compress) -ContentType 'application/json' -TimeoutSec 2 -ErrorAction Stop | Out-Null
+    }
+    catch {
+        Write-Verbose "Usage event not sent: $($_.Exception.Message)"
+    }
+}
+#endregion
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"

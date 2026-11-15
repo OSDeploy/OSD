@@ -133,7 +133,11 @@ function Get-OSDCoreDriverPackCatalogDell {
 
         #$CatalogVersion = (Get-Date $XmlCatalogContent.DriverPackManifest.version).ToString('yy.MM.dd')
         $RawCatalogVersion = $XmlCatalogContent.DriverPackManifest.version -replace '.00','.01'
-        $CatalogVersion = (Get-Date $RawCatalogVersion).ToString('yy.MM.dd')
+        $dtCatalogVersion = [datetime]::MinValue
+        if (-not [datetime]::TryParse("$RawCatalogVersion", [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$dtCatalogVersion)) {
+            $dtCatalogVersion = Get-Date
+        }
+        $CatalogVersion = $dtCatalogVersion.ToString('yy.MM.dd', [System.Globalization.CultureInfo]::InvariantCulture)
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Catalog version: $CatalogVersion"
 
         $DellDriverPackXml = $XmlCatalogContent.DriverPackManifest.DriverPackage
@@ -165,7 +169,9 @@ function Get-OSDCoreDriverPackCatalogDell {
                 $DriverPackVersion = $null
             }
 
-            $ReleaseDate = Get-Date $Item.dateTime -Format "yy.MM.dd"
+            $dtReleaseDate = [datetime]::MinValue
+            [void][datetime]::TryParse("$($Item.dateTime)", [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$dtReleaseDate)
+            $ReleaseDate = $dtReleaseDate.ToString('yy.MM.dd', [System.Globalization.CultureInfo]::InvariantCulture)
 
             $ObjectProperties = [Ordered]@{
                 CatalogVersion      = $CatalogVersion

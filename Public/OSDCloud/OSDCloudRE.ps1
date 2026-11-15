@@ -267,7 +267,7 @@ function Invoke-OSDCloudRE {
         DownloadFullName = $null
         Function = $MyInvocation.MyCommand.Name
         IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')
-        IsOnBattery = $(Get-OSDGather -Property IsOnBattery)
+        IsOnBattery = $(Test-OSDIsOnBattery)
         IsVirtualMachine = $(Test-IsVM)
         MountDiskImage = $null
         MountDiskImageDriveLetter = $null

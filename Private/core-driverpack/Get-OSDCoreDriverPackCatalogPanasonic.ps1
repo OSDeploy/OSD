@@ -75,7 +75,11 @@ function Get-OSDCoreDriverPackCatalogPanasonic {
         # Build Catalog
         #=================================================
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Building driver pack catalog"
-        $CatalogVersion = Get-Date $JsonCatalogContent.LastDateModified -Format "yy.MM.dd"
+        $dtCatalogVersion = [datetime]::MinValue
+        if (-not [datetime]::TryParse("$($JsonCatalogContent.LastDateModified)", [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$dtCatalogVersion)) {
+            $dtCatalogVersion = Get-Date
+        }
+        $CatalogVersion = $dtCatalogVersion.ToString('yy.MM.dd', [System.Globalization.CultureInfo]::InvariantCulture)
         Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Catalog version: $CatalogVersion"
 
         $ModelList = $JsonCatalogContent.Models
@@ -92,7 +96,9 @@ function Get-OSDCoreDriverPackCatalogPanasonic {
 
                 $DownloadUrl = $Item.URL
                 $ReleaseDate = $Item.ReleaseDate
-                $ReleaseDate = Get-Date $ReleaseDate -Format "yy.MM.dd"
+                $dtReleaseDate = [datetime]::MinValue
+                [void][datetime]::TryParse("$ReleaseDate", [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$dtReleaseDate)
+                $ReleaseDate = $dtReleaseDate.ToString('yy.MM.dd', [System.Globalization.CultureInfo]::InvariantCulture)
 
                 $HashMD5 = $Item.Hash
                 $NewName = "Panasonic $ModelName [$ReleaseDate]"
