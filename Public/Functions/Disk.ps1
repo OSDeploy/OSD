@@ -1720,7 +1720,11 @@ Author: David Segura - Recast Software
         [string]$BootLabel = 'USB Boot',
 
         [ValidateLength(0,32)]
-        [string]$DataLabel = 'USB Data'
+        [string]$DataLabel = 'USB Data',
+
+        #Creates the Boot partition first (at the start of the disk) instead of last
+        #Lets the Data partition be extended into trailing free space later, e.g. after cloning onto a larger USB drive
+        [switch]$BootFirst
     )
 
     #=================================================
@@ -1807,11 +1811,20 @@ Author: David Segura - Recast Software
         Set-Disk -Number $GetUSBDisk.Number -PartitionStyle MBR -ErrorAction Stop
     }
     if ($GetUSBDisk.SizeGB -le 2000) {
-        Write-Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
-        $DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop
+        if ($BootFirst) {
+            Write-Verbose '$BootDisk = $GetUSBDisk | New-Partition -Size 2GB -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel'
+            $BootDisk = $GetUSBDisk | New-Partition -Size 2GB -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel -ErrorAction Stop
 
-        Write-Verbose '$BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel'
-        $BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel -ErrorAction Stop
+            Write-Verbose '$DataDisk = $GetUSBDisk | New-Partition -UseMaximumSize -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
+            $DataDisk = $GetUSBDisk | New-Partition -UseMaximumSize -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop
+        }
+        else {
+            Write-Verbose '$DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel'
+            $DataDisk = $GetUSBDisk | New-Partition -Size ($GetUSBDisk.Size - 2GB) -AssignDriveLetter | Format-Volume -FileSystem NTFS -NewFileSystemLabel $DataLabel -ErrorAction Stop
+
+            Write-Verbose '$BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel'
+            $BootDisk = $GetUSBDisk | New-Partition -UseMaximumSize -IsActive -AssignDriveLetter | Format-Volume -FileSystem FAT32 -NewFileSystemLabel $BootLabel -ErrorAction Stop
+        }
     }
     #=================================================
     #	-ge 2TB
