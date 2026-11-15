@@ -1,7 +1,8 @@
 function Select-OSDCloudImageIndex {
     [CmdletBinding()]
     param (
-        [string]$ImagePath
+        [string]$ImagePath,
+        [switch]$ZTI
     )
 
     $Results = Get-WindowsImage -ImagePath $ImagePath
@@ -13,6 +14,10 @@ function Select-OSDCloudImageIndex {
 
     if ($Results) {
         $Results | Select-Object -Property ImageIndex, ImageName | Format-Table | Out-Host
+
+        if ($ZTI) {
+            Return $Results[0].ImageIndex
+        }
 
         do {
             $SelectReadHost = Read-Host -Prompt "Select an Image to apply by ImageIndex [Number]"
