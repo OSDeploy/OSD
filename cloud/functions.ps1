@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 24.2.22.1
+.VERSION 26.10.29.1
 .GUID 7a3671f6-485b-443e-8e86-b60fdcea1419
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm functions.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at functions.osdcloud.com
 .NOTES
-    Version 24.2.22.1
+    Version 26.10.29.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1
 .EXAMPLE
@@ -33,7 +33,30 @@ powershell iex (irm functions.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'functions.osdcloud.com'
-$ScriptVersion = '24.2.22.1'
+$ScriptVersion = '26.10.29.1'
+
+#region Usage
+# Anonymous usage count. Skipped when chain-loaded by another osdcloud.com script that already sent its event.
+if (-not $global:OSDCloudScriptEventSent) { & {
+    try {
+        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+        $payload = @{
+            api_key    = 'phc_2h7nQJCo41Hc5C64B2SkcEBZOvJ6mHr5xAHZyjPl3ZK'
+            event      = 'functions.osdcloud.com'
+            properties = @{
+                distinct_id               = [guid]::NewGuid().ToString()
+                '$process_person_profile' = $false
+                '$geoip_disable'          = $true
+            }
+            timestamp  = [datetime]::UtcNow.ToString('o')
+        }
+        Invoke-RestMethod -Method Post -Uri 'https://us.i.posthog.com/capture/' -Body ($payload | ConvertTo-Json -Compress) -ContentType 'application/json' -TimeoutSec 2 -ErrorAction Stop | Out-Null
+    }
+    catch {
+        Write-Verbose "Usage event not sent: $($_.Exception.Message)"
+    }
+} }
+#endregion
 
 #region Initialize
 if ($env:SystemDrive -eq 'X:') {

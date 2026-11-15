@@ -135,7 +135,9 @@ function Get-OSDCoreDriverPackCatalogLenovo {
                 # Release date is in this format: 2022-09-28
                 $ReleaseDate = $Item.date
                 # Need to convert it to this format: 22.09.28
-                $ReleaseDate = Get-Date $ReleaseDate -Format "yy.MM.dd"
+                $dtReleaseDate = [datetime]::MinValue
+                [void][datetime]::TryParse("$ReleaseDate", [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$dtReleaseDate)
+                $ReleaseDate = $dtReleaseDate.ToString('yy.MM.dd', [System.Globalization.CultureInfo]::InvariantCulture)
 
                 $OSVersion = $Item.version
                 if ($OSVersion -eq '*') {

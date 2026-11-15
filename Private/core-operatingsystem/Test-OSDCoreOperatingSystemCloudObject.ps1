@@ -4,24 +4,27 @@ function Test-OSDCoreOperatingSystemCloudObject {
     Tests whether an OSDCore operating system object URL is reachable.
 
     .DESCRIPTION
-    Reads the Url property from the supplied operating system object, or from
+    Reads the operating system download URL from the supplied object, or from
     $global:OSDCoreOperatingSystemCloudObject when no object is supplied, and returns
-    $true when a live TCP connection and HTTP HEAD request can reach it. Returns $false when the object
-    is missing, the Url property is empty, or the URL test fails. HTTP and HTTPS
-    are both tested for host-only web URLs so systems with an invalid date can still
-    detect basic network reachability over HTTP. Specific absolute file URLs are
-    tested exactly as supplied.
+    $true when a live TCP connection and HTTP HEAD request can reach it. The function
+    supports both module-native shapes: OSDCloud objects use FilePath and OSD objects
+    use Url. Returns $false when the object is missing, the resolved URL property is
+    empty, or the URL test fails. HTTP and HTTPS are both tested for host-only web
+    URLs so systems with an invalid date can still detect basic network reachability
+    over HTTP. Specific absolute file URLs are tested exactly as supplied.
 
     .PARAMETER OperatingSystemCloudObject
-    Operating system object containing a Url property to test.
+    Operating system object containing the download URL to test. OSDCloud uses
+    FilePath and OSD uses Url.
 
     .EXAMPLE
     Test-OSDCoreOperatingSystemCloudObject
-    Tests the Url property on $global:OSDCoreOperatingSystemCloudObject.
+    Tests the resolved FilePath/Url property on
+    $global:OSDCoreOperatingSystemCloudObject.
 
     .EXAMPLE
     Test-OSDCoreOperatingSystemCloudObject -OperatingSystemCloudObject $global:OSDCoreOperatingSystemCloudObject
-    Tests the Url property on the supplied operating system object.
+    Tests the resolved FilePath/Url property on the supplied operating system object.
 
     .LINK
     https://github.com/OSDeploy/OSD/tree/master/docs
@@ -32,6 +35,7 @@ function Test-OSDCoreOperatingSystemCloudObject {
     2026-07-19 - Removed Test-WebConnection dependency
     2026-07-19 - Preserved supplied scheme for specific file URLs
     2026-07-20 - Added live TCP validation before HTTP HEAD to avoid cached success responses
+    2026-09-30 - Added OSDCloud FilePath support for cross-module compatibility
     #>
     [CmdletBinding()]
     [OutputType([System.Boolean])]
@@ -43,16 +47,25 @@ function Test-OSDCoreOperatingSystemCloudObject {
     )
 
     process {
+        $Error.Clear()
+
         # The caller may pass an object explicitly or rely on the global OSDCore selection.
         if ($null -eq $OperatingSystemCloudObject) {
             Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject is not set."
             return $false
         }
 
+        # Resolve the module-native URL property: OSDCloud uses FilePath and OSD uses Url.
+        if (-not [string]::IsNullOrWhiteSpace([string]$OperatingSystemCloudObject.FilePath)) {
+            $OperatingSystemCloudObjectUrl = [string]$OperatingSystemCloudObject.FilePath
+        }
+        else {
+            $OperatingSystemCloudObjectUrl = [string]$OperatingSystemCloudObject.Url
+        }
+
         # A missing URL means there is nothing useful to test, so return the Boolean failure state.
-        $OperatingSystemCloudObjectUrl = [string]$OperatingSystemCloudObject.Url
         if ([string]::IsNullOrWhiteSpace($OperatingSystemCloudObjectUrl)) {
-            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject Url is not set."
+            Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] OSDCoreOperatingSystemCloudObject FilePath/Url is not set."
             return $false
         }
 

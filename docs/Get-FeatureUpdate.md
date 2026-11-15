@@ -41,7 +41,7 @@ Returns the latest matching arm64 Windows 11 24H2 volume feature update.
 
 ### -OSName
 Friendly OS target name used to select a specific version, release, and architecture profile.
-Defaults to Windows 11 25H2 amd64.
+Defaults to Windows 11 26H2 amd64.
 
 ```yaml
 Type: String
@@ -50,7 +50,7 @@ Aliases: Name
 
 Required: False
 Position: 1
-Default value: Windows 11 25H2 amd64
+Default value: Windows 11 26H2 amd64
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -105,7 +105,7 @@ Accept wildcard characters: False
 
 ### -OSReleaseID
 Feature update release identifier used with OSVersion for legacy version/release filtering.
-Examples include 25H2, 24H2, 23H2, and 22H2.
+Examples include 26H2, 25H2, 24H2, 23H2, and 22H2.
 
 ```yaml
 Type: String
@@ -114,7 +114,7 @@ Aliases: Build, OSBuild, ReleaseID
 
 Required: False
 Position: 5
-Default value: 25H2
+Default value: 26H2
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -166,4 +166,3 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
-

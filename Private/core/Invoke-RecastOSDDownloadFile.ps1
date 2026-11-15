@@ -1,4 +1,4 @@
-function Invoke-OSDCoreDownloadFile {
+function Invoke-RecastOSDDownloadFile {
     <#
     .SYNOPSIS
     Downloads a file to a local path and returns file information.
@@ -25,7 +25,7 @@ function Invoke-OSDCoreDownloadFile {
     Forces use of WebClient instead of curl.
 
     .EXAMPLE
-    Invoke-OSDCoreDownloadFile -SourceUrl 'https://example.org/file.cab' -DestinationDirectory "$env:TEMP\OSD"
+    Invoke-RecastOSDDownloadFile -SourceUrl 'https://example.org/file.cab' -DestinationDirectory "$env:TEMP\OSD"
     Downloads the file and returns a FileInfo object.
 
     .LINK
@@ -33,7 +33,7 @@ function Invoke-OSDCoreDownloadFile {
 
     .NOTES
     Author: David Segura - Recast Software
-    2026-07-16 - Moved help block inside function and expanded required sections
+    2026-09-30 - Unified the OSD and OSDCloud download helpers
     #>
     [CmdletBinding()]
     [OutputType([System.IO.FileInfo])]
@@ -61,6 +61,7 @@ function Invoke-OSDCoreDownloadFile {
         [System.Management.Automation.SwitchParameter]
         $WebClient
     )
+    $Error.Clear()
     #=================================================
     #	Values
     #=================================================
@@ -130,15 +131,19 @@ function Invoke-OSDCoreDownloadFile {
         elseif (([System.Net.WebRequest]::DefaultWebProxy).Address) {
             $UseWebClient = $true
         }
-        elseif (!(Test-CommandCurlExe)) {
+        elseif (-not (Get-Command -Name 'curl.exe' -ErrorAction Ignore)) {
             $UseWebClient = $true
         }
 
         if ($UseWebClient -eq $true) {
             [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls1
-            $WebClient = New-Object System.Net.WebClient
-            $WebClient.DownloadFile($SourceUrl, $DestinationFullName)
-            $WebClient.Dispose()
+            $webClientInstance = New-Object System.Net.WebClient
+            try {
+                $webClientInstance.DownloadFile($SourceUrl, $DestinationFullName)
+            }
+            finally {
+                $webClientInstance.Dispose()
+            }
         }
         else {
             Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] cURL Source: $SourceUrl"
@@ -192,7 +197,7 @@ function Invoke-OSDCoreDownloadFile {
 
             if ($localExists -and ((Get-Item $DestinationFullName).Length -lt $remoteLength)) {
                 Write-Verbose "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Download is incomplete after $RetryCount retries."
-                Write-Warning "Could not download $DestinationFullName"
+                Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Could not download $DestinationFullName"
                 $null
             }
         }
@@ -203,7 +208,7 @@ function Invoke-OSDCoreDownloadFile {
             Get-Item $DestinationFullName -Force
         }
         else {
-            Write-Warning "Could not download $DestinationFullName"
+            Write-Warning "[$(Get-Date -format s)] [$($MyInvocation.MyCommand.Name)] Could not download $DestinationFullName"
             $null
         }
         #=================================================

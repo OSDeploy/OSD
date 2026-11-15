@@ -47,7 +47,7 @@ Starts OSDCloud CLI interactively.
 
 ### EXAMPLE 2
 ```
-Start-OSDCloudCLI -OSName 'Windows 11 25H2 x64' -OSEdition Enterprise -OSLanguage en-us
+Start-OSDCloudCLI -OSName 'Windows 11 26H2 x64' -OSEdition Enterprise -OSLanguage en-us
 Starts OSDCloud CLI with explicit OS selections.
 ```
 
@@ -174,7 +174,7 @@ Accept wildcard characters: False
 ```
 
 ### -OSName
-Default parameter set OS selection, for example 'Windows 11 25H2 x64'.
+Default parameter set OS selection, for example 'Windows 11 26H2 x64'.
 
 ```yaml
 Type: String
@@ -337,4 +337,3 @@ Author: David Segura - Recast Software
 ## RELATED LINKS
 
 [https://github.com/OSDeploy/OSD/tree/master/docs](https://github.com/OSDeploy/OSD/tree/master/docs)
-

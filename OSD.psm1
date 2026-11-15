@@ -1,12 +1,12 @@
-$Classes = @(Get-ChildItem -Path "$PSScriptRoot\Classes\*.ps1")
-$Private = @(Get-ChildItem -Path "$PSScriptRoot\Private\*.ps1" -Recurse -ErrorAction SilentlyContinue)
+$Classes = @(Get-ChildItem -Path "$PSScriptRoot\Classes\*.ps1" | Where-Object { $_.Name -notlike '*.Tests.ps1' })
+$Private = @(Get-ChildItem -Path "$PSScriptRoot\Private\*.ps1" -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -notlike '*.Tests.ps1' })
 
 #Determine the current state of the OS
 $ImageState = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Setup\State' -ErrorAction Ignore).ImageState
 
 #Can't load these functions in Specialize Phase
 if ($ImageState -eq 'IMAGE_STATE_SPECIALIZE_RESEAL_TO_OOBE') {
-    $Public  = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1") -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.Name -notmatch 'ScreenPNG'} | Where-Object {$_.Name -notmatch 'Clipboard'})
+    $Public  = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1") -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -notlike '*.Tests.ps1' } | Where-Object {$_.Name -notmatch 'ScreenPNG'} | Where-Object {$_.Name -notmatch 'Clipboard'})
 
     foreach ($Import in @($Public + $Private)) {
         Try {. $Import.FullName}
@@ -28,7 +28,7 @@ else {
         throw $Err
     }
     
-    $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1") -Recurse -ErrorAction SilentlyContinue)
+    $Public = @(Get-ChildItem -Path ("$PSScriptRoot\Public\*.ps1") -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -notlike '*.Tests.ps1' })
 
     foreach ($Import in @($Public + $Private + $Classes)) {
         Try {. $Import.FullName}

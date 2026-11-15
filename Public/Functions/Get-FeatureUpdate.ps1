@@ -10,7 +10,7 @@ function Get-FeatureUpdate {
 
     .PARAMETER OSName
     Friendly OS target name used to select a specific version, release, and architecture profile.
-    Defaults to Windows 11 25H2 amd64.
+    Defaults to Windows 11 26H2 amd64.
 
     .PARAMETER OSVersion
     Operating system family used with OSReleaseID for legacy version/release filtering.
@@ -18,7 +18,7 @@ function Get-FeatureUpdate {
 
     .PARAMETER OSReleaseID
     Feature update release identifier used with OSVersion for legacy version/release filtering.
-    Examples include 25H2, 24H2, 23H2, and 22H2.
+    Examples include 26H2, 25H2, 24H2, 23H2, and 22H2.
 
     .PARAMETER OSArchitecture
     Processor architecture to filter on.
@@ -50,13 +50,17 @@ function Get-FeatureUpdate {
     .NOTES
     Author: David Segura - Recast Software
     2026-07-16 - Updated comment-based help to match OSD standards
+    2026-10-02 - Added OSName values used by New-OSDCloudOSWimFile to ValidateSet
     #>
 
     [CmdletBinding()]
     param (
         # Operating system display name.
-        # Default = Windows 11 25H2 amd64
+        # Default = Windows 11 26H2 amd64
         [ValidateSet(
+            'Windows 11 26H2 amd64',
+            'Windows 11 26H2 arm64',
+            'Windows 11 26H2 x64',
             'Windows 11 25H2 amd64',
             'Windows 11 25H2 arm64',
             'Windows 11 25H2 x64',
@@ -64,13 +68,19 @@ function Get-FeatureUpdate {
             'Windows 11 24H2 arm64',
             'Windows 11 24H2 x64',
             'Windows 11 23H2 amd64',
+            'Windows 11 23H2 arm64',
             'Windows 11 23H2 x64',
+            'Windows 11 22H2 amd64',
+            'Windows 11 22H2 x64',
+            'Windows 11 21H2 amd64',
+            'Windows 11 21H2 x64',
             'Windows 10 22H2 amd64',
+            'Windows 10 22H2 arm64',
             'Windows 10 22H2 x64'
             )]
         [Alias('Name')]
         [System.String]
-        $OSName = 'Windows 11 25H2 amd64',
+        $OSName = 'Windows 11 26H2 amd64',
 
         # Activation channel.
         # Default = Volume
@@ -102,11 +112,11 @@ function Get-FeatureUpdate {
         $OSLanguage = 'en-us',
 
         # Operating system release identifier for legacy version/release filtering.
-        # Default = 25H2
-        [ValidateSet('25H2','24H2','23H2','22H2')]
+        # Default = 26H2
+        [ValidateSet('26H2','25H2','24H2','23H2','22H2')]
         [Alias('Build','OSBuild','ReleaseID')]
         [System.String]
-        $OSReleaseID = '25H2',
+        $OSReleaseID = '26H2',
 
         # Operating system family for legacy version/release filtering.
         # Default = Windows 11

@@ -31,8 +31,8 @@ Resolves the target operating system image, determines the correct image index f
 
 ### EXAMPLE 1
 ```
-New-OSDCloudOSWimFile -OSName 'Windows 11 25H2 x64' -OSEdition Pro -OSLanguage en-us -OSActivation Retail -CreateISO
-Prepares the Windows 11 25H2 x64 Pro retail media and builds an ISO file.
+New-OSDCloudOSWimFile -OSName 'Windows 11 26H2 x64' -OSEdition Pro -OSLanguage en-us -OSActivation Retail -CreateISO
+Prepares the Windows 11 26H2 x64 Pro retail media and builds an ISO file.
 ```
 
 ## PARAMETERS
@@ -47,7 +47,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: Windows 11 25H2 x64
+Default value: Windows 11 26H2 x64
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -145,4 +145,3 @@ Author: David Segura - Recast Software
 [https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files](https://learn.microsoft.com/en-us/windows/deployment/upgrade/log-files)
 
 [https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-command-line-options?view=windows-11)
-

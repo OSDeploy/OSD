@@ -141,7 +141,7 @@ function Step-OSDCloudSaveOperatingSystemCloudObject {
             $null = New-Item -Path $USBDownloadPath -ItemType Directory -Force
         }
         # Download once to USB cache, then copy local for active deployment usage.
-        $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemCloudObject.Url -DestinationDirectory "$USBDownloadPath" -DestinationName $FileName
+        $SaveWebFile = Invoke-RecastOSDDownloadFile -SourceUrl $OperatingSystemCloudObject.Url -DestinationDirectory "$USBDownloadPath" -DestinationName $FileName
 
         if ($SaveWebFile) {
             Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] Copy Offline OS to $DownloadPath"
@@ -153,7 +153,7 @@ function Step-OSDCloudSaveOperatingSystemCloudObject {
         # $SaveWebFile is a DestinationFile Object, not a path
         # Direct-to-local fallback when no suitable USB cache is present.
         Write-Host -ForegroundColor DarkGray "[$(Get-Date -format s)] DownloadPath: $DownloadPath"
-        $SaveWebFile = Invoke-OSDCoreDownloadFile -SourceUrl $OperatingSystemCloudObject.Url -DestinationDirectory $DownloadPath -ErrorAction Stop
+        $SaveWebFile = Invoke-RecastOSDDownloadFile -SourceUrl $OperatingSystemCloudObject.Url -DestinationDirectory $DownloadPath -ErrorAction Stop
         $DestinationFile = $SaveWebFile
     }
     #=================================================
