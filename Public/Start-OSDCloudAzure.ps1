@@ -43,7 +43,7 @@ function Start-OSDCloudAzure {
 
         $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-Start-OSDCloudAzure.log"
         $null = Start-Transcript -Path (Join-Path "$env:SystemRoot\Temp" $Transcript) -ErrorAction Ignore
-        Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+        Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
         osdcloud-StartWinPE -OSDCloud
         Connect-OSDCloudAzure
         Get-OSDCloudAzureResources

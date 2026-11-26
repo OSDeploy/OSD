@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.9.13.1
+.VERSION 26.11.26.1
 .GUID aa123d2c-3cd3-4ef4-91f0-0c2139473991
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -23,9 +23,9 @@ powershell iex (irm azgui.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at azgui.osdcloud.com
 .NOTES
-    Version 22.9.13.1
+    Version 26.11.26.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/azgui.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/azgui.osdcloud.com.ps1
 .EXAMPLE
     powershell iex (irm azgui.osdcloud.com)
 #>
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'azgui.osdcloud.com'
-$ScriptVersion = '22.9.13.1'
+$ScriptVersion = '26.11.26.1'
 #TODO: Exclude Windows Images smaller than 3GB
 #=================================================
 #region Initialize
@@ -57,7 +57,7 @@ else {
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
 
 #Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 
 #endregion
 #=================================================

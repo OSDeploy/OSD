@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 26.10.29.1
+.VERSION 26.11.26.1
 .GUID 68790315-3c3f-4a9a-b191-84928e5d6a83
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -19,9 +19,9 @@
 .DESCRIPTION
     PSCloudScript
 .NOTES
-    Version 26.10.29.1
+    Version 26.11.26.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/re.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/re.osdcloud.com.ps1
 .EXAMPLE
 #>
 [CmdletBinding()]
@@ -32,7 +32,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'OSDCloud RE'
-$ScriptVersion = '26.10.29.1'
+$ScriptVersion = '26.11.26.1'
 
 #region Usage
 # Anonymous usage count: one event per run with a random id and no device or user data.
@@ -78,7 +78,7 @@ else {
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
 
 #Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 
 #endregion
 #=================================================

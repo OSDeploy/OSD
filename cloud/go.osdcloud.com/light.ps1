@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 22.9.13.1
+.VERSION 26.11.26.1
 .GUID b9c79000-c271-464e-839a-605b3b384c4e
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm raw.osdcloud.com/tasksequences/light.ps1)
 .DESCRIPTION
     PSCloudScript at raw.osdcloud.com/tasksequences/light.ps1
 .NOTES
-    Version 22.9.13.1
+    Version 26.11.26.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/tasksequences/light.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'raw.osdcloud.com/tasksequences/light.ps1'
-$ScriptVersion = '22.9.13.1'
+$ScriptVersion = '26.11.26.1'
 #=================================================
 #region Initialize
 
@@ -56,7 +56,7 @@ else {
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
 
 #Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 
 #endregion
 #=================================================

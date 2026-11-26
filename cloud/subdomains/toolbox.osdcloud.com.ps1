@@ -25,7 +25,7 @@ powershell iex (irm toolbox.osdcloud.com)
 .NOTES
     Version 23.5.25.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/toolbox.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/toolbox.osdcloud.com.ps1
 .EXAMPLE
     powershell iex (irm toolbox.osdcloud.com)
 #>

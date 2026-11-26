@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 23.2.28.1
+.VERSION 26.11.26.1
 .GUID ebeeafaa-b49e-4bb2-b9d1-73f5702e0dda
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -23,7 +23,7 @@ powershell iex (irm bh.osdcloud.com)
 .DESCRIPTION
     PSCloudScript at bh.osdcloud.com
 .NOTES
-    Version 23.2.28.1
+    Version 26.11.26.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/bh.osdcloud.com.ps1
 .EXAMPLE
@@ -34,7 +34,7 @@ param()
 #=================================================
 #Script Information
 $ScriptName = 'bh.osdcloud.com'
-$ScriptVersion = '23.2.28.1'
+$ScriptVersion = '26.11.26.1'
 #=================================================
 #region Initialize
 
@@ -56,7 +56,7 @@ else {
 Write-Host -ForegroundColor DarkGray "$ScriptName $ScriptVersion $WindowsPhase"
 
 #Load OSDCloud Functions
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 
 #endregion
 #=================================================

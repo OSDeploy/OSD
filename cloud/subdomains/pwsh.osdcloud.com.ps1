@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 23.6.10.1
+.VERSION 26.11.26.1
 .GUID 0c0cd2be-1a2d-4be4-8401-a869f4f104b0
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm pwsh.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports WinGet and PowerShell 7
 .NOTES
-    Version 23.6.10.1
+    Version 26.11.26.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/pwsh.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm pwsh.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'pwsh.osdcloud.com'
-$ScriptVersion = '23.6.10.1'
+$ScriptVersion = '26.11.26.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
@@ -51,7 +51,7 @@ else {
 }
 
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 #endregion
 
 #region Admin Elevation

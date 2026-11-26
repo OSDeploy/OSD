@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 24.9.6.1
+.VERSION 26.11.26.1
 .GUID 3066fde0-75e9-4b35-9038-3e5781a34228
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -24,15 +24,15 @@ powershell iex (irm ninja.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports the OSDCloud environment
 .NOTES
-    Version 24.9.6.1
+    Version 26.11.26.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/ninja.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/ninja.osdcloud.com.ps1
 .EXAMPLE
     powershell iex (irm ninja.osdcloud.com)
 #>
 [CmdletBinding()]
 $ScriptName = 'ninja.osdcloud.com'
-$ScriptVersion = '24.9.6.1'
+$ScriptVersion = '26.11.26.1'
 
 #region Initialize
 $Transcript = "$((Get-Date).ToString('yyyy-MM-dd-HHmmss'))-$ScriptName.log"
@@ -50,7 +50,7 @@ else {
 }
 
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
-#Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+#Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 #endregion
 
 #region Admin Elevation

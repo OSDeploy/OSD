@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 26.10.29.1
+.VERSION 26.11.26.1
 .GUID 0bf5a9ca-9bc5-4c8a-8e58-b5759c99b33d
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -24,7 +24,7 @@ powershell iex (irm tpm.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports TPM (Trusted Platform Module)
 .NOTES
-    Version 26.10.29.1
+    Version 26.11.26.1
 .LINK
     https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/tpm.osdcloud.com.ps1
 .EXAMPLE
@@ -33,7 +33,7 @@ powershell iex (irm tpm.osdcloud.com)
 [CmdletBinding()]
 param()
 $ScriptName = 'tpm.osdcloud.com'
-$ScriptVersion = '26.10.29.1'
+$ScriptVersion = '26.11.26.1'
 
 #region Usage
 # Anonymous usage count: one event per run with a random id and no device or user data.
@@ -75,7 +75,7 @@ else {
 }
 
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 #endregion
 
 #region Admin Elevation

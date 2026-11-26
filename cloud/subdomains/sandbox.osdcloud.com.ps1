@@ -1,5 +1,5 @@
 <#PSScriptInfo
-.VERSION 26.10.29.1
+.VERSION 26.11.26.1
 .GUID 9670c013-d1b1-4f5d-9bd0-0fa185b9f203
 .AUTHOR David Segura - Recast Software
 .COMPANYNAME osdcloud.com
@@ -24,16 +24,16 @@ powershell iex (irm sandbox.osdcloud.com)
 .DESCRIPTION
     PowerShell Script which supports the OSDCloud environment
 .NOTES
-    Version 26.10.29.1
+    Version 26.11.26.1
 .LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/sandbox.osdcloud.com.ps1
+    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/subdomains/sandbox.osdcloud.com.ps1
 .EXAMPLE
     powershell iex (irm sandbox.osdcloud.com)
 #>
 [CmdletBinding()]
 param()
 $ScriptName = 'sandbox.osdcloud.com'
-$ScriptVersion = '26.10.29.1'
+$ScriptVersion = '26.11.26.1'
 
 #region Usage
 # Anonymous usage count: one event per run with a random id and no device or user data.
@@ -75,7 +75,7 @@ else {
 }
 
 Write-Host -ForegroundColor Green "[+] $ScriptName $ScriptVersion ($WindowsPhase Phase)"
-Invoke-Expression -Command (Invoke-RestMethod -Uri functions.osdcloud.com)
+Invoke-Expression -Command (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/functions.ps1')
 #endregion
 
 #region Admin Elevation
