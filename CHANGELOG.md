@@ -2,12 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased - November 26, 2026
+## 26.11.26.1 - November 26, 2026
 
 ### Changed
 
 - Updated cloud scripts, cloud modules, `Connect-OSDCloudAzure`, `Start-OSDCloudAzure` and `OSDCloudRE` to load shared functions directly from the GitHub raw URL over HTTPS instead of the `functions.osdcloud.com` alias, removing the runtime dependency on the osdcloud.com domain.
 - Bumped cloud script versions to `26.11.26.1`.
+- Updated the module version to `26.11.26.1`.
 
 ### Fixed
 
